@@ -184,6 +184,7 @@ export function validateContentValue(id: string, value: string): string | null {
   }
   if (field.kind === "choice") return field.options?.some(option => option.value === value) ? null : "Choose one of the listed options.";
   if (field.kind === "image" && value === field.defaultValue && (/^brand\.logo\./.test(id) || /^footer\.social\.[a-z-]+\.icon$/.test(id)) && /\.(?:svg|ico)$/i.test(value)) return null;
+  if (field.kind === "image" && value === field.defaultValue && /^journal\.entry-press-[a-z0-9-]+\.logo$/.test(id) && trustedJournalSvgLogos.has(value)) return null;
   if (!value.startsWith("/") || value.startsWith("//") || value.includes("\\") || value.includes("..") || /[?#]/.test(value)) {
     return "Media must use a local site path.";
   }
@@ -198,7 +199,9 @@ async function mediaExists(value: string) {
   if (cloudStorageEnabled()) return upload ? cloudMediaExists(upload[1]) : publicAssetExists(value);
   const resolved = upload
     ? path.join(directory, "media", upload[1])
-    : path.join(process.cwd(), "public", value.slice(1));
+    // Next's metadata icon is served from app/, not the public directory.
+    : value === "/favicon.ico" ? path.join(process.cwd(), "src", "app", "favicon.ico")
+      : path.join(process.cwd(), "public", value.slice(1));
   try { return (await stat(resolved)).isFile(); } catch { return false; }
 }
 

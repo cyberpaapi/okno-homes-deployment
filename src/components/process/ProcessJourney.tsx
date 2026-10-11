@@ -204,6 +204,7 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
   const masterScrub = useSiteContent("process.opening.master-scrub", "/process/process-master.scrub.mp4");
   const poster = useSiteContent("process.opening.poster", "/process/land-poster.webp");
   const filmLabel = useSiteContent("process.opening.film-label", "OKNO process film advancing from land analysis to the completed home as the page scrolls");
+  const loadingLabel = useSiteContent("process.opening.loading", "Loading process film");
   const trackRef = useRef<HTMLElement>(null);
   const cover = useSiteContent("process.opening.cover", "/process/opening-cover.webp");
   const [activeStage, setActiveStage] = useState(0);
@@ -255,7 +256,7 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
             hq={masterHq}
             mobile={masterScrub}
             poster={poster}
-            label={filmLabel}
+            label={masterFilmReady ? filmLabel : loadingLabel}
             progress={scrollYProgress}
             onReady={setMasterFilmReady}
             onProgress={presentFrame}

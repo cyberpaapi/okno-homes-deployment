@@ -1,5 +1,7 @@
 # Admin documentation
 
+Current: [11 October full inventory, local browser cycles and production publishing block](../admin-audit-2026-10-11.md).
+
 - [Current implementation, scope and decision ledger](../admin-system.md)
 - [Approved completion plan](../admin-completion-plan-2026-10-06.md)
 - [Build checklist](../admin-build-checklist-2026-10-06.md)

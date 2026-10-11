@@ -1,0 +1,5955 @@
+{
+  "uniqueScalarFields": 1080,
+  "kindCounts": {
+    "text": 860,
+    "image": 177,
+    "video": 38,
+    "choice": 5
+  },
+  "registeredCollections": 25,
+  "pages": [
+    {
+      "id": "home",
+      "label": "Home",
+      "href": "/",
+      "sections": [],
+      "collections": []
+    },
+    {
+      "id": "homepage",
+      "label": "Published homepage",
+      "href": "/",
+      "sections": [
+        {
+          "id": "publishing",
+          "label": "Choose the live opening",
+          "fields": [
+            {
+              "id": "home.publishing.hero",
+              "kind": "text",
+              "label": "Homepage hero"
+            }
+          ]
+        }
+      ],
+      "collections": [
+        {
+          "id": "home.variants",
+          "pageId": "homepage",
+          "label": "Hero openings",
+          "itemLabel": "opening",
+          "maxItems": 24,
+          "fields": [
+            {
+              "key": "name",
+              "label": "Opening name",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "template",
+              "label": "Animation template",
+              "kind": "choice",
+              "required": true,
+              "options": [
+                {
+                  "label": "Forest V1",
+                  "value": "v1"
+                },
+                {
+                  "label": "City to Forza V2",
+                  "value": "v2"
+                }
+              ]
+            },
+            {
+              "key": "openingVideo",
+              "label": "Opening film",
+              "kind": "video",
+              "required": true
+            },
+            {
+              "key": "loopVideo",
+              "label": "Ambient loop",
+              "kind": "video"
+            },
+            {
+              "key": "poster",
+              "label": "Opening poster",
+              "kind": "image",
+              "required": true
+            },
+            {
+              "key": "loopPoster",
+              "label": "Ambient loop poster",
+              "kind": "image"
+            },
+            {
+              "key": "scrollVideo",
+              "label": "Scroll journey film · V1",
+              "kind": "video"
+            },
+            {
+              "key": "endImage",
+              "label": "Interior handoff image · V1",
+              "kind": "image"
+            },
+            {
+              "key": "introLastFrame",
+              "label": "Intro handoff still · V1",
+              "kind": "image"
+            },
+            {
+              "key": "tagline",
+              "label": "Still-frame tagline · V1",
+              "kind": "text",
+              "help": "V1 only. Shown over the frozen intro frame; leave empty to hide."
+            },
+            {
+              "key": "openingAlt",
+              "label": "Poster description",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "endAlt",
+              "label": "Interior image description · V1",
+              "kind": "text"
+            },
+            {
+              "key": "accessibleTitle",
+              "label": "Accessible page title",
+              "kind": "text"
+            },
+            {
+              "key": "buttonLabel",
+              "label": "Skip film button · V2",
+              "kind": "text",
+              "help": "Only appears with the City to Forza animation template."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hero-v1",
+      "label": "Hero V1 · default home",
+      "href": "/hero-v1",
+      "sections": [
+        {
+          "id": "opening",
+          "label": "Forest opening",
+          "fields": [
+            {
+              "id": "hero-v1.opening.start-image",
+              "kind": "image",
+              "label": "Opening still"
+            },
+            {
+              "id": "hero-v1.opening.end-image",
+              "kind": "image",
+              "label": "Interior still"
+            },
+            {
+              "id": "hero-v1.opening.intro-video",
+              "kind": "video",
+              "label": "Intro film"
+            },
+            {
+              "id": "hero-v1.opening.scroll-video",
+              "kind": "video",
+              "label": "Scroll journey film"
+            },
+            {
+              "id": "hero-v1.opening.intro-last-frame",
+              "kind": "image",
+              "label": "Intro handoff still"
+            },
+            {
+              "id": "hero-v1.opening.tagline",
+              "kind": "text",
+              "label": "Still-frame tagline · V1"
+            },
+            {
+              "id": "hero-v1.opening.accessible-title",
+              "kind": "text",
+              "label": "Accessible page title"
+            },
+            {
+              "id": "hero-v1.opening.start-alt",
+              "kind": "text",
+              "label": "Opening image description"
+            },
+            {
+              "id": "hero-v1.opening.end-alt",
+              "kind": "text",
+              "label": "Interior image description"
+            }
+          ]
+        },
+        {
+          "id": "timeline",
+          "label": "90-day process timeline",
+          "fields": [
+            {
+              "id": "home.timeline.heading-start",
+              "kind": "text",
+              "label": "Heading · opening"
+            },
+            {
+              "id": "home.timeline.heading-emphasis",
+              "kind": "text",
+              "label": "Heading · emphasis"
+            },
+            {
+              "id": "home.timeline.action",
+              "kind": "text",
+              "label": "Process button"
+            },
+            {
+              "id": "home.timeline.action-href",
+              "kind": "text",
+              "label": "Process button destination"
+            },
+            {
+              "id": "home.timeline.image",
+              "kind": "image",
+              "label": "Completed home image"
+            },
+            {
+              "id": "home.timeline.image-alt",
+              "kind": "text",
+              "label": "Image description"
+            },
+            {
+              "id": "home.timeline.image-caption",
+              "kind": "text",
+              "label": "Image caption"
+            },
+            {
+              "id": "home.timeline.stage-1.days",
+              "kind": "text",
+              "label": "Stage 1 · day range"
+            },
+            {
+              "id": "home.timeline.stage-1.title",
+              "kind": "text",
+              "label": "Stage 1 · heading"
+            },
+            {
+              "id": "home.timeline.stage-1.copy",
+              "kind": "text",
+              "label": "Stage 1 · description"
+            },
+            {
+              "id": "home.timeline.stage-2.days",
+              "kind": "text",
+              "label": "Stage 2 · day range"
+            },
+            {
+              "id": "home.timeline.stage-2.title",
+              "kind": "text",
+              "label": "Stage 2 · heading"
+            },
+            {
+              "id": "home.timeline.stage-2.copy",
+              "kind": "text",
+              "label": "Stage 2 · description"
+            },
+            {
+              "id": "home.timeline.stage-3.days",
+              "kind": "text",
+              "label": "Stage 3 · day range"
+            },
+            {
+              "id": "home.timeline.stage-3.title",
+              "kind": "text",
+              "label": "Stage 3 · heading"
+            },
+            {
+              "id": "home.timeline.stage-3.copy",
+              "kind": "text",
+              "label": "Stage 3 · description"
+            },
+            {
+              "id": "home.timeline.stage-4.days",
+              "kind": "text",
+              "label": "Stage 4 · day range"
+            },
+            {
+              "id": "home.timeline.stage-4.title",
+              "kind": "text",
+              "label": "Stage 4 · heading"
+            },
+            {
+              "id": "home.timeline.stage-4.copy",
+              "kind": "text",
+              "label": "Stage 4 · description"
+            },
+            {
+              "id": "home.timeline.stage-5.days",
+              "kind": "text",
+              "label": "Stage 5 · day range"
+            },
+            {
+              "id": "home.timeline.stage-5.title",
+              "kind": "text",
+              "label": "Stage 5 · heading"
+            },
+            {
+              "id": "home.timeline.stage-5.copy",
+              "kind": "text",
+              "label": "Stage 5 · description"
+            }
+          ]
+        },
+        {
+          "id": "signature-preview",
+          "label": "Signature preview",
+          "fields": [
+            {
+              "id": "home.signature.image",
+              "kind": "image",
+              "label": "Forza image"
+            },
+            {
+              "id": "home.signature.image-alt",
+              "kind": "text",
+              "label": "Forza image description"
+            },
+            {
+              "id": "home.signature.video",
+              "kind": "video",
+              "label": "Scroll rotation film"
+            },
+            {
+              "id": "home.signature.label",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "home.signature.heading-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "home.signature.heading-2",
+              "kind": "text",
+              "label": "Heading · second line"
+            },
+            {
+              "id": "home.signature.copy",
+              "kind": "text",
+              "label": "Closing copy"
+            },
+            {
+              "id": "home.signature.action",
+              "kind": "text",
+              "label": "Models button"
+            },
+            {
+              "id": "home.signature.action-href",
+              "kind": "text",
+              "label": "Models button destination"
+            }
+          ]
+        },
+        {
+          "id": "bespoke-preview",
+          "label": "Bespoke preview",
+          "fields": [
+            {
+              "id": "home.bespoke.image",
+              "kind": "image",
+              "label": "Bespoke background"
+            },
+            {
+              "id": "home.bespoke.image-alt",
+              "kind": "text",
+              "label": "Background description"
+            },
+            {
+              "id": "home.bespoke.card-image",
+              "kind": "image",
+              "label": "Courtyard image"
+            },
+            {
+              "id": "home.bespoke.card-alt",
+              "kind": "text",
+              "label": "Courtyard description"
+            },
+            {
+              "id": "home.bespoke.word",
+              "kind": "text",
+              "label": "Background word"
+            },
+            {
+              "id": "home.bespoke.heading-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "home.bespoke.heading-2",
+              "kind": "text",
+              "label": "Heading · second line"
+            },
+            {
+              "id": "home.bespoke.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "home.bespoke.action",
+              "kind": "text",
+              "label": "Bespoke button"
+            },
+            {
+              "id": "home.bespoke.action-href",
+              "kind": "text",
+              "label": "Bespoke button destination"
+            }
+          ]
+        },
+        {
+          "id": "sustainability-preview",
+          "label": "Sustainability preview",
+          "fields": [
+            {
+              "id": "home.sustainability.poster",
+              "kind": "image",
+              "label": "Opening still"
+            },
+            {
+              "id": "home.sustainability.poster-alt",
+              "kind": "text",
+              "label": "Still description"
+            },
+            {
+              "id": "home.sustainability.video",
+              "kind": "video",
+              "label": "Ambient film"
+            },
+            {
+              "id": "home.sustainability.label",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "home.sustainability.heading-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "home.sustainability.heading-2",
+              "kind": "text",
+              "label": "Heading · second line"
+            },
+            {
+              "id": "home.sustainability.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "home.sustainability.action",
+              "kind": "text",
+              "label": "Approach button"
+            },
+            {
+              "id": "home.sustainability.action-href",
+              "kind": "text",
+              "label": "Approach button destination"
+            }
+          ]
+        },
+        {
+          "id": "editorial-preview",
+          "label": "Journal and About previews",
+          "fields": [
+            {
+              "id": "home.editorial.journal.image",
+              "kind": "image",
+              "label": "Journal image"
+            },
+            {
+              "id": "home.editorial.journal.image-alt",
+              "kind": "text",
+              "label": "Journal image description"
+            },
+            {
+              "id": "home.editorial.journal.title",
+              "kind": "text",
+              "label": "Journal heading"
+            },
+            {
+              "id": "home.editorial.journal.copy",
+              "kind": "text",
+              "label": "Journal description"
+            },
+            {
+              "id": "home.editorial.journal.action",
+              "kind": "text",
+              "label": "Journal button"
+            },
+            {
+              "id": "home.editorial.journal.href",
+              "kind": "text",
+              "label": "Journal destination"
+            },
+            {
+              "id": "home.editorial.about.image",
+              "kind": "image",
+              "label": "About preview image"
+            },
+            {
+              "id": "home.editorial.about.image-alt",
+              "kind": "text",
+              "label": "About preview image description"
+            },
+            {
+              "id": "home.editorial.about.title",
+              "kind": "text",
+              "label": "About preview heading"
+            },
+            {
+              "id": "home.editorial.about.copy",
+              "kind": "text",
+              "label": "About preview description"
+            },
+            {
+              "id": "home.editorial.about.action",
+              "kind": "text",
+              "label": "About preview button"
+            },
+            {
+              "id": "home.editorial.about.href",
+              "kind": "text",
+              "label": "About destination"
+            }
+          ]
+        }
+      ],
+      "collections": []
+    },
+    {
+      "id": "hero-v2",
+      "label": "Hero V2 · city to Forza",
+      "href": "/hero-v2",
+      "sections": [
+        {
+          "id": "opening",
+          "label": "City-to-Forza opening",
+          "fields": [
+            {
+              "id": "hero-v2.opening.journey-video",
+              "kind": "video",
+              "label": "City-to-Forza film"
+            },
+            {
+              "id": "hero-v2.opening.journey-poster",
+              "kind": "image",
+              "label": "Opening poster"
+            },
+            {
+              "id": "hero-v2.opening.island-loop",
+              "kind": "video",
+              "label": "Forza island loop"
+            },
+            {
+              "id": "hero-v2.opening.island-poster",
+              "kind": "image",
+              "label": "Island poster"
+            },
+            {
+              "id": "hero-v2.opening.accessible-title",
+              "kind": "text",
+              "label": "Accessible page title"
+            }
+          ]
+        },
+        {
+          "id": "timeline",
+          "label": "90-day process timeline",
+          "fields": [
+            {
+              "id": "home.timeline.heading-start",
+              "kind": "text",
+              "label": "Heading · opening"
+            },
+            {
+              "id": "home.timeline.heading-emphasis",
+              "kind": "text",
+              "label": "Heading · emphasis"
+            },
+            {
+              "id": "home.timeline.action",
+              "kind": "text",
+              "label": "Process button"
+            },
+            {
+              "id": "home.timeline.action-href",
+              "kind": "text",
+              "label": "Process button destination"
+            },
+            {
+              "id": "home.timeline.image",
+              "kind": "image",
+              "label": "Completed home image"
+            },
+            {
+              "id": "home.timeline.image-alt",
+              "kind": "text",
+              "label": "Image description"
+            },
+            {
+              "id": "home.timeline.image-caption",
+              "kind": "text",
+              "label": "Image caption"
+            },
+            {
+              "id": "home.timeline.stage-1.days",
+              "kind": "text",
+              "label": "Stage 1 · day range"
+            },
+            {
+              "id": "home.timeline.stage-1.title",
+              "kind": "text",
+              "label": "Stage 1 · heading"
+            },
+            {
+              "id": "home.timeline.stage-1.copy",
+              "kind": "text",
+              "label": "Stage 1 · description"
+            },
+            {
+              "id": "home.timeline.stage-2.days",
+              "kind": "text",
+              "label": "Stage 2 · day range"
+            },
+            {
+              "id": "home.timeline.stage-2.title",
+              "kind": "text",
+              "label": "Stage 2 · heading"
+            },
+            {
+              "id": "home.timeline.stage-2.copy",
+              "kind": "text",
+              "label": "Stage 2 · description"
+            },
+            {
+              "id": "home.timeline.stage-3.days",
+              "kind": "text",
+              "label": "Stage 3 · day range"
+            },
+            {
+              "id": "home.timeline.stage-3.title",
+              "kind": "text",
+              "label": "Stage 3 · heading"
+            },
+            {
+              "id": "home.timeline.stage-3.copy",
+              "kind": "text",
+              "label": "Stage 3 · description"
+            },
+            {
+              "id": "home.timeline.stage-4.days",
+              "kind": "text",
+              "label": "Stage 4 · day range"
+            },
+            {
+              "id": "home.timeline.stage-4.title",
+              "kind": "text",
+              "label": "Stage 4 · heading"
+            },
+            {
+              "id": "home.timeline.stage-4.copy",
+              "kind": "text",
+              "label": "Stage 4 · description"
+            },
+            {
+              "id": "home.timeline.stage-5.days",
+              "kind": "text",
+              "label": "Stage 5 · day range"
+            },
+            {
+              "id": "home.timeline.stage-5.title",
+              "kind": "text",
+              "label": "Stage 5 · heading"
+            },
+            {
+              "id": "home.timeline.stage-5.copy",
+              "kind": "text",
+              "label": "Stage 5 · description"
+            }
+          ]
+        },
+        {
+          "id": "signature-preview",
+          "label": "Signature preview",
+          "fields": [
+            {
+              "id": "home.signature.image",
+              "kind": "image",
+              "label": "Forza image"
+            },
+            {
+              "id": "home.signature.image-alt",
+              "kind": "text",
+              "label": "Forza image description"
+            },
+            {
+              "id": "home.signature.video",
+              "kind": "video",
+              "label": "Scroll rotation film"
+            },
+            {
+              "id": "home.signature.label",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "home.signature.heading-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "home.signature.heading-2",
+              "kind": "text",
+              "label": "Heading · second line"
+            },
+            {
+              "id": "home.signature.copy",
+              "kind": "text",
+              "label": "Closing copy"
+            },
+            {
+              "id": "home.signature.action",
+              "kind": "text",
+              "label": "Models button"
+            },
+            {
+              "id": "home.signature.action-href",
+              "kind": "text",
+              "label": "Models button destination"
+            }
+          ]
+        },
+        {
+          "id": "bespoke-preview",
+          "label": "Bespoke preview",
+          "fields": [
+            {
+              "id": "home.bespoke.image",
+              "kind": "image",
+              "label": "Bespoke background"
+            },
+            {
+              "id": "home.bespoke.image-alt",
+              "kind": "text",
+              "label": "Background description"
+            },
+            {
+              "id": "home.bespoke.card-image",
+              "kind": "image",
+              "label": "Courtyard image"
+            },
+            {
+              "id": "home.bespoke.card-alt",
+              "kind": "text",
+              "label": "Courtyard description"
+            },
+            {
+              "id": "home.bespoke.word",
+              "kind": "text",
+              "label": "Background word"
+            },
+            {
+              "id": "home.bespoke.heading-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "home.bespoke.heading-2",
+              "kind": "text",
+              "label": "Heading · second line"
+            },
+            {
+              "id": "home.bespoke.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "home.bespoke.action",
+              "kind": "text",
+              "label": "Bespoke button"
+            },
+            {
+              "id": "home.bespoke.action-href",
+              "kind": "text",
+              "label": "Bespoke button destination"
+            }
+          ]
+        },
+        {
+          "id": "sustainability-preview",
+          "label": "Sustainability preview",
+          "fields": [
+            {
+              "id": "home.sustainability.poster",
+              "kind": "image",
+              "label": "Opening still"
+            },
+            {
+              "id": "home.sustainability.poster-alt",
+              "kind": "text",
+              "label": "Still description"
+            },
+            {
+              "id": "home.sustainability.video",
+              "kind": "video",
+              "label": "Ambient film"
+            },
+            {
+              "id": "home.sustainability.label",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "home.sustainability.heading-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "home.sustainability.heading-2",
+              "kind": "text",
+              "label": "Heading · second line"
+            },
+            {
+              "id": "home.sustainability.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "home.sustainability.action",
+              "kind": "text",
+              "label": "Approach button"
+            },
+            {
+              "id": "home.sustainability.action-href",
+              "kind": "text",
+              "label": "Approach button destination"
+            }
+          ]
+        },
+        {
+          "id": "editorial-preview",
+          "label": "Journal and About previews",
+          "fields": [
+            {
+              "id": "home.editorial.journal.image",
+              "kind": "image",
+              "label": "Journal image"
+            },
+            {
+              "id": "home.editorial.journal.image-alt",
+              "kind": "text",
+              "label": "Journal image description"
+            },
+            {
+              "id": "home.editorial.journal.title",
+              "kind": "text",
+              "label": "Journal heading"
+            },
+            {
+              "id": "home.editorial.journal.copy",
+              "kind": "text",
+              "label": "Journal description"
+            },
+            {
+              "id": "home.editorial.journal.action",
+              "kind": "text",
+              "label": "Journal button"
+            },
+            {
+              "id": "home.editorial.journal.href",
+              "kind": "text",
+              "label": "Journal destination"
+            },
+            {
+              "id": "home.editorial.about.image",
+              "kind": "image",
+              "label": "About preview image"
+            },
+            {
+              "id": "home.editorial.about.image-alt",
+              "kind": "text",
+              "label": "About preview image description"
+            },
+            {
+              "id": "home.editorial.about.title",
+              "kind": "text",
+              "label": "About preview heading"
+            },
+            {
+              "id": "home.editorial.about.copy",
+              "kind": "text",
+              "label": "About preview description"
+            },
+            {
+              "id": "home.editorial.about.action",
+              "kind": "text",
+              "label": "About preview button"
+            },
+            {
+              "id": "home.editorial.about.href",
+              "kind": "text",
+              "label": "About destination"
+            }
+          ]
+        }
+      ],
+      "collections": []
+    },
+    {
+      "id": "projects",
+      "label": "Projects",
+      "href": "/projects",
+      "sections": [
+        {
+          "id": "intro",
+          "label": "Atlas opening",
+          "fields": [
+            {
+              "id": "projects.intro.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "projects.intro.title",
+              "kind": "text",
+              "label": "Main heading"
+            },
+            {
+              "id": "projects.intro.subtitle",
+              "kind": "text",
+              "label": "Supporting line"
+            },
+            {
+              "id": "projects.intro.action",
+              "kind": "text",
+              "label": "View projects button"
+            },
+            {
+              "id": "projects.intro.action-href",
+              "kind": "text",
+              "label": "View projects button destination"
+            }
+          ]
+        },
+        {
+          "id": "globe-pins",
+          "label": "Globe pins",
+          "fields": []
+        },
+        {
+          "id": "project-library",
+          "label": "Project library",
+          "fields": []
+        },
+        {
+          "id": "detail-controls",
+          "label": "Project detail navigation",
+          "fields": [
+            {
+              "id": "projects.detail.return",
+              "kind": "text",
+              "label": "Return to projects link"
+            },
+            {
+              "id": "projects.detail.return-href",
+              "kind": "text",
+              "label": "Return link destination"
+            },
+            {
+              "id": "projects.detail.photos-tab",
+              "kind": "text",
+              "label": "Photographs tab"
+            },
+            {
+              "id": "projects.detail.films-tab",
+              "kind": "text",
+              "label": "Films tab"
+            }
+          ]
+        }
+      ],
+      "collections": [
+        {
+          "id": "projects.globePins",
+          "pageId": "projects",
+          "label": "Globe pins",
+          "itemLabel": "pin",
+          "maxItems": 100,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Place label",
+              "kind": "text",
+              "required": true,
+              "help": "Shown on the globe; no project page or photograph is needed."
+            },
+            {
+              "key": "latitude",
+              "label": "Latitude",
+              "kind": "text",
+              "required": true,
+              "help": "North/south decimal degrees, from −90 to 90."
+            },
+            {
+              "key": "longitude",
+              "label": "Longitude",
+              "kind": "text",
+              "required": true,
+              "help": "East/west decimal degrees, from −180 to 180."
+            }
+          ]
+        },
+        {
+          "id": "projects.records",
+          "pageId": "projects",
+          "label": "Projects",
+          "itemLabel": "project",
+          "maxItems": 200,
+          "fields": [
+            {
+              "key": "status",
+              "label": "Publication status",
+              "kind": "choice",
+              "options": [
+                {
+                  "label": "Published",
+                  "value": "active"
+                },
+                {
+                  "label": "Archived",
+                  "value": "archived"
+                }
+              ]
+            },
+            {
+              "key": "slug",
+              "label": "Project page address",
+              "kind": "text",
+              "help": "Unique address after /projects/. Existing records use their stable ID until changed."
+            },
+            {
+              "key": "slugHistory",
+              "label": "Previous page addresses",
+              "kind": "json",
+              "help": "Saved redirects for earlier project addresses."
+            },
+            {
+              "key": "showInProjects",
+              "label": "Show on Projects page",
+              "kind": "choice",
+              "options": [
+                {
+                  "label": "Show",
+                  "value": "true"
+                },
+                {
+                  "label": "Keep in library only",
+                  "value": "false"
+                }
+              ]
+            },
+            {
+              "key": "title",
+              "label": "Project title",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "category",
+              "label": "Project type",
+              "kind": "text"
+            },
+            {
+              "key": "location",
+              "label": "Project detail location",
+              "kind": "text",
+              "help": "Shown on this project's detail page only. Edit globe pins separately above the project library."
+            },
+            {
+              "key": "description",
+              "label": "Description",
+              "kind": "text"
+            },
+            {
+              "key": "coverSrc",
+              "label": "Cover photograph",
+              "kind": "image",
+              "required": true
+            },
+            {
+              "key": "coverAlt",
+              "label": "Cover description",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "gallery",
+              "label": "Gallery photographs",
+              "kind": "json",
+              "help": "Ordered gallery items. Use the photograph controls below when available."
+            },
+            {
+              "key": "films",
+              "label": "Films",
+              "kind": "json",
+              "help": "Ordered film items. Use the film controls below when available."
+            },
+            {
+              "key": "previewSrc",
+              "label": "Showcase preview film",
+              "kind": "video"
+            },
+            {
+              "key": "previewPoster",
+              "label": "Showcase film poster",
+              "kind": "image",
+              "help": "If omitted, the cover photograph is used."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "models",
+      "label": "Models",
+      "href": "/models",
+      "sections": [
+        {
+          "id": "selector",
+          "label": "Model selector opening",
+          "fields": [
+            {
+              "id": "models.selector.heading-start",
+              "kind": "text",
+              "label": "Heading · opening"
+            },
+            {
+              "id": "models.selector.heading-end",
+              "kind": "text",
+              "label": "Heading · emphasis"
+            },
+            {
+              "id": "models.selector.intro",
+              "kind": "text",
+              "label": "Supporting line"
+            },
+            {
+              "id": "models.selector.accessible-label",
+              "kind": "text",
+              "label": "Accessible selector label"
+            }
+          ]
+        },
+        {
+          "id": "selector-signature",
+          "label": "Signature selector card",
+          "fields": [
+            {
+              "id": "models.selector.signature.title",
+              "kind": "text",
+              "label": "Card heading"
+            },
+            {
+              "id": "models.selector.signature.label",
+              "kind": "text",
+              "label": "Accessible card label"
+            },
+            {
+              "id": "models.selector.signature.image",
+              "kind": "image",
+              "label": "Card photograph"
+            },
+            {
+              "id": "models.selector.signature.alt",
+              "kind": "text",
+              "label": "Image description"
+            },
+            {
+              "id": "models.selector.signature.description",
+              "kind": "text",
+              "label": "Card description"
+            },
+            {
+              "id": "models.selector.signature.action",
+              "kind": "text",
+              "label": "Card button"
+            },
+            {
+              "id": "models.selector.signature.mode",
+              "kind": "text",
+              "label": "Card label"
+            }
+          ]
+        },
+        {
+          "id": "selector-bespoke",
+          "label": "Bespoke selector card",
+          "fields": [
+            {
+              "id": "models.selector.bespoke.title",
+              "kind": "text",
+              "label": "Card heading"
+            },
+            {
+              "id": "models.selector.bespoke.label",
+              "kind": "text",
+              "label": "Accessible card label"
+            },
+            {
+              "id": "models.selector.bespoke.image",
+              "kind": "image",
+              "label": "Card photograph"
+            },
+            {
+              "id": "models.selector.bespoke.alt",
+              "kind": "text",
+              "label": "Image description"
+            },
+            {
+              "id": "models.selector.bespoke.description",
+              "kind": "text",
+              "label": "Card description"
+            },
+            {
+              "id": "models.selector.bespoke.action",
+              "kind": "text",
+              "label": "Card button"
+            },
+            {
+              "id": "models.selector.bespoke.mode",
+              "kind": "text",
+              "label": "Card label"
+            }
+          ]
+        }
+      ],
+      "collections": []
+    },
+    {
+      "id": "signature",
+      "label": "Signature models",
+      "href": "/models/signature",
+      "sections": [
+        {
+          "id": "signature-controls",
+          "label": "Collection controls",
+          "fields": [
+            {
+              "id": "models.signature.eyebrow",
+              "kind": "text",
+              "label": "Collection eyebrow"
+            },
+            {
+              "id": "models.signature.loading",
+              "kind": "text",
+              "label": "Loading message"
+            },
+            {
+              "id": "models.signature.plan-filter-label",
+              "kind": "text",
+              "label": "Plan filter accessible label"
+            },
+            {
+              "id": "models.signature.filter-all",
+              "kind": "text",
+              "label": "All plans button"
+            },
+            {
+              "id": "models.signature.filter-studio",
+              "kind": "text",
+              "label": "Studio button"
+            },
+            {
+              "id": "models.signature.filter-2-bhk",
+              "kind": "text",
+              "label": "Two bedroom button"
+            },
+            {
+              "id": "models.signature.filter-3-bhk",
+              "kind": "text",
+              "label": "Three bedroom button"
+            },
+            {
+              "id": "models.signature.scroll-cue",
+              "kind": "text",
+              "label": "Scroll instruction"
+            },
+            {
+              "id": "models.signature.models-label",
+              "kind": "text",
+              "label": "Model selector accessible label"
+            },
+            {
+              "id": "models.signature.details-action",
+              "kind": "text",
+              "label": "Explore details button"
+            },
+            {
+              "id": "models.signature.home-singular",
+              "kind": "text",
+              "label": "Available count · singular"
+            },
+            {
+              "id": "models.signature.home-plural",
+              "kind": "text",
+              "label": "Available count · plural"
+            },
+            {
+              "id": "models.signature.available",
+              "kind": "text",
+              "label": "Available count · qualifier"
+            },
+            {
+              "id": "models.signature.feature-eyebrow",
+              "kind": "text",
+              "label": "Feature card label"
+            },
+            {
+              "id": "models.signature.detail.close",
+              "kind": "text",
+              "label": "Explore close button"
+            },
+            {
+              "id": "models.signature.detail.internal-area",
+              "kind": "text",
+              "label": "Internal area label"
+            },
+            {
+              "id": "models.signature.detail.starting-price",
+              "kind": "text",
+              "label": "Starting price label"
+            },
+            {
+              "id": "models.signature.detail.delivery",
+              "kind": "text",
+              "label": "Delivery label"
+            },
+            {
+              "id": "models.signature.detail.delivery-value",
+              "kind": "text",
+              "label": "Delivery value"
+            },
+            {
+              "id": "models.signature.detail.spaces",
+              "kind": "text",
+              "label": "Spaces label"
+            },
+            {
+              "id": "models.signature.detail.configure-action",
+              "kind": "text",
+              "label": "Configure button prefix"
+            },
+            {
+              "id": "models.signature.detail.build-eyebrow",
+              "kind": "text",
+              "label": "Build box label"
+            },
+            {
+              "id": "models.signature.detail.build-line-1",
+              "kind": "text",
+              "label": "Build box first line"
+            },
+            {
+              "id": "models.signature.detail.build-line-2",
+              "kind": "text",
+              "label": "Build box second line"
+            },
+            {
+              "id": "models.signature.detail.warranty-eyebrow",
+              "kind": "text",
+              "label": "Warranty box label"
+            },
+            {
+              "id": "models.signature.detail.warranty-value",
+              "kind": "text",
+              "label": "Warranty statement"
+            }
+          ]
+        },
+        {
+          "id": "forza-media",
+          "label": "Forza · rotation media",
+          "fields": [
+            {
+              "id": "models.signature.forza.orbit-film",
+              "kind": "video",
+              "label": "Replace rotation master film"
+            },
+            {
+              "id": "models.signature.forza.detail-film",
+              "kind": "video",
+              "label": "Prepared Explore detail film"
+            },
+            {
+              "id": "models.signature.forza.poster",
+              "kind": "image",
+              "label": "Rotation poster"
+            },
+            {
+              "id": "models.signature.forza.poster-alt",
+              "kind": "text",
+              "label": "Poster description"
+            },
+            {
+              "id": "models.signature.forza.orbit-description",
+              "kind": "text",
+              "label": "Rotation accessible description"
+            }
+          ]
+        },
+        {
+          "id": "forza-story",
+          "label": "Forza · story cards",
+          "fields": [
+            {
+              "id": "models.signature.forza.feature-1.title",
+              "kind": "text",
+              "label": "Feature 1 heading"
+            },
+            {
+              "id": "models.signature.forza.feature-1.copy",
+              "kind": "text",
+              "label": "Feature 1 description"
+            },
+            {
+              "id": "models.signature.forza.feature-2.title",
+              "kind": "text",
+              "label": "Feature 2 heading"
+            },
+            {
+              "id": "models.signature.forza.feature-2.copy",
+              "kind": "text",
+              "label": "Feature 2 description"
+            },
+            {
+              "id": "models.signature.forza.feature-3.title",
+              "kind": "text",
+              "label": "Feature 3 heading"
+            },
+            {
+              "id": "models.signature.forza.feature-3.copy",
+              "kind": "text",
+              "label": "Feature 3 description"
+            }
+          ]
+        },
+        {
+          "id": "forza-explore",
+          "label": "Forza · Explore details",
+          "fields": [
+            {
+              "id": "models.signature.forza.display-name",
+              "kind": "text",
+              "label": "Display name"
+            },
+            {
+              "id": "models.signature.forza.explore-action",
+              "kind": "text",
+              "label": "Explore button"
+            }
+          ]
+        },
+        {
+          "id": "forza-plan-1",
+          "label": "Forza · Studio plan and price",
+          "fields": [
+            {
+              "id": "models.signature.forza.variant-1.name",
+              "kind": "text",
+              "label": "Plan name"
+            },
+            {
+              "id": "models.signature.forza.variant-1.area",
+              "kind": "text",
+              "label": "Published internal area"
+            },
+            {
+              "id": "models.signature.forza.variant-1.price",
+              "kind": "text",
+              "label": "Published starting price"
+            },
+            {
+              "id": "models.signature.forza.variant-1.spaces",
+              "kind": "text",
+              "label": "Spaces and features"
+            }
+          ]
+        },
+        {
+          "id": "forza-plan-2",
+          "label": "Forza · 1 BHK plan and price",
+          "fields": [
+            {
+              "id": "models.signature.forza.variant-2.name",
+              "kind": "text",
+              "label": "Plan name"
+            },
+            {
+              "id": "models.signature.forza.variant-2.area",
+              "kind": "text",
+              "label": "Published internal area"
+            },
+            {
+              "id": "models.signature.forza.variant-2.price",
+              "kind": "text",
+              "label": "Published starting price"
+            },
+            {
+              "id": "models.signature.forza.variant-2.spaces",
+              "kind": "text",
+              "label": "Spaces and features"
+            }
+          ]
+        },
+        {
+          "id": "kray-media",
+          "label": "Kray · rotation media",
+          "fields": [
+            {
+              "id": "models.signature.kray.orbit-film",
+              "kind": "video",
+              "label": "Replace rotation master film"
+            },
+            {
+              "id": "models.signature.kray.detail-film",
+              "kind": "video",
+              "label": "Prepared Explore detail film"
+            },
+            {
+              "id": "models.signature.kray.poster",
+              "kind": "image",
+              "label": "Rotation poster"
+            },
+            {
+              "id": "models.signature.kray.poster-alt",
+              "kind": "text",
+              "label": "Poster description"
+            },
+            {
+              "id": "models.signature.kray.orbit-description",
+              "kind": "text",
+              "label": "Rotation accessible description"
+            }
+          ]
+        },
+        {
+          "id": "kray-story",
+          "label": "Kray · story cards",
+          "fields": [
+            {
+              "id": "models.signature.kray.feature-1.title",
+              "kind": "text",
+              "label": "Feature 1 heading"
+            },
+            {
+              "id": "models.signature.kray.feature-1.copy",
+              "kind": "text",
+              "label": "Feature 1 description"
+            },
+            {
+              "id": "models.signature.kray.feature-2.title",
+              "kind": "text",
+              "label": "Feature 2 heading"
+            },
+            {
+              "id": "models.signature.kray.feature-2.copy",
+              "kind": "text",
+              "label": "Feature 2 description"
+            },
+            {
+              "id": "models.signature.kray.feature-3.title",
+              "kind": "text",
+              "label": "Feature 3 heading"
+            },
+            {
+              "id": "models.signature.kray.feature-3.copy",
+              "kind": "text",
+              "label": "Feature 3 description"
+            }
+          ]
+        },
+        {
+          "id": "kray-explore",
+          "label": "Kray · Explore details",
+          "fields": [
+            {
+              "id": "models.signature.kray.display-name",
+              "kind": "text",
+              "label": "Display name"
+            },
+            {
+              "id": "models.signature.kray.explore-action",
+              "kind": "text",
+              "label": "Explore button"
+            }
+          ]
+        },
+        {
+          "id": "kray-plan-1",
+          "label": "Kray · Kray Studio plan and price",
+          "fields": [
+            {
+              "id": "models.signature.kray.variant-1.name",
+              "kind": "text",
+              "label": "Plan name"
+            },
+            {
+              "id": "models.signature.kray.variant-1.area",
+              "kind": "text",
+              "label": "Published internal area"
+            },
+            {
+              "id": "models.signature.kray.variant-1.price",
+              "kind": "text",
+              "label": "Published starting price"
+            },
+            {
+              "id": "models.signature.kray.variant-1.spaces",
+              "kind": "text",
+              "label": "Spaces and features"
+            }
+          ]
+        },
+        {
+          "id": "kray-plan-2",
+          "label": "Kray · Kray 1 BHK plan and price",
+          "fields": [
+            {
+              "id": "models.signature.kray.variant-2.name",
+              "kind": "text",
+              "label": "Plan name"
+            },
+            {
+              "id": "models.signature.kray.variant-2.area",
+              "kind": "text",
+              "label": "Published internal area"
+            },
+            {
+              "id": "models.signature.kray.variant-2.price",
+              "kind": "text",
+              "label": "Published starting price"
+            },
+            {
+              "id": "models.signature.kray.variant-2.spaces",
+              "kind": "text",
+              "label": "Spaces and features"
+            }
+          ]
+        },
+        {
+          "id": "gaze-media",
+          "label": "Gaze · rotation media",
+          "fields": [
+            {
+              "id": "models.signature.gaze.orbit-film",
+              "kind": "video",
+              "label": "Replace rotation master film"
+            },
+            {
+              "id": "models.signature.gaze.detail-film",
+              "kind": "video",
+              "label": "Prepared Explore detail film"
+            },
+            {
+              "id": "models.signature.gaze.poster",
+              "kind": "image",
+              "label": "Rotation poster"
+            },
+            {
+              "id": "models.signature.gaze.poster-alt",
+              "kind": "text",
+              "label": "Poster description"
+            },
+            {
+              "id": "models.signature.gaze.orbit-description",
+              "kind": "text",
+              "label": "Rotation accessible description"
+            }
+          ]
+        },
+        {
+          "id": "gaze-story",
+          "label": "Gaze · story cards",
+          "fields": [
+            {
+              "id": "models.signature.gaze.feature-1.title",
+              "kind": "text",
+              "label": "Feature 1 heading"
+            },
+            {
+              "id": "models.signature.gaze.feature-1.copy",
+              "kind": "text",
+              "label": "Feature 1 description"
+            },
+            {
+              "id": "models.signature.gaze.feature-2.title",
+              "kind": "text",
+              "label": "Feature 2 heading"
+            },
+            {
+              "id": "models.signature.gaze.feature-2.copy",
+              "kind": "text",
+              "label": "Feature 2 description"
+            },
+            {
+              "id": "models.signature.gaze.feature-3.title",
+              "kind": "text",
+              "label": "Feature 3 heading"
+            },
+            {
+              "id": "models.signature.gaze.feature-3.copy",
+              "kind": "text",
+              "label": "Feature 3 description"
+            }
+          ]
+        },
+        {
+          "id": "gaze-explore",
+          "label": "Gaze · Explore details",
+          "fields": [
+            {
+              "id": "models.signature.gaze.display-name",
+              "kind": "text",
+              "label": "Display name"
+            },
+            {
+              "id": "models.signature.gaze.explore-action",
+              "kind": "text",
+              "label": "Explore button"
+            }
+          ]
+        },
+        {
+          "id": "gaze-plan-1",
+          "label": "Gaze · Studio retreat plan and price",
+          "fields": [
+            {
+              "id": "models.signature.gaze.variant-1.name",
+              "kind": "text",
+              "label": "Plan name"
+            },
+            {
+              "id": "models.signature.gaze.variant-1.area",
+              "kind": "text",
+              "label": "Published internal area"
+            },
+            {
+              "id": "models.signature.gaze.variant-1.price",
+              "kind": "text",
+              "label": "Published starting price"
+            },
+            {
+              "id": "models.signature.gaze.variant-1.spaces",
+              "kind": "text",
+              "label": "Spaces and features"
+            }
+          ]
+        },
+        {
+          "id": "tengo-media",
+          "label": "Tengo · rotation media",
+          "fields": [
+            {
+              "id": "models.signature.tengo.orbit-film",
+              "kind": "video",
+              "label": "Replace rotation master film"
+            },
+            {
+              "id": "models.signature.tengo.detail-film",
+              "kind": "video",
+              "label": "Prepared Explore detail film"
+            },
+            {
+              "id": "models.signature.tengo.poster",
+              "kind": "image",
+              "label": "Rotation poster"
+            },
+            {
+              "id": "models.signature.tengo.poster-alt",
+              "kind": "text",
+              "label": "Poster description"
+            },
+            {
+              "id": "models.signature.tengo.orbit-description",
+              "kind": "text",
+              "label": "Rotation accessible description"
+            }
+          ]
+        },
+        {
+          "id": "tengo-story",
+          "label": "Tengo · story cards",
+          "fields": [
+            {
+              "id": "models.signature.tengo.feature-1.title",
+              "kind": "text",
+              "label": "Feature 1 heading"
+            },
+            {
+              "id": "models.signature.tengo.feature-1.copy",
+              "kind": "text",
+              "label": "Feature 1 description"
+            },
+            {
+              "id": "models.signature.tengo.feature-2.title",
+              "kind": "text",
+              "label": "Feature 2 heading"
+            },
+            {
+              "id": "models.signature.tengo.feature-2.copy",
+              "kind": "text",
+              "label": "Feature 2 description"
+            },
+            {
+              "id": "models.signature.tengo.feature-3.title",
+              "kind": "text",
+              "label": "Feature 3 heading"
+            },
+            {
+              "id": "models.signature.tengo.feature-3.copy",
+              "kind": "text",
+              "label": "Feature 3 description"
+            }
+          ]
+        },
+        {
+          "id": "tengo-explore",
+          "label": "Tengo · Explore details",
+          "fields": [
+            {
+              "id": "models.signature.tengo.display-name",
+              "kind": "text",
+              "label": "Display name"
+            },
+            {
+              "id": "models.signature.tengo.explore-action",
+              "kind": "text",
+              "label": "Explore button"
+            }
+          ]
+        },
+        {
+          "id": "tengo-plan-1",
+          "label": "Tengo · 2 BHK plan and price",
+          "fields": [
+            {
+              "id": "models.signature.tengo.variant-1.name",
+              "kind": "text",
+              "label": "Plan name"
+            },
+            {
+              "id": "models.signature.tengo.variant-1.area",
+              "kind": "text",
+              "label": "Published internal area"
+            },
+            {
+              "id": "models.signature.tengo.variant-1.price",
+              "kind": "text",
+              "label": "Published starting price"
+            },
+            {
+              "id": "models.signature.tengo.variant-1.spaces",
+              "kind": "text",
+              "label": "Spaces and features"
+            }
+          ]
+        },
+        {
+          "id": "tengo-plan-2",
+          "label": "Tengo · 3 BHK plan and price",
+          "fields": [
+            {
+              "id": "models.signature.tengo.variant-2.name",
+              "kind": "text",
+              "label": "Plan name"
+            },
+            {
+              "id": "models.signature.tengo.variant-2.area",
+              "kind": "text",
+              "label": "Published internal area"
+            },
+            {
+              "id": "models.signature.tengo.variant-2.price",
+              "kind": "text",
+              "label": "Published starting price"
+            },
+            {
+              "id": "models.signature.tengo.variant-2.spaces",
+              "kind": "text",
+              "label": "Spaces and features"
+            }
+          ]
+        },
+        {
+          "id": "trib-media",
+          "label": "Trib · rotation media",
+          "fields": [
+            {
+              "id": "models.signature.trib.orbit-film",
+              "kind": "video",
+              "label": "Replace rotation master film"
+            },
+            {
+              "id": "models.signature.trib.detail-film",
+              "kind": "video",
+              "label": "Prepared Explore detail film"
+            },
+            {
+              "id": "models.signature.trib.poster",
+              "kind": "image",
+              "label": "Rotation poster"
+            },
+            {
+              "id": "models.signature.trib.poster-alt",
+              "kind": "text",
+              "label": "Poster description"
+            },
+            {
+              "id": "models.signature.trib.orbit-description",
+              "kind": "text",
+              "label": "Rotation accessible description"
+            }
+          ]
+        },
+        {
+          "id": "trib-story",
+          "label": "Trib · story cards",
+          "fields": [
+            {
+              "id": "models.signature.trib.feature-1.title",
+              "kind": "text",
+              "label": "Feature 1 heading"
+            },
+            {
+              "id": "models.signature.trib.feature-1.copy",
+              "kind": "text",
+              "label": "Feature 1 description"
+            },
+            {
+              "id": "models.signature.trib.feature-2.title",
+              "kind": "text",
+              "label": "Feature 2 heading"
+            },
+            {
+              "id": "models.signature.trib.feature-2.copy",
+              "kind": "text",
+              "label": "Feature 2 description"
+            },
+            {
+              "id": "models.signature.trib.feature-3.title",
+              "kind": "text",
+              "label": "Feature 3 heading"
+            },
+            {
+              "id": "models.signature.trib.feature-3.copy",
+              "kind": "text",
+              "label": "Feature 3 description"
+            }
+          ]
+        },
+        {
+          "id": "trib-explore",
+          "label": "Trib · Explore details",
+          "fields": [
+            {
+              "id": "models.signature.trib.display-name",
+              "kind": "text",
+              "label": "Display name"
+            },
+            {
+              "id": "models.signature.trib.explore-action",
+              "kind": "text",
+              "label": "Explore button"
+            }
+          ]
+        },
+        {
+          "id": "trib-plan-1",
+          "label": "Trib · Trib Studio plan and price",
+          "fields": [
+            {
+              "id": "models.signature.trib.variant-1.name",
+              "kind": "text",
+              "label": "Plan name"
+            },
+            {
+              "id": "models.signature.trib.variant-1.area",
+              "kind": "text",
+              "label": "Published internal area"
+            },
+            {
+              "id": "models.signature.trib.variant-1.price",
+              "kind": "text",
+              "label": "Published starting price"
+            },
+            {
+              "id": "models.signature.trib.variant-1.spaces",
+              "kind": "text",
+              "label": "Spaces and features"
+            }
+          ]
+        },
+        {
+          "id": "octapod-media",
+          "label": "Octapod · rotation media",
+          "fields": [
+            {
+              "id": "models.signature.octapod.orbit-film",
+              "kind": "video",
+              "label": "Replace rotation master film"
+            },
+            {
+              "id": "models.signature.octapod.detail-film",
+              "kind": "video",
+              "label": "Prepared Explore detail film"
+            },
+            {
+              "id": "models.signature.octapod.poster",
+              "kind": "image",
+              "label": "Rotation poster"
+            },
+            {
+              "id": "models.signature.octapod.poster-alt",
+              "kind": "text",
+              "label": "Poster description"
+            },
+            {
+              "id": "models.signature.octapod.orbit-description",
+              "kind": "text",
+              "label": "Rotation accessible description"
+            }
+          ]
+        },
+        {
+          "id": "octapod-story",
+          "label": "Octapod · story cards",
+          "fields": [
+            {
+              "id": "models.signature.octapod.feature-1.title",
+              "kind": "text",
+              "label": "Feature 1 heading"
+            },
+            {
+              "id": "models.signature.octapod.feature-1.copy",
+              "kind": "text",
+              "label": "Feature 1 description"
+            },
+            {
+              "id": "models.signature.octapod.feature-2.title",
+              "kind": "text",
+              "label": "Feature 2 heading"
+            },
+            {
+              "id": "models.signature.octapod.feature-2.copy",
+              "kind": "text",
+              "label": "Feature 2 description"
+            },
+            {
+              "id": "models.signature.octapod.feature-3.title",
+              "kind": "text",
+              "label": "Feature 3 heading"
+            },
+            {
+              "id": "models.signature.octapod.feature-3.copy",
+              "kind": "text",
+              "label": "Feature 3 description"
+            }
+          ]
+        },
+        {
+          "id": "octapod-explore",
+          "label": "Octapod · Explore details",
+          "fields": [
+            {
+              "id": "models.signature.octapod.display-name",
+              "kind": "text",
+              "label": "Display name"
+            },
+            {
+              "id": "models.signature.octapod.explore-action",
+              "kind": "text",
+              "label": "Explore button"
+            }
+          ]
+        },
+        {
+          "id": "octapod-plan-1",
+          "label": "Octapod · Studio plan and price",
+          "fields": [
+            {
+              "id": "models.signature.octapod.variant-1.name",
+              "kind": "text",
+              "label": "Plan name"
+            },
+            {
+              "id": "models.signature.octapod.variant-1.area",
+              "kind": "text",
+              "label": "Published internal area"
+            },
+            {
+              "id": "models.signature.octapod.variant-1.price",
+              "kind": "text",
+              "label": "Published starting price"
+            },
+            {
+              "id": "models.signature.octapod.variant-1.spaces",
+              "kind": "text",
+              "label": "Spaces and features"
+            }
+          ]
+        }
+      ],
+      "collections": [
+        {
+          "id": "signature.models",
+          "pageId": "signature",
+          "label": "Signature model roster",
+          "itemLabel": "model",
+          "maxItems": 24,
+          "fields": [
+            {
+              "key": "name",
+              "label": "Model name",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "orbitFilm",
+              "label": "Scroll rotation film",
+              "kind": "video"
+            },
+            {
+              "key": "detailFilm",
+              "label": "Explore detail film",
+              "kind": "video"
+            },
+            {
+              "key": "poster",
+              "label": "Opening poster",
+              "kind": "image"
+            },
+            {
+              "key": "posterAlt",
+              "label": "Poster description",
+              "kind": "text"
+            },
+            {
+              "key": "exploreAction",
+              "label": "Explore button",
+              "kind": "text"
+            },
+            {
+              "key": "features",
+              "label": "Three story cards",
+              "kind": "json"
+            },
+            {
+              "key": "gallery",
+              "label": "Preview images",
+              "kind": "json"
+            }
+          ]
+        },
+        {
+          "id": "signature.plans",
+          "pageId": "signature",
+          "label": "Signature plans",
+          "itemLabel": "plan",
+          "maxItems": 120,
+          "fields": [
+            {
+              "key": "modelId",
+              "label": "Owning model",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "name",
+              "label": "Plan name",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "area",
+              "label": "Published internal area",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "price",
+              "label": "Published starting price",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "spaces",
+              "label": "Spaces and features",
+              "kind": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "signature.gallery.forza",
+          "pageId": "signature",
+          "label": "Forza preview images",
+          "itemLabel": "image",
+          "maxItems": 50,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Image button text",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "image",
+              "label": "Preview image",
+              "kind": "image",
+              "required": true
+            },
+            {
+              "key": "alt",
+              "label": "Image description",
+              "kind": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "signature.gallery.kray",
+          "pageId": "signature",
+          "label": "Kray preview images",
+          "itemLabel": "image",
+          "maxItems": 50,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Image button text",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "image",
+              "label": "Preview image",
+              "kind": "image",
+              "required": true
+            },
+            {
+              "key": "alt",
+              "label": "Image description",
+              "kind": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "signature.gallery.gaze",
+          "pageId": "signature",
+          "label": "Gaze preview images",
+          "itemLabel": "image",
+          "maxItems": 50,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Image button text",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "image",
+              "label": "Preview image",
+              "kind": "image",
+              "required": true
+            },
+            {
+              "key": "alt",
+              "label": "Image description",
+              "kind": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "signature.gallery.tengo",
+          "pageId": "signature",
+          "label": "Tengo preview images",
+          "itemLabel": "image",
+          "maxItems": 50,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Image button text",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "image",
+              "label": "Preview image",
+              "kind": "image",
+              "required": true
+            },
+            {
+              "key": "alt",
+              "label": "Image description",
+              "kind": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "signature.gallery.trib",
+          "pageId": "signature",
+          "label": "Trib preview images",
+          "itemLabel": "image",
+          "maxItems": 50,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Image button text",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "image",
+              "label": "Preview image",
+              "kind": "image",
+              "required": true
+            },
+            {
+              "key": "alt",
+              "label": "Image description",
+              "kind": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "signature.gallery.octapod",
+          "pageId": "signature",
+          "label": "Octapod preview images",
+          "itemLabel": "image",
+          "maxItems": 50,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Image button text",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "image",
+              "label": "Preview image",
+              "kind": "image",
+              "required": true
+            },
+            {
+              "key": "alt",
+              "label": "Image description",
+              "kind": "text",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "configurators",
+      "label": "Configurators",
+      "href": "/models/signature/tengo/configure",
+      "sections": [
+        {
+          "id": "navigation",
+          "label": "Navigation and model stage",
+          "fields": [
+            {
+              "id": "configurator.brand.subtitle",
+              "kind": "text",
+              "label": "Brand subtitle"
+            },
+            {
+              "id": "configurator.nav.accessible",
+              "kind": "text",
+              "label": "Steps · accessible label"
+            },
+            {
+              "id": "configurator.nav.finishes",
+              "kind": "text",
+              "label": "First step"
+            },
+            {
+              "id": "configurator.nav.selection",
+              "kind": "text",
+              "label": "Second step"
+            },
+            {
+              "id": "configurator.action.back",
+              "kind": "text",
+              "label": "Back to model"
+            },
+            {
+              "id": "configurator.action.review",
+              "kind": "text",
+              "label": "Review button"
+            },
+            {
+              "id": "configurator.action.continue",
+              "kind": "text",
+              "label": "Continue button"
+            },
+            {
+              "id": "configurator.preview.studio",
+              "kind": "text",
+              "label": "Preview · return to studio"
+            },
+            {
+              "id": "configurator.preview.editor",
+              "kind": "text",
+              "label": "Preview · return to editor"
+            },
+            {
+              "id": "configurator.preview.notice",
+              "kind": "text",
+              "label": "Preview notice"
+            },
+            {
+              "id": "configurator.stage.accessible",
+              "kind": "text",
+              "label": "Model preview · accessible label"
+            },
+            {
+              "id": "configurator.stage.eyebrow",
+              "kind": "text",
+              "label": "Model preview · opening"
+            },
+            {
+              "id": "configurator.stage.original",
+              "kind": "text",
+              "label": "Original material status"
+            },
+            {
+              "id": "configurator.stage.view-accessible",
+              "kind": "text",
+              "label": "View switch · accessible label"
+            },
+            {
+              "id": "configurator.stage.exterior",
+              "kind": "text",
+              "label": "Exterior view button"
+            },
+            {
+              "id": "configurator.stage.interior",
+              "kind": "text",
+              "label": "Interior view button"
+            },
+            {
+              "id": "configurator.stage.show-finishes",
+              "kind": "text",
+              "label": "Show chosen finishes button"
+            },
+            {
+              "id": "configurator.stage.view-original",
+              "kind": "text",
+              "label": "View original materials button"
+            }
+          ]
+        },
+        {
+          "id": "viewer",
+          "label": "Interactive 3D preview",
+          "fields": [
+            {
+              "id": "configurator.viewer.poster-accessible",
+              "kind": "text",
+              "label": "Poster · image description template"
+            },
+            {
+              "id": "configurator.viewer.canvas-accessible",
+              "kind": "text",
+              "label": "3D canvas · accessible template"
+            },
+            {
+              "id": "configurator.viewer.live",
+              "kind": "text",
+              "label": "Loaded model status"
+            },
+            {
+              "id": "configurator.viewer.error",
+              "kind": "text",
+              "label": "Unavailable model status"
+            },
+            {
+              "id": "configurator.viewer.loading",
+              "kind": "text",
+              "label": "Loading model status"
+            },
+            {
+              "id": "configurator.viewer.preparing",
+              "kind": "text",
+              "label": "Finishing load status"
+            },
+            {
+              "id": "configurator.viewer.progress",
+              "kind": "text",
+              "label": "Load progress template"
+            },
+            {
+              "id": "configurator.viewer.error-help",
+              "kind": "text",
+              "label": "Model load error"
+            },
+            {
+              "id": "configurator.viewer.retry",
+              "kind": "text",
+              "label": "Retry model button"
+            },
+            {
+              "id": "configurator.viewer.lighting-accessible",
+              "kind": "text",
+              "label": "Lighting · accessible label"
+            },
+            {
+              "id": "configurator.viewer.daylight",
+              "kind": "text",
+              "label": "Daylight button"
+            },
+            {
+              "id": "configurator.viewer.golden",
+              "kind": "text",
+              "label": "Golden-hour button"
+            },
+            {
+              "id": "configurator.viewer.pointer-hint",
+              "kind": "text",
+              "label": "Mouse controls hint"
+            },
+            {
+              "id": "configurator.viewer.touch-hint",
+              "kind": "text",
+              "label": "Touch controls hint"
+            },
+            {
+              "id": "configurator.viewer.reset",
+              "kind": "text",
+              "label": "Reset view button"
+            },
+            {
+              "id": "configurator.viewer.retry-material",
+              "kind": "text",
+              "label": "Retry material button"
+            }
+          ]
+        },
+        {
+          "id": "finishes",
+          "label": "Choose finishes",
+          "fields": [
+            {
+              "id": "configurator.panel.accessible",
+              "kind": "text",
+              "label": "Choices panel · accessible label"
+            },
+            {
+              "id": "configurator.finish.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "configurator.finish.heading",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "configurator.finish.intro",
+              "kind": "text",
+              "label": "Introduction"
+            },
+            {
+              "id": "configurator.finish.surface-accessible",
+              "kind": "text",
+              "label": "Surface chooser · accessible label"
+            },
+            {
+              "id": "configurator.finish.curated",
+              "kind": "text",
+              "label": "Finish group label"
+            },
+            {
+              "id": "configurator.finish.selected",
+              "kind": "text",
+              "label": "Selected finish label"
+            },
+            {
+              "id": "configurator.finish.inspect",
+              "kind": "text",
+              "label": "Closer look button"
+            },
+            {
+              "id": "configurator.finish.inspect-accessible",
+              "kind": "text",
+              "label": "Inspect material · accessible template"
+            },
+            {
+              "id": "configurator.finish.group-accessible",
+              "kind": "text",
+              "label": "Finish group · accessible template"
+            },
+            {
+              "id": "configurator.finish.custom-family",
+              "kind": "text",
+              "label": "Custom finish category"
+            },
+            {
+              "id": "configurator.finish.progress",
+              "kind": "text",
+              "label": "Surface counter"
+            },
+            {
+              "id": "configurator.finish.next",
+              "kind": "text",
+              "label": "Next surface button"
+            },
+            {
+              "id": "configurator.finish.note",
+              "kind": "text",
+              "label": "Material preview note"
+            },
+            {
+              "id": "configurator.finish.saved",
+              "kind": "text",
+              "label": "Saved status"
+            }
+          ]
+        },
+        {
+          "id": "selection",
+          "label": "Review your selection",
+          "fields": [
+            {
+              "id": "configurator.selection.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "configurator.selection.heading",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "configurator.selection.surfaces",
+              "kind": "text",
+              "label": "Surface count · template"
+            },
+            {
+              "id": "configurator.selection.edit",
+              "kind": "text",
+              "label": "Edit finish button"
+            },
+            {
+              "id": "configurator.selection.download",
+              "kind": "text",
+              "label": "Download button"
+            },
+            {
+              "id": "configurator.selection.copy",
+              "kind": "text",
+              "label": "Copy link button"
+            },
+            {
+              "id": "configurator.selection.link-label",
+              "kind": "text",
+              "label": "Share link label"
+            },
+            {
+              "id": "configurator.selection.note",
+              "kind": "text",
+              "label": "Consultation note"
+            },
+            {
+              "id": "configurator.selection.reset",
+              "kind": "text",
+              "label": "Reset button"
+            },
+            {
+              "id": "configurator.selection.shared-status",
+              "kind": "text",
+              "label": "Opened shared selection status"
+            },
+            {
+              "id": "configurator.selection.expired-status",
+              "kind": "text",
+              "label": "Expired link status"
+            },
+            {
+              "id": "configurator.selection.copied-status",
+              "kind": "text",
+              "label": "Copied link status"
+            },
+            {
+              "id": "configurator.selection.copy-status",
+              "kind": "text",
+              "label": "Manual copy status"
+            },
+            {
+              "id": "configurator.selection.downloaded-status",
+              "kind": "text",
+              "label": "Download status"
+            },
+            {
+              "id": "configurator.selection.export-variant",
+              "kind": "text",
+              "label": "Export · missing variant"
+            },
+            {
+              "id": "configurator.selection.export-variant-label",
+              "kind": "text",
+              "label": "Export · variant label"
+            },
+            {
+              "id": "configurator.selection.export-revision-label",
+              "kind": "text",
+              "label": "Export · catalogue revision label"
+            },
+            {
+              "id": "configurator.selection.export-note",
+              "kind": "text",
+              "label": "Export · disclaimer"
+            }
+          ]
+        },
+        {
+          "id": "material-detail",
+          "label": "Material detail dialog",
+          "fields": [
+            {
+              "id": "configurator.detail.close-accessible",
+              "kind": "text",
+              "label": "Close · accessible label"
+            },
+            {
+              "id": "configurator.detail.sample-accessible",
+              "kind": "text",
+              "label": "Sample image · accessible template"
+            },
+            {
+              "id": "configurator.detail.view-accessible",
+              "kind": "text",
+              "label": "Full-size link · accessible template"
+            },
+            {
+              "id": "configurator.detail.view",
+              "kind": "text",
+              "label": "Full-size link"
+            },
+            {
+              "id": "configurator.detail.selected",
+              "kind": "text",
+              "label": "Selected sample label"
+            },
+            {
+              "id": "configurator.detail.collection",
+              "kind": "text",
+              "label": "Library sample label"
+            },
+            {
+              "id": "configurator.detail.note",
+              "kind": "text",
+              "label": "Material note"
+            },
+            {
+              "id": "configurator.detail.back-palette",
+              "kind": "text",
+              "label": "Back to palette button"
+            },
+            {
+              "id": "configurator.detail.back-collection",
+              "kind": "text",
+              "label": "Back to collection button"
+            }
+          ]
+        },
+        {
+          "id": "unavailable",
+          "label": "Unavailable layout and material library",
+          "fields": [
+            {
+              "id": "configurator.unavailable.eyebrow",
+              "kind": "text",
+              "label": "Model image · section label"
+            },
+            {
+              "id": "configurator.unavailable.exterior",
+              "kind": "text",
+              "label": "Model image · accessible template"
+            },
+            {
+              "id": "configurator.unavailable.caption",
+              "kind": "text",
+              "label": "Model image · caption"
+            },
+            {
+              "id": "configurator.unavailable.variant",
+              "kind": "text",
+              "label": "Available layout note"
+            },
+            {
+              "id": "configurator.unavailable.configure",
+              "kind": "text",
+              "label": "Configure available layout button"
+            },
+            {
+              "id": "configurator.unavailable.note",
+              "kind": "text",
+              "label": "Unready layout note"
+            },
+            {
+              "id": "configurator.library.accessible",
+              "kind": "text",
+              "label": "Library · accessible label"
+            },
+            {
+              "id": "configurator.library.eyebrow",
+              "kind": "text",
+              "label": "Library section label"
+            },
+            {
+              "id": "configurator.library.heading",
+              "kind": "text",
+              "label": "Library heading"
+            },
+            {
+              "id": "configurator.library.intro",
+              "kind": "text",
+              "label": "Library introduction"
+            },
+            {
+              "id": "configurator.library.filter-accessible",
+              "kind": "text",
+              "label": "Filters · accessible label"
+            },
+            {
+              "id": "configurator.library.all",
+              "kind": "text",
+              "label": "All materials filter"
+            },
+            {
+              "id": "configurator.library.count-one",
+              "kind": "text",
+              "label": "Singular count label"
+            },
+            {
+              "id": "configurator.library.count-many",
+              "kind": "text",
+              "label": "Plural count label"
+            },
+            {
+              "id": "configurator.library.samples-accessible",
+              "kind": "text",
+              "label": "Samples · accessible label"
+            },
+            {
+              "id": "configurator.library.sample-accessible",
+              "kind": "text",
+              "label": "Sample button · accessible template"
+            }
+          ]
+        },
+        {
+          "id": "product-data",
+          "label": "Model and finish catalogue",
+          "fields": []
+        }
+      ],
+      "collections": []
+    },
+    {
+      "id": "bespoke",
+      "label": "Bespoke",
+      "href": "/models/bespoke",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Opening",
+          "fields": [
+            {
+              "id": "models.bespoke.hero.image",
+              "kind": "image",
+              "label": "Opening photograph"
+            },
+            {
+              "id": "models.bespoke.hero.alt",
+              "kind": "text",
+              "label": "Image description"
+            },
+            {
+              "id": "models.bespoke.hero.background-word",
+              "kind": "text",
+              "label": "Background word"
+            },
+            {
+              "id": "models.bespoke.hero.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "models.bespoke.hero.line-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "models.bespoke.hero.line-2",
+              "kind": "text",
+              "label": "Heading · second line"
+            }
+          ]
+        },
+        {
+          "id": "manifesto",
+          "label": "Manifesto",
+          "fields": [
+            {
+              "id": "models.bespoke.manifesto.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "models.bespoke.manifesto.line-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "models.bespoke.manifesto.line-2",
+              "kind": "text",
+              "label": "Heading · second line"
+            },
+            {
+              "id": "models.bespoke.manifesto.line-3",
+              "kind": "text",
+              "label": "Heading · third line"
+            },
+            {
+              "id": "models.bespoke.manifesto.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "models.bespoke.manifesto.image",
+              "kind": "image",
+              "label": "Courtyard photograph"
+            },
+            {
+              "id": "models.bespoke.manifesto.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "portal",
+          "label": "Architecture transition",
+          "fields": [
+            {
+              "id": "models.bespoke.portal.image",
+              "kind": "image",
+              "label": "Portal photograph"
+            },
+            {
+              "id": "models.bespoke.portal.image-alt",
+              "kind": "text",
+              "label": "Portal image description"
+            }
+          ]
+        },
+        {
+          "id": "decisions",
+          "label": "Design decisions",
+          "fields": [
+            {
+              "id": "models.bespoke.stages.next-action",
+              "kind": "text",
+              "label": "Next-step button"
+            }
+          ]
+        },
+        {
+          "id": "decision-1",
+          "label": "Decision 1 · PLACE",
+          "fields": [
+            {
+              "id": "models.bespoke.stage-1.label",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "models.bespoke.stage-1.detail",
+              "kind": "text",
+              "label": "Detail"
+            },
+            {
+              "id": "models.bespoke.stage-1.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "models.bespoke.stage-1.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "models.bespoke.stage-1.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "decision-2",
+          "label": "Decision 2 · BRIEF",
+          "fields": [
+            {
+              "id": "models.bespoke.stage-2.label",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "models.bespoke.stage-2.detail",
+              "kind": "text",
+              "label": "Detail"
+            },
+            {
+              "id": "models.bespoke.stage-2.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "models.bespoke.stage-2.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "models.bespoke.stage-2.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "decision-3",
+          "label": "Decision 3 · FORM",
+          "fields": [
+            {
+              "id": "models.bespoke.stage-3.label",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "models.bespoke.stage-3.detail",
+              "kind": "text",
+              "label": "Detail"
+            },
+            {
+              "id": "models.bespoke.stage-3.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "models.bespoke.stage-3.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "models.bespoke.stage-3.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "decision-4",
+          "label": "Decision 4 · ATMOSPHERE",
+          "fields": [
+            {
+              "id": "models.bespoke.stage-4.label",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "models.bespoke.stage-4.detail",
+              "kind": "text",
+              "label": "Detail"
+            },
+            {
+              "id": "models.bespoke.stage-4.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "models.bespoke.stage-4.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "models.bespoke.stage-4.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "result",
+          "label": "The result",
+          "fields": [
+            {
+              "id": "models.bespoke.result.image",
+              "kind": "image",
+              "label": "Background photograph"
+            },
+            {
+              "id": "models.bespoke.result.alt",
+              "kind": "text",
+              "label": "Background description"
+            },
+            {
+              "id": "models.bespoke.result.word-1",
+              "kind": "text",
+              "label": "Background word · one"
+            },
+            {
+              "id": "models.bespoke.result.word-2",
+              "kind": "text",
+              "label": "Background word · two"
+            },
+            {
+              "id": "models.bespoke.result.card-image",
+              "kind": "image",
+              "label": "Inset photograph"
+            },
+            {
+              "id": "models.bespoke.result.card-alt",
+              "kind": "text",
+              "label": "Inset image description"
+            },
+            {
+              "id": "models.bespoke.result.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "models.bespoke.result.heading",
+              "kind": "text",
+              "label": "Closing heading"
+            }
+          ]
+        }
+      ],
+      "collections": []
+    },
+    {
+      "id": "hospitality",
+      "label": "Hospitality",
+      "href": "/hospitality",
+      "sections": [
+        {
+          "id": "opening",
+          "label": "Opening",
+          "fields": [
+            {
+              "id": "hospitality.opening.heading",
+              "kind": "text",
+              "label": "Opening heading"
+            },
+            {
+              "id": "hospitality.opening.image",
+              "kind": "image",
+              "label": "Opening photograph"
+            },
+            {
+              "id": "hospitality.opening.alt",
+              "kind": "text",
+              "label": "Photograph description"
+            },
+            {
+              "id": "hospitality.opening.caption",
+              "kind": "text",
+              "label": "Opening caption"
+            },
+            {
+              "id": "hospitality.opening.action",
+              "kind": "text",
+              "label": "Begin project button"
+            },
+            {
+              "id": "hospitality.opening.action-href",
+              "kind": "text",
+              "label": "Begin project destination"
+            }
+          ]
+        },
+        {
+          "id": "proof",
+          "label": "Estate capabilities",
+          "fields": [
+            {
+              "id": "hospitality.bento.1.eyebrow",
+              "kind": "text",
+              "label": "Card 1 label"
+            },
+            {
+              "id": "hospitality.bento.1.value",
+              "kind": "text",
+              "label": "Card 1 value"
+            },
+            {
+              "id": "hospitality.bento.1.title",
+              "kind": "text",
+              "label": "Card 1 heading"
+            },
+            {
+              "id": "hospitality.bento.1.image",
+              "kind": "image",
+              "label": "Card 1 photograph"
+            },
+            {
+              "id": "hospitality.bento.1.alt",
+              "kind": "text",
+              "label": "Card 1 photograph description"
+            },
+            {
+              "id": "hospitality.bento.2.eyebrow",
+              "kind": "text",
+              "label": "Card 2 label"
+            },
+            {
+              "id": "hospitality.bento.2.value",
+              "kind": "text",
+              "label": "Card 2 value"
+            },
+            {
+              "id": "hospitality.bento.2.title",
+              "kind": "text",
+              "label": "Card 2 heading"
+            },
+            {
+              "id": "hospitality.bento.2.image",
+              "kind": "image",
+              "label": "Card 2 photograph"
+            },
+            {
+              "id": "hospitality.bento.2.alt",
+              "kind": "text",
+              "label": "Card 2 photograph description"
+            },
+            {
+              "id": "hospitality.bento.3.eyebrow",
+              "kind": "text",
+              "label": "Card 3 label"
+            },
+            {
+              "id": "hospitality.bento.3.value",
+              "kind": "text",
+              "label": "Card 3 value"
+            },
+            {
+              "id": "hospitality.bento.3.title",
+              "kind": "text",
+              "label": "Card 3 heading"
+            },
+            {
+              "id": "hospitality.bento.3.image",
+              "kind": "image",
+              "label": "Card 3 photograph"
+            },
+            {
+              "id": "hospitality.bento.3.alt",
+              "kind": "text",
+              "label": "Card 3 photograph description"
+            },
+            {
+              "id": "hospitality.bento.4.eyebrow",
+              "kind": "text",
+              "label": "Card 4 label"
+            },
+            {
+              "id": "hospitality.bento.4.value",
+              "kind": "text",
+              "label": "Card 4 value"
+            },
+            {
+              "id": "hospitality.bento.4.title",
+              "kind": "text",
+              "label": "Card 4 heading"
+            },
+            {
+              "id": "hospitality.bento.4.image",
+              "kind": "image",
+              "label": "Card 4 photograph"
+            },
+            {
+              "id": "hospitality.bento.4.alt",
+              "kind": "text",
+              "label": "Card 4 photograph description"
+            },
+            {
+              "id": "hospitality.bento.5.eyebrow",
+              "kind": "text",
+              "label": "Card 5 label"
+            },
+            {
+              "id": "hospitality.bento.5.value",
+              "kind": "text",
+              "label": "Card 5 value"
+            },
+            {
+              "id": "hospitality.bento.5.title",
+              "kind": "text",
+              "label": "Card 5 heading"
+            },
+            {
+              "id": "hospitality.bento.5.image",
+              "kind": "image",
+              "label": "Card 5 photograph"
+            },
+            {
+              "id": "hospitality.bento.5.alt",
+              "kind": "text",
+              "label": "Card 5 photograph description"
+            }
+          ]
+        },
+        {
+          "id": "projects",
+          "label": "Selected work",
+          "fields": [
+            {
+              "id": "hospitality.selected.heading",
+              "kind": "text",
+              "label": "Selected work heading"
+            }
+          ]
+        },
+        {
+          "id": "timeline",
+          "label": "Delivery journey",
+          "fields": [
+            {
+              "id": "hospitality.timeline.label",
+              "kind": "text",
+              "label": "Delivery label"
+            },
+            {
+              "id": "hospitality.timeline.title",
+              "kind": "text",
+              "label": "Delivery heading"
+            },
+            {
+              "id": "hospitality.timeline.range",
+              "kind": "text",
+              "label": "Stage range"
+            },
+            {
+              "id": "hospitality.timeline.cover",
+              "kind": "image",
+              "label": "Journey cover"
+            },
+            {
+              "id": "hospitality.timeline.cover-alt",
+              "kind": "text",
+              "label": "Cover description"
+            },
+            {
+              "id": "hospitality.timeline.stage-1.number",
+              "kind": "text",
+              "label": "Stage 1 number"
+            },
+            {
+              "id": "hospitality.timeline.stage-1.title",
+              "kind": "text",
+              "label": "Stage 1 heading"
+            },
+            {
+              "id": "hospitality.timeline.stage-1.copy",
+              "kind": "text",
+              "label": "Stage 1 description"
+            },
+            {
+              "id": "hospitality.timeline.stage-1.image",
+              "kind": "image",
+              "label": "Stage 1 photograph"
+            },
+            {
+              "id": "hospitality.timeline.stage-1.alt",
+              "kind": "text",
+              "label": "Stage 1 photograph description"
+            },
+            {
+              "id": "hospitality.timeline.stage-2.number",
+              "kind": "text",
+              "label": "Stage 2 number"
+            },
+            {
+              "id": "hospitality.timeline.stage-2.title",
+              "kind": "text",
+              "label": "Stage 2 heading"
+            },
+            {
+              "id": "hospitality.timeline.stage-2.copy",
+              "kind": "text",
+              "label": "Stage 2 description"
+            },
+            {
+              "id": "hospitality.timeline.stage-2.image",
+              "kind": "image",
+              "label": "Stage 2 photograph"
+            },
+            {
+              "id": "hospitality.timeline.stage-2.alt",
+              "kind": "text",
+              "label": "Stage 2 photograph description"
+            },
+            {
+              "id": "hospitality.timeline.stage-3.number",
+              "kind": "text",
+              "label": "Stage 3 number"
+            },
+            {
+              "id": "hospitality.timeline.stage-3.title",
+              "kind": "text",
+              "label": "Stage 3 heading"
+            },
+            {
+              "id": "hospitality.timeline.stage-3.copy",
+              "kind": "text",
+              "label": "Stage 3 description"
+            },
+            {
+              "id": "hospitality.timeline.stage-3.image",
+              "kind": "image",
+              "label": "Stage 3 photograph"
+            },
+            {
+              "id": "hospitality.timeline.stage-3.alt",
+              "kind": "text",
+              "label": "Stage 3 photograph description"
+            },
+            {
+              "id": "hospitality.timeline.stage-4.number",
+              "kind": "text",
+              "label": "Stage 4 number"
+            },
+            {
+              "id": "hospitality.timeline.stage-4.title",
+              "kind": "text",
+              "label": "Stage 4 heading"
+            },
+            {
+              "id": "hospitality.timeline.stage-4.copy",
+              "kind": "text",
+              "label": "Stage 4 description"
+            },
+            {
+              "id": "hospitality.timeline.stage-4.image",
+              "kind": "image",
+              "label": "Stage 4 photograph"
+            },
+            {
+              "id": "hospitality.timeline.stage-4.alt",
+              "kind": "text",
+              "label": "Stage 4 photograph description"
+            },
+            {
+              "id": "hospitality.timeline.stage-5.number",
+              "kind": "text",
+              "label": "Stage 5 number"
+            },
+            {
+              "id": "hospitality.timeline.stage-5.title",
+              "kind": "text",
+              "label": "Stage 5 heading"
+            },
+            {
+              "id": "hospitality.timeline.stage-5.copy",
+              "kind": "text",
+              "label": "Stage 5 description"
+            },
+            {
+              "id": "hospitality.timeline.stage-5.image",
+              "kind": "image",
+              "label": "Stage 5 photograph"
+            },
+            {
+              "id": "hospitality.timeline.stage-5.alt",
+              "kind": "text",
+              "label": "Stage 5 photograph description"
+            },
+            {
+              "id": "hospitality.timeline.stage-6.number",
+              "kind": "text",
+              "label": "Stage 6 number"
+            },
+            {
+              "id": "hospitality.timeline.stage-6.title",
+              "kind": "text",
+              "label": "Stage 6 heading"
+            },
+            {
+              "id": "hospitality.timeline.stage-6.copy",
+              "kind": "text",
+              "label": "Stage 6 description"
+            },
+            {
+              "id": "hospitality.timeline.stage-6.image",
+              "kind": "image",
+              "label": "Stage 6 photograph"
+            },
+            {
+              "id": "hospitality.timeline.stage-6.alt",
+              "kind": "text",
+              "label": "Stage 6 photograph description"
+            },
+            {
+              "id": "hospitality.timeline.stage-7.number",
+              "kind": "text",
+              "label": "Stage 7 number"
+            },
+            {
+              "id": "hospitality.timeline.stage-7.title",
+              "kind": "text",
+              "label": "Stage 7 heading"
+            },
+            {
+              "id": "hospitality.timeline.stage-7.copy",
+              "kind": "text",
+              "label": "Stage 7 description"
+            },
+            {
+              "id": "hospitality.timeline.stage-7.image",
+              "kind": "image",
+              "label": "Stage 7 photograph"
+            },
+            {
+              "id": "hospitality.timeline.stage-7.alt",
+              "kind": "text",
+              "label": "Stage 7 photograph description"
+            }
+          ]
+        },
+        {
+          "id": "enquiry",
+          "label": "Enquiry close",
+          "fields": [
+            {
+              "id": "hospitality.closing.heading",
+              "kind": "text",
+              "label": "Closing heading"
+            },
+            {
+              "id": "hospitality.closing.action",
+              "kind": "text",
+              "label": "Enquiry button"
+            },
+            {
+              "id": "hospitality.closing.action-href",
+              "kind": "text",
+              "label": "Enquiry destination"
+            }
+          ]
+        }
+      ],
+      "collections": [
+        {
+          "id": "hospitality.selectedWork",
+          "pageId": "hospitality",
+          "label": "Selected work",
+          "itemLabel": "selection",
+          "maxItems": 100,
+          "fields": [
+            {
+              "key": "projectId",
+              "label": "Project",
+              "kind": "text",
+              "help": "Choose a published project. Older standalone entries are preserved separately."
+            },
+            {
+              "key": "nameOverride",
+              "label": "Display name override",
+              "kind": "text"
+            },
+            {
+              "key": "kindOverride",
+              "label": "Category override",
+              "kind": "text"
+            },
+            {
+              "key": "descriptionOverride",
+              "label": "Description override",
+              "kind": "text"
+            },
+            {
+              "key": "galleryPhotoId",
+              "label": "Project gallery photograph",
+              "kind": "text",
+              "help": "Choose a published photograph from the linked project's gallery."
+            },
+            {
+              "key": "imageSrcOverride",
+              "label": "Photograph override",
+              "kind": "image"
+            },
+            {
+              "key": "imageAltOverride",
+              "label": "Photograph description override",
+              "kind": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "process",
+      "label": "Process",
+      "href": "/process",
+      "sections": [
+        {
+          "id": "opening",
+          "label": "Film opening",
+          "fields": [
+            {
+              "id": "process.opening.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "process.opening.title",
+              "kind": "text",
+              "label": "Opening heading"
+            },
+            {
+              "id": "process.opening.summary",
+              "kind": "text",
+              "label": "Opening summary"
+            },
+            {
+              "id": "process.opening.cue",
+              "kind": "text",
+              "label": "Scroll instruction"
+            },
+            {
+              "id": "process.opening.cover",
+              "kind": "image",
+              "label": "Opening cover photograph"
+            },
+            {
+              "id": "process.opening.poster",
+              "kind": "image",
+              "label": "Film fallback poster"
+            },
+            {
+              "id": "process.opening.master-hq",
+              "kind": "video",
+              "label": "Desktop master film"
+            },
+            {
+              "id": "process.opening.master-scrub",
+              "kind": "video",
+              "label": "Mobile master film"
+            },
+            {
+              "id": "process.opening.film-label",
+              "kind": "text",
+              "label": "Film accessibility label"
+            },
+            {
+              "id": "process.opening.loading",
+              "kind": "text",
+              "label": "Loading label"
+            }
+          ]
+        },
+        {
+          "id": "sequence",
+          "label": "Build sequence",
+          "fields": [
+            {
+              "id": "process.sequence.title",
+              "kind": "text",
+              "label": "Accessible sequence heading"
+            },
+            {
+              "id": "process.sequence.rail-heading",
+              "kind": "text",
+              "label": "Timeline rail heading"
+            },
+            {
+              "id": "process.sequence.rail-summary",
+              "kind": "text",
+              "label": "Static timeline summary"
+            },
+            {
+              "id": "process.sequence.rail-aria",
+              "kind": "text",
+              "label": "Timeline accessibility label"
+            }
+          ]
+        },
+        {
+          "id": "stage-land",
+          "label": "Land · film chapter",
+          "fields": [
+            {
+              "id": "process.stage-land.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.stage-land.label",
+              "kind": "text",
+              "label": "Chapter label"
+            },
+            {
+              "id": "process.stage-land.title",
+              "kind": "text",
+              "label": "Chapter heading"
+            },
+            {
+              "id": "process.stage-land.copy",
+              "kind": "text",
+              "label": "Chapter description"
+            },
+            {
+              "id": "process.stage-land.poster",
+              "kind": "image",
+              "label": "Chapter poster"
+            }
+          ]
+        },
+        {
+          "id": "stage-architecture",
+          "label": "Architecture · film chapter",
+          "fields": [
+            {
+              "id": "process.stage-architecture.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.stage-architecture.label",
+              "kind": "text",
+              "label": "Chapter label"
+            },
+            {
+              "id": "process.stage-architecture.title",
+              "kind": "text",
+              "label": "Chapter heading"
+            },
+            {
+              "id": "process.stage-architecture.copy",
+              "kind": "text",
+              "label": "Chapter description"
+            },
+            {
+              "id": "process.stage-architecture.poster",
+              "kind": "image",
+              "label": "Chapter poster"
+            }
+          ]
+        },
+        {
+          "id": "stage-design-lock",
+          "label": "Design lock · film chapter",
+          "fields": [
+            {
+              "id": "process.stage-design-lock.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.stage-design-lock.label",
+              "kind": "text",
+              "label": "Chapter label"
+            },
+            {
+              "id": "process.stage-design-lock.title",
+              "kind": "text",
+              "label": "Chapter heading"
+            },
+            {
+              "id": "process.stage-design-lock.copy",
+              "kind": "text",
+              "label": "Chapter description"
+            },
+            {
+              "id": "process.stage-design-lock.poster",
+              "kind": "image",
+              "label": "Chapter poster"
+            }
+          ]
+        },
+        {
+          "id": "stage-assembly",
+          "label": "Assembly · film chapter",
+          "fields": [
+            {
+              "id": "process.stage-assembly.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.stage-assembly.label",
+              "kind": "text",
+              "label": "Chapter label"
+            },
+            {
+              "id": "process.stage-assembly.title",
+              "kind": "text",
+              "label": "Chapter heading"
+            },
+            {
+              "id": "process.stage-assembly.copy",
+              "kind": "text",
+              "label": "Chapter description"
+            },
+            {
+              "id": "process.stage-assembly.poster",
+              "kind": "image",
+              "label": "Chapter poster"
+            }
+          ]
+        },
+        {
+          "id": "stage-enclosure",
+          "label": "Enclosure · film chapter",
+          "fields": [
+            {
+              "id": "process.stage-enclosure.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.stage-enclosure.label",
+              "kind": "text",
+              "label": "Chapter label"
+            },
+            {
+              "id": "process.stage-enclosure.title",
+              "kind": "text",
+              "label": "Chapter heading"
+            },
+            {
+              "id": "process.stage-enclosure.copy",
+              "kind": "text",
+              "label": "Chapter description"
+            },
+            {
+              "id": "process.stage-enclosure.poster",
+              "kind": "image",
+              "label": "Chapter poster"
+            }
+          ]
+        },
+        {
+          "id": "stage-handover",
+          "label": "Handover · film chapter",
+          "fields": [
+            {
+              "id": "process.stage-handover.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.stage-handover.label",
+              "kind": "text",
+              "label": "Chapter label"
+            },
+            {
+              "id": "process.stage-handover.title",
+              "kind": "text",
+              "label": "Chapter heading"
+            },
+            {
+              "id": "process.stage-handover.copy",
+              "kind": "text",
+              "label": "Chapter description"
+            },
+            {
+              "id": "process.stage-handover.poster",
+              "kind": "image",
+              "label": "Chapter poster"
+            }
+          ]
+        },
+        {
+          "id": "details",
+          "label": "Five-phase timeline opening",
+          "fields": [
+            {
+              "id": "process.details.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "process.details.heading",
+              "kind": "text",
+              "label": "Section heading"
+            }
+          ]
+        },
+        {
+          "id": "detail-1",
+          "label": "Detail 1 · Brief and site",
+          "fields": [
+            {
+              "id": "process.details.phase-1.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.details.phase-1.title",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "process.details.phase-1.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "process.details.phase-1.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "process.details.phase-1.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "detail-2",
+          "label": "Detail 2 · Design and approvals",
+          "fields": [
+            {
+              "id": "process.details.phase-2.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.details.phase-2.title",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "process.details.phase-2.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "process.details.phase-2.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "process.details.phase-2.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "detail-3",
+          "label": "Detail 3 · Factory manufacturing",
+          "fields": [
+            {
+              "id": "process.details.phase-3.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.details.phase-3.title",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "process.details.phase-3.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "process.details.phase-3.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "process.details.phase-3.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "detail-4",
+          "label": "Detail 4 · Sequenced for site",
+          "fields": [
+            {
+              "id": "process.details.phase-4.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.details.phase-4.title",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "process.details.phase-4.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "process.details.phase-4.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "process.details.phase-4.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "detail-5",
+          "label": "Detail 5 · Assembly and handover",
+          "fields": [
+            {
+              "id": "process.details.phase-5.days",
+              "kind": "text",
+              "label": "Day range"
+            },
+            {
+              "id": "process.details.phase-5.title",
+              "kind": "text",
+              "label": "Heading"
+            },
+            {
+              "id": "process.details.phase-5.copy",
+              "kind": "text",
+              "label": "Description"
+            },
+            {
+              "id": "process.details.phase-5.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "process.details.phase-5.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        }
+      ],
+      "collections": []
+    },
+    {
+      "id": "sustainability",
+      "label": "Sustainability",
+      "href": "/sustainability",
+      "sections": [
+        {
+          "id": "journey",
+          "label": "Opening journey",
+          "fields": [
+            {
+              "id": "sustainability.journey.accessible-label",
+              "kind": "text",
+              "label": "Accessible journey label"
+            },
+            {
+              "id": "sustainability.journey.shared-poster",
+              "kind": "image",
+              "label": "Shared journey poster"
+            },
+            {
+              "id": "sustainability.journey.idle-video",
+              "kind": "video",
+              "label": "Opening ambient film"
+            },
+            {
+              "id": "sustainability.journey.scroll-video",
+              "kind": "video",
+              "label": "Scroll journey film"
+            },
+            {
+              "id": "sustainability.journey.fog-video",
+              "kind": "video",
+              "label": "Closing fog loop"
+            },
+            {
+              "id": "sustainability.journey.fog-poster",
+              "kind": "image",
+              "label": "Closing fog poster"
+            },
+            {
+              "id": "sustainability.journey.hero-line-1",
+              "kind": "text",
+              "label": "Hero heading · first line"
+            },
+            {
+              "id": "sustainability.journey.hero-line-2",
+              "kind": "text",
+              "label": "Hero heading · second line"
+            },
+            {
+              "id": "sustainability.journey.hero-emphasis",
+              "kind": "text",
+              "label": "Hero heading · emphasis"
+            },
+            {
+              "id": "sustainability.journey.hero-copy",
+              "kind": "text",
+              "label": "Hero introduction"
+            }
+          ]
+        },
+        {
+          "id": "journey-site",
+          "label": "Journey 1 · site",
+          "fields": [
+            {
+              "id": "sustainability.journey.site.title",
+              "kind": "text",
+              "label": "Scene heading"
+            }
+          ]
+        },
+        {
+          "id": "journey-canopy",
+          "label": "Journey 2 · canopy",
+          "fields": [
+            {
+              "id": "sustainability.journey.canopy.title",
+              "kind": "text",
+              "label": "Scene heading"
+            }
+          ]
+        },
+        {
+          "id": "journey-production",
+          "label": "Journey 3 · production",
+          "fields": [
+            {
+              "id": "sustainability.journey.production.title",
+              "kind": "text",
+              "label": "Scene heading"
+            }
+          ]
+        },
+        {
+          "id": "journey-longevity",
+          "label": "Journey 4 · longevity",
+          "fields": [
+            {
+              "id": "sustainability.journey.longevity.title",
+              "kind": "text",
+              "label": "Scene heading"
+            }
+          ]
+        },
+        {
+          "id": "material-truth",
+          "label": "The material truth",
+          "fields": [
+            {
+              "id": "sustainability.journey.proof-label",
+              "kind": "text",
+              "label": "Accessible section label"
+            },
+            {
+              "id": "sustainability.journey.proof-line-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "sustainability.journey.proof-line-2",
+              "kind": "text",
+              "label": "Heading · emphasis"
+            },
+            {
+              "id": "sustainability.journey.proof-copy",
+              "kind": "text",
+              "label": "Section description"
+            }
+          ]
+        },
+        {
+          "id": "proof",
+          "label": "Reflections proof opening",
+          "fields": [
+            {
+              "id": "sustainability.proof.opening-line-1",
+              "kind": "text",
+              "label": "Opening heading · first line"
+            },
+            {
+              "id": "sustainability.proof.opening-line-2",
+              "kind": "text",
+              "label": "Opening heading · second line"
+            },
+            {
+              "id": "sustainability.proof.opening-emphasis",
+              "kind": "text",
+              "label": "Opening heading · emphasis"
+            },
+            {
+              "id": "sustainability.proof.press-heading",
+              "kind": "text",
+              "label": "Press heading"
+            },
+            {
+              "id": "sustainability.proof.press-copy",
+              "kind": "text",
+              "label": "Press introduction"
+            }
+          ]
+        },
+        {
+          "id": "press-1",
+          "label": "Press 1 · Architectural Digest",
+          "fields": [
+            {
+              "id": "sustainability.proof.press-1.source",
+              "kind": "text",
+              "label": "Publication"
+            },
+            {
+              "id": "sustainability.proof.press-1.date",
+              "kind": "text",
+              "label": "Date"
+            },
+            {
+              "id": "sustainability.proof.press-1.title",
+              "kind": "text",
+              "label": "Headline"
+            },
+            {
+              "id": "sustainability.proof.press-1.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "sustainability.proof.press-1.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "press-2",
+          "label": "Press 2 · New Atlas",
+          "fields": [
+            {
+              "id": "sustainability.proof.press-2.source",
+              "kind": "text",
+              "label": "Publication"
+            },
+            {
+              "id": "sustainability.proof.press-2.date",
+              "kind": "text",
+              "label": "Date"
+            },
+            {
+              "id": "sustainability.proof.press-2.title",
+              "kind": "text",
+              "label": "Headline"
+            },
+            {
+              "id": "sustainability.proof.press-2.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "sustainability.proof.press-2.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "press-3",
+          "label": "Press 3 · HomeCrux",
+          "fields": [
+            {
+              "id": "sustainability.proof.press-3.source",
+              "kind": "text",
+              "label": "Publication"
+            },
+            {
+              "id": "sustainability.proof.press-3.date",
+              "kind": "text",
+              "label": "Date"
+            },
+            {
+              "id": "sustainability.proof.press-3.title",
+              "kind": "text",
+              "label": "Headline"
+            },
+            {
+              "id": "sustainability.proof.press-3.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "sustainability.proof.press-3.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "press-4",
+          "label": "Press 4 · Architecture+Design",
+          "fields": [
+            {
+              "id": "sustainability.proof.press-4.source",
+              "kind": "text",
+              "label": "Publication"
+            },
+            {
+              "id": "sustainability.proof.press-4.date",
+              "kind": "text",
+              "label": "Date"
+            },
+            {
+              "id": "sustainability.proof.press-4.title",
+              "kind": "text",
+              "label": "Headline"
+            },
+            {
+              "id": "sustainability.proof.press-4.image",
+              "kind": "image",
+              "label": "Photograph"
+            },
+            {
+              "id": "sustainability.proof.press-4.alt",
+              "kind": "text",
+              "label": "Image description"
+            }
+          ]
+        },
+        {
+          "id": "facts-intro",
+          "label": "Facts and final image",
+          "fields": [
+            {
+              "id": "sustainability.proof.final-image",
+              "kind": "image",
+              "label": "Closing photograph"
+            },
+            {
+              "id": "sustainability.proof.final-alt",
+              "kind": "text",
+              "label": "Closing image description"
+            },
+            {
+              "id": "sustainability.proof.final-credit",
+              "kind": "text",
+              "label": "Closing photograph credit"
+            },
+            {
+              "id": "sustainability.proof.facts-heading",
+              "kind": "text",
+              "label": "Facts heading"
+            },
+            {
+              "id": "sustainability.proof.facts-close",
+              "kind": "text",
+              "label": "Closing statement"
+            }
+          ]
+        },
+        {
+          "id": "fact-1",
+          "label": "Fact 1 · 300 sq ft",
+          "fields": [
+            {
+              "id": "sustainability.proof.fact-1.value",
+              "kind": "text",
+              "label": "Value"
+            },
+            {
+              "id": "sustainability.proof.fact-1.label",
+              "kind": "text",
+              "label": "Description"
+            }
+          ]
+        },
+        {
+          "id": "fact-2",
+          "label": "Fact 2 · Prefabricated",
+          "fields": [
+            {
+              "id": "sustainability.proof.fact-2.value",
+              "kind": "text",
+              "label": "Value"
+            },
+            {
+              "id": "sustainability.proof.fact-2.label",
+              "kind": "text",
+              "label": "Description"
+            }
+          ]
+        },
+        {
+          "id": "fact-3",
+          "label": "Fact 3 · Aluminium composite",
+          "fields": [
+            {
+              "id": "sustainability.proof.fact-3.value",
+              "kind": "text",
+              "label": "Value"
+            },
+            {
+              "id": "sustainability.proof.fact-3.label",
+              "kind": "text",
+              "label": "Description"
+            }
+          ]
+        },
+        {
+          "id": "fact-4",
+          "label": "Fact 4 · Motorized deck bed",
+          "fields": [
+            {
+              "id": "sustainability.proof.fact-4.value",
+              "kind": "text",
+              "label": "Value"
+            },
+            {
+              "id": "sustainability.proof.fact-4.label",
+              "kind": "text",
+              "label": "Description"
+            }
+          ]
+        },
+        {
+          "id": "ending",
+          "label": "Closing statement",
+          "fields": [
+            {
+              "id": "sustainability.ending.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "sustainability.ending.heading-line-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "sustainability.ending.heading-line-2",
+              "kind": "text",
+              "label": "Heading · second line"
+            },
+            {
+              "id": "sustainability.ending.heading-emphasis",
+              "kind": "text",
+              "label": "Heading · emphasis"
+            },
+            {
+              "id": "sustainability.ending.action",
+              "kind": "text",
+              "label": "Enquiry button"
+            },
+            {
+              "id": "sustainability.ending.action-href",
+              "kind": "text",
+              "label": "Enquiry destination"
+            }
+          ]
+        }
+      ],
+      "collections": []
+    },
+    {
+      "id": "journal",
+      "label": "Journal",
+      "href": "/journal",
+      "sections": [
+        {
+          "id": "hero",
+          "label": "Featured story opening",
+          "fields": [
+            {
+              "id": "journal.hero.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "journal.hero.heading",
+              "kind": "text",
+              "label": "Hero heading"
+            },
+            {
+              "id": "journal.hero.dek",
+              "kind": "text",
+              "label": "Hero description"
+            },
+            {
+              "id": "journal.hero.featured-id",
+              "kind": "text",
+              "label": "Featured Press story"
+            }
+          ]
+        },
+        {
+          "id": "press-intro",
+          "label": "Press introduction",
+          "fields": [
+            {
+              "id": "journal.press.eyebrow",
+              "kind": "text",
+              "label": "Section label"
+            },
+            {
+              "id": "journal.press.heading",
+              "kind": "text",
+              "label": "Section heading"
+            },
+            {
+              "id": "journal.press.caption",
+              "kind": "text",
+              "label": "Press marquee caption"
+            },
+            {
+              "id": "journal.press.action",
+              "kind": "text",
+              "label": "Press arrow link label"
+            }
+          ]
+        },
+        {
+          "id": "publication-ticker",
+          "label": "Publication ticker",
+          "fields": [
+            {
+              "id": "journal.publications.accessible-label",
+              "kind": "text",
+              "label": "Ticker accessibility label"
+            }
+          ]
+        },
+        {
+          "id": "notes-intro",
+          "label": "Project records introduction",
+          "fields": [
+            {
+              "id": "journal.notes.caption",
+              "kind": "text",
+              "label": "Archive marquee caption"
+            },
+            {
+              "id": "journal.notes.action",
+              "kind": "text",
+              "label": "Project-note arrow link label"
+            }
+          ]
+        },
+        {
+          "id": "archive",
+          "label": "Journal article grid",
+          "fields": [
+            {
+              "id": "journal.archive.heading",
+              "kind": "text",
+              "label": "Grid heading"
+            },
+            {
+              "id": "journal.archive.copy",
+              "kind": "text",
+              "label": "Grid introduction"
+            },
+            {
+              "id": "journal.archive.action",
+              "kind": "text",
+              "label": "Article card button"
+            }
+          ]
+        },
+        {
+          "id": "article-reader",
+          "label": "Article reader",
+          "fields": [
+            {
+              "id": "journal.article.back",
+              "kind": "text",
+              "label": "Back button"
+            },
+            {
+              "id": "journal.article.breadcrumb",
+              "kind": "text",
+              "label": "Breadcrumb"
+            },
+            {
+              "id": "journal.article.reading-suffix",
+              "kind": "text",
+              "label": "Reading time suffix"
+            },
+            {
+              "id": "journal.article.contents",
+              "kind": "text",
+              "label": "Contents heading"
+            },
+            {
+              "id": "journal.article.navigation-label",
+              "kind": "text",
+              "label": "Article sidebar accessibility label"
+            },
+            {
+              "id": "journal.article.on-page-label",
+              "kind": "text",
+              "label": "Contents links accessibility label"
+            },
+            {
+              "id": "journal.article.related",
+              "kind": "text",
+              "label": "Next story heading"
+            },
+            {
+              "id": "journal.article.closing-heading",
+              "kind": "text",
+              "label": "Closing heading"
+            },
+            {
+              "id": "journal.article.closing-action",
+              "kind": "text",
+              "label": "All stories button"
+            }
+          ]
+        }
+      ],
+      "collections": [
+        {
+          "id": "journal.articles",
+          "pageId": "journal",
+          "label": "Journal articles",
+          "itemLabel": "article",
+          "maxItems": 200,
+          "fields": [
+            {
+              "key": "recordId",
+              "label": "Stable article identity",
+              "kind": "text",
+              "help": "Internal identity retained when the page address changes."
+            },
+            {
+              "key": "slugHistory",
+              "label": "Previous page addresses",
+              "kind": "json",
+              "help": "Redirects from earlier article URLs."
+            },
+            {
+              "key": "category",
+              "label": "Category",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "title",
+              "label": "Article title",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "excerpt",
+              "label": "Introduction",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "image",
+              "label": "Cover photograph",
+              "kind": "image",
+              "required": true
+            },
+            {
+              "key": "imageAlt",
+              "label": "Cover description",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "heroCaption",
+              "label": "Cover caption",
+              "kind": "text"
+            },
+            {
+              "key": "sections",
+              "label": "Article sections",
+              "kind": "json",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "journal.press",
+          "pageId": "journal",
+          "label": "Press and news",
+          "itemLabel": "news item",
+          "maxItems": 200,
+          "fields": [
+            {
+              "key": "visibility",
+              "label": "Visibility",
+              "kind": "choice",
+              "options": [
+                {
+                  "label": "Shown on the site",
+                  "value": "shown"
+                },
+                {
+                  "label": "Hidden from the site",
+                  "value": "hidden"
+                }
+              ],
+              "help": "Hide temporarily without removing this editable record. Remove archives it with Restore available."
+            },
+            {
+              "key": "kind",
+              "label": "Story type",
+              "kind": "text"
+            },
+            {
+              "key": "source",
+              "label": "Publication or source",
+              "kind": "text",
+              "required": false
+            },
+            {
+              "key": "byline",
+              "label": "Byline",
+              "kind": "text"
+            },
+            {
+              "key": "date",
+              "label": "Date",
+              "kind": "text"
+            },
+            {
+              "key": "title",
+              "label": "Headline",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "summary",
+              "label": "Summary",
+              "kind": "text"
+            },
+            {
+              "key": "image",
+              "label": "Main photograph",
+              "kind": "image",
+              "required": false,
+              "help": "Optional for news. Text-only cards remain publishable."
+            },
+            {
+              "key": "imageAlt",
+              "label": "Photograph description",
+              "kind": "text",
+              "required": false,
+              "help": "Required when a photograph is supplied."
+            },
+            {
+              "key": "credit",
+              "label": "Photograph credit",
+              "kind": "text"
+            },
+            {
+              "key": "href",
+              "label": "Destination",
+              "kind": "url",
+              "required": true
+            },
+            {
+              "key": "external",
+              "label": "Open as external link",
+              "kind": "choice",
+              "options": [
+                {
+                  "label": "No",
+                  "value": "false"
+                },
+                {
+                  "label": "Yes",
+                  "value": "true"
+                }
+              ]
+            },
+            {
+              "key": "logo",
+              "label": "Optional publication logo",
+              "kind": "image"
+            }
+          ]
+        },
+        {
+          "id": "journal.notes",
+          "pageId": "journal",
+          "label": "Project notes",
+          "itemLabel": "project note",
+          "maxItems": 200,
+          "fields": [
+            {
+              "key": "visibility",
+              "label": "Visibility",
+              "kind": "choice",
+              "options": [
+                {
+                  "label": "Shown on the site",
+                  "value": "shown"
+                },
+                {
+                  "label": "Hidden from the site",
+                  "value": "hidden"
+                }
+              ],
+              "help": "Hide temporarily without removing this editable record. Remove archives it with Restore available."
+            },
+            {
+              "key": "kind",
+              "label": "Story type",
+              "kind": "text"
+            },
+            {
+              "key": "source",
+              "label": "Publication or source",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "byline",
+              "label": "Byline",
+              "kind": "text"
+            },
+            {
+              "key": "date",
+              "label": "Date",
+              "kind": "text"
+            },
+            {
+              "key": "title",
+              "label": "Headline",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "summary",
+              "label": "Summary",
+              "kind": "text"
+            },
+            {
+              "key": "image",
+              "label": "Main photograph",
+              "kind": "image",
+              "required": true
+            },
+            {
+              "key": "imageAlt",
+              "label": "Photograph description",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "credit",
+              "label": "Photograph credit",
+              "kind": "text"
+            },
+            {
+              "key": "href",
+              "label": "Destination",
+              "kind": "url",
+              "required": true
+            },
+            {
+              "key": "external",
+              "label": "Open as external link",
+              "kind": "choice",
+              "options": [
+                {
+                  "label": "No",
+                  "value": "false"
+                },
+                {
+                  "label": "Yes",
+                  "value": "true"
+                }
+              ]
+            },
+            {
+              "key": "logo",
+              "label": "Optional publication logo",
+              "kind": "image"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "label": "About",
+      "href": "/about",
+      "sections": [
+        {
+          "id": "opening",
+          "label": "About opening",
+          "fields": [
+            {
+              "id": "about.opening.title",
+              "kind": "text",
+              "label": "Page title"
+            },
+            {
+              "id": "about.opening.line-one",
+              "kind": "text",
+              "label": "First statement"
+            },
+            {
+              "id": "about.opening.line-two",
+              "kind": "text",
+              "label": "Second statement"
+            },
+            {
+              "id": "about.opening.image",
+              "kind": "image",
+              "label": "Opening photograph"
+            },
+            {
+              "id": "about.opening.image-alt",
+              "kind": "text",
+              "label": "Opening image description"
+            }
+          ]
+        },
+        {
+          "id": "vision",
+          "label": "Our vision",
+          "fields": [
+            {
+              "id": "about.vision.title",
+              "kind": "text",
+              "label": "Section title"
+            },
+            {
+              "id": "about.vision.copy",
+              "kind": "text",
+              "label": "Vision statement"
+            },
+            {
+              "id": "about.vision.image",
+              "kind": "image",
+              "label": "Vision photograph"
+            },
+            {
+              "id": "about.vision.image-alt",
+              "kind": "text",
+              "label": "Vision image description"
+            }
+          ]
+        },
+        {
+          "id": "future",
+          "label": "Fabricating the Future",
+          "fields": [
+            {
+              "id": "about.future.title",
+              "kind": "text",
+              "label": "Section title"
+            },
+            {
+              "id": "about.future.image",
+              "kind": "image",
+              "label": "Architecture photograph"
+            },
+            {
+              "id": "about.future.image-alt",
+              "kind": "text",
+              "label": "Architecture image description"
+            },
+            {
+              "id": "about.future.copy",
+              "kind": "text",
+              "label": "Section copy"
+            }
+          ]
+        },
+        {
+          "id": "founders",
+          "label": "Meet our founders",
+          "fields": [
+            {
+              "id": "about.founders.title",
+              "kind": "text",
+              "label": "Section title"
+            },
+            {
+              "id": "about.founders.image",
+              "kind": "image",
+              "label": "Founders photograph"
+            },
+            {
+              "id": "about.founders.image-alt",
+              "kind": "text",
+              "label": "Founders image description"
+            },
+            {
+              "id": "about.founders.copy",
+              "kind": "text",
+              "label": "Founders story"
+            }
+          ]
+        },
+        {
+          "id": "assurances",
+          "label": "Why OKNO?",
+          "fields": [
+            {
+              "id": "about.assurances.title",
+              "kind": "text",
+              "label": "Section title"
+            },
+            {
+              "id": "about.assurances.sustainability-title",
+              "kind": "text",
+              "label": "Sustainability title"
+            },
+            {
+              "id": "about.assurances.sustainability-detail",
+              "kind": "text",
+              "label": "Sustainability detail"
+            },
+            {
+              "id": "about.assurances.sustainability-icon",
+              "kind": "choice",
+              "label": "Sustainability icon"
+            },
+            {
+              "id": "about.assurances.move-in-title",
+              "kind": "text",
+              "label": "Move-in title"
+            },
+            {
+              "id": "about.assurances.move-in-detail",
+              "kind": "text",
+              "label": "Move-in detail"
+            },
+            {
+              "id": "about.assurances.move-in-icon",
+              "kind": "choice",
+              "label": "Move-in icon"
+            },
+            {
+              "id": "about.assurances.warranty-title",
+              "kind": "text",
+              "label": "Warranty title"
+            },
+            {
+              "id": "about.assurances.warranty-detail",
+              "kind": "text",
+              "label": "Warranty detail"
+            },
+            {
+              "id": "about.assurances.warranty-icon",
+              "kind": "choice",
+              "label": "Warranty icon"
+            },
+            {
+              "id": "about.assurances.energy-title",
+              "kind": "text",
+              "label": "Energy title"
+            },
+            {
+              "id": "about.assurances.energy-detail",
+              "kind": "text",
+              "label": "Energy detail"
+            },
+            {
+              "id": "about.assurances.energy-icon",
+              "kind": "choice",
+              "label": "Energy icon"
+            },
+            {
+              "id": "about.assurances.resilience-title",
+              "kind": "text",
+              "label": "Resilience title"
+            },
+            {
+              "id": "about.assurances.resilience-detail",
+              "kind": "text",
+              "label": "Resilience detail"
+            },
+            {
+              "id": "about.assurances.resilience-icon",
+              "kind": "choice",
+              "label": "Resilience icon"
+            }
+          ]
+        },
+        {
+          "id": "fit",
+          "label": "A perfect fit",
+          "fields": [
+            {
+              "id": "about.fit.title",
+              "kind": "text",
+              "label": "Section title"
+            },
+            {
+              "id": "about.fit.image",
+              "kind": "image",
+              "label": "Home photograph"
+            },
+            {
+              "id": "about.fit.image-alt",
+              "kind": "text",
+              "label": "Home image description"
+            },
+            {
+              "id": "about.fit.copy",
+              "kind": "text",
+              "label": "Closing copy"
+            }
+          ]
+        }
+      ],
+      "collections": []
+    },
+    {
+      "id": "enquiry",
+      "label": "Enquiry",
+      "href": "/enquiry",
+      "sections": [
+        {
+          "id": "intro",
+          "label": "Introduction",
+          "fields": [
+            {
+              "id": "enquiry.intro.heading-line-1",
+              "kind": "text",
+              "label": "Heading · first line"
+            },
+            {
+              "id": "enquiry.intro.heading-line-2",
+              "kind": "text",
+              "label": "Heading · second line"
+            },
+            {
+              "id": "enquiry.intro.copy",
+              "kind": "text",
+              "label": "Introduction"
+            }
+          ]
+        },
+        {
+          "id": "home-tab",
+          "label": "Home enquiry tab",
+          "fields": [
+            {
+              "id": "enquiry.tab-home.label",
+              "kind": "text",
+              "label": "Visible tab label"
+            },
+            {
+              "id": "enquiry.tab-home.accessible",
+              "kind": "text",
+              "label": "Accessible form name"
+            },
+            {
+              "id": "enquiry.home.name.label",
+              "kind": "text",
+              "label": "Name · label"
+            },
+            {
+              "id": "enquiry.home.name.placeholder",
+              "kind": "text",
+              "label": "Name · placeholder"
+            },
+            {
+              "id": "enquiry.home.contact.label",
+              "kind": "text",
+              "label": "Contact · label"
+            },
+            {
+              "id": "enquiry.home.contact.placeholder",
+              "kind": "text",
+              "label": "Contact · placeholder"
+            },
+            {
+              "id": "enquiry.home.land.label",
+              "kind": "text",
+              "label": "Land · label"
+            },
+            {
+              "id": "enquiry.home.land.placeholder",
+              "kind": "text",
+              "label": "Land · placeholder"
+            },
+            {
+              "id": "enquiry.home.land-status.label",
+              "kind": "text",
+              "label": "Land status · label"
+            },
+            {
+              "id": "enquiry.home.home-type.label",
+              "kind": "text",
+              "label": "Home type · label"
+            },
+            {
+              "id": "enquiry.home.timeline.label",
+              "kind": "text",
+              "label": "Timeline · label"
+            },
+            {
+              "id": "enquiry.home.submit",
+              "kind": "text",
+              "label": "Submit button"
+            }
+          ]
+        },
+        {
+          "id": "hospitality-tab",
+          "label": "Hospitality enquiry tab",
+          "fields": [
+            {
+              "id": "enquiry.tab-hospitality.label",
+              "kind": "text",
+              "label": "Visible tab label"
+            },
+            {
+              "id": "enquiry.tab-hospitality.accessible",
+              "kind": "text",
+              "label": "Accessible form name"
+            },
+            {
+              "id": "enquiry.hospitality.name.label",
+              "kind": "text",
+              "label": "Name and company · label"
+            },
+            {
+              "id": "enquiry.hospitality.name.placeholder",
+              "kind": "text",
+              "label": "Name and company · placeholder"
+            },
+            {
+              "id": "enquiry.hospitality.contact.label",
+              "kind": "text",
+              "label": "Contact · label"
+            },
+            {
+              "id": "enquiry.hospitality.contact.placeholder",
+              "kind": "text",
+              "label": "Contact · placeholder"
+            },
+            {
+              "id": "enquiry.hospitality.site.label",
+              "kind": "text",
+              "label": "Site · label"
+            },
+            {
+              "id": "enquiry.hospitality.site.placeholder",
+              "kind": "text",
+              "label": "Site · placeholder"
+            },
+            {
+              "id": "enquiry.hospitality.programme.label",
+              "kind": "text",
+              "label": "Programme · label"
+            },
+            {
+              "id": "enquiry.hospitality.keys.label",
+              "kind": "text",
+              "label": "Keys · label"
+            },
+            {
+              "id": "enquiry.hospitality.timeline.label",
+              "kind": "text",
+              "label": "Timeline · label"
+            },
+            {
+              "id": "enquiry.hospitality.submit",
+              "kind": "text",
+              "label": "Submit button"
+            }
+          ]
+        },
+        {
+          "id": "press-tab",
+          "label": "Press and other enquiry tab",
+          "fields": [
+            {
+              "id": "enquiry.tab-press.label",
+              "kind": "text",
+              "label": "Visible tab label"
+            },
+            {
+              "id": "enquiry.tab-press.accessible",
+              "kind": "text",
+              "label": "Accessible form name"
+            },
+            {
+              "id": "enquiry.press.name.label",
+              "kind": "text",
+              "label": "Name · label"
+            },
+            {
+              "id": "enquiry.press.name.placeholder",
+              "kind": "text",
+              "label": "Name · placeholder"
+            },
+            {
+              "id": "enquiry.press.contact.label",
+              "kind": "text",
+              "label": "Contact · label"
+            },
+            {
+              "id": "enquiry.press.contact.placeholder",
+              "kind": "text",
+              "label": "Contact · placeholder"
+            },
+            {
+              "id": "enquiry.press.purpose.label",
+              "kind": "text",
+              "label": "Purpose · label"
+            },
+            {
+              "id": "enquiry.press.purpose.placeholder",
+              "kind": "text",
+              "label": "Purpose · placeholder"
+            },
+            {
+              "id": "enquiry.press.nature.label",
+              "kind": "text",
+              "label": "Nature · label"
+            },
+            {
+              "id": "enquiry.press.submit",
+              "kind": "text",
+              "label": "Submit button"
+            }
+          ]
+        }
+      ],
+      "collections": [
+        {
+          "id": "enquiry.options.home.land-status",
+          "pageId": "enquiry",
+          "label": "Land status options",
+          "itemLabel": "option",
+          "maxItems": 40,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Visible option",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "value",
+              "label": "Stored value",
+              "kind": "text",
+              "required": true,
+              "help": "Keep this stable when changing the visible wording."
+            }
+          ]
+        },
+        {
+          "id": "enquiry.options.home.home-type",
+          "pageId": "enquiry",
+          "label": "Home type options",
+          "itemLabel": "option",
+          "maxItems": 40,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Visible option",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "value",
+              "label": "Stored value",
+              "kind": "text",
+              "required": true,
+              "help": "Keep this stable when changing the visible wording."
+            }
+          ]
+        },
+        {
+          "id": "enquiry.options.home.timeline",
+          "pageId": "enquiry",
+          "label": "Home timeline options",
+          "itemLabel": "option",
+          "maxItems": 40,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Visible option",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "value",
+              "label": "Stored value",
+              "kind": "text",
+              "required": true,
+              "help": "Keep this stable when changing the visible wording."
+            }
+          ]
+        },
+        {
+          "id": "enquiry.options.hospitality.programme",
+          "pageId": "enquiry",
+          "label": "Hospitality programme options",
+          "itemLabel": "option",
+          "maxItems": 40,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Visible option",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "value",
+              "label": "Stored value",
+              "kind": "text",
+              "required": true,
+              "help": "Keep this stable when changing the visible wording."
+            }
+          ]
+        },
+        {
+          "id": "enquiry.options.hospitality.keys",
+          "pageId": "enquiry",
+          "label": "Hospitality keys options",
+          "itemLabel": "option",
+          "maxItems": 40,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Visible option",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "value",
+              "label": "Stored value",
+              "kind": "text",
+              "required": true,
+              "help": "Keep this stable when changing the visible wording."
+            }
+          ]
+        },
+        {
+          "id": "enquiry.options.hospitality.timeline",
+          "pageId": "enquiry",
+          "label": "Hospitality timeline options",
+          "itemLabel": "option",
+          "maxItems": 40,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Visible option",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "value",
+              "label": "Stored value",
+              "kind": "text",
+              "required": true,
+              "help": "Keep this stable when changing the visible wording."
+            }
+          ]
+        },
+        {
+          "id": "enquiry.options.press.nature",
+          "pageId": "enquiry",
+          "label": "Press nature options",
+          "itemLabel": "option",
+          "maxItems": 40,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Visible option",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "value",
+              "label": "Stored value",
+              "kind": "text",
+              "required": true,
+              "help": "Keep this stable when changing the visible wording."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "label": "Footer",
+      "href": "/about",
+      "sections": [
+        {
+          "id": "footer-brand",
+          "label": "Brand line and social row",
+          "fields": [
+            {
+              "id": "footer.brand.line",
+              "kind": "text",
+              "label": "Brand line"
+            },
+            {
+              "id": "footer.social.navigation-label",
+              "kind": "text",
+              "label": "Social links accessibility name"
+            }
+          ]
+        },
+        {
+          "id": "footer-social-instagram",
+          "label": "Instagram profile",
+          "fields": [
+            {
+              "id": "footer.social.instagram.name",
+              "kind": "text",
+              "label": "Instagram · name"
+            },
+            {
+              "id": "footer.social.instagram.icon",
+              "kind": "image",
+              "label": "Instagram · icon"
+            },
+            {
+              "id": "footer.social.instagram.href",
+              "kind": "text",
+              "label": "Instagram · destination"
+            }
+          ]
+        },
+        {
+          "id": "footer-social-youtube",
+          "label": "YouTube profile",
+          "fields": [
+            {
+              "id": "footer.social.youtube.name",
+              "kind": "text",
+              "label": "YouTube · name"
+            },
+            {
+              "id": "footer.social.youtube.icon",
+              "kind": "image",
+              "label": "YouTube · icon"
+            },
+            {
+              "id": "footer.social.youtube.href",
+              "kind": "text",
+              "label": "YouTube · destination"
+            }
+          ]
+        },
+        {
+          "id": "footer-social-linkedin",
+          "label": "LinkedIn profile",
+          "fields": [
+            {
+              "id": "footer.social.linkedin.name",
+              "kind": "text",
+              "label": "LinkedIn · name"
+            },
+            {
+              "id": "footer.social.linkedin.icon",
+              "kind": "image",
+              "label": "LinkedIn · icon"
+            },
+            {
+              "id": "footer.social.linkedin.href",
+              "kind": "text",
+              "label": "LinkedIn · destination"
+            }
+          ]
+        },
+        {
+          "id": "footer-social-facebook",
+          "label": "Facebook profile",
+          "fields": [
+            {
+              "id": "footer.social.facebook.name",
+              "kind": "text",
+              "label": "Facebook · name"
+            },
+            {
+              "id": "footer.social.facebook.icon",
+              "kind": "image",
+              "label": "Facebook · icon"
+            },
+            {
+              "id": "footer.social.facebook.href",
+              "kind": "text",
+              "label": "Facebook · destination"
+            }
+          ]
+        },
+        {
+          "id": "footer-homes",
+          "label": "Homes links",
+          "fields": [
+            {
+              "id": "footer.homes.heading",
+              "kind": "text",
+              "label": "Column heading"
+            },
+            {
+              "id": "footer.homes.signature.label",
+              "kind": "text",
+              "label": "Signature · button text"
+            },
+            {
+              "id": "footer.homes.signature.href",
+              "kind": "text",
+              "label": "Signature · destination"
+            },
+            {
+              "id": "footer.homes.bespoke.label",
+              "kind": "text",
+              "label": "Bespoke · button text"
+            },
+            {
+              "id": "footer.homes.bespoke.href",
+              "kind": "text",
+              "label": "Bespoke · destination"
+            },
+            {
+              "id": "footer.homes.hospitality.label",
+              "kind": "text",
+              "label": "Hospitality · button text"
+            },
+            {
+              "id": "footer.homes.hospitality.href",
+              "kind": "text",
+              "label": "Hospitality · destination"
+            }
+          ]
+        },
+        {
+          "id": "footer-explore",
+          "label": "Explore links",
+          "fields": [
+            {
+              "id": "footer.explore.heading",
+              "kind": "text",
+              "label": "Column heading"
+            },
+            {
+              "id": "footer.explore.projects.label",
+              "kind": "text",
+              "label": "Projects · button text"
+            },
+            {
+              "id": "footer.explore.projects.href",
+              "kind": "text",
+              "label": "Projects · destination"
+            },
+            {
+              "id": "footer.explore.process.label",
+              "kind": "text",
+              "label": "Process · button text"
+            },
+            {
+              "id": "footer.explore.process.href",
+              "kind": "text",
+              "label": "Process · destination"
+            },
+            {
+              "id": "footer.explore.journal.label",
+              "kind": "text",
+              "label": "Journal · button text"
+            },
+            {
+              "id": "footer.explore.journal.href",
+              "kind": "text",
+              "label": "Journal · destination"
+            }
+          ]
+        },
+        {
+          "id": "footer-okno",
+          "label": "OKNO links",
+          "fields": [
+            {
+              "id": "footer.okno.heading",
+              "kind": "text",
+              "label": "Column heading"
+            },
+            {
+              "id": "footer.okno.about.label",
+              "kind": "text",
+              "label": "About · button text"
+            },
+            {
+              "id": "footer.okno.about.href",
+              "kind": "text",
+              "label": "About · destination"
+            },
+            {
+              "id": "footer.okno.sustainability.label",
+              "kind": "text",
+              "label": "Sustainability · button text"
+            },
+            {
+              "id": "footer.okno.sustainability.href",
+              "kind": "text",
+              "label": "Sustainability · destination"
+            },
+            {
+              "id": "footer.okno.enquire.label",
+              "kind": "text",
+              "label": "Enquire · button text"
+            },
+            {
+              "id": "footer.okno.enquire.href",
+              "kind": "text",
+              "label": "Enquire · destination"
+            }
+          ]
+        },
+        {
+          "id": "footer-bottom",
+          "label": "Bottom strip",
+          "fields": [
+            {
+              "id": "footer.bottom.copyright",
+              "kind": "text",
+              "label": "Copyright line"
+            },
+            {
+              "id": "footer.bottom.closing",
+              "kind": "text",
+              "label": "Closing line"
+            }
+          ]
+        }
+      ],
+      "collections": [
+        {
+          "id": "footer.links.homes",
+          "pageId": "footer",
+          "label": "Homes links",
+          "itemLabel": "link",
+          "maxItems": 20,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Link text",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "href",
+              "label": "Same-site destination",
+              "kind": "text",
+              "required": true,
+              "help": "Start with / and keep the link on this website."
+            }
+          ]
+        },
+        {
+          "id": "footer.links.explore",
+          "pageId": "footer",
+          "label": "Explore links",
+          "itemLabel": "link",
+          "maxItems": 20,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Link text",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "href",
+              "label": "Same-site destination",
+              "kind": "text",
+              "required": true,
+              "help": "Start with / and keep the link on this website."
+            }
+          ]
+        },
+        {
+          "id": "footer.links.okno",
+          "pageId": "footer",
+          "label": "Okno links",
+          "itemLabel": "link",
+          "maxItems": 20,
+          "fields": [
+            {
+              "key": "label",
+              "label": "Link text",
+              "kind": "text",
+              "required": true
+            },
+            {
+              "key": "href",
+              "label": "Same-site destination",
+              "kind": "text",
+              "required": true,
+              "help": "Start with / and keep the link on this website."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shared",
+      "label": "Shared site settings",
+      "href": "/",
+      "sections": [
+        {
+          "id": "header",
+          "label": "Header",
+          "fields": [
+            {
+              "id": "header.nav.home",
+              "kind": "text",
+              "label": "Home link"
+            },
+            {
+              "id": "header.nav.projects",
+              "kind": "text",
+              "label": "Projects link"
+            },
+            {
+              "id": "header.nav.models",
+              "kind": "text",
+              "label": "Models link"
+            },
+            {
+              "id": "header.nav.hospitality",
+              "kind": "text",
+              "label": "Hospitality link"
+            },
+            {
+              "id": "header.nav.process",
+              "kind": "text",
+              "label": "Process link"
+            },
+            {
+              "id": "header.nav.sustainability",
+              "kind": "text",
+              "label": "Sustainability link"
+            },
+            {
+              "id": "header.nav.journal",
+              "kind": "text",
+              "label": "Journal link"
+            },
+            {
+              "id": "header.nav.about",
+              "kind": "text",
+              "label": "About link"
+            },
+            {
+              "id": "header.action.enquire",
+              "kind": "text",
+              "label": "Enquiry button"
+            },
+            {
+              "id": "header.menu.open",
+              "kind": "text",
+              "label": "Open menu button"
+            },
+            {
+              "id": "header.menu.close",
+              "kind": "text",
+              "label": "Close menu button"
+            },
+            {
+              "id": "header.menu.navigation-label",
+              "kind": "text",
+              "label": "Menu navigation name"
+            },
+            {
+              "id": "header.menu.mobile-navigation-label",
+              "kind": "text",
+              "label": "Mobile navigation name"
+            },
+            {
+              "id": "header.menu.open-accessible",
+              "kind": "text",
+              "label": "Open button accessible name"
+            },
+            {
+              "id": "header.menu.close-accessible",
+              "kind": "text",
+              "label": "Close button accessible name"
+            },
+            {
+              "id": "header.nav.accessible-label",
+              "kind": "text",
+              "label": "Primary navigation name"
+            }
+          ]
+        },
+        {
+          "id": "global-brand",
+          "label": "Global Brand",
+          "fields": [
+            {
+              "id": "brand.logo.light",
+              "kind": "image",
+              "label": "Logo on dark backgrounds"
+            },
+            {
+              "id": "brand.logo.dark",
+              "kind": "image",
+              "label": "Logo on light backgrounds"
+            },
+            {
+              "id": "brand.logo.compact",
+              "kind": "image",
+              "label": "Compact brand mark"
+            },
+            {
+              "id": "brand.logo.icon",
+              "kind": "image",
+              "label": "Browser icon"
+            },
+            {
+              "id": "brand.logo.alt",
+              "kind": "text",
+              "label": "Brand accessible name"
+            }
+          ]
+        }
+      ],
+      "collections": []
+    }
+  ],
+  "scalarStoreRoundTrip": "passed",
+  "productionPublishing": "blocked-storage-503"
+}

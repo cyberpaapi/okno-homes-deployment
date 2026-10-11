@@ -1,0 +1,41 @@
+{
+  "cycleOne": {
+    "about": {
+      "title": "About OKNO · editor checkAboutOKNO·editorcheck"
+    },
+    "process": {
+      "dayText": [
+        "Days 02–09",
+        "Days 02–09 · Land"
+      ]
+    },
+    "aboutImages": [
+      {
+        "loaded": true,
+        "src": "/_next/image?url=%2Fapi%2Fsite-media%2Fe11f8fa4f12b6c4ce441cf506981102310df0644b6f9f609c3f3acc3c3c08234.webp&w=3840&q=75",
+        "width": 1114
+      }
+    ]
+  },
+  "cycleTwoBeforePublish": {
+    "renderer": "frames",
+    "source": null
+  },
+  "cycleTwoPublished": {
+    "height": 720,
+    "readyState": 4,
+    "renderer": "native",
+    "source": "/api/site-media/ddb875ee3b2c5aa079d4749019a85954eedc1472a8ecaf75f3d6704e73850629.mp4",
+    "width": 1280
+  },
+  "restored": {
+    "about": "About OKNOAboutOKNO",
+    "process": {
+      "days": [
+        "Days 01–10",
+        "Days 01–10 · Land"
+      ],
+      "renderer": "frames"
+    }
+  }
+}

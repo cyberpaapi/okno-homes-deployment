@@ -1,0 +1,4921 @@
+{
+  "scope": "675 exposed scalar input IDs; direct/template source references are trace evidence, not 675 browser publication tests. Choices and collection consumers have separate component tests.",
+  "fields": {
+    "about.assurances.energy-detail": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.${id}-detail"
+      }
+    ],
+    "about.assurances.energy-title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.${id}-title"
+      }
+    ],
+    "about.assurances.move-in-detail": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.${id}-detail"
+      }
+    ],
+    "about.assurances.move-in-title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.${id}-title"
+      }
+    ],
+    "about.assurances.resilience-detail": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.${id}-detail"
+      }
+    ],
+    "about.assurances.resilience-title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.${id}-title"
+      }
+    ],
+    "about.assurances.sustainability-detail": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.${id}-detail"
+      }
+    ],
+    "about.assurances.sustainability-title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.${id}-title"
+      }
+    ],
+    "about.assurances.title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.title"
+      }
+    ],
+    "about.assurances.warranty-detail": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.${id}-detail"
+      }
+    ],
+    "about.assurances.warranty-title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.assurances.${id}-title"
+      }
+    ],
+    "about.fit.copy": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.fit.copy"
+      }
+    ],
+    "about.fit.image": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.fit.image"
+      }
+    ],
+    "about.fit.image-alt": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.fit.image-alt"
+      }
+    ],
+    "about.fit.title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.fit.title"
+      }
+    ],
+    "about.founders.copy": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.founders.copy"
+      }
+    ],
+    "about.founders.image": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.founders.image"
+      }
+    ],
+    "about.founders.image-alt": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.founders.image-alt"
+      }
+    ],
+    "about.founders.title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.founders.title"
+      }
+    ],
+    "about.future.copy": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.future.copy"
+      }
+    ],
+    "about.future.image": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.future.image"
+      }
+    ],
+    "about.future.image-alt": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.future.image-alt"
+      }
+    ],
+    "about.future.title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.future.title"
+      }
+    ],
+    "about.opening.image": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.opening.image"
+      }
+    ],
+    "about.opening.image-alt": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.opening.image-alt"
+      }
+    ],
+    "about.opening.line-one": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.opening.line-one"
+      }
+    ],
+    "about.opening.line-two": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.opening.line-two"
+      }
+    ],
+    "about.opening.title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.opening.title",
+        "review": "exact hook or copy-helper consumer"
+      }
+    ],
+    "about.vision.copy": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.vision.copy"
+      }
+    ],
+    "about.vision.image": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.vision.image"
+      }
+    ],
+    "about.vision.image-alt": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.vision.image-alt"
+      }
+    ],
+    "about.vision.title": [
+      {
+        "file": "src/components/ui/about-section.tsx",
+        "pattern": "about.vision.title"
+      }
+    ],
+    "brand.logo.alt": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "brand.logo.alt"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "brand.logo.alt"
+      },
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "brand.logo.alt"
+      },
+      {
+        "file": "src/components/configurator/studio/CustomerUnavailable.tsx",
+        "pattern": "brand.logo.alt"
+      }
+    ],
+    "brand.logo.compact": [
+      {
+        "file": "src/components/Brand/OknoLogo.tsx",
+        "pattern": "brand.logo.compact"
+      }
+    ],
+    "brand.logo.dark": [
+      {
+        "file": "src/components/Brand/OknoLogo.tsx",
+        "pattern": "brand.logo.dark"
+      }
+    ],
+    "brand.logo.icon": [
+      {
+        "file": "src/components/Brand/BrandBrowserIcon.tsx",
+        "pattern": "brand.logo.icon"
+      }
+    ],
+    "brand.logo.light": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "brand.logo.light"
+      },
+      {
+        "file": "src/components/Brand/OknoLogo.tsx",
+        "pattern": "brand.logo.light"
+      }
+    ],
+    "configurator.action.back": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.action.back"
+      },
+      {
+        "file": "src/components/configurator/studio/CustomerUnavailable.tsx",
+        "pattern": "configurator.action.back"
+      }
+    ],
+    "configurator.action.continue": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.action.continue"
+      }
+    ],
+    "configurator.action.review": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.action.review"
+      },
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.action.review"
+      }
+    ],
+    "configurator.brand.subtitle": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.brand.subtitle"
+      },
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.brand.subtitle"
+      },
+      {
+        "file": "src/components/configurator/studio/CustomerUnavailable.tsx",
+        "pattern": "configurator.brand.subtitle"
+      }
+    ],
+    "configurator.detail.back-collection": [
+      {
+        "file": "src/components/configurator/studio/MaterialDetail.tsx",
+        "pattern": "configurator.detail.back-collection"
+      }
+    ],
+    "configurator.detail.back-palette": [
+      {
+        "file": "src/components/configurator/studio/MaterialDetail.tsx",
+        "pattern": "configurator.detail.back-palette"
+      }
+    ],
+    "configurator.detail.close-accessible": [
+      {
+        "file": "src/components/configurator/studio/MaterialDetail.tsx",
+        "pattern": "configurator.detail.close-accessible"
+      }
+    ],
+    "configurator.detail.collection": [
+      {
+        "file": "src/components/configurator/studio/MaterialDetail.tsx",
+        "pattern": "configurator.detail.collection"
+      }
+    ],
+    "configurator.detail.note": [
+      {
+        "file": "src/components/configurator/studio/MaterialDetail.tsx",
+        "pattern": "configurator.detail.note"
+      }
+    ],
+    "configurator.detail.sample-accessible": [
+      {
+        "file": "src/components/configurator/studio/MaterialDetail.tsx",
+        "pattern": "configurator.detail.sample-accessible"
+      }
+    ],
+    "configurator.detail.selected": [
+      {
+        "file": "src/components/configurator/studio/MaterialDetail.tsx",
+        "pattern": "configurator.detail.selected",
+        "review": "exact hook or copy-helper consumer"
+      }
+    ],
+    "configurator.detail.view": [
+      {
+        "file": "src/components/configurator/studio/MaterialDetail.tsx",
+        "pattern": "configurator.detail.view"
+      }
+    ],
+    "configurator.detail.view-accessible": [
+      {
+        "file": "src/components/configurator/studio/MaterialDetail.tsx",
+        "pattern": "configurator.detail.view-accessible"
+      }
+    ],
+    "configurator.finish.curated": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.curated"
+      }
+    ],
+    "configurator.finish.custom-family": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.custom-family"
+      },
+      {
+        "file": "src/components/configurator/studio/MaterialDetail.tsx",
+        "pattern": "configurator.finish.custom-family"
+      }
+    ],
+    "configurator.finish.eyebrow": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.eyebrow"
+      }
+    ],
+    "configurator.finish.group-accessible": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.group-accessible"
+      }
+    ],
+    "configurator.finish.heading": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.heading"
+      }
+    ],
+    "configurator.finish.inspect": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.inspect"
+      }
+    ],
+    "configurator.finish.inspect-accessible": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.inspect-accessible"
+      }
+    ],
+    "configurator.finish.intro": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.intro"
+      }
+    ],
+    "configurator.finish.next": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.next"
+      }
+    ],
+    "configurator.finish.note": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.note"
+      }
+    ],
+    "configurator.finish.progress": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.progress"
+      }
+    ],
+    "configurator.finish.saved": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.saved"
+      }
+    ],
+    "configurator.finish.selected": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.selected"
+      }
+    ],
+    "configurator.finish.surface-accessible": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.finish.surface-accessible"
+      }
+    ],
+    "configurator.library.accessible": [
+      {
+        "file": "src/components/configurator/studio/ApprovedMaterials.tsx",
+        "pattern": "configurator.library.accessible"
+      }
+    ],
+    "configurator.library.all": [
+      {
+        "file": "src/components/configurator/studio/ApprovedMaterials.tsx",
+        "pattern": "configurator.library.all"
+      }
+    ],
+    "configurator.library.count-many": [
+      {
+        "file": "src/components/configurator/studio/ApprovedMaterials.tsx",
+        "pattern": "configurator.library.count-many"
+      }
+    ],
+    "configurator.library.count-one": [
+      {
+        "file": "src/components/configurator/studio/ApprovedMaterials.tsx",
+        "pattern": "configurator.library.count-one"
+      }
+    ],
+    "configurator.library.eyebrow": [
+      {
+        "file": "src/components/configurator/studio/ApprovedMaterials.tsx",
+        "pattern": "configurator.library.eyebrow"
+      }
+    ],
+    "configurator.library.filter-accessible": [
+      {
+        "file": "src/components/configurator/studio/ApprovedMaterials.tsx",
+        "pattern": "configurator.library.filter-accessible"
+      }
+    ],
+    "configurator.library.heading": [
+      {
+        "file": "src/components/configurator/studio/ApprovedMaterials.tsx",
+        "pattern": "configurator.library.heading"
+      }
+    ],
+    "configurator.library.intro": [
+      {
+        "file": "src/components/configurator/studio/ApprovedMaterials.tsx",
+        "pattern": "configurator.library.intro"
+      }
+    ],
+    "configurator.library.sample-accessible": [
+      {
+        "file": "src/components/configurator/studio/ApprovedMaterials.tsx",
+        "pattern": "configurator.library.sample-accessible"
+      }
+    ],
+    "configurator.library.samples-accessible": [
+      {
+        "file": "src/components/configurator/studio/ApprovedMaterials.tsx",
+        "pattern": "configurator.library.samples-accessible"
+      }
+    ],
+    "configurator.nav.accessible": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.nav.accessible"
+      }
+    ],
+    "configurator.nav.finishes": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.nav.finishes"
+      }
+    ],
+    "configurator.nav.selection": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.nav.selection"
+      }
+    ],
+    "configurator.panel.accessible": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.panel.accessible"
+      }
+    ],
+    "configurator.preview.editor": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.preview.editor"
+      }
+    ],
+    "configurator.preview.notice": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.preview.notice"
+      }
+    ],
+    "configurator.preview.studio": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.preview.studio"
+      }
+    ],
+    "configurator.selection.copied-status": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.copied-status"
+      }
+    ],
+    "configurator.selection.copy": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.copy"
+      }
+    ],
+    "configurator.selection.copy-status": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.copy-status"
+      }
+    ],
+    "configurator.selection.download": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.download"
+      }
+    ],
+    "configurator.selection.downloaded-status": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.downloaded-status",
+        "review": "exact hook or copy-helper consumer"
+      }
+    ],
+    "configurator.selection.edit": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.edit"
+      }
+    ],
+    "configurator.selection.expired-status": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.expired-status"
+      }
+    ],
+    "configurator.selection.export-note": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.export-note",
+        "review": "exact hook or copy-helper consumer"
+      }
+    ],
+    "configurator.selection.export-revision-label": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.export-revision-label"
+      }
+    ],
+    "configurator.selection.export-variant": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.export-variant"
+      }
+    ],
+    "configurator.selection.export-variant-label": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.export-variant-label"
+      }
+    ],
+    "configurator.selection.eyebrow": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.eyebrow"
+      }
+    ],
+    "configurator.selection.heading": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.heading"
+      }
+    ],
+    "configurator.selection.link-label": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.link-label"
+      }
+    ],
+    "configurator.selection.note": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.note"
+      }
+    ],
+    "configurator.selection.reset": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.reset"
+      }
+    ],
+    "configurator.selection.shared-status": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.shared-status"
+      }
+    ],
+    "configurator.selection.surfaces": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.selection.surfaces",
+        "review": "exact hook or copy-helper consumer"
+      }
+    ],
+    "configurator.stage.accessible": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.stage.accessible"
+      }
+    ],
+    "configurator.stage.exterior": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.stage.exterior"
+      }
+    ],
+    "configurator.stage.eyebrow": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.stage.eyebrow"
+      }
+    ],
+    "configurator.stage.interior": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.stage.interior"
+      }
+    ],
+    "configurator.stage.original": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.stage.original"
+      }
+    ],
+    "configurator.stage.show-finishes": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.stage.show-finishes"
+      }
+    ],
+    "configurator.stage.view-accessible": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.stage.view-accessible"
+      }
+    ],
+    "configurator.stage.view-original": [
+      {
+        "file": "src/components/configurator/studio/CustomerStudio.tsx",
+        "pattern": "configurator.stage.view-original"
+      }
+    ],
+    "configurator.unavailable.caption": [
+      {
+        "file": "src/components/configurator/studio/CustomerUnavailable.tsx",
+        "pattern": "configurator.unavailable.caption"
+      }
+    ],
+    "configurator.unavailable.configure": [
+      {
+        "file": "src/components/configurator/studio/CustomerUnavailable.tsx",
+        "pattern": "configurator.unavailable.configure"
+      }
+    ],
+    "configurator.unavailable.exterior": [
+      {
+        "file": "src/components/configurator/studio/CustomerUnavailable.tsx",
+        "pattern": "configurator.unavailable.exterior"
+      },
+      {
+        "file": "src/components/configurator/studio/CustomerUnavailable.tsx",
+        "pattern": "configurator.unavailable.exterior"
+      }
+    ],
+    "configurator.unavailable.eyebrow": [
+      {
+        "file": "src/components/configurator/studio/CustomerUnavailable.tsx",
+        "pattern": "configurator.unavailable.eyebrow"
+      }
+    ],
+    "configurator.unavailable.note": [
+      {
+        "file": "src/components/configurator/studio/CustomerUnavailable.tsx",
+        "pattern": "configurator.unavailable.note"
+      }
+    ],
+    "configurator.unavailable.variant": [
+      {
+        "file": "src/components/configurator/studio/CustomerUnavailable.tsx",
+        "pattern": "configurator.unavailable.variant"
+      }
+    ],
+    "configurator.viewer.canvas-accessible": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.canvas-accessible"
+      }
+    ],
+    "configurator.viewer.daylight": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.daylight"
+      }
+    ],
+    "configurator.viewer.error": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.error"
+      }
+    ],
+    "configurator.viewer.error-help": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.error-help"
+      }
+    ],
+    "configurator.viewer.golden": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.golden"
+      }
+    ],
+    "configurator.viewer.lighting-accessible": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.lighting-accessible"
+      }
+    ],
+    "configurator.viewer.live": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.live"
+      }
+    ],
+    "configurator.viewer.loading": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.loading"
+      }
+    ],
+    "configurator.viewer.pointer-hint": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.pointer-hint"
+      }
+    ],
+    "configurator.viewer.poster-accessible": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.poster-accessible"
+      }
+    ],
+    "configurator.viewer.preparing": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.preparing"
+      }
+    ],
+    "configurator.viewer.progress": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.progress"
+      }
+    ],
+    "configurator.viewer.reset": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.reset"
+      }
+    ],
+    "configurator.viewer.retry": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.retry"
+      }
+    ],
+    "configurator.viewer.retry-material": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.retry-material"
+      }
+    ],
+    "configurator.viewer.touch-hint": [
+      {
+        "file": "src/components/configurator/studio/StudioViewer.tsx",
+        "pattern": "configurator.viewer.touch-hint"
+      }
+    ],
+    "enquiry.home.contact.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.home.contact.placeholder": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.home.home-type.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.home.land-status.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.home.land.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.home.land.placeholder": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.home.name.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.home.name.placeholder": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.home.submit": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.home.timeline.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.hospitality.contact.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.hospitality.contact.placeholder": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.hospitality.keys.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.hospitality.name.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.hospitality.name.placeholder": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.hospitality.programme.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.hospitality.site.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.hospitality.site.placeholder": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.hospitality.submit": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.hospitality.timeline.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.intro.copy": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.intro.heading-line-1": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.intro.heading-line-2": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.press.contact.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.press.contact.placeholder": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.press.name.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.press.name.placeholder": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.press.nature.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.press.purpose.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.press.purpose.placeholder": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.press.submit": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.tab-home.accessible": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.tab-home.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.tab-hospitality.accessible": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.tab-hospitality.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.tab-press.accessible": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "enquiry.tab-press.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "enquiry.${id}"
+      }
+    ],
+    "footer.bottom.closing": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.bottom.closing"
+      }
+    ],
+    "footer.bottom.copyright": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.bottom.copyright"
+      }
+    ],
+    "footer.brand.line": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.brand.line"
+      }
+    ],
+    "footer.explore.heading": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.${id}.heading"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.${id}.heading"
+      }
+    ],
+    "footer.homes.heading": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.${id}.heading"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.${id}.heading"
+      }
+    ],
+    "footer.okno.heading": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.${id}.heading"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.${id}.heading"
+      }
+    ],
+    "footer.social.facebook.href": [
+      {
+        "file": "src/lib/footerLinkCollections.ts",
+        "pattern": "footer.${group.id}.${link.id}.href"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.href"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.href"
+      }
+    ],
+    "footer.social.facebook.icon": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.icon"
+      }
+    ],
+    "footer.social.facebook.name": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.name"
+      }
+    ],
+    "footer.social.instagram.href": [
+      {
+        "file": "src/lib/footerLinkCollections.ts",
+        "pattern": "footer.${group.id}.${link.id}.href"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.href"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.href"
+      }
+    ],
+    "footer.social.instagram.icon": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.icon"
+      }
+    ],
+    "footer.social.instagram.name": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.name"
+      }
+    ],
+    "footer.social.linkedin.href": [
+      {
+        "file": "src/lib/footerLinkCollections.ts",
+        "pattern": "footer.${group.id}.${link.id}.href"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.href"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.href"
+      }
+    ],
+    "footer.social.linkedin.icon": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.icon"
+      }
+    ],
+    "footer.social.linkedin.name": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.name"
+      }
+    ],
+    "footer.social.navigation-label": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.navigation-label"
+      }
+    ],
+    "footer.social.youtube.href": [
+      {
+        "file": "src/lib/footerLinkCollections.ts",
+        "pattern": "footer.${group.id}.${link.id}.href"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.href"
+      },
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.href"
+      }
+    ],
+    "footer.social.youtube.icon": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.icon"
+      }
+    ],
+    "footer.social.youtube.name": [
+      {
+        "file": "src/components/Footer/SiteFooter.tsx",
+        "pattern": "footer.social.${id}.name"
+      }
+    ],
+    "header.action.enquire": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.menu.close": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.menu.close-accessible": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.menu.mobile-navigation-label": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.menu.navigation-label": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.menu.open": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.menu.open-accessible": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.nav.about": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.nav.accessible-label": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.nav.home": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.nav.hospitality": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.nav.journal": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.nav.models": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.nav.process": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.nav.projects": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "header.nav.sustainability": [
+      {
+        "file": "src/components/Header/Header.tsx",
+        "pattern": "header.${key}"
+      }
+    ],
+    "hero-v2.opening.accessible-title": [
+      {
+        "file": "src/components/hero-v2/HeroV2.tsx",
+        "pattern": "hero-v2.opening.accessible-title"
+      }
+    ],
+    "hero-v2.opening.island-loop": [
+      {
+        "file": "src/components/hero-v2/HeroV2.tsx",
+        "pattern": "hero-v2.opening.island-loop"
+      }
+    ],
+    "hero-v2.opening.island-poster": [
+      {
+        "file": "src/components/hero-v2/HeroV2.tsx",
+        "pattern": "hero-v2.opening.island-poster"
+      }
+    ],
+    "hero-v2.opening.journey-poster": [
+      {
+        "file": "src/components/hero-v2/HeroV2.tsx",
+        "pattern": "hero-v2.opening.journey-poster"
+      }
+    ],
+    "hero-v2.opening.journey-video": [
+      {
+        "file": "src/components/hero-v2/HeroV2.tsx",
+        "pattern": "hero-v2.opening.journey-video"
+      }
+    ],
+    "home.bespoke.action": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.bespoke.action"
+      }
+    ],
+    "home.bespoke.action-href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "home.bespoke.action-href"
+      },
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.bespoke.action-href"
+      }
+    ],
+    "home.bespoke.card-alt": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.bespoke.card-alt"
+      }
+    ],
+    "home.bespoke.card-image": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.bespoke.card-image"
+      }
+    ],
+    "home.bespoke.copy": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.bespoke.copy"
+      }
+    ],
+    "home.bespoke.heading-1": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.bespoke.heading-1"
+      }
+    ],
+    "home.bespoke.heading-2": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.bespoke.heading-2"
+      }
+    ],
+    "home.bespoke.image": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.bespoke.image"
+      }
+    ],
+    "home.bespoke.image-alt": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.bespoke.image-alt"
+      }
+    ],
+    "home.bespoke.word": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.bespoke.word"
+      }
+    ],
+    "home.editorial.about.action": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.action"
+      }
+    ],
+    "home.editorial.about.copy": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.copy"
+      }
+    ],
+    "home.editorial.about.href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "home.editorial.about.href"
+      },
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.href"
+      }
+    ],
+    "home.editorial.about.image": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.image"
+      }
+    ],
+    "home.editorial.about.image-alt": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.image-alt"
+      }
+    ],
+    "home.editorial.about.title": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.title"
+      }
+    ],
+    "home.editorial.journal.action": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.action"
+      }
+    ],
+    "home.editorial.journal.copy": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.copy"
+      }
+    ],
+    "home.editorial.journal.href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "home.editorial.journal.href"
+      },
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.href"
+      }
+    ],
+    "home.editorial.journal.image": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.image"
+      }
+    ],
+    "home.editorial.journal.image-alt": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.image-alt"
+      }
+    ],
+    "home.editorial.journal.title": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.editorial.${id}.title"
+      }
+    ],
+    "home.publishing.hero": [
+      {
+        "file": "src/app/page.tsx",
+        "pattern": "home.publishing.hero"
+      },
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "home.publishing.hero"
+      },
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "home.publishing.hero"
+      },
+      {
+        "file": "src/components/landing/HomeVariant.tsx",
+        "pattern": "home.publishing.hero"
+      }
+    ],
+    "home.signature.action": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.signature.action"
+      }
+    ],
+    "home.signature.action-href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "home.signature.action-href"
+      },
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.signature.action-href"
+      }
+    ],
+    "home.signature.copy": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.signature.copy"
+      }
+    ],
+    "home.signature.heading-1": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.signature.heading-1"
+      }
+    ],
+    "home.signature.heading-2": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.signature.heading-2"
+      }
+    ],
+    "home.signature.image": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.signature.image"
+      }
+    ],
+    "home.signature.image-alt": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.signature.image-alt"
+      }
+    ],
+    "home.signature.label": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.signature.label"
+      }
+    ],
+    "home.signature.video": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.signature.video"
+      }
+    ],
+    "home.sustainability.action": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.sustainability.action"
+      }
+    ],
+    "home.sustainability.action-href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "home.sustainability.action-href"
+      },
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.sustainability.action-href"
+      }
+    ],
+    "home.sustainability.copy": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.sustainability.copy"
+      }
+    ],
+    "home.sustainability.heading-1": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.sustainability.heading-1"
+      }
+    ],
+    "home.sustainability.heading-2": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.sustainability.heading-2"
+      }
+    ],
+    "home.sustainability.label": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.sustainability.label"
+      }
+    ],
+    "home.sustainability.poster": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.sustainability.poster"
+      },
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.sustainability.poster"
+      }
+    ],
+    "home.sustainability.poster-alt": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.sustainability.poster-alt"
+      }
+    ],
+    "home.sustainability.video": [
+      {
+        "file": "src/components/landing/LandingPathways.tsx",
+        "pattern": "home.sustainability.video"
+      }
+    ],
+    "home.timeline.action": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.action"
+      }
+    ],
+    "home.timeline.action-href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "home.timeline.action-href"
+      },
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.action-href"
+      }
+    ],
+    "home.timeline.heading-emphasis": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.heading-emphasis"
+      }
+    ],
+    "home.timeline.heading-start": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.heading-start"
+      }
+    ],
+    "home.timeline.image": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.image"
+      }
+    ],
+    "home.timeline.image-alt": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.image-alt"
+      }
+    ],
+    "home.timeline.image-caption": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.image-caption"
+      }
+    ],
+    "home.timeline.stage-1.copy": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-1.days": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-1.title": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-2.copy": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-2.days": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-2.title": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-3.copy": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-3.days": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-3.title": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-4.copy": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-4.days": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-4.title": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-5.copy": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-5.days": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "home.timeline.stage-5.title": [
+      {
+        "file": "src/components/landing/ProductTimeline.tsx",
+        "pattern": "home.timeline.stage-${index + 1}.${name}"
+      }
+    ],
+    "hospitality.bento.1.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      },
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.alt"
+      }
+    ],
+    "hospitality.bento.1.eyebrow": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.1.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.1.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.1.value": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.2.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      },
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.alt"
+      }
+    ],
+    "hospitality.bento.2.eyebrow": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.2.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.2.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.2.value": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.3.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      },
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.alt"
+      }
+    ],
+    "hospitality.bento.3.eyebrow": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.3.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.3.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.3.value": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.4.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      },
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.alt"
+      }
+    ],
+    "hospitality.bento.4.eyebrow": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.4.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.4.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.4.value": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.5.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      },
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.alt"
+      }
+    ],
+    "hospitality.bento.5.eyebrow": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.5.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.5.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.bento.5.value": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityBento.tsx",
+        "pattern": "hospitality.bento.${index + 1}.${field}"
+      }
+    ],
+    "hospitality.closing.action": [
+      {
+        "file": "src/components/hospitality/HospitalityExperience.tsx",
+        "pattern": "hospitality.closing.action"
+      }
+    ],
+    "hospitality.closing.action-href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "hospitality.closing.action-href"
+      },
+      {
+        "file": "src/components/hospitality/HospitalityExperience.tsx",
+        "pattern": "hospitality.closing.action-href"
+      }
+    ],
+    "hospitality.closing.heading": [
+      {
+        "file": "src/components/hospitality/HospitalityExperience.tsx",
+        "pattern": "hospitality.closing.heading"
+      }
+    ],
+    "hospitality.opening.action": [
+      {
+        "file": "src/components/hospitality/HospitalityIntro.tsx",
+        "pattern": "hospitality.opening.${key}"
+      }
+    ],
+    "hospitality.opening.action-href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "hospitality.opening.action-href"
+      },
+      {
+        "file": "src/components/hospitality/HospitalityIntro.tsx",
+        "pattern": "hospitality.opening.${key}"
+      }
+    ],
+    "hospitality.opening.alt": [
+      {
+        "file": "src/components/hospitality/HospitalityIntro.tsx",
+        "pattern": "hospitality.opening.${key}"
+      }
+    ],
+    "hospitality.opening.caption": [
+      {
+        "file": "src/components/hospitality/HospitalityIntro.tsx",
+        "pattern": "hospitality.opening.${key}"
+      }
+    ],
+    "hospitality.opening.heading": [
+      {
+        "file": "src/components/hospitality/HospitalityIntro.tsx",
+        "pattern": "hospitality.opening.${key}"
+      }
+    ],
+    "hospitality.opening.image": [
+      {
+        "file": "src/components/hospitality/HospitalityIntro.tsx",
+        "pattern": "hospitality.opening.${key}"
+      }
+    ],
+    "hospitality.selected.heading": [
+      {
+        "file": "src/components/hospitality/HospitalityExperience.tsx",
+        "pattern": "hospitality.selected.heading"
+      }
+    ],
+    "hospitality.timeline.cover": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.cover-alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.label": [
+      {
+        "file": "src/components/enquiry/EnquiryForm.tsx",
+        "pattern": "hospitality.timeline.label"
+      },
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.range": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-1.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-1.copy": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-1.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-1.number": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-1.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-2.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-2.copy": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-2.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-2.number": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-2.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-3.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-3.copy": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-3.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-3.number": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-3.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-4.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-4.copy": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-4.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-4.number": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-4.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-5.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-5.copy": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-5.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-5.number": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-5.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-6.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-6.copy": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-6.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-6.number": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-6.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-7.alt": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-7.copy": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-7.image": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-7.number": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.stage-7.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "hospitality.timeline.title": [
+      {
+        "file": "src/components/hospitality/21st/HospitalityTimeline.tsx",
+        "pattern": "hospitality.timeline.${key}"
+      }
+    ],
+    "journal.archive.action": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArchive.tsx",
+        "pattern": "journal.archive.action"
+      }
+    ],
+    "journal.archive.copy": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArchive.tsx",
+        "pattern": "journal.archive.copy"
+      }
+    ],
+    "journal.archive.heading": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArchive.tsx",
+        "pattern": "journal.archive.heading"
+      }
+    ],
+    "journal.article.back": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArticle.tsx",
+        "pattern": "journal.article.back"
+      }
+    ],
+    "journal.article.breadcrumb": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArticle.tsx",
+        "pattern": "journal.article.breadcrumb"
+      }
+    ],
+    "journal.article.closing-action": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArticle.tsx",
+        "pattern": "journal.article.closing-action"
+      }
+    ],
+    "journal.article.closing-heading": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArticle.tsx",
+        "pattern": "journal.article.closing-heading"
+      }
+    ],
+    "journal.article.contents": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArticle.tsx",
+        "pattern": "journal.article.contents"
+      }
+    ],
+    "journal.article.navigation-label": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArticle.tsx",
+        "pattern": "journal.article.navigation-label"
+      }
+    ],
+    "journal.article.on-page-label": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArticle.tsx",
+        "pattern": "journal.article.on-page-label"
+      }
+    ],
+    "journal.article.reading-suffix": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArticle.tsx",
+        "pattern": "journal.article.reading-suffix"
+      }
+    ],
+    "journal.article.related": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalArticle.tsx",
+        "pattern": "journal.article.related"
+      }
+    ],
+    "journal.hero.dek": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalHero.tsx",
+        "pattern": "journal.hero.dek"
+      }
+    ],
+    "journal.hero.eyebrow": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalHero.tsx",
+        "pattern": "journal.hero.eyebrow"
+      }
+    ],
+    "journal.hero.featured-id": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "journal.hero.featured-id"
+      },
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "journal.hero.featured-id"
+      },
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalHero.tsx",
+        "pattern": "journal.hero.featured-id"
+      }
+    ],
+    "journal.hero.heading": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalHero.tsx",
+        "pattern": "journal.hero.heading"
+      }
+    ],
+    "journal.notes.action": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalExperience.tsx",
+        "pattern": "journal.notes.action"
+      }
+    ],
+    "journal.notes.caption": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalExperience.tsx",
+        "pattern": "journal.notes.caption"
+      }
+    ],
+    "journal.press.action": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalHero.tsx",
+        "pattern": "journal.press.action"
+      },
+      {
+        "file": "src/components/journal/JournalExperience.tsx",
+        "pattern": "journal.press.action"
+      }
+    ],
+    "journal.press.caption": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalExperience.tsx",
+        "pattern": "journal.press.caption"
+      }
+    ],
+    "journal.press.eyebrow": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalExperience.tsx",
+        "pattern": "journal.press.eyebrow"
+      }
+    ],
+    "journal.press.heading": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/JournalExperience.tsx",
+        "pattern": "journal.press.heading"
+      }
+    ],
+    "journal.publications.accessible-label": [
+      {
+        "file": "src/lib/contentCollections.ts",
+        "pattern": "journal.${kind}"
+      },
+      {
+        "file": "src/components/journal/PublicationMarquee.tsx",
+        "pattern": "journal.publications.accessible-label"
+      }
+    ],
+    "models.bespoke.hero.alt": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.hero.background-word": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.hero.eyebrow": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.hero.image": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.hero.line-1": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.hero.line-2": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.manifesto.alt": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.manifesto.copy": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.manifesto.eyebrow": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.manifesto.image": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.manifesto.line-1": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.manifesto.line-2": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.manifesto.line-3": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.portal.image": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      },
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.portal.image"
+      }
+    ],
+    "models.bespoke.portal.image-alt": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      },
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.portal.image-alt"
+      }
+    ],
+    "models.bespoke.result.alt": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.result.card-alt": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.result.card-image": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.result.eyebrow": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.result.heading": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.result.image": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.result.word-1": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.result.word-2": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-1.alt": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-1.copy": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-1.detail": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-1.image": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-1.label": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-2.alt": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-2.copy": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-2.detail": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-2.image": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-2.label": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-3.alt": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-3.copy": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-3.detail": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-3.image": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-3.label": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-4.alt": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-4.copy": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-4.detail": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-4.image": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stage-4.label": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.bespoke.stages.next-action": [
+      {
+        "file": "src/components/models/BespokeExperience.tsx",
+        "pattern": "models.bespoke.${id}"
+      }
+    ],
+    "models.selector.accessible-label": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.bespoke.action": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.bespoke.alt": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.bespoke.description": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.bespoke.image": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.bespoke.label": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.bespoke.mode": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.bespoke.title": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.heading-end": [
+      {
+        "file": "src/components/models/ModelsEntry.tsx",
+        "pattern": "models.selector.heading-end"
+      },
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.heading-start": [
+      {
+        "file": "src/components/models/ModelsEntry.tsx",
+        "pattern": "models.selector.heading-start"
+      },
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.intro": [
+      {
+        "file": "src/components/models/ModelsEntry.tsx",
+        "pattern": "models.selector.intro"
+      },
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.signature.action": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.signature.alt": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.signature.description": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.signature.image": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.signature.label": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.signature.mode": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.selector.signature.title": [
+      {
+        "file": "src/components/models/ModelPathPanels.tsx",
+        "pattern": "models.selector.${id}"
+      }
+    ],
+    "models.signature.available": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.build-eyebrow": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.build-line-1": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.build-line-2": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.close": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.configure-action": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.delivery": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.delivery-value": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.internal-area": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.spaces": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.starting-price": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.warranty-eyebrow": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.detail.warranty-value": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.details-action": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.eyebrow": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.feature-eyebrow": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.filter-2-bhk": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.filter-3-bhk": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.filter-all": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.filter-studio": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.detail-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.display-name": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.explore-action": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.feature-1.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.feature-1.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.feature-2.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.feature-2.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.feature-3.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.feature-3.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.orbit-description": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.orbit-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.poster": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.forza.poster-alt": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.detail-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.display-name": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.explore-action": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.feature-1.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.feature-1.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.feature-2.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.feature-2.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.feature-3.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.feature-3.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.orbit-description": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.orbit-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.poster": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.gaze.poster-alt": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.home-plural": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.home-singular": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.detail-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.display-name": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.explore-action": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.feature-1.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.feature-1.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.feature-2.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.feature-2.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.feature-3.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.feature-3.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.orbit-description": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.orbit-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.poster": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.kray.poster-alt": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.loading": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.models-label": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.detail-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.display-name": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.explore-action": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.feature-1.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.feature-1.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.feature-2.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.feature-2.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.feature-3.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.feature-3.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.orbit-description": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.orbit-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.poster": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.octapod.poster-alt": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.plan-filter-label": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.scroll-cue": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.detail-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.display-name": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.explore-action": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.feature-1.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.feature-1.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.feature-2.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.feature-2.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.feature-3.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.feature-3.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.orbit-description": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.orbit-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.poster": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.tengo.poster-alt": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.detail-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.display-name": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.explore-action": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.feature-1.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.feature-1.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.feature-2.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.feature-2.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.feature-3.copy": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.feature-3.title": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.orbit-description": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.orbit-film": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.poster": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "models.signature.trib.poster-alt": [
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      },
+      {
+        "file": "src/components/models/ForzaExperience.tsx",
+        "pattern": "models.signature.${id}"
+      }
+    ],
+    "process.details.eyebrow": [
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.eyebrow"
+      }
+    ],
+    "process.details.heading": [
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.heading"
+      }
+    ],
+    "process.details.phase-1.alt": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.alt"
+      }
+    ],
+    "process.details.phase-1.copy": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.copy"
+      }
+    ],
+    "process.details.phase-1.days": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.days"
+      }
+    ],
+    "process.details.phase-1.image": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.image"
+      }
+    ],
+    "process.details.phase-1.title": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.title"
+      }
+    ],
+    "process.details.phase-2.alt": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.alt"
+      }
+    ],
+    "process.details.phase-2.copy": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.copy"
+      }
+    ],
+    "process.details.phase-2.days": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.days"
+      }
+    ],
+    "process.details.phase-2.image": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.image"
+      }
+    ],
+    "process.details.phase-2.title": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.title"
+      }
+    ],
+    "process.details.phase-3.alt": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.alt"
+      }
+    ],
+    "process.details.phase-3.copy": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.copy"
+      }
+    ],
+    "process.details.phase-3.days": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.days"
+      }
+    ],
+    "process.details.phase-3.image": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.image"
+      }
+    ],
+    "process.details.phase-3.title": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.title"
+      }
+    ],
+    "process.details.phase-4.alt": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.alt"
+      }
+    ],
+    "process.details.phase-4.copy": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.copy"
+      }
+    ],
+    "process.details.phase-4.days": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.days"
+      }
+    ],
+    "process.details.phase-4.image": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.image"
+      }
+    ],
+    "process.details.phase-4.title": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.title"
+      }
+    ],
+    "process.details.phase-5.alt": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.alt"
+      }
+    ],
+    "process.details.phase-5.copy": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.copy"
+      }
+    ],
+    "process.details.phase-5.days": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.days"
+      }
+    ],
+    "process.details.phase-5.image": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.image"
+      }
+    ],
+    "process.details.phase-5.title": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "process.details.phase-${index}"
+      },
+      {
+        "file": "src/components/process/ProcessDetailTimeline.tsx",
+        "pattern": "process.details.phase-${index + 1}.title"
+      }
+    ],
+    "process.opening.cover": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.cover"
+      },
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.cover"
+      }
+    ],
+    "process.opening.cue": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.cue"
+      }
+    ],
+    "process.opening.eyebrow": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.eyebrow"
+      }
+    ],
+    "process.opening.film-label": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.film-label"
+      }
+    ],
+    "process.opening.loading": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.loading",
+        "review": "exact hook or copy-helper consumer"
+      }
+    ],
+    "process.opening.master-hq": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.master-hq"
+      }
+    ],
+    "process.opening.master-scrub": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.master-scrub"
+      }
+    ],
+    "process.opening.poster": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.poster"
+      }
+    ],
+    "process.opening.summary": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.summary"
+      }
+    ],
+    "process.opening.title": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.opening.title"
+      }
+    ],
+    "process.sequence.rail-aria": [
+      {
+        "file": "src/components/process/21st/ProcessDeliveryTimeline.tsx",
+        "pattern": "process.sequence.rail-aria"
+      },
+      {
+        "file": "src/components/process/21st/ProcessDeliveryTimeline.tsx",
+        "pattern": "process.sequence.rail-aria"
+      }
+    ],
+    "process.sequence.rail-heading": [
+      {
+        "file": "src/components/process/21st/ProcessDeliveryTimeline.tsx",
+        "pattern": "process.sequence.rail-heading"
+      },
+      {
+        "file": "src/components/process/21st/ProcessDeliveryTimeline.tsx",
+        "pattern": "process.sequence.rail-heading"
+      }
+    ],
+    "process.sequence.rail-summary": [
+      {
+        "file": "src/components/process/21st/ProcessDeliveryTimeline.tsx",
+        "pattern": "process.sequence.rail-summary"
+      },
+      {
+        "file": "src/components/process/21st/ProcessDeliveryTimeline.tsx",
+        "pattern": "process.sequence.rail-summary"
+      }
+    ],
+    "process.sequence.title": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.sequence.title"
+      }
+    ],
+    "process.stage-architecture.copy": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.copy"
+      }
+    ],
+    "process.stage-architecture.days": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.days"
+      }
+    ],
+    "process.stage-architecture.label": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.label"
+      }
+    ],
+    "process.stage-architecture.poster": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.poster"
+      }
+    ],
+    "process.stage-architecture.title": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.title"
+      }
+    ],
+    "process.stage-assembly.copy": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.copy"
+      }
+    ],
+    "process.stage-assembly.days": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.days"
+      }
+    ],
+    "process.stage-assembly.label": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.label"
+      }
+    ],
+    "process.stage-assembly.poster": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.poster"
+      }
+    ],
+    "process.stage-assembly.title": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.title"
+      }
+    ],
+    "process.stage-design-lock.copy": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.copy"
+      }
+    ],
+    "process.stage-design-lock.days": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.days"
+      }
+    ],
+    "process.stage-design-lock.label": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.label"
+      }
+    ],
+    "process.stage-design-lock.poster": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.poster"
+      }
+    ],
+    "process.stage-design-lock.title": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.title"
+      }
+    ],
+    "process.stage-enclosure.copy": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.copy"
+      }
+    ],
+    "process.stage-enclosure.days": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.days"
+      }
+    ],
+    "process.stage-enclosure.label": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.label"
+      }
+    ],
+    "process.stage-enclosure.poster": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.poster"
+      }
+    ],
+    "process.stage-enclosure.title": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.title"
+      }
+    ],
+    "process.stage-handover.copy": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.copy"
+      }
+    ],
+    "process.stage-handover.days": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.days"
+      }
+    ],
+    "process.stage-handover.label": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.label"
+      }
+    ],
+    "process.stage-handover.poster": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.poster"
+      }
+    ],
+    "process.stage-handover.title": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.title"
+      }
+    ],
+    "process.stage-land.copy": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.copy"
+      }
+    ],
+    "process.stage-land.days": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.days"
+      }
+    ],
+    "process.stage-land.label": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.label"
+      }
+    ],
+    "process.stage-land.poster": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.poster"
+      }
+    ],
+    "process.stage-land.title": [
+      {
+        "file": "src/components/process/ProcessJourney.tsx",
+        "pattern": "process.stage-${stage.id}.title"
+      }
+    ],
+    "projects.detail.films-tab": [
+      {
+        "file": "src/lib/useProjectContent.ts",
+        "pattern": "projects.${project.id}"
+      },
+      {
+        "file": "src/components/projects/ProjectGallery.tsx",
+        "pattern": "projects.detail.films-tab"
+      }
+    ],
+    "projects.detail.photos-tab": [
+      {
+        "file": "src/lib/useProjectContent.ts",
+        "pattern": "projects.${project.id}"
+      },
+      {
+        "file": "src/components/projects/ProjectGallery.tsx",
+        "pattern": "projects.detail.photos-tab"
+      }
+    ],
+    "projects.detail.return": [
+      {
+        "file": "src/lib/useProjectContent.ts",
+        "pattern": "projects.${project.id}"
+      },
+      {
+        "file": "src/components/projects/ProjectGallery.tsx",
+        "pattern": "projects.detail.return"
+      }
+    ],
+    "projects.detail.return-href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "projects.detail.return-href"
+      },
+      {
+        "file": "src/lib/useProjectContent.ts",
+        "pattern": "projects.${project.id}"
+      },
+      {
+        "file": "src/components/projects/ProjectGallery.tsx",
+        "pattern": "projects.detail.return-href"
+      }
+    ],
+    "projects.intro.action": [
+      {
+        "file": "src/lib/useProjectContent.ts",
+        "pattern": "projects.${project.id}"
+      },
+      {
+        "file": "src/components/projects/ProjectsExperience.tsx",
+        "pattern": "projects.intro.action"
+      }
+    ],
+    "projects.intro.action-href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "projects.intro.action-href"
+      },
+      {
+        "file": "src/lib/useProjectContent.ts",
+        "pattern": "projects.${project.id}"
+      },
+      {
+        "file": "src/components/projects/ProjectsExperience.tsx",
+        "pattern": "projects.intro.action-href"
+      }
+    ],
+    "projects.intro.eyebrow": [
+      {
+        "file": "src/lib/useProjectContent.ts",
+        "pattern": "projects.${project.id}"
+      },
+      {
+        "file": "src/components/projects/ProjectsExperience.tsx",
+        "pattern": "projects.intro.eyebrow"
+      }
+    ],
+    "projects.intro.subtitle": [
+      {
+        "file": "src/lib/useProjectContent.ts",
+        "pattern": "projects.${project.id}"
+      },
+      {
+        "file": "src/components/projects/ProjectsExperience.tsx",
+        "pattern": "projects.intro.subtitle"
+      }
+    ],
+    "projects.intro.title": [
+      {
+        "file": "src/lib/useProjectContent.ts",
+        "pattern": "projects.${project.id}"
+      },
+      {
+        "file": "src/components/projects/ProjectsExperience.tsx",
+        "pattern": "projects.intro.title"
+      }
+    ],
+    "sustainability.ending.action": [
+      {
+        "file": "src/components/sustainability/SustainabilityEnding.tsx",
+        "pattern": "sustainability.ending.${key}"
+      }
+    ],
+    "sustainability.ending.action-href": [
+      {
+        "file": "src/lib/siteContentStore.ts",
+        "pattern": "sustainability.ending.action-href"
+      },
+      {
+        "file": "src/components/sustainability/SustainabilityEnding.tsx",
+        "pattern": "sustainability.ending.${key}"
+      }
+    ],
+    "sustainability.ending.eyebrow": [
+      {
+        "file": "src/components/sustainability/SustainabilityEnding.tsx",
+        "pattern": "sustainability.ending.${key}"
+      }
+    ],
+    "sustainability.ending.heading-emphasis": [
+      {
+        "file": "src/components/sustainability/SustainabilityEnding.tsx",
+        "pattern": "sustainability.ending.${key}"
+      }
+    ],
+    "sustainability.ending.heading-line-1": [
+      {
+        "file": "src/components/sustainability/SustainabilityEnding.tsx",
+        "pattern": "sustainability.ending.${key}"
+      }
+    ],
+    "sustainability.ending.heading-line-2": [
+      {
+        "file": "src/components/sustainability/SustainabilityEnding.tsx",
+        "pattern": "sustainability.ending.${key}"
+      }
+    ],
+    "sustainability.journey.accessible-label": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.canopy.title": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.fog-poster": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.fog-video": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.hero-copy": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.hero-emphasis": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.hero-line-1": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.hero-line-2": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.idle-video": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.longevity.title": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.production.title": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.proof-copy": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.proof-label": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.proof-line-1": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.proof-line-2": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.scroll-video": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.shared-poster": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.journey.site.title": [
+      {
+        "file": "src/components/sustainability/SustainabilityJourney.tsx",
+        "pattern": "sustainability.journey.${key}"
+      }
+    ],
+    "sustainability.proof.fact-1.label": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.fact-1.value": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.fact-2.label": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.fact-2.value": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.fact-3.label": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.fact-3.value": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.fact-4.label": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.fact-4.value": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.facts-close": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.facts-heading": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.final-alt": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.final-credit": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.final-image": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.opening-emphasis": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.opening-line-1": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.opening-line-2": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-1.alt": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-1.date": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-1.image": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-1.source": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-1.title": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-2.alt": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-2.date": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-2.image": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-2.source": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-2.title": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-3.alt": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-3.date": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-3.image": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-3.source": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-3.title": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-4.alt": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-4.date": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-4.image": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-4.source": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-4.title": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-copy": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ],
+    "sustainability.proof.press-heading": [
+      {
+        "file": "src/components/sustainability/SustainabilityProof.tsx",
+        "pattern": "sustainability.proof.${key}"
+      }
+    ]
+  }
+}

@@ -28,6 +28,16 @@ describe('Process frame-aware scroll bounds', () => {
     expect(limitProcessScroll(0, 9000, 100, 4000, 0, 'timeline')).toBe(100);
     expect(limitProcessScroll(5000, 0, 100, 4000, 1, 'timeline')).toBe(4100);
   });
+  it('keeps small crossings of the sticky/footer boundary native in both directions', () => {
+    const start = 3821.28125, span = 2880, end = start + span;
+    for (const delta of [8, 40, 120, 180]) {
+      expect(limitProcessScroll(end + 5, end + 5 - delta, start, span, 1, 'timeline')).toBe(end + 5 - delta);
+      expect(limitProcessScroll(end - 5, end - 5 + delta, start, span, 1, 'timeline')).toBe(end - 5 + delta);
+      expect(limitProcessScroll(start - 5, start - 5 + delta, start, span, 0, 'timeline')).toBe(start - 5 + delta);
+    }
+    // Large gestures still land on the end before entering an earlier phase.
+    expect(limitProcessScroll(end + 5, end - 2000, start, span, 1, 'timeline')).toBe(end);
+  });
   it('normalizes pixel, line and page wheel devices', () => {
     expect(wheelPixels(50, 0, 720)).toBe(50);
     expect(wheelPixels(3, 1, 720)).toBe(48);
