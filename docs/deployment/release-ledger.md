@@ -56,3 +56,6 @@
 | Final public routes | Sixteen page/API HEADs all 200; production site-status remains 2026-10-05; zero drafts | live-final-smoke.json; accepted working version preserved |
 | Final browser | Fresh /admin build displayed Editor connected. with owner key; Disconnect cleared access; home and admin browser smokes passed | No exhaustive control/device or large-film acceptance inferred |
 | Evidence follow-up | Documentation-only commit records verification; ignored-build command must exit 0 and leave the tested runtime alias in place | Will verify Git integration after push before handoff |
+
+| Ignored-build verification | Documentation source 123886bd7ac32f459d6149c62d30a069a026c018, deployment dpl_3NJ7Pfvi88vZ4a9JiFMgwzJRQTuk, was intentionally canceled after the ignored-build command exited 0 | Live Vercel logs confirm docs-only comparison works; production alias still resolves to READY dpl_FEwsSa5fnzqPhBtKYMUDC5B1JoDq |
+| Handoff | Runtime stays at tested application source e8347acd4c8675d29c95caf4a1d6140a88ae4087; later commits contain documentation only | All deployment-plan subtasks complete; key remains in owner-only ignored local file and sensitive Production env |
