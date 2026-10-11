@@ -39,6 +39,12 @@ describe('ForestEntryOption', () => {
     vi.restoreAllMocks();
   });
 
+  it('leaves ordinary wheel input to the normal document scroller',()=>{
+    render(<ForestEntryOption/>);
+    const event=new WheelEvent('wheel',{deltaY:2400,cancelable:true,bubbles:true});
+    fireEvent(window,event);
+    expect(event.defaultPrevented).toBe(false);
+  });
   it('waits for the presented last frame before showing the ending overlay',()=>{
     vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
     const {container}=render(<ForestEntryOption/>);

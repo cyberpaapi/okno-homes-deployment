@@ -1,25 +1,18 @@
 import { describe,expect,it } from 'vitest';
-import { heroFilmLastTime,heroFilmProgress,limitHeroFilmScroll } from './heroFilmScroll';
+import { heroFilmLastTime,heroFilmProgress } from './heroFilmScroll';
 
-describe('Hero gestures stay within the presented film',()=>{
+describe('Hero film scroll mapping',()=>{
   it('completes the actual final frame even with rounded native duration',()=>{
     for(const duration of [577/24,24.041667,24.042]) {
       expect(heroFilmLastTime(duration)).toBe(24);
       expect(24/heroFilmLastTime(duration)).toBe(1);
     }
   });
-  it('bounds oversized forward and reverse gestures instead of queueing a skip',()=>{
-    const forward=limitHeroFilmScroll(1900,6500,0,6480,0);
-    expect(heroFilmProgress(forward/6480)).toBeCloseTo(.035);
-    const reverse=limitHeroFilmScroll(7000,3000,0,6480,1);
-    expect(heroFilmProgress(reverse/6480)).toBeCloseTo(.965);
-    expect(limitHeroFilmScroll(6500,7500,0,6480,1)).toBe(7500);
-    expect(limitHeroFilmScroll(1900,0,0,6480,0)).toBe(0);
-  });
-  it('does not rewind an existing position or impede lower sections and empty tracks',()=>{
-    expect(limitHeroFilmScroll(4000,4200,0,6480,.1)).toBe(4000);
-    expect(limitHeroFilmScroll(9000,9200,0,6480,0)).toBe(9200);
-    expect(limitHeroFilmScroll(0,200,0,0,0)).toBe(200);
-    expect(heroFilmProgress(.3)).toBe(0);expect(heroFilmProgress(.965)).toBeCloseTo(1);
+  it('maps normal document position without gesture clamping',()=>{
+    expect(heroFilmProgress(0)).toBe(0);
+    expect(heroFilmProgress(.3)).toBe(0);
+    expect(heroFilmProgress(.6325)).toBeCloseTo(.5);
+    expect(heroFilmProgress(.965)).toBeCloseTo(1);
+    expect(heroFilmProgress(2)).toBe(1);
   });
 });

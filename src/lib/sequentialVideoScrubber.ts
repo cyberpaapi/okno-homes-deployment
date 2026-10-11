@@ -1,6 +1,6 @@
 /** Native fallback: seek to the next adjacent frame only after the previous
  * seek is presented. Delayed seeks never build a catch-up skip. */
-export function createSequentialVideoScrubber(video: HTMLVideoElement, fps: number, present: (time: number) => void) {
+export function createSequentialVideoScrubber(video: HTMLVideoElement, fps: number, present: (time: number) => void, maxPresentationFps = fps) {
   let requested = 0, shown = Math.round(video.currentTime*fps), raf = 0, disposed = false;
   let waiting = false, explicit = false, nextPaint = -Infinity, maxStep = 0, skipped = 0;
   const sequence: number[] = [];
@@ -19,8 +19,10 @@ export function createSequentialVideoScrubber(video: HTMLVideoElement, fps: numb
     const next = Math.round(video.currentTime*fps);
     if (!explicit) { const step = Math.abs(next-shown); maxStep = Math.max(maxStep,step); skipped += Math.max(0,step-1); }
     const now = performance.now();
-    nextPaint = !explicit && Number.isFinite(nextPaint) && now-nextPaint < 1000/fps
-      ? nextPaint+1000/fps : now+1000/fps;
+    const rate = Math.min(Math.max(fps,maxPresentationFps),fps+Math.abs(requested-next)*6);
+    const interval = 1000/rate;
+    nextPaint = !explicit && Number.isFinite(nextPaint) && now-nextPaint < interval
+      ? nextPaint+interval : now+interval;
     explicit = false; shown = next; waiting = false;
     sequence.push(shown); if (sequence.length > 24) sequence.shift();
     video.dataset.scrubSequence = sequence.join(',');

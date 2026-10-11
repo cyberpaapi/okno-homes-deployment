@@ -146,6 +146,31 @@ describe('range-indexed film rendering', () => {
     expect(seen.slice(-24)).toEqual(Array.from({length:24},(_,i)=>575-i));
     expect(canvas.dataset.scrubPresentedTime).toBe('23.0000'); abort.abort();
   });
+  it('responds faster to normal scrolling while retaining every adjacent frame and reversal', async () => {
+    setup(); const abort=new AbortController(); const canvas=document.createElement('canvas'); const seen:number[]=[];
+    const scrubber=await createH264FrameScrubber(canvas,abort.signal,vi.fn(),vi.fn(),{sequential:true,maxPresentationFps:60,onPresented:t=>seen.push(Math.round(t*24))});
+    await vi.advanceTimersByTimeAsync(100); scrubber!.setTime(24);
+    await vi.advanceTimersByTimeAsync(10500);
+    expect(seen).toEqual(Array.from({length:577},(_,i)=>i));
+    expect(canvas.dataset.scrubSkippedFrames).toBe('0');
+    scrubber!.setTime(20); await vi.advanceTimersByTimeAsync(1900);
+    expect(canvas.dataset.scrubPresentedTime).toBe('20.0000');
+    expect(canvas.dataset.scrubMaxStep).toBe('1');
+    abort.abort();
+  });
+  it('keeps presenting cached adjacent frames while a refill is blocked', async () => {
+    const mocks=setup(); const abort=new AbortController(); const canvas=document.createElement('canvas');
+    const scrubber=await createH264FrameScrubber(canvas,abort.signal,vi.fn(),vi.fn(),{sequential:true,maxPresentationFps:60});
+    await vi.advanceTimersByTimeAsync(100);
+    // Seed the runway, then stall a decoder refill. Presentation is independent
+    // of that asynchronous job and must drain the ready frames.
+    for(let index=1;index<=12;index++)mocks.emit(index);
+    mocks.pause(); scrubber!.setTime(24);
+    await vi.advanceTimersByTimeAsync(300);
+    expect(Number(canvas.dataset.scrubPresentedTime)).toBeGreaterThanOrEqual(12/24);
+    expect(canvas.dataset.scrubSkippedFrames).toBe('0');
+    abort.abort();
+  });
   it('holds a missing adjacent frame instead of using a cached future frame', async () => {
     const mocks=setup(); const abort=new AbortController(); const canvas=document.createElement('canvas'); const seen:number[]=[];
     const scrubber=await createH264FrameScrubber(canvas,abort.signal,vi.fn(),vi.fn(),{sequential:true,onPresented:t=>seen.push(Math.round(t*24))});

@@ -42,6 +42,7 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
       duration.current = heroFilmDuration;
       local = await createH264FrameScrubber(canvas.current, abort.signal, () => onReady(true), fallback, {
         sequential: true,
+        maxPresentationFps: 60,
         onPresented: time => onProgress(Math.min(1,time/Math.max(1/24,heroFilmLastTime(duration.current)))),
       });
       if (abort.signal.aborted) { local?.dispose(); return; }
@@ -56,7 +57,7 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
   useEffect(() => {
     if (!native || !video.current) return;
     const element = video.current;
-    const scrubber = createSequentialVideoScrubber(element,24,time => onProgress(Math.min(1,time/Math.max(1/24,heroFilmLastTime(duration.current)))));
+    const scrubber = createSequentialVideoScrubber(element,24,time => onProgress(Math.min(1,time/Math.max(1/24,heroFilmLastTime(duration.current)))),60);
     controller.current = scrubber;
     const ready = () => { duration.current = element.duration; onReady(true); onProgress(0); sync(); };
     element.addEventListener('loadeddata',ready);

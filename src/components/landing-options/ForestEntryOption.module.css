@@ -16,7 +16,7 @@
 
 .sequence {
   position: relative;
-  height: 1000svh;
+  height: 520svh;
   background: #0d120e;
 }
 
@@ -121,7 +121,7 @@ canvas.journeyVideo:not([data-scrub-presented-frames]) { opacity: 0; }
 }
 
 @media (max-width: 700px) {
-  .sequence { height: 920svh; }
+  .sequence { height: 500svh; }
   .sticky { min-height: 600px; }
   .video,
   .startFrame img,

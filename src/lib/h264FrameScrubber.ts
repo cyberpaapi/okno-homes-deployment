@@ -5,7 +5,7 @@ const last = film.packets.length - 1;
 /** Decode indexed AVC packets near the current scroll position.
  * Bounded byte ranges avoid downloading the film prefix before a late seek.
  */
-export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, options: { sequential?: boolean; onPresented?(time: number): void } = {}) {
+export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, options: { sequential?: boolean; maxPresentationFps?: number; onPresented?(time: number): void } = {}) {
   if (typeof VideoDecoder === 'undefined') return null;
   const description = Uint8Array.from(atob(film.description), character => character.charCodeAt(0));
   const config: VideoDecoderConfig = { codec: film.codec, codedWidth: film.width, codedHeight: film.height, description, optimizeForLatency: true, hardwareAcceleration: 'no-preference' };
@@ -110,10 +110,14 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
     context.drawImage(frame, 0, 0, film.width, film.height);
     if (drawn >= 0) { const step = Math.abs(present - drawn); maxStep = Math.max(maxStep, step); skipped += Math.max(0, step - 1); }
     drawn = present;
-    // Preserve the 24fps clock across 60Hz paints. After a stall, restart the
-    // clock rather than compressing overdue frames into a catch-up burst.
-    nextPaint = Number.isFinite(nextPaint) && now-nextPaint < 1000/film.fps
-      ? nextPaint+1000/film.fps : now+1000/film.fps;
+    // Source FPS describes the movie, not scroll speed. Advance adjacent
+    // frames up to the display's 60Hz cadence when input runs ahead; ease back
+    // to source cadence near the target. Never burst overdue frames after a stall.
+    const rate = Math.min(Math.max(film.fps, options.maxPresentationFps ?? film.fps), film.fps + Math.abs(requested-drawn)*6);
+    const interval = 1000/rate;
+    nextPaint = Number.isFinite(nextPaint) && now-nextPaint < interval
+      ? nextPaint+interval : now+interval;
+    canvas.dataset.scrubPresentationFps = rate.toFixed(1);
     sequence.push(present); if (sequence.length > 24) sequence.shift();
     canvas.dataset.scrubSequence = sequence.join(',');
     canvas.dataset.scrubMaxStep = String(maxStep);
@@ -132,7 +136,13 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
     canvas.dataset.scrubCacheFrames = String(frames.size);
     if (first) { first = false; ready(); }
     options.onPresented?.(present / film.fps);
-    if (options.sequential) { nextTarget(); requestedAt = performance.now(); void pump(); }
+    if (options.sequential) {
+      nextTarget(); requestedAt = performance.now();
+      // Fetching/refilling must not suspend presentation of frames already
+      // decoded. The pump may be busy waiting for the next byte range.
+      if (drawn !== target && frames.has(target)) queueDraw();
+      void pump();
+    }
   };
   const queueDraw = () => { if (!disposed && !raf) raf = requestAnimationFrame(draw); };
   const decoder = new VideoDecoder({

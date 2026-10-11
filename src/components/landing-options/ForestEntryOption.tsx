@@ -14,7 +14,6 @@ import LandingExperience from '@/components/landing/LandingExperience';
 import OknoLogo from '@/components/Brand/OknoLogo';
 import ScrollJourneyFilm from './ScrollJourneyFilm';
 import { useHeroReloadPosition } from './useHeroReloadPosition';
-import useHeroFilmScrollGuard from './useHeroFilmScrollGuard';
 import { useSiteContent } from '@/lib/useSiteContent';
 import { homeVariantAccessibleTitle } from '@/lib/homeVariantContent';
 import type { ContentItem } from '@/lib/contentCollections';
@@ -73,7 +72,6 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const animated = !reducedMotion && !saveData;
   const presentedFilmProgress = useMotionValue(0);
   const presentFilm = useCallback((value: number) => presentedFilmProgress.set(value), [presentedFilmProgress]);
-  useHeroFilmScrollGuard(sectionRef, presentedFilmProgress, animated);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
