@@ -7,6 +7,10 @@
 - `OKNO-homes-older-version` is historical. Never implement current admin work there.
 - This document is the current admin specification and progress ledger. Update it whenever scope, decisions, or coverage change.
 
+## Accepted Hero V1 media defaults — 11 October 2026
+
+The user accepted the closed-window turn and requested it on the original website. V1 built-in scroll-film and ending-still defaults now use the [accepted merged film and its actual final frame](hero-v1-window-finish-2026-10-11.md). The editor names the final image “Window ending still”. Current local and production publications have no V1 media/variant overrides; no draft or publication write is needed. Existing user content, credentials and production storage remain unchanged.
+
 ## Optimization and live admin verification — 11 October 2026
 
 Storage follow-up: the confirmed feature block is Blob, connected only to current OKNO; retained Deployment Storage is a separate shared-team allowance. The user's authorized old-demo deletion is complete and does not unblock admin saves. Exact usage counters still await dashboard two-factor sign-in. KRNL's frontend remains available; its settings were untouched. See [the storage review](header-storage-review-2026-10-11.md).

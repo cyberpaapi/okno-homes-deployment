@@ -2,7 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import probe from 'ffprobe-static';
-const source = '/assets/landing-options/forest-entry-scroll-seekable-900p.mp4';
+const source = '/assets/landing-options/forest-entry-scroll-window-finish.mp4';
 const bytes = readFileSync(`public${source}`);
 const data = JSON.parse(execFileSync(probe.path, ['-v','error','-select_streams','v:0','-show_streams','-show_packets','-show_data','-show_entries','stream=width,height,avg_frame_rate,extradata:packet=pos,size,pts_time,dts_time,flags','-of','json',`public${source}`]));
 const stream = data.streams[0];
@@ -12,4 +12,4 @@ if (description[0] !== 1 || data.packets.some(p => p.pts_time !== p.dts_time)) t
 const manifest = { source, sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length, width: stream.width, height: stream.height, fps: 24, codec: `avc1.${description.subarray(1,4).toString('hex')}`, description: description.toString('base64'), packets: data.packets.map(p => [Number(p.pos), Number(p.size), Math.round(Number(p.pts_time)*1e6), p.flags.includes('K') ? 1 : 0]) };
 if (manifest.packets.some(([pos,size])=>pos+size>bytes.length)) throw new Error('Packet exceeds source bytes.');
 writeFileSync('config/hero-v1-video.json',JSON.stringify(manifest)+'\n');
-console.log(`Indexed ${manifest.packets.length} original AVC samples at ${manifest.width}×${manifest.height}; video bytes unchanged.`);
+console.log(`Indexed ${manifest.packets.length} AVC samples at ${manifest.width}×${manifest.height}; video bytes unchanged.`);

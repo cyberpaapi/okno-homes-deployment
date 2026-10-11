@@ -4,9 +4,9 @@ export const homeVariantDefaults: ContentItem[] = [
   { id: "hero-v1", fields: {
     name: "Hero V1 · forest", template: "v1",
     openingVideo: "/assets/landing-options/forest-entry-intro-15s.mp4",
-    scrollVideo: "/assets/landing-options/forest-entry-scroll-seekable-900p.mp4",
+    scrollVideo: "/assets/landing-options/forest-entry-scroll-window-finish.mp4",
     poster: "/assets/landing-options/forest-entry-start-v2.jpg",
-    endImage: "/assets/landing-options/forest-entry-end-v2.jpg",
+    endImage: "/assets/landing-options/forest-entry-window-finish.jpg",
     introLastFrame: "/assets/landing-options/forest-entry-intro-last-frame.png",
     openingAlt: "A single illuminated Kioo home within dense forest at blue hour",
     endAlt: "The timber-lined interior of the Kioo home opening to the forest",

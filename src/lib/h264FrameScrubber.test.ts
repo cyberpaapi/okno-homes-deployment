@@ -5,12 +5,12 @@ import film from '../../config/hero-v1-video.json';
 import { createH264FrameScrubber } from './h264FrameScrubber';
 
 const bytes = readFileSync(`public${film.source}`);
-describe('original-packet hero frame rendering', () => {
+describe('merged-film packet rendering', () => {
   afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); vi.useRealTimers(); });
-  it('indexes every original frame without modifying the native MP4', () => {
+  it('indexes every merged frame without modifying the MP4', () => {
     expect(createHash('sha256').update(bytes).digest('hex')).toBe(film.sha256);
-    expect([film.width,film.height,film.fps,film.packets.length]).toEqual([1920,1080,24,481]);
-    expect(film.packets.filter(p=>p[3]).length).toBe(161);
+    expect([film.width,film.height,film.fps,film.packets.length]).toEqual([1920,1080,24,577]);
+    expect(film.packets.filter(p=>p[3]).length).toBe(193);
     expect(film.packets.every(([position,size],index)=>position+size<=bytes.length && (index===0 || film.packets[index-1][2]<film.packets[index][2]))).toBe(true);
   });
   it('passes untouched AVC packets to the decoder, bounds frame memory and releases it', async () => {

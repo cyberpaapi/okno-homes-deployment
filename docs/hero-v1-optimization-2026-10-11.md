@@ -1,5 +1,7 @@
 # Hero V1, About and preview refinement — 11 October 2026
 
+The later [accepted window finish](hero-v1-window-finish-2026-10-11.md) appends four seconds to this original film and changes its ending still; frame-preservation measurements below describe the original baseline.
+
 ## Implementation plan and scope
 
 1. Hero V1: establish media metadata and current seek behavior; remove the intermediate ambient video/fireflies; hold the approved intro end frame with OKNO Modhomes and an editable tagline. Keep the original film resolution and frames. Test three to five distinct scroll cases before release.

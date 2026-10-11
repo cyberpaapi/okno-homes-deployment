@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useMotionValueEvent, type MotionValue } from 'motion/react';
 import { createVideoScrubber } from '@/lib/videoScrubber';
 
-const indexedSource = '/assets/landing-options/forest-entry-scroll-seekable-900p.mp4';
+const indexedSource = '/assets/landing-options/forest-entry-scroll-window-finish.mp4';
 type Controller = { setTime(time: number): void; dispose(): void };
 export default function ScrollJourneyFilm({ src, poster, progress, className, onReady }: {
   src: string; poster: string; progress: MotionValue<number>; className: string; onReady(ready: boolean): void;
@@ -12,7 +12,7 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
   const canvas = useRef<HTMLCanvasElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const controller = useRef<Controller | null>(null);
-  const duration = useRef(481 / 24);
+  const duration = useRef(577 / 24);
   const [native, setNative] = useState(false);
   const sync = () => controller.current?.setTime(Math.min(1,Math.max(0,(progress.get()-.3)/.665)) * duration.current);
   useMotionValueEvent(progress, 'change', sync);
