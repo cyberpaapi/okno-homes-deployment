@@ -1,3 +1,5 @@
+import Script from "next/script";
+import { heroReloadBootstrap } from "@/lib/heroReloadPosition";
 import type { Metadata } from "next";
 import "./globals.css";
 import SiteFrame from '@/components/SiteFrame';
@@ -17,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body id="top">
+        <Script id="hero-v1-reload-position" strategy="beforeInteractive">{heroReloadBootstrap}</Script>
         <BrandBrowserIcon />
         <SiteTypography />
         <SiteFrame>{children}</SiteFrame>

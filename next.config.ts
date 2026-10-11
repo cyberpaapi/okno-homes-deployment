@@ -21,6 +21,9 @@ const nextConfig: NextConfig = {
     ],
   },
   allowedDevOrigins: ["127.0.0.1"],
+  async redirects() {
+    return [{ source: "/assets/landing-options/forest-entry-scroll-window-finish.mp4", destination: "/assets/landing-options/forest-entry-scroll-window-smooth.mp4", permanent: true }];
+  },
   async headers() {
     return [{ source: "/page-images/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] }];
   },

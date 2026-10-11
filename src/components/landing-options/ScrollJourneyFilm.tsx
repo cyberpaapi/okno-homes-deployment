@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useMotionValueEvent, type MotionValue } from 'motion/react';
 import { createVideoScrubber } from '@/lib/videoScrubber';
 
-const indexedSource = '/assets/landing-options/forest-entry-scroll-window-finish.mp4';
+const indexedSource = '/assets/landing-options/forest-entry-scroll-window-smooth.mp4';
 type Controller = { setTime(time: number): void; dispose(): void };
 export default function ScrollJourneyFilm({ src, poster, progress, className, onReady }: {
   src: string; poster: string; progress: MotionValue<number>; className: string; onReady(ready: boolean): void;

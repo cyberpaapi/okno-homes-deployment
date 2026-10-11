@@ -11,6 +11,7 @@ import { ReactLenis } from 'lenis/react';
 import LandingExperience from '@/components/landing/LandingExperience';
 import OknoLogo from '@/components/Brand/OknoLogo';
 import ScrollJourneyFilm from './ScrollJourneyFilm';
+import { useHeroReloadPosition } from './useHeroReloadPosition';
 import { useSiteContent } from '@/lib/useSiteContent';
 import { homeVariantAccessibleTitle } from '@/lib/homeVariantContent';
 import type { ContentItem } from '@/lib/contentCollections';
@@ -18,7 +19,7 @@ import styles from './ForestEntryOption.module.css';
 
 const INTRO_VIDEO = '/assets/landing-options/forest-entry-intro-15s.mp4';
 const INTRO_LAST_FRAME = '/assets/landing-options/forest-entry-intro-last-frame.png';
-const JOURNEY_VIDEO = '/assets/landing-options/forest-entry-scroll-window-finish.mp4';
+const JOURNEY_VIDEO = '/assets/landing-options/forest-entry-scroll-window-smooth.mp4';
 const START = '/assets/landing-options/forest-entry-start-v2.jpg';
 const END = '/assets/landing-options/forest-entry-window-finish.jpg';
 
@@ -57,6 +58,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const startAlt = variant?.fields.openingAlt || savedStartAlt;
   const endAlt = variant?.fields.endAlt || savedEndAlt;
   const sectionRef = useRef<HTMLElement>(null);
+  useHeroReloadPosition(sectionRef);
   const viewportRef = useRef<HTMLDivElement>(null);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const introFinished = useRef(false);

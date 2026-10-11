@@ -14,7 +14,7 @@ vi.mock('next/image', () => ({ default: (props: React.ImgHTMLAttributes<HTMLImag
 } }));
 vi.mock('./ScrollJourneyFilm', () => ({ default: ({ src, className }: { src: string; className: string }) => <video src={src} className={className} /> }));
 vi.mock('@/components/landing/LandingExperience', () => ({ default: () => <div data-testid="option-one">Current landing page</div> }));
-vi.mock('lenis/react', () => ({ ReactLenis: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
+vi.mock('lenis/react', () => ({ useLenis: () => undefined, ReactLenis: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
 vi.mock('motion/react', () => ({
   motion: new Proxy({}, { get: (_, tag) => tag }),
   useScroll: () => ({ scrollYProgress: { get: () => motionState.progress } }),
@@ -48,12 +48,12 @@ describe('ForestEntryOption', () => {
     expect(screen.getByTestId('option-one')).toBeInTheDocument();
     expect(container.firstElementChild).toHaveAttribute(
       'data-journey-video',
-      '/assets/landing-options/forest-entry-scroll-window-finish.mp4',
+      '/assets/landing-options/forest-entry-scroll-window-smooth.mp4',
     );
     expect(container.firstElementChild).not.toHaveAttribute('data-ambient-video');
     expect([...container.querySelectorAll('video')].map(video => video.getAttribute('src'))).toEqual([
       '/assets/landing-options/forest-entry-intro-15s.mp4',
-      '/assets/landing-options/forest-entry-scroll-window-finish.mp4',
+      '/assets/landing-options/forest-entry-scroll-window-smooth.mp4',
     ]);
   });
 
