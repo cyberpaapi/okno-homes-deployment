@@ -49,7 +49,7 @@ async function verify() {
   if (contentApi.status !== 401 && contentApi.status !== 503) throw new Error(`Admin API returned unexpected HTTP ${contentApi.status}.`);
   console.log(`OKNO admin: ${adminOrigin}/admin`);
   console.log(`Fixed admin port ${localPorts.admin}; website dependency stays on ${localPorts.website}.`);
-  if (contentApi.status === 503) console.warn("Editing is disabled: the website process on 3134 has no OKNO_CMS_ADMIN_TOKEN. Restart that process with a private token of at least 24 characters to enable edits.");
+  if (contentApi.status === 503) console.warn("Editing is disabled: the website process on 3134 has no OKNO_CMS_ADMIN_TOKEN. Restart that process with the configured shared key (at least 8 characters) to enable edits.");
 }
 
 const existing = await adminReady();

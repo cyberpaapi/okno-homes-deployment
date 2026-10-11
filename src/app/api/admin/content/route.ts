@@ -6,7 +6,7 @@ import { PUBLIC_CONTENT_TAG } from '@/lib/publicContent';
 export const runtime = "nodejs";
 
 function refuse(request: Request) {
-  if (!adminTokenConfigured()) return Response.json({ error: "Set OKNO_CMS_ADMIN_TOKEN (at least 24 characters) on the server." }, { status: 503 });
+  if (!adminTokenConfigured()) return Response.json({ error: "Set the shared OKNO_CMS_ADMIN_TOKEN (at least 8 characters) on the server." }, { status: 503 });
   if (!isAdminAuthorized(request)) return Response.json({ error: "Admin token is incorrect." }, { status: 401 });
   return null;
 }

@@ -143,11 +143,11 @@ async function updateContent(change: (current: ContentSnapshot) => ContentSnapsh
 }
 
 export function adminTokenConfigured() {
-  return Boolean((process.env.OKNO_CMS_ADMIN_TOKEN && process.env.OKNO_CMS_ADMIN_TOKEN.length >= 24) || readLocalDemoCredential());
+  return Boolean((process.env.OKNO_CMS_ADMIN_TOKEN && process.env.OKNO_CMS_ADMIN_TOKEN.length >= 8) || readLocalDemoCredential());
 }
 
 function matchesToken(configured: string | undefined, supplied: string | undefined) {
-  if (!configured || configured.length < 24 || !supplied) return false;
+  if (!configured || configured.length < 8 || !supplied) return false;
   const first = Buffer.from(configured);
   const second = Buffer.from(supplied);
   return first.length === second.length && timingSafeEqual(first, second);

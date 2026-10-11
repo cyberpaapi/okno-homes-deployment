@@ -1,0 +1,10 @@
+{
+  "fingerprint": "252935053fbb",
+  "local": {
+    "fixedKey": 200,
+    "wrongCase": 401,
+    "previousLocalKey": 401,
+    "unauthenticated": 401
+  },
+  "production": "pending"
+}
