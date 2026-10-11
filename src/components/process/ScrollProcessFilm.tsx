@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useMotionValueEvent, type MotionValue } from 'motion/react';
 import { createVideoScrubber } from '@/lib/videoScrubber';
 import { ProcessPlayhead, processFilmProgress } from '@/lib/processScrub';
-import { PROCESS_END_FRAME, PROCESS_END_TIME, PROCESS_FPS } from '@/lib/processChapters';
+import { PROCESS_END_TIME, PROCESS_FPS, PROCESS_HANDOVER_TIME, PROCESS_FINAL_SOURCE_TIME, processPresentationPackets } from '@/lib/processChapters';
 
 type Controller = { setTime(time: number): void; dispose(): void };
 type Props = {
@@ -77,7 +77,7 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
       if (abort.signal.aborted || !canvas.current) return;
       // Bound decoding as well as seeking: cache lookahead cannot expose the
       // discarded outro while a late frame is still being decoded.
-      const cut = { ...film, packets: film.packets.slice(0, PROCESS_END_FRAME + 1) };
+      const cut = { ...film, packets: processPresentationPackets(film.packets) };
       endTime.current = PROCESS_END_TIME;
       local = await createIndexedFrameScrubber(cut, canvas.current, abort.signal, () => onReady(true), fallback, time => onProgress(Math.min(1, time / endTime.current)));
       if (abort.signal.aborted) { local?.dispose(); return; }
@@ -98,13 +98,16 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
     if (!nativeSource || !video.current) return;
     const element = video.current;
     const scrubber = createVideoScrubber(element, 30);
-    controller.current = scrubber;
+    const original = nativeSource === '/process/process-master.hq.mp4' || nativeSource === '/process/process-master.scrub.mp4';
+    controller.current = {
+      setTime: time => scrubber.setTime(original && time >= PROCESS_HANDOVER_TIME ? Math.min(PROCESS_FINAL_SOURCE_TIME, element.duration - 1 / PROCESS_FPS) : time),
+      dispose: () => scrubber.dispose(),
+    };
     const ready = () => {
-      const original = nativeSource === '/process/process-master.hq.mp4' || nativeSource === '/process/process-master.scrub.mp4';
       endTime.current = original ? Math.min(PROCESS_END_TIME, element.duration - 1 / PROCESS_FPS) : Math.max(0, element.duration - 1 / PROCESS_FPS);
       onReady(true); wake.current();
     };
-    const presented = () => onProgress(Math.min(1, element.currentTime / endTime.current));
+    const presented = () => onProgress(original && element.currentTime >= PROCESS_FINAL_SOURCE_TIME - .02 ? 1 : Math.min(1, element.currentTime / endTime.current));
     element.addEventListener('loadeddata', ready);
     element.addEventListener('seeked', presented);
     if (element.readyState >= 2) ready();

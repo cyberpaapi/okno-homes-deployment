@@ -32,10 +32,10 @@ describe('V1 reload position', () => {
   });
   it('takes browser restoration only on reload, keeping back/forward navigation untouched', () => {
     sessionStorage.setItem(HERO_POSITION_KEY, JSON.stringify({...snapshot,path:location.pathname+location.search}));
-    vi.spyOn(performance,'getEntriesByType').mockReturnValue([{type:'back_forward'}] as PerformanceEntry[]);
+    vi.spyOn(performance,'getEntriesByType').mockReturnValue([{type:'back_forward'}] as PerformanceNavigationTiming[]);
     const scroll = vi.spyOn(window,'scrollTo').mockImplementation(() => {});
     Function(heroReloadBootstrap)(); expect(scroll).not.toHaveBeenCalled();
-    vi.mocked(performance.getEntriesByType).mockReturnValue([{type:'reload'}] as PerformanceEntry[]);
+    vi.mocked(performance.getEntriesByType).mockReturnValue([{type:'reload'}] as PerformanceNavigationTiming[]);
     history.scrollRestoration='auto'; Function(heroReloadBootstrap)();
     expect(history.scrollRestoration).toBe('manual'); expect(scroll).toHaveBeenCalledWith(0,0);
     expect(document.documentElement.dataset.v1Restoration).toBe('auto');

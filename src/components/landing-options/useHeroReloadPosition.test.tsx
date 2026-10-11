@@ -35,7 +35,7 @@ describe('reload after measured layout changes', () => {
   });
   it.each([3200, 14000])('handles the first reload without a saved snapshot at y=%s', async (initialY) => {
     vi.useFakeTimers(); let y=initialY; vi.stubGlobal('scrollY',y);
-    vi.spyOn(performance,'getEntriesByType').mockReturnValue([{type:'reload'}] as PerformanceEntry[]);
+    vi.spyOn(performance,'getEntriesByType').mockReturnValue([{type:'reload'}] as PerformanceNavigationTiming[]);
     vi.spyOn(document,'readyState','get').mockReturnValue('complete');
     vi.spyOn(HTMLElement.prototype,'getBoundingClientRect').mockImplementation(function (this: HTMLElement) { return {top:this.id==='sustainability-preview'?12870-y:0,bottom:7200-y} as DOMRect; });
     const scroll = vi.spyOn(window,'scrollTo').mockImplementation(((_x: number,next: number)=>{y=next;vi.stubGlobal('scrollY',y);}) as typeof window.scrollTo);

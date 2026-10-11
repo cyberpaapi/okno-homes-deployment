@@ -43,13 +43,13 @@ describe('replacement Process films and lifecycle', () => {
     Object.defineProperties(video, { readyState: { value: 4 }, duration: { value: 25.633333 } });
     fireEvent.loadedData(video);
     await act(async () => { await vi.advanceTimersByTimeAsync(10000); });
-    expect(video.currentTime).toBeCloseTo(620 / 30);
+    expect(video.currentTime).toBeCloseTo(25.6);
     fireEvent.seeked(video);
     expect(onProgress).toHaveBeenLastCalledWith(1);
     await act(async () => { progress.set(2); await vi.advanceTimersByTimeAsync(1000); });
-    expect(video.currentTime).toBeCloseTo(620 / 30);
+    expect(video.currentTime).toBeCloseTo(25.6);
     await act(async () => { progress.set(.8); await vi.advanceTimersByTimeAsync(500); });
-    expect(video.currentTime).toBeLessThan(620 / 30);
+    expect(video.currentTime).toBeLessThan(20.1);
     expect(video.currentTime).toBeGreaterThan(18);
     view.unmount();
   });
