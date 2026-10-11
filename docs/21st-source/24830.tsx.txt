@@ -1,0 +1,223 @@
+// @ts-nocheck
+"use client";
+import { AnimatePresence, AnimateSharedLayout, motion } from "motion/react";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+
+export const itemsArr = [
+  {
+    id: 1,
+    url: "https://cdn.21st.dev/assets/mirror/61/61fba7967229af5763933d0010bb8898322f7caf4ddcec1fdc49631accdf6e8b.jpg",
+    title: "Misty Mountain Majesty",
+    description:
+      "A breathtaking view of misty mountains shrouded in clouds, creating an ethereal landscape.",
+    tags: ["Misty", "Mountains", "Clouds", "Ethereal", "Landscape"],
+  },
+  {
+    id: 2,
+    url: "https://cdn.21st.dev/assets/mirror/a0/a0347946f1279a5e7a11a9a2405813da15fc66c86c629096ce2f26fb12b3ba3c.jpg",
+    title: "Winter Wonderland",
+    description:
+      "A serene winter scene with snow-covered trees and mountains, showcasing nature's pristine beauty.",
+    tags: ["Winter", "Snow", "Trees", "Mountains", "Serene"],
+  },
+  {
+    id: 3,
+    url: "https://cdn.21st.dev/assets/mirror/7d/7d50d54afe86e8a3f5125ed1c1b2620b3908f8292d50929a5cbb4b47eb14ed1e.jpg",
+    title: "Autumn Mountain Retreat",
+    description:
+      "A cozy cabin nestled in the mountains, surrounded by the vibrant colors of autumn foliage.",
+    tags: ["Autumn", "Cabin", "Mountains", "Foliage", "Cozy"],
+  },
+  {
+    id: 4,
+    url: "https://cdn.21st.dev/assets/mirror/be/bec6215be6cd082c943700a58fd0b746c4bc609fffa1ef29aebdf541fdaa09e0.jpg",
+    title: "Tranquil Lake Reflection",
+    description:
+      "A calm mountain lake perfectly reflecting the surrounding peaks and sky, creating a mirror-like surface.",
+    tags: ["Lake", "Reflection", "Mountains", "Tranquil", "Mirror"],
+  },
+  {
+    id: 5,
+    url: "https://cdn.21st.dev/assets/mirror/61/61fba7967229af5763933d0010bb8898322f7caf4ddcec1fdc49631accdf6e8b.jpg",
+    title: "Misty Mountain Peaks",
+    description:
+      "Majestic mountain peaks emerging from a sea of clouds, showcasing nature's grandeur.",
+    tags: ["Misty", "Peaks", "Clouds", "Majestic", "Nature"],
+  },
+  {
+    id: 6,
+    url: "https://cdn.21st.dev/assets/mirror/c0/c05c68bbab0df750341e0ae3e45ca956271fe8be03e2edf123f9d9e27f34da9b.jpg",
+    title: "Golden Hour Glow",
+    description:
+      "A stunning mountain landscape bathed in the warm light of the golden hour, highlighting every contour.",
+    tags: ["Golden Hour", "Mountains", "Landscape", "Warm", "Scenic"],
+  },
+  {
+    id: 7,
+    url: "https://cdn.21st.dev/assets/mirror/e7/e7c75c01704af7934b2c19c8875aad5253a73ff3196152279d82f4228c0938d8.jpg",
+    title: "Snowy Mountain Highway",
+    description:
+      "A winding road cutting through a snowy mountain landscape, inviting adventure and exploration.",
+    tags: ["Snow", "Road", "Mountains", "Winter", "Adventure"],
+  },
+  {
+    id: 8,
+    url: "https://cdn.21st.dev/assets/mirror/1b/1b29107c1e2de6ee99816c6579659f4580c56da822fabfc510a0e24c714f1680.jpg",
+    title: "Foggy Mountain Forest",
+    description:
+      "A mysterious and enchanting forest shrouded in fog, with mountains looming in the background.",
+    tags: ["Fog", "Forest", "Mountains", "Mysterious", "Enchanting"],
+  },
+  {
+    id: 9,
+    url: "https://cdn.21st.dev/assets/mirror/62/6258a4502bcab2019b7968a8430d40388dca8095e260bd71214e0b58d1174755.jpg",
+    title: "Sunset Mountain Silhouette",
+    description:
+      "A dramatic silhouette of mountain peaks against a vibrant sunset sky, creating a stunning contrast.",
+    tags: ["Sunset", "Silhouette", "Mountains", "Dramatic", "Sky"],
+  },
+  {
+    id: 10,
+    url: "https://cdn.21st.dev/assets/mirror/d2/d27844e08ea18a79be6997dc69bc2c5413bb0d356d8a7f7e3048adf7469852d9.jpg",
+    title: "Alpine Meadow Bliss",
+    description:
+      "A lush alpine meadow dotted with wildflowers, set against a backdrop of towering mountain peaks.",
+    tags: ["Alpine", "Meadow", "Wildflowers", "Mountains", "Peaceful"],
+  },
+  {
+    id: 11,
+    url: "https://cdn.21st.dev/assets/mirror/e2/e230c01d8a7cd574141858578e59e1a5bc4900adfe3b76491fef7946b47f2719.jpg",
+    title: "Mountain Lake Serenity",
+    description:
+      "A serene mountain lake surrounded by pine forests, reflecting the calm beauty of the wilderness.",
+    tags: ["Lake", "Mountains", "Forest", "Reflection", "Serenity"],
+  },
+];
+
+function Gallery({
+  items,
+  setIndex,
+  setOpen,
+  index,
+}: {
+  items: typeof itemsArr;
+  setIndex: (index: number) => void;
+  setOpen: (open: boolean) => void;
+  index: number;
+}) {
+  return (
+    <div className="rounded-md w-fit mx-auto md:gap-2 gap-1 flex pb-20 pt-10 ">
+      {items.slice(0, 11).map((item, i) => {
+        return (
+          <>
+            <motion.img
+              whileTap={{ scale: 0.95 }}
+              className={`rounded-2xl ${
+                index === i
+                  ? "w-[250px] "
+                  : "xl:w-[50px] md:w-[30px] sm:w-[20px] w-[14px]"
+              } h-[200px] shrink-0  object-cover transition-[width] ease-in-out duration-300`}
+              key={item}
+              onMouseEnter={() => {
+                setIndex(i);
+              }}
+              onMouseLeave={() => {
+                setIndex(i);
+              }}
+              onClick={() => {
+                setIndex(i);
+                setOpen(true);
+              }}
+              src={item?.url}
+              layoutId={item.id}
+            />
+          </>
+        );
+      })}
+    </div>
+  );
+}
+
+export default function AccordionModal() {
+  const [index, setIndex] = useState(5);
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+  return (
+    <div className="relative">
+      <Gallery
+        items={itemsArr}
+        index={index}
+        setIndex={setIndex}
+        setOpen={setOpen}
+      />
+      <AnimatePresence>
+        {open !== false && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            key="overlay"
+            className="dark:bg-black/40 bg-white/40 backdrop-blur-lg fixed inset-0 z-50 top-0 left-0 bottom-0 right-0 w-full h-full grid place-content-center"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            <div onClick={(e) => e.stopPropagation()}>
+              <motion.div
+                layoutId={itemsArr[index].id}
+                className="w-[400px] h-[400px] rounded-2xl relative cursor-default overflow-hidden"
+              >
+                <Image
+                  src={itemsArr[index].url}
+                  width={400}
+                  height={400}
+                  alt="single-image"
+                  className="rounded-2xl h-full w-full object-cover"
+                />
+                <article className="dark:bg-black/40 bg-white/40 backdrop-blur-md absolute -bottom-1 left-0 w-full rounded-md p-2">
+                  <motion.h1
+                    initial={{ scaleY: 0.2 }}
+                    animate={{ scaleY: 1 }}
+                    exit={{ scaleY: 0.2 }}
+                    transition={{ duration: 0.2, delay: 0.2 }}
+                    className="text-xl font-semibold"
+                  >
+                    {itemsArr[index].title}
+                  </motion.h1>
+                  <motion.p
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ scaleY: -10, opacity: 0 }}
+                    transition={{ duration: 0.2, delay: 0.2 }}
+                    className="text-sm leading-[100%] py-2"
+                  >
+                    {itemsArr[index].description}
+                  </motion.p>
+                </article>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+

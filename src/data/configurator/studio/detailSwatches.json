@@ -1,0 +1,210 @@
+{
+  "obsidian-shield": {
+    "src": "/configurator/material-details/v1/obsidian-shield.png",
+    "width": 1672,
+    "height": 941,
+    "sourceFile": "01_Obsidian_Shield.png",
+    "bytes": 2156847,
+    "sha256": "e18f673b885555b7e22004b5b66d160b8743adc437b0785458dd7a642e8df941"
+  },
+  "titanium-veil": {
+    "src": "/configurator/material-details/v1/titanium-veil.png",
+    "width": 1672,
+    "height": 941,
+    "sourceFile": "02_Titanium_Veil.png",
+    "bytes": 1811019,
+    "sha256": "d0f0e7a114783d6c463975c656a2f4ec461fd5edb3d6a3dbac2ff27b4c238a93"
+  },
+  "ivory-armor": {
+    "src": "/configurator/material-details/v1/ivory-armor.png",
+    "width": 1672,
+    "height": 941,
+    "sourceFile": "03_Ivory_Armor.png",
+    "bytes": 846842,
+    "sha256": "43cd287c9cf4d06804146f637862b64eb0b6c85fedb8e2e492d689cbe9b3bdcb"
+  },
+  "castile-crest": {
+    "src": "/configurator/material-details/v1/castile-crest.png",
+    "width": 1619,
+    "height": 971,
+    "sourceFile": "04_Castile_Crest.png",
+    "bytes": 2222948,
+    "sha256": "06bcfe447dd65cd7d7cd208e1f7d577f1037df8f6f40d174b362665c0053eba0"
+  },
+  "barcelona-blaze": {
+    "src": "/configurator/material-details/v1/barcelona-blaze.png",
+    "width": 1614,
+    "height": 974,
+    "sourceFile": "05_Barcelona_Blaze.png",
+    "bytes": 3603034,
+    "sha256": "fb2c739f5f62fc485f2584ef2801a1678b8d7a3ebae11cfca765bf83c79a4014"
+  },
+  "lone-star-shingles": {
+    "src": "/configurator/material-details/v1/lone-star-shingles.png",
+    "width": 1672,
+    "height": 941,
+    "sourceFile": "06_Lone_Star_Shingles.png",
+    "bytes": 4179637,
+    "sha256": "05797de33e13fbaa6002b2f4a45a5c7b9f7c66ccfa054ab1763f5fc7909f096f"
+  },
+  "heartland-shingles": {
+    "src": "/configurator/material-details/v1/heartland-shingles.png",
+    "width": 1672,
+    "height": 941,
+    "sourceFile": "07_Heartland_Shingles.png",
+    "bytes": 4005841,
+    "sha256": "6ee26923a1c5797272e9c9bf7a162d82a064fbfdfd86be568a12d5693eac7713"
+  },
+  "rustic-canopy": {
+    "src": "/configurator/material-details/v1/rustic-canopy.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "08_Rustic_Canopy.png",
+    "bytes": 4005400,
+    "sha256": "42a52a5561dd6fd017ace9cd852ad050c775250724c93f30cf1f04ff67712c08"
+  },
+  "ebony-timber": {
+    "src": "/configurator/material-details/v1/ebony-timber.png",
+    "width": 1672,
+    "height": 940,
+    "sourceFile": "09_Ebony_Timber.png",
+    "bytes": 2357308,
+    "sha256": "feb1ea805ff13c787735a16e29cb144bc50cb7db2659a347fcca658340de6ec4"
+  },
+  "golden-oak": {
+    "src": "/configurator/material-details/v1/golden-oak.jpg",
+    "width": 736,
+    "height": 736,
+    "sourceFile": "10_Golden_Oak.jpg",
+    "bytes": 101055,
+    "sha256": "0036ce2248268fc6882e5d8afb640094615853b3ab3473c714b8e663480a32bd"
+  },
+  "pearlwood": {
+    "src": "/configurator/material-details/v1/pearlwood.jpg",
+    "width": 910,
+    "height": 512,
+    "sourceFile": "11_Pearlwood.jpg",
+    "bytes": 77800,
+    "sha256": "e29e871f7bdd82f28688486e67a8473863cb9237a67cd4a200f8a648bf0e1192"
+  },
+  "desert-sand": {
+    "src": "/configurator/material-details/v1/desert-sand.jpg",
+    "width": 564,
+    "height": 1128,
+    "sourceFile": "12_Desert_Sand.jpg",
+    "bytes": 33791,
+    "sha256": "612a4c37d4d0a70d83301d450122561ea4be07f5141175dc7bf0bb48e0832e3f"
+  },
+  "brick-ember": {
+    "src": "/configurator/material-details/v1/brick-ember.jpg",
+    "width": 736,
+    "height": 736,
+    "sourceFile": "13_Brick_Ember.jpg",
+    "bytes": 150992,
+    "sha256": "e066e94184042f00a7bba1aabc1c469417a28417eb06d507e43fbfd48cd3ea07"
+  },
+  "terracotta-hue": {
+    "src": "/configurator/material-details/v1/terracotta-hue.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "14_Terracotta_Hue.png",
+    "bytes": 4214451,
+    "sha256": "d34f916cac8fdc5afdf1df0e19978d773e6c630ed202aed576c0f3bb124aeb4c"
+  },
+  "urban-stone": {
+    "src": "/configurator/material-details/v1/urban-stone.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "15_Urban_Stone.png",
+    "bytes": 2772378,
+    "sha256": "9671ef04cfef596df8482ec2372e49b4a1f7250e6bb9a86b4c28ae929c90547e"
+  },
+  "mink-gray": {
+    "src": "/configurator/material-details/v1/mink-gray.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "16_Mink_Gray.png",
+    "bytes": 3154420,
+    "sha256": "388fc5381b96853c359f27a1a1c7bc0b98e0ee253c40ce4e1a827a9474326002"
+  },
+  "alpine-white": {
+    "src": "/configurator/material-details/v1/alpine-white.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "17_Alpine_White.png",
+    "bytes": 2941165,
+    "sha256": "ea6a7018154f395b52fcce98e3f8a38cf156730514cf3a78eb7ed5fcfcde3035"
+  },
+  "tuscan-elegance": {
+    "src": "/configurator/material-details/v1/tuscan-elegance.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "18_Tuscan_Elegance.png",
+    "bytes": 3196139,
+    "sha256": "463e8c36b9d55cf2930f5e130409b8f5b8afb6efe558322ae479aa36a4bd1396"
+  },
+  "urban-slate": {
+    "src": "/configurator/material-details/v1/urban-slate.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "19_Urban_Slate.png",
+    "bytes": 3480351,
+    "sha256": "5e77411d273088c96a5e51b5eb660ce1f6efeb183875da1c59f16d3a8510092c"
+  },
+  "walnut-weave": {
+    "src": "/configurator/material-details/v1/walnut-weave.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "20_Walnut_Weave.png",
+    "bytes": 3515790,
+    "sha256": "f55b14720b9f6047fa71e3d7304fe70bdb6f4976b5aa0d8737afec73fc10d44c"
+  },
+  "oak-frost": {
+    "src": "/configurator/material-details/v1/oak-frost.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "21_Oak_Frost.png",
+    "bytes": 3016045,
+    "sha256": "fb0cde20d2a1dd985a9a1faed479aadcfc82dc98a37a99ecdd6e47519fefad58"
+  },
+  "sienna-nutwood": {
+    "src": "/configurator/material-details/v1/sienna-nutwood.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "22_Sienna_Nutwood.png",
+    "bytes": 2889381,
+    "sha256": "903a0f4d5c7ac89a73b54f11bc66e52bbdb8a42838737456fd759639e03be70d"
+  },
+  "brione-driftwood": {
+    "src": "/configurator/material-details/v1/brione-driftwood.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "23_Brione_Driftwood.png",
+    "bytes": 2651378,
+    "sha256": "45d79d0d2c2fc97503aff62f3e259d2d881ab2e4cfb5106c17d809d0f2b883c4"
+  },
+  "lime-grove": {
+    "src": "/configurator/material-details/v1/lime-grove.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "24_Lime_Grove.png",
+    "bytes": 2176364,
+    "sha256": "27f41ede7a5cdf18b825dac11f86d6cd6a73ecd53efa949952c7803b8791c91a"
+  },
+  "silea-sandstone": {
+    "src": "/configurator/material-details/v1/silea-sandstone.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "25_Silea_Sandstone.png",
+    "bytes": 3204213,
+    "sha256": "c0c0ddcc77fb1e2f553d736583e2d512d39df740da6ec1bdb867a40e3985901f"
+  },
+  "ontario-hemlock": {
+    "src": "/configurator/material-details/v1/ontario-hemlock.png",
+    "width": 1536,
+    "height": 1024,
+    "sourceFile": "26_Ontario_Hemlock.png",
+    "bytes": 2243784,
+    "sha256": "970cf42a42daec932a2de7540b9c22b99fa4d96984d52d8743ddf0a9ec2f588e"
+  }
+}

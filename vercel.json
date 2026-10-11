@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "npm run build && npm run release:check-bundles",
+  "installCommand": "npm ci",
+  "regions": [
+    "bom1"
+  ],
+  "ignoreCommand": "node scripts/ignore-docs-build.mjs"
+}

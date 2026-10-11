@@ -1,0 +1,10 @@
+import { ImageGallery } from "@/components/ui/carousel-circular-image-gallery";
+
+export default function DemoOne() {
+  return (
+    <div className="w-full">
+      <ImageGallery />
+    </div>
+  );
+}
+

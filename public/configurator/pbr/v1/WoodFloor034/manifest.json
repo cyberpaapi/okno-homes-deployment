@@ -1,0 +1,23 @@
+[
+  {
+    "map": "Color",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 759288,
+    "sha256": "6ebec386a00ce459cf1d3c2385303d7476f37a9efba5d1d7035c7cf757c5aab6"
+  },
+  {
+    "map": "NormalGL",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 1178584,
+    "sha256": "7c52563d6384e47082d98e8b495a6048238ca7cd7fc218b438bfb0fede30a462"
+  },
+  {
+    "map": "Roughness",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 154568,
+    "sha256": "768e8f5497d2ebb49c7b83a97e581cff098ad1d52483a8bdfaf79f5da111ff43"
+  }
+]

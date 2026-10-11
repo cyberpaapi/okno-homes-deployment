@@ -1,0 +1,29 @@
+{
+  "component": {
+    "id": 3800,
+    "componentId": 3141,
+    "authorUserId": "user_2zOjh12GteL9ZE15zD7tDl2B1YG",
+    "name": "Luma Spin",
+    "demoName": "default.tsx",
+    "description": "Luma Spin is a loader component",
+    "previewUrl": "https://cdn.21st.dev/user_2zOjh12GteL9ZE15zD7tDl2B1YG/luma-spin/default/preview.1753183613629.png",
+    "installCommand": "npx shadcn@latest add \"https://21st.dev/r/theritikk/luma-spin?api_key=$API_KEY_21ST\"",
+    "componentCode": "export const Component = () => {\nreturn (\n    <div className= \"relative w-[65px] aspect-square\" >\n    <span className=\"absolute rounded-[50px] animate-loaderAnim shadow-[inset_0_0_0_3px] shadow-gray-800 dark:shadow-gray-100\" />\n      <span className=\"absolute rounded-[50px] animate-loaderAnim animation-delay shadow-[inset_0_0_0_3px] shadow-gray-800 dark:shadow-gray-100\" />\n        <style jsx > {`\n        @keyframes loaderAnim {\n          0% {\n            inset: 0 35px 35px 0;\n          }\n          12.5% {\n            inset: 0 35px 0 0;\n          }\n          25% {\n            inset: 35px 35px 0 0;\n          }\n          37.5% {\n            inset: 35px 0 0 0;\n          }\n          50% {\n            inset: 35px 0 0 35px;\n          }\n          62.5% {\n            inset: 0 0 0 35px;\n          }\n          75% {\n            inset: 0 0 35px 35px;\n          }\n          87.5% {\n            inset: 0 0 35px 0;\n          }\n          100% {\n            inset: 0 35px 35px 0;\n          }\n        }\n        .animate-loaderAnim {\n          animation: loaderAnim 2.5s infinite;\n        }\n        .animation-delay {\n          animation-delay: -1.25s;\n        }\n      `}</style>\n  < /div>\n  );\n};\n",
+    "demoCode": "import { Component } from \"@/components/ui/luma-spin\";\n\nexport default function DemoOne() {\n  return <Component />;\n}\n",
+    "registryDependencies": {
+      "filesWithRegistry": {},
+      "npmDependencies": {}
+    },
+    "isPublic": true,
+    "registryTeamId": null,
+    "registryUserId": null
+  },
+  "quota": {
+    "tier": "paid",
+    "remaining": null,
+    "perDay": null,
+    "resetAt": null,
+    "upgradeUrl": null
+  }
+}
+

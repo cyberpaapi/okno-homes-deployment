@@ -1,0 +1,528 @@
+[
+  {
+    "id": "forrest",
+    "title": "Forrest",
+    "folder": "Forrest(C)",
+    "gallery": [
+      {
+        "src": "/assets/projects/real-v1/forrest-01.webp",
+        "alt": "Forrest \u2014 Glazed pavilion, curved garden path and reflecting pool at sunset",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-02.webp",
+        "alt": "Forrest \u2014 Bedroom opening to a planted courtyard through full-height glass",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-03.webp",
+        "alt": "Forrest \u2014 Timber-floored lounge overlooking the garden",
+        "width": 3200,
+        "height": 2123
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-04.webp",
+        "alt": "Forrest \u2014 Sloping entrance canopy framed by palms",
+        "width": 3200,
+        "height": 2255
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-05.webp",
+        "alt": "Forrest \u2014 A planted courtyard and water garden",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-06.webp",
+        "alt": "Forrest \u2014 Dining room with glazed walls and a timber ceiling",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-07.webp",
+        "alt": "Forrest \u2014 Garden path beside the glass-fronted pavilion",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-08.webp",
+        "alt": "Forrest \u2014 Illuminated pavilion reflected in the pool after dark",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-09.webp",
+        "alt": "Forrest \u2014 Lounge seating beside a private pool",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-10.webp",
+        "alt": "Forrest \u2014 Bedroom opening to a covered terrace at dusk",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-11.webp",
+        "alt": "Forrest \u2014 Stone-clad entrance pavilion illuminated at night",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-12.webp",
+        "alt": "Forrest \u2014 Curved water feature and warm-lit pavilion at night",
+        "width": 3200,
+        "height": 2133
+      }
+    ],
+    "films": [
+      {
+        "src": "/assets/projects/real-v1/forrest-film.mp4",
+        "poster": "/assets/projects/real-v1/forrest-film-poster.jpg",
+        "title": "FORREST",
+        "duration": 153,
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "src": "/assets/projects/real-v1/forrest-fpv.mp4",
+        "poster": "/assets/projects/real-v1/forrest-fpv-poster.jpg",
+        "title": "Forrest \u2014 FPV",
+        "duration": 106,
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+  },
+  {
+    "id": "kioo",
+    "title": "Kioo",
+    "folder": "Kioo_Photos",
+    "gallery": [
+      {
+        "src": "/assets/projects/real-v1/kioo-01.webp",
+        "alt": "Kioo \u2014 Mirrored cabin raised among dense forest trees",
+        "width": 3200,
+        "height": 2132
+      },
+      {
+        "src": "/assets/projects/real-v1/kioo-02.webp",
+        "alt": "Kioo \u2014 Timber-lined bedroom with full-height forest views",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kioo-03.webp",
+        "alt": "Kioo \u2014 Aerial view of the mirrored cabin and deck",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kioo-04.webp",
+        "alt": "Kioo \u2014 Outdoor terrace seating overlooking the forest",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kioo-05.webp",
+        "alt": "Kioo \u2014 Timber-lined bedroom at dusk",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kioo-06.webp",
+        "alt": "Kioo \u2014 Mirrored facade reflecting the surrounding trees",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kioo-07.webp",
+        "alt": "Kioo \u2014 Detail of the reflective facade and black frame",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kioo-08.webp",
+        "alt": "Kioo \u2014 Forest canopy and distant hills at sunset",
+        "width": 3200,
+        "height": 2132
+      },
+      {
+        "src": "/assets/projects/real-v1/kioo-09.webp",
+        "alt": "Kioo \u2014 Warm-lit bedroom opening onto the terrace at dusk",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kioo-10.webp",
+        "alt": "Kioo \u2014 Misty landscape around the forest cabin",
+        "width": 3200,
+        "height": 2132
+      }
+    ],
+    "films": []
+  },
+  {
+    "id": "kray-sangareddy",
+    "title": "Kray Sangareddy",
+    "folder": "Kray Sangareddy",
+    "gallery": [
+      {
+        "src": "/assets/projects/real-v1/kray-sangareddy-01.webp",
+        "alt": "Kray Sangareddy \u2014 Timber-clad cabin with a deep sloping roof",
+        "width": 3200,
+        "height": 2134
+      },
+      {
+        "src": "/assets/projects/real-v1/kray-sangareddy-02.webp",
+        "alt": "Kray Sangareddy \u2014 Entrance facade surrounded by planting",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kray-sangareddy-03.webp",
+        "alt": "Kray Sangareddy \u2014 Interior passage with timber walls",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kray-sangareddy-04.webp",
+        "alt": "Kray Sangareddy \u2014 Round mirror and basin against timber cladding",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kray-sangareddy-05.webp",
+        "alt": "Kray Sangareddy \u2014 Upholstered seat beside the glazing",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kray-sangareddy-06.webp",
+        "alt": "Kray Sangareddy \u2014 Detail of timber siding and black window frame",
+        "width": 2133,
+        "height": 3200
+      },
+      {
+        "src": "/assets/projects/real-v1/kray-sangareddy-07.webp",
+        "alt": "Kray Sangareddy \u2014 Warm-lit dining space seen through glass",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/kray-sangareddy-08.webp",
+        "alt": "Kray Sangareddy \u2014 Cabin glazing and sloping roof at dusk",
+        "width": 3200,
+        "height": 2133
+      }
+    ],
+    "films": [
+      {
+        "src": "/assets/projects/real-v1/kray-01.mp4",
+        "poster": "/assets/projects/real-v1/kray-01-poster.jpg",
+        "title": "Kray \u2014 01",
+        "duration": 8,
+        "width": 1080,
+        "height": 1920
+      },
+      {
+        "src": "/assets/projects/real-v1/kray-02.mp4",
+        "poster": "/assets/projects/real-v1/kray-02-poster.jpg",
+        "title": "Kray \u2014 02",
+        "duration": 10,
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "src": "/assets/projects/real-v1/kray-03.mp4",
+        "poster": "/assets/projects/real-v1/kray-03-poster.jpg",
+        "title": "Kray \u2014 03",
+        "duration": 8,
+        "width": 1080,
+        "height": 1920
+      }
+    ]
+  },
+  {
+    "id": "lakewood",
+    "title": "Lakewood Villa",
+    "folder": "Lakewood(Villa)",
+    "gallery": [
+      {
+        "src": "/assets/projects/real-v1/lakewood-01.webp",
+        "alt": "Lakewood Villa \u2014 Angular glazed villa illuminated at dusk",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/lakewood-02.webp",
+        "alt": "Lakewood Villa \u2014 Pool and villa at sunset",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/lakewood-03.webp",
+        "alt": "Lakewood Villa \u2014 Entrance beneath intersecting sloping roofs",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/lakewood-04.webp",
+        "alt": "Lakewood Villa \u2014 Timber-lined entry with vertical screen",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/lakewood-05.webp",
+        "alt": "Lakewood Villa \u2014 Bedroom with timber wall and ceiling",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/lakewood-06.webp",
+        "alt": "Lakewood Villa \u2014 Living room opening to the landscaped garden",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/lakewood-07.webp",
+        "alt": "Lakewood Villa \u2014 Central courtyard and glazed entrance",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/lakewood-08.webp",
+        "alt": "Lakewood Villa \u2014 Illuminated villa reflected in still water",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/lakewood-09.webp",
+        "alt": "Lakewood Villa \u2014 Concrete stair and full-height glazing",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/lakewood-10.webp",
+        "alt": "Lakewood Villa \u2014 Aerial view of the villa, pool and gardens at dusk",
+        "width": 3200,
+        "height": 2400
+      }
+    ],
+    "films": [
+      {
+        "src": "/assets/projects/real-v1/lakewood-film.mp4",
+        "poster": "/assets/projects/real-v1/lakewood-film-poster.jpg",
+        "title": "Lakewoods",
+        "duration": 131,
+        "width": 3840,
+        "height": 2160
+      }
+    ]
+  },
+  {
+    "id": "octapod-layana",
+    "title": "Octapod Layana",
+    "folder": "Octapod_Layana/PHOTOS",
+    "gallery": [
+      {
+        "src": "/assets/projects/real-v1/octapod-layana-01.webp",
+        "alt": "Octapod Layana \u2014 Octagonal cabins arranged around a swimming pool",
+        "width": 3200,
+        "height": 1800
+      },
+      {
+        "src": "/assets/projects/real-v1/octapod-layana-02.webp",
+        "alt": "Octapod Layana \u2014 Cabins and planting beside the central pool",
+        "width": 3200,
+        "height": 2134
+      },
+      {
+        "src": "/assets/projects/real-v1/octapod-layana-03.webp",
+        "alt": "Octapod Layana \u2014 Timber-clad cabin facade with full-height glazing",
+        "width": 2133,
+        "height": 3200
+      },
+      {
+        "src": "/assets/projects/real-v1/octapod-layana-04.webp",
+        "alt": "Octapod Layana \u2014 View from the cabin doorway toward the pool",
+        "width": 2133,
+        "height": 3200
+      },
+      {
+        "src": "/assets/projects/real-v1/octapod-layana-05.webp",
+        "alt": "Octapod Layana \u2014 Bedroom opening toward the surrounding grounds",
+        "width": 2133,
+        "height": 3200
+      },
+      {
+        "src": "/assets/projects/real-v1/octapod-layana-06.webp",
+        "alt": "Octapod Layana \u2014 Garden planting beside a glazed cabin entrance",
+        "width": 2133,
+        "height": 3200
+      },
+      {
+        "src": "/assets/projects/real-v1/octapod-layana-07.webp",
+        "alt": "Octapod Layana \u2014 Curved swimming pool edge and planting",
+        "width": 2133,
+        "height": 3200
+      },
+      {
+        "src": "/assets/projects/real-v1/octapod-layana-08.webp",
+        "alt": "Octapod Layana \u2014 Overhead view of octagonal roofs and the central pool",
+        "width": 3200,
+        "height": 1800
+      },
+      {
+        "src": "/assets/projects/real-v1/octapod-layana-09.webp",
+        "alt": "Octapod Layana \u2014 Illuminated cabins surrounding the pool after dark",
+        "width": 3200,
+        "height": 1800
+      },
+      {
+        "src": "/assets/projects/real-v1/octapod-layana-10.webp",
+        "alt": "Octapod Layana \u2014 Warm-lit cabin glazing at dusk",
+        "width": 2133,
+        "height": 3200
+      }
+    ],
+    "films": [
+      {
+        "src": "/assets/projects/real-v1/layana-1.mp4",
+        "poster": "/assets/projects/real-v1/layana-1-poster.jpg",
+        "title": "Cabin and Rain",
+        "duration": 18,
+        "width": 1080,
+        "height": 1920
+      },
+      {
+        "src": "/assets/projects/real-v1/layana-2.mp4",
+        "poster": "/assets/projects/real-v1/layana-2-poster.jpg",
+        "title": "Okno Reel 2",
+        "duration": 53,
+        "width": 1080,
+        "height": 1920
+      },
+      {
+        "src": "/assets/projects/real-v1/layana-3.mp4",
+        "poster": "/assets/projects/real-v1/layana-3-poster.jpg",
+        "title": "Reel 3",
+        "duration": 37,
+        "width": 1080,
+        "height": 1920
+      },
+      {
+        "src": "/assets/projects/real-v1/layana-4.mp4",
+        "poster": "/assets/projects/real-v1/layana-4-poster.jpg",
+        "title": "Reel 4",
+        "duration": 39,
+        "width": 1080,
+        "height": 1920
+      },
+      {
+        "src": "/assets/projects/real-v1/layana-5.mp4",
+        "poster": "/assets/projects/real-v1/layana-5-poster.jpg",
+        "title": "Reel 5",
+        "duration": 31,
+        "width": 1080,
+        "height": 1920
+      }
+    ]
+  },
+  {
+    "id": "rasa-vikarabad",
+    "title": "Rasa Vikarabad",
+    "folder": "Rasa_Vikarabad",
+    "gallery": [
+      {
+        "src": "/assets/projects/real-v1/rasa-vikarabad-01.webp",
+        "alt": "Rasa Vikarabad \u2014 Timber-clad cabins framing a central swimming pool",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/rasa-vikarabad-02.webp",
+        "alt": "Rasa Vikarabad \u2014 Bedroom with dark timber walls and flooring",
+        "width": 3200,
+        "height": 2134
+      },
+      {
+        "src": "/assets/projects/real-v1/rasa-vikarabad-03.webp",
+        "alt": "Rasa Vikarabad \u2014 Cabins, terrace and pool in daylight",
+        "width": 3200,
+        "height": 2134
+      },
+      {
+        "src": "/assets/projects/real-v1/rasa-vikarabad-04.webp",
+        "alt": "Rasa Vikarabad \u2014 Poolside refreshments with the water beyond",
+        "width": 3200,
+        "height": 2134
+      },
+      {
+        "src": "/assets/projects/real-v1/rasa-vikarabad-05.webp",
+        "alt": "Rasa Vikarabad \u2014 Dark timber dining and kitchen interior",
+        "width": 2133,
+        "height": 3200
+      },
+      {
+        "src": "/assets/projects/real-v1/rasa-vikarabad-06.webp",
+        "alt": "Rasa Vikarabad \u2014 Timber-clad cabin entrance seen from the garden",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/rasa-vikarabad-07.webp",
+        "alt": "Rasa Vikarabad \u2014 Bedroom with a glazed opening toward the terrace",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/rasa-vikarabad-08.webp",
+        "alt": "Rasa Vikarabad \u2014 Detail of the timber poolside deck",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/rasa-vikarabad-09.webp",
+        "alt": "Rasa Vikarabad \u2014 Dining room opening onto the pool terrace",
+        "width": 3200,
+        "height": 2133
+      },
+      {
+        "src": "/assets/projects/real-v1/rasa-vikarabad-10.webp",
+        "alt": "Rasa Vikarabad \u2014 Cabins and swimming pool at dusk",
+        "width": 3200,
+        "height": 2133
+      }
+    ],
+    "films": []
+  },
+  {
+    "id": "trib-birdseye",
+    "title": "Trib BirdsEye",
+    "folder": "Trib_BirdsEye",
+    "gallery": [
+      {
+        "src": "/assets/projects/real-v1/trib-birdseye-01.webp",
+        "alt": "Trib BirdsEye \u2014 Steep-roofed cabin set among trees",
+        "width": 2133,
+        "height": 3200
+      },
+      {
+        "src": "/assets/projects/real-v1/trib-birdseye-02.webp",
+        "alt": "Trib BirdsEye \u2014 Triangular cabin facade framed by forest planting",
+        "width": 2400,
+        "height": 3200
+      },
+      {
+        "src": "/assets/projects/real-v1/trib-birdseye-03.webp",
+        "alt": "Trib BirdsEye \u2014 Timber-lined interior looking through a tall triangular window",
+        "width": 2400,
+        "height": 3200
+      }
+    ],
+    "films": []
+  }
+]

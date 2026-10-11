@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Geist OKNO";
+  src: url("/fonts/geist-regular.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Geist OKNO";
+  src: url("/fonts/geist-medium.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500 700;
+}
+
+:root {
+  --paper: #f4f0e9;
+  --paper2: #eee8df;
+  --ink: #17130f;
+  --muted: #8b8175;
+  --gold: #a88a5b;
+  --gold2: #c0a477;
+  --line: rgba(120, 99, 67, 0.3);
+  --route-accent: var(--gold);
+  --route-accent-soft: rgba(168, 138, 91, .12);
+  --site-gutter: clamp(20px, 5vw, 72px);
+  --mobile-header-height: 64px;
+}
+
+[data-route="models"] {
+  --route-accent: #d2b477;
+  --route-accent-soft: rgba(210, 180, 119, .14);
+}
+
+[data-route="projects"] {
+  --route-accent: #b54838;
+  --route-accent-soft: rgba(181, 72, 56, .11);
+}
+
+[data-route="process"] {
+  --route-accent: #b8f4ee;
+  --route-accent-soft: rgba(184, 244, 238, .14);
+}
+
+[data-route="sustainability"] {
+  --route-accent: #d7f397;
+  --route-accent-soft: rgba(215, 243, 151, .14);
+}
+
+[data-route="journal"] {
+  --route-accent: #a95f43;
+  --route-accent-soft: rgba(169, 95, 67, .12);
+}
+
+[data-route="about"] {
+  --route-accent: #9f704f;
+  --route-accent-soft: rgba(159, 112, 79, .12);
+  --gold: var(--route-accent);
+}
+
+[data-route="enquiry"] {
+  --route-accent: #967458;
+  --route-accent-soft: rgba(150, 116, 88, .13);
+  --gold: var(--route-accent);
+}
+
+[data-route="hospitality"] {
+  --route-accent: #a8895e;
+  --route-accent-soft: rgba(168, 137, 94, .14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Geist OKNO", Arial, sans-serif;
+  overflow-x: clip;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+img,
+video,
+canvas {
+  max-width: 100%;
+}
+
+html[data-site-font="geist"] body :where(*) {
+  font-family: "Geist OKNO", Arial, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .no-transition * {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --site-gutter: 20px;
+  }
+
+  body {
+    min-height: 100svh;
+  }
+}
+
+/* Global Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c3b4a2;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a98a5c;
+}

@@ -1,0 +1,10 @@
+.mediaSection{min-width:0;border-top:1px solid #e0e8de;padding-top:18px}
+.mediaHeading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:13px}
+.mediaHeading strong{font-size:13px;color:#213629}
+.mediaHeading p{margin:5px 0 0;color:#617368;font-size:11px;line-height:1.5;max-width:48ch}
+.mediaSection .mediaHeading button{min-height:34px;font-size:11px}
+.mediaSection :where(input,textarea){max-width:100%}
+.archiveHeading{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:15px 0 0;padding-top:17px;border-top:1px solid #dce5d9;color:#264634;font-size:13px}
+.archiveHeading small{color:#6a7e6d;font-size:11px;font-weight:450}
+.toggleRow{display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:10px;row-gap:4px;padding:12px;border:1px solid #dce6dc;border-radius:8px;background:#f4f8f3}.toggleRow input{width:17px;height:17px;accent-color:#28513a}.toggleRow label{font-size:12px;font-weight:650;cursor:pointer}.toggleRow small{grid-column:2;color:#617368;font-size:11px;line-height:1.45}.useCover{appearance:none;border:1px solid #cbd5ca;border-radius:8px;background:#fbfcfa;color:#254732;min-height:36px;padding:8px 11px;font:inherit;font-size:12px;font-weight:650;cursor:pointer}.useCover:hover{background:#edf4eb;border-color:#789d7d}
+@media(max-width:700px){.mediaHeading{flex-direction:column}.mediaHeading button{width:100%}}

@@ -1,0 +1,41 @@
+.loader {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.loader > span:not(.srOnly) {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(225, 255, 248, .7);
+  background: rgba(184, 244, 238, .12);
+  animation: morph 1.8s infinite cubic-bezier(.65, 0, .35, 1);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes morph {
+  0%, 100% { transform: rotate(0deg) translateX(0) scale(.7); opacity: .36; }
+  50% { transform: rotate(90deg) translateX(17px) scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader > span:not(.srOnly) { animation: none; }
+  .loader > span:nth-child(1) { transform: translate(-9px, -9px); }
+  .loader > span:nth-child(2) { transform: translate(9px, -9px); }
+  .loader > span:nth-child(3) { transform: translate(-9px, 9px); }
+  .loader > span:nth-child(4) { transform: translate(9px, 9px); }
+}

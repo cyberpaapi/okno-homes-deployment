@@ -1,0 +1,28 @@
+{
+  "component": {
+    "id": 4588,
+    "componentId": 3530,
+    "authorUserId": "user_2ra80vx0iKMyQWJ5AESmNfFbCHD",
+    "name": "Morph Loading",
+    "demoName": "default.tsx",
+    "description": "A modern animated loading component with gradient orbs that rotate in a smooth morphing pattern.",
+    "previewUrl": "https://cdn.21st.dev/jatin-yadav05/morph-loading/default/preview.1753633018239.png",
+    "installCommand": "npx shadcn@latest add \"https://21st.dev/r/jatin-yadav05/morph-loading?api_key=$API_KEY_21ST\"",
+    "componentCode": "\"use client\"\n\nimport { cn } from \"@/lib/utils\"\n\ninterface UniqueLoadingProps {\n  variant?: \"morph\"\n  size?: \"sm\" | \"md\" | \"lg\"\n  className?: string\n}\n\nexport default function UniqueLoading({\n  variant = \"morph\",\n  size = \"md\",\n  className,\n}: UniqueLoadingProps) {\n  const containerSizes = {\n    sm: \"w-16 h-16\",\n    md: \"w-24 h-24\",\n    lg: \"w-32 h-32\",\n  }\n\n  if (variant === \"morph\") {\n    return (\n      <div className={cn(\"relative\", containerSizes[size], className)}>\n        <div className=\"absolute inset-0 flex items-center justify-center\">\n          {[0, 1, 2, 3].map((i) => (\n            <div\n              key={i}\n              className=\"absolute w-4 h-4 bg-black dark:bg-white\"\n              style={{\n                animation: `morph-${i} 2s infinite ease-in-out`,\n                animationDelay: `${i * 0.2}s`,\n              }}\n            />\n          ))}\n        </div>\n      </div>\n    )\n  }\n\n  return null\n}",
+    "demoCode": "import UniqueLoading from \"@/components/ui/morph-loading\";\n\nexport default function DemoOne() {\n  return  <UniqueLoading variant=\"morph\" size=\"lg\" className=\"w-full h-full\" />;\n}\n",
+    "registryDependencies": {
+      "filesWithRegistry": {},
+      "npmDependencies": {}
+    },
+    "isPublic": true,
+    "registryTeamId": null,
+    "registryUserId": null
+  },
+  "quota": {
+    "tier": "paid",
+    "remaining": null,
+    "perDay": null,
+    "resetAt": null,
+    "upgradeUrl": null
+  }
+}

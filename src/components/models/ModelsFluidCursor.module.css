@@ -1,0 +1,6 @@
+.dot,.ring { position:fixed; z-index:20010; top:0; left:0; display:block; pointer-events:none; opacity:0; border-radius:50%; translate:-50% -50%; will-change:transform; transition:opacity .12s ease,width .24s cubic-bezier(.22,1,.36,1),height .24s cubic-bezier(.22,1,.36,1),background .24s ease; }
+.dot { width:5px; height:5px; background:#f4fbff; box-shadow:0 0 0 1px #0717224d; }
+.ring { width:25px; height:25px; border:1px solid #dff7ffb8; background:#dff7ff14; }
+.ring[data-active="true"] { width:54px; height:54px; background:#9bc9ff24; }
+:global(html[data-models-cursor="true"][data-models-cursor-visible="true"]) .dot,:global(html[data-models-cursor="true"][data-models-cursor-visible="true"]) .ring { opacity:1; }
+@media (pointer:coarse),(prefers-reduced-motion:reduce) { .dot,.ring { display:none; } }

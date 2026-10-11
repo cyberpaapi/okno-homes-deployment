@@ -1,0 +1,2 @@
+.loader{position:fixed;inset:0;z-index:15000;display:grid;place-items:center;background:#111b14;pointer-events:none}.loader img{display:block}.trail{position:fixed;inset:0;z-index:45;pointer-events:none}.trailImage{position:absolute;width:100px;height:125px;margin:-62px 0 0 -50px;box-shadow:0 12px 24px #0003}.trailImage img{object-fit:cover}
+.entranceLogo{width:185px;max-width:50vw;height:auto}

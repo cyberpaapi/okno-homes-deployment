@@ -1,0 +1,24 @@
+{
+  "tengo": {
+    "url": "/api/configurator/customer-model/tengo",
+    "fileName": "tengo-customer-v1.glb",
+    "bytes": 22704140,
+    "transferBytes": 7396283,
+    "sha256": "f858a38aa22be410a807d806bc6c9fce190b48da35545621733fba4ff81d5f3a",
+    "sourceHash": "f6cde03d1c7811f3d1c3cfe68ddd70256ba3e44552083a866ee333be7dfe03d9",
+    "nodes": 322,
+    "triangles": 267837,
+    "geometryVerified": true
+  },
+  "kray": {
+    "url": "/api/configurator/customer-model/kray",
+    "fileName": "kray-customer-v1.glb",
+    "bytes": 79516416,
+    "transferBytes": 15930517,
+    "sha256": "d10a25f70b49f3ac0d3bcf035f8cb8350b9b3e8c63b740a0bcbe6f9719f4e742",
+    "sourceHash": "08806590bef001c6f35b15c13ad928591c5add17f17dfaf033bc263e88da1d2f",
+    "nodes": 1842,
+    "triangles": 1470678,
+    "geometryVerified": true
+  }
+}

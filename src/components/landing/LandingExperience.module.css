@@ -1,0 +1,37 @@
+.page {
+  --landing-bg: #151814;
+  --landing-accent: #a7bbb0;
+  background:
+    radial-gradient(circle at 14% 8%, rgb(101 119 84 / 12%), transparent 30%),
+    radial-gradient(circle at 84% 46%, rgb(94 119 107 / 10%), transparent 34%),
+    var(--landing-bg);
+  color: #f4f0e9;
+  font-family: "Geist OKNO", sans-serif;
+  overflow: clip;
+}
+.page a { color: inherit; text-decoration: none; }
+.page a:focus-visible, .page button:focus-visible { outline: 2px solid var(--landing-accent); outline-offset: 7px; }
+
+.timelineField {
+  position: relative;
+  isolation: isolate;
+  margin-top: -1px;
+  background: linear-gradient(180deg, #151814, #171a16 52%, #141713);
+}
+.timelineField::before,
+.timelineField::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  left: 0;
+  height: 18svh;
+  pointer-events: none;
+}
+.timelineField::before { top: 0; background: linear-gradient(180deg, #151814, transparent); }
+.timelineField::after { bottom: 0; background: linear-gradient(180deg, transparent, #121612); }
+.timelineField > * { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .page * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+}

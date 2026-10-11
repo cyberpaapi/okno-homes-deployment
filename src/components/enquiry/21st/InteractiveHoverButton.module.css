@@ -1,0 +1,74 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 184px;
+  height: 52px;
+  overflow: hidden;
+  border: 1px solid #24231f;
+  border-radius: 999px;
+  background: transparent;
+  color: #24231f;
+  cursor: pointer;
+  font: 600 11px/1 "Enquiry Geist", "Geist OKNO", Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dot {
+  position: absolute;
+  inset: 0;
+  background: #24231f;
+  clip-path: circle(3.5px at 25.5px 50%);
+  transition: clip-path 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.label {
+  transform: translateX(7px);
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), opacity 250ms ease;
+}
+
+.reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #f4f0e8;
+  opacity: 0;
+  transform: translateX(14px);
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
+}
+
+.button:hover .dot,
+.button:focus-visible .dot {
+  clip-path: circle(150% at 25.5px 50%);
+}
+
+.button:hover .label,
+.button:focus-visible .label {
+  opacity: 0;
+  transform: translateX(-14px);
+}
+
+.button:hover .reveal,
+.button:focus-visible .reveal {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0ms, 220ms;
+}
+
+.button:focus-visible {
+  outline: 2px solid #a68348;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .label,
+  .reveal {
+    transition: none;
+  }
+}

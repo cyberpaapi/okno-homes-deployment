@@ -1,0 +1,37 @@
+.heading {
+  display: flex;
+  max-width: 13ch;
+  flex-wrap: wrap;
+  gap: 0 .18em;
+  margin: 0;
+  font-family: "OKNO Bodoni", Georgia, serif !important;
+  font-size: clamp(64px, 7.4vw, 132px);
+  font-weight: 400;
+  line-height: .82;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+}
+
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  padding: .04em .02em .13em 0;
+  margin-bottom: -.13em;
+}
+
+.mask > span { display: inline-block; }
+
+@media (max-width: 900px) {
+  .heading {
+    max-width: 10.5ch;
+    font-size: clamp(54px, 11.5vw, 94px);
+    line-height: .86;
+  }
+}
+
+@media (max-width: 560px) {
+  .heading {
+    font-size: clamp(48px, 14vw, 72px);
+    line-height: .86;
+  }
+}

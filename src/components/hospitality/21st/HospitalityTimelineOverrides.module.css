@@ -1,0 +1,181 @@
+@media (min-width: 1024px) {
+  .stage {
+    height: 175vw;
+  }
+
+  .stickyCentered {
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1300px) {
+  .stage :global([data-copy]) h3 {
+    font-size: 24px;
+  }
+
+  .stage :global([data-copy]) p {
+    font-size: 12px;
+  }
+
+  .stage :global([data-copy]) b {
+    font-size: 10px;
+  }
+}
+
+.mobileStage {
+  --timeline-sage: #d4e8b5;
+  --timeline-stone: #f1c57e;
+  --timeline-water: #82ded1;
+  position: relative;
+  padding: 72px 20px 96px;
+  overflow: hidden;
+  background: transparent;
+  color: #f4f1e9;
+}
+
+.mobileCover {
+  height: 56vw;
+  margin: 0 0 58px;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.mobileCover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mobileHeader small,
+.mobileHeader span {
+  color: rgba(244, 241, 233, .62);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.mobileHeader h2 {
+  max-width: 8ch;
+  margin: 12px 0 24px;
+  font-size: clamp(50px, 15vw, 70px);
+  font-weight: 540;
+  letter-spacing: -.075em;
+  line-height: .88;
+}
+
+.mobileList {
+  position: relative;
+  margin: 58px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mobileList::before {
+  position: absolute;
+  top: 9px;
+  bottom: 10px;
+  left: 8px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--timeline-sage) 22%, var(--timeline-stone) 34%, var(--timeline-stone) 53%, var(--timeline-water) 65%);
+  content: "";
+}
+
+.mobileList li {
+  --milestone-accent: var(--timeline-sage);
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 8px;
+  padding: 0 0 44px;
+}
+
+.mobileList li[data-phase="make"] { --milestone-accent: var(--timeline-stone); }
+.mobileList li[data-phase="open"] { --milestone-accent: var(--timeline-water); }
+
+.mobileList li::before {
+  position: absolute;
+  top: 6px;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--milestone-accent);
+  content: "";
+}
+
+.mobileList li::after {
+  position: absolute;
+  top: 11px;
+  left: 8px;
+  width: 34px;
+  height: 1px;
+  background: var(--milestone-accent);
+  content: "";
+}
+
+.mobileList b {
+  padding-left: 20px;
+  color: var(--milestone-accent);
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+.mobileList h3 {
+  margin: 0;
+  color: var(--milestone-accent);
+  font-size: 28px;
+  font-weight: 520;
+  letter-spacing: -.055em;
+  line-height: .95;
+}
+
+.mobileList p {
+  max-width: 28ch;
+  margin: 10px 0 0;
+  color: rgba(244, 241, 233, .62);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.mobilePhoto {
+  position: relative;
+  width: 128px;
+  height: 80px;
+  margin: 18px 0 0;
+  overflow: hidden;
+  border: 1px solid var(--milestone-accent);
+  border-radius: 8px;
+  background: #193125;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, .23);
+  backface-visibility: hidden;
+}
+
+.mobilePhoto img { object-fit: cover; }
+
+@media (min-width: 600px) {
+  .mobileStage {
+    padding: 100px clamp(42px, 7vw, 76px) 130px;
+  }
+
+  .mobileCover {
+    height: min(48vw, 460px);
+  }
+
+  .mobileHeader h2 {
+    font-size: clamp(62px, 10vw, 92px);
+  }
+
+  .mobileList {
+    width: min(720px, 100%);
+    margin-top: 76px;
+  }
+
+  .mobilePhoto { width: 160px; height: 100px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobilePhoto { transform: none !important; opacity: 1 !important; visibility: visible !important; }
+}

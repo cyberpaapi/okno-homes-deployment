@@ -1,0 +1,16 @@
+.addRow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 15px;margin-bottom:15px;border-radius:9px;background:#edf3eb;color:#294733;font-size:12px;font-weight:650}
+.picker{position:relative;min-width:min(100%,250px);font-weight:450}
+.pickerTrigger{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:39px;padding:9px 11px;border:1px solid #b9cbbb;border-radius:8px;background:#fff;color:#213629;text-align:left;font:inherit;font-size:12px;cursor:pointer}
+.pickerTrigger span{min-width:0;overflow-wrap:anywhere}.pickerTrigger svg{flex:none}
+.pickerTrigger:focus-visible,.pickerSearch input:focus-visible,.pickerList button:focus-visible{outline:2px solid #4c8260;outline-offset:2px}
+.pickerPopup{position:absolute;z-index:30;top:calc(100% + 5px);left:0;right:0;min-width:260px;border:1px solid #c6d5c4;border-radius:9px;background:#fff;box-shadow:0 14px 34px #112d1b29;overflow:hidden}
+.pickerSearch{display:flex;align-items:center;gap:7px;padding:9px 11px;border-bottom:1px solid #e2e9df;color:#466450}
+.pickerSearch input{min-width:0;width:100%;border:0;background:transparent;color:#213629;font:inherit;font-size:12px;outline:0}
+.pickerList{max-height:245px;overflow-y:auto;padding:5px}
+.pickerList button{display:flex;align-items:center;gap:9px;width:100%;padding:7px;border:0;border-radius:6px;background:#fff;color:#213629;text-align:left;font:inherit;font-size:12px;cursor:pointer}
+.pickerList button:hover,.pickerList button[data-active=true]{background:#eaf1e8}
+.pickerList img{width:48px;height:36px;object-fit:cover;border-radius:4px;background:#e5eae3;flex:none}
+.pickerList button span{min-width:0;overflow-wrap:anywhere;font-weight:650}.pickerList button small{display:block;margin-top:2px;color:#6f8273;font-size:10px;font-weight:450}
+.pickerEmpty{margin:0;padding:12px;color:#65786a;font-size:11px;line-height:1.5}
+.srOnly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:700px){.addRow{align-items:stretch;flex-direction:column}.picker{width:100%}.pickerPopup{min-width:0}}

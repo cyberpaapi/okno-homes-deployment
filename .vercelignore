@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.env*
+.okno-content
+.okno-secrets
+.local-preview
+artifacts
+tmp
+coverage
+*.tsbuildinfo
+docs

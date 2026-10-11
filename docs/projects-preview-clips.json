@@ -1,0 +1,27 @@
+[
+  {
+    "id": "forrest",
+    "source": "Cinematic Videos/Forrest_FPV.MP4",
+    "start": 22,
+    "length": 16,
+    "width": 1920,
+    "bitrate": "8M",
+    "fps": 25
+  },
+  {
+    "id": "kray-sangareddy",
+    "source": "Kray Sangareddy/02.mp4",
+    "start": 0,
+    "length": 10,
+    "width": 1920,
+    "bitrate": "6M"
+  },
+  {
+    "id": "lakewood",
+    "source": "Cinematic Videos/Lakewoods.mp4",
+    "start": 28,
+    "length": 12,
+    "width": 1920,
+    "bitrate": "6M"
+  }
+]

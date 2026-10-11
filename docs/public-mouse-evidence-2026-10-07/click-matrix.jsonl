@@ -1,0 +1,53 @@
+{"route":"/","control":"header Models click","result":"PASS"}
+{"route":"/","control":"process CTA click","result":"PASS"}
+{"route":"/","control":"Signature CTA click","result":"PASS"}
+{"route":"/hero-v2","control":"skip film","result":"FAIL","error":"locator.click: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Skip the film and view Forza' })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" "}
+{"route":"/models","control":"Signature panel click","result":"PASS"}
+{"route":"/models","control":"Bespoke panel click","result":"PASS"}
+{"route":"/models/signature","control":"filter state Studio","result":"OBSERVED","pressed":"true","body":"P\nP\nr\nr\no\no\nj\nj\ne\ne\nc\nc\nt\nt\ns\ns\nM\nM\no\no\nd\nd\ne\ne\nl\nl\ns\ns\nH\nH\no\no\ns\ns\np\np\ni\ni\nt\nt\na\na\nl\nl\ni\ni\nt\nt\ny\ny\nP\nP\nr\nr\no\n"}
+{"route":"/models/signature","control":"filter Studio","result":"PASS"}
+{"route":"/models/signature","control":"filter state 2 BHK","result":"OBSERVED","pressed":"true","body":"P\nP\nr\nr\no\no\nj\nj\ne\ne\nc\nc\nt\nt\ns\ns\nM\nM\no\no\nd\nd\ne\ne\nl\nl\ns\ns\nH\nH\no\no\ns\ns\np\np\ni\ni\nt\nt\na\na\nl\nl\ni\ni\nt\nt\ny\ny\nP\nP\nr\nr\no\n"}
+{"route":"/models/signature","control":"filter 2 BHK","result":"PASS"}
+{"route":"/models/signature","control":"filter state 3 BHK","result":"OBSERVED","pressed":"true","body":"P\nP\nr\nr\no\no\nj\nj\ne\ne\nc\nc\nt\nt\ns\ns\nM\nM\no\no\nd\nd\ne\ne\nl\nl\ns\ns\nH\nH\no\no\ns\ns\np\np\ni\ni\nt\nt\na\na\nl\nl\ni\ni\nt\nt\ny\ny\nP\nP\nr\nr\no\n"}
+{"route":"/models/signature","control":"filter 3 BHK","result":"PASS"}
+{"route":"/models/signature","control":"filter state All","result":"OBSERVED","pressed":"true","body":"P\nP\nr\nr\no\no\nj\nj\ne\ne\nc\nc\nt\nt\ns\ns\nM\nM\no\no\nd\nd\ne\ne\nl\nl\ns\ns\nH\nH\no\no\ns\ns\np\np\ni\ni\nt\nt\na\na\nl\nl\ni\ni\nt\nt\ny\ny\nP\nP\nr\nr\no\n"}
+{"route":"/models/signature","control":"filter All","result":"PASS"}
+{"route":"/models/signature","control":"model state Kray","result":"OBSERVED","heading":"KRAY","url":"http://127.0.0.1:3134/models/signature"}
+{"route":"/models/signature","control":"model Kray","result":"PASS"}
+{"route":"/models/signature","control":"model state Gaze","result":"OBSERVED","heading":"GAZE","url":"http://127.0.0.1:3134/models/signature"}
+{"route":"/models/signature","control":"model Gaze","result":"PASS"}
+{"route":"/models/signature","control":"model state Tengo","result":"OBSERVED","heading":"TENGO","url":"http://127.0.0.1:3134/models/signature"}
+{"route":"/models/signature","control":"model Tengo","result":"PASS"}
+{"route":"/models/signature","control":"model state Trib","result":"OBSERVED","heading":"TRIB","url":"http://127.0.0.1:3134/models/signature"}
+{"route":"/models/signature","control":"model Trib","result":"PASS"}
+{"route":"/models/signature","control":"model state Octapod","result":"OBSERVED","heading":"OCTAPOD","url":"http://127.0.0.1:3134/models/signature"}
+{"route":"/models/signature","control":"model Octapod","result":"PASS"}
+{"route":"/models/signature","control":"model state Forza","result":"OBSERVED","heading":"FORZA","url":"http://127.0.0.1:3134/models/signature"}
+{"route":"/models/signature","control":"model Forza","result":"PASS"}
+{"route":"/models/signature","control":"details state","result":"OBSERVED","url":"http://127.0.0.1:3134/models/signature","buttons":["Trib","Octapod","⊞Explore details","Close ×","Studio","1 BHK","Exterior","Kitchen","Living","Bedroom","Bath",""]}
+{"route":"/models/signature","control":"Explore details","result":"PASS"}
+{"route":"/models/bespoke","control":"Next step: BRIEF state","result":"OBSERVED","hash":"","scroll":6600}
+{"route":"/models/bespoke","control":"Next step: BRIEF","result":"PASS"}
+{"route":"/models/bespoke","control":"Next step: FORM state","result":"OBSERVED","hash":"","scroll":7498}
+{"route":"/models/bespoke","control":"Next step: FORM","result":"PASS"}
+{"route":"/models/bespoke","control":"Next step: ATMOSPHERE state","result":"OBSERVED","hash":"","scroll":9164}
+{"route":"/models/bespoke","control":"Next step: ATMOSPHERE","result":"PASS"}
+{"route":"/models/bespoke","control":"Next step: The result state","result":"OBSERVED","hash":"","scroll":10038}
+{"route":"/models/bespoke","control":"Next step: The result","result":"PASS"}
+{"route":"/hospitality","control":"gallery state","result":"OBSERVED","dialogs":1,"buttons":["Forrest","Layana Farms","Miraya","Project Thiru","Nova Valley","Close","","",""]}
+{"route":"/hospitality","control":"gallery photo open","result":"PASS"}
+{"route":"/journal","control":"first article click","result":"PASS"}
+{"route":"/enquiry","control":"tab state Hospitality & estates","result":"OBSERVED","selected":"true","forms":2}
+{"route":"/enquiry","control":"tab Hospitality & estates","result":"PASS"}
+{"route":"/enquiry","control":"tab state Press & other","result":"OBSERVED","selected":"true","forms":3}
+{"route":"/enquiry","control":"tab Press & other","result":"PASS"}
+{"route":"/enquiry","control":"tab state A home of my own","result":"OBSERVED","selected":"true","forms":3}
+{"route":"/enquiry","control":"tab A home of my own","result":"PASS"}
+{"route":"/enquiry","control":"submit state","result":"OBSERVED","url":"http://127.0.0.1:3134/enquiry","alerts":[""],"valid":true}
+{"route":"/enquiry","control":"empty submit","result":"PASS"}
+{"route":"/models/signature/tengo/configure","control":"swatch state","result":"OBSERVED","pressed":"true"}
+{"route":"/models/signature/tengo/configure","control":"material swatch","result":"PASS"}
+{"route":"/models/signature/tengo/configure","control":"step state","result":"OBSERVED","visible":"les\nShingles\nRustic Canopy\nThatched Roof\nEbony Timber\nThermowood\nPearlwood\nThermowood\nSurface 2 of 5\nNext: Flooring →\n\nMaterial previews are indicative. Natural grain, colour and scale may vary from the final physical finish.\n\n✓ Saved on this browser"}
+{"route":"/models/signature/tengo/configure","control":"next Roof","result":"PASS"}
+{"route":"/models/signature/tengo/configure","control":"review","result":"FAIL","error":"locator.click: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Review your selection/ })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"Studio-module_"}
+{"route":"all","control":"page errors","result":"OBSERVED","count":0,"sample":[]}

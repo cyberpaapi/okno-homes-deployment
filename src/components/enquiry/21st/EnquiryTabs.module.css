@@ -1,0 +1,68 @@
+.tabs {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  padding: 3px;
+  border: 1px solid rgba(33, 31, 27, 0.18);
+  background: rgba(33, 31, 27, 0.035);
+}
+
+.selectedIndicator,
+.hoverIndicator {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.selectedIndicator {
+  background: #24231f;
+}
+
+.hoverIndicator {
+  background: rgba(33, 31, 27, 0.07);
+}
+
+.tab {
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #6d6960;
+  cursor: pointer;
+  font: 500 12px/1.2 "Enquiry Geist", "Geist OKNO", Arial, sans-serif;
+  letter-spacing: -0.01em;
+  transition: color 180ms ease;
+}
+
+.tab[aria-selected="true"] {
+  color: #f4f0e8;
+}
+
+.tab:focus-visible {
+  box-shadow: inset 0 0 0 2px #a68348;
+}
+
+.tab span {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 520px) {
+  .tab {
+    min-height: 46px;
+    padding: 0 8px;
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab {
+    transition: none;
+  }
+}

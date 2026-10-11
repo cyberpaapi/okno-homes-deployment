@@ -1,0 +1,5 @@
+import ArticleBlock from "@/components/ui/article-5";
+
+export default function ArticleBlockDemo() {
+  return <ArticleBlock />;
+}

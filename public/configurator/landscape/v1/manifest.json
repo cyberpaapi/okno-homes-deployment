@@ -1,0 +1,37 @@
+[
+  {
+    "name": "fir_tree_01_near",
+    "source": "https://polyhaven.com/a/fir_tree_01",
+    "license": "CC0",
+    "sourceTriangles": 2300624,
+    "browserTriangles": 179330
+  },
+  {
+    "name": "fir_tree_01",
+    "source": "https://polyhaven.com/a/fir_tree_01",
+    "license": "CC0",
+    "sourceTriangles": 2300624,
+    "browserTriangles": 34487
+  },
+  {
+    "name": "rock_moss_set_01",
+    "source": "https://polyhaven.com/a/rock_moss_set_01",
+    "license": "CC0",
+    "sourceTriangles": 63127,
+    "browserTriangles": 44178
+  },
+  {
+    "name": "fern_02",
+    "source": "https://polyhaven.com/a/fern_02",
+    "license": "CC0",
+    "sourceTriangles": 6232,
+    "browserTriangles": 4360
+  },
+  {
+    "name": "grass_medium_01",
+    "source": "https://polyhaven.com/a/grass_medium_01",
+    "license": "CC0",
+    "sourceTriangles": 24730,
+    "browserTriangles": 8660
+  }
+]

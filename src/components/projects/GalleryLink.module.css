@@ -1,0 +1,2 @@
+.transition { position:fixed;z-index:9000;overflow:hidden;background:#f4f3ee;pointer-events:auto; }
+.transition img { object-fit:cover; }

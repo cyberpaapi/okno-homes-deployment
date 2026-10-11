@@ -1,0 +1,32 @@
+.cursor {
+  position: fixed;
+  z-index: 10001;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  background: #f4f0e9;
+  mix-blend-mode: exclusion;
+  will-change: transform;
+  transition: opacity .16s ease, background-color .2s ease, border-color .2s ease;
+}
+.cursor[data-mode="interactive"] {
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid #f4f0e9;
+  mix-blend-mode: difference;
+}
+:global(html[data-landing-cursor="true"]):has(.cursor),
+:global(html[data-landing-cursor="true"]):has(.cursor) :global(body),
+:global(html[data-landing-cursor="true"]):has(.cursor) :global(body *) {
+  cursor: none !important;
+}
+@media (pointer: coarse), (prefers-reduced-motion: reduce), (hover: none) {
+  .cursor { display: none; }
+  :global(html[data-landing-cursor="true"]):has(.cursor),
+  :global(html[data-landing-cursor="true"]):has(.cursor) :global(body),
+  :global(html[data-landing-cursor="true"]):has(.cursor) :global(body *) { cursor: revert !important; }
+}

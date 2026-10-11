@@ -1,0 +1,47 @@
+{
+  "source": "Archived Onko-Homes-models customer implementation, recovered 2026-09-27",
+  "files": {
+    "src/components/configurator/materialProjection.ts": "c80d8c87c0c6625cde0ccd227c943da4fb88fa23e24e006c687d3fc7e9ef93e1",
+    "src/components/configurator/studio/CustomerStudio.tsx": "3113bf6deddd34ca3eccd2a92d3ac550171db2651f733ec7b8893a76ffa9a12e",
+    "src/components/configurator/studio/CustomerUnavailable.tsx": "1c0e185f538f48319c740c4ee8e6ce30fa685b429b6ce57c463c0a45d0d8a65c",
+    "src/components/configurator/studio/StudioViewer.tsx": "8bb64480fdf19d1186e41d256b9582cf0e1a4c4065ca65a0751a795608f89f53",
+    "src/components/configurator/studio/StudioViewer.test.tsx": "9734a0bfa2fbe8663dcf079bffb885cf3639a8fe86d8ca1e729f324c2e1f01a6",
+    "src/components/configurator/studio/ApprovedMaterials.tsx": "eff5a94eefbec7c64e40a93068318655e294e39bb058e91b8afdd32eb5f0a792",
+    "src/components/configurator/studio/ApprovedMaterials.test.tsx": "c4488a13385a2939f26e55ce82e7211e5e4e3624d952ec53e3399adddfd8859c",
+    "src/components/configurator/studio/MaterialDetail.tsx": "4c6bbda70f471b621da16c29174103ac86bb4da7f1585d152b5cdbfe0b5f08b8",
+    "src/components/configurator/studio/Studio.module.css": "b6604029a37d6db785ab951a8e3c36d3b2762b75c1228184ecfa4d5b15cd2da6",
+    "src/components/configurator/studio/selection.ts": "9bbf96580856cbdfd08fcdc0e0d78587d6420b99bc6e8e72b35adeac760cdfdc",
+    "src/components/configurator/studio/selection.test.ts": "ab4834e78aab3304ab2d398a17e21f2117b14faf00b25969abc328b68cc8e25e",
+    "src/components/configurator/studio/studioScene.ts": "6e2db3343a7f9976f78ae7b0a667845526405e41dc4eb9e480677f237a8a5a22",
+    "src/components/configurator/studio/customerSetting.ts": "388096d08fc651b74125abd08120f5223c2cb6d635ad6510b98a618281e97f05",
+    "src/components/configurator/studio/finishRendering.ts": "5740562d2860484045c1909992c8f4803b49c40e2b204349985010611a6981c9",
+    "src/components/configurator/studio/finishRendering.test.ts": "346a7084922395793a8ee467bede39fbcfa6ad29d0c464076ff9a8742251a7c9",
+    "src/components/configurator/studio/frameBounds.ts": "d4bd155625fcca849b40f7c486c8900a41df8dc7644b1e5e9af3bda5e7226826",
+    "src/components/configurator/studio/frameBounds.test.ts": "c3bd0e6d6067771174ae2b197fa1fa60a9b44a6fa4b5caa37080ffad664549b9",
+    "src/components/configurator/studio/woodlandLayout.ts": "38384fd72ef08f605862004d6bc0bca06c7fe34cf39e466b5a020c90892be466",
+    "src/components/configurator/studio/woodlandLayout.test.ts": "06b6dede2f76917f87c20150c63983ba9765b513830ac2e29a35d81ff970fa55",
+    "src/components/configurator/studio/woodlandScene.ts": "99ee399c971f22f6a102ef4cd07b18050e81e526fd6b3dc0d19e98cfaf4e181c",
+    "src/data/configurator/materials.ts": "9c9968c10aea92ccb3cf5ef066372b43ce8b9743b4c4a3b4dc69a2a450e0c147",
+    "src/data/configurator/types.ts": "f470b077c76faaab9a46ecbe4b4de19ed56beea340aa709bc30391b3160a879a",
+    "src/data/configurator/index.ts": "6b7ac708fb5aa6699889aacf2a767fc936f583e1bfdac312ef288f06afd6a360",
+    "src/data/configurator/studio/assets.json": "8a75d73d6de433a1480e8697cb7bc8587bcd9aae273ebc3f6e464c38439f82d3",
+    "src/data/configurator/studio/catalogue.ts": "bd18c5ffd8f6d3112f2a9a62d91b0651bbe7c407bd5fd3325465af1a99f75792",
+    "src/data/configurator/studio/finishes.ts": "9b698d4f5c51084a1fdc7c418c711182a8604eab9faf24bf5f50c9a79e05b31c",
+    "src/data/configurator/studio/customerAssets.json": "1a6e77424c3993205075ae08d6fbc281cee052edfdee08b1d399628764fe87d8",
+    "src/data/configurator/studio/surfaceMappings.json": "d7ac89e22c018d40f08b4366bcb6e48ea57371b8e705c90f5a135b0af018d3a5",
+    "src/data/configurator/studio/pbrLuminance.json": "4a648b44571ed11daac1f11115b63c498fedbe3edfe2c9362a56921c2f7b923e",
+    "src/data/configurator/studio/detailSwatches.json": "aa749ee0edf27637d0cc4d49a5362d3886941823f34d5965b5eabe1e19aedd47"
+  },
+  "published": {
+    "tengo": {
+      "revision": 1,
+      "sourceHash": "f6cde03d1c7811f3d1c3cfe68ddd70256ba3e44552083a866ee333be7dfe03d9",
+      "variant": "signature"
+    },
+    "kray": {
+      "revision": 4,
+      "sourceHash": "08806590bef001c6f35b15c13ad928591c5add17f17dfaf033bc263e88da1d2f",
+      "variant": "signature"
+    }
+  }
+}

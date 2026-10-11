@@ -1,0 +1,59 @@
+.stage {
+  --timeline-sage: #d4e8b5;
+  --timeline-stone: #f1c57e;
+  --timeline-water: #82ded1;
+  position: relative;
+  width: 100%;
+  height: 200vw;
+  background: transparent;
+  color: #f4f1e9;
+}
+.sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; padding-top: 10vh; }
+.slider { display: flex; align-items: center; gap: 5vw; width: 240vw; height: min(34vw, 68vh); padding: 0 5vw; will-change: transform; }
+.cover { position: relative; flex: 0 0 30vw; height: 88%; overflow: hidden; border-radius: 1vw; }
+.cover img { width: 100%; height: 100%; object-fit: cover; }
+.timeline { position: relative; flex: 0 0 194vw; height: 100%; }
+.axis { position: absolute; left: 0; top: 50%; display: flex; align-items: center; width: 100%; height: 1px; background: rgba(212,232,181,.32); }
+.axis span { display: block; flex: 0 0 98%; height: 3px; background: linear-gradient(90deg, var(--timeline-sage) 28%, var(--timeline-stone) 38%, var(--timeline-stone) 53%, var(--timeline-water) 63%); clip-path: inset(0 100% 0 0); }
+.axis i { display: block; flex: 0 0 .8vw; width: .8vw; height: .8vw; border-radius: 50%; background: var(--timeline-sage); }
+.axis i:last-child { background: var(--timeline-water); }
+.timelineTitle { position: absolute; left: 0; top: 5%; width: 29vw; }
+.timelineTitle small { display: block; margin-bottom: 1vw; color: rgba(244,241,233,.62); font-size: .72vw; font-weight: 650; letter-spacing: .2em; text-transform: uppercase; }
+.timelineTitle h2 { max-width: 9ch; max-height: 23vh; overflow-y: auto; overflow-wrap: anywhere; margin: 0; font-size: 3.2vw; font-weight: 540; letter-spacing: -.07em; line-height: .92; }
+.period { position: absolute; left: 0; top: 55%; margin: 0; color: rgba(244,241,233,.62); font-size: 1.25vw; }
+.step { --left: calc(29vw + var(--step-index) * 23vw); --milestone-accent: var(--timeline-sage); --photo-height: clamp(59px, 5.3vw, 92px); --photo-offset: clamp(8px, .8vw, 14px); position: absolute; left: var(--left); top: 0; width: 20vw; height: 50%; perspective: 650px; }
+.step[data-phase="make"] { --milestone-accent: var(--timeline-stone); }
+.step[data-phase="open"] { --milestone-accent: var(--timeline-water); }
+.step[data-side="bottom"] { top: 50%; }
+.dot { position: absolute; left: 0; width: 1vw; height: 1vw; border-radius: 50%; background: var(--milestone-accent); transform: translate(-50%, -50%); }
+.step[data-side="top"] .dot { bottom: 0; transform: translate(-50%, 50%); }
+.step[data-side="bottom"] .dot { top: 0; }
+.stem { position: absolute; left: 0; width: 1px; height: 92%; background: var(--milestone-accent); opacity: .8; }
+.step[data-side="top"] .stem { bottom: 0; }
+.step[data-side="bottom"] .stem { top: 0; }
+.photoLink { position: absolute; left: 0; width: 2.4vw; height: 1px; background: var(--milestone-accent); }
+.step[data-side="top"] .photoLink { bottom: calc(var(--photo-offset) + var(--photo-height) / 2); }
+.step[data-side="bottom"] .photoLink { top: calc(var(--photo-offset) + var(--photo-height) / 2); }
+.photo {
+  position: absolute;
+  z-index: 1;
+  left: 2.4vw;
+  width: calc(var(--photo-height) * 1.65);
+  height: var(--photo-height);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--milestone-accent);
+  border-radius: 8px;
+  background: #193125;
+  backface-visibility: hidden;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, .23);
+}
+.photo img { object-fit: cover; }
+.step[data-side="top"] .photo { bottom: var(--photo-offset); }
+.step[data-side="bottom"] .photo { top: var(--photo-offset); }
+.stepCopy { position: absolute; left: 2.4vw; width: 18vw; max-height: calc(100% - var(--photo-height) - 2 * var(--photo-offset)); overflow-y: auto; overflow-wrap: anywhere; }
+.step[data-side="top"] .stepCopy { top: 0; }
+.step[data-side="bottom"] .stepCopy { bottom: 0; }
+.stepCopy b { display: block; margin-bottom: .8vw; color: var(--milestone-accent); font-size: .82vw; letter-spacing: .18em; }
+.stepCopy h3 { margin: 0; color: var(--milestone-accent); font-size: 2.2vw; font-weight: 520; letter-spacing: -.06em; line-height: .92; }
+.stepCopy p { max-width: 18vw; margin: 1vw 0 0; color: rgba(244,241,233,.62); font-size: 1.02vw; line-height: 1.28; }

@@ -1,0 +1,11 @@
+.logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 467 / 156;
+  object-fit: contain;
+}
+
+.logo[data-tone="dark"] {
+  filter: brightness(0) saturate(100%);
+}
