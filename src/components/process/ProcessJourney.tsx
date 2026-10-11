@@ -15,7 +15,6 @@ import ProcessDeliveryTimeline, {
   type ProcessTimelineItem,
 } from "./21st/ProcessDeliveryTimeline";
 import ProcessDetailTimeline from "./ProcessDetailTimeline";
-import ProcessClosing from "./ProcessClosing";
 import ProcessNavigation from "./21st/ProcessNavigation";
 import ProcessTextReveal from "./21st/ProcessTextReveal";
 import styles from "./Process.module.css";
@@ -298,7 +297,6 @@ export default function ProcessJourney() {
       <main className={styles.pageContent} data-route="process">
         {reducedMotion ? <><StaticProcessHero /><ReducedProcess /></> : <AnimatedProcess onFilmCovering={setFilmCovering} />}
         <ProcessDetailTimeline />
-        <ProcessClosing />
       </main>
     </div>
   );

@@ -1,6 +1,8 @@
 # Final Showcase documentation map
 
-Current Process correction: [connected Days 01–90 timeline and no arbitrary counters](process-days-timeline-2026-10-11.md).
+Current Process finish: [remove the rejected white closing and increase both film directions](process-final-pacing-2026-10-11.md).
+
+Retained Process correction: [connected Days 01–90 timeline and no arbitrary counters](process-days-timeline-2026-10-11.md).
 
 Previous Process direction (the compact phase counter is superseded): [reverse cadence, phase progress and page ending](process-ending-2026-10-11.md), retaining the [fast-scroll boundaries](process-scroll-boundaries-2026-10-11.md) and accepted continuous film motion.
 

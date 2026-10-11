@@ -18,8 +18,8 @@ describe('replacement Process films and lifecycle', () => {
     Object.defineProperties(video, { readyState: { value: 4 }, duration: { value: 25.633333 } });
     fireEvent.loadedData(video);
     await act(async () => { await vi.advanceTimersByTimeAsync(1000); });
-    expect(video.currentTime).toBeGreaterThan(2);
-    expect(video.currentTime).toBeLessThan(3.2);
+    expect(video.currentTime).toBeGreaterThan(3.2);
+    expect(video.currentTime).toBeLessThan(4);
     expect(onReady).toHaveBeenLastCalledWith(true);
     fireEvent.seeked(video);
     expect(onProgress).toHaveBeenLastCalledWith(video.currentTime / video.duration);

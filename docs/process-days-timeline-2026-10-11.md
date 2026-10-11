@@ -1,3 +1,5 @@
+> The connected actual-day timeline remains current. The subsequently rejected white closing section is removed and both film directions are faster in [the final pacing correction](process-final-pacing-2026-10-11.md).
+
 # Process day timeline correction — 11 October 2026
 
 ## Current decision

@@ -1,4 +1,4 @@
-> The compact Stepper indicator and its phase counters in this historical release were rejected by the client. They are superseded by [the connected actual-day timeline](process-days-timeline-2026-10-11.md). Playback and closing-section decisions remain current.
+> The compact Stepper indicator and its phase counters in this historical release were rejected by the client. They are superseded by [the connected actual-day timeline](process-days-timeline-2026-10-11.md). Its closing section was subsequently rejected and removed; both film directions are now faster. See [the final pacing correction](process-final-pacing-2026-10-11.md).
 
 # Process reverse cadence, phase progress and page ending
 

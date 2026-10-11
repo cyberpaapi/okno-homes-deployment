@@ -54,6 +54,8 @@ describe("ProcessJourney", () => {
     expect(within(screen.getByRole("list", { name: "Build day timeline" })).queryByRole("button")).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Visualized completed gabled modular home in its coastal landscape" })).toBeInTheDocument();
     expect(screen.queryByText(/packing and transport/i)).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Before we begin." })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Let’s talk about your place." })).not.toBeInTheDocument();
 
   });
 

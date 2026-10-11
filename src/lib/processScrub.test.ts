@@ -18,7 +18,7 @@ describe('smooth Process scroll playhead', () => {
       const prior = head.time;
       const next = head.step(10, 1 / 60);
       expect(next).toBeGreaterThanOrEqual(prior);
-      expect(next - prior).toBeLessThanOrEqual(3.2 / 60);
+      expect(next - prior).toBeLessThanOrEqual(4 / 60);
       expect(next).toBeLessThanOrEqual(10);
     }
     expect(head.time).toBe(10);
@@ -34,7 +34,7 @@ describe('smooth Process scroll playhead', () => {
     for (let index = 0; index < 120; index++) head.step(0, 1 / 60);
     expect(head.time).toBe(0);
   });
-  it('backtracks faster while retaining the forward speed and smooth frame bounds', () => {
+  it('backtracks faster while retaining smooth frame bounds at the increased cadence', () => {
     const forward = new ProcessPlayhead();
     const reverse = new ProcessPlayhead();
     reverse.reset(25.6);
@@ -43,7 +43,7 @@ describe('smooth Process scroll playhead', () => {
       forward.step(25.6, 1 / 60);
       reverse.step(0, 1 / 60);
       expect(reverse.time).toBeLessThanOrEqual(prior);
-      expect(prior - reverse.time).toBeLessThanOrEqual(4 / 60);
+      expect(prior - reverse.time).toBeLessThanOrEqual(5 / 60);
       expect(reverse.time).toBeGreaterThanOrEqual(0);
     }
     expect((25.6 - reverse.time) / forward.time).toBeCloseTo(1.25, 2);

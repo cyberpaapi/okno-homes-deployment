@@ -1,0 +1,150 @@
+{
+  "firstLargeForward": {
+    "chapter": "land",
+    "closing": 0,
+    "detailEnd": 6701.281433105469,
+    "detailProgress": "0",
+    "filmEnd": 2736,
+    "filmProgress": "0.042912873862158654",
+    "footer": 1,
+    "frame": "1.1000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 576.6666870117188,
+    "source": [
+      "1920",
+      "1080"
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "forwardFilm": {
+    "chapter": "land",
+    "closing": 0,
+    "detailEnd": 6701.28125,
+    "detailProgress": "0",
+    "filmEnd": 2736,
+    "filmProgress": "0.11833550065019506",
+    "footer": 1,
+    "frame": "3.0333",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 690,
+    "source": [
+      "1920",
+      "1080"
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "reverseFilm": {
+    "chapter": "land",
+    "closing": 0,
+    "detailEnd": 6701.281311035156,
+    "detailProgress": "0",
+    "filmEnd": 2736,
+    "filmProgress": "0.07802340702210664",
+    "footer": 1,
+    "frame": "2.0000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 551.3333129882812,
+    "source": [
+      "1920",
+      "1080"
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "desktopEnding": {
+    "chapter": "handover",
+    "closing": 0,
+    "detailEnd": 6701.28125,
+    "detailProgress": "1",
+    "filmEnd": 2736,
+    "filmProgress": "0.9986996098829649",
+    "footer": 1,
+    "frame": "25.6000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 7131.33349609375,
+    "source": [
+      "1920",
+      "1080"
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "mobileForward": {
+    "chapter": "handover",
+    "closing": 0,
+    "detailEnd": 7757.02099609375,
+    "detailProgress": "0.0023289923831604853",
+    "filmEnd": 3207,
+    "filmProgress": "0.9973992197659298",
+    "footer": 1,
+    "frame": "25.5667",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 3014.666748046875,
+    "source": [
+      "1280",
+      "720"
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "mobileReverse": {
+    "chapter": "handover",
+    "closing": 0,
+    "detailEnd": 7757.020751953125,
+    "detailProgress": "0",
+    "filmEnd": 3207,
+    "filmProgress": "0.9479843953185956",
+    "footer": 1,
+    "frame": "24.3000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 2845.333251953125,
+    "source": [
+      "1280",
+      "720"
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "mobileEnding": {
+    "chapter": "handover",
+    "closing": 0,
+    "detailEnd": 7757.020751953125,
+    "detailProgress": "1",
+    "filmEnd": 3207,
+    "filmProgress": "0.9986996098829649",
+    "footer": 1,
+    "frame": "25.6000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 8258,
+    "source": [
+      "1280",
+      "720"
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "consoleErrors": []
+}
