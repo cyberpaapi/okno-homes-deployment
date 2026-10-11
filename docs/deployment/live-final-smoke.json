@@ -1,0 +1,87 @@
+{
+  "base": "https://okno-homes-deployment.vercel.app",
+  "sourceCommit": "e8347acd4c8675d29c95caf4a1d6140a88ae4087",
+  "deployment": "dpl_FEwsSa5fnzqPhBtKYMUDC5B1JoDq",
+  "at": "2026-10-11T00:50:54.658Z",
+  "checks": [
+    {
+      "route": "/",
+      "status": 200
+    },
+    {
+      "route": "/about",
+      "status": 200
+    },
+    {
+      "route": "/models",
+      "status": 200
+    },
+    {
+      "route": "/models/signature",
+      "status": 200
+    },
+    {
+      "route": "/models/bespoke",
+      "status": 200
+    },
+    {
+      "route": "/models/signature/tengo/configure",
+      "status": 200
+    },
+    {
+      "route": "/models/signature/kray/configure",
+      "status": 200
+    },
+    {
+      "route": "/projects",
+      "status": 200
+    },
+    {
+      "route": "/journal",
+      "status": 200
+    },
+    {
+      "route": "/hospitality",
+      "status": 200
+    },
+    {
+      "route": "/process",
+      "status": 200
+    },
+    {
+      "route": "/sustainability",
+      "status": 200
+    },
+    {
+      "route": "/enquiry",
+      "status": 200
+    },
+    {
+      "route": "/admin",
+      "status": 200
+    },
+    {
+      "route": "/api/site-content",
+      "status": 200
+    },
+    {
+      "route": "/api/site-status",
+      "status": 200
+    }
+  ],
+  "content": {
+    "revision": 13,
+    "draftRevision": 58,
+    "publishedFields": 23,
+    "drafts": 0
+  },
+  "site": {
+    "site": "okno-final-showcase",
+    "version": "2026-10-05",
+    "mode": "production",
+    "configurators": [
+      "tengo",
+      "kray"
+    ]
+  }
+}

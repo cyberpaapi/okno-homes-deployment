@@ -1,0 +1,23 @@
+{
+  "base": "https://okno-homes-deployment.vercel.app",
+  "at": "2026-10-11T00:49:59.192Z",
+  "checks": [
+    "Admin rejects unauthenticated access",
+    "Admin rejects an incorrect key",
+    "Owner key connects the deployed editor API",
+    "Draft save persists in cloud storage",
+    "Saved draft is isolated from public content",
+    "Stale draft revision is rejected",
+    "Publish succeeds on the deployed CMS",
+    "Published cloud content is visible through the public API",
+    "Original published fields and collections restored exactly",
+    "Direct upload authorization rejects unauthenticated requests",
+    "Owner key obtains a scoped direct-upload token",
+    "Scoped client token uploads the original directly to private Blob",
+    "Cloud FFmpeg preparation returns scroll film, detail film and poster",
+    "Prepared cloud film serves byte ranges",
+    "Cloud poster is available",
+    "Original upload remains byte-for-byte recoverable",
+    "Media QA never stages or publishes a replacement"
+  ]
+}

@@ -11,6 +11,10 @@
 
 `okno-homes-demo` and `krnlv3` are separate existing projects. Never change their repository link, settings, secrets, domains or storage as part of this release.
 
+## Live release
+
+Website: https://okno-homes-deployment.vercel.app; editor: https://okno-homes-deployment.vercel.app/admin. Verified runtime source is e8347acd4c8675d29c95caf4a1d6140a88ae4087, deployment dpl_FEwsSa5fnzqPhBtKYMUDC5B1JoDq. Documentation commits can follow without replacing this runtime.
+
 ## Deployment
 
 1. Read the plan, working version and admin ledger. Verify local Git state and current project with `vercel project inspect --non-interactive` from the repository root.

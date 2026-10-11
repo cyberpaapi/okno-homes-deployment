@@ -1,6 +1,6 @@
 # OKNO private repository and Vercel release plan
 
-Date: 11 October 2026 (Asia/Kolkata). Status: implementation in progress.
+Date: 11 October 2026 (Asia/Kolkata). Status: production release verified.
 
 ## Authorized outcome
 
@@ -17,7 +17,7 @@ Create a new private GitHub repository containing the current Final Showcase web
 | D5 | Verify source | Tests, lint, typecheck and clean production build; secret/asset audit | Complete |
 | D6 | Create and push private repository | Remote visibility and pushed commit verified | Complete |
 | D7 | Create isolated Vercel project and configure storage/secrets | Exact owner and project confirmed; other projects unchanged | Complete |
-| D8 | Deploy and smoke-test | Public pages and `/admin`; unauthorized writes refused; authenticated draft/publish and media persist; evidence recorded | Pending |
+| D8 | Deploy and smoke-test | Public pages and `/admin`; unauthorized writes refused; authenticated draft/publish and media persist; evidence recorded | Complete |
 
 Subtasks are sequential in this chat; no additional agents or unrelated project changes are required.
 

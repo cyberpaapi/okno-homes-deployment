@@ -48,3 +48,11 @@
 | ETag correction validation | Private QA object read with identity encoding yielded a strong validator; current conditional write passed and stale retry failed | New weak-validator regression test added; final source checks running |
 
 | Corrected source checks | 78 files / 301 tests passed after the ETag correction; scoped lint and TypeScript passed | Cloud read now requests identity encoding and rejects weak validators; incidental cloud connection copy corrected |
+
+| Final runtime | dpl_FEwsSa5fnzqPhBtKYMUDC5B1JoDq READY; source e8347acd4c8675d29c95caf4a1d6140a88ae4087; production alias https://okno-homes-deployment.vercel.app | Exact source and bom1 functions verified; cloud build 3m 2s plus 30s post-build |
+| Final cloud build | Next compile and TypeScript passed; all 30 trace gates passed, largest 177.4 MiB | No local secrets/state/Git in runtime bundles; required binaries/models retained |
+| CMS round trip | All 17 live API checks passed: unauthorized/wrong key, owner access, save, draft isolation, stale 409, publish, public propagation, exact restoration and media workflow | live-api-verification.json; original published fields/collections restored, no drafts |
+| Final state | Cloud published revision 13 / draft revision 58, 23 published fields; local remains revision 11 / draft revision 54 | Verification advances cloud revisions/history for audit; no verification text remains published |
+| Final public routes | Sixteen page/API HEADs all 200; production site-status remains 2026-10-05; zero drafts | live-final-smoke.json; accepted working version preserved |
+| Final browser | Fresh /admin build displayed Editor connected. with owner key; Disconnect cleared access; home and admin browser smokes passed | No exhaustive control/device or large-film acceptance inferred |
+| Evidence follow-up | Documentation-only commit records verification; ignored-build command must exit 0 and leave the tested runtime alias in place | Will verify Git integration after push before handoff |

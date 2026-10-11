@@ -15,6 +15,15 @@ The single-owner key generator and management guide are now implemented at [`dep
 
 Read [the deployment plan](deployment/implementation-plan.md) and [release ledger](deployment/release-ledger.md) for subtasks, decisions and verified results. Local JSON/filesystem storage, in-memory video preparation and demo credentials must not be described as cloud-ready. The owner key needs working cryptographic generation and a documented server-only configuration, handoff, rotation and revocation procedure. Per-person keys/accounts are an alternative, not an existing feature.
 
+## Production acceptance ledger — 11 October 2026
+
+- Private release repository: [CodeAcc2007-dev/okno-homes-deployment](https://github.com/CodeAcc2007-dev/okno-homes-deployment). Website [production URL](https://okno-homes-deployment.vercel.app); editor [typed /admin URL](https://okno-homes-deployment.vercel.app/admin). Existing demo and KRNLv3 projects were untouched.
+- One owner key was generated and configured as a sensitive Production secret. Generation/rotation/file permissions were verified; key sign-in and Disconnect passed in the live browser. No public admin link, noindex metadata, unauthorized 401 and draft privacy were verified. No key is committed or printed.
+- Source verification: 78 Vitest files / 301 tests passed, plus 12 focused checks after the connection-copy correction; TypeScript and lint passed. The final Vercel build passed the trace gate (30 traces, largest 177.4 MiB).
+- All 17 live API checks passed, including cloud draft save, stale revision 409, publish/public propagation, exact restoration, scoped direct upload, FFmpeg derivatives/poster, 206 ranges and original byte recovery. An initial weak-ETag failure was found and corrected before handoff.
+- Current cloud publication is revision 13 / draft revision 58 with no drafts. Published fields and collections match the release seed's accepted content; verification advances revisions/history. Local CMS remains revision 11 / draft revision 54. QA media is retained but never staged or published.
+- Production identity: source e8347acd4c8675d29c95caf4a1d6140a88ae4087, deployment dpl_FEwsSa5fnzqPhBtKYMUDC5B1JoDq. Decisions and machine-readable evidence are in [the release ledger](deployment/release-ledger.md). This verifies deployment and representative CMS flows; previous partial control/physical-device/long-film acceptance boundaries still apply. Cloud conversion has a 300-second handler limit, with durable originals and explicit failure.
+
 ## Process day-label typography correction — 8 October 2026
 
 The five-slide timeline previously rendered the literal word `Days` in its small caption while putting nearly all edited day-field text in the oversized numeral span. Changing `Days` therefore enlarged the replacement word. The six film-chapter day strings also accepted unstructured text, and the existing published `process.stage-land.days` contains extra digits from prior testing. These are two related render/validation faults, not a reason to discard the user's published CMS snapshot.
