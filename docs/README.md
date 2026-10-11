@@ -2,7 +2,9 @@
 
 Current admin audit and Process footer boundary: [coverage, corrections, local publish/restore and the production storage block](admin-audit-2026-10-11.md).
 
-Current Process finish: [remove the rejected white closing and increase both film directions](process-final-pacing-2026-10-11.md).
+Current Process Handover correction: [shared build periods and a held closed-house endpoint](process-handover-stop-2026-10-11.md).
+
+Previous Process finish: [remove the rejected white closing and increase both film directions](process-final-pacing-2026-10-11.md).
 
 Retained Process correction: [connected Days 01–90 timeline and no arbitrary counters](process-days-timeline-2026-10-11.md).
 

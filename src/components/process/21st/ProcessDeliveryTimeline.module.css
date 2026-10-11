@@ -20,12 +20,14 @@
 .heading h3 { font-size: clamp(14px, 1.25vw, 18px); font-weight: 500; letter-spacing: -.02em; }
 .heading p { margin-top: 7px; color: rgb(225 236 228 / 52%); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
 .track { position: relative; min-width: 0; }
+.dayRanges { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); padding-bottom: 8px; color: #a7bbb0; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dayRanges > span { min-width: 0; }
 
 .trackBase,
 .trackActive {
   position: absolute;
   z-index: 0;
-  top: 26px;
+  top: 46px;
   right: 26px;
   left: 26px;
   height: 1px;
@@ -39,7 +41,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  height: 100%;
+  height: auto;
   margin: 0;
   padding: 0;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -106,7 +108,7 @@
 @media (max-width: 1100px) {
   .timeline { padding: 14px 18px 16px; grid-template-columns: 116px minmax(0, 1fr); gap: 14px; }
   .heading h3 { font-size: 13px; }
-  .trackBase, .trackActive { top: 22px; right: 20px; left: 20px; }
+  .trackBase, .trackActive { top: 42px; right: 20px; left: 20px; }
   .milestone { display: flex; align-items: center; flex-direction: column; padding-right: 0; gap: 5px; text-align: center; }
   .thumbnail { width: 44px; }
   .milestoneCopy em { display: block; font-size: 9px; }
@@ -119,6 +121,7 @@
   .heading h3 { font-size: 12px; }
   .heading p { margin-top: 0; font-size: 7px; }
   .track { min-height: 55px; }
+  .dayRanges { padding-top: 14px; padding-bottom: 5px; font-size: 8px; letter-spacing: 0; }
   .trackBase, .trackActive { top: 6px; right: 0; left: 0; }
   .thumbnail { display: none; }
   .milestone { position: relative; display: block; min-height: 54px; opacity: .65; text-align: left; }

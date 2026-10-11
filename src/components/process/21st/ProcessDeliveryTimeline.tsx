@@ -21,7 +21,17 @@ function TimelineItems({
   items: readonly ProcessTimelineItem[];
   activeIndex?: number;
 }) {
+  const ranges = items.reduce<{ days: string; count: number }[]>((groups, item) => {
+    const previous = groups.at(-1);
+    if (previous?.days === item.days) previous.count++;
+    else groups.push({ days: item.days, count: 1 });
+    return groups;
+  }, []);
   return (
+    <>
+    <div className={styles.dayRanges}>
+      {ranges.map((range, index) => <span key={index} style={{ gridColumn: `span ${range.count}` }}>{range.days}</span>)}
+    </div>
     <ol>
       {items.map((item, index) => {
         const active = activeIndex === index;
@@ -30,13 +40,13 @@ function TimelineItems({
             className={styles.milestone}
             data-active={active}
             aria-current={active ? "step" : undefined}
+            aria-label={`${item.days} · ${item.label}`}
             key={item.id}
           >
             <span className={styles.thumbnail} aria-hidden="true">
               <Image src={item.poster} alt="" fill sizes="72px" />
             </span>
             <span className={styles.milestoneCopy}>
-              <span>{item.days}</span>
               <em>{item.label}</em>
               <strong>{item.title}</strong>
             </span>
@@ -44,6 +54,7 @@ function TimelineItems({
         );
       })}
     </ol>
+    </>
   );
 }
 

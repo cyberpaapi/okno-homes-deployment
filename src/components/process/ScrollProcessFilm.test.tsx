@@ -22,7 +22,7 @@ describe('replacement Process films and lifecycle', () => {
     expect(video.currentTime).toBeLessThan(4);
     expect(onReady).toHaveBeenLastCalledWith(true);
     fireEvent.seeked(video);
-    expect(onProgress).toHaveBeenLastCalledWith(video.currentTime / video.duration);
+    expect(onProgress).toHaveBeenLastCalledWith(video.currentTime / (video.duration - 1 / 30));
     await act(async () => { progress.set(.16); await vi.advanceTimersByTimeAsync(2000); });
     expect(video.currentTime).toBe(0);
     await act(async () => { progress.set(.9); await vi.advanceTimersByTimeAsync(200); });
@@ -30,6 +30,28 @@ describe('replacement Process films and lifecycle', () => {
     view.unmount();
     await act(async () => { progress.set(1); await vi.advanceTimersByTimeAsync(2000); });
     expect(video.currentTime).toBe(atUnmount);
+  });
+  it('holds the original film on the closed-house frame and never seeks into its outro', async () => {
+    vi.useFakeTimers();
+    vi.stubGlobal('VideoDecoder', undefined);
+    vi.stubGlobal('IntersectionObserver', class { observe() {} disconnect() {} });
+    const progress = motionValue(1);
+    const onProgress = vi.fn();
+    const view = render(<ScrollProcessFilm hq="/process/process-master.hq.mp4" mobile="/process/process-master.scrub.mp4" poster="/process/land-poster.webp" label="Film" className="film" progress={progress} onReady={vi.fn()} onProgress={onProgress} />);
+    await act(async () => { await vi.dynamicImportSettled(); await vi.advanceTimersByTimeAsync(50); });
+    const video = view.container.querySelector('video')!;
+    Object.defineProperties(video, { readyState: { value: 4 }, duration: { value: 25.633333 } });
+    fireEvent.loadedData(video);
+    await act(async () => { await vi.advanceTimersByTimeAsync(10000); });
+    expect(video.currentTime).toBeCloseTo(620 / 30);
+    fireEvent.seeked(video);
+    expect(onProgress).toHaveBeenLastCalledWith(1);
+    await act(async () => { progress.set(2); await vi.advanceTimersByTimeAsync(1000); });
+    expect(video.currentTime).toBeCloseTo(620 / 30);
+    await act(async () => { progress.set(.8); await vi.advanceTimersByTimeAsync(500); });
+    expect(video.currentTime).toBeLessThan(620 / 30);
+    expect(video.currentTime).toBeGreaterThan(18);
+    view.unmount();
   });
   it('prepares the actual ending after a deliberate offscreen jump, then reverses gently', async () => {
     vi.useFakeTimers();
@@ -49,7 +71,7 @@ describe('replacement Process films and lifecycle', () => {
     fireEvent.seeked(video);
     expect(video.currentTime).toBeCloseTo(25.6);
     fireEvent.seeked(video);
-    expect(onProgress).toHaveBeenLastCalledWith(video.currentTime / video.duration);
+    expect(onProgress).toHaveBeenLastCalledWith(video.currentTime / (video.duration - 1 / 30));
     await act(async () => { progress.set(.87); observe([{ isIntersecting: true }]); await vi.advanceTimersByTimeAsync(100); });
     expect(video.currentTime).toBeLessThan(25.6);
     expect(video.currentTime).toBeGreaterThan(25.3);

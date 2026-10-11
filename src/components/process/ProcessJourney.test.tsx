@@ -43,8 +43,11 @@ describe("ProcessJourney", () => {
       expect(within(schedule).getByText(label)).toBeInTheDocument();
     }
     expect(within(schedule).getByText("Days 01–10")).toBeInTheDocument();
-    expect(within(schedule).getAllByText("Days 11–25")).toHaveLength(2);
-    expect(within(schedule).getAllByText("Days 73–90")).toHaveLength(3);
+    expect(within(schedule).getAllByText("Days 11–25")).toHaveLength(1);
+    expect(within(schedule).getAllByText("Days 73–90")).toHaveLength(1);
+    for (const label of ["Assembly", "Enclosure", "Handover"]) {
+      expect(within(schedule).getByRole("listitem", { name: `Days 73–90 · ${label}` })).toBeInTheDocument();
+    }
     expect(screen.getByRole("heading", { name: "From brief to handover." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Factory manufacturing" })).toBeInTheDocument();
     for (const range of ["01–10", "11–25", "26–60", "61–72", "73–90"]) {

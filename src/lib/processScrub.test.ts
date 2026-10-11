@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { PROCESS_END_TIME } from './processChapters';
 import { ProcessPlayhead, processFilmProgress, processStageAt } from './processScrub';
 
 describe('smooth Process scroll playhead', () => {
@@ -57,9 +58,11 @@ describe('smooth Process scroll playhead', () => {
     expect(head.step(25, 0)).toBe(prior);
   });
   it('retains both Days 11–25 stages from original film cues', () => {
-    expect(processStageAt(7.7 / 25.633333)).toBe(1);
-    expect(processStageAt(10.5 / 25.633333)).toBe(2);
+    expect(processStageAt(7.7 / PROCESS_END_TIME)).toBe(1);
+    expect(processStageAt(10.5 / PROCESS_END_TIME)).toBe(2);
     expect(processStageAt(0)).toBe(0);
+    expect(processStageAt(20 / PROCESS_END_TIME)).toBe(4);
+    expect(processStageAt(20.1 / PROCESS_END_TIME)).toBe(5);
     expect(processStageAt(1)).toBe(5);
   });
   it('prepares an offscreen ending without preserving stale forward velocity', () => {
