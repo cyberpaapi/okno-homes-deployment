@@ -1,5 +1,15 @@
 # Accepted Hero V1 window finish — 11 October 2026
 
+## Process-style Hero V1 smoothing — 12 October 2026
+
+The owner requests the Process page's weighted scroll feel on Hero V1. `ForestEntryOption` now follows the same visual spring as `ProcessJourney`: stiffness 160, damping 30, mass .72 and restDelta .0002. Film time and all opening/ending fades use that one progress value. Lenis lerp is shortened from .12 to .18 to avoid adding a long document tail; reduced motion remains direct, and initial restored positions skip spring travel. The Process page itself is unchanged.
+
+The current delivery remains the existing 1920×1080 / 24 fps / 577-frame `forest-entry-scroll-window-smooth.mp4` (47,573,337 bytes). No media generation, re-encoding, Blob upload or CMS write is part of this correction. The accepted source history below remains historical; its larger master URL redirects to the current derivative.
+
+Existing film/component/reload regressions: 4 files / 18 tests pass. Focused lint, production build/TypeScript and all 30 traces pass (largest 179.8 MiB; private files excluded). The fixed 3134 website and 3140 gateway remain running.
+
+Local browser checks at 1280×720 and 390×844 show gradual settling and reversal, the accepted final frame at 24.0000 seconds, no horizontal overflow or captured browser errors, and a playing intro at scroll zero after endpoint reload. Settled Timeline, Forza and Sustainability positions survive reload exactly. Cold large jumps still need decode catch-up: the desktop sample's largest frame wait was 293.9 ms, phone-layout sample 875.6 ms; these observations do not claim universal device smoothness. The shared spring gives weighted progress, not a guarantee of decoder throughput. No media, content-store, credentials, billing or unrelated-project changes accompany this release.
+
 The user accepted the closed-window continuation and requested its integration into the original website. This supersedes the earlier window-opening/exit request and rejected endpoint stills. No further generation or credits were used during integration.
 
 ## Accepted source and merge

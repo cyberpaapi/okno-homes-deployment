@@ -6,6 +6,7 @@ import {
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
+  useSpring,
 } from 'motion/react';
 import { ReactLenis } from 'lenis/react';
 import LandingExperience from '@/components/landing/LandingExperience';
@@ -72,9 +73,16 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
-  // Lenis already eases the physical scroll. A second spring makes the film
-  // trail far behind the actual position, then jump forward once seeking ends.
-  const mediaProgress = scrollYProgress;
+  // Match ProcessJourney's weighted, non-bouncing visual response. The film
+  // and its fades follow one progress value instead of separate animations.
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 160,
+    damping: 30,
+    mass: .72,
+    restDelta: .0002,
+    skipInitialAnimation: true,
+  });
+  const mediaProgress = reducedMotion ? scrollYProgress : smoothProgress;
 
   const finishIntro = () => {
     if (introFinished.current) return;
@@ -227,5 +235,6 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   );
 
   // Smooth Scroll, 21st.dev 2836. Touch and reduced-motion keep native scroll.
-  return reducedMotion ? page : <ReactLenis root options={{ lerp: .12, wheelMultiplier: 1 }}>{page}</ReactLenis>;
+  // A shorter document tail keeps the Process spring responsive on reversal.
+  return reducedMotion ? page : <ReactLenis root options={{ lerp: .18, wheelMultiplier: 1 }}>{page}</ReactLenis>;
 }
