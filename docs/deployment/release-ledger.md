@@ -94,3 +94,14 @@ The unused `okno-homes-demo` cloud project and its six deployments were permanen
 | Source gates | 81 files / 314 tests, lint, isolated production build/type checking, 30 traces largest 179.7 MiB | Passed; cloud traces largest 177.4 MiB |
 | Runtime | `003ee99ff7fe3a07d522f3eda5295a2fee7f5970`, READY `dpl_3vcbYX4PkNBjoKUvtHuYf4XcFHYD`; canonical alias verified | Same private repository and existing project; other projects untouched |
 | Production acceptance | 13 page/API HEADs 200; revision-17 public content exact/private drafts absent; since poll 204, invalid key 401, owner storage 503; five V1 scroll cases | Detailed [V1 ledger](../hero-v1-optimization-2026-10-11.md); production publishing remains explicitly blocked |
+
+## Process chapter playback — 11 October 2026
+
+| Decision / check | Evidence | Outcome |
+| --- | --- | --- |
+| Motion and quality | Native 1× chapter playback replaces per-scroll seeks; original HQ/mobile SHA-256 unchanged | Six separate holds, including Architecture and Design lock at Days 11–25; fresh gesture resumes |
+| Layout and cover | Separate CMS cover, expanding transition, stronger phase/day hierarchy, full-width detail timeline, bounded/paused Silk | Desktop and 390px local/live checks; zero horizontal overflow; other route implementations preserved |
+| Source gates | Final build, TypeScript, lint, 46 targeted tests; 30 local traces largest 179.7 MiB | Earlier obsolete CMS field-count failure corrected and relevant 34 tests rerun; see detailed ledger |
+| Runtime | `9301ee7dbe553e21ca89c6434218ce170d48161a`; READY `dpl_5RcH7jvcCXVAHMd5hWLSsuf7fgR5`; canonical alias attached | Cloud compile/TypeScript and 30 trace guards passed, largest 177.4 MiB |
+| Live playback | Six captured native held frames at 1080p/1×; final release, Continue, narrow initial 720p source and skip/Home verified | [Process evidence and limits](../process-optimization-2026-10-11.md); no physical-device zero-dropped-frame claim |
+| CMS / account | Local cover draft privacy/publish/public-update/restoration passed; live public revision 17, owner storage 503 | Blob block remains until 10 November 02:47 UTC; exact usage still awaits browser 2FA; KRNL untouched |

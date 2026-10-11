@@ -21,7 +21,7 @@ Cover: a distinct 1920×1080 WebP at quality 95, extracted from the accepted HQ 
 
 ## Progress and verification
 
-Implementation and end-to-end verification pending. Record observed results here; source checks alone do not establish smooth playback on physical devices.
+Implementation, local acceptance and production verification are complete as recorded below. Source checks alone do not establish smooth playback on every physical device. Exact Vercel usage meters and cloud admin publication remain blocked as described in the account report.
 
 ### Source and interaction verification
 
@@ -50,4 +50,17 @@ Final production build, standalone TypeScript, lint and trace checks passed (30 
 
 Desktop and 390×844 final cover composition passed: the completed home is visible inside its opening frame on both layouts, with no horizontal overflow. Proof: [desktop cover](process-optimization-evidence/cover-final-local.png), [mobile cover](process-optimization-evidence/cover-final-mobile.png). Website health checks cover the 15 canonical editorial/configurator routes and 17 stylesheet assets; existing admin gateway remains on 3140. Original master media bytes and HTTP 206 support are retained. Production deployment verification follows below.
 
-Final native continuation check: Land held at 7.635115 seconds; a fresh scroll resumed Architecture at 8.033094 seconds with playbackRate=1, paused=false and no loading overlay. The currentTime was not rewritten at that forward boundary. Other unchanged cue stops were exercised in the six-stage capture above. Cloud verification will repeat the final flow.
+Final native continuation check: Land held at 7.635115 seconds; a fresh scroll resumed Architecture at 8.033094 seconds with playbackRate=1, paused=false and no loading overlay. The currentTime was not rewritten at that forward boundary. Other unchanged cue stops were exercised in the six-stage capture above. Cloud verification repeated the final flow below.
+
+### Production acceptance
+
+Application source `9301ee7dbe553e21ca89c6434218ce170d48161a` is READY in deployment `dpl_5RcH7jvcCXVAHMd5hWLSsuf7fgR5`, attached to `https://okno-homes-deployment.vercel.app`. Cloud compile and TypeScript passed; all 30 trace guards passed, largest 177.4 MiB. The existing project/repository is retained; no KRNL project changes.
+
+- All six live 1080p chapter stops held at 1× with pinned scrollY=396. Fresh scroll resumed each next chapter; Continue also resumed Handover, and a fresh final scroll released native page scrolling. Observed held times: 7.620866, 10.236372, 11.369369, 16.657924, 21.948763 and 25.622642 seconds. [Native DOM capture](process-optimization-evidence/production-chapter-stops.json).
+- Live Architecture continuation began without a forward boundary seek. Both Days 11–25 stages remain distinct. [Paused Architecture proof](process-optimization-evidence/architecture-production.png).
+- A separate live reverse-control pass moved from the Architecture hold to the Land hold with Previous (7.616666 seconds); View the timeline and Home then restored the opening at scrollY=0/time=0. The delivered tab is left at the opening.
+- Cover/Process/admin shell returned 200; original HQ video returned HTTP 206 with total size 31,172,040 bytes. Public content returned revision 17 with no draft fields. The owner content request returned 503 from the suspended Blob store; cloud publication is explicitly unaccepted.
+- Live 390×844 initial reload selected the original 1280×720 master, played at 1× and held Land at 7.604283 seconds. View the timeline released scrolling; Home restored the opening at time zero. Cover images loaded, horizontal overflow was zero; this remains browser breakpoint QA rather than a physical-phone performance benchmark.
+- Live detailed phase headings render at weight 700 and the desktop document has zero horizontal overflow. [Timeline proof](process-optimization-evidence/timeline-production.png), [opening](process-optimization-evidence/cover-production.png), [narrow opening](process-optimization-evidence/cover-production-mobile.png).
+
+The browser account audit still stops at Verify Your Identity after a refreshed GitHub sign-in. CLI billing usage remains unavailable for this Hobby account; no exact used/remaining totals or reclaimed bytes are asserted. Local CMS cover publication/restoration passed; live CMS writes await storage recovery.
