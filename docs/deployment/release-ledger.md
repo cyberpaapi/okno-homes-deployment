@@ -105,3 +105,14 @@ The unused `okno-homes-demo` cloud project and its six deployments were permanen
 | Runtime | `9301ee7dbe553e21ca89c6434218ce170d48161a`; READY `dpl_5RcH7jvcCXVAHMd5hWLSsuf7fgR5`; canonical alias attached | Cloud compile/TypeScript and 30 trace guards passed, largest 177.4 MiB |
 | Live playback | Six captured native held frames at 1080p/1×; final release, Continue, narrow initial 720p source and skip/Home verified | [Process evidence and limits](../process-optimization-2026-10-11.md); no physical-device zero-dropped-frame claim |
 | CMS / account | Local cover draft privacy/publish/public-update/restoration passed; live public revision 17, owner storage 503 | Blob block remains until 10 November 02:47 UTC; exact usage still awaits browser 2FA; KRNL untouched |
+
+## Process continuous-scroll revision — later 11 October 2026
+
+| Decision / check | Evidence | Outcome |
+| --- | --- | --- |
+| Latest user direction | Smooth continuous forward/reverse scroll; faster traversal; remove chapter locks and Previous/Continue/View timeline buttons | Replaces the same-day native chapter experiment; accepted cover, layout, typography and lower timeline preserved |
+| Rendering / quality | Exact original AVC packets; bounded frame cache; critically damped playhead; native fallback for replacement/unsupported films | Original HQ/mobile byte hashes retained; V1 renderer and other page implementations unchanged |
+| Source/local gates | 28 targeted tests across packet, pacing, fallback, V1 regression, Process and registry checks; TypeScript, full lint, build, 30 traces largest 179.7 MiB | All passed; native Home/End, desktop/narrow layout and forward/reverse behavior verified |
+| Runtime | `317e8b86fbdfe9dc961a49c286005f4a5ed07667`; READY `dpl_HmeqeFUEFdx5WiUEHwKpZRakHizJ`; canonical alias attached | Cloud compile/TypeScript and 30 trace guards passed, largest 177.4 MiB |
+| Live acceptance | Original 1080p/720p frame renderers, actual frame/copy alignment, native exit/restoration, no extra controls, zero horizontal overflow | [Detailed revision and proof](../process-scroll-revision-2026-10-11.md); physical-device/zero-dropped-frame guarantee not asserted |
+| Account boundary | Browser still at 2FA; no CMS cloud writes, new store, billing or KRNL changes | Prior exact-usage and Blob-publication blockers remain |

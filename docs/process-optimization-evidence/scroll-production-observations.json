@@ -1,0 +1,209 @@
+[
+  {
+    "case": "desktop reverse settled",
+    "state": {
+      "buttons": [
+        "Menu"
+      ],
+      "chapter": "land",
+      "coverOpacity": "0",
+      "coverReady": "true",
+      "diagnostics": {
+        "filmRenderer": "frames",
+        "processMasterVideo": "true",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "1.9",
+        "scrubLoadMs": "10.7",
+        "scrubMaxMs": "49.1",
+        "scrubMeanMs": "5.3",
+        "scrubPresentedFrames": "135",
+        "scrubPresentedTime": "3.4000",
+        "scrubTarget": "3.4000"
+      },
+      "height": 3456,
+      "overflow": 0,
+      "renderer": "frames",
+      "scroll": 720,
+      "sourceHeight": 1080,
+      "viewport": 1280,
+      "width": 1920
+    }
+  },
+  {
+    "case": "native End exits film",
+    "state": {
+      "buttons": [
+        "Menu"
+      ],
+      "chapter": "land",
+      "coverOpacity": "0",
+      "coverReady": "true",
+      "diagnostics": {
+        "filmRenderer": "frames",
+        "processMasterVideo": "true",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "30.5",
+        "scrubLoadMs": "10.7",
+        "scrubMaxMs": "49.1",
+        "scrubMeanMs": "5.5",
+        "scrubPresentedFrames": "136",
+        "scrubPresentedTime": "3.4667",
+        "scrubTarget": "3.4667"
+      },
+      "height": 3456,
+      "overflow": 0,
+      "renderer": "frames",
+      "scroll": 7384,
+      "sourceHeight": 1080,
+      "viewport": 1280,
+      "width": 1920
+    }
+  },
+  {
+    "case": "Home restores cover",
+    "state": {
+      "buttons": [
+        "Menu"
+      ],
+      "chapter": "land",
+      "coverOpacity": "0",
+      "coverReady": "true",
+      "diagnostics": {
+        "filmRenderer": "frames",
+        "processMasterVideo": "true",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "1.8",
+        "scrubLoadMs": "10.7",
+        "scrubMaxMs": "49.1",
+        "scrubMeanMs": "5.4",
+        "scrubPresentedFrames": "144",
+        "scrubPresentedTime": "3.0667",
+        "scrubTarget": "3.0667"
+      },
+      "height": 3456,
+      "overflow": 0,
+      "renderer": "frames",
+      "scroll": 0,
+      "sourceHeight": 1080,
+      "viewport": 1280,
+      "width": 1920
+    }
+  },
+  {
+    "case": "mobile cover",
+    "state": {
+      "buttons": [
+        "Menu"
+      ],
+      "chapter": "land",
+      "coverOpacity": "1",
+      "coverReady": "true",
+      "diagnostics": {
+        "filmRenderer": "frames",
+        "processMasterVideo": "true",
+        "scrubCacheFrames": "2",
+        "scrubLoadMs": "122.0",
+        "scrubPresentedFrames": "1",
+        "scrubPresentedTime": "0.0000",
+        "scrubTarget": "0.0000"
+      },
+      "height": 4051,
+      "overflow": 0,
+      "renderer": "frames",
+      "scroll": 0,
+      "sourceHeight": 720,
+      "viewport": 390,
+      "width": 1280
+    }
+  },
+  {
+    "case": "mobile forward settled",
+    "state": {
+      "buttons": [
+        "Menu"
+      ],
+      "chapter": "land",
+      "coverOpacity": "0",
+      "coverReady": "true",
+      "diagnostics": {
+        "filmRenderer": "frames",
+        "processMasterVideo": "true",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "0.9",
+        "scrubLoadMs": "122.0",
+        "scrubMaxMs": "98.4",
+        "scrubMeanMs": "3.4",
+        "scrubPresentedFrames": "51",
+        "scrubPresentedTime": "3.4000",
+        "scrubTarget": "3.4000"
+      },
+      "height": 4051,
+      "overflow": 0,
+      "renderer": "frames",
+      "scroll": 844,
+      "sourceHeight": 720,
+      "viewport": 390,
+      "width": 1280
+    }
+  },
+  {
+    "case": "mobile reverse restores cover",
+    "state": {
+      "buttons": [
+        "Menu"
+      ],
+      "chapter": "land",
+      "coverOpacity": "1",
+      "coverReady": "true",
+      "diagnostics": {
+        "filmRenderer": "frames",
+        "processMasterVideo": "true",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "1.7",
+        "scrubLoadMs": "122.0",
+        "scrubMaxMs": "98.4",
+        "scrubMeanMs": "5.2",
+        "scrubPresentedFrames": "69",
+        "scrubPresentedTime": "1.8333",
+        "scrubTarget": "1.8333"
+      },
+      "height": 4051,
+      "overflow": 0,
+      "renderer": "frames",
+      "scroll": 0,
+      "sourceHeight": 720,
+      "viewport": 390,
+      "width": 1280
+    }
+  },
+  {
+    "case": "desktop Home settled",
+    "state": {
+      "buttons": [
+        "Menu"
+      ],
+      "chapter": "land",
+      "coverOpacity": "1",
+      "coverReady": "true",
+      "diagnostics": {
+        "filmRenderer": "frames",
+        "processMasterVideo": "true",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "14.8",
+        "scrubLoadMs": "10.7",
+        "scrubMaxMs": "49.1",
+        "scrubMeanMs": "5.3",
+        "scrubPresentedFrames": "174",
+        "scrubPresentedTime": "0.0000",
+        "scrubTarget": "0.0000"
+      },
+      "height": 3456,
+      "overflow": 0,
+      "renderer": "frames",
+      "scroll": 0,
+      "sourceHeight": 1080,
+      "viewport": 1280,
+      "width": 1920
+    }
+  }
+]
