@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cache } from "react";
 import { notFound, redirect } from "next/navigation";
 import ModelsHeader from "@/components/models/ModelsHeader";
 import JournalArticle from "@/components/journal/JournalArticle";
@@ -9,11 +10,11 @@ type Props = { params: Promise<{ slug: string }> };
 
 export const dynamic = "force-dynamic";
 
-async function publishedArticles() {
+const publishedArticles = cache(async () => {
   const snapshot = await readContent();
   const items = snapshot.publishedCollections["journal.articles"] ?? journalArticleFallbacks(snapshot.published);
   return { items, posts: journalArticlesFromItems(items) };
-}
+});
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;

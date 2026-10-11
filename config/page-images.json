@@ -1,0 +1,858 @@
+{
+  "/about/okno-founders.jpeg": [
+    {
+      "width": 384,
+      "src": "/page-images/2b321590d671662e-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/2b321590d671662e-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/2b321590d671662e-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/2b321590d671662e-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/2b321590d671662e-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/2b321590d671662e-1920.webp"
+    }
+  ],
+  "/about/storyboard/about-film-frame-01.png": [
+    {
+      "width": 384,
+      "src": "/page-images/25e07200ec555b4e-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/25e07200ec555b4e-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/25e07200ec555b4e-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/25e07200ec555b4e-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/25e07200ec555b4e-1280.webp"
+    },
+    {
+      "width": 1672,
+      "src": "/page-images/25e07200ec555b4e-1672.webp"
+    }
+  ],
+  "/about/storyboard/about-film-frame-02.png": [
+    {
+      "width": 384,
+      "src": "/page-images/2fffd693e575bb19-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/2fffd693e575bb19-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/2fffd693e575bb19-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/2fffd693e575bb19-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/2fffd693e575bb19-1280.webp"
+    },
+    {
+      "width": 1672,
+      "src": "/page-images/2fffd693e575bb19-1672.webp"
+    }
+  ],
+  "/about/storyboard/about-film-frame-03.png": [
+    {
+      "width": 384,
+      "src": "/page-images/88a9c1686152b333-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/88a9c1686152b333-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/88a9c1686152b333-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/88a9c1686152b333-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/88a9c1686152b333-1280.webp"
+    },
+    {
+      "width": 1672,
+      "src": "/page-images/88a9c1686152b333-1672.webp"
+    }
+  ],
+  "/assets/journal/source-logos/architectural-digest.png": [
+    {
+      "width": 256,
+      "src": "/page-images/27a7a258d902c215-256.webp"
+    }
+  ],
+  "/assets/journal/source-logos/homecrux.png": [
+    {
+      "width": 192,
+      "src": "/page-images/2cbd926b8bf95cc5-192.webp"
+    }
+  ],
+  "/assets/journal/source-logos/new-atlas.png": [
+    {
+      "width": 180,
+      "src": "/page-images/3d934ed605ad5345-180.webp"
+    }
+  ],
+  "/assets/journal/source-logos/world-architecture-community.png": [
+    {
+      "width": 180,
+      "src": "/page-images/b4d30339d1ea0f27-180.webp"
+    }
+  ],
+  "/assets/projects/real-v1/forrest-01.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/a420f84b91f2d4b6-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/a420f84b91f2d4b6-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/a420f84b91f2d4b6-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/a420f84b91f2d4b6-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/a420f84b91f2d4b6-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/a420f84b91f2d4b6-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/forrest-03.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/fa075f07c00d5ba5-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/fa075f07c00d5ba5-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/fa075f07c00d5ba5-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/fa075f07c00d5ba5-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/fa075f07c00d5ba5-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/fa075f07c00d5ba5-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/forrest-04.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/c667711e4d65b77e-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/c667711e4d65b77e-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/c667711e4d65b77e-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/c667711e4d65b77e-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/c667711e4d65b77e-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/c667711e4d65b77e-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/forrest-08.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/226ed85da91a4663-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/226ed85da91a4663-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/226ed85da91a4663-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/226ed85da91a4663-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/226ed85da91a4663-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/226ed85da91a4663-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kioo-01.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/72c6d031dcd96c96-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/72c6d031dcd96c96-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/72c6d031dcd96c96-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/72c6d031dcd96c96-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/72c6d031dcd96c96-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/72c6d031dcd96c96-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kioo-02.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/12d141574dbd711e-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/12d141574dbd711e-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/12d141574dbd711e-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/12d141574dbd711e-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/12d141574dbd711e-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/12d141574dbd711e-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kioo-03.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/13f4d3f11d6fa950-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/13f4d3f11d6fa950-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/13f4d3f11d6fa950-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/13f4d3f11d6fa950-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/13f4d3f11d6fa950-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/13f4d3f11d6fa950-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kioo-04.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/e0bf8f2436b4b749-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/e0bf8f2436b4b749-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/e0bf8f2436b4b749-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/e0bf8f2436b4b749-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/e0bf8f2436b4b749-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/e0bf8f2436b4b749-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kioo-05.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/edc983f49dae7014-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/edc983f49dae7014-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/edc983f49dae7014-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/edc983f49dae7014-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/edc983f49dae7014-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/edc983f49dae7014-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kioo-07.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/f68fb79cbb6d533a-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/f68fb79cbb6d533a-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/f68fb79cbb6d533a-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/f68fb79cbb6d533a-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/f68fb79cbb6d533a-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/f68fb79cbb6d533a-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kioo-08.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/92f0fa9071ecba2b-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/92f0fa9071ecba2b-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/92f0fa9071ecba2b-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/92f0fa9071ecba2b-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/92f0fa9071ecba2b-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/92f0fa9071ecba2b-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kioo-09.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/93a162a908549227-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/93a162a908549227-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/93a162a908549227-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/93a162a908549227-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/93a162a908549227-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/93a162a908549227-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kioo-10.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/1efca45d036047b6-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/1efca45d036047b6-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/1efca45d036047b6-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/1efca45d036047b6-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/1efca45d036047b6-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/1efca45d036047b6-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kray-sangareddy-01.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/143f99206440c072-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/143f99206440c072-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/143f99206440c072-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/143f99206440c072-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/143f99206440c072-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/143f99206440c072-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kray-sangareddy-02.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/dfb277c72b434f16-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/dfb277c72b434f16-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/dfb277c72b434f16-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/dfb277c72b434f16-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/dfb277c72b434f16-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/dfb277c72b434f16-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kray-sangareddy-03.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/b44696613b4d09bc-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/b44696613b4d09bc-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/b44696613b4d09bc-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/b44696613b4d09bc-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/b44696613b4d09bc-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/b44696613b4d09bc-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kray-sangareddy-06.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/6079fc9c9c14b48b-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/6079fc9c9c14b48b-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/6079fc9c9c14b48b-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/6079fc9c9c14b48b-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/6079fc9c9c14b48b-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/6079fc9c9c14b48b-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/kray-sangareddy-07.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/67244b13693e933f-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/67244b13693e933f-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/67244b13693e933f-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/67244b13693e933f-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/67244b13693e933f-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/67244b13693e933f-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/lakewood-01.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/42dd665306c0b778-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/42dd665306c0b778-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/42dd665306c0b778-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/42dd665306c0b778-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/42dd665306c0b778-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/42dd665306c0b778-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/lakewood-03.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/e9f174fd77bdaf9d-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/e9f174fd77bdaf9d-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/e9f174fd77bdaf9d-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/e9f174fd77bdaf9d-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/e9f174fd77bdaf9d-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/e9f174fd77bdaf9d-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/lakewood-08.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/7daaa44c05c14db3-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/7daaa44c05c14db3-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/7daaa44c05c14db3-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/7daaa44c05c14db3-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/7daaa44c05c14db3-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/7daaa44c05c14db3-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/octapod-layana-01.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/548f0b3d32d16b43-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/548f0b3d32d16b43-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/548f0b3d32d16b43-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/548f0b3d32d16b43-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/548f0b3d32d16b43-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/548f0b3d32d16b43-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/octapod-layana-03.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/a551d566e53ce143-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/a551d566e53ce143-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/a551d566e53ce143-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/a551d566e53ce143-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/a551d566e53ce143-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/a551d566e53ce143-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/octapod-layana-08.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/0c6fd875ab3e2119-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/0c6fd875ab3e2119-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/0c6fd875ab3e2119-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/0c6fd875ab3e2119-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/0c6fd875ab3e2119-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/0c6fd875ab3e2119-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/rasa-vikarabad-01.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/88e7e3389e22e63c-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/88e7e3389e22e63c-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/88e7e3389e22e63c-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/88e7e3389e22e63c-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/88e7e3389e22e63c-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/88e7e3389e22e63c-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/rasa-vikarabad-04.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/7ade8febc8a3636c-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/7ade8febc8a3636c-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/7ade8febc8a3636c-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/7ade8febc8a3636c-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/7ade8febc8a3636c-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/7ade8febc8a3636c-1920.webp"
+    }
+  ],
+  "/assets/projects/real-v1/trib-birdseye-01.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/fad5768af66b158b-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/fad5768af66b158b-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/fad5768af66b158b-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/fad5768af66b158b-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/fad5768af66b158b-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/fad5768af66b158b-1920.webp"
+    }
+  ],
+  "/models/forza/interiors/forza-living.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/1dc40a54c44bd168-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/1dc40a54c44bd168-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/1dc40a54c44bd168-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/1dc40a54c44bd168-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/1dc40a54c44bd168-1280.webp"
+    },
+    {
+      "width": 1444,
+      "src": "/page-images/1dc40a54c44bd168-1444.webp"
+    }
+  ]
+}

@@ -3,6 +3,7 @@
 // Editorial two-column reading layout adapted from 21st.dev Article With
 // Author Sidebar, demo 29471. The source is archived in docs/21st-source/.
 import Image from "next/image";
+import { pageImageLoader } from "@/lib/pageImageLoader";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useJournalBlogPosts } from "@/lib/useJournalContent";
@@ -42,7 +43,7 @@ export default function JournalArticle({ slug, initialItems }: { slug: string; i
       </header>
 
       <figure className={styles.heroFigure}>
-        <div className={styles.heroImage}>{post.image ? <Image src={post.image} alt={post.imageAlt} fill priority sizes="100vw" /> : <span className={styles.missingImage}>Add a photograph before publishing</span>}</div>
+        <div className={styles.heroImage}>{post.image ? <Image loader={pageImageLoader} src={post.image} alt={post.imageAlt} fill priority sizes="100vw" /> : <span className={styles.missingImage}>Add a photograph before publishing</span>}</div>
         {post.heroCaption && <figcaption>{post.heroCaption}</figcaption>}
       </figure>
 
@@ -56,7 +57,7 @@ export default function JournalArticle({ slug, initialItems }: { slug: string; i
               </section>
               {section.image && (
                 <figure className={styles.inlineFigure}>
-                  <div className={styles.inlineImage}><Image src={section.image} alt={section.imageAlt ?? ""} fill sizes="(max-width: 780px) 100vw, 760px" /></div>
+                  <div className={styles.inlineImage}><Image loader={pageImageLoader} src={section.image} alt={section.imageAlt ?? ""} fill sizes="(max-width: 780px) 100vw, 760px" /></div>
                   {section.imageCaption && <figcaption>{section.imageCaption}</figcaption>}
                 </figure>
               )}

@@ -36,6 +36,7 @@
 }
 
 .mobileCover {
+  position: relative;
   height: 56vw;
   margin: 0 0 58px;
   overflow: hidden;

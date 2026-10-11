@@ -411,6 +411,8 @@ export function ShaderBackground({ className }: { className?: string }) {
     let pointerClientY = 0
     let bounds = canvas.getBoundingClientRect()
     let raf = 0
+    let timer = 0
+    let lastDraw = -Infinity
     let lastNow: number | null = null
     let visible = document.visibilityState === "visible"
     let inView = true
@@ -426,7 +428,7 @@ export function ShaderBackground({ className }: { className?: string }) {
       const rawHeight = Math.max(1, Math.round(bounds.height * dpr))
       const pixelScale = Math.min(
         1,
-        Math.sqrt(2_000_000 / Math.max(1, rawWidth * rawHeight)),
+        Math.sqrt(520_000 / Math.max(1, rawWidth * rawHeight)),
       )
       const width = Math.max(1, Math.round(rawWidth * pixelScale))
       const height = Math.max(1, Math.round(rawHeight * pixelScale))
@@ -437,10 +439,20 @@ export function ShaderBackground({ className }: { className?: string }) {
       }
     }
 
-    function requestRender() {
-      if (!disposed && visible && inView && raf === 0) {
-        raf = requestAnimationFrame(render)
+    function requestRender(delay = 0) {
+      if (!disposed && visible && inView && raf === 0 && timer === 0) {
+        if (delay > 0) {
+          timer = window.setTimeout(() => { timer = 0; requestRender() }, delay)
+        } else raf = requestAnimationFrame(render)
       }
+    }
+
+    function stopRendering() {
+      cancelAnimationFrame(raf)
+      window.clearTimeout(timer)
+      raf = 0
+      timer = 0
+      lastNow = null
     }
 
     const updatePointerTarget = () => {
@@ -499,30 +511,18 @@ export function ShaderBackground({ className }: { className?: string }) {
     const intersectionObserver = new IntersectionObserver(([entry]) => {
       inView = entry?.isIntersecting ?? true
       if (inView) requestRender()
-      else if (raf !== 0) {
-        cancelAnimationFrame(raf)
-        raf = 0
-        lastNow = null
-      }
+      else stopRendering()
     })
     intersectionObserver.observe(canvas)
     const onVisibilityChange = () => {
       visible = document.visibilityState === "visible"
       if (visible) requestRender()
-      else if (raf !== 0) {
-        cancelAnimationFrame(raf)
-        raf = 0
-        lastNow = null
-      }
+      else stopRendering()
     }
     document.addEventListener("visibilitychange", onVisibilityChange)
     const onReducedMotionChange = () => {
       motionReduced = reducedMotion.matches
-      if (raf !== 0) {
-        cancelAnimationFrame(raf)
-        raf = 0
-        lastNow = null
-      }
+      stopRendering()
       requestRender()
     }
     reducedMotion.addEventListener("change", onReducedMotionChange)
@@ -530,6 +530,11 @@ export function ShaderBackground({ className }: { className?: string }) {
     function render(now: number) {
       raf = 0
       if (disposed || !visible || !inView) return
+      // The slow silk field does not need display-rate fragment shading.
+      // Keep time in seconds so the accepted drift speed stays unchanged.
+      const nextFrameIn = 1000 / 24 - (now - lastDraw)
+      if (timeAnimated() && nextFrameIn > 0) { requestRender(nextFrameIn); return }
+      lastDraw = now
       const dt = lastNow === null ? 0 : Math.min((now - lastNow) / 1000, 0.1)
       lastNow = now
       const follow = 1 - Math.exp(-12 * dt)
@@ -571,7 +576,7 @@ export function ShaderBackground({ className }: { className?: string }) {
     requestRender()
     return () => {
       disposed = true
-      cancelAnimationFrame(raf)
+      stopRendering()
       resizeObserver.disconnect()
       intersectionObserver.disconnect()
       document.removeEventListener("visibilitychange", onVisibilityChange)

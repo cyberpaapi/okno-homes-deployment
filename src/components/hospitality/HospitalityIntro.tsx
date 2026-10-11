@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { pageImageLoader } from "@/lib/pageImageLoader";
 import { motion, useReducedMotion } from "motion/react";
 import { MagneticLink } from "../projects/21st/Magnetic";
 import { useSiteContentMap } from "@/lib/useSiteContent";
@@ -41,7 +42,7 @@ export function HospitalityIntro({ enquiryHref }: { enquiryHref: string }) {
 
       <figure className={styles.media} data-image-ready={imageReady}>
         <div className={styles.imageFrame}>
-          <Image
+          <Image loader={pageImageLoader}
             src={get("image", "/assets/projects/real-v1/lakewood-08.webp")}
             alt={get("alt", "Lakewood hospitality buildings reflected in water at dusk")}
             fill

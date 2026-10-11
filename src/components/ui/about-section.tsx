@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { pageImageLoader } from "@/lib/pageImageLoader";
 import { BadgeCheck, CalendarClock, House, Lightbulb, ShieldCheck, type LucideIcon } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { SilkBackground } from "@/components/projects/21st/SilkBackground";
@@ -50,7 +51,7 @@ export default function AboutSection() {
             <TextReveal as="h1" text={value("about.opening.title", "About OKNO")} className={styles.heroTitle} />
           </div>
           <figure className={`${styles.media} ${styles.heroMedia}`}>
-            <Image
+            <Image loader={pageImageLoader}
               src={value("about.opening.image", "/about/storyboard/about-film-frame-01.png")}
               alt={value("about.opening.image-alt", "An OKNO home in a natural landscape at dusk")}
               fill priority sizes="(max-width: 1440px) 100vw, 1440px"
@@ -68,7 +69,7 @@ export default function AboutSection() {
       <section id="vision" className={`${styles.chapter} ${styles.vision}`} data-about-viewport-section>
         <div className={`${styles.inner} ${styles.split} ${styles.visionSplit}`}>
           <motion.figure className={`${styles.media} ${styles.visionMedia}`} {...mediaEntrance}>
-            <Image src={value("about.vision.image", "/models/forza/interiors/forza-living.webp")}
+            <Image loader={pageImageLoader} src={value("about.vision.image", "/models/forza/interiors/forza-living.webp")}
               alt={value("about.vision.image-alt", "An OKNO living space opening toward a natural landscape")}
               fill sizes="(max-width: 840px) 100vw, 46vw" />
           </motion.figure>
@@ -86,7 +87,7 @@ export default function AboutSection() {
             <p className={styles.body}>{value("about.future.copy", "Our homes, sculpted by esteemed architects, are symphonies of sophistication. With a fusion of eco-conscious design and bespoke craftsmanship, each residence exudes timeless grace. Discover the art of living at OKNO Modhomes, where elegance is eternalised.")}</p>
           </div>
           <motion.figure className={`${styles.media} ${styles.landscapeMedia}`} {...mediaEntrance}>
-            <Image src={value("about.future.image", "/about/storyboard/about-film-frame-02.png")}
+            <Image loader={pageImageLoader} src={value("about.future.image", "/about/storyboard/about-film-frame-02.png")}
               alt={value("about.future.image-alt", "A precision-fabricated OKNO home")}
               fill sizes="(max-width: 840px) 100vw, 54vw" />
           </motion.figure>
@@ -104,7 +105,7 @@ export default function AboutSection() {
       <section id="founders" className={`${styles.chapter} ${styles.founders}`} data-about-viewport-section>
         <div className={`${styles.inner} ${styles.split} ${styles.foundersSplit}`}>
           <motion.figure className={`${styles.media} ${styles.foundersMedia}`} {...mediaEntrance}>
-            <Image src={value("about.founders.image", "/about/okno-founders.jpeg")}
+            <Image loader={pageImageLoader} src={value("about.founders.image", "/about/okno-founders.jpeg")}
               alt={value("about.founders.image-alt", "OKNO Modhomes founders")}
               fill sizes="(max-width: 840px) 100vw, 46vw" />
           </motion.figure>
@@ -144,7 +145,7 @@ export default function AboutSection() {
             <p className={styles.body}>{value("about.fit.copy", "Don't sweat the details; we've taken care of it all for you. Our walls, ceilings, floors, and everything in between are designed and precision-manufactured to work with one another from beginning to end. What you get is a cohesive aesthetic and perfect lines everywhere you look.")}</p>
           </div>
           <motion.figure className={`${styles.media} ${styles.landscapeMedia}`} {...mediaEntrance}>
-            <Image src={value("about.fit.image", "/about/storyboard/about-film-frame-03.png")}
+            <Image loader={pageImageLoader} src={value("about.fit.image", "/about/storyboard/about-film-frame-03.png")}
               alt={value("about.fit.image-alt", "The timber facade and entrance of an OKNO home")}
               fill sizes="(max-width: 840px) 100vw, 54vw" />
           </motion.figure>

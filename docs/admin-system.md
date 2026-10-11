@@ -7,6 +7,10 @@
 - `OKNO-homes-older-version` is historical. Never implement current admin work there.
 - This document is the current admin specification and progress ledger. Update it whenever scope, decisions, or coverage change.
 
+## Optimization and live admin verification — 11 October 2026
+
+The user requested the [first performance and interaction pass](optimization-2026-10-11.md). Projects and Hero V1 code are excluded; Home/Process intensive video revision and Sustainability fade sequencing remain for the later pass. Live admin checks include connection, section/field controls, draft isolation, actual browser image upload, preview, Publish and public propagation. Original fields/collections are backed up privately and restored with a conditional Blob write; concurrent owner changes block restoration. Keys and drafts must never enter public reports. Coverage and any unresolved delivery/interaction limits belong in the new verification ledger.
+
 ## Deployment authorization and admin routing — 11 October 2026
 
 The user now authorizes a new private repository and Vercel deployment of this Final Showcase website and editor. This supersedes earlier statements that deployment was out of scope. Production editor URL is `/admin` on the website domain, reached by typing its address; no public navigation button/link is to be added. `/api/admin/*` remains authenticated regardless of discoverability. Local ports and the gateway remain unchanged for local work.

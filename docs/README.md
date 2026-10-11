@@ -2,6 +2,8 @@
 
 Start here before editing. Files under `docs/archive/` are historical evidence, not current specifications.
 
+The [11 October first performance and interaction pass](optimization-2026-10-11.md) records the current scope, page deferrals, performance evidence and live public/admin checks.
+
 ## Production deployment work
 
 Start at the [deployment index](deployment/README.md) for architecture, operations, key management and live evidence. The [admin index](admin/README.md) links current scope and acceptance. The [11 October plan](deployment/implementation-plan.md) and [release ledger](deployment/release-ledger.md) track the private repository and same-domain `/admin` release.

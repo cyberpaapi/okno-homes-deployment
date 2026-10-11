@@ -3,6 +3,7 @@
 // Conventional blog-grid adaptation of 21st.dev Blog Grid, demo 28557.
 // Each image receives a restrained scroll-linked drift using motion/react.
 import Image from "next/image";
+import { pageImageLoader } from "@/lib/pageImageLoader";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
@@ -30,7 +31,7 @@ function BlogCard({ post, index, actionLabel }: { post: PublishedJournalArticle;
       <Link className={styles.blogLink} href={`/journal/${post.id}`} aria-label={`${actionLabel} ${post.title}`}>
         <div className={styles.blogImage}>
           <motion.div className={styles.blogImageDrift} style={reduced ? undefined : { y: imageY }}>
-            {post.image ? <Image src={post.image} alt={post.imageAlt} fill sizes="(max-width: 760px) 92vw, (max-width: 1100px) 46vw, 30vw" /> : <span className={styles.missingImage}>Add a photograph before publishing</span>}
+            {post.image ? <Image loader={pageImageLoader} src={post.image} alt={post.imageAlt} fill sizes="(max-width: 760px) 92vw, (max-width: 1100px) 46vw, 30vw" /> : <span className={styles.missingImage}>Add a photograph before publishing</span>}
           </motion.div>
         </div>
         <div className={styles.blogCopy}>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { pageImageLoader } from "@/lib/pageImageLoader";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -118,7 +119,7 @@ export function HospitalityGallery({ projects }: { projects: HospitalityProject[
               transition={{ duration: reducedMotion ? 0 : 0.46, ease: [0.16, 1, 0.3, 1] }}
               onClick={(event) => event.stopPropagation()}
             >
-              <Image src={selectedProject.image} alt={selectedProject.alt} fill sizes="94vw" priority />
+              <Image loader={pageImageLoader} src={selectedProject.image} alt={selectedProject.alt} fill sizes="94vw" priority />
               <figcaption>{selectedProject.name}</figcaption>
             </motion.figure>
             <button className={styles.close} type="button" onClick={() => setSelectedId(null)} aria-label="Close photograph">Close</button>
@@ -161,7 +162,7 @@ export function HospitalityGallery({ projects }: { projects: HospitalityProject[
                     data-magnetic-ignore
                   >
                     <span className={styles.image}>
-                      <Image src={project.image} alt={project.alt} fill sizes="(max-width: 560px) 92vw, (max-width: 760px) 46vw, 30vw" />
+                      <Image loader={pageImageLoader} src={project.image} alt={project.alt} fill sizes="(max-width: 560px) 92vw, (max-width: 760px) 46vw, 30vw" />
                     </span>
                     <span className={styles.shade} aria-hidden="true" />
                     <span className={styles.name}>{project.name}</span>

@@ -102,6 +102,10 @@
   position: relative;
   overflow: hidden;
   margin-top: clamp(46px, 7vh, 82px);
+  /* Keep the sliding forms clipped sideways, with space for the rounded border
+     and keyboard focus ring below the final action. */
+  padding: 6px 6px 10px;
+  margin-inline: -6px;
 }
 
 .formSlide {
