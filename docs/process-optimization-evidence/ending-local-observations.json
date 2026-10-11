@@ -1,0 +1,647 @@
+{
+  "points": [
+    {
+      "label": "mobile-last-phase",
+      "chapter": "handover",
+      "coverOpacity": "0",
+      "detailEnd": 7757.0205078125,
+      "detailProgress": "0.75",
+      "detailStart": 4381.0205078125,
+      "filmProgress": "0.9986996098829649",
+      "frame": "25.6000",
+      "overflow": 0,
+      "pinEnd": 3207,
+      "renderer": "frames",
+      "scroll": 7216.66650390625,
+      "source": [
+        1280,
+        720
+      ],
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "label": "desktop-forward-oversize",
+      "chapter": "land",
+      "coverOpacity": "0",
+      "detailEnd": 6701.281433105469,
+      "detailProgress": "0",
+      "detailStart": 3821.2814331054688,
+      "filmProgress": "0.031209362808842653",
+      "frame": "0.8000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 576.6666870117188,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-0",
+      "chapter": "handover",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "1",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.9986996098829649",
+      "frame": "25.6000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 6701.33349609375,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-1",
+      "chapter": "handover",
+      "coverOpacity": "0",
+      "detailEnd": 6701.281005859375,
+      "detailProgress": "0.7926683121612907",
+      "detailStart": 3821.281005859375,
+      "filmProgress": "0.9986996098829649",
+      "frame": "25.6000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 6240.66650390625,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-2",
+      "chapter": "handover",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0.5517522279671082",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.9986996098829649",
+      "frame": "25.6000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 5590,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-3",
+      "chapter": "handover",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0.3038338663010062",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.9986996098829649",
+      "frame": "25.6000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 4894,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-4",
+      "chapter": "handover",
+      "coverOpacity": "0",
+      "detailEnd": 6701.281066894531,
+      "detailProgress": "0.05573817813845858",
+      "detailStart": 3821.2810668945312,
+      "filmProgress": "0.9986996098829649",
+      "frame": "25.6000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 4174.66650390625,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-5",
+      "chapter": "handover",
+      "coverOpacity": "0",
+      "detailEnd": 6701.281168617308,
+      "detailProgress": "0.0025616149932500857",
+      "detailStart": 3821.281168617308,
+      "filmProgress": "0.9986996098829649",
+      "frame": "25.6000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 3821.333251953125,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-6",
+      "chapter": "handover",
+      "coverOpacity": "0",
+      "detailEnd": 6701.2813720703125,
+      "detailProgress": "0",
+      "detailStart": 3821.281372070313,
+      "filmProgress": "0.9674902470741222",
+      "frame": "24.8000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 2430.666748046875,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-7",
+      "chapter": "handover",
+      "coverOpacity": "0",
+      "detailEnd": 6701.2813720703125,
+      "detailProgress": "0",
+      "detailStart": 3821.281372070313,
+      "filmProgress": "0.9050715214564369",
+      "frame": "23.2000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 2330.666748046875,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-8",
+      "chapter": "enclosure",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.8504551365409624",
+      "frame": "21.8000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 2214,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-9",
+      "chapter": "enclosure",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.8036410923276984",
+      "frame": "20.6000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 2097.333251953125,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-10",
+      "chapter": "enclosure",
+      "coverOpacity": "0",
+      "detailEnd": 6701.2813720703125,
+      "detailProgress": "0",
+      "detailStart": 3821.281372070313,
+      "filmProgress": "0.7399219765929779",
+      "frame": "18.9667",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 1997.3333740234375,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-reverse-11",
+      "chapter": "enclosure",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.6866059817945385",
+      "frame": "17.6000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 1870,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-0",
+      "chapter": "assembly",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.6280884265279585",
+      "frame": "16.1000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 1728,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-1",
+      "chapter": "assembly",
+      "coverOpacity": "0",
+      "detailEnd": 6701.2813720703125,
+      "detailProgress": "0",
+      "detailStart": 3821.281372070313,
+      "filmProgress": "0.5773732119635892",
+      "frame": "14.8000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 1622.6666259765625,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-2",
+      "chapter": "assembly",
+      "coverOpacity": "0",
+      "detailEnd": 6701.2813720703125,
+      "detailProgress": "0",
+      "detailStart": 3821.281372070313,
+      "filmProgress": "0.5383615084525358",
+      "frame": "13.8000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 1514.6666259765625,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-3",
+      "chapter": "assembly",
+      "coverOpacity": "0",
+      "detailEnd": 6701.2813720703125,
+      "detailProgress": "0",
+      "detailStart": 3821.281372070313,
+      "filmProgress": "0.4759427828348504",
+      "frame": "12.2000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 1414.6666259765625,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-4",
+      "chapter": "design-lock",
+      "coverOpacity": "0",
+      "detailEnd": 6701.2813720703125,
+      "detailProgress": "0",
+      "detailStart": 3821.281372070313,
+      "filmProgress": "0.42912873862158646",
+      "frame": "11.0000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 1314.6666259765625,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-5",
+      "chapter": "architecture",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.38231469440832255",
+      "frame": "9.8000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 1184,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-6",
+      "chapter": "architecture",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.31989596879063714",
+      "frame": "8.2000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 1098,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-7",
+      "chapter": "land",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.2808842652795839",
+      "frame": "7.2000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 982,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-8",
+      "chapter": "land",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.22626788036410922",
+      "frame": "5.8000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 882,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-9",
+      "chapter": "land",
+      "coverOpacity": "0",
+      "detailEnd": 6701.281311035156,
+      "detailProgress": "0",
+      "detailStart": 3821.281311035156,
+      "filmProgress": "0.17945383615084523",
+      "frame": "4.6000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 765.3333129882812,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-10",
+      "chapter": "land",
+      "coverOpacity": "0",
+      "detailEnd": 6701.281311035156,
+      "detailProgress": "0",
+      "detailStart": 3821.281311035156,
+      "filmProgress": "0.12483745123537061",
+      "frame": "3.2000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 665.3333129882812,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-11",
+      "chapter": "land",
+      "coverOpacity": "0",
+      "detailEnd": 6701.281433105469,
+      "detailProgress": "0",
+      "detailStart": 3821.2814331054688,
+      "filmProgress": "0.07802340702210664",
+      "frame": "2.0000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 548.6666870117188,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-12",
+      "chapter": "land",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.023407022106631988",
+      "frame": "0.6000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 438,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-13",
+      "chapter": "land",
+      "coverOpacity": "0",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0.0013003901170351106",
+      "frame": "0.0333",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 438,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "label": "desktop-inverse-14",
+      "chapter": "land",
+      "coverOpacity": "1",
+      "detailEnd": 6701.28125,
+      "detailProgress": "0",
+      "detailStart": 3821.28125,
+      "filmProgress": "0",
+      "frame": "0.0000",
+      "overflow": 0,
+      "pinEnd": 2736,
+      "renderer": "frames",
+      "scroll": 0,
+      "source": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    }
+  ],
+  "links": {
+    "enquiry": "/enquiry",
+    "models": "/models"
+  },
+  "consoleErrors": []
+}

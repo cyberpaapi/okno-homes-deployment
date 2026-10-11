@@ -7,6 +7,7 @@ import { gazePrototype, oknoModels } from "@/data/models";
 import { customerCopySections } from "@/data/configurator/studio/customerCopy";
 import { footerGroups, footerSocialLinks } from "@/data/footerContent";
 import { processDetailPhases } from "@/data/processDetailPhases";
+import { processClosing } from "@/data/processClosing";
 import type { ContentItem } from "@/lib/contentCollections";
 export { homeVariantDefaults } from "@/data/homeVariants";
 
@@ -563,6 +564,17 @@ export const adminPages: readonly ContentPage[] = [
         { id: `process.details.phase-${index + 1}.alt`, label: "Image description", kind: "text", defaultValue: alt, help: "Describe the actual replacement image; concept imagery must not be presented as documentary photography." },
       ],
     })),
+    { id: "closing", label: "Before we begin · page ending", fields: [
+      { id: "process.closing.heading", label: "Section heading", kind: "text", defaultValue: processClosing.heading },
+      { id: "process.closing.summary", label: "Introduction", kind: "text", defaultValue: processClosing.summary },
+      ...(["land", "brief", "timing"] as const).flatMap(key => [
+        { id: `process.closing.${key}.title`, label: `${processClosing[key].title} heading`, kind: "text" as const, defaultValue: processClosing[key].title },
+        { id: `process.closing.${key}.copy`, label: `${processClosing[key].title} description`, kind: "text" as const, defaultValue: processClosing[key].copy },
+      ]),
+      { id: "process.closing.invitation", label: "Conversation heading", kind: "text", defaultValue: processClosing.invitation },
+      { id: "process.closing.enquiry", label: "Enquiry link label", kind: "text", defaultValue: processClosing.enquiry },
+      { id: "process.closing.models", label: "Models link label", kind: "text", defaultValue: processClosing.models },
+    ], note: "The closing follows the timeline and uses normal scrolling. Links go to Enquiry and Models; enquiry delivery remains deferred." },
   ] },
   { id: "sustainability", label: siteNavigationItems[4].label, href: "/sustainability", sections: [
     { id: "journey", label: "Opening journey", fields: [

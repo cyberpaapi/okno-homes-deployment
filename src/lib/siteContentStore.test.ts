@@ -80,7 +80,7 @@ describe("collection content store", () => {
     const store = await import("./siteContentStore");
     const { adminPages } = await import("@/data/adminContent");
     const processFields = adminPages.find(page => page.id === "process")?.sections.flatMap(section => section.fields) ?? [];
-    expect(processFields).toHaveLength(71);
+    expect(processFields).toHaveLength(82);
     for (const field of processFields) expect(store.validateContentValue(field.id, field.defaultValue), field.id).toBeNull();
     expect(store.validateContentValue("process.details.phase-1.title", "A".repeat(45))).toMatch(/44 characters/);
     expect(store.validateContentValue("process.details.phase-1.title", "A concise title")).toBeNull();

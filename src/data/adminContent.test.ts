@@ -30,7 +30,7 @@ describe("admin page hierarchy", () => {
     expect(process.sections.map(section => section.id)).toEqual([
       "opening", "sequence", "stage-land", "stage-architecture", "stage-design-lock",
       "stage-assembly", "stage-enclosure", "stage-handover", "details",
-      "detail-1", "detail-2", "detail-3", "detail-4", "detail-5",
+      "detail-1", "detail-2", "detail-3", "detail-4", "detail-5", "closing",
     ]);
     const fields = new Map(process.sections.flatMap(section => section.fields.map(field => [field.id, field] as const)));
     expect(fields.get("process.sequence.rail-heading")?.defaultValue).toBe("Build sequence");

@@ -52,47 +52,6 @@
   will-change: transform;
 }
 
-.timelineLine {
-  position: absolute;
-  right: clamp(20px, 3vw, 48px);
-  bottom: clamp(24px, 4svh, 44px);
-  left: clamp(20px, 3vw, 48px);
-  z-index: 1;
-  height: 16px;
-  pointer-events: none;
-}
-
-.timelineLine::before,
-.timelineLineFill {
-  position: absolute;
-  top: 7px;
-  right: 0;
-  left: 0;
-  height: 2px;
-  content: '';
-}
-
-.timelineLine::before { background: rgb(200 218 199 / 24%); }
-
-.timelineLineFill {
-  background: #c8dac7;
-  transform-origin: left center;
-}
-
-.timelineTicks {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.timelineTick {
-  width: 2px;
-  height: 14px;
-  background: #a7bbb0;
-}
-
 .phase {
   display: grid;
   flex: 0 0 20%;
@@ -211,8 +170,6 @@
   .track { display: block; width: 100%; height: auto; transform: none !important; will-change: auto; }
   .phase { width: 100%; height: auto; min-height: 0; margin-bottom: 64px; padding: 24px 16px 0; }
   .phase:last-child { margin-bottom: 0; }
-  .timelineLine { top: 0; right: auto; bottom: 0; left: 3px; width: 2px; height: auto; background: rgb(200 218 199 / 45%); }
-  .timelineLine::before, .timelineLineFill, .timelineTicks { display: none; }
 }
 
 @media (min-width: 701px) and (max-height: 620px) {
@@ -232,6 +189,4 @@
   .phase { width: 100%; min-height: 0; height: auto; margin-bottom: clamp(80px, 10vw, 150px); padding-left: clamp(20px, 3vw, 48px); }
   .phase:last-child { margin-bottom: 0; }
   .imageWrap { transform: none !important; opacity: 1 !important; }
-  .timelineLine { top: 0; right: auto; bottom: 0; left: 3px; width: 2px; height: auto; background: rgb(200 218 199 / 45%); }
-  .timelineLine::before, .timelineLineFill, .timelineTicks { display: none; }
 }

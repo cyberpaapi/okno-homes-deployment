@@ -23,7 +23,10 @@ export class ProcessPlayhead {
     const omega = 2 / .24;
     const x = omega * dt;
     const decay = 1 / (1 + x + .48 * x * x + .235 * x * x * x);
-    const change = Math.min(3.2 * .24, Math.max(-3.2 * .24, this.time - original));
+    // Keep the accepted forward cadence. Backtracking has 25% more travel
+    // per second, with the same damped acceleration and reversal braking.
+    const speed = original < this.time ? 4 : 3.2;
+    const change = Math.min(speed * .24, Math.max(-speed * .24, this.time - original));
     const goal = this.time - change;
     const temp = (this.velocity + omega * change) * dt;
     this.velocity = (this.velocity - omega * temp) * decay;

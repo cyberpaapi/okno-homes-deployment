@@ -86,3 +86,7 @@ The user supersedes the preceding chapter-lock experiment: restore smooth bidire
 ## Later 11 October — fast-scroll boundaries and timeline refinement
 
 The accepted film easing remains. A local frame-aware guard now limits oversized forward/reverse gestures so neither sequence is skipped before its presented content catches up; this supersedes the earlier unrestricted-input boundary decision. Product Timeline by hyperiux (`26930`, source above) retains its milestone/line structure, with better contrast and vertical thumbnail/type alignment. The existing five-phase detail timeline settles on complete phases and aligns its day range with the heading/copy. No new external component or media is introduced. See [boundary and timeline acceptance](process-scroll-boundaries-2026-10-11.md).
+
+## Bottom phase indicator replacement — 11 October 2026
+
+Retrieved actual Component and Demo code from **Animated Progress Stepper**, author **shadcnspace**, demo **28558**, component **14938**, [21st source](https://21st.dev/@shadcnspace/components/stepper-03). `ProcessPhaseProgress.tsx` adapts its controlled active/completed state, `aria-current` and eased fill to a read-only segmented indicator driven by the presented phase. Buttons, checkmarks, pulses, decorative workflow panel and external UI dependencies are omitted. Existing motion/CSS Modules and OKNO green palette are used. Reshaped Progress indicator 17921 (reshaped) was also retrieved, but its package wrapper was not installed or adapted. See [the release decisions](process-ending-2026-10-11.md).

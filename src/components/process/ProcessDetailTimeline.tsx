@@ -8,6 +8,7 @@ import { useSiteContent, useSiteContentMap } from '@/lib/useSiteContent';
 import { processDetailPhases } from '@/data/processDetailPhases';
 import { resolveProcessDayRange } from '@/lib/processDayRange';
 import useProcessScrollGuard from './useProcessScrollGuard';
+import ProcessPhaseProgress from './ProcessPhaseProgress';
 
 export default function ProcessDetailTimeline() {
   const values = useSiteContentMap();
@@ -75,15 +76,7 @@ export default function ProcessDetailTimeline() {
               </article>
             ))}
           </motion.div>
-          <div className={styles.timelineLine} aria-hidden="true">
-            <motion.span
-              className={styles.timelineLineFill}
-              style={{ scaleX: reducedMotion ? 1 : smoothProgress }}
-            />
-            <div className={styles.timelineTicks}>
-              {processDetailPhases.map((phase) => <span className={styles.timelineTick} key={phase.days} />)}
-            </div>
-          </div>
+          <ProcessPhaseProgress titles={currentPhases.map(phase => phase.title)} progress={smoothProgress} />
         </div>
       </div>
     </section>

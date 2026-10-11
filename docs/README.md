@@ -1,6 +1,6 @@
 # Final Showcase documentation map
 
-Current Process direction: [fast-scroll boundary and timeline polish](process-scroll-boundaries-2026-10-11.md), extending the [continuous smooth-scroll revision](process-scroll-revision-2026-10-11.md) without restoring forced chapter holds or playback buttons.
+Current Process direction: [reverse cadence, phase progress and page ending](process-ending-2026-10-11.md), retaining the [fast-scroll boundaries](process-scroll-boundaries-2026-10-11.md) and accepted continuous film motion.
 
 Current priority correction: [Models header and Vercel storage review](header-storage-review-2026-10-11.md), including authorized historical cloud-demo deletion and the distinction between Deployment Storage and the confirmed Blob block.
 

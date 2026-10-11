@@ -34,6 +34,22 @@ describe('smooth Process scroll playhead', () => {
     for (let index = 0; index < 120; index++) head.step(0, 1 / 60);
     expect(head.time).toBe(0);
   });
+  it('backtracks faster while retaining the forward speed and smooth frame bounds', () => {
+    const forward = new ProcessPlayhead();
+    const reverse = new ProcessPlayhead();
+    reverse.reset(25.6);
+    for (let index = 0; index < 120; index++) {
+      const prior = reverse.time;
+      forward.step(25.6, 1 / 60);
+      reverse.step(0, 1 / 60);
+      expect(reverse.time).toBeLessThanOrEqual(prior);
+      expect(prior - reverse.time).toBeLessThanOrEqual(4 / 60);
+      expect(reverse.time).toBeGreaterThanOrEqual(0);
+    }
+    expect((25.6 - reverse.time) / forward.time).toBeCloseTo(1.25, 2);
+    for (let index = 0; index < 500; index++) reverse.step(0, 1 / 60);
+    expect(reverse.time).toBe(0);
+  });
   it('does not jump across the film after a delayed frame or hidden tab', () => {
     const head = new ProcessPlayhead();
     expect(head.step(25, 30)).toBeLessThan(.16);
