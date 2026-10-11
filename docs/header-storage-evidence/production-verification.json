@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-10-11T05:09:05.403Z",
+  "deployment": {
+    "id": "dpl_8PFTmtV1QxmW13GjWi9ftrFwvuLQ",
+    "state": "READY",
+    "source": "0b0cdc636f64c221762437cf496973e682a248e4",
+    "project": "prj_IerXwGshmSnvYnuvQmXuJY5tEb8j",
+    "aliases": [
+      "okno-homes-deployment.vercel.app",
+      "okno-homes-deployment-codeacc2007-8289s-projects.vercel.app",
+      "okno-homes-deployment-git-main-codeacc2007-8289s-projects.vercel.app"
+    ]
+  },
+  "browser": {
+    "route": "https://okno-homes-deployment.vercel.app/models",
+    "navLinks": 7,
+    "navPadding": "0px",
+    "navRadius": "0px",
+    "navBackground": "none",
+    "headerBlend": "difference",
+    "aboutClick": true,
+    "returnToModelsClick": true,
+    "screenshot": "models-production-after.png"
+  },
+  "headChecks": [
+    {
+      "url": "https://krnlv3.vercel.app/",
+      "status": 200
+    },
+    {
+      "url": "https://okno-homes-deployment.vercel.app/",
+      "status": 200
+    },
+    {
+      "url": "https://okno-homes-deployment.vercel.app/models",
+      "status": 200
+    },
+    {
+      "url": "https://okno-homes-deployment.vercel.app/admin",
+      "status": 200
+    },
+    {
+      "url": "https://okno-homes-deployment.vercel.app/api/admin/content",
+      "status": 401
+    }
+  ],
+  "historicalCloudDemo": {
+    "name": "okno-homes-demo",
+    "deleted": true,
+    "deploymentsRemoved": 6,
+    "localAndGithubSourcePreserved": true
+  },
+  "limits": {
+    "confirmedBlock": "blob",
+    "exactExhaustedCounter": "unverified - dashboard 2FA pending",
+    "deploymentStorageTotal": "unverified - dashboard 2FA pending",
+    "krnlConfigurationChanged": false,
+    "productionCmsWritesAttempted": false
+  }
+}
