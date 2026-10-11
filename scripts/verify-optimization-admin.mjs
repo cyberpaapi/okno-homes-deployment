@@ -39,11 +39,12 @@ if (action === 'backup') {
   if (allowed.some(id => (current.published[id] !== original.published[id] && current.published[id] !== expected[id]) || (current.draft[id] !== undefined && current.draft[id] !== expected[id]))) throw new Error('Owner changed a QA field; refuse to overwrite it.');
   process.loadEnvFile('.okno-secrets/vercel-production.env');
   const stored = await get('cms/content.json', { access: 'private', useCache: false, headers: { 'Accept-Encoding': 'identity' } });
-  if (!stored?.stream || !stored.etag || stored.etag.startsWith('W/')) throw new Error('No strong ETag for conditional restoration.');
+  const etag = stored?.blob.etag;
+  if (!stored?.stream || !etag || etag.startsWith('W/')) throw new Error('No strong ETag for conditional restoration.');
   const fresh = JSON.parse(await new Response(stored.stream).text());
   if (fresh.revision !== current.revision || fresh.draftRevision !== current.draftRevision) throw new Error('Concurrent edit detected before restoration.');
   const restored = { ...fresh, published: original.published, draft: original.draft, publishedCollections: original.publishedCollections, draftCollections: original.draftCollections, revision: fresh.revision + 1, draftRevision: fresh.draftRevision + 1 };
-  await put('cms/content.json', JSON.stringify(restored), { access: 'private', contentType: 'application/json', addRandomSuffix: false, cacheControlMaxAge: 0, ifMatch: stored.etag });
+  await put('cms/content.json', JSON.stringify(restored), { access: 'private', contentType: 'application/json', addRandomSuffix: false, cacheControlMaxAge: 0, ifMatch: etag });
   const live = await publicContent();
   if (JSON.stringify(live.published) !== JSON.stringify(original.published) || JSON.stringify(live.publishedCollections) !== JSON.stringify(original.publishedCollections)) throw new Error('Restored public content differs from backup.');
   console.log('PASS: all original published fields/collections restored exactly; revisions advance and owner changes are protected.');
