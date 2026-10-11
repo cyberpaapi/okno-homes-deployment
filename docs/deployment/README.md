@@ -10,7 +10,7 @@ The deployment is complete only after private repository, source SHA, READY stat
 
 ## Verified release
 
-The current Hero V1 ordered-frame release is recorded in [its integration ledger](../hero-v1-window-finish-2026-10-11.md): runtime `53a82f60224ef92ca7ea7723e02568d303f956f6`, READY deployment `dpl_HBqXTrpP6yZ5giMuvx5Q5UeHqboh`. It preserves the accepted window film, applies adjacent-frame playback and reload rules, and caches its unchanged fingerprinted source. Earlier reports below retain historical evidence.
+The current Hero V1 normal-scroll release is recorded in [its integration ledger](../hero-v1-window-finish-2026-10-11.md): runtime `0509a19a66e2ceb4a829d0828f579815e6d322de`, READY deployment `dpl_CY9aTSRaXE2iV3vRePfhYrfHAdZN`. It shortens the Hero, removes discarded gesture distance, speeds ready-frame presentation and preserves the accepted source, endpoint and reload rules. Cold decode holds remain measured; previous reports below retain historical evidence.
 
 Production website: https://okno-homes-deployment.vercel.app. Editor: https://okno-homes-deployment.vercel.app/admin. All plan subtasks are complete. Read the release ledger for source/deployment identity, exact checks and remaining acceptance boundaries.
 
