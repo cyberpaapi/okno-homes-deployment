@@ -21,7 +21,7 @@ export default async function Page({ params, searchParams }: Props) {
   const configuration = resolvePublishedConfiguration(slug, query.variant);
   if (!configuration) notFound();
   if (configuration.status === "unsupported-variant") {
-    return <CustomerUnavailable slug={configuration.slug} availableVariant={configuration.catalogue.variant} />;
+    return <CustomerUnavailable slug={configuration.slug} availableVariant={configuration.catalogue.variant} requestedVariant={typeof query.variant === "string" ? query.variant : undefined} />;
   }
   return <CustomerStudio key={`${slug}-${configuration.catalogue.revision}`} catalogue={configuration.catalogue} />;
 }

@@ -54,11 +54,12 @@ describe("customer configurator copy", () => {
       "configurator.unavailable.configure": "Open {variant}",
       "configurator.library.heading": "Our surface library.",
     };
-    render(<CustomerUnavailable slug="kray" availableVariant="1-bhk" />);
+    render(<CustomerUnavailable slug="kray" availableVariant="1-bhk" requestedVariant="studio" />);
     const brand = screen.getByRole("link", { name: "New OKNO identity Signature configurator" });
     expect(brand.querySelector("img")?.getAttribute("src")).toContain("brand-wordmark.png");
     expect(screen.getByText("Explore the 1 BHK layout now.")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Open 1 BHK ↗" })).toHaveAttribute("href", "/models/signature/kray/configure?variant=1-bhk");
+    expect(screen.getByRole("link", { name: "← Back to model" })).toHaveAttribute("href", "/models/signature?model=kray&details=1&variant=studio");
     expect(screen.getByRole("heading", { name: "Our surface library." })).toBeInTheDocument();
   });
 });

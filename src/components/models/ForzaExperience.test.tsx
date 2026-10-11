@@ -42,6 +42,19 @@ if (!forza || !kray || !tengo || !trib || !octapod) {
 const signatureModels = [forza, kray, gazePrototype, tengo, trib, octapod];
 
 describe("ForzaExperience", () => {
+  it("returns to the requested model and stable variant instead of reopening Forza", () => {
+    render(<ForzaExperience models={signatureModels} initialModelSlug="kray" initialDetailsOpen initialVariantId="1-bhk" />);
+    const dialog = screen.getByRole("dialog", { name: "Kray" });
+    expect(within(dialog).getByRole("tab", { name: "Kray 1 BHK" })).toHaveAttribute("aria-selected", "true");
+    expect(within(dialog).getByRole("link", { name: "Configure Kray" })).toHaveAttribute("href", "/models/signature/kray/configure?variant=1-bhk");
+    expect(within(screen.getByRole("group", { name: "Signature models" })).getByRole("button", { name: "Kray" })).toHaveAttribute("aria-pressed", "true");
+  });
+
+  it("falls back safely for a removed or unknown model link", () => {
+    render(<ForzaExperience models={signatureModels} initialModelSlug="removed-model" initialDetailsOpen initialVariantId="unknown" />);
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Forza" })).toBeInTheDocument();
+  });
   it("renders an added model and its added plan with independent media and Explore copy", async () => {
     cms.collections["signature.models"] = [...signatureModelDefaults, { id: "aurora", fields: {
       name: "Aurora", orbitFilm: "/qa/aurora-a.mp4", detailFilm: "/qa/aurora-b.mp4", poster: "/qa/aurora.webp",

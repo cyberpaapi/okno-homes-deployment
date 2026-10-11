@@ -9,7 +9,7 @@ import { useCustomerCopy } from "./useCustomerCopy";
 import OknoLogo from "@/components/Brand/OknoLogo";
 import { useSiteContentMap } from "@/lib/useSiteContent";
 
-export default function CustomerUnavailable({ slug, availableVariant }: { slug: StudioModel; availableVariant?: string }) {
+export default function CustomerUnavailable({ slug, availableVariant, requestedVariant }: { slug: StudioModel; availableVariant?: string; requestedVariant?: string }) {
   const copy = useCustomerCopy();
   const brandName = useSiteContentMap()["brand.logo.alt"] || "OKNO Modhomes";
   const variantName = availableVariant?.replaceAll("-", " ").toUpperCase() || "";
@@ -17,7 +17,7 @@ export default function CustomerUnavailable({ slug, availableVariant }: { slug: 
     <main className={`${styles.app} ${styles.customer} ${styles.customerUnavailable}`}>
       <header className={styles.header}>
         <Link href="/models/signature" className={styles.brand} aria-label={`${brandName} ${copy("configurator.brand.subtitle")}`}><OknoLogo priority /><span>{copy("configurator.brand.subtitle")}</span></Link>
-        <div className={styles.headerActions}><Link href={`/models/signature?model=${slug}&details=1`}>← {copy("configurator.action.back")}</Link></div>
+        <div className={styles.headerActions}><Link href={`/models/signature?model=${slug}&details=1${requestedVariant ? `&variant=${encodeURIComponent(requestedVariant)}` : ""}`}>← {copy("configurator.action.back")}</Link></div>
       </header>
       <div className={styles.unavailableLayout}>
         <section className={styles.unavailableStage} aria-label={copy("configurator.unavailable.exterior", { model: slug })}>

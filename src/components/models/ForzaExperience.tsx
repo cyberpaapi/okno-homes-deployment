@@ -440,7 +440,12 @@ const bentoCardVariants: Variants = {
   }),
 };
 
-export default function ForzaExperience({ models }: { models: OknoModel[] }) {
+export default function ForzaExperience({ models, initialModelSlug = "forza", initialDetailsOpen = false, initialVariantId = null }: {
+  models: OknoModel[];
+  initialModelSlug?: string;
+  initialDetailsOpen?: boolean;
+  initialVariantId?: string | null;
+}) {
   const content = useSiteContentMap();
   const collections = useSiteCollectionsMap();
   const modelRecords = collections["signature.models"] ?? signatureModelDefaults;
@@ -461,9 +466,11 @@ export default function ForzaExperience({ models }: { models: OknoModel[] }) {
   const prefersReducedMotion = useReducedMotion();
   const [videoReady, setVideoReady] = useState(false);
   const [detailVisible, setDetailVisible] = useState(false);
-  const [detailsOpen, setDetailsOpen] = useState(false);
+  const initialModelExists = modelRecords.some(record => record.id === initialModelSlug);
+  const [detailsOpen, setDetailsOpen] = useState(initialDetailsOpen && initialModelExists);
+  const [linkedVariantId, setLinkedVariantId] = useState(initialVariantId);
   const [detailsOrigin, setDetailsOrigin] = useState<DetailsOrigin>({ x: 0, y: 0 });
-  const [activeSlug, setActiveSlug] = useState("forza");
+  const [activeSlug, setActiveSlug] = useState(initialModelExists ? initialModelSlug : "forza");
   const [planFilter, setPlanFilter] = useState<PlanFilter>("all");
   useEffect(() => {
     document.documentElement.removeAttribute("data-model-transition");
@@ -801,6 +808,7 @@ export default function ForzaExperience({ models }: { models: OknoModel[] }) {
     requestedFrameRef.current = -1;
     targetProgressRef.current = 0;
     setDetailsOpen(false);
+    setLinkedVariantId(null);
     setActiveSlug(slug);
   };
 
@@ -821,6 +829,7 @@ export default function ForzaExperience({ models }: { models: OknoModel[] }) {
   };
 
   const openDetails = () => {
+    setLinkedVariantId(null);
     const triggerRect = detailsTriggerRef.current?.getBoundingClientRect();
     if (triggerRect) {
       setDetailsOrigin({
@@ -1066,7 +1075,7 @@ export default function ForzaExperience({ models }: { models: OknoModel[] }) {
         {detailsOpen && (
           <DetailsLayer
             model={presentationModel}
-            initialVariantIndex={activeVariantIndex}
+            initialVariantIndex={linkedVariantId ? Math.max(0, activeModel.variants.findIndex((_, index) => exploreVariantId(activeModel.slug, index) === linkedVariantId)) : activeVariantIndex}
             gallery={experience.gallery}
             origin={detailsOrigin}
             onClose={() => setDetailsOpen(false)}

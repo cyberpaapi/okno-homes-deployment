@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ForzaExperience from "@/components/models/ForzaExperience";
+import SignatureExperience from "@/components/models/SignatureExperience";
 import { gazePrototype, oknoModels } from "@/data/models";
 
 export const metadata: Metadata = {
@@ -21,5 +21,5 @@ export default function SignatureModelsPage() {
   });
 
   if (!signatureModels.length) return null;
-  return <ForzaExperience models={signatureModels} />;
+  return <SignatureExperience models={signatureModels} />;
 }
