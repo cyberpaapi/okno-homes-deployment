@@ -1,0 +1,81 @@
+{
+  "iteration": 3,
+  "cases": [
+    {
+      "label": "slow forward",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "12",
+        "scrubLastMs": "175.8",
+        "scrubLoadMs": "306.2",
+        "scrubMaxMs": "175.8",
+        "scrubMeanMs": "115.4",
+        "scrubPresentedFrames": "4",
+        "scrubPresentedTime": "12.0417",
+        "scrubTarget": "12.0417"
+      },
+      "top": -4536
+    },
+    {
+      "label": "fast forward",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "12",
+        "scrubLastMs": "175.8",
+        "scrubLoadMs": "306.2",
+        "scrubMaxMs": "175.8",
+        "scrubMeanMs": "115.4",
+        "scrubPresentedFrames": "4",
+        "scrubPresentedTime": "12.0417",
+        "scrubTarget": "15.3750"
+      },
+      "top": -5252.6669921875
+    },
+    {
+      "label": "reverse",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "12",
+        "scrubLastMs": "175.8",
+        "scrubLoadMs": "306.2",
+        "scrubMaxMs": "175.8",
+        "scrubMeanMs": "115.4",
+        "scrubPresentedFrames": "4",
+        "scrubPresentedTime": "12.0417",
+        "scrubTarget": "10.4167"
+      },
+      "top": -4180.6669921875
+    },
+    {
+      "label": "small reverse",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "12",
+        "scrubLastMs": "54.0",
+        "scrubLoadMs": "306.2",
+        "scrubMaxMs": "175.8",
+        "scrubMeanMs": "90.1",
+        "scrubPresentedFrames": "6",
+        "scrubPresentedTime": "10.1250",
+        "scrubTarget": "10.1250"
+      },
+      "top": -4118.6669921875
+    },
+    {
+      "label": "end of film",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "12",
+        "scrubLastMs": "54.0",
+        "scrubLoadMs": "306.2",
+        "scrubMaxMs": "175.8",
+        "scrubMeanMs": "90.1",
+        "scrubPresentedFrames": "6",
+        "scrubPresentedTime": "10.1250",
+        "scrubTarget": "16.7917"
+      },
+      "top": -5550.6669921875
+    }
+  ],
+  "interpretation": "Superseded: exact-target-only renderer still held on fast gestures; iteration 4 addresses this."
+}

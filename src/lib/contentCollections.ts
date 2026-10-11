@@ -69,6 +69,7 @@ export const collectionDefinitions: readonly CollectionDefinition[] = [
       { key: "scrollVideo", label: "Scroll journey film · V1", kind: "video" },
       { key: "endImage", label: "Interior handoff image · V1", kind: "image" },
       { key: "introLastFrame", label: "Intro handoff still · V1", kind: "image" },
+      { key: "tagline", label: "Still-frame tagline · V1", kind: "text", help: "V1 only. Shown over the frozen intro frame; leave empty to hide." },
       { key: "openingAlt", label: "Poster description", kind: "text", required: true },
       { key: "endAlt", label: "Interior image description · V1", kind: "text" },
       { key: "accessibleTitle", label: "Accessible page title", kind: "text" },

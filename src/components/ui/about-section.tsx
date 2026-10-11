@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { useRef } from "react";
 import { pageImageLoader } from "@/lib/pageImageLoader";
 import { BadgeCheck, CalendarClock, House, Lightbulb, ShieldCheck, type LucideIcon } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 import { SilkBackground } from "@/components/projects/21st/SilkBackground";
 import { TextReveal } from "@/components/about/TextReveal";
 import { useSiteContentMap } from "@/lib/useSiteContent";
@@ -31,6 +32,8 @@ export default function AboutSection() {
   const content = useSiteContentMap();
   const value = (id: string, fallback: string) => content[id] ?? fallback;
   const reduceMotion = useReducedMotion();
+  const paperRef = useRef<HTMLDivElement>(null);
+  const paperVisible = useInView(paperRef, { margin: "-20% 0px -20% 0px" });
   const mediaEntrance = reduceMotion ? {} : {
     initial: { opacity: 0.84, y: 18 },
     whileInView: { opacity: 1, y: 0 },
@@ -42,7 +45,7 @@ export default function AboutSection() {
   return (
     <div className={styles.page} data-about-surface="silk">
       <div className={styles.ambient} data-about-21st="24383" aria-hidden="true">
-        <SilkBackground maxPixels={520_000} fps={24} interactive={false} />
+        <SilkBackground paused={paperVisible} maxPixels={520_000} fps={24} interactive={false} />
       </div>
 
       <section className={styles.hero} data-about-viewport-section>
@@ -94,14 +97,7 @@ export default function AboutSection() {
         </div>
       </section>
 
-      <motion.div
-        className={styles.paperInterlude}
-        data-about-paper
-        initial={reduceMotion ? false : { opacity: 0.9, y: 26 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.08 }}
-        transition={{ duration: reduceMotion ? 0 : 0.9, ease: [0.16, 1, 0.3, 1] }}
-      >
+      <div ref={paperRef} className={styles.paperInterlude} data-about-paper>
       <section id="founders" className={`${styles.chapter} ${styles.founders}`} data-about-viewport-section>
         <div className={`${styles.inner} ${styles.split} ${styles.foundersSplit}`}>
           <motion.figure className={`${styles.media} ${styles.foundersMedia}`} {...mediaEntrance}>
@@ -136,7 +132,7 @@ export default function AboutSection() {
           </ul>
         </div>
       </section>
-      </motion.div>
+      </div>
 
       <section className={`${styles.chapter} ${styles.fit}`} data-about-viewport-section>
         <div className={`${styles.inner} ${styles.split} ${styles.fitSplit}`}>

@@ -112,7 +112,7 @@ export default function CollectionEditor({ definition, items, onChange, onUpload
         <summary><span className={styles.order}>{index + 1}</span><span className={styles.itemName}>{itemName(item, definition.itemLabel)}<small>{item.id}</small></span><span className={styles.summaryHint}>Edit</span></summary>
         <div className={styles.body}>
           <div className={styles.identity}><label htmlFor={`${definition.id}-${item.id}-id`}>Stable page ID</label><input id={`${definition.id}-${item.id}-id`} value={item.id} maxLength={80} disabled={locked} onChange={event => update(index, { ...item, id: event.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, "-") })} /><small>Changing a published ID can change its link. Use a short, unique name.</small></div>
-          {definition.fields.filter(field => definition.id !== "home.variants" || (item.fields.template === "v1" ? !["loopPoster", "buttonLabel"].includes(field.key) : !["scrollVideo", "endImage", "introLastFrame", "endAlt"].includes(field.key))).map(field => {
+          {definition.fields.filter(field => definition.id !== "home.variants" || (item.fields.template === "v1" ? !["loopVideo", "loopPoster", "buttonLabel"].includes(field.key) : !["scrollVideo", "endImage", "introLastFrame", "endAlt", "tagline"].includes(field.key))).map(field => {
             const controlId = `${definition.id}-${item.id}-${field.key}`;
             const value = item.fields[field.key] ?? "";
             return <div className={styles.field} key={field.key}>

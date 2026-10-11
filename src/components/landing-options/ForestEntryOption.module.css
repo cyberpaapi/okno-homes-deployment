@@ -34,7 +34,8 @@
 
 .sticky {
   --intro-opacity: 1;
-  --ambient-opacity: 0;
+  --still-opacity: 0;
+  --brand-opacity: 0;
   --journey-opacity: 0;
   --end-opacity: 0;
   --treatment-lift: 0;
@@ -50,7 +51,7 @@
 .startFrame,
 .endFrame,
 .video,
-.ambientAtmosphere,
+.introStill,
 .grade {
   position: absolute;
   inset: 0;
@@ -63,13 +64,15 @@
 
 .startFrame img,
 .endFrame img,
+.introStill img,
 .video {
   object-fit: cover;
   object-position: center;
 }
 
 .startFrame img,
-.endFrame img {
+.endFrame img,
+.introStill img {
   filter: saturate(1.55) contrast(1.14) brightness(1.08);
 }
 
@@ -84,91 +87,26 @@
 }
 
 .introVideo { opacity: var(--intro-opacity); }
-.ambientVideo {
-  opacity: var(--ambient-opacity);
-}
 .journeyVideo { opacity: var(--journey-opacity); }
-.introComplete { opacity: 0 !important; transition: opacity .7s cubic-bezier(.22, 1, .36, 1); }
-
-.ambientAtmosphere {
-  z-index: 3;
-  opacity: var(--ambient-opacity);
-  overflow: hidden;
+canvas.journeyVideo:not([data-scrub-presented-frames]) { opacity: 0; }
+.introComplete { opacity: 0 !important; }
+.introStill { z-index: 2; opacity: var(--still-opacity); }
+.brand {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 28px;
+  opacity: var(--brand-opacity);
   pointer-events: none;
+  text-align: center;
 }
-
-.fogBankFar,
-.fogBankNear {
-  position: absolute;
-  display: block;
-  width: 88%;
-  height: 30%;
-  border-radius: 50%;
-  animation-play-state: paused;
-}
-
-.fogBankFar {
-  top: 7%;
-  left: -17%;
-  background: radial-gradient(ellipse, rgba(211, 190, 221, .26), rgba(191, 177, 213, .1) 42%, transparent 72%);
-  animation: fogDriftFar 11s ease-in-out infinite alternate;
-}
-
-.fogBankNear {
-  top: 12%;
-  right: -24%;
-  background: radial-gradient(ellipse, rgba(197, 183, 213, .2), rgba(177, 169, 203, .08) 44%, transparent 73%);
-  animation: fogDriftNear 13s ease-in-out infinite alternate;
-}
-
-.fogBankFar,
-.fogBankNear { animation-play-state: paused; }
-
-.firefly {
-  position: absolute;
-  z-index: 1;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #f6dc8e;
-  box-shadow: 0 0 8px 2px rgba(240, 195, 95, .7);
-  opacity: 0;
-  animation: fireflyDrift 4.8s ease-in-out infinite;
-  animation-play-state: paused;
-}
-
-.firefly:nth-child(3) { left: 18%; top: 62%; animation-delay: -.8s; }
-.firefly:nth-child(4) { left: 32%; top: 73%; animation-delay: -2.4s; animation-duration: 5.6s; }
-.firefly:nth-child(5) { left: 46%; top: 56%; animation-delay: -1.7s; animation-duration: 4.3s; }
-.firefly:nth-child(6) { left: 61%; top: 69%; animation-delay: -3.1s; animation-duration: 6.1s; }
-.firefly:nth-child(7) { left: 76%; top: 61%; animation-delay: -2s; animation-duration: 5.2s; }
-.firefly:nth-child(8) { left: 85%; top: 78%; animation-delay: -4.4s; animation-duration: 5.9s; }
-
-.ambientLive .ambientVideo { animation: ambientBreath 8s ease-in-out infinite alternate; }
-.ambientLive .fogBankFar,
-.ambientLive .fogBankNear,
-.ambientLive .firefly { animation-play-state: running; }
-
-@keyframes ambientBreath {
-  from { transform: scale(1.006); }
-  to { transform: scale(1.025); }
-}
-
-@keyframes fogDriftFar {
-  from { transform: translate3d(-5%, 0, 0); }
-  to { transform: translate3d(8%, -3%, 0); }
-}
-
-@keyframes fogDriftNear {
-  from { transform: translate3d(6%, 1%, 0); }
-  to { transform: translate3d(-8%, -2%, 0); }
-}
-
-@keyframes fireflyDrift {
-  0%, 100% { opacity: .08; transform: translate3d(0, 0, 0) scale(.8); }
-  32% { opacity: .85; transform: translate3d(8px, -10px, 0) scale(1); }
-  68% { opacity: .22; transform: translate3d(-5px, 5px, 0) scale(.85); }
-}
+.brand .wordmark { width: clamp(220px, 32vw, 460px); height: auto; }
+.brand p { max-width: 40ch; margin: 0; font-size: clamp(16px, 1.8vw, 25px); line-height: 1.4; color: #f4f0e9; text-shadow: 0 2px 18px #000; }
 
 .grade {
   z-index: 6;
@@ -187,7 +125,8 @@
   .sticky { min-height: 600px; }
   .video,
   .startFrame img,
-  .endFrame img { object-position: center; }
+  .endFrame img,
+  .introStill img { object-position: center; }
   .grade {
     background:
       radial-gradient(circle at 48% 56%, rgba(220, 150, 74, .1), transparent 28%),
@@ -201,5 +140,10 @@
   .sticky { position: relative; }
   .endFrame,
   .video,
-  .ambientAtmosphere { display: none; }
+  .introStill { display: none; }
+  .brand { opacity: 1; }
 }
+
+.option[data-static="true"] .sequence { height: 100svh; }
+.option[data-static="true"] .sticky { position: relative; }
+.option[data-static="true"] .brand { opacity: 1; }

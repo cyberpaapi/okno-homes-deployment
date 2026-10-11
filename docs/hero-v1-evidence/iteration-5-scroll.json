@@ -1,0 +1,81 @@
+{
+  "iteration": 5,
+  "cases": [
+    {
+      "label": "slow forward",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "22",
+        "scrubLastMs": "1.9",
+        "scrubLoadMs": "355.0",
+        "scrubMaxMs": "385.1",
+        "scrubMeanMs": "79.1",
+        "scrubPresentedFrames": "16",
+        "scrubPresentedTime": "10.7083",
+        "scrubTarget": "10.7083"
+      },
+      "top": -4248
+    },
+    {
+      "label": "fast forward",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "24",
+        "scrubLastMs": "1.9",
+        "scrubLoadMs": "355.0",
+        "scrubMaxMs": "385.1",
+        "scrubMeanMs": "73.5",
+        "scrubPresentedFrames": "23",
+        "scrubPresentedTime": "14.0833",
+        "scrubTarget": "14.0833"
+      },
+      "top": -4968
+    },
+    {
+      "label": "reverse",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "24",
+        "scrubLastMs": "183.2",
+        "scrubLoadMs": "355.0",
+        "scrubMaxMs": "385.1",
+        "scrubMeanMs": "75.7",
+        "scrubPresentedFrames": "28",
+        "scrubPresentedTime": "9.0417",
+        "scrubTarget": "9.0417"
+      },
+      "top": -3888
+    },
+    {
+      "label": "small reverse",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "24",
+        "scrubLastMs": "1.9",
+        "scrubLoadMs": "355.0",
+        "scrubMaxMs": "385.1",
+        "scrubMeanMs": "69.9",
+        "scrubPresentedFrames": "31",
+        "scrubPresentedTime": "8.7917",
+        "scrubTarget": "8.7917"
+      },
+      "top": -3830.666748046875
+    },
+    {
+      "label": "last frame",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "24",
+        "scrubLastMs": "107.9",
+        "scrubLoadMs": "355.0",
+        "scrubMaxMs": "385.1",
+        "scrubMeanMs": "71.4",
+        "scrubPresentedFrames": "33",
+        "scrubPresentedTime": "20.0000",
+        "scrubTarget": "20.0000"
+      },
+      "top": -6350.6669921875
+    }
+  ],
+  "interpretation": "Original 1920x1080/24fps AVC; cache never exceeds 24. Five gesture cases settle on exact targets. App measurements include cold-load and decode latency, not browser FPS or physical-device certification."
+}

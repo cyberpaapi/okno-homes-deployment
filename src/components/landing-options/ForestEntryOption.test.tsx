@@ -12,6 +12,7 @@ vi.mock('next/image', () => ({ default: (props: React.ImgHTMLAttributes<HTMLImag
   // eslint-disable-next-line @next/next/no-img-element
   return <img {...imageProps} alt={props.alt} />;
 } }));
+vi.mock('./ScrollJourneyFilm', () => ({ default: ({ src, className }: { src: string; className: string }) => <video src={src} className={className} /> }));
 vi.mock('@/components/landing/LandingExperience', () => ({ default: () => <div data-testid="option-one">Current landing page</div> }));
 vi.mock('lenis/react', () => ({ ReactLenis: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
 vi.mock('motion/react', () => ({
@@ -49,31 +50,24 @@ describe('ForestEntryOption', () => {
       'data-journey-video',
       '/assets/landing-options/forest-entry-scroll-seekable-900p.mp4',
     );
-    expect(container.firstElementChild).toHaveAttribute(
-      'data-ambient-video',
-      '/assets/landing-options/forest-entry-ambient-loop.mp4',
-    );
+    expect(container.firstElementChild).not.toHaveAttribute('data-ambient-video');
     expect([...container.querySelectorAll('video')].map(video => video.getAttribute('src'))).toEqual([
       '/assets/landing-options/forest-entry-intro-15s.mp4',
-      '/assets/landing-options/forest-entry-ambient-loop.mp4',
       '/assets/landing-options/forest-entry-scroll-seekable-900p.mp4',
     ]);
   });
 
-  it('restarts a paused forest loop when the page regains focus', () => {
-    motionState.progress = .2;
-    vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
+  it('holds the intro still and editable tagline without any idle playback', () => {
     const play = vi.spyOn(HTMLMediaElement.prototype, 'play').mockResolvedValue(undefined);
-    vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
-
-    const { container } = render(<ForestEntryOption />);
-    const [intro] = container.querySelectorAll('video');
-    fireEvent.ended(intro);
-    expect(play).toHaveBeenCalled();
-
-    play.mockClear();
+    const { container, rerender } = render(<ForestEntryOption variant={{ id: 'hero-v1', fields: { tagline: 'A home in the forest.' } }} />);
+    fireEvent.ended(container.querySelector('video')!);
+    expect(container.querySelector('img[src="/assets/landing-options/forest-entry-intro-last-frame.png"]')).toBeInTheDocument();
+    expect(screen.getByText('A home in the forest.')).toBeInTheDocument();
+    expect(container.querySelectorAll('video')).toHaveLength(2);
     fireEvent.focus(window);
-    expect(play).toHaveBeenCalledWith();
+    expect(play).not.toHaveBeenCalled();
+    rerender(<ForestEntryOption variant={{ id: 'hero-v1', fields: { tagline: '' } }} />);
+    expect(container.querySelector('[data-hero-v1-tagline]')).toBeNull();
   });
 
   it('replays the intro after scrolling away and returning to the top', () => {

@@ -18,5 +18,5 @@ export default function HomeVariant({ initialHero, forcedId }: { initialHero: st
   }
   const template = item?.fields.template ?? "v1";
   const override = collections["home.variants"] ? item : undefined;
-  return template === "v2" ? <HeroV2 variant={override} /> : <HeroV1 variant={override} />;
+  return template === "v2" ? <HeroV2 variant={override} /> : <HeroV1 key={item?.id ?? 'hero-v1'} variant={override} />;
 }

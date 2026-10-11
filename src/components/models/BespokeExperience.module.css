@@ -31,12 +31,12 @@
 .heroLayers { position: absolute; inset: 15% 0 auto; display: grid; color: #183f7914; font: 550 clamp(92px, 15vw, 235px)/.61 "Bespoke Geist", sans-serif; letter-spacing: -.09em; text-align: center; }
 .heroLayers span:nth-child(2) { transform: translateX(-4vw); color: #3852bf17; }
 .heroLayers span:nth-child(3) { transform: translateX(5vw); color: #2779c713; }
-.heroFrame { position: relative; overflow: hidden; isolation: isolate; border: 1px solid #fff; box-shadow: 0 35px 100px #2c555c2b, inset 0 1px #fff; transform: translateZ(0); }
+.heroFrame { container-type: inline-size; position: relative; overflow: hidden; isolation: isolate; border: 1px solid #fff; box-shadow: 0 35px 100px #2c555c2b, inset 0 1px #fff; transform: translateZ(0); }
 .heroImage { position: absolute; inset: -3%; transform-origin: center; }
 .heroShade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 42%, #081419a6 100%); }
 .heroWords { position: absolute; inset: auto 0 0; z-index: 2; padding: clamp(26px, 4.5vw, 70px); color: #f8fbfa; }
 .heroWords p { color: #dceff3; }
-.heroWords h1 { max-width: 1120px; max-height: min(72svh, 700px); overflow-y: auto; overflow-wrap: anywhere; margin: 0; font: 550 clamp(54px, 8.2vw, 132px)/.86 "Bespoke Geist", sans-serif; letter-spacing: -.075em; }
+.heroWords h1 { max-width: 1120px; overflow-wrap: anywhere; margin: 0; font: 550 clamp(28px, 8cqw, 112px)/.98 "Bespoke Geist", sans-serif; letter-spacing: -.075em; }
 
 .manifesto { display: grid; min-height: 150svh; grid-template-columns: .8fr 1.2fr; align-items: center; gap: clamp(40px, 7vw, 120px); padding: 12vh clamp(24px, 5vw, 78px); background: #ffffff9c; backdrop-filter: blur(12px); }
 .manifestoCopy { align-self: center; }
@@ -106,7 +106,7 @@
   .hero { height:180svh; }
   .heroLayers { top:21%; font-size:24vw; }
   .heroWords { padding:26px; }
-  .heroWords h1 { font-size:clamp(46px,13vw,64px); }
+  .heroWords h1 { font-size:clamp(32px,12cqw,64px); }
   .manifesto { min-height:auto; gap:62px; padding:130px 20px; }
   .layeredHeading { font-size:clamp(43px,12vw,60px); }
   .layeredHeading span:nth-child(2),.layeredHeading span:nth-child(3) { margin-left:0; }

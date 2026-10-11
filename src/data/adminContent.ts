@@ -314,6 +314,8 @@ const legacyCollectionSections: ContentSection[] = [
 ];
 
 const legacyOptionFields: ContentField[] = [];
+// Retain historical saved data without offering a V1 loop that is no longer used.
+const retiredHeroFields: ContentField[] = [{ id: 'hero-v1.opening.ambient-video', label: 'Retired V1 ambient loop', kind: 'video', defaultValue: '/assets/landing-options/forest-entry-ambient-loop.mp4' }];
 function enquirySection(id: string, label: string, entries: readonly (readonly [string, string, string])[]): ContentSection {
   const fields = entries.map(([key, fieldLabel, defaultValue]): ContentField => ({
     id: `enquiry.${key}`, label: fieldLabel, kind: "text", defaultValue,
@@ -342,9 +344,9 @@ export const adminPages: readonly ContentPage[] = [
             { id: "hero-v1.opening.start-image", label: "Opening still", kind: "image", defaultValue: "/assets/landing-options/forest-entry-start-v2.jpg" },
             { id: "hero-v1.opening.end-image", label: "Interior still", kind: "image", defaultValue: "/assets/landing-options/forest-entry-end-v2.jpg" },
             { id: "hero-v1.opening.intro-video", label: "Intro film", kind: "video", defaultValue: "/assets/landing-options/forest-entry-intro-15s.mp4" },
-            { id: "hero-v1.opening.ambient-video", label: "Forest ambient loop", kind: "video", defaultValue: "/assets/landing-options/forest-entry-ambient-loop.mp4" },
             { id: "hero-v1.opening.scroll-video", label: "Scroll journey film", kind: "video", defaultValue: "/assets/landing-options/forest-entry-scroll-seekable-900p.mp4", help: "Replacement must remain seekable; the scroll interaction reads video time." },
             { id: "hero-v1.opening.intro-last-frame", label: "Intro handoff still", kind: "image", defaultValue: "/assets/landing-options/forest-entry-intro-last-frame.png" },
+            { id: "hero-v1.opening.tagline", label: "Still-frame tagline · V1", kind: "text", defaultValue: "Live better, live modular.", help: "Shown with OKNO Modhomes on the frozen intro frame. Leave empty to hide the tagline." },
             { id: "hero-v1.opening.accessible-title", label: "Accessible page title", kind: "text", defaultValue: "OKNO Modhomes" },
             { id: "hero-v1.opening.start-alt", label: "Opening image description", kind: "text", defaultValue: "A single illuminated Kioo home within dense forest at blue hour" },
             { id: "hero-v1.opening.end-alt", label: "Interior image description", kind: "text", defaultValue: "The timber-lined interior of the Kioo home opening to the forest" },
@@ -804,6 +806,7 @@ export function allContentFields(pages: readonly ContentPage[] = adminPages): Co
   walk(pages);
   for (const section of legacyCollectionSections) for (const field of section.fields) if (!unique.has(field.id)) unique.set(field.id, field);
   for (const field of legacyOptionFields) if (!unique.has(field.id)) unique.set(field.id, field);
+  for (const field of retiredHeroFields) if (!unique.has(field.id)) unique.set(field.id, field);
   return [...unique.values()];
 }
 

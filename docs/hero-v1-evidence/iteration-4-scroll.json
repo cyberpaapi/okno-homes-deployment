@@ -1,0 +1,105 @@
+{
+  "iteration": 4,
+  "cases": [
+    {
+      "label": "slow forward",
+      "immediate": {
+        "film": {
+          "filmRenderer": "frames",
+          "scrubCacheFrames": "22",
+          "scrubLastMs": "1.9",
+          "scrubLoadMs": "31.9",
+          "scrubMaxMs": "452.9",
+          "scrubMeanMs": "188.4",
+          "scrubPresentedFrames": "14",
+          "scrubPresentedTime": "10.7083",
+          "scrubTarget": "10.7083"
+        },
+        "top": -4248
+      },
+      "settled": {
+        "film": {
+          "filmRenderer": "frames",
+          "scrubCacheFrames": "22",
+          "scrubLastMs": "1.9",
+          "scrubLoadMs": "31.9",
+          "scrubMaxMs": "452.9",
+          "scrubMeanMs": "188.4",
+          "scrubPresentedFrames": "14",
+          "scrubPresentedTime": "10.7083",
+          "scrubTarget": "10.7083"
+        },
+        "top": -4248
+      }
+    },
+    {
+      "label": "fast forward",
+      "settled": {
+        "film": {
+          "filmRenderer": "frames",
+          "scrubCacheFrames": "24",
+          "scrubLastMs": "12.4",
+          "scrubLoadMs": "31.9",
+          "scrubMaxMs": "452.9",
+          "scrubMeanMs": "135.5",
+          "scrubPresentedFrames": "21",
+          "scrubPresentedTime": "14.0833",
+          "scrubTarget": "14.0833"
+        },
+        "top": -4968
+      }
+    },
+    {
+      "label": "reverse",
+      "settled": {
+        "film": {
+          "filmRenderer": "frames",
+          "scrubCacheFrames": "24",
+          "scrubLastMs": "789.4",
+          "scrubLoadMs": "31.9",
+          "scrubMaxMs": "789.4",
+          "scrubMeanMs": "231.6",
+          "scrubPresentedFrames": "31",
+          "scrubPresentedTime": "9.0417",
+          "scrubTarget": "9.0417"
+        },
+        "top": -3888
+      }
+    },
+    {
+      "label": "small reverse",
+      "settled": {
+        "film": {
+          "filmRenderer": "frames",
+          "scrubCacheFrames": "24",
+          "scrubLastMs": "2.6",
+          "scrubLoadMs": "31.9",
+          "scrubMaxMs": "789.4",
+          "scrubMeanMs": "219.6",
+          "scrubPresentedFrames": "33",
+          "scrubPresentedTime": "8.7917",
+          "scrubTarget": "8.7917"
+        },
+        "top": -3830.666748046875
+      }
+    },
+    {
+      "label": "near end of film",
+      "settled": {
+        "film": {
+          "filmRenderer": "frames",
+          "scrubCacheFrames": "24",
+          "scrubLastMs": "2.8",
+          "scrubLoadMs": "31.9",
+          "scrubMaxMs": "789.4",
+          "scrubMeanMs": "189.5",
+          "scrubPresentedFrames": "39",
+          "scrubPresentedTime": "18.8333",
+          "scrubTarget": "18.8333"
+        },
+        "top": -5990.6669921875
+      }
+    }
+  ],
+  "interpretation": "Superseded: nearest original frames keep motion active, but reverse prebuffer was decoded before target; iteration 5 prioritizes target."
+}

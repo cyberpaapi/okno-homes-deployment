@@ -64,12 +64,15 @@ const legacyJournalItemIds = new Set([
 ]);
 function editableSections(page: ContentPage) {
   const sections = page.sections.filter(section => page.id === "journal" ? !legacyJournalItemIds.has(section.id) && !section.id.startsWith("post-") : page.id === "projects" ? section.id === "project-library" || !section.id.startsWith("project-") : page.id === "signature" ? !section.id.includes("-plan-") : true);
+  // V1 has one editing source, shared with the published-home opening selector.
+  // Historical scalar fields remain readable when the collection has not been saved.
+  if (page.id === "hero-v1") return sections.filter(section => section.id !== 'opening');
   return page.id === "footer" ? sections.map(section => ["footer-homes", "footer-explore", "footer-okno"].includes(section.id) ? { ...section, fields: section.fields.filter(field => field.id.endsWith(".heading")) } : section) : sections;
 }
 
 function mergeLegacyHeroValues(items: ContentItem[], values: Record<string, string>): ContentItem[] {
   const mappings: Record<string, Record<string, string>> = {
-    "hero-v1": { openingVideo: "hero-v1.opening.intro-video", loopVideo: "hero-v1.opening.ambient-video", scrollVideo: "hero-v1.opening.scroll-video", poster: "hero-v1.opening.start-image", endImage: "hero-v1.opening.end-image", introLastFrame: "hero-v1.opening.intro-last-frame", openingAlt: "hero-v1.opening.start-alt", endAlt: "hero-v1.opening.end-alt", accessibleTitle: "hero-v1.opening.accessible-title" },
+    "hero-v1": { openingVideo: "hero-v1.opening.intro-video", scrollVideo: "hero-v1.opening.scroll-video", poster: "hero-v1.opening.start-image", endImage: "hero-v1.opening.end-image", introLastFrame: "hero-v1.opening.intro-last-frame", openingAlt: "hero-v1.opening.start-alt", endAlt: "hero-v1.opening.end-alt", accessibleTitle: "hero-v1.opening.accessible-title", tagline: "hero-v1.opening.tagline" },
     "hero-v2": { openingVideo: "hero-v2.opening.journey-video", loopVideo: "hero-v2.opening.island-loop", poster: "hero-v2.opening.journey-poster", loopPoster: "hero-v2.opening.island-poster", accessibleTitle: "hero-v2.opening.accessible-title" },
   };
   return items.map(item => ({ ...item, fields: { ...item.fields, ...Object.fromEntries(Object.entries(mappings[item.id] ?? {}).flatMap(([key, fieldId]) => values[fieldId] !== undefined ? [[key, values[fieldId]]] : [])) } }));
@@ -203,7 +206,7 @@ function FieldEditor({ field, value, published, changed, busy, onChange, onSave,
   const shownJournalPress = journalPress?.filter(item => item.fields.visibility !== "hidden");
   const invalidDayRange = /^process\.(?:details\.phase-[1-5]|stage-[a-z-]+)\.days$/.test(field.id) && Boolean(value.trim()) && !parseProcessDayRange(value);
   return <div className={styles.field}>
-    <div className={styles.fieldHeading}><Icon size={17} aria-hidden="true" /><div><label id={`${field.id}-label`} htmlFor={field.kind === "choice" ? undefined : field.id}>{field.label}</label><small>{field.id === "home.publishing.hero" || field.id === "journal.hero.featured-id" ? "Choice" : field.kind === "text" ? "Text" : field.kind === "image" ? "Image" : field.kind === "video" ? "Video" : "Choice"}</small></div></div>
+    <div className={styles.fieldHeading}><Icon size={17} aria-hidden="true" /><div><label id={`${field.id}-label`} htmlFor={field.kind === "choice" && field.id !== "home.publishing.hero" ? undefined : field.id}>{field.label}</label><small>{field.id === "home.publishing.hero" || field.id === "journal.hero.featured-id" ? "Choice" : field.kind === "text" ? "Text" : field.kind === "image" ? "Image" : field.kind === "video" ? "Video" : "Choice"}</small></div></div>
     {field.help && <p className={styles.fieldHelp}>{field.help}</p>}
     <div className={styles.fieldBody}>
       {field.id === "home.publishing.hero" ? <select id={field.id} value={value} onChange={event => onChange(event.target.value)} disabled={busy}>{homeVariants?.map(item => <option key={item.id} value={item.id}>{item.fields.name || item.id}</option>)}</select> : field.id === "journal.hero.featured-id" ? <select id={field.id} value={value} onChange={event => onChange(event.target.value)} disabled={busy}>
@@ -551,7 +554,7 @@ export default function AdminStudio() {
       {view === "content" ? <div id="admin-content-panel" aria-labelledby="admin-content-tab" className={styles.workspace} role="tabpanel">
         <div className={styles.editorColumn}>
           <div className={styles.sectionIntro}><h2>Sections</h2><p>{`${totalMapped ? `${totalMapped} connected field${totalMapped === 1 ? "" : "s"}` : "Fields are being mapped"} · Expand a section to edit its content.`}</p></div>
-          {(page.id === "homepage" || selectedCustomVariant) && collectionDefinitionsForPage("homepage").map(definition => collectionPanel(definition, selectedCustomVariant ?? undefined))}
+          {(page.id === "homepage" || page.id === "hero-v1" || selectedCustomVariant) && collectionDefinitionsForPage("homepage").map(definition => collectionPanel(definition, page.id === "hero-v1" ? 'hero-v1' : selectedCustomVariant ?? undefined))}
           {page.id === "signature" ? signaturePanels() : visibleSections.map((section,index) => sectionPanel(section,index))}
           {!visibleSections.length && !collectionDefinitionsForPage(page.id).length && <p className={styles.unmapped}>Choose one of the Home variants in the left panel.</p>}
         </div>

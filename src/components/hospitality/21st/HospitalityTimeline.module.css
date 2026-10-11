@@ -9,7 +9,7 @@
   color: #f4f1e9;
 }
 .sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; padding-top: 10vh; }
-.slider { display: flex; align-items: center; gap: 5vw; width: 240vw; height: min(34vw, 68vh); padding: 0 5vw; will-change: transform; }
+.slider { display: flex; align-items: center; gap: 5vw; width: 240vw; height: min(40vw, 82svh); padding: 0 5vw; will-change: transform; }
 .cover { position: relative; flex: 0 0 30vw; height: 88%; overflow: hidden; border-radius: 1vw; }
 .cover img { width: 100%; height: 100%; object-fit: cover; }
 .timeline { position: relative; flex: 0 0 194vw; height: 100%; }
@@ -19,7 +19,7 @@
 .axis i:last-child { background: var(--timeline-water); }
 .timelineTitle { position: absolute; left: 0; top: 5%; width: 29vw; }
 .timelineTitle small { display: block; margin-bottom: 1vw; color: rgba(244,241,233,.62); font-size: .72vw; font-weight: 650; letter-spacing: .2em; text-transform: uppercase; }
-.timelineTitle h2 { max-width: 9ch; max-height: 23vh; overflow-y: auto; overflow-wrap: anywhere; margin: 0; font-size: 3.2vw; font-weight: 540; letter-spacing: -.07em; line-height: .92; }
+.timelineTitle h2 { max-width: 9ch;  overflow-wrap: anywhere; margin: 0; font-size: 3.2vw; font-weight: 540; letter-spacing: -.07em; line-height: .92; }
 .period { position: absolute; left: 0; top: 55%; margin: 0; color: rgba(244,241,233,.62); font-size: 1.25vw; }
 .step { --left: calc(29vw + var(--step-index) * 23vw); --milestone-accent: var(--timeline-sage); --photo-height: clamp(59px, 5.3vw, 92px); --photo-offset: clamp(8px, .8vw, 14px); position: absolute; left: var(--left); top: 0; width: 20vw; height: 50%; perspective: 650px; }
 .step[data-phase="make"] { --milestone-accent: var(--timeline-stone); }
@@ -51,9 +51,9 @@
 .photo img { object-fit: cover; }
 .step[data-side="top"] .photo { bottom: var(--photo-offset); }
 .step[data-side="bottom"] .photo { top: var(--photo-offset); }
-.stepCopy { position: absolute; left: 2.4vw; width: 18vw; max-height: calc(100% - var(--photo-height) - 2 * var(--photo-offset)); overflow-y: auto; overflow-wrap: anywhere; }
+.stepCopy { position: absolute; left: 2.4vw; width: 18vw;  overflow-wrap: anywhere; }
 .step[data-side="top"] .stepCopy { top: 0; }
 .step[data-side="bottom"] .stepCopy { bottom: 0; }
 .stepCopy b { display: block; margin-bottom: .8vw; color: var(--milestone-accent); font-size: .82vw; letter-spacing: .18em; }
-.stepCopy h3 { margin: 0; color: var(--milestone-accent); font-size: 2.2vw; font-weight: 520; letter-spacing: -.06em; line-height: .92; }
-.stepCopy p { max-width: 18vw; margin: 1vw 0 0; color: rgba(244,241,233,.62); font-size: 1.02vw; line-height: 1.28; }
+.stepCopy h3 { margin: 0; color: var(--milestone-accent); font-size: clamp(20px, 2vw, 32px); font-weight: 520; letter-spacing: -.06em; line-height: .92; }
+.stepCopy p { max-width: 18vw; margin: 1vw 0 0; color: rgba(244,241,233,.62); font-size: clamp(11px, .95vw, 16px); line-height: 1.28; }

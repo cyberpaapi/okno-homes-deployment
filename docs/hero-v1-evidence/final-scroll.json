@@ -1,0 +1,81 @@
+{
+  "iteration": 6,
+  "cases": [
+    {
+      "label": "slow forward",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "63",
+        "scrubLastMs": "2.8",
+        "scrubLoadMs": "295.7",
+        "scrubMaxMs": "149.1",
+        "scrubMeanMs": "39.4",
+        "scrubPresentedFrames": "14",
+        "scrubPresentedTime": "10.7083",
+        "scrubTarget": "10.7083"
+      },
+      "top": -4248
+    },
+    {
+      "label": "fast forward",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "82",
+        "scrubLastMs": "30.9",
+        "scrubLoadMs": "295.7",
+        "scrubMaxMs": "183.3",
+        "scrubMeanMs": "35.2",
+        "scrubPresentedFrames": "26",
+        "scrubPresentedTime": "14.0833",
+        "scrubTarget": "14.0833"
+      },
+      "top": -4968
+    },
+    {
+      "label": "reverse",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "49.2",
+        "scrubLoadMs": "295.7",
+        "scrubMaxMs": "183.3",
+        "scrubMeanMs": "31.8",
+        "scrubPresentedFrames": "34",
+        "scrubPresentedTime": "9.0417",
+        "scrubTarget": "9.0417"
+      },
+      "top": -3888
+    },
+    {
+      "label": "small reverse",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "2.7",
+        "scrubLoadMs": "295.7",
+        "scrubMaxMs": "183.3",
+        "scrubMeanMs": "28.7",
+        "scrubPresentedFrames": "39",
+        "scrubPresentedTime": "8.7917",
+        "scrubTarget": "8.7917"
+      },
+      "top": -3830.666748046875
+    },
+    {
+      "label": "last frame",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "152.2",
+        "scrubLoadMs": "295.7",
+        "scrubMaxMs": "183.3",
+        "scrubMeanMs": "33.2",
+        "scrubPresentedFrames": "44",
+        "scrubPresentedTime": "20.0000",
+        "scrubTarget": "20.0000"
+      },
+      "top": -6350.6669921875
+    }
+  ],
+  "interpretation": "Original 1920x1080/24fps source retained; desktop cache cap 96 native frames, conservative cap 48. Settled targets match original frames. Measurements are app presentation latency, not FPS or physical-device acceptance."
+}

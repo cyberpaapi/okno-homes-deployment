@@ -52,4 +52,4 @@ next-env.d.ts
 /artifacts/
 !.env.example
 
-/.next-release/
+/.next-release*/

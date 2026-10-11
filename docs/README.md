@@ -1,5 +1,7 @@
 # Final Showcase documentation map
 
+Current V1 follow-up: [Hero V1, About, scrollbars and preview optimization](hero-v1-optimization-2026-10-11.md).
+
 Start here before editing. Files under `docs/archive/` are historical evidence, not current specifications.
 
 The [11 October first performance and interaction pass](optimization-2026-10-11.md) records the current scope, page deferrals, performance evidence and live public/admin checks.
