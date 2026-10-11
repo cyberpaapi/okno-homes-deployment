@@ -1,0 +1,31 @@
+{
+  "fingerprint": "0afd324cd321",
+  "newKeyContent": {
+    "status": 503,
+    "error": "Content storage is unavailable. Check the existing OKNO Vercel Blob store's status and usage limits before editing. Your content has not been changed."
+  },
+  "newKeyUploadCapability": {
+    "status": 200,
+    "mode": "blob"
+  },
+  "previousKey": {
+    "status": 401,
+    "error": "Admin token is incorrect."
+  },
+  "unauthenticated": {
+    "status": 401,
+    "error": "Admin token is incorrect."
+  },
+  "admin": {
+    "status": 200
+  },
+  "home": {
+    "status": 200
+  },
+  "deployment": {
+    "id": "dpl_8rQAxu1fj2Z61wQyXbDN3EaSvuuL",
+    "state": "READY",
+    "source": "e11c6288bd32f3e9def5bcfc451f39a7ba2626b0",
+    "canonicalAlias": "https://okno-homes-deployment.vercel.app"
+  }
+}

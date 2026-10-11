@@ -11,3 +11,5 @@ Current: [11 October full inventory, local browser cycles and production publish
 - [Production release record](../deployment/release-ledger.md)
 
 Earlier local acceptance does not establish deployed storage, auth or media reliability. Current cloud evidence belongs in the release ledger.
+
+Testing handoff: [short key-generation and rotation steps](testing-key-quickstart.md).
