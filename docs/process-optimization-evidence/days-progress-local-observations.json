@@ -1,0 +1,28 @@
+{
+  "desktopComplete": {
+    "barWidth": 1195.2083740234375,
+    "current": "Days 73–90: Assembly and handover",
+    "detailProgress": "1",
+    "fill": "none",
+    "labels": "Days01–10Days11–25Days26–60Days61–72Days73–90",
+    "overflow": 0,
+    "scroll": 6701.33349609375,
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "mobileComplete": {
+    "barWidth": 342,
+    "current": "Days 73–90: Assembly and handover",
+    "detailProgress": "1",
+    "fill": "none",
+    "labels": "Days01–10Days11–25Days26–60Days61–72Days73–90",
+    "overflow": 0,
+    "scroll": 7757.33349609375,
+    "viewport": [
+      390,
+      844
+    ]
+  }
+}

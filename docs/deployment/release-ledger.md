@@ -132,3 +132,11 @@ The unused `okno-homes-demo` cloud project and its six deployments were permanen
 | Runtime | `317e8b86fbdfe9dc961a49c286005f4a5ed07667`; READY `dpl_HmeqeFUEFdx5WiUEHwKpZRakHizJ`; canonical alias attached | Cloud compile/TypeScript and 30 trace guards passed, largest 177.4 MiB |
 | Live acceptance | Original 1080p/720p frame renderers, actual frame/copy alignment, native exit/restoration, no extra controls, zero horizontal overflow | [Detailed revision and proof](../process-scroll-revision-2026-10-11.md); physical-device/zero-dropped-frame guarantee not asserted |
 | Account boundary | Browser still at 2FA; no CMS cloud writes, new store, billing or KRNL changes | Prior exact-usage and Blob-publication blockers remain |
+
+
+## Connected Process day timeline — 11 October 2026
+
+- Client rejected the arbitrary 01/05-style counters and short segmented indicator. Replaced them with a full-width connected day chronology and presented-progress beam, retaining the existing five photos, day fields, accepted film cadence and page ending.
+- Actual [Aceternity Timeline source](https://21st.dev/@manuarora700/components/timeline), Manu Arora, demo 857 / component 325, retrieved and recorded. Live catalogue shows 4.2k bookmarks; download ranking was unavailable and is not asserted. Permanent no-counter/catalogue-popularity guidance saved in AGENTS.md and authorized memory note.
+- 21 targeted tests, TypeScript, full zero-warning lint, local/cloud production builds and 30 trace checks passed. Live desktop/mobile: all real day markers visible, zero overflow/errors, reverse fill follows presented phase.
+- Runtime `305844f09b8d8392cc2cfacf05e22f8a36c8803e`; READY `dpl_7oGkLsPtWv6UHY4A9yeaYy5jNfVy`, canonical alias verified. [Decision and screenshot ledger](../process-days-timeline-2026-10-11.md). Documentation-only follow-up preserves this runtime. No CMS cloud writes, store, billing or other-project changes.

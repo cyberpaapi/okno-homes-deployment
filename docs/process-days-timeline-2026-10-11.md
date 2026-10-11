@@ -17,3 +17,10 @@ The client's 21st.dev requirement refers to catalogue-wide popularity, not their
 ## Verification
 
 Local verification passed: 21 targeted Process/playhead/boundary tests, zero-warning full ESLint, TypeScript, production build and all 30 trace checks (largest 179.7 MiB). Canonical 3134 launcher verified 15 routes and 21 stylesheet assets. Desktop 1280×720 and mobile 390×844 captures show all five day ranges connected across the width, with no arbitrary counts, new controls or horizontal overflow. Large reverse input moved from the completed last phase into Days 61–72; fill and current milestone followed presented motion. Browser error logs were empty. Evidence: `days-progress-desktop-local.png`, `days-progress-mobile-local.png` and `days-component-popularity.json` in `docs/process-optimization-evidence/`. Existing Process day-field inputs feed both the phase content and the bottom day markers; no new CMS keys are introduced. This does not change the separate production Blob usage block or claim live admin publication works while that store is suspended.
+
+
+## Published acceptance
+
+Application SHA `305844f09b8d8392cc2cfacf05e22f8a36c8803e`; READY deployment `dpl_7oGkLsPtWv6UHY4A9yeaYy5jNfVy`, canonical [Process page](https://okno-homes-deployment.vercel.app/process). Vercel compile, TypeScript and all 30 cloud trace checks passed (largest 177.4 MiB). Same private repository and existing OKNO project; no other project, storage or billing changes.
+
+Live 1280×720 and 390×844 captures match the local composition. All five real day ranges remain visible, the beam spans 1195.2px on desktop and 342px on mobile, horizontal overflow is zero, and console error logs are empty. Large reverse input moves from the last phase to Days 61–72, with the fill settling at the same presented 0.75 phase position. See `days-progress-desktop-live.png`, `days-progress-mobile-live.png`, `days-progress-live-observations.json` and `days-live-http.json` in the evidence folder. Public Process and admin shell return 200; the unauthenticated owner API returns 401. Existing CMS publication limitations remain separate from this UI-only correction.

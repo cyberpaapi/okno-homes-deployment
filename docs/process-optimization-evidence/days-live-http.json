@@ -1,0 +1,14 @@
+[
+  {
+    "path": "/process",
+    "status": 200
+  },
+  {
+    "path": "/admin",
+    "status": 200
+  },
+  {
+    "path": "/api/admin/content",
+    "status": 401
+  }
+]
