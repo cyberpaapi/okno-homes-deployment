@@ -11,3 +11,5 @@ The credential grants full CMS read, upload, draft save and publishing rights. I
 Production's existing Vercel Blob storage block is separate from sign-in. A valid key currently reaches a storage-unavailable 503; live editing/upload/publishing cannot be accepted until that store is available. This credential change does not reduce compute materially or alter the quota.
 
 See [the configuration notes](../deployment/admin-keys.md) and the current admin/release ledgers for activation evidence.
+
+Activation verified 11 October: local key accepted (200); live key accepted by upload capability (200), with content still reaching storage 503. Wrong case, old keys and missing credentials were rejected (401). [Acceptance record](fixed-key-acceptance.json).
