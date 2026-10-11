@@ -27,4 +27,6 @@ Final eight-file regression run passed 31 tests, including the new complete-phas
 
 ## Rendered and production acceptance
 
-Pending the completed source gates and desktop/mobile browser checks. Exact deployment identity and evidence will be added after verification.
+First production application `e5db2466a1c397012b56900a70fbd8cc37b3826a`, READY `dpl_3kNdq3HKW4tLzuQNYE17ffiEMkeV`, confirmed large forward/reverse film bounds and exact original ending at 25.6000 seconds. The next gesture entered the complete first detail phase at scrollY=3821.3333. Live confirmation then found an idle-boundary regression: the eight-second stalled-source escape clock had also been armed for a deliberately static timeline entry. Pausing to read allowed the next large gesture to bypass the detail sequence. This first deployment is not final acceptance.
+
+The focused correction clears that clock whenever the current scroll position's expected content is already presented, and arms it only for genuinely outstanding content. The handoff test now pauses for 60 seconds at both first/last detail entries before a large forward/reverse gesture; each must remain bounded. No further UI/media change is made. Final deployment identity and acceptance follow after this correction's verification.

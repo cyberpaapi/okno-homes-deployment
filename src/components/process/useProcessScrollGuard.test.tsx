@@ -74,6 +74,8 @@ describe('gesture guard integration', () => {
     expect(fireEvent.wheel(window, { deltaY: 9000, cancelable: true })).toBe(true);
   });
   it('lets the nearest unfinished sequence own a large gesture without the other guard overriding it', () => {
+    vi.useFakeTimers();
+    vi.advanceTimersByTime(1000);
     let y = 0;
     vi.spyOn(window, 'scrollY', 'get').mockImplementation(() => y);
     vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(720);
@@ -90,11 +92,13 @@ describe('gesture guard integration', () => {
     film.set(.999); y = 2900;
     fireEvent.wheel(window, { deltaY: 10000, cancelable: true });
     expect(y).toBe(4000); // Finished film releases into the complete first phase.
+    vi.advanceTimersByTime(60000); // Reading the first phase must never disable its guard.
     fireEvent.wheel(window, { deltaY: 10000, cancelable: true });
     expect(y).toBe(4480); // A fresh gesture advances to the next phase.
     timeline.set(1); y = 7400;
     fireEvent.wheel(window, { deltaY: -10000, cancelable: true });
     expect(y).toBe(7000); // Reverse entry shows the complete last phase.
+    vi.advanceTimersByTime(60000); // Reading the last phase must also preserve inverse bounds.
     fireEvent.wheel(window, { deltaY: -10000, cancelable: true });
     expect(y).toBe(6520); // Detail timeline owns further reverse movement.
     timeline.set(0); y = 4100;

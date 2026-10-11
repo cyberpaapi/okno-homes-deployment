@@ -3,6 +3,7 @@
 import { useEffect, type RefObject } from 'react';
 import type { MotionValue } from 'motion/react';
 import { limitProcessScroll, wheelPixels } from '@/lib/processScrollGuard';
+import { processFilmProgress } from '@/lib/processScrub';
 
 /** Local guard, not a document scroll lock. Explicit Home/End, links and
  * history restoration stay native; unsupported/stalled media fail open. */
@@ -26,13 +27,22 @@ export default function useProcessScrollGuard(
     const nested = (target: EventTarget | null) => target instanceof Element && !!target.closest('a, button, input, textarea, select, [contenteditable="true"], [role="dialog"], nav');
     const constrain = (current: number, requested: number) => {
       // Escape a stalled source rather than trapping the visitor on a film.
-      if (performance.now() < bypassUntil || (stalledSince && performance.now() - stalledSince > 8000)) return requested;
+      if (performance.now() < bypassUntil) return requested;
       // Short mobile/reduced-motion CSS uses an ordinary vertical document,
       // not a pinned sequence. Follow that layout rather than constraining it.
       if (kind === 'timeline' && element.firstElementChild && getComputedStyle(element.firstElementChild).position !== 'sticky') return requested;
       const rect = element.getBoundingClientRect();
       const start = rect.top + window.scrollY;
       const span = element.offsetHeight - window.innerHeight;
+      if (span <= 0) return requested;
+      const expectedAt = (position: number) => {
+        const raw = Math.min(1, Math.max(0, (position - start) / span));
+        return kind === 'film' ? processFilmProgress(raw) : Math.round(raw * 4) / 4;
+      };
+      // Reading a settled phase is not a decoder stall. Only keep the escape
+      // clock while the current scroll position requests unpresented content.
+      if (Math.abs(expectedAt(current) - shown.get()) < .004) stalledSince = 0;
+      if (stalledSince && performance.now() - stalledSince > 8000) return requested;
       // The nearest sequence owns a crossing gesture. The lower timeline
       // must not intercept a gesture starting in the film, or vice versa.
       const route = element.closest('[data-route="process"]');
@@ -45,7 +55,7 @@ export default function useProcessScrollGuard(
         if (timeline && Number(timeline.dataset.presentedProgress ?? 0) > .003) return requested;
       }
       const allowed = limitProcessScroll(current, requested, start, span, shown.get(), kind);
-      if (Math.abs(allowed - requested) > .5 && !stalledSince) stalledSince = performance.now();
+      if (Math.abs(allowed - requested) > .5 && !stalledSince && Math.abs(expectedAt(allowed) - shown.get()) >= .004) stalledSince = performance.now();
       return allowed;
     };
     const move = (delta: number, event: Event) => {
