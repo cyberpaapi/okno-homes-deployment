@@ -13,12 +13,13 @@
 
 ## Live release
 
-Website: https://okno-homes-deployment.vercel.app; editor: https://okno-homes-deployment.vercel.app/admin. Verified runtime source is e8347acd4c8675d29c95caf4a1d6140a88ae4087, deployment dpl_FEwsSa5fnzqPhBtKYMUDC5B1JoDq. Documentation commits can follow without replacing this runtime.
+Website: https://okno-homes-deployment.vercel.app; editor: https://okno-homes-deployment.vercel.app/admin. Current verified runtime source is `3fa5be36fd38315934381c30e67fba4790e7aade`, deployment `dpl_BzKXYyMjC94pQC3TtcmZd2ao9GwP`. Read the [optimization ledger](../optimization-2026-10-11.md) for current evidence and acceptance boundaries. Documentation commits can follow without replacing this runtime.
 
 ## Deployment
 
 1. Read the plan, working version and admin ledger. Verify local Git state and current project with `vercel project inspect --non-interactive` from the repository root.
 2. Install from lockfile (`npm ci`). Run tests, lint, typecheck and production build. For an isolated local build use `OKNO_BUILD_DIR=.next-release npm run build`; keep this variable out of Vercel. Run `npm run release:check-bundles -- .next-release` after an isolated build. Production build also checks tracing for bundle size, private data exclusion and required model/media assets.
+   When changing priority-page built-in photographs, run `node scripts/prepare-page-images.mjs` and commit the generated responsive images, page-image manifest and public-asset inventory. New CMS uploads use the existing image fallback and do not require this build-time generation step.
 3. Ensure the private production Blob store is connected to Production only and `OKNO_CMS_ADMIN_TOKEN` is a sensitive Production secret. Read [key management](admin-keys.md).
 4. Initialize a newly created store once using `node scripts/seed-cloud-content.mjs <ignored-production-env-file>`. The seed includes current published content only and never overwrites an existing store. Its migrated uploaded photo is versioned at `public/content-media/`.
 5. Push the reviewed commit to `main`. Vercel's Git integration builds application commits; production follows `main`. Documentation-only follow-up commits are ignored by the build so recording release evidence does not replace the tested runtime. Initial commits always build. Use Git deployment for this media-rich source instead of a CLI source upload.

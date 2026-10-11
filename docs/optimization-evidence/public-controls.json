@@ -1,0 +1,1242 @@
+{
+  "date": "2026-10-11",
+  "releaseSource": "3fa5be36fd38315934381c30e67fba4790e7aade",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "coverage": [
+    {
+      "page": "/journal/compact-site",
+      "action": "Article card and return navigation",
+      "result": {
+        "anchors": [
+          {
+            "href": "#journal-section-compact-site-section-1",
+            "label": "Begin with the usable footprint"
+          },
+          {
+            "href": "#journal-section-compact-site-section-2",
+            "label": "Make access part of the design"
+          },
+          {
+            "href": "#journal-section-compact-site-section-3",
+            "label": "Use openings to borrow space"
+          }
+        ],
+        "title": "Choosing a modular home for a compact site",
+        "url": "/journal/compact-site"
+      }
+    },
+    {
+      "page": "/journal/sloped-land",
+      "action": "Article card and return navigation",
+      "result": {
+        "anchors": [
+          {
+            "href": "#journal-section-sloped-land-section-1",
+            "label": "Read the site before placing the home"
+          },
+          {
+            "href": "#journal-section-sloped-land-section-2",
+            "label": "Resolve ground and water together"
+          },
+          {
+            "href": "#journal-section-sloped-land-section-3",
+            "label": "Plan the route in and the view out"
+          }
+        ],
+        "title": "What to check before building on sloped land",
+        "url": "/journal/sloped-land"
+      }
+    },
+    {
+      "page": "/journal/sloped-land",
+      "action": "Contents anchor",
+      "hash": "#journal-section-sloped-land-section-1"
+    },
+    {
+      "page": "/journal/small-retreat",
+      "action": "Article card and return navigation",
+      "result": {
+        "anchors": [
+          {
+            "href": "#journal-section-small-retreat-section-1",
+            "label": "Give every zone a purpose"
+          },
+          {
+            "href": "#journal-section-small-retreat-section-2",
+            "label": "Let the view do useful work"
+          },
+          {
+            "href": "#journal-section-small-retreat-section-3",
+            "label": "Keep storage quiet"
+          }
+        ],
+        "title": "Planning a 300 sq ft retreat that still feels open",
+        "url": "/journal/small-retreat"
+      }
+    },
+    {
+      "page": "/journal/small-retreat",
+      "action": "Contents anchor",
+      "hash": "#journal-section-small-retreat-section-1"
+    },
+    {
+      "page": "/journal/material-comfort",
+      "action": "Article card and return navigation",
+      "result": {
+        "anchors": [
+          {
+            "href": "#journal-section-material-comfort-section-1",
+            "label": "Think in layers"
+          },
+          {
+            "href": "#journal-section-material-comfort-section-2",
+            "label": "Give windows a precise role"
+          },
+          {
+            "href": "#journal-section-material-comfort-section-3",
+            "label": "Choose surfaces for use and upkeep"
+          }
+        ],
+        "title": "Materials that shape comfort in a prefab home",
+        "url": "/journal/material-comfort"
+      }
+    },
+    {
+      "page": "/journal/material-comfort",
+      "action": "Contents anchor",
+      "hash": "#journal-section-material-comfort-section-1"
+    },
+    {
+      "page": "/journal/factory-to-site",
+      "action": "Article card and return navigation",
+      "result": {
+        "anchors": [
+          {
+            "href": "#journal-section-factory-to-site-section-1",
+            "label": "Two workstreams, one programme"
+          },
+          {
+            "href": "#journal-section-factory-to-site-section-2",
+            "label": "Prepare the site for arrival"
+          },
+          {
+            "href": "#journal-section-factory-to-site-section-3",
+            "label": "Leave time for the last details"
+          }
+        ],
+        "title": "From factory preparation to site assembly",
+        "url": "/journal/factory-to-site"
+      }
+    },
+    {
+      "page": "/journal/factory-to-site",
+      "action": "Contents anchor",
+      "hash": "#journal-section-factory-to-site-section-1"
+    },
+    {
+      "page": "/journal/hospitality-rooms",
+      "action": "Article card and return navigation",
+      "result": {
+        "anchors": [
+          {
+            "href": "#journal-section-hospitality-rooms-section-1",
+            "label": "Start with the guest journey"
+          },
+          {
+            "href": "#journal-section-hospitality-rooms-section-2",
+            "label": "Repeat what works"
+          },
+          {
+            "href": "#journal-section-hospitality-rooms-section-3",
+            "label": "Design for the people running the place"
+          }
+        ],
+        "title": "Designing modular rooms for hospitality",
+        "url": "/journal/hospitality-rooms"
+      }
+    },
+    {
+      "page": "/journal/hospitality-rooms",
+      "action": "Contents anchor",
+      "hash": "#journal-section-hospitality-rooms-section-1"
+    },
+    {
+      "page": "/journal/compact-site",
+      "action": "Contents anchor",
+      "hash": "#journal-section-compact-site-section-1"
+    },
+    {
+      "page": "/journal/compact-site",
+      "action": "Contents anchor",
+      "hash": "#journal-section-compact-site-section-2"
+    },
+    {
+      "page": "/journal/compact-site",
+      "action": "Contents anchor",
+      "hash": "#journal-section-compact-site-section-3"
+    },
+    {
+      "page": "/journal/compact-site",
+      "action": "Related story",
+      "destination": "https://okno-homes-deployment.vercel.app/journal/sloped-land"
+    },
+    {
+      "page": "/journal",
+      "action": "Marquee pointer drag and arrow hover",
+      "result": "Marquee track moved and released. Featured fixed arrow native hover data-active=true; external target=_blank rel=noreferrer."
+    },
+    {
+      "page": "/models/signature",
+      "action": "Floor plan filter Studio",
+      "pressed": "true",
+      "choices": [
+        "Forza",
+        "Kray",
+        "Gaze",
+        "Trib",
+        "Octapod"
+      ]
+    },
+    {
+      "page": "/models/signature",
+      "action": "Floor plan filter 2 BHK",
+      "pressed": "true",
+      "choices": [
+        "Tengo"
+      ]
+    },
+    {
+      "page": "/models/signature",
+      "action": "Floor plan filter 3 BHK",
+      "pressed": "true",
+      "choices": [
+        "Tengo"
+      ]
+    },
+    {
+      "page": "/models/signature",
+      "action": "Floor plan filter All",
+      "pressed": "true",
+      "choices": [
+        "Forza",
+        "Kray",
+        "Gaze",
+        "Tengo",
+        "Trib",
+        "Octapod"
+      ]
+    },
+    {
+      "page": "/models/signature",
+      "action": "Choose Kray",
+      "pressed": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Choose Gaze",
+      "pressed": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Choose Tengo",
+      "pressed": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Choose Trib",
+      "pressed": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Choose Octapod",
+      "pressed": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Choose Forza",
+      "pressed": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza variant 1 BHK",
+      "selected": "true",
+      "note": "Verified with dialog settled; initial pointer target moved during opening"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza variant Studio",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza gallery Exterior",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza gallery Kitchen",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza gallery Living",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza gallery Bedroom",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza gallery Bath",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=2-bhk",
+      "action": "Configure Tengo CTA",
+      "result": "Honest unavailable variant fallback with link to SIGNATURE layout"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Roof finish Obsidian Shield",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Roof finish Titanium Veil",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Roof finish Ivory Armor",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Roof finish Castile Crest",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Roof finish Barcelona Blaze",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Roof finish Lone Star Shingles",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Roof finish Heartland Shingles",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Roof finish Rustic Canopy",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Roof finish Ebony Timber",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Roof finish Pearlwood",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Flooring finish Tuscan Elegance",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Flooring finish Urban Slate",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Flooring finish Walnut Weave",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Flooring finish Oak Frost",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Flooring finish Sienna Nutwood",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Flooring finish Brione Driftwood",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Flooring finish Lime Grove",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Flooring finish Silea Sandstone",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Obsidian Shield",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Titanium Veil",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Ivory Armor",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Ebony Timber",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Golden Oak",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Pearlwood",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Desert Sand",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Brick Ember",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Urban Stone",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Mink Gray",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Alpine White",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Walnut Weave",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Oak Frost",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Sienna Nutwood",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Brione Driftwood",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Lime Grove",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal ceilings finish Ontario Hemlock",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Ebony Timber",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Golden Oak",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Pearlwood",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Desert Sand",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Brick Ember",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Urban Stone",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Mink Gray",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Alpine White",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Sienna Nutwood",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Brione Driftwood",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Lime Grove",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Internal walls finish Silea Sandstone",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "External walls finish Obsidian Shield",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "External walls finish Titanium Veil",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "External walls finish Ivory Armor",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "External walls finish Ebony Timber",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "External walls finish Golden Oak",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "External walls finish Desert Sand",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "External walls finish Brick Ember",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "External walls finish Terracotta Hue",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "External walls finish Urban Stone",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "External walls finish Mink Gray",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Copy selection link",
+      "result": "Valid same-domain selection URL"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=signature",
+      "action": "Review, sample detail, download, reset view, reset palette",
+      "result": "Pass; curated palette restored"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Kray 1 BHK variant",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature/kray/configure?variant=1-bhk",
+      "action": "Material library filter External walls",
+      "pressed": "true",
+      "sampleCount": 10
+    },
+    {
+      "page": "/models/signature/kray/configure?variant=1-bhk",
+      "action": "Material library filter Roof",
+      "pressed": "true",
+      "sampleCount": 10
+    },
+    {
+      "page": "/models/signature/kray/configure?variant=1-bhk",
+      "action": "Material library filter Flooring",
+      "pressed": "true",
+      "sampleCount": 8
+    },
+    {
+      "page": "/models/signature/kray/configure?variant=1-bhk",
+      "action": "Material library filter Internal ceilings",
+      "pressed": "true",
+      "sampleCount": 17
+    },
+    {
+      "page": "/models/signature/kray/configure?variant=1-bhk",
+      "action": "Material library filter Internal walls",
+      "pressed": "true",
+      "sampleCount": 12
+    },
+    {
+      "page": "/models/signature/kray/configure?variant=1-bhk",
+      "action": "Material library filter All materials 26",
+      "pressed": "true",
+      "sampleCount": 26
+    },
+    {
+      "page": "/models/signature/kray/configure?variant=signature",
+      "action": "Live 3D, Golden Oak, Golden hour, orbit/zoom, reset view, interior, original comparison, review/reset palette",
+      "result": "Pass; curated palette restored; screenshot saved"
+    },
+    {
+      "page": "/models/bespoke",
+      "action": "Next step BRIEF",
+      "result": "BRIEF stage visibly centered after native smooth scroll"
+    },
+    {
+      "page": "/models/bespoke",
+      "action": "Next step FORM, ATMOSPHERE, The result",
+      "result": "All scroll actions moved through their stages"
+    },
+    {
+      "page": "/enquiry",
+      "action": "Home fields, select options, action",
+      "result": "Inputs and selection work; submit is existing preventDefault, delivery explicitly deferred"
+    },
+    {
+      "page": "/enquiry",
+      "action": "Hospitality and Press input/select controls, actions and three tab transitions",
+      "result": "Pass; no delivery as explicitly deferred"
+    },
+    {
+      "page": "/enquiry",
+      "action": "Production clipping and native pointer hover",
+      "result": "10px bottom clearance, full rounded border visible, native :hover true; screenshots saved"
+    },
+    {
+      "page": "/hospitality",
+      "action": "Gallery Miraya",
+      "result": "Dialog opened and closed"
+    },
+    {
+      "page": "/hospitality",
+      "action": "Gallery Nova Valley",
+      "result": "Dialog opened and closed"
+    },
+    {
+      "page": "/hospitality",
+      "action": "Gallery Layana Farms",
+      "result": "Dialog opened and closed"
+    },
+    {
+      "page": "/hospitality",
+      "action": "Gallery Project Thiru",
+      "result": "Dialog opened and closed"
+    },
+    {
+      "page": "/hospitality",
+      "action": "Text lens fragment hit test",
+      "result": "Active over text; absent over whitespace"
+    },
+    {
+      "page": "/hospitality",
+      "action": "Hospitality enquiry CTA",
+      "result": "Correct intent and Hospitality tab opened"
+    },
+    {
+      "page": "/about",
+      "action": "Scroll section Our vision",
+      "result": "Section reached"
+    },
+    {
+      "page": "/about",
+      "action": "Scroll section Fabricating the Future",
+      "result": "Section reached"
+    },
+    {
+      "page": "/about",
+      "action": "Scroll section Meet our founders",
+      "result": "Section reached"
+    },
+    {
+      "page": "/about",
+      "action": "Scroll section Why OKNO?",
+      "result": "Section reached"
+    },
+    {
+      "page": "/about",
+      "action": "Scroll section A perfect fit. Everywhere, every time.",
+      "result": "Section reached"
+    },
+    {
+      "page": "/sustainability",
+      "action": "Conversation CTA",
+      "result": "Correct Enquiry route; fade sequence untouched"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Gaze variant Studio retreat",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Gaze view Exterior",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Gaze view Bedroom",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Gaze view Interior",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Gaze view Setting",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Gaze view Axonometric",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Trib variant Trib Studio",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Trib view Exterior",
+      "selected": "true",
+      "note": "Verified with dialog settled; initial pointer target moved during opening"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Trib view Bedroom",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Trib view Kitchenette",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Trib view Bath",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Trib view Setting",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Octapod variant Studio",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Octapod view Exterior",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Octapod view Bedroom",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Octapod view Interior",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Octapod view Setting",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Octapod view Cutaway",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Kray variant Kray Studio",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Kray variant Kray 1 BHK",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Kray view Exterior",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Kray view Living",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Kray view Kitchen",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Kray view Deck",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Kray view Setting",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Tengo variant 2 BHK",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Tengo variant 3 BHK",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Tengo view Exterior",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Tengo view Living",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Tengo view Bedroom",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Tengo view Dining",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Tengo view Plan",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza variant Studio",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza variant 1 BHK",
+      "selected": "true",
+      "note": "Verified with dialog settled; initial pointer target moved during opening"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza view Exterior",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza view Kitchen",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza view Living",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza view Bedroom",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Forza view Bath",
+      "selected": "true"
+    },
+    {
+      "page": "/models/signature",
+      "action": "Dialog Escape dismissal",
+      "result": "Pass"
+    },
+    {
+      "page": "shared header",
+      "action": "Pointer clicks on all seven navigation links, destinations and rolling hover",
+      "result": [
+        {
+          "name": "About",
+          "hover": true
+        },
+        {
+          "name": "Models",
+          "destination": "https://okno-homes-deployment.vercel.app/models",
+          "hover": true
+        },
+        {
+          "name": "Hospitality",
+          "destination": "https://okno-homes-deployment.vercel.app/hospitality",
+          "hover": true
+        },
+        {
+          "name": "Process",
+          "destination": "https://okno-homes-deployment.vercel.app/process",
+          "hover": true
+        },
+        {
+          "name": "Sustainability",
+          "destination": "https://okno-homes-deployment.vercel.app/sustainability",
+          "hover": true
+        },
+        {
+          "name": "Journal",
+          "destination": "https://okno-homes-deployment.vercel.app/journal",
+          "hover": true
+        },
+        {
+          "name": "Projects",
+          "destination": "https://okno-homes-deployment.vercel.app/projects",
+          "hover": true
+        },
+        {
+          "name": "About",
+          "destination": "https://okno-homes-deployment.vercel.app/about",
+          "hover": true
+        }
+      ]
+    },
+    {
+      "page": "shared footer",
+      "action": "Bespoke destination",
+      "result": "Correct route"
+    },
+    {
+      "page": "shared footer",
+      "action": "Signature pointer click",
+      "result": "https://okno-homes-deployment.vercel.app/models/signature"
+    },
+    {
+      "page": "shared footer",
+      "action": "Bespoke pointer click",
+      "result": "https://okno-homes-deployment.vercel.app/models/bespoke"
+    },
+    {
+      "page": "shared footer",
+      "action": "Hospitality pointer click",
+      "result": "https://okno-homes-deployment.vercel.app/hospitality"
+    },
+    {
+      "page": "shared footer",
+      "action": "Projects pointer click",
+      "result": "https://okno-homes-deployment.vercel.app/projects"
+    },
+    {
+      "page": "shared footer",
+      "action": "Process pointer click",
+      "result": "https://okno-homes-deployment.vercel.app/process"
+    },
+    {
+      "page": "shared footer",
+      "action": "Journal pointer click",
+      "result": "https://okno-homes-deployment.vercel.app/journal"
+    },
+    {
+      "page": "shared footer",
+      "action": "About pointer click",
+      "result": "https://okno-homes-deployment.vercel.app/about"
+    },
+    {
+      "page": "shared footer",
+      "action": "Sustainability pointer click",
+      "result": "https://okno-homes-deployment.vercel.app/sustainability"
+    },
+    {
+      "page": "shared footer",
+      "action": "Enquire pointer click",
+      "result": "https://okno-homes-deployment.vercel.app/enquiry?intent=home"
+    },
+    {
+      "page": "/journal/compact-site",
+      "action": "Contents Begin with the usable footprint",
+      "result": "#journal-section-compact-site-section-1"
+    },
+    {
+      "page": "/journal/compact-site",
+      "action": "Contents Make access part of the design",
+      "result": "#journal-section-compact-site-section-2"
+    },
+    {
+      "page": "/journal/compact-site",
+      "action": "Contents Use openings to borrow space",
+      "result": "#journal-section-compact-site-section-3"
+    },
+    {
+      "page": "/journal/compact-site",
+      "action": "Related story /journal/sloped-land",
+      "result": "https://okno-homes-deployment.vercel.app/journal/sloped-land"
+    },
+    {
+      "page": "/journal/compact-site",
+      "action": "Related story /journal/small-retreat",
+      "result": "https://okno-homes-deployment.vercel.app/journal/small-retreat"
+    },
+    {
+      "page": "/journal/compact-site",
+      "action": "Top Journal return link",
+      "result": "Pass"
+    },
+    {
+      "page": "/journal/sloped-land",
+      "action": "Contents Read the site before placing the home",
+      "result": "#journal-section-sloped-land-section-1"
+    },
+    {
+      "page": "/journal/sloped-land",
+      "action": "Contents Resolve ground and water together",
+      "result": "#journal-section-sloped-land-section-2"
+    },
+    {
+      "page": "/journal/sloped-land",
+      "action": "Contents Plan the route in and the view out",
+      "result": "#journal-section-sloped-land-section-3"
+    },
+    {
+      "page": "/journal/sloped-land",
+      "action": "Related story /journal/small-retreat",
+      "result": "https://okno-homes-deployment.vercel.app/journal/small-retreat"
+    },
+    {
+      "page": "/journal/sloped-land",
+      "action": "Related story /journal/material-comfort",
+      "result": "https://okno-homes-deployment.vercel.app/journal/material-comfort"
+    },
+    {
+      "page": "/journal/sloped-land",
+      "action": "Top Journal return link",
+      "result": "Pass"
+    },
+    {
+      "page": "/journal/small-retreat",
+      "action": "Contents Give every zone a purpose",
+      "result": "#journal-section-small-retreat-section-1"
+    },
+    {
+      "page": "/journal/small-retreat",
+      "action": "Contents Let the view do useful work",
+      "result": "#journal-section-small-retreat-section-2"
+    },
+    {
+      "page": "/journal/small-retreat",
+      "action": "Contents Keep storage quiet",
+      "result": "#journal-section-small-retreat-section-3"
+    },
+    {
+      "page": "/journal/small-retreat",
+      "action": "Related story /journal/material-comfort",
+      "result": "https://okno-homes-deployment.vercel.app/journal/material-comfort"
+    },
+    {
+      "page": "/journal/small-retreat",
+      "action": "Related story /journal/factory-to-site",
+      "result": "https://okno-homes-deployment.vercel.app/journal/factory-to-site"
+    },
+    {
+      "page": "/journal/small-retreat",
+      "action": "Top Journal return link",
+      "result": "Pass"
+    },
+    {
+      "page": "/journal/material-comfort",
+      "action": "Contents Think in layers",
+      "result": "#journal-section-material-comfort-section-1"
+    },
+    {
+      "page": "/journal/material-comfort",
+      "action": "Contents Give windows a precise role",
+      "result": "#journal-section-material-comfort-section-2"
+    },
+    {
+      "page": "/journal/material-comfort",
+      "action": "Contents Choose surfaces for use and upkeep",
+      "result": "#journal-section-material-comfort-section-3"
+    },
+    {
+      "page": "/journal/material-comfort",
+      "action": "Related story /journal/factory-to-site",
+      "result": "https://okno-homes-deployment.vercel.app/journal/factory-to-site"
+    },
+    {
+      "page": "/journal/material-comfort",
+      "action": "Related story /journal/hospitality-rooms",
+      "result": "https://okno-homes-deployment.vercel.app/journal/hospitality-rooms"
+    },
+    {
+      "page": "/journal/material-comfort",
+      "action": "Top Journal return link",
+      "result": "Pass"
+    },
+    {
+      "page": "/journal/factory-to-site",
+      "action": "Contents Two workstreams, one programme",
+      "result": "#journal-section-factory-to-site-section-1"
+    },
+    {
+      "page": "/journal/factory-to-site",
+      "action": "Contents Prepare the site for arrival",
+      "result": "#journal-section-factory-to-site-section-2"
+    },
+    {
+      "page": "/journal/factory-to-site",
+      "action": "Contents Leave time for the last details",
+      "result": "#journal-section-factory-to-site-section-3"
+    },
+    {
+      "page": "/journal/factory-to-site",
+      "action": "Related story /journal/hospitality-rooms",
+      "result": "https://okno-homes-deployment.vercel.app/journal/hospitality-rooms"
+    },
+    {
+      "page": "/journal/factory-to-site",
+      "action": "Related story /journal/compact-site",
+      "result": "https://okno-homes-deployment.vercel.app/journal/compact-site"
+    },
+    {
+      "page": "/journal/factory-to-site",
+      "action": "Top Journal return link",
+      "result": "Pass"
+    },
+    {
+      "page": "/journal/hospitality-rooms",
+      "action": "Contents Start with the guest journey",
+      "result": "#journal-section-hospitality-rooms-section-1"
+    },
+    {
+      "page": "/journal/hospitality-rooms",
+      "action": "Contents Repeat what works",
+      "result": "#journal-section-hospitality-rooms-section-2"
+    },
+    {
+      "page": "/journal/hospitality-rooms",
+      "action": "Contents Design for the people running the place",
+      "result": "#journal-section-hospitality-rooms-section-3"
+    },
+    {
+      "page": "/journal/hospitality-rooms",
+      "action": "Related story /journal/compact-site",
+      "result": "https://okno-homes-deployment.vercel.app/journal/compact-site"
+    },
+    {
+      "page": "/journal/hospitality-rooms",
+      "action": "Related story /journal/sloped-land",
+      "result": "https://okno-homes-deployment.vercel.app/journal/sloped-land"
+    },
+    {
+      "page": "/journal/hospitality-rooms",
+      "action": "Top Journal return link",
+      "result": "Pass"
+    },
+    {
+      "page": "/models/signature/kray/configure?variant=1-bhk",
+      "action": "Released Back to model regression",
+      "result": "Kray detail dialog reopens with Kray 1 BHK selected and matching Configure destination"
+    },
+    {
+      "page": "/models/signature/tengo/configure?variant=3-bhk",
+      "action": "Released Back to model regression",
+      "result": "Tengo dialog reopens with 3 BHK selected"
+    },
+    {
+      "page": "/enquiry",
+      "action": "Final release three-tab button clearance",
+      "result": [
+        {
+          "tab": "Hospitality & estates",
+          "bottomSpace": 9.999984741210938
+        },
+        {
+          "tab": "Press & other",
+          "bottomSpace": 10
+        },
+        {
+          "tab": "A home of my own",
+          "bottomSpace": 9.999984741210938
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Desktop browser only; mobile viewport override did not change actual dimensions.",
+    "Gallery/dialog controls verified after entrance transforms settled.",
+    "Excluded page implementations and Enquiry delivery deferred by user.",
+    "Admin inventory does not assert every possible field combination was published.",
+    "Third-party link attributes checked; third-party uptime/login availability is outside website acceptance."
+  ]
+}

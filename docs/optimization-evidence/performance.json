@@ -1,0 +1,225 @@
+{
+  "at": "2026-10-11T01:41:06.513Z",
+  "base": "https://okno-homes-deployment.vercel.app",
+  "before": [
+    {
+      "path": "/about",
+      "ttfbMs": 63,
+      "totalMs": 76,
+      "bytes": 47116,
+      "cache": "HIT",
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/journal",
+      "ttfbMs": 34,
+      "totalMs": 45,
+      "bytes": 106500,
+      "cache": "HIT",
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/hospitality",
+      "ttfbMs": 102,
+      "totalMs": 182,
+      "bytes": 101100,
+      "cache": "MISS",
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/enquiry",
+      "ttfbMs": 36,
+      "totalMs": 37,
+      "bytes": 38076,
+      "cache": "HIT",
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/api/site-content",
+      "ttfbMs": 119,
+      "totalMs": 120,
+      "bytes": 2434,
+      "cache": "MISS",
+      "type": "application/json"
+    },
+    {
+      "path": "/_next/image?url=%2Fabout%2Fstoryboard%2Fabout-film-frame-01.png&w=1920&q=75",
+      "ttfbMs": 56,
+      "totalMs": 69,
+      "bytes": 128036,
+      "cache": "HIT",
+      "type": "image/webp"
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fprojects%2Freal-v1%2Flakewood-08.webp&w=1920&q=75",
+      "ttfbMs": 36,
+      "totalMs": 68,
+      "bytes": 215464,
+      "cache": "HIT",
+      "type": "image/webp"
+    }
+  ],
+  "after": [
+    {
+      "path": "/about",
+      "status": 200,
+      "ttfbMs": 52,
+      "totalMs": 57,
+      "bytes": 44711,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/journal",
+      "status": 200,
+      "ttfbMs": 341,
+      "totalMs": 351,
+      "bytes": 94108,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/hospitality",
+      "status": 200,
+      "ttfbMs": 100,
+      "totalMs": 200,
+      "bytes": 81604,
+      "cache": "MISS",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/enquiry",
+      "status": 200,
+      "ttfbMs": 42,
+      "totalMs": 47,
+      "bytes": 38076,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/api/site-content",
+      "status": 200,
+      "ttfbMs": 100,
+      "totalMs": 101,
+      "bytes": 2434,
+      "cache": "MISS",
+      "cacheControl": "no-store",
+      "type": "application/json"
+    },
+    {
+      "path": "/page-images/25e07200ec555b4e-1672.webp",
+      "status": 200,
+      "ttfbMs": 332,
+      "totalMs": 344,
+      "bytes": 125564,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=31536000, immutable",
+      "type": "image/webp"
+    },
+    {
+      "path": "/page-images/7daaa44c05c14db3-1920.webp",
+      "status": 200,
+      "ttfbMs": 57,
+      "totalMs": 71,
+      "bytes": 210846,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=31536000, immutable",
+      "type": "image/webp"
+    }
+  ],
+  "routeChecks": [
+    {
+      "route": "/",
+      "status": 200
+    },
+    {
+      "route": "/about",
+      "status": 200
+    },
+    {
+      "route": "/models",
+      "status": 200
+    },
+    {
+      "route": "/models/signature",
+      "status": 200
+    },
+    {
+      "route": "/models/bespoke",
+      "status": 200
+    },
+    {
+      "route": "/models/signature/tengo/configure",
+      "status": 200
+    },
+    {
+      "route": "/models/signature/kray/configure",
+      "status": 200
+    },
+    {
+      "route": "/projects",
+      "status": 200
+    },
+    {
+      "route": "/journal",
+      "status": 200
+    },
+    {
+      "route": "/hospitality",
+      "status": 200
+    },
+    {
+      "route": "/process",
+      "status": 200
+    },
+    {
+      "route": "/sustainability",
+      "status": 200
+    },
+    {
+      "route": "/enquiry",
+      "status": 200
+    },
+    {
+      "route": "/admin",
+      "status": 200
+    },
+    {
+      "route": "/api/site-content",
+      "status": 200
+    },
+    {
+      "route": "/api/site-status",
+      "status": 200
+    },
+    {
+      "route": "/journal/compact-site",
+      "status": 200
+    },
+    {
+      "route": "/journal/sloped-land",
+      "status": 200
+    },
+    {
+      "route": "/journal/small-retreat",
+      "status": 200
+    },
+    {
+      "route": "/journal/material-comfort",
+      "status": 200
+    },
+    {
+      "route": "/journal/factory-to-site",
+      "status": 200
+    },
+    {
+      "route": "/journal/hospitality-rooms",
+      "status": 200
+    }
+  ],
+  "limits": "Single desktop-machine requests, not CWV, FPS, throttled-network or physical-device measurements. GET timing and HEAD cache metadata are separate requests."
+}

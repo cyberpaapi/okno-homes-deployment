@@ -59,3 +59,17 @@
 
 | Ignored-build verification | Documentation source 123886bd7ac32f459d6149c62d30a069a026c018, deployment dpl_3NJ7Pfvi88vZ4a9JiFMgwzJRQTuk, was intentionally canceled after the ignored-build command exited 0 | Live Vercel logs confirm docs-only comparison works; production alias still resolves to READY dpl_FEwsSa5fnzqPhBtKYMUDC5B1JoDq |
 | Handoff | Runtime stays at tested application source e8347acd4c8675d29c95caf4a1d6140a88ae4087; later commits contain documentation only | All deployment-plan subtasks complete; key remains in owner-only ignored local file and sensitive Production env |
+
+## First optimization release — 11 October 2026
+
+| Decision / check | Evidence | Outcome |
+| --- | --- | --- |
+| Scope | About, Journal, Hospitality performance and Enquiry padding first; Projects/Hero V1 excluded, Home/Process intensive videos and Sustainability fades later | Accepted visual identity retained; excluded page implementations untouched |
+| Image/render work | 196 prepared WebPs from 36 photos; responsive loader on priority pages; seven Hospitality stage photos lazy; Journal shader bounded to about 520k pixels / 24 fps | Production URLs, immutable headers, lazy loading and shader backing dimensions verified |
+| Public control defect | Configurator Back to model carried parameters ignored by Signature | Query-aware static-shell client wrapper and stable variant return links added; live Kray 1 BHK and Tengo 3 BHK regressions pass |
+| Source checks | Full 78-file / 301-test suite passed before return fix; focused 15 Signature + 3 customer-copy tests passed after; whole-repository lint and final isolated build/TypeScript pass | 30 local function trace guards pass, largest 179.7 MiB |
+| Final runtime | Source `3fa5be36fd38315934381c30e67fba4790e7aade`; `dpl_BzKXYyMjC94pQC3TtcmZd2ao9GwP`, READY; production alias attached, bom1 functions | Cloud compile/TypeScript and all 30 trace guards pass (largest 177.4 MiB) |
+| Live admin | Browser image upload, text/image Save draft, draft isolation, Publish, public rendering, existing-tab polling and guarded exact restoration | Original published fields/collections restored; revision 17 / draft 65, zero drafts; Disconnect clears owner key; unauthorized access 401 |
+| Public acceptance | Primary navigation, footer routes, all six article/contents/related links, galleries, model/plan/view controls, supported 3D configurators, Bespoke stages and Enquiry tabs/fields/actions | Detailed current records in [optimization ledger](../optimization-2026-10-11.md); mobile/physical-device acceptance unconfirmed |
+| Enquiry decision | User explicitly chose to defer delivery during this pass | UI and 10px action clearance checked; no message-delivery claim |
+| Evidence follow-up | Documentation-only changes record runtime and coverage | Keep this tested runtime when pushing evidence; verify ignored-build result before final handoff |

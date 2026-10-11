@@ -1,0 +1,115 @@
+{
+  "at": "2026-10-11T01:46:43.172Z",
+  "base": "https://okno-homes-deployment.vercel.app",
+  "sourceCommit": "3fa5be36fd38315934381c30e67fba4790e7aade",
+  "deployment": "dpl_BzKXYyMjC94pQC3TtcmZd2ao9GwP",
+  "ready": true,
+  "privateRepository": true,
+  "checks": [
+    {
+      "route": "/",
+      "status": 200
+    },
+    {
+      "route": "/about",
+      "status": 200
+    },
+    {
+      "route": "/models",
+      "status": 200
+    },
+    {
+      "route": "/models/signature",
+      "status": 200
+    },
+    {
+      "route": "/models/bespoke",
+      "status": 200
+    },
+    {
+      "route": "/models/signature/tengo/configure",
+      "status": 200
+    },
+    {
+      "route": "/models/signature/kray/configure",
+      "status": 200
+    },
+    {
+      "route": "/projects",
+      "status": 200
+    },
+    {
+      "route": "/journal",
+      "status": 200
+    },
+    {
+      "route": "/hospitality",
+      "status": 200
+    },
+    {
+      "route": "/process",
+      "status": 200
+    },
+    {
+      "route": "/sustainability",
+      "status": 200
+    },
+    {
+      "route": "/enquiry",
+      "status": 200
+    },
+    {
+      "route": "/admin",
+      "status": 200
+    },
+    {
+      "route": "/api/site-content",
+      "status": 200
+    },
+    {
+      "route": "/api/site-status",
+      "status": 200
+    },
+    {
+      "route": "/journal/compact-site",
+      "status": 200
+    },
+    {
+      "route": "/journal/sloped-land",
+      "status": 200
+    },
+    {
+      "route": "/journal/small-retreat",
+      "status": 200
+    },
+    {
+      "route": "/journal/material-comfort",
+      "status": 200
+    },
+    {
+      "route": "/journal/factory-to-site",
+      "status": 200
+    },
+    {
+      "route": "/journal/hospitality-rooms",
+      "status": 200
+    }
+  ],
+  "site": {
+    "site": "okno-final-showcase",
+    "version": "2026-10-05",
+    "mode": "production",
+    "configurators": [
+      "tengo",
+      "kray"
+    ]
+  },
+  "cloudTraceGuard": {
+    "count": 30,
+    "largestMiB": 177.4
+  },
+  "localTraceGuard": {
+    "count": 30,
+    "largestMiB": 179.7
+  }
+}

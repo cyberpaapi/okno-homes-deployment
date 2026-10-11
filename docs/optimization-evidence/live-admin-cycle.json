@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-11T01:44:03.430Z",
+  "ownerAuthentication": 200,
+  "unauthenticatedAccess": 401,
+  "revision": 17,
+  "draftRevision": 65,
+  "originalPublishedFieldsRestored": true,
+  "originalPublishedCollectionsRestored": true,
+  "draftFields": 0,
+  "draftCollections": 0,
+  "publicMatchesOwner": true,
+  "publicLeaksDrafts": false,
+  "steps": [
+    "Owner UI Connect",
+    "About title Save draft",
+    "Actual browser private Blob photograph upload",
+    "Photograph Save draft",
+    "Draft site preview opened",
+    "Public draft isolation",
+    "Publish 2 drafts",
+    "Public heading and uploaded photograph rendered",
+    "Conditional restoration preserving original fields/collections",
+    "Owner disconnected"
+  ],
+  "restorationGuard": "Strong ETag with identity encoding, revision match, refusal to overwrite concurrent owner changes",
+  "existingPublicTabUpdatesWithoutReload": true,
+  "existingPublicTabRestoresWithoutReload": true,
+  "useOriginalControl": "Default About title restored in unsaved editor state",
+  "disconnectClearsToken": true
+}
