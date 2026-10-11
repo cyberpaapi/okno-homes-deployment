@@ -9,7 +9,7 @@
 - Private production Blob: `okno-content-production` (`store_1AQc4Grm9lELxTSB`), Mumbai (`bom1`)
 - Runtime: Node.js 22, Next.js 16.4.0, Fluid Compute, 300-second upload-preparation handler ceiling.
 
-`okno-homes-demo` and `krnlv3` are separate existing projects. Never change their repository link, settings, secrets, domains or storage as part of this release.
+`krnlv3` remains a separate project and must not have its repository link, settings, secrets, domains or storage changed as part of OKNO work. On 11 October the user explicitly authorized permanent deletion of the unused `okno-homes-demo` cloud project and its six deployments. Deletion is verified; historical local source and GitHub remain preserved. See [the storage review](../header-storage-review-2026-10-11.md) for backups, shared-team quota implications and exact-counter limitations.
 
 ## Live release
 

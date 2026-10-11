@@ -5,7 +5,6 @@
 .logo { display: block; width: 126px; line-height: 0; }
 .logo img { display: block; width: 100%; height: auto; }
 .navigation { position: absolute; left: 50%; display: flex; align-items: center; gap: clamp(16px, 1.8vw, 28px); transform: translateX(-50%); font-size: 11px; }
-.header[data-nav-backdrop="true"] .navigation { padding: 13px 18px; border: 1px solid #dce8e328; border-radius: 999px; background: #07131cc9; box-shadow: 0 8px 30px #02081136; backdrop-filter: blur(12px); }
 .rolling { display: inline-block; color: #eee8d3bc; text-decoration: none; white-space: nowrap; }
 .rolling[aria-current="page"], .rolling:hover, .rolling:focus-visible { color: #f4f0e7; }
 .header[data-tone="light"] .rolling { color: #53564a; }

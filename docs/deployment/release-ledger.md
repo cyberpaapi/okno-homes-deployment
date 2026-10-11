@@ -2,6 +2,12 @@
 
 11 October 2026. Entries distinguish verified facts, planned work and unresolved gates.
 
+## Current Models header and quota correction
+
+See [the header/storage review](../header-storage-review-2026-10-11.md) for the implementation plan, October 7 capsule provenance, three local visual iterations, 13 passing focused tests, lint, production build and trace acceptance. The Models-only nav backdrop is removed; shared geometry and rolling interactions are retained with foreground contrast over the split background. Git deployment/live acceptance is pending this release.
+
+The unused `okno-homes-demo` cloud project and its six deployments were permanently deleted after explicit user confirmation, preserving local/GitHub source and private metadata backups. Post-delete listing retains only current OKNO and KRNLv3; both canonical sites return 200. KRNL settings and deployments are untouched. The confirmed Blob-only block remains; exact Blob counter and Deployment Storage total still await dashboard 2FA. Team Deployment Storage is shared, so project separation alone does not guarantee quota isolation.
+
 | Step | Decision / evidence | Result |
 | --- | --- | --- |
 | Source audit | Read WORKING-VERSION.md, docs/README.md, docs/admin-system.md and checkout AGENTS.md | Final Showcase confirmed |

@@ -2,6 +2,8 @@
 
 ## Navigation
 
+11 October correction: remove the Models-only capsule introduced by the 7 October M-01 contrast fix. The shared header geometry is authoritative; the selector may adjust foreground contrast over its split background only. See [the header/storage review](header-storage-review-2026-10-11.md) for the correction and verification.
+
 All current marketing pages now use `components/Header/Header.tsx`, the approved Models/Projects navigation composition. The desktop structure retains the left OKNO wordmark, centered navigation and magnetic enquiry control. The same Liquid Morph menu handles mobile navigation throughout the site. Typography is Geist OKNO; the palette is warm paper, charcoal and muted gold. Light and dark page backgrounds change contrast only, not layout or interaction.
 
 Actual retrieved 21st sources retained:

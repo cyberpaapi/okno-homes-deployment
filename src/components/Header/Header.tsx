@@ -141,10 +141,9 @@ type HeaderProps = {
   variant?: "glass" | "immersive";
   mobileOnly?: boolean;
   trapFocus?: boolean;
-  navBackdrop?: boolean;
 };
 
-export default function Header({ tone, variant, enquiryHref = "/enquiry", currentHref, navBackdrop = false }: HeaderProps) {
+export default function Header({ tone, variant, enquiryHref = "/enquiry", currentHref }: HeaderProps) {
   const values = useSiteContentMap();
   const get = (key: string, fallback: string) => values[`header.${key}`] || fallback;
   const brandName = values["brand.logo.alt"] || "OKNO Modhomes";
@@ -159,7 +158,7 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", curren
   const navigationLabel = get("menu.navigation-label", "Site navigation");
   const compactForCopy = navigation.some(item => item.label.length > 20) || navigation.reduce((length, item) => length + item.label.length, 0) > 90;
   return (
-    <header className={styles.header} data-tone={resolvedTone} data-copy-compact={compactForCopy} data-nav-backdrop={navBackdrop} data-site-header>
+    <header className={styles.header} data-tone={resolvedTone} data-copy-compact={compactForCopy} data-site-header>
       <div className={styles.shell}>
         <MagneticLink href="/" className={styles.logo} aria-label={`${brandName} home`} data-models-magnetic>
           <OknoLogo tone={resolvedTone === "light" ? "dark" : "light"} priority />

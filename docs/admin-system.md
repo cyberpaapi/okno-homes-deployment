@@ -9,6 +9,8 @@
 
 ## Optimization and live admin verification — 11 October 2026
 
+Storage follow-up: the confirmed feature block is Blob, connected only to current OKNO; retained Deployment Storage is a separate shared-team allowance. The user's authorized old-demo deletion is complete and does not unblock admin saves. Exact usage counters still await dashboard two-factor sign-in. KRNL's frontend remains available; its settings were untouched. See [the storage review](header-storage-review-2026-10-11.md).
+
 Current V1 checkpoint: two local draft/publish/restore cycles passed for the still/tagline and the published-home opening selector, with already-open public pages updating without reload. Original fields/collections are restored exactly, zero local drafts remain, and the editor is disconnected. The existing local demo credential was reused; it is not accepted in production. V2 remains untested. See the [V1 ledger](hero-v1-optimization-2026-10-11.md) for cycle evidence.
 
 Production V1 acceptance is blocked by the existing private Blob store's `limits-exceeded-suspended` status, recorded from 11 October until 10 November 2026. Authentication worked before suspension; no V1 production QA writes occurred. Public content now uses a published-only cache, invalidated by successful Publish/reconnect, with the verified release publication as an outage fallback. The editor continues fresh authenticated reads and conditional writes and returns a clear 503 when storage is unavailable. No new store, plan purchase or other project change was made. Account verification/unblocking requires the user; two production V1 cycles remain pending.

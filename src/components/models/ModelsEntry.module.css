@@ -37,6 +37,15 @@
   padding: 0 14px 2px;
 }
 
+/* Keep the shared header silhouette while its foreground contrasts with the
+   selector's dark/paper split. Blend at the header's stacking context so the
+   rolling glyphs stay visible; no navigation container is drawn. */
+@media (min-width: 1121px) {
+  .page :global([data-site-header]) {
+    mix-blend-mode: difference;
+  }
+}
+
 .introduction h1 {
   margin: 0;
   font-family: "Models Geist", "Geist OKNO", Arial, sans-serif;

@@ -43,7 +43,7 @@ export default function ModelsEntry() {
     <MotionConfig reducedMotion="user">
       <ModelsEntrance ready={mediaReady} />
       <main ref={pageRef} className={styles.page} data-route="models">
-        <ModelsHeader navBackdrop />
+        <ModelsHeader />
         <section className={styles.introduction}>
           <motion.h1
             initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
