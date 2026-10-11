@@ -1,0 +1,53 @@
+{
+  "desktop": {
+    "chapter": "handover",
+    "days": [
+      "Days 01–10",
+      "Days 11–25",
+      "Days 73–90"
+    ],
+    "film": {
+      "filmRenderer": "frames",
+      "processMasterVideo": "true",
+      "scrubCacheFrames": "78",
+      "scrubLastMs": "5.8",
+      "scrubLoadMs": "189.9",
+      "scrubMaxMs": "546.8",
+      "scrubMeanMs": "64.6",
+      "scrubPresentedFrames": "31",
+      "scrubPresentedTime": "20.6667",
+      "scrubTarget": "20.6667"
+    },
+    "viewport": [
+      1280,
+      720
+    ],
+    "y": 2572
+  },
+  "mobile": {
+    "chapter": "handover",
+    "days": [
+      "Days 01–10",
+      "Days 11–25",
+      "Days 73–90"
+    ],
+    "film": {
+      "filmRenderer": "frames",
+      "processMasterVideo": "true",
+      "scrubCacheFrames": "96",
+      "scrubLastMs": "12.7",
+      "scrubLoadMs": "121.8",
+      "scrubMaxMs": "54.4",
+      "scrubMeanMs": "7.3",
+      "scrubPresentedFrames": "65",
+      "scrubPresentedTime": "20.6667",
+      "scrubTarget": "20.6667"
+    },
+    "overflow": -8,
+    "viewport": [
+      390,
+      844
+    ],
+    "y": 3014.666748046875
+  }
+}
