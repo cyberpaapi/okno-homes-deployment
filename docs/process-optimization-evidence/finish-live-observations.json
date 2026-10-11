@@ -1,0 +1,213 @@
+{
+  "desktopForwardOne": {
+    "chapter": "land",
+    "closing": 0,
+    "detailEnd": 6701.281433105469,
+    "detailProgress": "0",
+    "filmEnd": 2736,
+    "filmProgress": "0.044213263979193757",
+    "footer": 1,
+    "frame": "1.1333",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 576.6666870117188,
+    "source": [
+      "1920",
+      "1080"
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "desktopForwardTwo": {
+    "chapter": "land",
+    "closing": 0,
+    "detailEnd": 6701.28125,
+    "detailProgress": "0",
+    "filmEnd": 2736,
+    "filmProgress": "0.08842652795838751",
+    "footer": 1,
+    "frame": "2.2667",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 696,
+    "source": [
+      "1920",
+      "1080"
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "desktopReverse": {
+    "chapter": "land",
+    "closing": 0,
+    "detailEnd": 6701.281341552734,
+    "detailProgress": "0",
+    "filmEnd": 2736,
+    "filmProgress": "0.05851755526657997",
+    "footer": 1,
+    "frame": "1.5000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 507.3333435058594,
+    "source": [
+      "1920",
+      "1080"
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "desktopEnding": {
+    "chapter": "handover",
+    "closing": 0,
+    "detailEnd": 6701.28125,
+    "detailProgress": "1",
+    "filmEnd": 2736,
+    "filmProgress": "0.9986996098829649",
+    "footer": 1,
+    "frame": "25.6000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 7131.33349609375,
+    "source": [
+      "1920",
+      "1080"
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "mobileStart": {
+    "chapter": "handover",
+    "closing": 0,
+    "detailEnd": 7757.02099609375,
+    "detailProgress": "0.17980552700601857",
+    "filmEnd": 3207,
+    "filmProgress": "0.9596879063719116",
+    "footer": 1,
+    "frame": "24.6000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 0,
+    "source": [
+      "1280",
+      "720"
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "mobileStartSettled": {
+    "chapter": "land",
+    "closing": 0,
+    "detailEnd": 7757.02099609375,
+    "detailProgress": "0",
+    "filmEnd": 3207,
+    "filmProgress": "0",
+    "footer": 1,
+    "frame": "0.0000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 0,
+    "source": [
+      "1280",
+      "720"
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "mobileForwardOne": {
+    "chapter": "land",
+    "closing": 0,
+    "detailEnd": 7757.02099609375,
+    "detailProgress": "0",
+    "filmEnd": 3207,
+    "filmProgress": "0.042912873862158654",
+    "footer": 1,
+    "frame": "1.1000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 676,
+    "source": [
+      "1280",
+      "720"
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "mobileForwardTwo": {
+    "chapter": "land",
+    "closing": 0,
+    "detailEnd": 7757.020935058594,
+    "detailProgress": "0",
+    "filmEnd": 3207,
+    "filmProgress": "0.0975292587776333",
+    "footer": 1,
+    "frame": "2.5000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 802.6666870117188,
+    "source": [
+      "1280",
+      "720"
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "mobileReverse": {
+    "chapter": "land",
+    "closing": 0,
+    "detailEnd": 7757.020812988281,
+    "detailProgress": "0",
+    "filmEnd": 3207,
+    "filmProgress": "0.05981794538361509",
+    "footer": 1,
+    "frame": "1.5333",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 617.3333129882812,
+    "source": [
+      "1280",
+      "720"
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "mobileEnding": {
+    "chapter": "handover",
+    "closing": 0,
+    "detailEnd": 7757.020751953125,
+    "detailProgress": "1",
+    "filmEnd": 3207,
+    "filmProgress": "0.9986996098829649",
+    "footer": 1,
+    "frame": "25.6000",
+    "overflow": 0,
+    "renderer": "frames",
+    "scroll": 8258,
+    "source": [
+      "1280",
+      "720"
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "consoleErrors": []
+}

@@ -140,3 +140,12 @@ The unused `okno-homes-demo` cloud project and its six deployments were permanen
 - Actual [Aceternity Timeline source](https://21st.dev/@manuarora700/components/timeline), Manu Arora, demo 857 / component 325, retrieved and recorded. Live catalogue shows 4.2k bookmarks; download ranking was unavailable and is not asserted. Permanent no-counter/catalogue-popularity guidance saved in AGENTS.md and authorized memory note.
 - 21 targeted tests, TypeScript, full zero-warning lint, local/cloud production builds and 30 trace checks passed. Live desktop/mobile: all real day markers visible, zero overflow/errors, reverse fill follows presented phase.
 - Runtime `305844f09b8d8392cc2cfacf05e22f8a36c8803e`; READY `dpl_7oGkLsPtWv6UHY4A9yeaYy5jNfVy`, canonical alias verified. [Decision and screenshot ledger](../process-days-timeline-2026-10-11.md). Documentation-only follow-up preserves this runtime. No CMS cloud writes, store, billing or other-project changes.
+
+
+## Process closing removal and final pacing — 11 October 2026
+
+- Remove rejected white **Before we begin** section and its 11 editor fields. Five-photo timeline and connected Days 01–90 beam lead directly into the existing footer. No replacement section or arbitrary content added.
+- Forward and reverse travel caps increase 25% to 4 and 5 film-seconds/sec; same damping, reversal braking, original media packets and presented-frame scroll bounds.
+- 57 targeted tests, full zero-warning lint, TypeScript, local/cloud production builds and 30 trace checks passed. Fixed 3140 admin gateway check passed, reusing 3134.
+- Application `39a944d9edb408fe7e6156c13e2d4299d96be7dc`; READY `dpl_5o8WAAixFtssmK41ux9HWz9UWqCU`, canonical alias attached. Desktop/mobile native forward and reverse gestures, first-frame settling and dark ending verified; no overflow or captured console errors. [Decisions and evidence](../process-final-pacing-2026-10-11.md).
+- No CMS cloud writes, store, billing or other-project changes; production Blob block unchanged. Documentation-only follow-up keeps this tested runtime.

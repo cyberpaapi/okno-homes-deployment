@@ -1,0 +1,14 @@
+{
+  "/process": {
+    "status": 200,
+    "error": null
+  },
+  "/admin": {
+    "status": 200,
+    "error": null
+  },
+  "/api/admin/content": {
+    "status": 401,
+    "error": null
+  }
+}
