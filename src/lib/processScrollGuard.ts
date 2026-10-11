@@ -12,12 +12,14 @@ export function limitProcessScroll(
   const end = start + span;
   // Enter the detail sequence on its complete first/last phase before
   // accepting another gesture, even when the incoming gesture is enormous.
-  if (kind === 'timeline' && requested > current && current < start && requested >= start) return start;
-  if (kind === 'timeline' && requested < current && current > end && requested <= end) return end;
-  if (requested > current && current <= end && requested > start && progress < .993) {
+  // scrollTo can round a fractional CSS boundary by a fraction of a pixel.
+  // Treat that position as inside, so a reverse entry can actually advance.
+  if (kind === 'timeline' && requested > current && current < start - 1 && requested >= start) return start;
+  if (kind === 'timeline' && requested < current && current > end + 1 && requested <= end) return end;
+  if (requested > current && current <= end + 1 && requested > start && progress < .993) {
     return Math.max(current, Math.min(requested, start + span * (opening + length * Math.min(1, progress + lead))));
   }
-  if (requested < current && current >= start && requested < end && progress > .003) {
+  if (requested < current && current >= start - 1 && requested < end && progress > .003) {
     return Math.min(current, Math.max(requested, start + span * (opening + length * Math.max(0, progress - lead))));
   }
   return requested;

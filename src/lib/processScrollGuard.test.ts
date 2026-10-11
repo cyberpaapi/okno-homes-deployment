@@ -33,4 +33,10 @@ describe('Process frame-aware scroll bounds', () => {
     expect(wheelPixels(3, 1, 720)).toBe(48);
     expect(wheelPixels(2, 2, 720)).toBe(1440);
   });
+  it('advances inward from fractional CSS boundaries rounded by the browser', () => {
+    const start = 3821.28125, span = 2880;
+    expect(limitProcessScroll(6701.33349609375, 3101, start, span, 1, 'timeline')).toBeCloseTo(start + span * .84);
+    expect(limitProcessScroll(start - .05, 9000, start, span, 0, 'timeline')).toBeCloseTo(start + span * .16);
+    expect(limitProcessScroll(start + span + .05, 9000, start, span, .98, 'timeline')).toBe(start + span + .05);
+  });
 });
