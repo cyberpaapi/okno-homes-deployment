@@ -1,12 +1,12 @@
 import { notFound, redirect } from 'next/navigation';
 import { findAtlasProject } from '@/data/projectAtlas';
 import { findProjectByPath } from '@/data/projectCollections';
-import { readContent } from '@/lib/siteContentStore';
+import { readPublicContent } from '@/lib/publicContent';
 import ProjectGallery from '@/components/projects/ProjectGallery';
 
 export const dynamic = 'force-dynamic';
 async function findPublishedProject(slug: string) {
-  const { publishedCollections } = await readContent();
+  const { publishedCollections } = await readPublicContent();
   return Object.prototype.hasOwnProperty.call(publishedCollections, 'projects.records')
     ? findProjectByPath(publishedCollections['projects.records'], slug)
     : (() => { const project = findAtlasProject(slug); return project ? { project, redirect: false } : null; })();

@@ -1,6 +1,6 @@
 import { atlasProjects } from '@/data/projectAtlas';
 import { visibleProjectsFromCollection } from '@/data/projectCollections';
-import { readContent } from '@/lib/siteContentStore';
+import { readPublicContent } from '@/lib/publicContent';
 import ProjectsExperience from '@/components/projects/ProjectsExperience';
 import { initialGlobePinItems } from '@/data/globePinCollections';
 
@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function ProjectsPage({ searchParams }: { searchParams: Promise<{ place?: string }> }) {
   const { place } = await searchParams;
-  const { publishedCollections } = await readContent();
+  const { publishedCollections } = await readPublicContent();
   const projects = Object.prototype.hasOwnProperty.call(publishedCollections, 'projects.records')
     ? visibleProjectsFromCollection(publishedCollections['projects.records'])
     : atlasProjects;

@@ -4,14 +4,14 @@ import { notFound, redirect } from "next/navigation";
 import ModelsHeader from "@/components/models/ModelsHeader";
 import JournalArticle from "@/components/journal/JournalArticle";
 import { findJournalArticleByPath, journalArticleFallbacks, journalArticlesFromItems } from "@/lib/journalCollections";
-import { readContent } from "@/lib/siteContentStore";
+import { readPublicContent } from "@/lib/publicContent";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export const dynamic = "force-dynamic";
 
 const publishedArticles = cache(async () => {
-  const snapshot = await readContent();
+  const snapshot = await readPublicContent();
   const items = snapshot.publishedCollections["journal.articles"] ?? journalArticleFallbacks(snapshot.published);
   return { items, posts: journalArticlesFromItems(items) };
 });

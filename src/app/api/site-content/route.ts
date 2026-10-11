@@ -1,10 +1,10 @@
-import { readContent } from "@/lib/siteContentStore";
+import { readPublicContent } from "@/lib/publicContent";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
-  const { revision, published, publishedCollections } = await readContent();
+  const { revision, published, publishedCollections } = await readPublicContent();
   if (new URL(request.url).searchParams.get("since") === String(revision)) {
     return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
   }

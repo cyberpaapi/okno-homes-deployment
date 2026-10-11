@@ -46,6 +46,8 @@ if (action === 'backup') {
       if (fresh.revision !== current.revision || fresh.draftRevision !== current.draftRevision) throw new Error('Concurrent owner edit; refuse restoration.');
       const restored = { ...fresh, published: original.published, draft: original.draft, publishedCollections: original.publishedCollections, draftCollections: original.draftCollections, revision: fresh.revision + 1, draftRevision: fresh.draftRevision + 1 };
       await put('cms/content.json', JSON.stringify(restored), { access: 'private', contentType: 'application/json', addRandomSuffix: false, cacheControlMaxAge: 0, ifMatch: etag });
+      const refresh = await fetch(`${base}/api/admin/content`, { headers: { Authorization: `Bearer ${key}` }, cache: 'no-store' });
+      if (!refresh.ok) throw new Error('Owner cache refresh failed after restoration.');
       const live = await publicContent();
       if (!equal(live.published, original.published) || !equal(live.publishedCollections, original.publishedCollections)) throw new Error('Restoration differs from original content.');
       console.log(`PASS: cycle ${cycle} original fields/collections restored exactly at revision ${live.revision}.`);

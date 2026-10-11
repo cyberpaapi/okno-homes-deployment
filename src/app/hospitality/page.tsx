@@ -2,7 +2,7 @@ import HospitalityExperience from '@/components/hospitality/HospitalityExperienc
 import { atlasProjects } from '@/data/projectAtlas';
 import { projectsFromCollection } from '@/data/projectCollections';
 import { initialHospitalitySelections } from '@/data/hospitalitySelectedWork';
-import { readContent } from '@/lib/siteContentStore';
+import { readPublicContent } from '@/lib/publicContent';
 
 export const metadata = {
   title: 'OKNO — Hospitality',
@@ -12,7 +12,7 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function HospitalityPage() {
-  const { publishedCollections } = await readContent();
+  const { publishedCollections } = await readPublicContent();
   const projects = Object.prototype.hasOwnProperty.call(publishedCollections, 'projects.records')
     ? projectsFromCollection(publishedCollections['projects.records'])
     : atlasProjects;
