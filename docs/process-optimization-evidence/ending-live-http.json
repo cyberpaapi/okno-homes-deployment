@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/process",
+    "status": 200
+  },
+  {
+    "path": "/models",
+    "status": 200
+  },
+  {
+    "path": "/enquiry",
+    "status": 200
+  },
+  {
+    "path": "/admin",
+    "status": 200
+  },
+  {
+    "path": "/api/site-content",
+    "status": 200
+  },
+  {
+    "path": "/process/process-master.hq.mp4",
+    "status": 206,
+    "range": "bytes 0-1023/31172040"
+  },
+  {
+    "path": "/process/process-master.scrub.mp4",
+    "status": 206,
+    "range": "bytes 0-1023/15346328"
+  }
+]

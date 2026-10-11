@@ -30,4 +30,12 @@ The sole 3134 website uses `.next-release-process-ending`, with all 15 canonical
 
 Layout evidence: [desktop ending](process-optimization-evidence/ending-close-desktop-local.png), [desktop marker](process-optimization-evidence/ending-marker-desktop-local.png), [mobile preparation](process-optimization-evidence/ending-close-mobile-local.png), [mobile actions](process-optimization-evidence/ending-actions-mobile-local.png), [mobile marker](process-optimization-evidence/ending-marker-mobile-local.png).
 
-Production identity and live confirmation will be appended after the application commit is READY.
+## Production acceptance
+
+Application source **`fc30dd64658beaae0a5bfc297344c0aa581728ab`**, deployment **`dpl_DfCwmVtogtSwBqxuhxx9m4iuouHj`**, is **READY** on [the canonical Process route](https://okno-homes-deployment.vercel.app/process). CLI account/team/project matched the existing OKNO target. Cloud compile, TypeScript, build and all 30 traces passed; largest cloud trace 177.4 MiB. Same private repository, same project, no other project/environment/store/billing change.
+
+Live 1280×720: first large forward gesture remains bounded at 576.6667px; the original 1920×1080 film renderer is retained. Ending and compact marker match the local composition. Both closing links navigate to their intended Enquiry/Models routes and browser Back restores Process. Large inverse input moves from the complete last detail phase through the five phases and original six film stages, then restores scrollY=0 / presented time=0.0000 / cover opacity=1. The counter/list identify the actual final phase as 05 / 05 and Assembly and handover.
+
+Live 390×844: readable closing preparation, original 1280×720 renderer, complete last-phase re-entry at 7757.3335px, then bounded inward reverse at 7216.6665px; no horizontal overflow. No captured console errors. Temporary viewport reset after confirmation. Five public/editor/content HEAD checks return 200; HQ/mobile media ranges return 206 with original byte totals. No further application changes followed acceptance.
+
+Evidence: [live observations](process-optimization-evidence/ending-live-observations.json), [HTTP/ranges](process-optimization-evidence/ending-live-http.json), [live desktop ending](process-optimization-evidence/ending-close-desktop-production.png), [live desktop marker](process-optimization-evidence/ending-marker-desktop-production.png), [live mobile ending](process-optimization-evidence/ending-close-mobile-production.png), [live mobile marker](process-optimization-evidence/ending-marker-mobile-production.png). Documentation-only commit follows this tested application release and should not replace it.

@@ -1,5 +1,9 @@
 # Release decision and evidence ledger
 
+## Latest Process reverse and page ending — 11 October 2026
+
+Source `fc30dd64658beaae0a5bfc297344c0aa581728ab`, READY `dpl_DfCwmVtogtSwBqxuhxx9m4iuouHj`, canonical alias verified. Reverse film travel limit is 25% higher; forward cadence/damping/original media and fast-scroll guards remain. The long bottom line is replaced by a read-only phase count/segments; a new preparation/conversation close follows the five photographs, with 11 matching editor fields. Actual 21st.dev Stepper 03 source (shadcnspace, 28558) retrieved and adaptation recorded. 57 tests, lint, TS/local/cloud builds and 30 traces pass. Live desktop/mobile-width checks verify inverse restoration, marker state, normal-flow close and both destination links; five HEADs 200 and both original media ranges 206. [Full decisions and evidence](../process-ending-2026-10-11.md). No cloud CMS/key/store/billing write or other project change; Blob recovery and email delivery are not claimed.
+
 ## Latest Process fast-scroll correction — 11 October 2026
 
 | Decision / check | Evidence | Outcome |
