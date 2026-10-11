@@ -48,8 +48,10 @@ describe("ProcessJourney", () => {
     expect(screen.getByRole("heading", { name: "From brief to handover." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Factory manufacturing" })).toBeInTheDocument();
     for (const range of ["01–10", "11–25", "26–60", "61–72", "73–90"]) {
-      expect(screen.getByText(range)).toBeInTheDocument();
+      expect(within(screen.getByRole("list", { name: "Build day timeline" })).getByText(range)).toBeInTheDocument();
     }
+    expect(screen.queryByText(/0[1-5]\s*\/\s*05/)).not.toBeInTheDocument();
+    expect(within(screen.getByRole("list", { name: "Build day timeline" })).queryByRole("button")).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Visualized completed gabled modular home in its coastal landscape" })).toBeInTheDocument();
     expect(screen.queryByText(/packing and transport/i)).not.toBeInTheDocument();
 

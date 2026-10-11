@@ -76,7 +76,7 @@ export default function ProcessDetailTimeline() {
               </article>
             ))}
           </motion.div>
-          <ProcessPhaseProgress titles={currentPhases.map(phase => phase.title)} progress={smoothProgress} />
+          <ProcessPhaseProgress phases={currentPhases} progress={smoothProgress} />
         </div>
       </div>
     </section>

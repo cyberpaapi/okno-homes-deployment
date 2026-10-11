@@ -1,0 +1,19 @@
+# Process day timeline correction — 11 October 2026
+
+## Current decision
+
+The client rejected the compact Stepper adaptation and all arbitrary phase counters. Replace it with one continuous, full-width connecting progress beam and the actual five day ranges: Days 01–10, 11–25, 26–60, 61–72 and 73–90. Keep the five photographs, copy, accepted forward motion, faster reverse cadence, scroll boundaries and page ending. No new buttons, font or slide-count display.
+
+The client's 21st.dev requirement refers to catalogue-wide popularity, not their personal bookmarks. It is now recorded in repository AGENTS.md and the explicitly authorized memory note. Never add decorative counters to future OKNO revisions.
+
+## Component evidence
+
+- Selected source: [Timeline by Manu Arora / Aceternity UI](https://21st.dev/@manuarora700/components/timeline), demo **857**, component **325**; MIT.
+- Actual component source and demo retrieved through 21st.dev; retained source: `docs/21st-source/process-days-857.tsx.txt`.
+- The live related-component catalogue on [Product Timeline](https://21st.dev/@hyperiux/components/timeline) showed **4.2k bookmarks** for Aceternity Timeline, ahead of the other related timelines inspected (Modern Timeline 638, HextaUI Timeline 621, ReleaseTimeLine 819). Product Timeline was separately observed at 1.4k. This verifies strong relative bookmark popularity among inspected matches, not an absolute whole-catalogue ranking.
+- Download totals and download-order controls were not exposed by the component pages or metadata API. No download count or rank is claimed.
+- Adaptation: rotate the source's connected scroll beam to the horizontal day chronology, use the already-presented phase MotionValue for fill, keep milestone/date structure, use the existing OKNO colors and typography. Replace sample years with existing CMS day ranges. The film and gallery scroll implementations remain untouched. No second scroll runtime or package is added.
+
+## Verification
+
+Local verification passed: 21 targeted Process/playhead/boundary tests, zero-warning full ESLint, TypeScript, production build and all 30 trace checks (largest 179.7 MiB). Canonical 3134 launcher verified 15 routes and 21 stylesheet assets. Desktop 1280×720 and mobile 390×844 captures show all five day ranges connected across the width, with no arbitrary counts, new controls or horizontal overflow. Large reverse input moved from the completed last phase into Days 61–72; fill and current milestone followed presented motion. Browser error logs were empty. Evidence: `days-progress-desktop-local.png`, `days-progress-mobile-local.png` and `days-component-popularity.json` in `docs/process-optimization-evidence/`. Existing Process day-field inputs feed both the phase content and the bottom day markers; no new CMS keys are introduced. This does not change the separate production Blob usage block or claim live admin publication works while that store is suspended.
