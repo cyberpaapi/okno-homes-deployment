@@ -1,0 +1,118 @@
+{
+  "base": "https://okno-homes-deployment.vercel.app",
+  "at": "2026-10-11T00:42:04.695Z",
+  "checks": [
+    {
+      "route": "/",
+      "status": 200
+    },
+    {
+      "route": "/about",
+      "status": 200
+    },
+    {
+      "route": "/models",
+      "status": 200
+    },
+    {
+      "route": "/models/signature",
+      "status": 200
+    },
+    {
+      "route": "/models/bespoke",
+      "status": 200
+    },
+    {
+      "route": "/models/signature/tengo/configure",
+      "status": 200
+    },
+    {
+      "route": "/models/signature/kray/configure",
+      "status": 200
+    },
+    {
+      "route": "/projects",
+      "status": 200
+    },
+    {
+      "route": "/journal",
+      "status": 200
+    },
+    {
+      "route": "/hospitality",
+      "status": 200
+    },
+    {
+      "route": "/process",
+      "status": 200
+    },
+    {
+      "route": "/sustainability",
+      "status": 200
+    },
+    {
+      "route": "/enquiry",
+      "status": 200
+    },
+    {
+      "route": "/admin",
+      "status": 200
+    },
+    {
+      "route": "/api/site-status",
+      "status": 200
+    },
+    {
+      "route": "/api/site-content",
+      "status": 200
+    },
+    {
+      "route": "/",
+      "secretAbsent": true,
+      "adminLinkAbsent": true
+    },
+    {
+      "route": "/admin",
+      "secretAbsent": true,
+      "noindex": true
+    },
+    {
+      "route": "/api/site-content",
+      "draftsAbsent": true
+    },
+    {
+      "model": "tengo",
+      "encoding": "identity",
+      "status": 200,
+      "bytes": 0
+    },
+    {
+      "model": "tengo",
+      "encoding": "gzip",
+      "status": 200,
+      "bytes": 7396283
+    },
+    {
+      "model": "kray",
+      "encoding": "identity",
+      "status": 200,
+      "bytes": 0
+    },
+    {
+      "model": "kray",
+      "encoding": "gzip",
+      "status": 200,
+      "bytes": 15930517
+    },
+    {
+      "model": "tengo",
+      "bytes": 22704140,
+      "hashMatches": true
+    },
+    {
+      "model": "kray",
+      "bytes": 79516416,
+      "hashMatches": true
+    }
+  ]
+}

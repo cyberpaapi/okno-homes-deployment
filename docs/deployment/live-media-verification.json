@@ -1,0 +1,14 @@
+{
+  "base": "https://okno-homes-deployment.vercel.app",
+  "at": "2026-10-11T00:42:04.223Z",
+  "checks": [
+    "Direct upload authorization rejects unauthenticated requests",
+    "Owner key obtains a scoped direct-upload token",
+    "Scoped client token uploads the original directly to private Blob",
+    "Cloud FFmpeg preparation returns scroll film, detail film and poster",
+    "Prepared cloud film serves byte ranges",
+    "Cloud poster is available",
+    "Original upload remains byte-for-byte recoverable",
+    "Media QA never stages or publishes a replacement"
+  ]
+}

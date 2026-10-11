@@ -116,7 +116,7 @@ async function readAdminSnapshot(credential: string): Promise<Snapshot> {
 function connectedMessage(next: Snapshot) {
   return next.demoExpiresAt
     ? `Local test token connected. It expires ${new Date(next.demoExpiresAt).toLocaleString()}. Publish changes to update the live demo.`
-    : "Editor connected to this local Final Showcase.";
+    : "Editor connected.";
 }
 
 // Adapted from 21st.dev originui Button 143: one consistent action vocabulary.

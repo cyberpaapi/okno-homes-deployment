@@ -2,6 +2,12 @@
 
 Private source for the Final Showcase website and its content studio. One Next.js application serves the public website and `/admin` on the same domain. Admin is reached by typing its URL; no public website link is provided. Editing requires the owner's action key.
 
+## Live release
+
+- Website: https://okno-homes-deployment.vercel.app
+- Admin: https://okno-homes-deployment.vercel.app/admin
+- Private repository: https://github.com/CodeAcc2007-dev/okno-homes-deployment
+
 ## Start here
 
 - [Working version](WORKING-VERSION.md)

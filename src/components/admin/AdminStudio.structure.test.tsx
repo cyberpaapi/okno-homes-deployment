@@ -74,7 +74,7 @@ describe("page-first admin structure", () => {
       render(<AdminStudio />);
       fireEvent.change(screen.getByLabelText("Admin token"), { target: { value: "local-test-token" } });
       fireEvent.click(screen.getByRole("button", { name: "Connect" }));
-      await screen.findByText("Editor connected to this local Final Showcase.");
+      await screen.findByText("Editor connected.");
       fireEvent.click(screen.getByRole("button", { name: /^Process\d+$/ }));
       fireEvent.click(screen.getByText("Land · film chapter", { exact: true }).closest("summary")!);
       expect(screen.getByText("Saved range is invalid; the website shows the original until corrected.")).toBeInTheDocument();

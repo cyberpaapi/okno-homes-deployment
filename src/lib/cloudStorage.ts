@@ -15,8 +15,14 @@ function requireCloudStorage() {
 
 export async function readCloudContent() {
   requireCloudStorage();
-  const result = await get("cms/content.json", { access: "private", useCache: false });
+  const result = await get("cms/content.json", { access: "private", useCache: false, headers: { "Accept-Encoding": "identity" } });
   if (!result || result.statusCode !== 200) return null;
+  // A compressed JSON response carries a weak HTTP validator, unusable for CAS.
+  // Request the stored representation and refuse to write from a weak version.
+  if (!result.blob.etag || result.blob.etag.startsWith("W/")) {
+    await result.stream.cancel();
+    throw new Error("Content version is unavailable. Reload before saving or publishing.");
+  }
   return { value: JSON.parse(await new Response(result.stream).text()) as unknown, etag: result.blob.etag };
 }
 

@@ -23,7 +23,14 @@ describe("deployed content storage", () => {
     vi.mocked(get).mockResolvedValue({ statusCode: 200, stream: new Response('{"revision":12}').body!, blob: { etag: '"12"' }, headers: new Headers() } as unknown as Awaited<ReturnType<typeof get>>);
     const { readCloudContent } = await import("./cloudStorage");
     expect(await readCloudContent()).toEqual({ value: { revision: 12 }, etag: '"12"' });
-    expect(get).toHaveBeenCalledWith("cms/content.json", { access: "private", useCache: false });
+    expect(get).toHaveBeenCalledWith("cms/content.json", { access: "private", useCache: false, headers: { "Accept-Encoding": "identity" } });
+  });
+
+  it("refuses a weak content validator instead of permitting an unsafe write", async () => {
+    const { get } = await import("@vercel/blob");
+    vi.mocked(get).mockResolvedValue({ statusCode: 200, stream: new Response('{}').body!, blob: { etag: 'W/"12"' }, headers: new Headers() } as unknown as Awaited<ReturnType<typeof get>>);
+    const { readCloudContent } = await import("./cloudStorage");
+    await expect(readCloudContent()).rejects.toThrow(/Content version is unavailable/);
   });
 
   it("permits one of two independent writes and rejects the stale writer", async () => {

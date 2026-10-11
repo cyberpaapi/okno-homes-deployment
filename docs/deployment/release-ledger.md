@@ -38,3 +38,13 @@
 
 | First Git deployment | GitHub main 49cc56a2aab8f6fe61ceff0695134e77867f7f53 pushed; production deployment dpl_Gv6a1LLPrTaUjX6UZzSwNFEknoz3 started from matching SHA | Cloud build in progress |
 | Git build-context correction | Vercel applies .vercelignore before the ignored-build command. Excluding .git made the docs-only comparison unavailable. Retain Git build metadata while excluding it from every runtime trace | Configuration follow-up build required; no application/media change |
+
+| Live draft finding | Production GET authentication passed, but draft PATCH returned 409. Blob JSON GET used a compressed weak ETag while head returned its strong validator | No draft/public content changed; request identity encoding and refuse any weak validator before CAS |
+
+| Public cloud smoke | Sixteen main page/API HEADs returned 200; owner key absent from HTML; home has no admin anchor; admin is noindex; public content excludes draft/history data | Passed; live-public-verification.json |
+| Approved model recovery | Tengo and Kray negotiated variants returned 200; streamed full model bodies match source byte lengths and SHA-256 hashes | Approved geometry retained; Vercel may negotiate gzip internally and strip HEAD content-length |
+| Live media preparation | Scoped owner-authorized private client upload, three prepared outputs, range 206, poster 200 and original byte hash checked | Passed; QA film never staged/published; live-media-verification.json |
+| Browser access | Live home visually loaded; /admin Connect accepted the generated owner key; Disconnect cleared it and disabled editing; no error console entries on these two routes | Save/publish live check awaits ETag fix deployment |
+| ETag correction validation | Private QA object read with identity encoding yielded a strong validator; current conditional write passed and stale retry failed | New weak-validator regression test added; final source checks running |
+
+| Corrected source checks | 78 files / 301 tests passed after the ETag correction; scoped lint and TypeScript passed | Cloud read now requests identity encoding and rejects weak validators; incidental cloud connection copy corrected |
