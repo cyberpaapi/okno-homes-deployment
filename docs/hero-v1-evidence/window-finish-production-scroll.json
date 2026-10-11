@@ -1,0 +1,46 @@
+[
+  {
+    "endStillLoaded": true,
+    "film": {
+      "filmRenderer": "frames",
+      "scrubCacheFrames": "33",
+      "scrubLastMs": "4986.3",
+      "scrubLoadMs": "3535.1",
+      "scrubMaxMs": "4986.3",
+      "scrubMeanMs": "3681.9",
+      "scrubPresentedFrames": "5",
+      "scrubPresentedTime": "24.0000",
+      "scrubTarget": "24.0000"
+    },
+    "scrollY": 6480,
+    "source": "/assets/landing-options/forest-entry-scroll-window-finish.mp4"
+  },
+  {
+    "film": {
+      "filmRenderer": "frames",
+      "scrubCacheFrames": "42",
+      "scrubLastMs": "6.5",
+      "scrubLoadMs": "3535.1",
+      "scrubMaxMs": "4986.3",
+      "scrubMeanMs": "1848.9",
+      "scrubPresentedFrames": "9",
+      "scrubPresentedTime": "18.6667",
+      "scrubTarget": "18.6667"
+    },
+    "scrollY": 5292
+  },
+  {
+    "film": {
+      "filmRenderer": "frames",
+      "scrubCacheFrames": "89",
+      "scrubLastMs": "229.2",
+      "scrubLoadMs": "3535.1",
+      "scrubMaxMs": "4986.3",
+      "scrubMeanMs": "1371.5",
+      "scrubPresentedFrames": "12",
+      "scrubPresentedTime": "24.0000",
+      "scrubTarget": "24.0000"
+    },
+    "scrollY": 6480
+  }
+]

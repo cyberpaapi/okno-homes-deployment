@@ -1,0 +1,32 @@
+{
+  "/": {
+    "status": 200,
+    "bytes": null
+  },
+  "/hero-v1": {
+    "status": 200,
+    "bytes": "57153"
+  },
+  "/admin": {
+    "status": 200,
+    "bytes": "39301"
+  },
+  "/assets/landing-options/forest-entry-scroll-window-finish.mp4": {
+    "status": 200,
+    "bytes": "80406713"
+  },
+  "/assets/landing-options/forest-entry-window-finish.jpg": {
+    "status": 200,
+    "bytes": "1256979"
+  },
+  "range": {
+    "status": 206,
+    "range": "bytes 80406000-80406712/80406713"
+  },
+  "savedKey": 200,
+  "publication": {
+    "revision": 17,
+    "v1Overrides": [],
+    "homeVariantOverride": null
+  }
+}
