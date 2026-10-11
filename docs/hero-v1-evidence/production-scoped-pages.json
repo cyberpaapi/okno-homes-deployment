@@ -1,0 +1,89 @@
+{
+  "bespoke": {
+    "clientHeight": 96,
+    "font": "49.045px",
+    "overflowY": "visible",
+    "scrollHeight": 104,
+    "text": "A home authoredfrom place."
+  },
+  "about": {
+    "height": 950.6666870117188,
+    "opacity": "1",
+    "top": -218.4375,
+    "transform": "none"
+  },
+  "hospitality": [
+    {
+      "clientHeight": 91,
+      "overflowY": "visible",
+      "scrollHeight": 91
+    },
+    {
+      "clientHeight": 91,
+      "overflowY": "visible",
+      "scrollHeight": 91
+    },
+    {
+      "clientHeight": 91,
+      "overflowY": "visible",
+      "scrollHeight": 91
+    },
+    {
+      "clientHeight": 91,
+      "overflowY": "visible",
+      "scrollHeight": 91
+    },
+    {
+      "clientHeight": 91,
+      "overflowY": "visible",
+      "scrollHeight": 91
+    },
+    {
+      "clientHeight": 91,
+      "overflowY": "visible",
+      "scrollHeight": 91
+    },
+    {
+      "clientHeight": 91,
+      "overflowY": "visible",
+      "scrollHeight": 91
+    }
+  ],
+  "projectPreviews": [
+    {
+      "alt": "Forrest — Bedroom opening to a planted courtyard through full-height glass",
+      "loaded": true,
+      "src": "https://okno-homes-deployment.vercel.app/_next/image?url=%2Fassets%2Fprojects%2Freal-v1%2Fforrest-02.webp&w=1920&q=90"
+    },
+    {
+      "alt": "Lakewood Villa — Pool and villa at sunset",
+      "loaded": true,
+      "src": "https://okno-homes-deployment.vercel.app/_next/image?url=%2Fassets%2Fprojects%2Freal-v1%2Flakewood-02.webp&w=1920&q=90"
+    },
+    {
+      "alt": "Trib BirdsEye — Triangular cabin facade framed by forest planting",
+      "loaded": true,
+      "src": "https://okno-homes-deployment.vercel.app/_next/image?url=%2Fassets%2Fprojects%2Freal-v1%2Ftrib-birdseye-02.webp&w=750&q=90"
+    },
+    {
+      "alt": "Kioo — Timber-lined bedroom with full-height forest views",
+      "loaded": true,
+      "src": "https://okno-homes-deployment.vercel.app/_next/image?url=%2Fassets%2Fprojects%2Freal-v1%2Fkioo-02.webp&w=1920&q=90"
+    },
+    {
+      "alt": "Octapod Layana — Cabins and planting beside the central pool",
+      "loaded": true,
+      "src": "https://okno-homes-deployment.vercel.app/_next/image?url=%2Fassets%2Fprojects%2Freal-v1%2Foctapod-layana-02.webp&w=1920&q=90"
+    },
+    {
+      "alt": "Kray Sangareddy — Entrance facade surrounded by planting",
+      "loaded": true,
+      "src": "https://okno-homes-deployment.vercel.app/_next/image?url=%2Fassets%2Fprojects%2Freal-v1%2Fkray-sangareddy-02.webp&w=1920&q=90"
+    },
+    {
+      "alt": "Rasa Vikarabad — Bedroom with dark timber walls and flooring",
+      "loaded": true,
+      "src": "https://okno-homes-deployment.vercel.app/_next/image?url=%2Fassets%2Fprojects%2Freal-v1%2Frasa-vikarabad-02.webp&w=1920&q=90"
+    }
+  ]
+}

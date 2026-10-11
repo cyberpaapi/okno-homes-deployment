@@ -1,0 +1,65 @@
+{
+  "source": "003ee99ff7fe3a07d522f3eda5295a2fee7f5970",
+  "deployment": "dpl_3vcbYX4PkNBjoKUvtHuYf4XcFHYD",
+  "routes": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/hero-v1",
+      "status": 200
+    },
+    {
+      "path": "/about",
+      "status": 200
+    },
+    {
+      "path": "/hospitality",
+      "status": 200
+    },
+    {
+      "path": "/journal",
+      "status": 200
+    },
+    {
+      "path": "/models/bespoke",
+      "status": 200
+    },
+    {
+      "path": "/projects",
+      "status": 200
+    },
+    {
+      "path": "/projects/forrest",
+      "status": 200
+    },
+    {
+      "path": "/projects/kioo",
+      "status": 200
+    },
+    {
+      "path": "/projects/octapod-layana",
+      "status": 200
+    },
+    {
+      "path": "/projects/rasa-vikarabad",
+      "status": 200
+    },
+    {
+      "path": "/admin",
+      "status": 200
+    },
+    {
+      "path": "/api/site-content",
+      "status": 200
+    }
+  ],
+  "publicRevision": 17,
+  "publicFieldsAndCollectionsMatchVerifiedSeed": true,
+  "publicHasNoDraftOrHistory": true,
+  "sinceStatus": 204,
+  "ownerStatus": 503,
+  "ownerError": "Content storage is unavailable. Check the existing OKNO Vercel Blob store's status and usage limits before editing. Your content has not been changed.",
+  "invalidTokenStatus": 401
+}

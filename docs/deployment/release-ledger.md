@@ -74,3 +74,17 @@
 | Enquiry decision | User explicitly chose to defer delivery during this pass | UI and 10px action clearance checked; no message-delivery claim |
 | Evidence follow-up | Documentation-only changes record runtime and coverage | Keep this tested runtime when pushing evidence; verify ignored-build result before final handoff |
 | Optimization evidence guard | Documentation commit `f6728b6` produced deployment `okno-homes-deployment-6mxbqvvmg`; live logs confirm the ignored-build command returned 0 and intentionally canceled it | Production alias still resolves to READY `dpl_BzKXYyMjC94pQC3TtcmZd2ao9GwP`; evidence updates preserve tested application source |
+
+## Hero V1 and storage recovery — 11 October 2026
+
+| Decision / check | Evidence | Outcome |
+| --- | --- | --- |
+| Hero V1 iterations | Six implementation/browser passes; original 1920×1080/24 fps source retained byte-for-byte | Original AVC frame decoding, bounded cache, directional prebuffering and gentler scroll easing; native fallback retained |
+| Held opening | Original intro endpoint, actual OKNO Modhomes logo, editable V1-only tagline/still | Intermediate ambient film, fog and fireflies removed; V2/Process unchanged |
+| Other scoped fixes | About paper rendering, Bespoke heading, Hospitality stage copy and project-index responsive previews | Existing identity/copy retained; nested editorial scrollers removed and all seven improved previews loaded |
+| Local V1 admin | Two draft-isolated browser publish cycles: still/tagline, then V1 duplicate + homepage selector | Already-open public pages updated without reload; original content restored exactly at local revision 15, zero drafts; editor disconnected |
+| Production storage incident | Existing store `limits-exceeded-suspended`; account block until 10 November 2026 02:47 UTC | No production V1 QA writes, new store or billing change; user account action required before two production V1 cycles |
+| Public content recovery | Published-only 30-minute Data Cache, Publish/reconnect invalidation, verified revision-17 seed fallback; admin fresh reads/CAS unchanged | Public routes remain available during suspension; owner API explicitly returns 503 instead of pretending to save |
+| Source gates | 81 files / 314 tests, lint, isolated production build/type checking, 30 traces largest 179.7 MiB | Passed; cloud traces largest 177.4 MiB |
+| Runtime | `003ee99ff7fe3a07d522f3eda5295a2fee7f5970`, READY `dpl_3vcbYX4PkNBjoKUvtHuYf4XcFHYD`; canonical alias verified | Same private repository and existing project; other projects untouched |
+| Production acceptance | 13 page/API HEADs 200; revision-17 public content exact/private drafts absent; since poll 204, invalid key 401, owner storage 503; five V1 scroll cases | Detailed [V1 ledger](../hero-v1-optimization-2026-10-11.md); production publishing remains explicitly blocked |

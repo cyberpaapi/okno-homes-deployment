@@ -13,7 +13,9 @@
 
 ## Live release
 
-Website: https://okno-homes-deployment.vercel.app; editor: https://okno-homes-deployment.vercel.app/admin. Current verified runtime source is `3fa5be36fd38315934381c30e67fba4790e7aade`, deployment `dpl_BzKXYyMjC94pQC3TtcmZd2ao9GwP`. Read the [optimization ledger](../optimization-2026-10-11.md) for current evidence and acceptance boundaries. Documentation commits can follow without replacing this runtime.
+Website: https://okno-homes-deployment.vercel.app; editor: https://okno-homes-deployment.vercel.app/admin. Current verified runtime source is `003ee99ff7fe3a07d522f3eda5295a2fee7f5970`, deployment `dpl_3vcbYX4PkNBjoKUvtHuYf4XcFHYD`, READY. Read the [Hero V1 ledger](../hero-v1-optimization-2026-10-11.md) for current evidence and acceptance boundaries. Documentation commits can follow without replacing this runtime.
+
+The existing private Blob store is suspended for a usage limit until 10 November 2026 02:47 UTC. Public routes now serve a published-only cache or the verified release publication during an outage; admin reads/writes fail closed with a storage-unavailable 503. The user must unblock the store or change their plan in Vercel. No agent-created replacement store or billing change is authorized by this incident. After recovery, reconnect the owner editor to refresh the public cache and complete the two pending production V1 cycles. A future outage fallback can omit CMS edits newer than this release seed; preserve private publication backups when releasing.
 
 ## Deployment
 

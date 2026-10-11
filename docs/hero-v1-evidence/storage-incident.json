@@ -1,0 +1,21 @@
+{
+  "project": "okno-homes-deployment",
+  "store": {
+    "id": "store_1AQc4Grm9lELxTSB",
+    "name": "okno-content-production",
+    "status": "limits-exceeded-suspended",
+    "billingState": "suspended"
+  },
+  "accountBlock": {
+    "blockedFrom": 1791686836071,
+    "blockedUntil": 1794278836071,
+    "isCurrentlyBlocked": true
+  },
+  "blockedFromUTC": "2026-10-11T02:47:16.071Z",
+  "blockedUntilUTC": "2026-11-10T02:47:16.071Z",
+  "productionV1WritesMade": false,
+  "productionAcceptanceCycles": 0,
+  "localAcceptanceCycles": 2,
+  "exactExceededMetric": "not independently verified",
+  "newStoreOrBillingChangeMade": false
+}

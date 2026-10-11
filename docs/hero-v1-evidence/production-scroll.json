@@ -1,0 +1,75 @@
+{
+  "cases": [
+    {
+      "label": "forward",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "54",
+        "scrubLastMs": "37.4",
+        "scrubLoadMs": "393.0",
+        "scrubMaxMs": "37.4",
+        "scrubMeanMs": "17.7",
+        "scrubPresentedFrames": "11",
+        "scrubPresentedTime": "10.7083",
+        "scrubTarget": "10.7083"
+      }
+    },
+    {
+      "label": "fast forward",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "23.1",
+        "scrubLoadMs": "393.0",
+        "scrubMaxMs": "51.0",
+        "scrubMeanMs": "15.7",
+        "scrubPresentedFrames": "22",
+        "scrubPresentedTime": "14.0833",
+        "scrubTarget": "14.0833"
+      }
+    },
+    {
+      "label": "reverse",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "22.8",
+        "scrubLoadMs": "393.0",
+        "scrubMaxMs": "51.0",
+        "scrubMeanMs": "15.4",
+        "scrubPresentedFrames": "29",
+        "scrubPresentedTime": "9.0417",
+        "scrubTarget": "9.0417"
+      }
+    },
+    {
+      "label": "small reverse",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "17.9",
+        "scrubLoadMs": "393.0",
+        "scrubMaxMs": "51.0",
+        "scrubMeanMs": "15.5",
+        "scrubPresentedFrames": "34",
+        "scrubPresentedTime": "8.7917",
+        "scrubTarget": "8.7917"
+      }
+    },
+    {
+      "label": "last frame",
+      "film": {
+        "filmRenderer": "frames",
+        "scrubCacheFrames": "96",
+        "scrubLastMs": "239.3",
+        "scrubLoadMs": "393.0",
+        "scrubMaxMs": "239.3",
+        "scrubMeanMs": "24.4",
+        "scrubPresentedFrames": "38",
+        "scrubPresentedTime": "20.0000",
+        "scrubTarget": "20.0000"
+      }
+    }
+  ],
+  "interpretation": "Application frame presentation metrics on production. Original source; not FPS or physical-device certification."
+}
