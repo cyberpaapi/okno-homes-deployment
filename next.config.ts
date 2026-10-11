@@ -22,10 +22,17 @@ const nextConfig: NextConfig = {
   },
   allowedDevOrigins: ["127.0.0.1"],
   async redirects() {
-    return [{ source: "/assets/landing-options/forest-entry-scroll-window-finish.mp4", destination: "/assets/landing-options/forest-entry-scroll-window-smooth.mp4", permanent: true }];
+    return ["forest-entry-scroll-window-finish.mp4", "forest-entry-scroll-window-smooth.mp4"].map(name => ({
+      source: `/assets/landing-options/${name}`,
+      destination: "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4",
+      permanent: true,
+    }));
   },
   async headers() {
-    return [{ source: "/page-images/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] }];
+    return ["/page-images/:path*", "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4"].map(source => ({
+      source,
+      headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+    }));
   },
   images: {
     qualities: [75, 90],

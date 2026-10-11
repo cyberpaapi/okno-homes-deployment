@@ -345,7 +345,7 @@ export const adminPages: readonly ContentPage[] = [
             { id: "hero-v1.opening.start-image", label: "Opening still", kind: "image", defaultValue: "/assets/landing-options/forest-entry-start-v2.jpg" },
             { id: "hero-v1.opening.end-image", label: "Window ending still", kind: "image", defaultValue: "/assets/landing-options/forest-entry-window-finish.jpg" },
             { id: "hero-v1.opening.intro-video", label: "Intro film", kind: "video", defaultValue: "/assets/landing-options/forest-entry-intro-15s.mp4" },
-            { id: "hero-v1.opening.scroll-video", label: "Scroll journey film", kind: "video", defaultValue: "/assets/landing-options/forest-entry-scroll-window-smooth.mp4", help: "Replacement must remain seekable; the scroll interaction reads video time." },
+            { id: "hero-v1.opening.scroll-video", label: "Scroll journey film", kind: "video", defaultValue: "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4", help: "Replacement must remain seekable; the scroll interaction reads video time." },
             { id: "hero-v1.opening.intro-last-frame", label: "Intro handoff still", kind: "image", defaultValue: "/assets/landing-options/forest-entry-intro-last-frame.png" },
             { id: "hero-v1.opening.tagline", label: "Still-frame tagline · V1", kind: "text", defaultValue: "Live better, live modular.", help: "Shown with OKNO Modhomes on the frozen intro frame. Leave empty to hide the tagline." },
             { id: "hero-v1.opening.accessible-title", label: "Accessible page title", kind: "text", defaultValue: "OKNO Modhomes" },

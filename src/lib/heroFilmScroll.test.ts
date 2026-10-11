@@ -1,7 +1,13 @@
 import { describe,expect,it } from 'vitest';
-import { heroFilmProgress,limitHeroFilmScroll } from './heroFilmScroll';
+import { heroFilmLastTime,heroFilmProgress,limitHeroFilmScroll } from './heroFilmScroll';
 
 describe('Hero gestures stay within the presented film',()=>{
+  it('completes the actual final frame even with rounded native duration',()=>{
+    for(const duration of [577/24,24.041667,24.042]) {
+      expect(heroFilmLastTime(duration)).toBe(24);
+      expect(24/heroFilmLastTime(duration)).toBe(1);
+    }
+  });
   it('bounds oversized forward and reverse gestures instead of queueing a skip',()=>{
     const forward=limitHeroFilmScroll(1900,6500,0,6480,0);
     expect(heroFilmProgress(forward/6480)).toBeCloseTo(.035);

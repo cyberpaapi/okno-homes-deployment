@@ -7,6 +7,10 @@
 - `OKNO-homes-older-version` is historical. Never implement current admin work there.
 - This document is the current admin specification and progress ledger. Update it whenever scope, decisions, or coverage change.
 
+## Hero V1 frame-order and cache default — 12 October 2026
+
+The scroll default now points to `forest-entry-scroll-window-smooth-b6de05527e75.mp4`, a content-fingerprinted name for the unchanged 47,573,337-byte / 1080p / 24fps delivery film. Both earlier delivery URLs redirect to it. The packet index, public inventory, Home default and editor default agree; no saved content, owner credential or Blob object is written. Immutable caching applies only to this frozen media URL. Hero gesture playback follows adjacent frames, and native metadata/seek rounding cannot prevent final-frame completion. Embedded native seeking can still be slower than standalone indexed rendering. Verification and release identity belong in [the Hero integration ledger](hero-v1-window-finish-2026-10-11.md).
+
 ## Hero V1 delivery default — 11 October 2026
 
 The built-in scroll-film default now uses the smaller 1080p/24fps delivery derivative `forest-entry-scroll-window-smooth.mp4`. The accepted motion and window ending still are retained. Current publications have no V1 media override; no CMS write or credential change is required. The private master, workflow and verification notes are outside the repository.

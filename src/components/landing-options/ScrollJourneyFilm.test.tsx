@@ -11,8 +11,8 @@ describe('embedded Hero V1 preview',()=>{
     vi.useFakeTimers();
     Object.defineProperty(window,'parent',{configurable:true,value:{}});
     const Decoder=vi.fn();vi.stubGlobal('VideoDecoder',Decoder);
-    const progress=motionValue(.8),onReady=vi.fn();
-    const view=render(<ScrollJourneyFilm src="/assets/landing-options/forest-entry-scroll-window-smooth.mp4" poster="/cover.jpg" className="film" progress={progress} onReady={onReady}/>);
+    const progress=motionValue(.8),onReady=vi.fn(),onProgress=vi.fn();
+    const view=render(<ScrollJourneyFilm src="/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4" poster="/cover.jpg" className="film" progress={progress} onReady={onReady} onProgress={onProgress}/>);
     const video=view.container.querySelector('video')!;
     expect(video).toBeTruthy();expect(view.container.querySelector('canvas')).toBeNull();expect(Decoder).not.toHaveBeenCalled();
     Object.defineProperties(video,{readyState:{value:4},duration:{value:24}});
@@ -22,6 +22,18 @@ describe('embedded Hero V1 preview',()=>{
     fireEvent.seeked(video);
     await act(async()=>{progress.set(.5);await vi.advanceTimersByTimeAsync(1000);});
     expect(video.currentTime).toBeLessThan(forward);
+    view.unmount();
+  });
+  it('reports the true ending after native metadata rounds the duration',()=>{
+    Object.defineProperty(window,'parent',{configurable:true,value:{}});
+    const onProgress=vi.fn();
+    const view=render(<ScrollJourneyFilm src="/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4" poster="/cover.jpg" className="film" progress={motionValue(1)} onReady={vi.fn()} onProgress={onProgress}/>);
+    const video=view.container.querySelector('video')!;
+    Object.defineProperties(video,{readyState:{value:4},duration:{value:24.042}});
+    fireEvent.loadedData(video);fireEvent.seeked(video);
+    expect(video.currentTime).toBeGreaterThan(24);
+    expect(video.currentTime).toBeLessThan(24.042);
+    expect(onProgress).toHaveBeenLastCalledWith(1);
     view.unmount();
   });
 });

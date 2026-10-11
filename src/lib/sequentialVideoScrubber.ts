@@ -5,12 +5,15 @@ export function createSequentialVideoScrubber(video: HTMLVideoElement, fps: numb
   let waiting = false, explicit = false, nextPaint = -Infinity, maxStep = 0, skipped = 0;
   const sequence: number[] = [];
   const indexAt = (time: number) => Math.min(Math.max(0,Math.round((video.duration-1/fps)*fps)),Math.max(0,Math.round(time*fps)));
+  // Some native engines truncate seek times to microseconds. Seek inside the
+  // requested frame, rather than fractionally before its presentation time.
+  const seekTime = (index: number) => Math.min(video.duration-.0001,(index+.01)/fps);
   const queue = () => { if (!disposed && !raf && !document.hidden) raf = requestAnimationFrame(tick); };
   const tick = (now: number) => {
     raf = 0;
     if (disposed || document.hidden || waiting || !Number.isFinite(video.duration) || requested === shown) return;
     if (now < nextPaint) { queue(); return; }
-    waiting = true; video.currentTime = (shown+Math.sign(requested-shown))/fps;
+    waiting = true; video.currentTime = seekTime(shown+Math.sign(requested-shown));
   };
   const seeked = () => {
     const next = Math.round(video.currentTime*fps);
@@ -35,7 +38,7 @@ export function createSequentialVideoScrubber(video: HTMLVideoElement, fps: numb
       if (requested === shown && !waiting) { present(shown/fps); return; }
       explicit = true; waiting = true;
       video.dataset.scrubExplicitSeeks = String(Number(video.dataset.scrubExplicitSeeks ?? 0)+1);
-      video.currentTime = requested/fps;
+      video.currentTime = seekTime(requested);
     },
     dispose() { disposed = true; cancelAnimationFrame(raf); video.removeEventListener('seeked',seeked); document.removeEventListener('visibilitychange',visibility); },
   };

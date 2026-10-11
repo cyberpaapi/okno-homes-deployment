@@ -5,7 +5,7 @@ function setup() {
   vi.useFakeTimers();
   vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
   const video = document.createElement('video');
-  Object.defineProperty(video, 'duration', { value: 577/24 });
+  Object.defineProperty(video, 'duration', { value: 24.042 });
   let time = 0, paused = false;
   const seeks: number[] = [];
   Object.defineProperty(video, 'currentTime', {
@@ -36,6 +36,8 @@ describe('ordered native video fallback', () => {
     const { video, controller, seeks, seen, pause } = setup();
     pause(); controller.setTime(24); await vi.advanceTimersByTimeAsync(2000);
     expect(seeks).toEqual([1]); expect(seen).toEqual([]);
+    expect(video.currentTime).toBeGreaterThan(41667/1e6);
+    expect(video.currentTime).toBeLessThan(2/24);
     controller.setTime(22); await vi.advanceTimersByTimeAsync(2000);
     expect(seeks).toEqual([1]);
     video.dispatchEvent(new Event('seeked')); await vi.advanceTimersByTimeAsync(50);

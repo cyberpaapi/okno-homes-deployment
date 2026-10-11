@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useMotionValueEvent, type MotionValue } from 'motion/react';
 import { createSequentialVideoScrubber } from '@/lib/sequentialVideoScrubber';
 import { isEmbeddedSitePreview } from '@/lib/sitePreview';
-import { heroFilmProgress } from '@/lib/heroFilmScroll';
+import { heroFilmLastTime, heroFilmProgress } from '@/lib/heroFilmScroll';
 
-const indexedSource = '/assets/landing-options/forest-entry-scroll-window-smooth.mp4';
+const indexedSource = '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4';
 type Controller = { setTime(time: number): void; seek(time: number): void; dispose(): void };
 export default function ScrollJourneyFilm({ src, poster, progress, className, onReady, onProgress }: {
   src: string; poster: string; progress: MotionValue<number>; className: string; onReady(ready: boolean): void; onProgress(progress: number): void;
@@ -19,7 +19,7 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
   const sync = () => {
     const surface = canvas.current ?? video.current;
     const rect = surface?.getBoundingClientRect();
-    const time = heroFilmProgress(progress.get()) * Math.max(0,duration.current-1/24);
+    const time = heroFilmProgress(progress.get()) * heroFilmLastTime(duration.current);
     if (rect && (rect.bottom <= 0 || rect.top >= window.innerHeight) || progress.get() <= .3) controller.current?.seek(time);
     else controller.current?.setTime(time);
   };
@@ -42,7 +42,7 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
       duration.current = heroFilmDuration;
       local = await createH264FrameScrubber(canvas.current, abort.signal, () => onReady(true), fallback, {
         sequential: true,
-        onPresented: time => onProgress(Math.min(1,time/Math.max(1/24,duration.current-1/24))),
+        onPresented: time => onProgress(Math.min(1,time/Math.max(1/24,heroFilmLastTime(duration.current)))),
       });
       if (abort.signal.aborted) { local?.dispose(); return; }
       if (!local) { fallback(); return; }
@@ -56,7 +56,7 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
   useEffect(() => {
     if (!native || !video.current) return;
     const element = video.current;
-    const scrubber = createSequentialVideoScrubber(element,24,time => onProgress(Math.min(1,time/Math.max(1/24,duration.current-1/24))));
+    const scrubber = createSequentialVideoScrubber(element,24,time => onProgress(Math.min(1,time/Math.max(1/24,heroFilmLastTime(duration.current)))));
     controller.current = scrubber;
     const ready = () => { duration.current = element.duration; onReady(true); onProgress(0); sync(); };
     element.addEventListener('loadeddata',ready);

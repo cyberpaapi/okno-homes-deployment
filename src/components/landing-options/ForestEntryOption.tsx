@@ -22,7 +22,7 @@ import styles from './ForestEntryOption.module.css';
 
 const INTRO_VIDEO = '/assets/landing-options/forest-entry-intro-15s.mp4';
 const INTRO_LAST_FRAME = '/assets/landing-options/forest-entry-intro-last-frame.png';
-const JOURNEY_VIDEO = '/assets/landing-options/forest-entry-scroll-window-smooth.mp4';
+const JOURNEY_VIDEO = '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4';
 const START = '/assets/landing-options/forest-entry-start-v2.jpg';
 const END = '/assets/landing-options/forest-entry-window-finish.jpg';
 

@@ -63,12 +63,12 @@ describe('ForestEntryOption', () => {
     expect(screen.getByTestId('option-one')).toBeInTheDocument();
     expect(container.firstElementChild).toHaveAttribute(
       'data-journey-video',
-      '/assets/landing-options/forest-entry-scroll-window-smooth.mp4',
+      '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4',
     );
     expect(container.firstElementChild).not.toHaveAttribute('data-ambient-video');
     expect([...container.querySelectorAll('video')].map(video => video.getAttribute('src'))).toEqual([
       '/assets/landing-options/forest-entry-intro-15s.mp4',
-      '/assets/landing-options/forest-entry-scroll-window-smooth.mp4',
+      '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4',
     ]);
   });
 

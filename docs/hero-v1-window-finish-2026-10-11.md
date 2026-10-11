@@ -1,5 +1,15 @@
 # Accepted Hero V1 window finish — 11 October 2026
 
+## Ordered-frame correction — 12 October 2026
+
+The owner reports frame skipping and jumps after the spring change. Hero V1 gesture playback now presents the next adjacent frame, holds when it is unavailable and restarts its 24fps clock after a stall without skipping overdue frames. It no longer substitutes a cached future frame. Decode runway refills happen in batches rather than decoding a GOP for each new frame. Maximum gesture lead is .035 of the film, about .84 seconds, measured against the displayed frame; excess input is discarded and Lenis is synchronized. Explicit navigation and offscreen preparation remain independent seeks. A stalled decoder fails open after eight seconds; lower content and Home/End navigation remain usable.
+
+The ending fade waits for actual frame 576, rather than the requested scroll position. Native completion uses the last frame index despite rounded metadata, and seeks land inside each requested frame to avoid sub-frame rounding errors. Native adjacent seeking can be slower than the indexed renderer; ordered presentation is not a promise of universal 24fps screen cadence.
+
+The unchanged 47,573,337-byte film is named `forest-entry-scroll-window-smooth-b6de05527e75.mp4`, with one-year immutable caching. Its full SHA remains `b6de05527e753772bad65c9dfc3ba04ff42db003896d7b20043ee25aabfc6a9f`. Both prior delivery URLs redirect to it; defaults, inventory and packet index agree. No generation, re-encoding, Blob upload, content-store write, credential or billing change is involved. Source bytes and the accepted window ending are preserved.
+
+Eight focused files / 32 tests pass, including all 577 frames forward, adjacent reverse playback, missing-frame holds, native fallback, gesture escape, reload rules and rounded ending metadata. Focused lint passes. Local browser passes reached all 577 indexed frames with skipped count 0, maximum step 1 and no explicit seek during ordinary film gestures. Phone-layout forward/reverse samples also keep step 1; Sustainability reload restores the exact offset. The initial live application is `a4e1a0a577e291e9e197991a67cead4ce1a63b15`, READY `dpl_Ae3Daoom9A9v3xGo9ZFrqpor2gyx`; it establishes ordered playback before the final native/cache follow-up. Cold decode/network holds remain possible: its first live streaming pass recorded 2432.7 ms. That is a hold, not an acceptable claim of perfectly even motion. Final release acceptance follows after the fingerprinted URL and native corrections are verified. Full evidence and the owner workflow remain private outside the repository.
+
 ## Process-style Hero V1 smoothing — 12 October 2026
 
 The owner requests the Process page's weighted scroll feel on Hero V1. `ForestEntryOption` now follows the same visual spring as `ProcessJourney`: stiffness 160, damping 30, mass .72 and restDelta .0002. Film time and all opening/ending fades use that one progress value. Lenis lerp is shortened from .12 to .18 to avoid adding a long document tail; reduced motion remains direct, and initial restored positions skip spring travel. The Process page itself is unchanged.
