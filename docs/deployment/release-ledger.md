@@ -149,3 +149,12 @@ The unused `okno-homes-demo` cloud project and its six deployments were permanen
 - 57 targeted tests, full zero-warning lint, TypeScript, local/cloud production builds and 30 trace checks passed. Fixed 3140 admin gateway check passed, reusing 3134.
 - Application `39a944d9edb408fe7e6156c13e2d4299d96be7dc`; READY `dpl_5o8WAAixFtssmK41ux9HWz9UWqCU`, canonical alias attached. Desktop/mobile native forward and reverse gestures, first-frame settling and dark ending verified; no overflow or captured console errors. [Decisions and evidence](../process-final-pacing-2026-10-11.md).
 - No CMS cloud writes, store, billing or other-project changes; production Blob block unchanged. Documentation-only follow-up keeps this tested runtime.
+
+
+## Admin audit and Process footer crossing — 11 October 2026
+
+- Correct the small-scroll timeline endpoint snap without changing accepted film pacing, day beam, layout or media. Huge-entry guards remain. Small fractional crossings have regression coverage.
+- Inspect all 16 editor panels; inventory 1,080 registered scalars and 25 collections; trace the 675 exposed scalar inputs. Correct trusted Journal default-logo validation, original favicon existence and the unused Process loading label.
+- Full suite 87 files / 341 tests, focused final Process checks 2 files / 4 tests, lint, TypeScript and local/cloud builds passed. Cloud 30 trace guards passed, largest 177.5 MiB. Two real fixed-port local upload/publish/poll cycles passed and original fields/collections were restored exactly, with zero drafts; test media retained.
+- Runtime `e11c6288bd32f3e9def5bcfc451f39a7ba2626b0`; READY `dpl_6MW8vo2vcUG4jjQfYYeNoaM8Fj5c`; canonical alias verified. Fresh desktop and 390×844 live forward/reverse footer crossings stayed native; zero horizontal overflow and no captured Process console errors.
+- Live public/admin shell/favicon/published API return 200; unauthenticated editor API 401. Authenticated CMS content remains storage-unavailable **503**. Live upload capability is not upload acceptance. Production publishing remains blocked; no cloud QA writes, media upload, new store, billing or unrelated-project mutation. [Complete audit and evidence](../admin-audit-2026-10-11.md). Documentation-only follow-up preserves the tested runtime.

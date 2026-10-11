@@ -1,0 +1,60 @@
+{
+  "desktop": {
+    "end": {
+      "end": 6701.28125,
+      "overflow": 0,
+      "progress": "0.8708060721023669",
+      "stageTop": -430.0520935058594,
+      "y": 7131.33349609375
+    },
+    "reverseSmall": {
+      "end": 6701.28125,
+      "overflow": 0,
+      "progress": "1",
+      "stageTop": 0,
+      "y": 6591.33349609375
+    },
+    "forwardSmall": {
+      "end": 6701.28125,
+      "overflow": 0,
+      "progress": "1",
+      "stageTop": -430.0520935058594,
+      "y": 7131.33349609375
+    }
+  },
+  "mobile": {
+    "reverseSmall": {
+      "end": 7757.02099609375,
+      "overflow": 0,
+      "progress": "1",
+      "stageTop": 0,
+      "y": 7625.33349609375
+    },
+    "forwardSmall": {
+      "end": 7757.020751953125,
+      "overflow": 0,
+      "progress": "1",
+      "stageTop": -500.9791870117187,
+      "y": 8258
+    },
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "immediateKeyboardEndSnapshot": {
+      "end": 7757.02099609375,
+      "overflow": 0,
+      "progress": "0",
+      "stageTop": 4381.02099609375,
+      "y": 0
+    },
+    "settledFooter": {
+      "end": 7757.020751953125,
+      "overflow": 0,
+      "progress": "1",
+      "stageTop": -500.9791870117187,
+      "y": 8258
+    }
+  },
+  "capturedConsoleErrors": []
+}

@@ -1,0 +1,25 @@
+{
+  "/process": {
+    "status": 200
+  },
+  "/admin": {
+    "status": 200
+  },
+  "/favicon.ico": {
+    "status": 200
+  },
+  "/api/site-content": {
+    "status": 200
+  },
+  "/api/admin/content": {
+    "status": 503,
+    "error": "Content storage is unavailable. Check the existing OKNO Vercel Blob store's status and usage limits before editing. Your content has not been changed."
+  },
+  "/api/admin/upload": {
+    "status": 200,
+    "mode": "blob"
+  },
+  "unauthenticated content": {
+    "status": 401
+  }
+}
