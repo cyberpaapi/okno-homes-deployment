@@ -35,3 +35,6 @@
 | Final production source build | Webpack build passed; 30 final function traces passed, largest 179.7 MiB; no local CMS, secrets or env files; Linux binaries and all four approved GLB variants retained | Source ready to publish; cloud live checks pending |
 | Trace regression gate | Added release:check-bundles to Vercel build command | Future application builds fail on private-data inclusion, oversized functions or missing required binaries/models |
 | Preserved archive whitespace | Initial git diff check reports incumbent whitespace in retrieved provenance and preserved source | No unrelated whitespace rewrite; scoped lint passes |
+
+| First Git deployment | GitHub main 49cc56a2aab8f6fe61ceff0695134e77867f7f53 pushed; production deployment dpl_Gv6a1LLPrTaUjX6UZzSwNFEknoz3 started from matching SHA | Cloud build in progress |
+| Git build-context correction | Vercel applies .vercelignore before the ignored-build command. Excluding .git made the docs-only comparison unavailable. Retain Git build metadata while excluding it from every runtime trace | Configuration follow-up build required; no application/media change |
