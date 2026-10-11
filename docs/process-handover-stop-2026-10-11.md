@@ -1,5 +1,7 @@
 # Process closed-house ending — 11 October 2026
 
+Superseded by the owner’s [12 October continuous-date and smooth-finish correction](process-continuous-days-2026-10-12.md). The grouped ranges and hard keyframe cut below are historical, not the current specification.
+
 The owner requests one coherent Days 73–90 period and a held, complete house at Handover, rather than the film continuing into its ending effects.
 
 ## Decisions

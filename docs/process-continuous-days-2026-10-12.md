@@ -22,5 +22,15 @@ Retain the accepted 4 film seconds/second forward, 5 reverse and damped braking.
 ## Verification
 
 - Six focused test files / 35 tests passed: complete day coverage, public/admin matching defaults, monotonic soft-endpoint blend, original packet window, native end/reverse, custom films, playhead and fast-scroll boundaries.
-- Full TypeScript check passed. Focused lint is checked after removing an unsupported picture ARIA attribute.
-- Production build and live desktop/mobile observations will be recorded after deployment. This does not claim production CMS writes; the existing Blob 503 remains separate.
+- Full TypeScript check passed. Focused lint passed with zero warnings after removing an unsupported picture ARIA attribute.
+- Production build, TypeScript and all 30 function traces passed; largest trace 177.5 MiB, private files excluded. This does not claim production CMS writes; the existing Blob 503 remains separate.
+
+## Live acceptance
+
+Application source `b17f2abd9095bfb51d0f458095c42b17e85aeddc` is READY as `dpl_7et6iaRAC59QJE2TxGfvWMre3hCK`, attached to https://okno-homes-deployment.vercel.app.
+
+Desktop 1280×720 traversed all six named chapters and their distinct dates. Forward samples crossed Enclosure with opacity rising continuously from zero to the completed-house hold; reverse samples declined from 0.865 to 0.035 to zero as the original construction film returned. Mobile 390×844 used the paired 1280-pixel still and likewise passed forward and reverse blend checks. Both held the completed house at presented film time 20.6667 seconds with opacity 1, complete decoded image, no horizontal overflow, and no browser errors or warnings. The visual ending remains subject to owner acceptance; these are observed engineering/browser checks, not a claim of universal device performance.
+
+[Desktop completed house and all dates](process-evidence/continuous-days-desktop-2026-10-12.jpg) · [Mobile completed house](process-evidence/continuous-days-mobile-2026-10-12.jpg) · [Forward/reverse observations](process-evidence/continuous-days-production-2026-10-12.json).
+
+The fixed local runtime was preserved; cloud deployment is the release target for this correction. No content-store writes, key changes, unrelated pages or other Vercel projects were changed.

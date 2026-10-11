@@ -1,0 +1,213 @@
+{
+  "deployment": "dpl_7et6iaRAC59QJE2TxGfvWMre3hCK",
+  "source": "b17f2abd9095bfb51d0f458095c42b17e85aeddc",
+  "desktop": {
+    "forward": [
+      {
+        "heading": "Build sequenceDays 01–10 · Land",
+        "opacity": "0",
+        "time": "0.9000",
+        "y": 576.6666870117188
+      },
+      {
+        "heading": "Build sequenceDays 01–10 · Land",
+        "opacity": "0",
+        "time": "2.2000",
+        "y": 700.6666870117188
+      },
+      {
+        "heading": "Build sequenceDays 01–10 · Land",
+        "opacity": "0",
+        "time": "3.1333",
+        "y": 807.3333129882812
+      },
+      {
+        "heading": "Build sequenceDays 01–10 · Land",
+        "opacity": "0",
+        "time": "4.2000",
+        "y": 927.3333129882812
+      },
+      {
+        "heading": "Build sequenceDays 01–10 · Land",
+        "opacity": "0",
+        "time": "5.6000",
+        "y": 1051.3333740234375
+      },
+      {
+        "heading": "Build sequenceDays 01–10 · Land",
+        "opacity": "0",
+        "time": "6.6000",
+        "y": 1158
+      },
+      {
+        "heading": "Build sequenceDays 01–10 · Land",
+        "opacity": "0",
+        "time": "7.5333",
+        "y": 1258
+      },
+      {
+        "heading": "Build sequenceDays 11–18 · Architecture",
+        "opacity": "0",
+        "time": "8.5333",
+        "y": 1361.3333740234375
+      },
+      {
+        "heading": "Build sequenceDays 11–18 · Architecture",
+        "opacity": "0",
+        "time": "9.5333",
+        "y": 1464.6666259765625
+      },
+      {
+        "heading": "Build sequenceDays 19–25 · Design lock",
+        "opacity": "0",
+        "time": "10.6000",
+        "y": 1578
+      },
+      {
+        "heading": "Build sequenceDays 26–60 · Assembly",
+        "opacity": "0",
+        "time": "12.0667",
+        "y": 1716
+      },
+      {
+        "heading": "Build sequenceDays 26–60 · Assembly",
+        "opacity": "0",
+        "time": "13.0000",
+        "y": 1826
+      },
+      {
+        "heading": "Build sequenceDays 26–60 · Assembly",
+        "opacity": "0",
+        "time": "14.1000",
+        "y": 1932.6666259765625
+      },
+      {
+        "heading": "Build sequenceDays 26–60 · Assembly",
+        "opacity": "0",
+        "time": "15.0667",
+        "y": 2032.6666259765625
+      },
+      {
+        "heading": "Build sequenceDays 26–60 · Assembly",
+        "opacity": "0",
+        "time": "16.1333",
+        "y": 2146
+      },
+      {
+        "heading": "Build sequenceDays 61–72 · Enclosure",
+        "opacity": "0",
+        "time": "17.1667",
+        "y": 2256
+      },
+      {
+        "heading": "Build sequenceDays 61–72 · Enclosure",
+        "opacity": "0",
+        "time": "18.1667",
+        "y": 2356
+      },
+      {
+        "heading": "Build sequenceDays 61–72 · Enclosure",
+        "opacity": "0.209877",
+        "time": "18.9000",
+        "y": 2459.333251953125
+      }
+    ],
+    "finish": {
+      "dates": "Days 01–10Days 11–18Days 19–25Days 26–60Days 61–72Days 73–90",
+      "h": 720,
+      "heading": "Build sequenceDays 73–90 · Handover",
+      "imageComplete": true,
+      "naturalWidth": 1920,
+      "opacity": "1",
+      "overflow": false,
+      "time": "20.6667",
+      "w": 1280,
+      "y": 2572
+    },
+    "reverse": [
+      {
+        "heading": "Build sequenceDays 61–72 · Enclosure",
+        "opacity": "0.865049",
+        "time": "19.6000",
+        "y": 2433.333251953125
+      },
+      {
+        "heading": "Build sequenceDays 61–72 · Enclosure",
+        "opacity": "0.0354938",
+        "time": "18.6000",
+        "y": 2309.333251953125
+      },
+      {
+        "heading": "Build sequenceDays 61–72 · Enclosure",
+        "opacity": "0",
+        "time": "17.2667",
+        "y": 2192
+      },
+      {
+        "heading": "Build sequenceDays 26–60 · Assembly",
+        "opacity": "0",
+        "time": "16.0667",
+        "y": 2068
+      }
+    ],
+    "logs": []
+  },
+  "mobile": {
+    "forward": [
+      {
+        "heading": "Build sequenceDays 61–72 · Enclosure",
+        "opacity": "0",
+        "time": "18.1333",
+        "y": 2749.333251953125
+      },
+      {
+        "heading": "Build sequenceDays 61–72 · Enclosure",
+        "opacity": "0.53469",
+        "time": "19.2333",
+        "y": 2882.666748046875
+      },
+      {
+        "heading": "Build sequenceDays 73–90 · Handover",
+        "opacity": "1",
+        "time": "20.3333",
+        "y": 3014.666748046875
+      },
+      {
+        "heading": "Build sequenceDays 73–90 · Handover",
+        "opacity": "1",
+        "time": "20.6333",
+        "y": 3014.666748046875
+      }
+    ],
+    "finish": {
+      "currentSrc": "https://okno-homes-deployment.vercel.app/process/process-final-house-mobile.webp",
+      "dates": "Days 01–10Days 11–18Days 19–25Days 26–60Days 61–72Days 73–90",
+      "h": 844,
+      "imageComplete": true,
+      "naturalWidth": 1280,
+      "opacity": "1",
+      "overflow": false,
+      "time": "20.6667",
+      "w": 390,
+      "y": 3014.666748046875
+    },
+    "reverse": [
+      {
+        "opacity": "0.886479",
+        "time": "19.6333",
+        "y": 2852
+      },
+      {
+        "opacity": "0.00157496",
+        "time": "18.4000",
+        "y": 2710.666748046875
+      },
+      {
+        "opacity": "0",
+        "time": "17.2333",
+        "y": 2565.333251953125
+      }
+    ],
+    "logs": []
+  }
+}
