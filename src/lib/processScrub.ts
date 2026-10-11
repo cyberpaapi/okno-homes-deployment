@@ -12,6 +12,10 @@ export function processStageAt(progress: number) {
 export class ProcessPlayhead {
   time = 0;
   private velocity = 0;
+  reset(time: number) {
+    this.time = Math.max(0, time);
+    this.velocity = 0;
+  }
   step(target: number, elapsed: number) {
     const dt = Math.min(.05, Math.max(0, elapsed));
     if (!dt) return this.time;

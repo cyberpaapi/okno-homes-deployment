@@ -1,6 +1,6 @@
 .section {
   position: relative;
-  padding: clamp(110px, 16vw, 220px) 0 clamp(72px, 8vw, 110px);
+  padding: clamp(64px, 8vw, 112px) 0 clamp(48px, 6vw, 80px);
   border-top: 1px solid rgb(167 187 176 / 12%);
   background: linear-gradient(180deg, rgb(12 22 15 / 92%), #121913 32%, #141713);
   color: #eef3ed;
@@ -8,7 +8,7 @@
 
 .intro {
   width: calc(100% - clamp(40px, 6vw, 96px));
-  margin: 0 auto clamp(80px, 12vw, 150px);
+  margin: 0 auto clamp(24px, 4vw, 56px);
 }
 
 .intro > p {
@@ -24,10 +24,10 @@
   max-width: 10ch;
   margin: 0;
   font-family: "OKNO Bodoni", Georgia, serif;
-  font-size: clamp(66px, 9vw, 150px);
+  font-size: clamp(56px, 7vw, 96px);
   font-weight: 400;
-  line-height: .86;
-  letter-spacing: -.055em;
+  line-height: .96;
+  letter-spacing: -.04em;
   text-wrap: balance;
 }
 
@@ -96,19 +96,18 @@
 .phase {
   display: grid;
   flex: 0 0 20%;
-  grid-template-columns: minmax(0, .74fr) minmax(0, 1.3fr);
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.25fr);
   align-items: center;
   gap: clamp(36px, 5vw, 90px);
   width: 20%;
   height: 100%;
-  padding: clamp(20px, 3vw, 48px) clamp(20px, 3vw, 48px);
+  padding: 96px clamp(20px, 3vw, 48px) 76px;
   box-sizing: border-box;
 }
 
 .phaseCopy {
   align-self: center;
-  max-width: 380px;
-  padding-bottom: clamp(15px, 5vh, 70px);
+  max-width: 450px;
 }
 
 .phaseCopy h3 {
@@ -122,7 +121,7 @@
   text-wrap: balance;
 }
 
-.phaseCopy p {
+.phaseSummary {
   max-width: 38ch;
   margin: 25px 0 0;
   color: rgb(233 240 234 / 74%);
@@ -135,7 +134,8 @@
 
 .imageWrap {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
+  max-height: 66svh;
   width: 100%;
   overflow: hidden;
   border-radius: 14px;
@@ -148,22 +148,22 @@
   display: flex;
   align-items: baseline;
   gap: clamp(12px, 1.5vw, 22px);
-  margin: clamp(18px, 2.2vw, 34px) 0 0;
+  margin: 0 0 clamp(24px, 3vw, 40px);
   color: #c8dac7;
   white-space: nowrap;
 }
 
 .daysPrefix {
   color: #a7bbb0;
-  font-size: clamp(13px, 1.2vw, 19px);
-  font-weight: 500;
-  letter-spacing: .16em;
+  font-size: clamp(12px, 1vw, 16px);
+  font-weight: 600;
+  letter-spacing: .08em;
   text-transform: uppercase;
 }
 
 .daysRange {
   font-family: "Geist OKNO", Arial, sans-serif;
-  font-size: clamp(78px, 10.5vw, 160px);
+  font-size: clamp(48px, 5.4vw, 78px);
   font-weight: 600;
   line-height: .88;
   letter-spacing: -.04em;
@@ -173,36 +173,36 @@
 @media (max-width: 900px) {
   .phase { grid-template-columns: minmax(0, .78fr) minmax(0, 1.25fr); gap: 28px; }
   .phaseCopy h3 { font-size: clamp(38px, 4.7vw, 56px); }
-  .daysRange { font-size: clamp(68px, 10vw, 100px); }
+  .daysRange { font-size: clamp(42px, 6vw, 62px); }
 }
 
 @media (max-width: 700px) {
   .section { padding-right: 0; padding-left: 0; }
-  .intro { margin-bottom: 70px; }
+  .intro { margin-bottom: 24px; }
   .intro h2 { font-size: clamp(62px, 18vw, 88px); }
   .phase {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
-    align-content: start;
-    gap: clamp(32px, 5svh, 44px);
-    padding: clamp(82px, 13svh, 126px) 20px 28px;
+    align-content: center;
+    gap: clamp(22px, 3svh, 32px);
+    padding: clamp(78px, 11svh, 106px) 20px 64px;
   }
   .phaseVisual { grid-row: 1; }
   .phaseCopy { grid-row: 2; padding-bottom: 0; }
   .imageWrap { border-radius: 10px; }
-  .days { flex-wrap: wrap; gap: 6px 12px; margin-top: 22px; }
+  .days { flex-wrap: wrap; gap: 6px 12px; margin: 0 0 18px; }
   .daysPrefix { font-size: 13px; }
-  .daysRange { font-size: clamp(62px, 17vw, 100px); }
-  .phaseCopy h3 { font-size: clamp(42px, 11vw, 58px); }
-  .phaseCopy p { margin-top: 16px; font-size: 14px; line-height: 1.55; }
+  .daysRange { font-size: clamp(40px, 11vw, 56px); }
+  .phaseCopy h3 { font-size: clamp(34px, 9vw, 48px); }
+  .phaseSummary { margin-top: 14px; font-size: 14px; line-height: 1.55; }
 }
 
 @media (max-width: 700px) and (max-height: 700px) {
   .phase { gap: 20px; padding-top: 58px; }
-  .days { margin-top: 16px; }
-  .daysRange { font-size: clamp(64px, 17vw, 90px); }
-  .phaseCopy h3 { font-size: 40px; }
-  .phaseCopy p { margin-top: 10px; }
+  .days { margin-bottom: 14px; }
+  .daysRange { font-size: 40px; }
+  .phaseCopy h3 { font-size: 34px; }
+  .phaseSummary { margin-top: 10px; }
 }
 
 @media (max-width: 700px) and (max-height: 620px) {
@@ -213,6 +213,15 @@
   .phase:last-child { margin-bottom: 0; }
   .timelineLine { top: 0; right: auto; bottom: 0; left: 3px; width: 2px; height: auto; background: rgb(200 218 199 / 45%); }
   .timelineLine::before, .timelineLineFill, .timelineTicks { display: none; }
+}
+
+@media (min-width: 701px) and (max-height: 620px) {
+  .phase { padding-top: 76px; padding-bottom: 56px; }
+  .phaseCopy h3 { font-size: 36px; }
+  .phaseSummary { margin-top: 16px; font-size: 13px; line-height: 1.45; }
+  .days { margin-bottom: 20px; }
+  .daysRange { font-size: 40px; }
+  .imageWrap { max-height: 60svh; }
 }
 
 @media (prefers-reduced-motion: reduce) {

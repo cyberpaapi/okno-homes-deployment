@@ -82,3 +82,7 @@ The user now authorizes six scroll-triggered chapter stops and full-width detail
 ## Continuous-scroll correction — later 11 October 2026
 
 The user supersedes the preceding chapter-lock experiment: restore smooth bidirectional scroll, remove its new playback buttons/transition overlays, and move through the film faster. Existing Scroll Media Expansion Hero, Silk, rail and detail timeline adaptations retain their original provenance. The accepted cover expands continuously, then blends into the original-packet film renderer; captions follow presented frames without moving overlapping layers. No new 21st.dev component is used. The detailed timeline width/typography remain. Current decisions and acceptance are in [the scroll revision ledger](process-scroll-revision-2026-10-11.md).
+
+## Later 11 October — fast-scroll boundaries and timeline refinement
+
+The accepted film easing remains. A local frame-aware guard now limits oversized forward/reverse gestures so neither sequence is skipped before its presented content catches up; this supersedes the earlier unrestricted-input boundary decision. Product Timeline by hyperiux (`26930`, source above) retains its milestone/line structure, with better contrast and vertical thumbnail/type alignment. The existing five-phase detail timeline settles on complete phases and aligns its day range with the heading/copy. No new external component or media is introduced. See [boundary and timeline acceptance](process-scroll-boundaries-2026-10-11.md).

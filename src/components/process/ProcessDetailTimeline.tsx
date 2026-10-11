@@ -7,6 +7,7 @@ import styles from './ProcessDetailTimeline.module.css';
 import { useSiteContent, useSiteContentMap } from '@/lib/useSiteContent';
 import { processDetailPhases } from '@/data/processDetailPhases';
 import { resolveProcessDayRange } from '@/lib/processDayRange';
+import useProcessScrollGuard from './useProcessScrollGuard';
 
 export default function ProcessDetailTimeline() {
   const values = useSiteContentMap();
@@ -26,8 +27,12 @@ export default function ProcessDetailTimeline() {
     target: timelineRef,
     offset: ['start start', 'end end'],
   });
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 240, damping: 34, mass: .6 });
+  // Settle on a complete phase instead of leaving one phase's photo beside
+  // the next phase's text. Day/copy/image continue to travel as one article.
+  const phaseProgress = useTransform(scrollYProgress, value => Math.round(value * 4) / 4);
+  const smoothProgress = useSpring(phaseProgress, { stiffness: 120, damping: 26, mass: .8 });
   const trackX = useTransform(smoothProgress, [0, 1], ['0%', '-80%']);
+  useProcessScrollGuard(timelineRef, smoothProgress, 'timeline', !reducedMotion);
 
   return (
     <section className={styles.section} aria-labelledby="process-detail-title">
@@ -36,14 +41,18 @@ export default function ProcessDetailTimeline() {
         <h2 id="process-detail-title">{heading}</h2>
       </header>
 
-      <div className={styles.timeline} ref={timelineRef}>
+      <div className={styles.timeline} ref={timelineRef} data-process-detail-timeline>
         <div className={styles.stage}>
           <motion.div className={styles.track} style={{ x: reducedMotion ? '0%' : trackX }}>
             {currentPhases.map((phase, index) => (
               <article className={styles.phase} data-process-phase={index + 1} key={index}>
                 <div className={styles.phaseCopy}>
+                  <p className={styles.days}>
+                    <span className={styles.daysPrefix}>{phase.days.label}</span>
+                    <span className={styles.daysRange}>{phase.days.range}</span>
+                  </p>
                   <h3>{phase.title}</h3>
-                  <p>{phase.copy}</p>
+                  <p className={styles.phaseSummary}>{phase.copy}</p>
                 </div>
 
                 <div className={styles.phaseVisual}>
@@ -62,10 +71,6 @@ export default function ProcessDetailTimeline() {
                       sizes="(max-width: 700px) calc(100vw - 32px), (max-width: 1100px) 54vw, 53vw"
                     />
                   </motion.div>
-                  <p className={styles.days}>
-                    <span className={styles.daysPrefix}>{phase.days.label}</span>
-                    <span className={styles.daysRange}>{phase.days.range}</span>
-                  </p>
                 </div>
               </article>
             ))}

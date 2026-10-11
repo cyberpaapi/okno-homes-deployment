@@ -22,6 +22,7 @@ import ScrollProcessFilm from "./ScrollProcessFilm";
 import { processStageAt } from "@/lib/processScrub";
 import { useSiteContent, useSiteContentMap } from "@/lib/useSiteContent";
 import { resolveProcessDayRange } from "@/lib/processDayRange";
+import useProcessScrollGuard from "./useProcessScrollGuard";
 
 type Stage = ProcessTimelineItem & {
   days: string;
@@ -208,6 +209,7 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
   const [activeStage, setActiveStage] = useState(0);
   const [masterFilmReady, setMasterFilmReady] = useState(false);
   const sequenceProgress = useMotionValue(0);
+  useProcessScrollGuard(trackRef, sequenceProgress);
   const presentedStage = useRef(0);
   const presentFrame = useCallback((progress: number) => {
     sequenceProgress.set(progress);

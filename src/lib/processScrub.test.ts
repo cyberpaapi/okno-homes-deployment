@@ -46,4 +46,12 @@ describe('smooth Process scroll playhead', () => {
     expect(processStageAt(0)).toBe(0);
     expect(processStageAt(1)).toBe(5);
   });
+  it('prepares an offscreen ending without preserving stale forward velocity', () => {
+    const head = new ProcessPlayhead();
+    for (let index = 0; index < 60; index++) head.step(10, 1 / 60);
+    head.reset(25.6);
+    expect(head.time).toBe(25.6);
+    expect(head.step(23, 1 / 60)).toBeLessThan(25.6);
+    expect(head.time).toBeGreaterThan(25.5);
+  });
 });

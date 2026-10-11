@@ -31,4 +31,28 @@ describe('replacement Process films and lifecycle', () => {
     await act(async () => { progress.set(1); await vi.advanceTimersByTimeAsync(2000); });
     expect(video.currentTime).toBe(atUnmount);
   });
+  it('prepares the actual ending after a deliberate offscreen jump, then reverses gently', async () => {
+    vi.useFakeTimers();
+    let observe: (entries: { isIntersecting: boolean }[]) => void = () => {};
+    vi.stubGlobal('IntersectionObserver', class {
+      constructor(callback: typeof observe) { observe = callback; }
+      observe() {} disconnect() {}
+    });
+    const progress = motionValue(.2);
+    const onProgress = vi.fn();
+    const view = render(<ScrollProcessFilm hq="/custom-process.mp4" mobile="/custom-mobile.mp4" poster="/process/land-poster.webp" label="Process film" className="film" progress={progress} onReady={vi.fn()} onProgress={onProgress} />);
+    const video = view.container.querySelector('video')!;
+    Object.defineProperties(video, { readyState: { value: 4 }, duration: { value: 25.633333 } });
+    fireEvent.loadedData(video);
+    await act(async () => { await vi.advanceTimersByTimeAsync(100); });
+    await act(async () => { progress.set(1); observe([{ isIntersecting: false }]); await vi.advanceTimersByTimeAsync(40); });
+    fireEvent.seeked(video);
+    expect(video.currentTime).toBeCloseTo(25.6);
+    fireEvent.seeked(video);
+    expect(onProgress).toHaveBeenLastCalledWith(video.currentTime / video.duration);
+    await act(async () => { progress.set(.87); observe([{ isIntersecting: true }]); await vi.advanceTimersByTimeAsync(100); });
+    expect(video.currentTime).toBeLessThan(25.6);
+    expect(video.currentTime).toBeGreaterThan(25.3);
+    view.unmount();
+  });
 });

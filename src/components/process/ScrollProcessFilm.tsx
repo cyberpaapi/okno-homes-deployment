@@ -42,6 +42,15 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
       else previous = 0;
     };
     const queue = () => {
+      // Explicit End/history navigation may skip the film. Prepare its real
+      // ending offscreen so reverse entry starts at the ending, not a stale
+      // early frame. Visible playback keeps the accepted damped reversal.
+      if (!disposed && !visible && controller.current && progress.get() >= .94) {
+        previous = 0;
+        playhead.current.reset(target());
+        controller.current.setTime(target());
+        return;
+      }
       if (!disposed && !document.hidden && visible && !frame && controller.current) frame = requestAnimationFrame(tick);
     };
     wake.current = queue;
