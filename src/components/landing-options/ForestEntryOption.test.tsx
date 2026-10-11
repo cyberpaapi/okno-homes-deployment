@@ -5,23 +5,28 @@ import ForestEntryOption from './ForestEntryOption';
 const motionState = vi.hoisted(() => ({
   progress: 0,
   onChange: null as ((progress: number) => void) | null,
+  shown: 0,
+  onShown: null as ((progress: number) => void) | null,
+  onProgress: null as ((progress: number) => void) | null,
 }));
+const shownValue = { get:()=>motionState.shown, set:(value:number)=>{motionState.shown=value;motionState.onShown?.(value);}, on:()=>()=>{} };
 
 vi.mock('next/image', () => ({ default: (props: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean; priority?: boolean }) => {
   const imageProps = { ...props }; delete imageProps.fill; delete imageProps.priority;
   // eslint-disable-next-line @next/next/no-img-element
   return <img {...imageProps} alt={props.alt} />;
 } }));
-vi.mock('./ScrollJourneyFilm', () => ({ default: ({ src, className }: { src: string; className: string }) => <video src={src} className={className} /> }));
+vi.mock('./ScrollJourneyFilm', () => ({ default: ({ src, className,onProgress }: { src: string; className: string;onProgress:(value:number)=>void }) => {motionState.onProgress=onProgress;return <video src={src} className={className} />;} }));
 vi.mock('@/components/landing/LandingExperience', () => ({ default: () => <div data-testid="option-one">Current landing page</div> }));
 vi.mock('lenis/react', () => ({ useLenis: () => undefined, ReactLenis: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
 vi.mock('motion/react', () => ({
   motion: new Proxy({}, { get: (_, tag) => tag }),
   useScroll: () => ({ scrollYProgress: { get: () => motionState.progress } }),
   useSpring: (value: unknown) => value,
+  useMotionValue:()=>shownValue,
   useTransform: () => ({ get: () => 0 }),
-  useMotionValueEvent: (_value: unknown, _event: string, callback: (progress: number) => void) => {
-    motionState.onChange = callback;
+  useMotionValueEvent: (value: unknown, _event: string, callback: (progress: number) => void) => {
+    if(value===shownValue)motionState.onShown=callback;else motionState.onChange = callback;
   },
   useReducedMotion: () => false,
 }));
@@ -30,9 +35,19 @@ describe('ForestEntryOption', () => {
   afterEach(() => {
     motionState.progress = 0;
     motionState.onChange = null;
+    motionState.shown=0;motionState.onShown=null;motionState.onProgress=null;
     vi.restoreAllMocks();
   });
 
+  it('waits for the presented last frame before showing the ending overlay',()=>{
+    vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
+    const {container}=render(<ForestEntryOption/>);
+    act(()=>{motionState.progress=1;motionState.onChange?.(1);});
+    const viewport=container.querySelector('[style*="--end-opacity"]') as HTMLElement;
+    expect(viewport.style.getPropertyValue('--end-opacity')).toBe('0.0000');
+    act(()=>motionState.onProgress?.(1));
+    expect(viewport.style.getPropertyValue('--end-opacity')).toBe('1.0000');
+  });
   it('keeps the current landing after the separate forest-entry sequence', () => {
     const { container } = render(<ForestEntryOption />);
     const hero = screen.getByRole('region', { name: 'A journey from the forest into an OKNO home' });

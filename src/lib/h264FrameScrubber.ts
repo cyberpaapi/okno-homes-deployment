@@ -5,7 +5,7 @@ const last = film.packets.length - 1;
 /** Decode indexed AVC packets near the current scroll position.
  * Bounded byte ranges avoid downloading the film prefix before a late seek.
  */
-export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void) {
+export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, options: { sequential?: boolean; onPresented?(time: number): void } = {}) {
   if (typeof VideoDecoder === 'undefined') return null;
   const description = Uint8Array.from(atob(film.description), character => character.charCodeAt(0));
   const config: VideoDecoderConfig = { codec: film.codec, codedWidth: film.width, codedHeight: film.height, description, optimizeForLatency: true, hardwareAcceleration: 'no-preference' };
@@ -83,20 +83,41 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
   let fetching = false;
   let activeRanges = new Set<number>();
   let direction = 1;
+  let requested = 0;
+  let nextPaint = -Infinity;
+  let maxStep = 0;
+  let skipped = 0;
+  const sequence: number[] = [];
+  const nextTarget = () => {
+    if (!options.sequential) return;
+    target = drawn < 0 ? target : drawn + Math.sign(requested - drawn);
+    direction = requested < Math.max(0, drawn) ? -1 : 1;
+  };
 
-  const draw = () => {
+  const draw = (now: number) => {
     raf = 0;
     if (disposed || document.hidden || drawn === target || !frames.size) return;
+    if (options.sequential && now < nextPaint) { queueDraw(); return; }
     // Approach the requested position without crossing it. A cached future
     // frame must not overshoot, then visibly rewind when the exact frame lands.
     const candidates = [...frames.keys()].filter(index => index >= Math.min(drawn,target) && index <= Math.max(drawn,target));
     if (!candidates.length) return;
+    if (options.sequential && !frames.has(target)) return;
     const present = frames.has(target) ? target : candidates.reduce((a,b) => Math.abs(a-target) < Math.abs(b-target) ? a : b);
     if (present === drawn) return;
     const frame = frames.get(present);
     if (!frame) return;
     context.drawImage(frame, 0, 0, film.width, film.height);
+    if (drawn >= 0) { const step = Math.abs(present - drawn); maxStep = Math.max(maxStep, step); skipped += Math.max(0, step - 1); }
     drawn = present;
+    // Preserve the 24fps clock across 60Hz paints. After a stall, restart the
+    // clock rather than compressing overdue frames into a catch-up burst.
+    nextPaint = Number.isFinite(nextPaint) && now-nextPaint < 1000/film.fps
+      ? nextPaint+1000/film.fps : now+1000/film.fps;
+    sequence.push(present); if (sequence.length > 24) sequence.shift();
+    canvas.dataset.scrubSequence = sequence.join(',');
+    canvas.dataset.scrubMaxStep = String(maxStep);
+    canvas.dataset.scrubSkippedFrames = String(skipped);
     const latency = performance.now() - requestedAt;
     canvas.dataset.scrubPresentedFrames = String(++draws);
     canvas.dataset.scrubPresentedTime = (present / film.fps).toFixed(4);
@@ -110,6 +131,8 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
     }
     canvas.dataset.scrubCacheFrames = String(frames.size);
     if (first) { first = false; ready(); }
+    options.onPresented?.(present / film.fps);
+    if (options.sequential) { nextTarget(); requestedAt = performance.now(); void pump(); }
   };
   const queueDraw = () => { if (!disposed && !raf) raf = requestAnimationFrame(draw); };
   const decoder = new VideoDecoder({
@@ -143,6 +166,9 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
     if (!needsTarget) {
       while (missing !== ahead && frames.has(missing)) missing += direction;
       if (frames.has(missing)) return;
+      // Refill a half-empty runway in batches. Decoding a GOP for every
+      // single newly exposed frame wastes work and interrupts the turn.
+      if (options.sequential && Math.abs(missing-target) >= Math.max(3,Math.floor(LOOK_AHEAD/2))) return;
     }
     // Present a missing target first, then fill a short directional buffer.
     let start = needsTarget ? target : direction < 0 ? ahead : missing;
@@ -186,7 +212,8 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
   void pump();
   return {
     setTime(time: number) {
-      const next = Math.min(last,Math.max(0,Math.round(time*film.fps)));
+      requested = Math.min(last,Math.max(0,Math.round(time*film.fps)));
+      const next = options.sequential ? (drawn < 0 ? target : drawn + Math.sign(requested-drawn)) : requested;
       if (target !== next) { direction = next > target ? 1 : -1; target = next; requestedAt = performance.now(); }
       if (busy && fetching && Math.abs(target-jobTarget) > LOOK_AHEAD) {
         generation++;
@@ -196,7 +223,17 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
       for (const [id, job] of pending) {
         if (!activeRanges.has(id) && Math.abs(id-currentChunk()) > 4) { job.abort.abort(); pending.delete(id); }
       }
-      canvas.dataset.scrubTarget = (target / film.fps).toFixed(4);
+      canvas.dataset.scrubTarget = (requested / film.fps).toFixed(4);
+      void pump();
+    },
+    // Only for hidden/offscreen preparation and explicit navigation. Gesture
+    // playback always follows adjacent frames, including after a decode stall.
+    seek(time: number) {
+      requested = Math.min(last,Math.max(0,Math.round(time*film.fps)));
+      if (requested === drawn) return;
+      drawn = -1; target = requested; nextPaint = -Infinity;
+      canvas.dataset.scrubExplicitSeeks = String(Number(canvas.dataset.scrubExplicitSeeks ?? 0)+1);
+      canvas.dataset.scrubTarget = (requested / film.fps).toFixed(4);
       void pump();
     },
     dispose,

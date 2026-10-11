@@ -1,9 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   useMotionValueEvent,
+  useMotionValue,
   useReducedMotion,
   useScroll,
   useSpring,
@@ -13,6 +14,7 @@ import LandingExperience from '@/components/landing/LandingExperience';
 import OknoLogo from '@/components/Brand/OknoLogo';
 import ScrollJourneyFilm from './ScrollJourneyFilm';
 import { useHeroReloadPosition } from './useHeroReloadPosition';
+import useHeroFilmScrollGuard from './useHeroFilmScrollGuard';
 import { useSiteContent } from '@/lib/useSiteContent';
 import { homeVariantAccessibleTitle } from '@/lib/homeVariantContent';
 import type { ContentItem } from '@/lib/contentCollections';
@@ -69,6 +71,9 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const reducedMotion = useReducedMotion();
   const saveData = useDataSaver();
   const animated = !reducedMotion && !saveData;
+  const presentedFilmProgress = useMotionValue(0);
+  const presentFilm = useCallback((value: number) => presentedFilmProgress.set(value), [presentedFilmProgress]);
+  useHeroFilmScrollGuard(sectionRef, presentedFilmProgress, animated);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
@@ -113,7 +118,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
       const stillOpacity = introFinished.current ? 1 - range(progress, .3, .36) : 0;
       const brandOpacity = !animated ? 1 : introFinished.current ? 1 - range(progress, .04, .16) : 0;
       const journeyOpacity = range(progress, .3, .36);
-      const endOpacity = range(progress, .975, 1);
+      const endOpacity = !animated || presentedFilmProgress.get() >= 1 ? range(progress, .975, 1) : 0;
       viewport.style.setProperty('--intro-opacity', introOpacity.toFixed(4));
       viewport.style.setProperty('--still-opacity', stillOpacity.toFixed(4));
       viewport.style.setProperty('--brand-opacity', brandOpacity.toFixed(4));
@@ -125,6 +130,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   };
 
   useMotionValueEvent(mediaProgress, 'change', syncMedia);
+  useMotionValueEvent(presentedFilmProgress, 'change', () => syncMedia(mediaProgress.get()));
 
   useEffect(() => {
     const video = introVideoRef.current;
@@ -223,6 +229,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
                 progress={mediaProgress}
                 className={`${styles.video} ${styles.journeyVideo}`}
                 onReady={setJourneyReady}
+                onProgress={presentFilm}
               />
             </>
           )}

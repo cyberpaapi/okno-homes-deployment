@@ -134,4 +134,25 @@ describe('range-indexed film rendering', () => {
     vi.stubGlobal('VideoDecoder', { isConfigSupported: async () => ({ supported: false }) });
     expect(await createH264FrameScrubber(document.createElement('canvas'), new AbortController().signal, vi.fn(), vi.fn())).toBeNull();
   });
+  it('presents all frames in order after a large request and reverses without skipping', async () => {
+    const mocks=setup(); const abort=new AbortController(); const canvas=document.createElement('canvas'); const seen:number[]=[];
+    const scrubber=await createH264FrameScrubber(canvas,abort.signal,vi.fn(),vi.fn(),{sequential:true,onPresented:t=>seen.push(Math.round(t*24))});
+    await vi.advanceTimersByTimeAsync(100); scrubber!.setTime(24);
+    await vi.advanceTimersByTimeAsync(32000);
+    expect(seen).toEqual(Array.from({length:577},(_,i)=>i));
+    expect(mocks.decode.mock.calls.length).toBeLessThan(2000);
+    expect(canvas.dataset.scrubSkippedFrames).toBe('0'); expect(canvas.dataset.scrubMaxStep).toBe('1');
+    scrubber!.setTime(23); await vi.advanceTimersByTimeAsync(1400);
+    expect(seen.slice(-24)).toEqual(Array.from({length:24},(_,i)=>575-i));
+    expect(canvas.dataset.scrubPresentedTime).toBe('23.0000'); abort.abort();
+  });
+  it('holds a missing adjacent frame instead of using a cached future frame', async () => {
+    const mocks=setup(); const abort=new AbortController(); const canvas=document.createElement('canvas'); const seen:number[]=[];
+    const scrubber=await createH264FrameScrubber(canvas,abort.signal,vi.fn(),vi.fn(),{sequential:true,onPresented:t=>seen.push(Math.round(t*24))});
+    await vi.advanceTimersByTimeAsync(100); mocks.pause(); mocks.emit(540); scrubber!.setTime(22);
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(seen.at(-1)).toBeLessThanOrEqual(12);
+    expect(seen.every((frame,i)=>i===0||frame===seen[i-1]+1)).toBe(true);
+    expect(canvas.dataset.scrubSkippedFrames).toBe('0'); abort.abort();
+  });
 });
