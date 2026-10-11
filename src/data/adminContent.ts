@@ -6,6 +6,7 @@ import { journalBlogPosts } from "@/components/journal/journalBlogData";
 import { gazePrototype, oknoModels } from "@/data/models";
 import { customerCopySections } from "@/data/configurator/studio/customerCopy";
 import { footerGroups, footerSocialLinks } from "@/data/footerContent";
+import { PROCESS_DAY_RANGES } from "@/lib/processChapters";
 import { processDetailPhases } from "@/data/processDetailPhases";
 import type { ContentItem } from "@/lib/contentCollections";
 export { homeVariantDefaults } from "@/data/homeVariants";
@@ -135,12 +136,12 @@ const projectRecordSections: ContentSection[] = projectMedia.map(project => ({
 }));
 
 const processStages = [
-  ["land", "Days 01–10", "Land", "The brief meets the land.", "The site and the brief are read together before a model is selected or a bespoke design begins.", "/process/land-poster.webp"],
-  ["architecture", "Days 11–25", "Architecture", "The plan takes shape.", "The site, programme and chosen model are translated into a clear architectural direction.", "/process/drawing-poster.webp"],
-  ["design-lock", "Days 11–25", "Design lock", "Every decision is resolved.", "Design development, approvals, engineering and material planning are completed before the build advances.", "/process/design-lock-poster.webp"],
-  ["assembly", "Days 73–90", "Assembly", "The structure takes shape.", "Prepared floor and wall panels are aligned into the resolved structure on the finished base.", "/process/generated/process-panel-base-v1.webp"],
-  ["enclosure", "Days 73–90", "Enclosure", "The home closes around the view.", "Roof, glazing and envelope complete the form while keeping the architecture tied to its setting.", "/process/generated/process-panel-walls-v1.webp"],
-  ["handover", "Days 73–90", "Handover", "Finished where it belongs.", "The completed home is checked as one resolved whole before the final handover.", "/process/generated/process-panel-complete-v1.webp"],
+  ["land", PROCESS_DAY_RANGES["land"], "Land", "The brief meets the land.", "The site and the brief are read together before a model is selected or a bespoke design begins.", "/process/land-poster.webp"],
+  ["architecture", PROCESS_DAY_RANGES["architecture"], "Architecture", "The plan takes shape.", "The site, programme and chosen model are translated into a clear architectural direction.", "/process/drawing-poster.webp"],
+  ["design-lock", PROCESS_DAY_RANGES["design-lock"], "Design lock", "Every decision is resolved.", "Design development, approvals, engineering and material planning are completed before the build advances.", "/process/design-lock-poster.webp"],
+  ["assembly", PROCESS_DAY_RANGES["assembly"], "Assembly", "The structure takes shape.", "Prepared floor and wall panels are aligned into the resolved structure on the finished base.", "/process/generated/process-panel-base-v1.webp"],
+  ["enclosure", PROCESS_DAY_RANGES["enclosure"], "Enclosure", "The home closes around the view.", "Roof, glazing and envelope complete the form while keeping the architecture tied to its setting.", "/process/generated/process-panel-walls-v1.webp"],
+  ["handover", PROCESS_DAY_RANGES["handover"], "Handover", "Finished where it belongs.", "The completed home is checked as one resolved whole before the final handover.", "/process/generated/process-panel-complete-v1.webp"],
 ] as const;
 
 const sustainabilityPress = [

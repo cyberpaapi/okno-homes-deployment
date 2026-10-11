@@ -4,6 +4,7 @@ import { siteNavigationItems } from "./siteNavigation";
 import projectMedia from "./realProjectMedia.json";
 import { pressEntries } from "@/components/journal/journalData";
 import { gazePrototype, oknoModels } from "./models";
+import { PROCESS_DAY_RANGES } from "@/lib/processChapters";
 import { processDetailPhases } from "./processDetailPhases";
 
 describe("admin page hierarchy", () => {
@@ -37,6 +38,9 @@ describe("admin page hierarchy", () => {
     expect(fields.get("process.opening.film-label")?.kind).toBe("text");
     expect(fields.get("process.opening.cover")?.kind).toBe("image");
     expect(fields.get("process.opening.cover")?.defaultValue).not.toBe(fields.get("process.opening.poster")?.defaultValue);
+    for (const [id,days] of Object.entries(PROCESS_DAY_RANGES)) {
+      expect(fields.get(`process.stage-${id}.days`)?.defaultValue).toBe(days);
+    }
     processDetailPhases.forEach((phase, index) => {
       const prefix = `process.details.phase-${index + 1}`;
       expect(fields.get(`${prefix}.image`)?.defaultValue).toBe(phase.image);

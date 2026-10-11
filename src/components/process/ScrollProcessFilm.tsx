@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMotionValueEvent, type MotionValue } from 'motion/react';
 import { createVideoScrubber } from '@/lib/videoScrubber';
 import { ProcessPlayhead, processFilmProgress } from '@/lib/processScrub';
-import { PROCESS_END_TIME, PROCESS_FPS, PROCESS_HANDOVER_TIME, PROCESS_FINAL_SOURCE_TIME, processPresentationPackets } from '@/lib/processChapters';
+import { PROCESS_END_TIME, PROCESS_FPS, processFinishOpacity, processPresentationPackets } from '@/lib/processChapters';
 
 type Controller = { setTime(time: number): void; dispose(): void };
 type Props = {
@@ -16,11 +17,17 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
   const canvas = useRef<HTMLCanvasElement>(null);
   const surface = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
+  const finish = useRef<HTMLImageElement>(null);
+  const originalFilm = useRef(false);
   const controller = useRef<Controller | null>(null);
   const playhead = useRef(new ProcessPlayhead());
   const endTime = useRef(PROCESS_END_TIME);
   const wake = useRef(() => {});
   const [nativeSource, setNativeSource] = useState<string | null>(null);
+  const present = useCallback((time: number) => {
+    if (finish.current) finish.current.style.opacity = String(originalFilm.current ? processFinishOpacity(time) : 0);
+    onProgress(Math.min(1, time / endTime.current));
+  }, [onProgress]);
   useMotionValueEvent(progress, 'change', () => wake.current());
 
   useEffect(() => {
@@ -60,6 +67,8 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; previous = 0; queue(); });
     if (surface.current) observer.observe(surface.current);
     const source = window.innerWidth >= 1024 ? hq : mobile;
+    originalFilm.current = source === '/process/process-master.hq.mp4' || source === '/process/process-master.scrub.mp4';
+    if (finish.current) finish.current.style.opacity = '0';
     const fallback = () => {
       if (disposed) return;
       abort.abort();
@@ -79,7 +88,7 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
       // discarded outro while a late frame is still being decoded.
       const cut = { ...film, packets: processPresentationPackets(film.packets) };
       endTime.current = PROCESS_END_TIME;
-      local = await createIndexedFrameScrubber(cut, canvas.current, abort.signal, () => onReady(true), fallback, time => onProgress(Math.min(1, time / endTime.current)));
+      local = await createIndexedFrameScrubber(cut, canvas.current, abort.signal, () => onReady(true), fallback, present);
       if (abort.signal.aborted) { local?.dispose(); return; }
       if (!local) { fallback(); return; }
       controller.current = local;
@@ -92,29 +101,31 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
       document.removeEventListener('visibilitychange', visibility);
       abort.abort(); local?.dispose(); controller.current = null; wake.current = () => {};
     };
-  }, [hq, mobile, progress, onReady, onProgress]);
+  }, [hq, mobile, progress, onReady, present]);
 
   useEffect(() => {
     if (!nativeSource || !video.current) return;
     const element = video.current;
     const scrubber = createVideoScrubber(element, 30);
     const original = nativeSource === '/process/process-master.hq.mp4' || nativeSource === '/process/process-master.scrub.mp4';
-    controller.current = {
-      setTime: time => scrubber.setTime(original && time >= PROCESS_HANDOVER_TIME ? Math.min(PROCESS_FINAL_SOURCE_TIME, element.duration - 1 / PROCESS_FPS) : time),
-      dispose: () => scrubber.dispose(),
-    };
+    controller.current = scrubber;
     const ready = () => {
       endTime.current = original ? Math.min(PROCESS_END_TIME, element.duration - 1 / PROCESS_FPS) : Math.max(0, element.duration - 1 / PROCESS_FPS);
       onReady(true); wake.current();
     };
-    const presented = () => onProgress(original && element.currentTime >= PROCESS_FINAL_SOURCE_TIME - .02 ? 1 : Math.min(1, element.currentTime / endTime.current));
+    const presented = () => present(element.currentTime);
     element.addEventListener('loadeddata', ready);
     element.addEventListener('seeked', presented);
     if (element.readyState >= 2) ready();
     return () => { element.removeEventListener('loadeddata', ready); element.removeEventListener('seeked', presented); scrubber.dispose(); controller.current = null; };
-  }, [nativeSource, onReady, onProgress]);
+  }, [nativeSource, onReady, present]);
 
   return <div ref={surface} style={{ position: 'absolute', inset: 0 }}>{nativeSource
     ? <video ref={video} className={className} src={nativeSource} poster={poster} muted playsInline preload="auto" aria-label={label} data-process-master-video data-film-renderer="native" onError={() => onReady(false)} />
-    : <canvas ref={canvas} className={className} width={1920} height={1080} role="img" aria-label={label} data-process-master-video data-film-renderer="frames" />}</div>;
+    : <canvas ref={canvas} className={className} width={1920} height={1080} role="img" aria-label={label} data-process-master-video data-film-renderer="frames" />}
+    <picture>
+      <source media="(max-width: 1023px)" srcSet="/process/process-final-house-mobile.webp" />
+      <Image ref={finish} src="/process/process-final-house.webp" alt="" aria-hidden="true" fill unoptimized loading="eager" className={className} data-process-finish style={{ opacity: 0, pointerEvents: 'none' }} />
+    </picture>
+  </div>;
 }

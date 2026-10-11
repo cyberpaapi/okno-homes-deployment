@@ -2,7 +2,9 @@
 
 Current admin audit and Process footer boundary: [coverage, corrections, local publish/restore and the production storage block](admin-audit-2026-10-11.md).
 
-Current Process Handover correction: [shared build periods and a held closed-house endpoint](process-handover-stop-2026-10-11.md).
+Current Process correction: [continuous Days 01–90 and a smooth completed-house finish](process-continuous-days-2026-10-12.md).
+
+Superseded Process Handover correction: [grouped build periods and the earlier hard held-frame cut](process-handover-stop-2026-10-11.md).
 
 Previous Process finish: [remove the rejected white closing and increase both film directions](process-final-pacing-2026-10-11.md).
 

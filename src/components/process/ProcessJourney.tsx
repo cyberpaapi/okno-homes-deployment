@@ -23,6 +23,7 @@ import { processStageAt } from "@/lib/processScrub";
 import { useSiteContent, useSiteContentMap } from "@/lib/useSiteContent";
 import { resolveProcessDayRange } from "@/lib/processDayRange";
 import useProcessScrollGuard from "./useProcessScrollGuard";
+import { PROCESS_DAY_RANGES } from "@/lib/processChapters";
 
 type Stage = ProcessTimelineItem & {
   days: string;
@@ -32,7 +33,7 @@ type Stage = ProcessTimelineItem & {
 const stages: readonly Stage[] = [
   {
     id: "land",
-    days: "Days 01–10",
+    days: PROCESS_DAY_RANGES.land,
     label: "Land",
     title: "The brief meets the land.",
     copy: "The site and the brief are read together before a model is selected or a bespoke design begins.",
@@ -40,7 +41,7 @@ const stages: readonly Stage[] = [
   },
   {
     id: "architecture",
-    days: "Days 11–25",
+    days: PROCESS_DAY_RANGES.architecture,
     label: "Architecture",
     title: "The plan takes shape.",
     copy: "The site, programme and chosen model are translated into a clear architectural direction.",
@@ -48,7 +49,7 @@ const stages: readonly Stage[] = [
   },
   {
     id: "design-lock",
-    days: "Days 11–25",
+    days: PROCESS_DAY_RANGES['design-lock'],
     label: "Design lock",
     title: "Every decision is resolved.",
     copy: "Design development, approvals, engineering and material planning are completed before the build advances.",
@@ -56,7 +57,7 @@ const stages: readonly Stage[] = [
   },
   {
     id: "assembly",
-    days: "Days 73–90",
+    days: PROCESS_DAY_RANGES.assembly,
     label: "Assembly",
     title: "The structure takes shape.",
     copy: "Prepared floor and wall panels are aligned into the resolved structure on the finished base.",
@@ -64,7 +65,7 @@ const stages: readonly Stage[] = [
   },
   {
     id: "enclosure",
-    days: "Days 73–90",
+    days: PROCESS_DAY_RANGES.enclosure,
     label: "Enclosure",
     title: "The home closes around the view.",
     copy: "Roof, glazing and envelope complete the form while keeping the architecture tied to its setting.",
@@ -72,7 +73,7 @@ const stages: readonly Stage[] = [
   },
   {
     id: "handover",
-    days: "Days 73–90",
+    days: PROCESS_DAY_RANGES.handover,
     label: "Handover",
     title: "Finished where it belongs.",
     copy: "The completed home is checked as one resolved whole before the final handover.",

@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import { PROCESS_DAY_RANGES } from "@/lib/processChapters";
 import ProcessJourney from "./ProcessJourney";
 
 beforeAll(() => {
@@ -42,11 +43,10 @@ describe("ProcessJourney", () => {
     for (const label of ["Land", "Architecture", "Design lock", "Assembly", "Enclosure", "Handover"]) {
       expect(within(schedule).getByText(label)).toBeInTheDocument();
     }
-    expect(within(schedule).getByText("Days 01–10")).toBeInTheDocument();
-    expect(within(schedule).getAllByText("Days 11–25")).toHaveLength(1);
-    expect(within(schedule).getAllByText("Days 73–90")).toHaveLength(1);
-    for (const label of ["Assembly", "Enclosure", "Handover"]) {
-      expect(within(schedule).getByRole("listitem", { name: `Days 73–90 · ${label}` })).toBeInTheDocument();
+    for (const [id, days] of Object.entries(PROCESS_DAY_RANGES)) {
+      expect(within(schedule).getAllByText(days)).toHaveLength(1);
+      const label = id === 'design-lock' ? 'Design lock' : id[0].toUpperCase() + id.slice(1);
+      expect(within(schedule).getByRole('listitem', { name: `${days} · ${label}` })).toBeInTheDocument();
     }
     expect(screen.getByRole("heading", { name: "From brief to handover." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Factory manufacturing" })).toBeInTheDocument();
