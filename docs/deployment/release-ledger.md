@@ -1,5 +1,17 @@
 # Release decision and evidence ledger
 
+## Latest Process fast-scroll correction — 11 October 2026
+
+| Decision / check | Evidence | Outcome |
+| --- | --- | --- |
+| Accepted smooth film | Continuous eased playhead and exact original masters retained | Oversized forward/reverse gestures bounded to presented frames; no chapter waits/buttons |
+| Timeline UI | Complete phase settling, day/title/copy alignment, tighter introduction and readable mobile rail | 1280×720 and 390×844 live checks; zero horizontal overflow |
+| Boundary regressions | 60-second simulated reading pauses and exact observed fractional coordinates | Idle is distinguished from stalled decoding; 1px comparison tolerance prevents inverse entry traps |
+| Source gates | 32 targeted tests, lint, TypeScript, final local/cloud builds, 30 function traces | Passed; local largest 179.7 MiB, cloud 177.4 MiB |
+| Final runtime | `54e2d0b151b1b42ebabb304b7889188d83a522ba`; READY `dpl_A9sH5P44XkMJAG1DE9RR5mF7EFBY`; canonical alias attached | Same private repo/project; original video hashes unchanged |
+| Live inverse | 30-second final-phase pause, inward progression from rounded boundary, all detail phases and full film reverse to time/scroll 0 | Passed; [detailed acceptance and failure provenance](../process-scroll-boundaries-2026-10-11.md) |
+| Services / scope | Single 3134 accepted build, reused 3140 gateway; no cloud content/key/store/billing writes | Gateway health verified; no production CMS publication claim |
+
 11 October 2026. Entries distinguish verified facts, planned work and unresolved gates.
 
 ## Current Models header and quota correction
