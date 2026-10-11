@@ -1,0 +1,734 @@
+{
+  "deployment": "dpl_4rpyAQaBuSRuGgjb2ypphSBa8L4H",
+  "source": "b3845dc0dbe341279e1190d570fbfb46ff9353fe",
+  "session": "Fresh disconnected application tabs; incognito unavailable in controlled browser",
+  "panels": [
+    {
+      "panel": "published-home",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 11346,
+        "heading": "OKNO Modhomes",
+        "height": 499,
+        "scrollHeight": 10222,
+        "videos": [
+          {
+            "ready": 4,
+            "time": 12.670794,
+            "width": 1920
+          },
+          {
+            "ready": 4,
+            "renderer": "native",
+            "time": 0,
+            "width": 1920
+          }
+        ],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 909
+          },
+          {
+            "complete": true,
+            "width": 909
+          },
+          {
+            "complete": true,
+            "width": 909
+          },
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 300
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "OKNO Modhomes",
+        "videos": [
+          {
+            "ready": 4,
+            "time": 12.864764,
+            "width": 1920
+          },
+          {
+            "ready": 4,
+            "time": 0,
+            "width": 1920
+          }
+        ],
+        "y": 670
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "hero-v1",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 11945,
+        "heading": "OKNO Modhomes",
+        "height": 499,
+        "scrollHeight": 10222,
+        "videos": [
+          {
+            "ready": 4,
+            "time": 12.95358,
+            "width": 1920
+          },
+          {
+            "ready": 4,
+            "renderer": "native",
+            "time": 0,
+            "width": 1920
+          }
+        ],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 909
+          },
+          {
+            "complete": true,
+            "width": 909
+          },
+          {
+            "complete": true,
+            "width": 909
+          },
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 300
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "OKNO Modhomes",
+        "videos": [
+          {
+            "ready": 4,
+            "time": 13.136336,
+            "width": 1920
+          },
+          {
+            "ready": 4,
+            "time": 0,
+            "width": 1920
+          }
+        ],
+        "y": 671.3333129882812
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "hero-v2",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 12014,
+        "heading": "OKNO Modhomes - from the city to Forza",
+        "height": 499,
+        "scrollHeight": 5734,
+        "videos": [
+          {
+            "ready": 4,
+            "time": 9.791667,
+            "width": 1922
+          },
+          {
+            "ready": 4,
+            "time": 1.319037,
+            "width": 1920
+          }
+        ],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 300
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "OKNO Modhomes - from the city to Forza",
+        "videos": [
+          {
+            "ready": 4,
+            "time": 9.791667,
+            "width": 1922
+          },
+          {
+            "ready": 4,
+            "time": 1.445844,
+            "width": 1920
+          }
+        ],
+        "y": 720
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "projects",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 27923,
+        "heading": "Homes, everywhere.Homes, everywhere.",
+        "height": 499,
+        "scrollHeight": 2537,
+        "videos": [],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": false,
+            "width": 0
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "Homes, everywhere.Homes, everywhere.",
+        "videos": [
+          {
+            "ready": 0,
+            "time": 0,
+            "width": 0
+          }
+        ],
+        "y": 716.6666870117188
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "models",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 11382,
+        "heading": "A home. Your way.",
+        "height": 499,
+        "scrollHeight": 951,
+        "videos": [],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 527
+          },
+          {
+            "complete": true,
+            "width": 527
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "A home. Your way.",
+        "videos": [],
+        "y": 452
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "signature",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 15522,
+        "heading": "Forza",
+        "height": 499,
+        "scrollHeight": 2793,
+        "videos": [
+          {
+            "ready": 4,
+            "time": 0,
+            "width": 1152
+          },
+          {
+            "ready": 4,
+            "time": 0,
+            "width": 1920
+          }
+        ],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "Forza",
+        "videos": [
+          {
+            "ready": 4,
+            "time": 2.416666,
+            "width": 1152
+          },
+          {
+            "ready": 4,
+            "time": 0,
+            "width": 1920
+          }
+        ],
+        "y": 720
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "bespoke",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 12428,
+        "heading": "A home authoredfrom place.",
+        "height": 499,
+        "scrollHeight": 7018,
+        "videos": [],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 792
+          },
+          {
+            "complete": true,
+            "width": 792
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "A home authoredfrom place.",
+        "videos": [],
+        "y": 720
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "hospitality",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 30935,
+        "heading": "Builttowelcome.Designedtoscale.",
+        "height": 499,
+        "scrollHeight": 6237,
+        "videos": [],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 418
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "Builttowelcome.Designedtoscale.",
+        "videos": [],
+        "y": 720
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "process",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 12418,
+        "heading": "Builtin90days.",
+        "height": 499,
+        "scrollHeight": 5543,
+        "videos": [
+          {
+            "ready": 4,
+            "renderer": "native",
+            "time": 0,
+            "width": 1280
+          }
+        ],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 1280
+          },
+          {
+            "complete": true,
+            "width": 909
+          },
+          {
+            "complete": true,
+            "width": 72
+          },
+          {
+            "complete": true,
+            "width": 72
+          },
+          {
+            "complete": true,
+            "width": 72
+          },
+          {
+            "complete": true,
+            "width": 72
+          },
+          {
+            "complete": true,
+            "width": 72
+          },
+          {
+            "complete": true,
+            "width": 72
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "Builtin90days.",
+        "videos": [
+          {
+            "ready": 1,
+            "time": 0.966666,
+            "width": 1280
+          }
+        ],
+        "y": 399.3333435058594
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "sustainability",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 12841,
+        "heading": "Build lessagainst the land.",
+        "height": 499,
+        "scrollHeight": 8671,
+        "videos": [
+          {
+            "ready": 4,
+            "time": 3.404624,
+            "width": 1920
+          },
+          {
+            "ready": 4,
+            "time": 0,
+            "width": 1920
+          },
+          {
+            "ready": 0,
+            "time": 0,
+            "width": 0
+          }
+        ],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "Build lessagainst the land.",
+        "videos": [
+          {
+            "ready": 4,
+            "time": 3.539192,
+            "width": 1920
+          },
+          {
+            "ready": 1,
+            "time": 1,
+            "width": 1920
+          },
+          {
+            "ready": 0,
+            "time": 0,
+            "width": 0
+          }
+        ],
+        "y": 720
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "journal",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 15085,
+        "heading": "News from the practice.News from the practice.",
+        "height": 499,
+        "scrollHeight": 4297,
+        "videos": [],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 400
+          },
+          {
+            "complete": true,
+            "width": 256
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "News from the practice.News from the practice.",
+        "videos": [],
+        "y": 720
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "about",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 12734,
+        "heading": "About OKNOAboutOKNO",
+        "height": 499,
+        "scrollHeight": 3718,
+        "videos": [],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 792
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "About OKNOAboutOKNO",
+        "videos": [],
+        "y": 720
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "enquiry",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 11570,
+        "heading": "Tell us what you’re building.Tell us whatyou’re building.",
+        "height": 499,
+        "scrollHeight": 1062,
+        "videos": [],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "Tell us what you’re building.Tell us whatyou’re building.",
+        "videos": [],
+        "y": 563.3333129882812
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "footer",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 12734,
+        "heading": "About OKNOAboutOKNO",
+        "height": 499,
+        "scrollHeight": 3718,
+        "videos": [],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 396
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "About OKNOAboutOKNO",
+        "videos": [],
+        "y": 720
+      },
+      "recoveryShown": false
+    },
+    {
+      "panel": "shared",
+      "dwellMs": 6500,
+      "before": {
+        "applicationError": false,
+        "bodyLength": 11346,
+        "heading": "OKNO Modhomes",
+        "height": 499,
+        "scrollHeight": 10222,
+        "videos": [
+          {
+            "ready": 4,
+            "time": 12.911169,
+            "width": 1920
+          },
+          {
+            "ready": 4,
+            "renderer": "native",
+            "time": 0,
+            "width": 1920
+          }
+        ],
+        "visibleImages": [
+          {
+            "complete": true,
+            "width": 909
+          },
+          {
+            "complete": true,
+            "width": 909
+          },
+          {
+            "complete": true,
+            "width": 909
+          },
+          {
+            "complete": true,
+            "width": 300
+          },
+          {
+            "complete": true,
+            "width": 300
+          }
+        ],
+        "y": 0
+      },
+      "after": {
+        "heading": "OKNO Modhomes",
+        "videos": [
+          {
+            "ready": 4,
+            "time": 13.09172,
+            "width": 1920
+          },
+          {
+            "ready": 4,
+            "time": 0,
+            "width": 1920
+          }
+        ],
+        "y": 674
+      },
+      "recoveryShown": false
+    }
+  ],
+  "aboutDraftPreview": {
+    "heading": "Preview verificationPreviewverification",
+    "images": [
+      {
+        "complete": true,
+        "width": 316
+      }
+    ],
+    "recoveryText": false
+  },
+  "publicAboutHeading": "About OKNOAboutOKNO",
+  "restoredAbout": {
+    "title": "About OKNO",
+    "image": "/about/storyboard/about-film-frame-01.png"
+  },
+  "nativeProcessForward": {
+    "video": [
+      {
+        "ready": 1,
+        "renderer": "native",
+        "time": 5.5,
+        "width": 1280
+      }
+    ],
+    "y": 716.6666870117188
+  },
+  "nativeProcessReverse": {
+    "ready": 4,
+    "time": 3.733333,
+    "width": 1280
+  },
+  "nativeHero": {
+    "ready": 1,
+    "renderer": "native",
+    "time": 11.833333,
+    "width": 1920
+  },
+  "publicProcessRenderer": "frames",
+  "mobile": {
+    "before": {
+      "heading": "About OKNOAboutOKNO",
+      "images": [
+        {
+          "complete": true,
+          "width": 300
+        },
+        {
+          "complete": true,
+          "width": 344
+        }
+      ],
+      "y": 0
+    },
+    "after": {
+      "heading": "About OKNOAboutOKNO",
+      "y": 844
+    },
+    "layout": {
+      "height": 844,
+      "overflow": false,
+      "width": 390
+    }
+  },
+  "logs": []
+}

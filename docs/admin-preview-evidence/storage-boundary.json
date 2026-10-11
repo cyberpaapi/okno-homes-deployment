@@ -1,0 +1,14 @@
+[
+  {
+    "path": "/api/admin/content",
+    "status": 503,
+    "revision": null,
+    "error": "Content storage is unavailable. Check the existing OKNO Vercel Blob store's status and usage limits before editing. Your content has not been changed."
+  },
+  {
+    "path": "/api/site-content",
+    "status": 200,
+    "revision": 17,
+    "error": null
+  }
+]
