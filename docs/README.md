@@ -1,6 +1,8 @@
 # Final Showcase documentation map
 
-Current admin audit and Process footer boundary: [coverage, corrections, local publish/restore and the production storage block](admin-audit-2026-10-11.md).
+Current admin preview correction: [fresh-session checks, readiness, native embedded films and Configurator deferral](admin-preview-reliability-2026-10-12.md).
+
+Previous admin audit and Process footer boundary: [coverage, corrections, local publish/restore and the production storage block](admin-audit-2026-10-11.md).
 
 Current Process correction: [continuous Days 01–90 and a smooth completed-house finish](process-continuous-days-2026-10-12.md).
 

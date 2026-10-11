@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMotionValueEvent, type MotionValue } from 'motion/react';
 import { createVideoScrubber } from '@/lib/videoScrubber';
+import { isEmbeddedSitePreview } from '@/lib/sitePreview';
 import { ProcessPlayhead, processFilmProgress } from '@/lib/processScrub';
 import { PROCESS_END_TIME, PROCESS_FPS, processFinishOpacity, processPresentationPackets } from '@/lib/processChapters';
 
@@ -78,7 +79,7 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
       setNativeSource(source);
     };
     void (async () => {
-      if (source !== '/process/process-master.hq.mp4' && source !== '/process/process-master.scrub.mp4') { fallback(); return; }
+      if (isEmbeddedSitePreview() || source !== '/process/process-master.hq.mp4' && source !== '/process/process-master.scrub.mp4') { fallback(); return; }
       const [{ createIndexedFrameScrubber }, { default: film }] = await Promise.all([
         import('@/lib/indexedFrameScrubber'),
         source.endsWith('.hq.mp4') ? import('../../../config/process-video-hq.json') : import('../../../config/process-video-scrub.json'),

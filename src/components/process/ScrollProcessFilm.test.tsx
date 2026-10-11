@@ -5,6 +5,19 @@ import ScrollProcessFilm from './ScrollProcessFilm';
 
 describe('replacement Process films and lifecycle', () => {
   afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); vi.restoreAllMocks(); });
+  it('uses native original-film decoding inside an embedded preview without a full-size frame cache', () => {
+    const parent = Object.getOwnPropertyDescriptor(window, 'parent')!;
+    Object.defineProperty(window, 'parent', { configurable: true, value: {} });
+    vi.stubGlobal('IntersectionObserver', class { observe() {} disconnect() {} });
+    const Decoder = vi.fn(); vi.stubGlobal('VideoDecoder', Decoder);
+    try {
+      const view = render(<ScrollProcessFilm hq="/process/process-master.hq.mp4" mobile="/process/process-master.scrub.mp4" poster="/process/land-poster.webp" label="Film" className="film" progress={motionValue(.6)} onReady={vi.fn()} onProgress={vi.fn()} />);
+      expect(view.container.querySelector('video')).toBeTruthy();
+      expect(view.container.querySelector('canvas')).toBeNull();
+      expect(Decoder).not.toHaveBeenCalled();
+      view.unmount();
+    } finally { Object.defineProperty(window, 'parent', parent); }
+  });
   it('eases a CMS replacement through the native fallback, reverses and cleans up', async () => {
     vi.useFakeTimers();
     vi.stubGlobal('IntersectionObserver', class { observe() {} disconnect() {} });

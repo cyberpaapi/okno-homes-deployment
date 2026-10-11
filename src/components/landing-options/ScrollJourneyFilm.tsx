@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useMotionValueEvent, type MotionValue } from 'motion/react';
 import { createVideoScrubber } from '@/lib/videoScrubber';
+import { isEmbeddedSitePreview } from '@/lib/sitePreview';
 
 const indexedSource = '/assets/landing-options/forest-entry-scroll-window-smooth.mp4';
 type Controller = { setTime(time: number): void; dispose(): void };
@@ -28,7 +29,7 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
       setNative(true);
     };
     void (async () => {
-      if (src !== indexedSource || !canvas.current) { fallback(); return; }
+      if (isEmbeddedSitePreview() || src !== indexedSource || !canvas.current) { fallback(); return; }
       const { createH264FrameScrubber, heroFilmDuration } = await import('@/lib/h264FrameScrubber');
       if (abort.signal.aborted) return;
       duration.current = heroFilmDuration;

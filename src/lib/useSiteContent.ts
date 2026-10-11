@@ -2,6 +2,7 @@
 
 import { useMemo, useSyncExternalStore } from "react";
 import localPorts from "../../config/local-ports.json";
+import { announcePreviewReady } from "./sitePreview";
 import type { ContentCollections, ContentItem } from "@/lib/contentCollections";
 
 type PublicSnapshot = { revision: number; published: Record<string, string>; publishedCollections: ContentCollections };
@@ -38,6 +39,7 @@ function subscribe(listener: () => void) {
     interval = setInterval(() => { void refresh(); }, 2500);
     document.addEventListener("visibilitychange", refresh);
     window.addEventListener("message", receivePreview);
+    announcePreviewReady();
   }
   return () => {
     listeners.delete(listener);

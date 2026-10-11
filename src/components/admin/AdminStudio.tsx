@@ -26,10 +26,13 @@ import { signatureModelDefaults, signaturePlanDefaults } from "@/lib/signatureCo
 import { footerLinkDefaults } from "@/lib/footerLinkCollections";
 import { parseProcessDayRange } from "@/lib/processDayRange";
 import SignatureModelPanel from "./SignatureModelPanel";
+import { PREVIEW_READY, PREVIEW_UPDATE } from "@/lib/sitePreview";
 
 type Snapshot = { revision: number; draftRevision: number; published: Record<string, string>; draft: Record<string, string>; publishedCollections: ContentCollections; draftCollections: ContentCollections; history: { revision: number; publishedCollections: ContentCollections; publishedAt: string }[]; demoExpiresAt?: string };
 type View = "content" | "site";
 
+// Hide the deferred editor without removing legacy content IDs or stored data.
+const studioPages = adminPages.map(page => ({ ...page, children: page.children?.filter(child => child.id !== "configurators") }));
 const subscribeToLocation = () => () => {};
 const enquiryOptionDefaults: Record<string, readonly string[]> = {
   "home.land-status": ["I own it", "I'm buying it", "I'm still looking"],
@@ -240,6 +243,8 @@ export default function AdminStudio() {
   const uploadControllerRef = useRef<AbortController | null>(null);
   const siteOrigin = useSyncExternalStore(subscribeToLocation, siteOriginSnapshot, () => null);
   const previewRef = useRef<HTMLIFrameElement>(null);
+  const [previewAttempt, setPreviewAttempt] = useState(0);
+  const [previewState, setPreviewState] = useState<{ id: string; status: "ready" | "slow" } | null>(null);
   const connect = useCallback(async (credential: string) => {
     setBusy(true); setError("");
     try { const next = await readAdminSnapshot(credential); setToken(credential); setSnapshot(next); setMessage(connectedMessage(next)); }
@@ -259,8 +264,10 @@ export default function AdminStudio() {
   const customHomePages: ContentPage[] = homeVariants
     .filter(item => item.id !== "hero-v1" && item.id !== "hero-v2")
     .map(item => ({ id: `hero-variant:${item.id}`, label: item.fields.name || item.id, href: `/hero/${item.id}`, sections: sharedHomeSections }));
-  const navigationPages: ContentPage[] = [{ ...adminPages[0], children: [...(adminPages[0].children ?? []), ...customHomePages] }, ...adminPages.slice(1)];
+  const navigationPages: ContentPage[] = [{ ...studioPages[0], children: [...(studioPages[0].children ?? []), ...customHomePages] }, ...studioPages.slice(1)];
   const page = findPage(selectedId, navigationPages) ?? adminPages[0].children![0];
+  const previewIdentity = `${page.id}:${view}:${previewAttempt}`;
+  const previewStatus = previewState?.id === previewIdentity ? previewState.status : "loading";
   const selectedCustomVariant = page.id.startsWith("hero-variant:") ? page.id.slice("hero-variant:".length) : null;
   const previewHref = selectedCustomVariant ? "/" : page.href;
   const visibleSections = editableSections(page);
@@ -269,9 +276,24 @@ export default function AdminStudio() {
 
   const previewValues = useMemo(() => ({ ...(snapshot?.draft ?? {}), ...local, ...(selectedId.startsWith("hero-variant:") ? { "home.publishing.hero": selectedId.slice("hero-variant:".length) } : {}) }), [snapshot?.draft, local, selectedId]);
   const previewCollections = useMemo(() => ({ ...(snapshot?.publishedCollections ?? {}), ...(snapshot?.draftCollections ?? {}), ...localCollections }), [snapshot?.publishedCollections, snapshot?.draftCollections, localCollections]);
+  const sendPreview = useCallback(() => {
+    if (siteOrigin) previewRef.current?.contentWindow?.postMessage({ type: PREVIEW_UPDATE, values: previewValues, collections: previewCollections }, siteOrigin);
+  }, [previewValues, previewCollections, siteOrigin]);
+  useEffect(() => { sendPreview(); }, [sendPreview, view, selectedId]);
   useEffect(() => {
-    if (siteOrigin) previewRef.current?.contentWindow?.postMessage({ type: "OKNO_CMS_PREVIEW", values: previewValues, collections: previewCollections }, siteOrigin);
-  }, [previewValues, previewCollections, view, selectedId, siteOrigin]);
+    const ready = (event: MessageEvent) => {
+      if (event.origin !== siteOrigin || event.source !== previewRef.current?.contentWindow || event.data?.type !== PREVIEW_READY) return;
+      setPreviewState({ id: previewIdentity, status: "ready" });
+      sendPreview();
+    };
+    window.addEventListener("message", ready);
+    return () => window.removeEventListener("message", ready);
+  }, [siteOrigin, sendPreview, previewIdentity]);
+  useEffect(() => {
+    if (!siteOrigin) return;
+    const timer = window.setTimeout(() => setPreviewState(state => state?.id === previewIdentity && state.status === "ready" ? state : { id: previewIdentity, status: "slow" }), 12000);
+    return () => window.clearTimeout(timer);
+  }, [siteOrigin, previewIdentity]);
   const pageUrl = siteOrigin ? `${siteOrigin}${page.href}` : page.href;
   const previewPageUrl = siteOrigin ? `${siteOrigin}${previewHref}` : previewHref;
 
@@ -551,6 +573,7 @@ export default function AdminStudio() {
         <button id="admin-content-tab" role="tab" tabIndex={view === "content" ? 0 : -1} aria-controls="admin-content-panel" aria-selected={view === "content"} onClick={() => setView("content")} onKeyDown={event => { if (event.key === "ArrowRight") { setView("site"); document.getElementById("admin-site-tab")?.focus(); } }}>Page content</button>
         <button id="admin-site-tab" role="tab" tabIndex={view === "site" ? 0 : -1} aria-controls="admin-site-panel" aria-selected={view === "site"} onClick={() => setView("site")} onKeyDown={event => { if (event.key === "ArrowLeft") { setView("content"); document.getElementById("admin-content-tab")?.focus(); } }}>Draft site preview</button>
       </div>
+      {previewStatus === "slow" && <div className={styles.notice} role="status">The preview is taking longer to load. Reload it or use Open page above to test this page separately. <ActionButton type="button" variant="quiet" onClick={() => setPreviewAttempt(attempt => attempt + 1)}>Reload preview</ActionButton></div>}
       {view === "content" ? <div id="admin-content-panel" aria-labelledby="admin-content-tab" className={styles.workspace} role="tabpanel">
         <div className={styles.editorColumn}>
           <div className={styles.sectionIntro}><h2>Sections</h2><p>{`${totalMapped ? `${totalMapped} connected field${totalMapped === 1 ? "" : "s"}` : "Fields are being mapped"} · Expand a section to edit its content.`}</p></div>
@@ -558,8 +581,8 @@ export default function AdminStudio() {
           {page.id === "signature" ? signaturePanels() : visibleSections.map((section,index) => sectionPanel(section,index))}
           {!visibleSections.length && !collectionDefinitionsForPage(page.id).length && <p className={styles.unmapped}>Choose one of the Home variants in the left panel.</p>}
         </div>
-        <aside className={styles.previewColumn} aria-label="Page position preview"><div className={styles.previewTop}><div><strong>On the website</strong><span>Draft preview · {selectedCustomVariant ? `${page.href} opening` : page.href}</span></div><a href={pageUrl} target="_blank" rel="noopener noreferrer"><ExternalLink size={16} aria-hidden="true" /><span className={styles.srOnly}>Open full page</span></a></div><iframe ref={previewRef} key={`${page.id}:${snapshot?.revision ?? 0}`} title={`${page.label} draft preview`} src={siteOrigin ? previewPageUrl : undefined} loading="lazy" onLoad={() => { if (siteOrigin) previewRef.current?.contentWindow?.postMessage({ type: "OKNO_CMS_PREVIEW", values: previewValues, collections: previewCollections }, siteOrigin); }} /></aside>
-      </div> : <div id="admin-site-panel" aria-labelledby="admin-site-tab" className={styles.fullPreview} role="tabpanel"><iframe ref={previewRef} key={`${page.id}:${snapshot?.revision ?? 0}`} title={`${page.label} draft site preview`} src={siteOrigin ? previewPageUrl : undefined} onLoad={() => { if (siteOrigin) previewRef.current?.contentWindow?.postMessage({ type: "OKNO_CMS_PREVIEW", values: previewValues, collections: previewCollections }, siteOrigin); }} /></div>}
+        <aside className={styles.previewColumn} aria-label="Page position preview"><div className={styles.previewTop}><div><strong>On the website</strong><span>Draft preview · {selectedCustomVariant ? `${page.href} opening` : page.href}</span></div><a href={pageUrl} target="_blank" rel="noopener noreferrer"><ExternalLink size={16} aria-hidden="true" /><span className={styles.srOnly}>Open full page</span></a></div><iframe ref={previewRef} key={`${page.id}:${previewAttempt}`} title={`${page.label} draft preview`} src={siteOrigin ? previewPageUrl : undefined} loading="eager" allow="autoplay; fullscreen" onLoad={sendPreview} onError={() => setPreviewState({ id: previewIdentity, status: "slow" })} /></aside>
+      </div> : <div id="admin-site-panel" aria-labelledby="admin-site-tab" className={styles.fullPreview} role="tabpanel"><iframe ref={previewRef} key={`${page.id}:${previewAttempt}`} title={`${page.label} draft site preview`} src={siteOrigin ? previewPageUrl : undefined} loading="eager" allow="autoplay; fullscreen" onLoad={sendPreview} onError={() => setPreviewState({ id: previewIdentity, status: "slow" })} /></div>}
     </main>
   </div>;
 }
