@@ -1,0 +1,20 @@
+import { execFileSync } from 'node:child_process';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import probe from 'ffprobe-static';
+
+// Index the accepted files, never transcode or replace them.
+for (const variant of ['hq', 'scrub']) {
+  const source = `/process/process-master.${variant}.mp4`;
+  const bytes = readFileSync(`public${source}`);
+  const data = JSON.parse(execFileSync(probe.path, ['-v', 'error', '-select_streams', 'v:0', '-show_streams', '-show_packets', '-show_data', '-show_entries', 'stream=width,height,avg_frame_rate,extradata:packet=pos,size,pts_time,dts_time,flags', '-of', 'json', `public${source}`]));
+  const stream = data.streams[0];
+  const hex = stream.extradata.trim().split('\n').map(line => line.split(':')[1].trim().split('  ')[0].replace(/\s/g, '')).join('');
+  const description = Buffer.from(hex, 'hex');
+  if (description[0] !== 1 || data.packets.some(p => p.pts_time !== p.dts_time)) throw new Error('Expected presentation-ordered AVC samples.');
+  const [numerator, denominator] = stream.avg_frame_rate.split('/').map(Number);
+  const manifest = { source, sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length, width: stream.width, height: stream.height, fps: numerator / denominator, codec: `avc1.${description.subarray(1, 4).toString('hex')}`, description: description.toString('base64'), packets: data.packets.map(p => [Number(p.pos), Number(p.size), Math.round(Number(p.pts_time) * 1e6), p.flags.includes('K') ? 1 : 0]) };
+  if (manifest.packets.some(([pos, size]) => pos + size > bytes.length)) throw new Error('Packet exceeds source bytes.');
+  writeFileSync(`config/process-video-${variant}.json`, JSON.stringify(manifest) + '\n');
+  console.log(`${variant}: indexed ${manifest.packets.length} original ${manifest.width}×${manifest.height}/${manifest.fps} frames; MP4 unchanged.`);
+}

@@ -2,25 +2,24 @@
 
 import Image from "next/image";
 import {
-  AnimatePresence,
-  motion,
+  useMotionValue,
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useSpring,
 } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SilkBackground } from "@/components/projects/21st/SilkBackground";
 import ProcessDeliveryTimeline, {
   StaticProcessDeliveryTimeline,
   type ProcessTimelineItem,
 } from "./21st/ProcessDeliveryTimeline";
 import ProcessDetailTimeline from "./ProcessDetailTimeline";
-import ProcessLoader from "./21st/ProcessLoader";
 import ProcessNavigation from "./21st/ProcessNavigation";
 import ProcessTextReveal from "./21st/ProcessTextReveal";
 import styles from "./Process.module.css";
-import { useChapterPlayback } from "./useChapterPlayback";
+import ScrollProcessFilm from "./ScrollProcessFilm";
+import { processStageAt } from "@/lib/processScrub";
 import { useSiteContent, useSiteContentMap } from "@/lib/useSiteContent";
 import { resolveProcessDayRange } from "@/lib/processDayRange";
 
@@ -130,10 +129,10 @@ function applyScrollVisuals(
   layout: ViewportLayout,
 ) {
   if (!track) return;
-  const frame = between(value, 0, .68);
-  const hero = between(value, .28, .65);
-  const story = between(value, .58, .68);
-  const rail = between(value, .58, .68);
+  const frame = between(value, 0, .16);
+  const hero = between(value, .035, .13);
+  const story = between(value, .14, .2);
+  const rail = between(value, .14, .2);
   const bounds = layout === "mobile"
     ? { top: 57, right: 5, bottom: 5, left: 5, radius: 10 }
     : layout === "tablet"
@@ -146,6 +145,7 @@ function applyScrollVisuals(
     `inset(${bounds.top * remaining}% ${bounds.right * remaining}% ${bounds.bottom * remaining}% ${bounds.left * remaining}% round ${bounds.radius * remaining}px)`,
   );
   track.style.setProperty("--cover-inset", `${bounds.top * remaining}% ${bounds.right * remaining}% ${bounds.bottom * remaining}% ${bounds.left * remaining}%`);
+  track.style.setProperty("--cover-opacity", String(1 - between(value, .115, .16)));
   track.style.setProperty("--hero-opacity", String(1 - hero));
   track.style.setProperty("--hero-y", `${-34 * hero}px`);
   track.style.setProperty("--story-opacity", String(story));
@@ -202,26 +202,32 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
   const masterHq = useSiteContent("process.opening.master-hq", "/process/process-master.hq.mp4");
   const masterScrub = useSiteContent("process.opening.master-scrub", "/process/process-master.scrub.mp4");
   const poster = useSiteContent("process.opening.poster", "/process/land-poster.webp");
-  const loading = useSiteContent("process.opening.loading", "Loading process film");
   const filmLabel = useSiteContent("process.opening.film-label", "OKNO process film advancing from land analysis to the completed home as the page scrolls");
   const trackRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const cover = useSiteContent("process.opening.cover", "/process/opening-cover.webp");
-  const film = useChapterPlayback(trackRef, videoRef, `${masterHq}|${masterScrub}`);
-  const activeStage = film.chapter;
-  const masterFilmReady = film.revealed;
-  const sequenceProgress = film.progress;
+  const [activeStage, setActiveStage] = useState(0);
+  const [masterFilmReady, setMasterFilmReady] = useState(false);
+  const sequenceProgress = useMotionValue(0);
+  const presentedStage = useRef(0);
+  const presentFrame = useCallback((progress: number) => {
+    sequenceProgress.set(progress);
+    const next = processStageAt(progress);
+    if (next !== presentedStage.current) {
+      presentedStage.current = next;
+      setActiveStage(next);
+    }
+  }, [sequenceProgress]);
   const layout = useViewportLayout();
   const { scrollYProgress } = useScroll({ target: trackRef, offset: ["start start", "end end"] });
   const visualProgress = useSpring(scrollYProgress, {
-    stiffness: 210,
+    stiffness: 160,
     damping: 30,
     mass: .72,
     restDelta: .0002,
   });
   useMotionValueEvent(visualProgress, "change", (value) => {
     applyScrollVisuals(trackRef.current, value, layout);
-    onFilmCovering(value >= .68 && value < .98);
+    onFilmCovering(value >= .16 && value < .98);
   });
   useEffect(() => {
     applyScrollVisuals(trackRef.current, visualProgress.get(), layout);
@@ -231,7 +237,7 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
   const active = currentStages[activeStage];
 
   return (
-    <section className={styles.storyTrack} ref={trackRef} aria-labelledby="process-title" data-playback={film.playback} data-chapter={active.id}>
+    <section className={styles.storyTrack} ref={trackRef} aria-labelledby="process-title" data-playback="scroll" data-chapter={active.id}>
       <div className={styles.stickyViewport}>
         <div className={styles.heroCopy}>
           <p className={styles.heroLabel}>{opening.eyebrow}</p>
@@ -241,64 +247,33 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
         </div>
 
         <div className={styles.mediaFrame}>
-          <video
+          <ScrollProcessFilm
+            key={`${masterHq}|${masterScrub}`}
             className={styles.sceneVideo}
-            ref={videoRef}
-            data-process-master-video
-            muted
-            playsInline
-            disablePictureInPicture
-            controls={false}
-            preload="auto"
+            hq={masterHq}
+            mobile={masterScrub}
             poster={poster}
-            aria-label={filmLabel}
-          >
-            <source media="(min-width: 1024px)" src={masterHq} type="video/mp4" />
-            <source src={masterScrub} type="video/mp4" />
-          </video>
+            label={filmLabel}
+            progress={scrollYProgress}
+            onReady={setMasterFilmReady}
+            onProgress={presentFrame}
+          />
 
           <div className={styles.coverLayer} data-revealed={masterFilmReady} aria-hidden="true">
             <Image src={cover} alt="" fill priority sizes="(max-aspect-ratio: 16/9) 178vh, 100vw" quality={90} />
           </div>
           <div className={styles.mediaTreatment} aria-hidden="true" />
 
-          <AnimatePresence>
-            {film.playback === "loading" ? (
-              <motion.div className={styles.loadingLayer} initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .24 }}>
-                <ProcessLoader label={loading} />
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
-
           <div className={styles.storyCopy}>
-            <AnimatePresence mode="sync" initial={false}>
-              <motion.div
-                className={styles.copyInner}
-                key={active.id}
-                initial={{ opacity: 0, transform: "translate3d(0, 22px, 0)" }}
-                animate={{ opacity: 1, transform: "translate3d(0, 0, 0)" }}
-                exit={{ opacity: 0, transform: "translate3d(0, -14px, 0)" }}
-                transition={{ duration: .34, ease: [.23, 1, .32, 1] }}
-              >
+              <div className={styles.copyInner}>
                 <p className={styles.stageLabel}>{active.days}</p>
                 <h2>{active.label}</h2>
                 <p className={styles.stageTitle}>{active.title}</p>
                 <p className={styles.stageCopy}>{active.copy}</p>
-              </motion.div>
-            </AnimatePresence>
+              </div>
           </div>
         </div>
 
-        {film.playback !== "opening" && film.playback !== "finished" ? (
-          <div className={styles.playbackControls}>
-            <p role="status">{film.playback === "playing" ? "Playing chapter" : film.playback === "loading" ? loading : film.playback === "blocked" ? "Film paused. Try playing again or view the timeline." : "Scroll to continue"}</p>
-            <div>
-              <button type="button" onClick={film.previous} disabled={film.playback === "playing" || film.playback === "loading"}>Previous</button>
-              <button type="button" onClick={film.next} disabled={film.playback === "playing" || film.playback === "loading"}>{film.playback === "blocked" ? "Play film" : activeStage === 5 ? "Continue to timeline" : "Continue"}</button>
-              <button type="button" onClick={film.leave}>View the timeline</button>
-            </div>
-          </div>
-        ) : null}
         <div className={styles.timelineShell}>
           <ProcessDeliveryTimeline items={timelineItems} activeIndex={activeStage} progress={sequenceProgress} />
         </div>
