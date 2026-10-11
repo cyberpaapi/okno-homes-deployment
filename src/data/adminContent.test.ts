@@ -35,6 +35,8 @@ describe("admin page hierarchy", () => {
     const fields = new Map(process.sections.flatMap(section => section.fields.map(field => [field.id, field] as const)));
     expect(fields.get("process.sequence.rail-heading")?.defaultValue).toBe("Build sequence");
     expect(fields.get("process.opening.film-label")?.kind).toBe("text");
+    expect(fields.get("process.opening.cover")?.kind).toBe("image");
+    expect(fields.get("process.opening.cover")?.defaultValue).not.toBe(fields.get("process.opening.poster")?.defaultValue);
     processDetailPhases.forEach((phase, index) => {
       const prefix = `process.details.phase-${index + 1}`;
       expect(fields.get(`${prefix}.image`)?.defaultValue).toBe(phase.image);

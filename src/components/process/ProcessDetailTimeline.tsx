@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import styles from './ProcessDetailTimeline.module.css';
 import { useSiteContent, useSiteContentMap } from '@/lib/useSiteContent';
@@ -26,7 +26,8 @@ export default function ProcessDetailTimeline() {
     target: timelineRef,
     offset: ['start start', 'end end'],
   });
-  const trackX = useTransform(scrollYProgress, [0, 1], ['0%', '-80%']);
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 240, damping: 34, mass: .6 });
+  const trackX = useTransform(smoothProgress, [0, 1], ['0%', '-80%']);
 
   return (
     <section className={styles.section} aria-labelledby="process-detail-title">
@@ -57,7 +58,7 @@ export default function ProcessDetailTimeline() {
                       src={phase.image}
                       alt={phase.alt}
                       fill
-                      loading="eager"
+                      loading="lazy"
                       sizes="(max-width: 700px) calc(100vw - 32px), (max-width: 1100px) 54vw, 53vw"
                     />
                   </motion.div>
@@ -72,7 +73,7 @@ export default function ProcessDetailTimeline() {
           <div className={styles.timelineLine} aria-hidden="true">
             <motion.span
               className={styles.timelineLineFill}
-              style={{ scaleX: reducedMotion ? 1 : scrollYProgress }}
+              style={{ scaleX: reducedMotion ? 1 : smoothProgress }}
             />
             <div className={styles.timelineTicks}>
               {processDetailPhases.map((phase) => <span className={styles.timelineTick} key={phase.days} />)}

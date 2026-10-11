@@ -8,9 +8,8 @@ import {
   useReducedMotion,
   useScroll,
   useSpring,
-  useTransform,
 } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SilkBackground } from "@/components/projects/21st/SilkBackground";
 import ProcessDeliveryTimeline, {
   StaticProcessDeliveryTimeline,
@@ -21,6 +20,7 @@ import ProcessLoader from "./21st/ProcessLoader";
 import ProcessNavigation from "./21st/ProcessNavigation";
 import ProcessTextReveal from "./21st/ProcessTextReveal";
 import styles from "./Process.module.css";
+import { useChapterPlayback } from "./useChapterPlayback";
 import { useSiteContent, useSiteContentMap } from "@/lib/useSiteContent";
 import { resolveProcessDayRange } from "@/lib/processDayRange";
 
@@ -109,44 +109,6 @@ function between(value: number, start: number, end: number) {
   return clamp((value - start) / (end - start));
 }
 
-function stageAt(progress: number) {
-  return Math.min(stages.length - 1, Math.floor(clamp(progress) * stages.length));
-}
-
-const MASTER_VIDEO_FRAME_RATE = 30;
-const SCRUB_SCHEDULER_FPS = 36;
-const MASTER_STAGE_TIMES = [0, 7.65, 10.241667, 11.375, 16.675, 21.975, 25.633333] as const;
-
-function mapProcessProgressToTime(progress: number, duration: number) {
-  const safeDuration = Number.isFinite(duration) && duration > 0 ? duration : 0;
-  const scaled = clamp(progress) * stages.length;
-  const stageIndex = Math.min(stages.length - 1, Math.floor(scaled));
-  const localProgress = stageIndex === stages.length - 1 && scaled >= stages.length
-    ? 1
-    : scaled - stageIndex;
-  const start = MASTER_STAGE_TIMES[stageIndex];
-  const end = MASTER_STAGE_TIMES[stageIndex + 1];
-  const masterDuration = MASTER_STAGE_TIMES[MASTER_STAGE_TIMES.length - 1];
-  const normalizedTime = (start + (end - start) * localProgress) / masterDuration;
-  return normalizedTime * Math.max(0, safeDuration - 1 / MASTER_VIDEO_FRAME_RATE);
-}
-
-function getProcessSeekRequest({
-  video,
-  progress,
-  requestedFrame,
-}: {
-  video: HTMLVideoElement;
-  progress: number;
-  requestedFrame: number;
-}) {
-  if (video.readyState < HTMLMediaElement.HAVE_METADATA || video.seeking) return null;
-  const targetTime = mapProcessProgressToTime(progress, video.duration);
-  const frameIndex = Math.max(0, Math.round(targetTime * MASTER_VIDEO_FRAME_RATE));
-  if (frameIndex === requestedFrame) return null;
-  return { frameIndex, time: frameIndex / MASTER_VIDEO_FRAME_RATE };
-}
-
 function useViewportLayout() {
   const [layout, setLayout] = useState<"desktop" | "tablet" | "mobile">("desktop");
 
@@ -168,10 +130,10 @@ function applyScrollVisuals(
   layout: ViewportLayout,
 ) {
   if (!track) return;
-  const frame = between(value, 0, .14);
-  const hero = between(value, .075, .145);
-  const story = between(value, .135, .18);
-  const rail = between(value, .14, .19);
+  const frame = between(value, 0, .68);
+  const hero = between(value, .28, .65);
+  const story = between(value, .58, .68);
+  const rail = between(value, .58, .68);
   const bounds = layout === "mobile"
     ? { top: 57, right: 5, bottom: 5, left: 5, radius: 10 }
     : layout === "tablet"
@@ -183,6 +145,7 @@ function applyScrollVisuals(
     "--frame-clip",
     `inset(${bounds.top * remaining}% ${bounds.right * remaining}% ${bounds.bottom * remaining}% ${bounds.left * remaining}% round ${bounds.radius * remaining}px)`,
   );
+  track.style.setProperty("--cover-inset", `${bounds.top * remaining}% ${bounds.right * remaining}% ${bounds.bottom * remaining}% ${bounds.left * remaining}%`);
   track.style.setProperty("--hero-opacity", String(1 - hero));
   track.style.setProperty("--hero-y", `${-34 * hero}px`);
   track.style.setProperty("--story-opacity", String(story));
@@ -191,7 +154,7 @@ function applyScrollVisuals(
 
 function StaticProcessHero() {
   const opening = useProcessOpening();
-  const poster = useSiteContent("process.opening.poster", "/process/land-poster.webp");
+  const poster = useSiteContent("process.opening.cover", "/process/opening-cover.webp");
   return (
     <section className={styles.staticHero} aria-labelledby="process-title">
       <div className={styles.staticHeroCopy}>
@@ -200,7 +163,7 @@ function StaticProcessHero() {
         <p className={styles.heroSummary}>{opening.summary}</p>
       </div>
       <div className={styles.staticHeroFilm} aria-hidden="true">
-        <Image src={poster} alt="" fill priority sizes="(max-width: 700px) 92vw, 46vw" />
+        <Image src={poster} alt="" fill priority sizes="100vw" />
         <span />
       </div>
     </section>
@@ -232,7 +195,7 @@ function ReducedProcess() {
   );
 }
 
-function AnimatedProcess() {
+function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean) => void }) {
   const currentStages = useProcessStages();
   const timelineItems = currentStages.map(({ id, days, label, title, poster }) => ({ id, days, label, title, poster }));
   const opening = useProcessOpening();
@@ -243,13 +206,11 @@ function AnimatedProcess() {
   const filmLabel = useSiteContent("process.opening.film-label", "OKNO process film advancing from land analysis to the completed home as the page scrolls");
   const trackRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const targetProgressRef = useRef(0);
-  const requestedFrameRef = useRef(-1);
-  const scrubFrameRef = useRef<number | null>(null);
-  const scrubTimerRef = useRef<number | null>(null);
-  const scheduleScrubRef = useRef<() => void>(() => undefined);
-  const [activeStage, setActiveStage] = useState(0);
-  const [masterFilmReady, setMasterFilmReady] = useState(false);
+  const cover = useSiteContent("process.opening.cover", "/process/opening-cover.webp");
+  const film = useChapterPlayback(trackRef, videoRef, `${masterHq}|${masterScrub}`);
+  const activeStage = film.chapter;
+  const masterFilmReady = film.revealed;
+  const sequenceProgress = film.progress;
   const layout = useViewportLayout();
   const { scrollYProgress } = useScroll({ target: trackRef, offset: ["start start", "end end"] });
   const visualProgress = useSpring(scrollYProgress, {
@@ -258,140 +219,19 @@ function AnimatedProcess() {
     mass: .72,
     restDelta: .0002,
   });
-  const sequenceTarget = useTransform(scrollYProgress, [.055, .94], [0, 1], { clamp: true });
-  // This matches the weighted, critically damped orbit used on the Models page:
-  // the wheel chooses a destination, then the film settles into it with mass.
-  const sequenceProgress = useSpring(sequenceTarget, {
-    stiffness: 300,
-    damping: 32,
-    mass: .85,
-    restDelta: .0002,
-    restSpeed: .001,
-  });
-
   useMotionValueEvent(visualProgress, "change", (value) => {
     applyScrollVisuals(trackRef.current, value, layout);
+    onFilmCovering(value >= .68 && value < .98);
   });
-
-  useMotionValueEvent(sequenceProgress, "change", (progress) => {
-    const weightedProgress = clamp(progress);
-    targetProgressRef.current = weightedProgress;
-    const nextStage = stageAt(weightedProgress);
-    setActiveStage((current) => current === nextStage ? current : nextStage);
-    scheduleScrubRef.current();
-  });
-
   useEffect(() => {
     applyScrollVisuals(trackRef.current, visualProgress.get(), layout);
   }, [layout, visualProgress]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const prepareVideo = () => {
-      if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
-      video.pause();
-      targetProgressRef.current = clamp(sequenceProgress.get());
-      requestedFrameRef.current = -1;
-      setMasterFilmReady(true);
-    };
-    prepareVideo();
-    video.addEventListener("loadeddata", prepareVideo);
-    video.load();
-    return () => video.removeEventListener("loadeddata", prepareVideo);
-  }, [sequenceProgress, masterHq, masterScrub]);
-
-  useEffect(() => {
-    if (!masterFilmReady) return;
-    const video = videoRef.current;
-    const track = trackRef.current;
-    if (!video || !track) return;
-    let trackVisible = true;
-    let lastSeekAt = 0;
-    const minimumSeekInterval = 1000 / SCRUB_SCHEDULER_FPS;
-
-    const scrubVideo = () => {
-      scrubFrameRef.current = null;
-      if (!trackVisible || document.hidden) return;
-
-      const elapsed = performance.now() - lastSeekAt;
-      if (elapsed < minimumSeekInterval) {
-        if (scrubTimerRef.current === null) {
-          scrubTimerRef.current = window.setTimeout(() => {
-            scrubTimerRef.current = null;
-            scrubVideo();
-          }, minimumSeekInterval - elapsed);
-        }
-        return;
-      }
-
-      const request = getProcessSeekRequest({
-        video,
-        progress: targetProgressRef.current,
-        requestedFrame: requestedFrameRef.current,
-      });
-      if (request) {
-        requestedFrameRef.current = request.frameIndex;
-        lastSeekAt = performance.now();
-        video.currentTime = request.time;
-      }
-    };
-
-    const scheduleScrub = () => {
-      if (scrubFrameRef.current === null && trackVisible && !document.hidden) {
-        scrubFrameRef.current = window.requestAnimationFrame(scrubVideo);
-      }
-    };
-
-    const observer = new IntersectionObserver(([entry]) => {
-      trackVisible = entry.isIntersecting;
-      if (!trackVisible && scrubFrameRef.current !== null) {
-        window.cancelAnimationFrame(scrubFrameRef.current);
-        scrubFrameRef.current = null;
-      } else if (trackVisible) {
-        scheduleScrub();
-      }
-    }, { rootMargin: "120px 0px" });
-
-    const handleVisibilityChange = () => {
-      if (document.hidden && scrubFrameRef.current !== null) {
-        window.cancelAnimationFrame(scrubFrameRef.current);
-        scrubFrameRef.current = null;
-      } else {
-        scheduleScrub();
-      }
-    };
-
-    scheduleScrubRef.current = scheduleScrub;
-    video.addEventListener("seeked", scrubVideo);
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    observer.observe(track);
-    scheduleScrub();
-
-    return () => {
-      scheduleScrubRef.current = () => undefined;
-      video.removeEventListener("seeked", scrubVideo);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      observer.disconnect();
-      if (scrubTimerRef.current !== null) {
-        window.clearTimeout(scrubTimerRef.current);
-        scrubTimerRef.current = null;
-      }
-      if (scrubFrameRef.current !== null) {
-        window.cancelAnimationFrame(scrubFrameRef.current);
-        scrubFrameRef.current = null;
-      }
-    };
-  }, [masterFilmReady]);
-
-  const attachMasterVideo = useCallback((node: HTMLVideoElement | null) => {
-    if (node) videoRef.current = node;
-  }, []);
+  useEffect(() => () => onFilmCovering(false), [onFilmCovering]);
 
   const active = currentStages[activeStage];
 
   return (
-    <section className={styles.storyTrack} ref={trackRef} aria-labelledby="process-title">
+    <section className={styles.storyTrack} ref={trackRef} aria-labelledby="process-title" data-playback={film.playback} data-chapter={active.id}>
       <div className={styles.stickyViewport}>
         <div className={styles.heroCopy}>
           <p className={styles.heroLabel}>{opening.eyebrow}</p>
@@ -403,7 +243,7 @@ function AnimatedProcess() {
         <div className={styles.mediaFrame}>
           <video
             className={styles.sceneVideo}
-            ref={attachMasterVideo}
+            ref={videoRef}
             data-process-master-video
             muted
             playsInline
@@ -417,10 +257,13 @@ function AnimatedProcess() {
             <source src={masterScrub} type="video/mp4" />
           </video>
 
+          <div className={styles.coverLayer} data-revealed={masterFilmReady} aria-hidden="true">
+            <Image src={cover} alt="" fill priority sizes="(max-aspect-ratio: 16/9) 178vh, 100vw" quality={90} />
+          </div>
           <div className={styles.mediaTreatment} aria-hidden="true" />
 
           <AnimatePresence>
-            {!masterFilmReady ? (
+            {film.playback === "loading" ? (
               <motion.div className={styles.loadingLayer} initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .24 }}>
                 <ProcessLoader label={loading} />
               </motion.div>
@@ -437,14 +280,25 @@ function AnimatedProcess() {
                 exit={{ opacity: 0, transform: "translate3d(0, -14px, 0)" }}
                 transition={{ duration: .34, ease: [.23, 1, .32, 1] }}
               >
-                <p className={styles.stageLabel}>{active.days} · {active.label}</p>
-                <h2>{active.title}</h2>
+                <p className={styles.stageLabel}>{active.days}</p>
+                <h2>{active.label}</h2>
+                <p className={styles.stageTitle}>{active.title}</p>
                 <p className={styles.stageCopy}>{active.copy}</p>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
 
+        {film.playback !== "opening" && film.playback !== "finished" ? (
+          <div className={styles.playbackControls}>
+            <p role="status">{film.playback === "playing" ? "Playing chapter" : film.playback === "loading" ? loading : film.playback === "blocked" ? "Film paused. Try playing again or view the timeline." : "Scroll to continue"}</p>
+            <div>
+              <button type="button" onClick={film.previous} disabled={film.playback === "playing" || film.playback === "loading"}>Previous</button>
+              <button type="button" onClick={film.next} disabled={film.playback === "playing" || film.playback === "loading"}>{film.playback === "blocked" ? "Play film" : activeStage === 5 ? "Continue to timeline" : "Continue"}</button>
+              <button type="button" onClick={film.leave}>View the timeline</button>
+            </div>
+          </div>
+        ) : null}
         <div className={styles.timelineShell}>
           <ProcessDeliveryTimeline items={timelineItems} activeIndex={activeStage} progress={sequenceProgress} />
         </div>
@@ -455,15 +309,16 @@ function AnimatedProcess() {
 
 export default function ProcessJourney() {
   const reducedMotion = useReducedMotion();
+  const [filmCovering, setFilmCovering] = useState(false);
 
   return (
     <div className={styles.processPage}>
       <div className={styles.silkLayer} aria-hidden="true">
-        <SilkBackground maxPixels={180_000} fps={8} interactive={false} />
+        <SilkBackground maxPixels={320_000} fps={30} paused={filmCovering} interactive={false} />
       </div>
       <ProcessNavigation />
       <main className={styles.pageContent} data-route="process">
-        {reducedMotion ? <><StaticProcessHero /><ReducedProcess /></> : <AnimatedProcess />}
+        {reducedMotion ? <><StaticProcessHero /><ReducedProcess /></> : <AnimatedProcess onFilmCovering={setFilmCovering} />}
         <ProcessDetailTimeline />
       </main>
     </div>

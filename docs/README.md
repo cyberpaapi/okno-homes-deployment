@@ -50,3 +50,6 @@ Start at the [deployment index](deployment/README.md) for architecture, operatio
 - `archive/homepage/` contains rejected or superseded homepage planning and validation notes.
 - `archive/hospitality/` contains the pre-4-October Hospitality component record.
 - `21st-source/` remains provenance material and should not be treated as page-level working instructions.
+
+- [Process chapter playback and optimization — 11 October](process-optimization-2026-10-11.md)
+- [Vercel account limits and meter availability — 11 October](deployment/account-limits-2026-10-11.md)

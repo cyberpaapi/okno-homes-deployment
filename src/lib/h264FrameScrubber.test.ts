@@ -37,7 +37,7 @@ describe('original-packet hero frame rendering', () => {
     vi.stubGlobal('VideoDecoder',Decoder); vi.stubGlobal('EncodedVideoChunk',Chunk);
     vi.stubGlobal('fetch',vi.fn(async()=>({ok:true,body:{getReader:()=>{let done=false;return {read:async()=>{if(done)return {done:true};done=true;return {done:false,value:bytes};}};}}})));
     const drawImage = vi.fn();
-    vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockReturnValue({drawImage} as unknown as CanvasRenderingContext2D);
+    vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockImplementation((() => ({drawImage})) as unknown as typeof HTMLCanvasElement.prototype.getContext);
     const canvas = document.createElement('canvas');
     const abort = new AbortController();
     const ready = vi.fn(); const fail = vi.fn();
