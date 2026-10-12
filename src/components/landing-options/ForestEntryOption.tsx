@@ -9,6 +9,7 @@ import {
   useScroll,
 } from 'motion/react';
 import { ReactLenis } from 'lenis/react';
+import type { VirtualScrollData } from 'lenis';
 import LandingExperience from '@/components/landing/LandingExperience';
 import OknoLogo from '@/components/Brand/OknoLogo';
 import ScrollJourneyFilm from './ScrollJourneyFilm';
@@ -16,6 +17,7 @@ import { useHeroReloadPosition } from './useHeroReloadPosition';
 import { useHeroFilmExit } from './useHeroFilmExit';
 import { useSiteContent } from '@/lib/useSiteContent';
 import { homeVariantAccessibleTitle } from '@/lib/homeVariantContent';
+import { heroWheelDelta } from '@/lib/heroWheelSensitivity';
 import type { ContentItem } from '@/lib/contentCollections';
 import styles from './ForestEntryOption.module.css';
 
@@ -60,6 +62,14 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const startAlt = variant?.fields.openingAlt || savedStartAlt;
   const endAlt = variant?.fields.endAlt || savedEndAlt;
   const sectionRef = useRef<HTMLElement>(null);
+  const adjustHeroWheel = useCallback((data: VirtualScrollData) => {
+    const hero = sectionRef.current;
+    if (hero && data.event.type === 'wheel') {
+      const bounds = hero.getBoundingClientRect();
+      data.deltaY = heroWheelDelta(data.deltaY, data.event.type, bounds.top, bounds.bottom, window.innerHeight);
+    }
+    return true;
+  }, []);
   useHeroReloadPosition(sectionRef);
   const viewportRef = useRef<HTMLDivElement>(null);
   const introVideoRef = useRef<HTMLVideoElement>(null);
@@ -220,5 +230,5 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
 
   // Smooth Scroll, 21st.dev 2836. Touch and reduced-motion keep native scroll.
   // A shorter document tail keeps the Process spring responsive on reversal.
-  return reducedMotion ? page : <ReactLenis root options={{ lerp: .18, wheelMultiplier: 1 }}>{page}</ReactLenis>;
+  return reducedMotion ? page : <ReactLenis root options={{ lerp: .18, wheelMultiplier: 1, virtualScroll: adjustHeroWheel }}>{page}</ReactLenis>;
 }
