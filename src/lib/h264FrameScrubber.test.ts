@@ -153,9 +153,34 @@ describe('range-indexed film rendering', () => {
     await vi.advanceTimersByTimeAsync(10500);
     expect(seen).toEqual(Array.from({length:577},(_,i)=>i));
     expect(canvas.dataset.scrubSkippedFrames).toBe('0');
+    expect(Number(canvas.dataset.scrubByteCache)).toBeLessThanOrEqual(16*1024*1024);
+    expect(Number(canvas.dataset.scrubFetchedBytes)).toBeLessThanOrEqual(film.bytes);
     scrubber!.setTime(20); await vi.advanceTimersByTimeAsync(1900);
     expect(canvas.dataset.scrubPresentedTime).toBe('20.0000');
     expect(canvas.dataset.scrubMaxStep).toBe('1');
+    abort.abort();
+  });
+  it('prepares a larger compressed runway for faster playback without changing the memory cap', async () => {
+    const mocks=setup(); const abort=new AbortController(); const canvas=document.createElement('canvas');
+    await createH264FrameScrubber(canvas,abort.signal,vi.fn(),vi.fn(),{sequential:true,maxPresentationFps:60});
+    await vi.advanceTimersByTimeAsync(100);
+    const starts=mocks.fetchRange.mock.calls.map(([,options])=>Number(options.headers.Range.match(/\d+/)![0]));
+    expect(starts).toContain(16*512*1024);
+    expect(Number(canvas.dataset.scrubByteCache)).toBeLessThanOrEqual(16*1024*1024);
+    abort.abort();
+  });
+  it('does not cancel its valid fast-playback runway on the next scroll update', async () => {
+    setup(); const jobs:{start:number;signal:AbortSignal}[]=[];
+    vi.stubGlobal('fetch',vi.fn((_url:string,options:{headers:{Range:string};signal:AbortSignal})=>new Promise((_resolve,reject)=>{
+      const start=Number(options.headers.Range.match(/\d+/)![0]);
+      jobs.push({start,signal:options.signal});
+      options.signal.addEventListener('abort',()=>reject(new Error('Cancelled')),{once:true});
+    })));
+    const abort=new AbortController();
+    const scrubber=await createH264FrameScrubber(document.createElement('canvas'),abort.signal,vi.fn(),vi.fn(),{sequential:true,maxPresentationFps:60});
+    scrubber!.setTime(.125);
+    expect(jobs.find(job=>job.start===8*512*1024)?.signal.aborted).toBe(false);
+    expect(jobs.find(job=>job.start===16*512*1024)?.signal.aborted).toBe(false);
     abort.abort();
   });
   it('keeps presenting cached adjacent frames while a refill is blocked', async () => {

@@ -1,5 +1,13 @@
 # Accepted Hero V1 window finish — 11 October 2026
 
+## Faster-scroll buffer and intro competition — 12 October 2026
+
+The follow-up keeps normal scrolling and the shorter sequence. Faster adjacent playback prefetches up to sixteen 512 KiB chunks ahead instead of three, retaining the existing 32-chunk / 16 MiB compressed-cache bound. Ordinary target updates preserve this valid directional runway rather than aborting requests more than four chunks away; distant opposite-direction work still cancels, and required active ranges remain protected. Cache eviction prefers dropping behind the direction at equal distance, so a new frontier chunk does not evict itself and get requested again. A full forward regression fetches no more than the source file size. Initial movie preparation can therefore request about 8.5 MiB instead of 2 MiB; this is bounded prefetch, not new deployed storage or a guarantee of lower transfer for every visitor.
+
+Once the visitor leaves the intro, the hidden 22,439,964-byte intro source is released so it cannot continue competing with movie range requests. Returning to the opening restores the same intro source and starts it from zero; full Hero reload also starts the intro, while lower-section reload retains its offset. A `playing` listener resumes the existing intro rate tuning after restoration. The movie, first/last frames, resolution, source FPS, compression and immutable address remain unchanged.
+
+Seven focused files / 34 tests and scoped zero-warning lint pass, including source identity, adjacent playback, valid runway preservation, blocked refill, intro release/revival and reload behavior. Isolated production build/TypeScript and all 30 traces pass (largest 179.8 MiB). Actual local forward playback reaches all 577 frames, the true 24.0000-second window endpoint and a fetched total of exactly 47,573,337 bytes, with maximum step 1 / skipped count 0. A 390×844 layout accepts a large gesture normally, releases the hidden intro and reloads into a playing intro at y=0; lower Forza reload preserves its -504px offset. Local holds remain measurable (573.1ms forward, 444.5ms phone-layout sample); do not call these perfectly even cadence. Final production acceptance follows below. No media upload, generation, new store, billing or credential change is involved.
+
 ## Normal, faster scroll correction — 12 October 2026
 
 The owner rejected repeated gestures caused by the previous .035-film lead clamp. Ordinary wheel, touch, keyboard and scrollbar input now stays with the normal document/Lenis scroller; the Hero-specific interception and discarded-distance policy have been removed. This supersedes the gesture-clamp decision in the historical ordered-frame entry below.

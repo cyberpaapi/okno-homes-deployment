@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import ForestEntryOption from './ForestEntryOption';
 
 const motionState = vi.hoisted(() => ({
@@ -32,6 +32,7 @@ vi.mock('motion/react', () => ({
 }));
 
 describe('ForestEntryOption', () => {
+  beforeEach(()=>{ vi.spyOn(HTMLMediaElement.prototype,'load').mockImplementation(()=>{}); });
   afterEach(() => {
     motionState.progress = 0;
     motionState.onChange = null;
@@ -39,6 +40,20 @@ describe('ForestEntryOption', () => {
     vi.restoreAllMocks();
   });
 
+  it('releases the hidden intro request and restores playback when returning to the opening',()=>{
+    vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});
+    const play=vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue(undefined);
+    const {container}=render(<ForestEntryOption/>);
+    const intro=container.querySelector('video')!;
+    act(()=>{motionState.progress=.2;motionState.onChange?.(.2);});
+    expect(intro.hasAttribute('src')).toBe(false);
+    expect(intro.load).toHaveBeenCalledOnce();
+    act(()=>{motionState.progress=0;motionState.onChange?.(0);});
+    expect(intro.getAttribute('src')).toBe('/assets/landing-options/forest-entry-intro-15s.mp4');
+    expect(intro.load).toHaveBeenCalledTimes(2);
+    expect(play).toHaveBeenCalledOnce();
+    expect(intro.currentTime).toBe(0);
+  });
   it('leaves ordinary wheel input to the normal document scroller',()=>{
     render(<ForestEntryOption/>);
     const event=new WheelEvent('wheel',{deltaY:2400,cancelable:true,bubbles:true});

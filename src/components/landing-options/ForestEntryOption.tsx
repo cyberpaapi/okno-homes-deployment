@@ -103,12 +103,15 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
       leftIntroZone.current = false;
       introFinished.current = false;
       setIntroComplete(false);
+      if (!intro.hasAttribute('src')) { intro.src = introVideo; intro.load(); }
       intro.currentTime = 0;
       void intro.play().catch(() => {});
     }
-    if (intro && progress > .1 && !introFinished.current) {
-      intro.pause();
-      finishIntro();
+    if (intro && animated && progress > .1) {
+      if (!introFinished.current) { intro.pause(); finishIntro(); }
+      // The hidden intro must not keep downloading its 22 MB body while the
+      // visitor scrubs the film. Restore it when returning to the opening.
+      if (intro.hasAttribute('src')) { intro.removeAttribute('src'); intro.load(); }
     }
 
     if (viewport) {
@@ -149,9 +152,11 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     };
 
     video.addEventListener('play', startTuning);
+    video.addEventListener('playing', startTuning);
     startTuning();
     return () => {
       video.removeEventListener('play', startTuning);
+      video.removeEventListener('playing', startTuning);
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, [animated]);

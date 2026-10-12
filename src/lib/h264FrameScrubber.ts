@@ -20,10 +20,16 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
   canvas.height = film.height;
   const CHUNK_BYTES = 512 * 1024;
   const MAX_CHUNKS = 32;
+  // Faster chronological playback needs a compressed runway long enough to
+  // cover CDN latency. Keep the same 16 MiB cap; refill ahead, not at the edge.
+  const PREFETCH_CHUNKS = options.sequential && (options.maxPresentationFps ?? film.fps) > film.fps ? 16 : 3;
   const chunks = new Map<number, Uint8Array>();
   const pending = new Map<number, { promise: Promise<Uint8Array>; abort: AbortController }>();
   let received = 0;
   const currentChunk = () => Math.floor(film.packets[target][0] / CHUNK_BYTES);
+  // At equal distance, evict behind the play direction. Otherwise the newest
+  // frontier chunk can evict itself and be fetched again on every paint.
+  const evictionDistance = (id: number) => Math.abs(id-currentChunk()) + ((id-currentChunk())*direction < 0 ? .5 : 0);
   async function chunk(id: number) {
     const cached = chunks.get(id);
     if (cached) return cached;
@@ -41,7 +47,7 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
       received += data.length;
       chunks.set(id, data);
       while (chunks.size > MAX_CHUNKS) {
-        const farthest = [...chunks.keys()].reduce((a,b) => Math.abs(a-currentChunk()) > Math.abs(b-currentChunk()) ? a : b);
+        const farthest = [...chunks.keys()].reduce((a,b) => evictionDistance(a) > evictionDistance(b) ? a : b);
         chunks.delete(farthest);
       }
       canvas.dataset.scrubFetchedBytes = String(received);
@@ -166,7 +172,7 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
     queueDraw();
     // Fetch a short compressed runway while the decoder works. Speculative
     // requests never choose a frame or trigger fallback on their own.
-    for (let step = 1; step <= 3; step++) {
+    for (let step = 1; step <= PREFETCH_CHUNKS; step++) {
       const id = currentChunk() + direction * step;
       if (id >= 0 && id * CHUNK_BYTES < film.bytes) void chunk(id).catch(() => {});
     }
@@ -231,7 +237,8 @@ export async function createH264FrameScrubber(canvas: HTMLCanvasElement, signal:
         activeRanges.clear();
       }
       for (const [id, job] of pending) {
-        if (!activeRanges.has(id) && Math.abs(id-currentChunk()) > 4) { job.abort.abort(); pending.delete(id); }
+        const distance = (id-currentChunk()) * direction;
+        if (!activeRanges.has(id) && (distance > PREFETCH_CHUNKS+1 || distance < -4)) { job.abort.abort(); pending.delete(id); }
       }
       canvas.dataset.scrubTarget = (requested / film.fps).toFixed(4);
       void pump();
