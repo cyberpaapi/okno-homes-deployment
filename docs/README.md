@@ -16,7 +16,9 @@ Previous Process direction (the compact phase counter is superseded): [reverse c
 
 Current priority correction: [Models header and Vercel storage review](header-storage-review-2026-10-11.md), including authorized historical cloud-demo deletion and the distinction between Deployment Storage and the confirmed Blob block.
 
-Current V1 motion correction: [normal faster scrolling, ordered frames and the accepted right-hand window ending](hero-v1-window-finish-2026-10-11.md).
+Current V1 motion correction: [scroll-driven independent frames, static reversal, faster intro and completed-window handoff](hero-v1-scroll-repair-2026-10-12.md).
+
+The [accepted window source and earlier playback attempts](hero-v1-window-finish-2026-10-11.md) retain historical evidence.
 
 Previous V1 follow-up: [Hero V1, About, scrollbars and preview optimization](hero-v1-optimization-2026-10-11.md).
 

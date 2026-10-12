@@ -1,5 +1,7 @@
 # Accepted Hero V1 window finish — 11 October 2026
 
+Playback decisions below are historical. The [12 October recording-driven repair](hero-v1-scroll-repair-2026-10-12.md) supersedes chronological playback, intro replay on reversal, the extra spring and earlier scroll distances. The accepted source/window remains unchanged.
+
 ## Faster-scroll buffer and intro competition — 12 October 2026
 
 The follow-up keeps normal scrolling and the shorter sequence. Faster adjacent playback prefetches up to sixteen 512 KiB chunks ahead instead of three, retaining the existing 32-chunk / 16 MiB compressed-cache bound. Ordinary target updates preserve this valid directional runway rather than aborting requests more than four chunks away; distant opposite-direction work still cancels, and required active ranges remain protected. Cache eviction prefers dropping behind the direction at equal distance, so a new frontier chunk does not evict itself and get requested again. A full forward regression fetches no more than the source file size. Initial movie preparation can therefore request about 8.5 MiB instead of 2 MiB; this is bounded prefetch, not new deployed storage or a guarantee of lower transfer for every visitor.

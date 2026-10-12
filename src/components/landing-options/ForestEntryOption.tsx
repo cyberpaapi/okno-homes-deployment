@@ -7,13 +7,13 @@ import {
   useMotionValue,
   useReducedMotion,
   useScroll,
-  useSpring,
 } from 'motion/react';
 import { ReactLenis } from 'lenis/react';
 import LandingExperience from '@/components/landing/LandingExperience';
 import OknoLogo from '@/components/Brand/OknoLogo';
 import ScrollJourneyFilm from './ScrollJourneyFilm';
 import { useHeroReloadPosition } from './useHeroReloadPosition';
+import { useHeroFilmExit } from './useHeroFilmExit';
 import { useSiteContent } from '@/lib/useSiteContent';
 import { homeVariantAccessibleTitle } from '@/lib/homeVariantContent';
 import type { ContentItem } from '@/lib/contentCollections';
@@ -64,9 +64,9 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const viewportRef = useRef<HTMLDivElement>(null);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const introFinished = useRef(false);
-  const leftIntroZone = useRef(false);
   const [introComplete, setIntroComplete] = useState(false);
   const [journeyReady, setJourneyReady] = useState(false);
+  const [endingFallback, setEndingFallback] = useState(false);
   const reducedMotion = useReducedMotion();
   const saveData = useDataSaver();
   const animated = !reducedMotion && !saveData;
@@ -76,16 +76,11 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
-  // Match ProcessJourney's weighted, non-bouncing visual response. The film
-  // and its fades follow one progress value instead of separate animations.
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 160,
-    damping: 30,
-    mass: .72,
-    restDelta: .0002,
-    skipInitialAnimation: true,
-  });
-  const mediaProgress = reducedMotion ? scrollYProgress : smoothProgress;
+  // Lenis smooths the document once. A second spring and a chronological
+  // playback queue make the camera continue after the visitor stops scrolling.
+  const mediaProgress = scrollYProgress;
+  const fallbackEnding = useCallback(() => setEndingFallback(true), []);
+  useHeroFilmExit(sectionRef, presentedFilmProgress, animated, fallbackEnding);
 
   const finishIntro = () => {
     if (introFinished.current) return;
@@ -98,28 +93,20 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     const progress = clamp(rawProgress);
     const viewport = viewportRef.current;
     const intro = introVideoRef.current;
-    if (progress > .1) leftIntroZone.current = true;
-    if (intro && animated && progress <= .005 && leftIntroZone.current && introFinished.current) {
-      leftIntroZone.current = false;
-      introFinished.current = false;
-      setIntroComplete(false);
-      if (!intro.hasAttribute('src')) { intro.src = introVideo; intro.load(); }
-      intro.currentTime = 0;
-      void intro.play().catch(() => {});
-    }
-    if (intro && animated && progress > .1) {
+    if (intro && animated && progress > .005) {
       if (!introFinished.current) { intro.pause(); finishIntro(); }
       // The hidden intro must not keep downloading its 22 MB body while the
-      // visitor scrubs the film. Restore it when returning to the opening.
+      // visitor scrubs the film. Ordinary reversal keeps the static base;
+      // only a fresh page load mounts the autoplay intro again.
       if (intro.hasAttribute('src')) { intro.removeAttribute('src'); intro.load(); }
     }
 
     if (viewport) {
-      const introOpacity = 1 - range(progress, .04, .16);
-      const stillOpacity = introFinished.current ? 1 - range(progress, .3, .36) : 0;
-      const brandOpacity = !animated ? 1 : introFinished.current ? 1 - range(progress, .04, .16) : 0;
-      const journeyOpacity = range(progress, .3, .36);
-      const endOpacity = !animated || presentedFilmProgress.get() >= 1 ? range(progress, .975, 1) : 0;
+      const introOpacity = 1 - range(progress, .005, .06);
+      const stillOpacity = introFinished.current ? 1 - range(progress, .04, .08) : 0;
+      const brandOpacity = !animated ? 1 : introFinished.current ? 1 - range(progress, .005, .06) : 0;
+      const journeyOpacity = endingFallback && progress >= .9 ? 0 : range(progress, .04, .08);
+      const endOpacity = !animated || presentedFilmProgress.get() >= 1 || endingFallback ? range(progress, .9, .94) : 0;
       viewport.style.setProperty('--intro-opacity', introOpacity.toFixed(4));
       viewport.style.setProperty('--still-opacity', stillOpacity.toFixed(4));
       viewport.style.setProperty('--brand-opacity', brandOpacity.toFixed(4));
@@ -137,27 +124,13 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     const video = introVideoRef.current;
     if (!animated || !video) return;
 
-    let frame = 0;
-    const tunePlayback = () => {
-      frame = 0;
-      if (!Number.isFinite(video.duration) || video.duration <= 0 || video.paused || video.ended) return;
-
-      const progress = clamp(video.currentTime / video.duration);
-      const sCurve = progress * progress * progress * (progress * (progress * 6 - 15) + 10);
-      video.playbackRate = 2.15 - sCurve * 1.43;
-      frame = window.requestAnimationFrame(tunePlayback);
-    };
-    const startTuning = () => {
-      if (!frame) frame = window.requestAnimationFrame(tunePlayback);
-    };
-
-    video.addEventListener('play', startTuning);
-    video.addEventListener('playing', startTuning);
-    startTuning();
+    const tunePlayback = () => { video.playbackRate = 1.75; };
+    video.addEventListener('loadedmetadata', tunePlayback);
+    video.addEventListener('playing', tunePlayback);
+    tunePlayback();
     return () => {
-      video.removeEventListener('play', startTuning);
-      video.removeEventListener('playing', startTuning);
-      if (frame) window.cancelAnimationFrame(frame);
+      video.removeEventListener('loadedmetadata', tunePlayback);
+      video.removeEventListener('playing', tunePlayback);
     };
   }, [animated]);
 
@@ -165,7 +138,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     syncMedia(mediaProgress.get());
     // Motion owns the changing progress value; this only primes restored scroll positions.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animated, journeyReady]);
+  }, [animated, journeyReady, endingFallback]);
 
   const page = (
     <div
@@ -174,6 +147,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
       data-video-ready={journeyReady || undefined}
       data-static={!animated}
       data-journey-video={journeyVideo}
+      data-film-ending={endingFallback ? 'still-fallback' : 'decoded'}
     >
       <section
         ref={sectionRef}

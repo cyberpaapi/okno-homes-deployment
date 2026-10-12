@@ -40,7 +40,16 @@ describe('ForestEntryOption', () => {
     vi.restoreAllMocks();
   });
 
-  it('releases the hidden intro request and restores playback when returning to the opening',()=>{
+  it('keeps the automatic intro at a constant faster rate through the whole shot', () => {
+    const {container}=render(<ForestEntryOption/>);
+    const intro=container.querySelector('video')!;
+    expect(intro.playbackRate).toBe(1.75);
+    intro.currentTime=14;
+    fireEvent.playing(intro);
+    expect(intro.playbackRate).toBe(1.75);
+  });
+
+  it('releases the intro and keeps a static base when returning to the opening',()=>{
     vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});
     const play=vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue(undefined);
     const {container}=render(<ForestEntryOption/>);
@@ -49,9 +58,9 @@ describe('ForestEntryOption', () => {
     expect(intro.hasAttribute('src')).toBe(false);
     expect(intro.load).toHaveBeenCalledOnce();
     act(()=>{motionState.progress=0;motionState.onChange?.(0);});
-    expect(intro.getAttribute('src')).toBe('/assets/landing-options/forest-entry-intro-15s.mp4');
-    expect(intro.load).toHaveBeenCalledTimes(2);
-    expect(play).toHaveBeenCalledOnce();
+    expect(intro.hasAttribute('src')).toBe(false);
+    expect(intro.load).toHaveBeenCalledOnce();
+    expect(play).not.toHaveBeenCalled();
     expect(intro.currentTime).toBe(0);
   });
   it('leaves ordinary wheel input to the normal document scroller',()=>{
@@ -106,7 +115,7 @@ describe('ForestEntryOption', () => {
     expect(container.querySelector('[data-hero-v1-tagline]')).toBeNull();
   });
 
-  it('replays the intro after scrolling away and returning to the top', () => {
+  it('does not replay the intro after scrolling away and returning to the top', () => {
     vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
     vi.spyOn(HTMLMediaElement.prototype, 'play').mockResolvedValue(undefined);
     vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
@@ -127,8 +136,8 @@ describe('ForestEntryOption', () => {
       motionState.progress = 0;
       motionState.onChange?.(0);
     });
-    expect(intro.currentTime).toBe(0);
-    expect(introPlay).toHaveBeenCalledOnce();
-    expect(intro.className).not.toContain('introComplete');
+    expect(intro.currentTime).toBe(3);
+    expect(introPlay).not.toHaveBeenCalled();
+    expect(intro.className).toContain('introComplete');
   });
 });

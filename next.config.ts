@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
     }));
   },
   async headers() {
-    return ["/page-images/:path*", "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4"].map(source => ({
+    return ["/page-images/:path*", "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4", "/assets/landing-options/forest-entry-frames-:hash.bin"].map(source => ({
       source,
       headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
     }));

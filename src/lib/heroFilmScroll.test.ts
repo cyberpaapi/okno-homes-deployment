@@ -10,9 +10,9 @@ describe('Hero film scroll mapping',()=>{
   });
   it('maps normal document position without gesture clamping',()=>{
     expect(heroFilmProgress(0)).toBe(0);
-    expect(heroFilmProgress(.3)).toBe(0);
-    expect(heroFilmProgress(.6325)).toBeCloseTo(.5);
-    expect(heroFilmProgress(.965)).toBeCloseTo(1);
+    expect(heroFilmProgress(.06)).toBe(0);
+    expect(heroFilmProgress(.48)).toBeCloseTo(.5);
+    expect(heroFilmProgress(.9)).toBeCloseTo(1);
     expect(heroFilmProgress(2)).toBe(1);
   });
 });

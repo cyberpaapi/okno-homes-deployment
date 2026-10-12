@@ -1,0 +1,81 @@
+'use client';
+
+import { useEffect, type RefObject } from 'react';
+import { useLenis } from 'lenis/react';
+import type { MotionValue } from 'motion/react';
+import { HERO_FILM_EXIT } from '@/lib/heroFilmScroll';
+
+/** Only the handoff is gated. Keep the full input distance and release it once
+ * the actual window frame has painted, rather than running the film offscreen. */
+export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: MotionValue<number>, enabled: boolean, showEnding: () => void) {
+  const lenis = useLenis();
+  useEffect(() => {
+    const hero = section.current;
+    if (!enabled || !hero) return;
+    let previousY = window.scrollY;
+    let pendingY: number | null = null;
+    let timeout = 0, release = 0, paint = 0;
+    let fallback = false;
+    const boundary = () => hero.getBoundingClientRect().top + window.scrollY + (hero.offsetHeight - window.innerHeight) * HERO_FILM_EXIT;
+    const move = (y: number, immediate: boolean) => {
+      if (lenis) lenis.scrollTo(y, { immediate, force: true });
+      else window.scrollTo(0, y);
+    };
+    const clear = () => {
+      window.clearTimeout(timeout); window.clearTimeout(release); cancelAnimationFrame(paint);
+      timeout = 0; release = 0; paint = 0;
+      hero.removeAttribute('data-film-exit-pending');
+    };
+    const finish = () => {
+      if (pendingY === null || (!fallback && shown.get() < 1) || release || paint) return;
+      // Let the endpoint and its matching still render before moving the page.
+      paint = requestAnimationFrame(() => {
+        paint = requestAnimationFrame(() => {
+          paint = 0;
+          release = window.setTimeout(() => {
+            const y = pendingY;
+            pendingY = null; clear();
+            if (y !== null) { previousY = y; move(y, false); }
+          }, 120);
+        });
+      });
+    };
+    const check = () => {
+      const y = window.scrollY, end = boundary();
+      if (pendingY !== null) {
+        if (y < end - 3) { pendingY = null; clear(); }
+        else if (y > end + 1) {
+          pendingY = Math.max(pendingY, y, lenis?.targetScroll ?? y);
+          move(end, true);
+        }
+      } else if (previousY <= end && y > end && shown.get() < 1 && !fallback) {
+        pendingY = Math.max(y, lenis?.targetScroll ?? y);
+        hero.setAttribute('data-film-exit-pending', 'true');
+        move(end, true);
+        // A failed CDN/decoder must not trap the page. The accepted exact-end
+        // still is the recovery surface, never an unfinished room frame.
+        timeout = window.setTimeout(() => { fallback = true; showEnding(); finish(); }, 2000);
+        finish();
+      }
+      previousY = Math.min(y, pendingY === null ? y : end);
+    };
+    const wheel = (event: WheelEvent) => {
+      if (pendingY === null || event.ctrlKey) return;
+      if (event.deltaY < 0) { pendingY = null; clear(); return; }
+      if (event.deltaY > 0) {
+        const unit = event.deltaMode === 2 ? window.innerHeight : event.deltaMode === 1 ? 16 : 1;
+        pendingY += event.deltaY * unit;
+        event.preventDefault();
+      }
+    };
+    const unsubscribe = shown.on('change', finish);
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('wheel', wheel, { passive: false, capture: true });
+    lenis?.on('scroll', check);
+    return () => {
+      clear(); unsubscribe(); lenis?.off('scroll', check);
+      window.removeEventListener('scroll', check);
+      window.removeEventListener('wheel', wheel, true);
+    };
+  }, [section, shown, enabled, showEnding, lenis]);
+}

@@ -1,0 +1,21 @@
+# Hero V1 scroll control repair — 12 October 2026
+
+The owner's 67.731-second recording showed the camera continuing after input, stuttering, leaving the Hero before finishing, and replaying the intro on reversal. The previous chronological frame queue is superseded: Lenis smooths the document once, while the current scroll position selects the displayed pose. The second film spring and the raw-frame playback queue are removed. Rapid input replaces the target instead of playing old targets afterward.
+
+The intro plays once on a fresh page load at a constant 1.75× rate (about 8.6 seconds for its 15.041667-second source). Scrolling away pauses/releases its download. Ordinary reversal/Home returns to the existing static intro-last-frame image and does not restore or replay the intro. Hero reload still resets to zero and autoplays; lower-section reload preserves its section offset.
+
+Desktop Hero height is 460svh and phone height 440svh, with 3.6/3.4 viewports of sticky travel. The film spans .06–.90 progress, followed by the window hold and normal transition. At .95, an unfinished endpoint temporarily retains scroll overshoot until the actual accepted last frame paints, then releases that distance. Reverse input cancels the hold. A two-second failed-delivery recovery uses the matching ending still, never an unfinished interior frame, and keeps the page usable. This changes only the handoff, rather than clamping every gesture.
+
+## Independent delivery frames
+
+The active image renderer uses independently decoded 1920×1080 WebP poses extracted from the accepted merged MP4. The 289 poses retain original indices 0, 2, …, 576 and their original 24fps timestamps; this is scroll sampling, not a promise to display every raw source frame during a fast gesture. First and last compositions and the closed right-hand window ending are retained. No generated camera shot is introduced.
+
+One fingerprinted byte-range bundle is 46,739,190 bytes, slightly smaller than the 47,573,337-byte MP4. Its SHA-256 is `f01009d3a94ffea54c7cd1cb61e963c4486d9da563ac48aae97c3f95b4d8654e`; its index is `config/hero-v1-frames.json`. All 289 dimensions and WebP boundaries are verified. Representative full-resolution comparison at 25 one-second positions yields SSIM 0.989751 against the existing delivery MP4. This is lossy compression, not pixel identity or a full-master comparison. The original MP4 remains unchanged for native/custom-source/embedded fallback.
+
+The frame bundle adds 46.7 MB to static deployment assets. Normal image playback uses that bundle rather than downloading both representations. Compressed caching stays capped at 16 MiB; decoded bitmaps use an 18/28-image cap, lower than the former 36/60 VideoFrame cap. Two speculative image decodes warm a short directional window beside the current target. Cached poses may approach the target without overshooting it; idle prefetch never advances the camera. The native fallback also seeks the latest position without a chronological queue. No Blob operation, paid generation, replacement store, billing or credential change is involved. Current Hobby team checks show no general block and the existing Blob feature block; exact remaining usage is unavailable.
+
+## Verification
+
+Eight focused files / 27 tests and zero-warning scoped lint pass. Isolated production build/TypeScript and all 30 function traces pass; private data remains excluded. Local desktop and actual 390×844 layout checks confirm ordinary gestures, fast navigation, reversal, target settling, accepted 24.0000-second endpoint, static Home return and reload-only intro. The actual Forza heading restores exactly to y=5508 and top=225.7917px after reload. Console has no errors/warnings.
+
+The final local forward/reverse/fast-gesture run observed a 122.8ms maximum response including initial preparation, versus about one second in rejected MP4 candidates. The phone-layout sample reaches the actual final frame before its timeline becomes visible (115.1ms endpoint response); ordinary Home is static and reload plays the intro at 1.75×. A separate fresh desktop preparation took 174.8ms; Home refetch in an earlier local pass took 161.9ms. These are measured samples, not a guarantee for every physical device or connection. Production identity and live acceptance are appended after publishing.
