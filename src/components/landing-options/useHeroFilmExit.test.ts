@@ -3,10 +3,11 @@ import { motionValue } from 'motion/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useHeroFilmExit } from './useHeroFilmExit';
 
-vi.mock('lenis/react', () => ({ useLenis: () => undefined }));
+const driver=vi.hoisted(()=>({active:undefined as undefined|{targetScroll:number;scrollTo:ReturnType<typeof vi.fn>;on:ReturnType<typeof vi.fn>;off:ReturnType<typeof vi.fn>}}));
+vi.mock('lenis/react', () => ({ useLenis: () => driver.active }));
 let y = 0;
 beforeEach(() => {
-  vi.useFakeTimers(); y = 0;
+  vi.useFakeTimers(); y = 0; driver.active=undefined;
   vi.spyOn(window, 'scrollY', 'get').mockImplementation(() => y);
   vi.stubGlobal('innerHeight', 1000);
   vi.spyOn(window, 'scrollTo').mockImplementation((...args) => { y = Number(args[1]); });
@@ -21,6 +22,16 @@ function setup() {
   return { ...hook, hero, shown, fallback };
 }
 describe('Hero movie handoff', () => {
+  it('makes Home interrupt wheel inertia while leaving editable controls alone',()=>{
+    const scrollTo=vi.fn((next:number)=>{y=next;});
+    driver.active={targetScroll:600,scrollTo,on:vi.fn(),off:vi.fn()};
+    y=400;const view=setup();
+    act(()=>window.dispatchEvent(new KeyboardEvent('keydown',{key:'Home'})));
+    expect(scrollTo).toHaveBeenCalledWith(0,{immediate:true,force:true});expect(y).toBe(0);
+    const input=document.createElement('input');document.body.append(input);scrollTo.mockClear();
+    act(()=>input.dispatchEvent(new KeyboardEvent('keydown',{key:'Home',bubbles:true})));
+    expect(scrollTo).not.toHaveBeenCalled();input.remove();view.unmount();
+  });
   it('holds before lower content, preserves overshoot and releases after the actual end frame', async () => {
     const view = setup();
     act(() => { y = 1200; window.dispatchEvent(new Event('scroll')); });

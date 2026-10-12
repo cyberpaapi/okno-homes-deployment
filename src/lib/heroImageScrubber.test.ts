@@ -56,4 +56,23 @@ describe('independent Hero scroll frames',()=>{
     expect(mocks.fetch.mock.calls.every(([,o])=>Number(o.headers.Range.match(/\d+/)![0])>data.length/2)).toBe(true);
     abort.abort();
   });
+  it('retains the actual ending and opening through cache eviction for instant handoff and reversal',async()=>{
+    const mocks=setup(),canvas=document.createElement('canvas'),abort=new AbortController();
+    const scrubber=createHeroImageScrubber(canvas,abort.signal,vi.fn(),vi.fn(),vi.fn())!;
+    await vi.advanceTimersByTimeAsync(40);
+    for(const time of [1,4,8,12,16,20]){scrubber.setTime(time);await vi.advanceTimersByTimeAsync(30);}
+    mocks.decode.mockClear();
+    // Block new decodes: the window approach must already be in the cache.
+    mocks.decode.mockImplementation(()=>new Promise<never>(()=>{}));
+    scrubber.setTime(572/24);await vi.advanceTimersByTimeAsync(20);
+    expect(canvas.dataset.scrubPresentedTime).toBe('23.8333');
+    mocks.decode.mockClear();
+    scrubber.setTime(24);await vi.advanceTimersByTimeAsync(20);
+    expect(canvas.dataset.scrubPresentedTime).toBe('24.0000');
+    expect(mocks.decode).not.toHaveBeenCalled();
+    scrubber.setTime(0);await vi.advanceTimersByTimeAsync(20);
+    expect(canvas.dataset.scrubPresentedTime).toBe('0.0000');
+    expect(Number(canvas.dataset.scrubCacheFrames)).toBeLessThanOrEqual(18);
+    abort.abort();
+  });
 });

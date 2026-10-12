@@ -69,13 +69,21 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
       }
     };
     const unsubscribe = shown.on('change', finish);
+    const key = (event: KeyboardEvent) => {
+      if (event.key !== 'Home' || (event.target instanceof Element && event.target.closest('input,textarea,select,[contenteditable]'))) return;
+      // Native Home must supersede a still-running wheel animation; otherwise
+      // its next Lenis tick can pull the document back down again.
+      if (lenis) { pendingY = null; clear(); lenis.scrollTo(0,{immediate:true,force:true}); }
+    };
     window.addEventListener('scroll', check, { passive: true });
     window.addEventListener('wheel', wheel, { passive: false, capture: true });
+    window.addEventListener('keydown',key);
     lenis?.on('scroll', check);
     return () => {
       clear(); unsubscribe(); lenis?.off('scroll', check);
       window.removeEventListener('scroll', check);
       window.removeEventListener('wheel', wheel, true);
+      window.removeEventListener('keydown',key);
     };
   }, [section, shown, enabled, showEnding, lenis]);
 }

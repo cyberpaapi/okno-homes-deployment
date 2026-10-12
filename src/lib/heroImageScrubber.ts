@@ -11,6 +11,12 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   canvas.width = film.width; canvas.height = film.height;
   const CHUNK = 512 * 1024, MAX_CHUNKS = 32;
   const MAX_FRAMES = ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 0) >= 8 ? 28 : 18;
+  const lastPose = film.frames.length-1;
+  const anchors = new Set([0,lastPose-2,lastPose-1,lastPose]);
+  const anchorChunks = new Set([...anchors].flatMap(index => {
+    const [offset,size] = film.frames[index];
+    return [Math.floor(offset/CHUNK),Math.floor((offset+size-1)/CHUNK)];
+  }));
   const chunks = new Map<number, Uint8Array>();
   const requests = new Map<number, { abort: AbortController; promise: Promise<Uint8Array> }>();
   const images = new Map<number, ImageBitmap>();
@@ -61,7 +67,7 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
       if (disposed) { bitmap.close(); throw new Error('Disposed'); }
       images.set(index,bitmap);
       while (images.size > MAX_FRAMES) {
-        const farthest = [...images.keys()].reduce((a,b) => Math.abs(a-target) > Math.abs(b-target) ? a : b);
+        const farthest = [...images.keys()].filter(index => !anchors.has(index)).reduce((a,b) => Math.abs(a-target) > Math.abs(b-target) ? a : b);
         images.get(farthest)?.close(); images.delete(farthest);
       }
       canvas.dataset.scrubCacheFrames = String(images.size);
@@ -133,7 +139,7 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
     canvas.dataset.scrubTarget = (film.frames[target][2]/film.fps).toFixed(4);
     // Fetch a small compressed runway; keep the existing 16 MiB cache cap.
     for (const [id,request] of requests) {
-      if (Math.abs(id-chunkAt()) > 4) { request.abort.abort(); requests.delete(id); }
+      if (!anchorChunks.has(id) && Math.abs(id-chunkAt()) > 4) { request.abort.abort(); requests.delete(id); }
     }
     for (let step=0;step<=2;step++) {
       const id = chunkAt()+direction*step;
@@ -153,5 +159,8 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   signal.addEventListener('abort',dispose,{once:true});
   document.addEventListener('visibilitychange',visibility);
   canvas.dataset.scrubMode = 'scroll'; setTime(0);
+  // Prepare the real ending during the intro. Reserve its bitmap within the
+  // same cache cap, so a fast handoff does not fetch it at the boundary.
+  for (const index of anchors) if (index !== 0) void image(index).catch(() => {});
   return { setTime, seek: setTime, dispose };
 }
