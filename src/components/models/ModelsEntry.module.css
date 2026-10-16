@@ -49,7 +49,7 @@
 .introduction h1 {
   margin: 0;
   font-family: "Models Geist", "Geist OKNO", Arial, sans-serif;
-  font-size: clamp(19px, 2.1vw, 34px);
+  font-size: var(--type-size-subheading, clamp(19px, 2.1vw, 34px));
   font-weight: 500;
   line-height: 1;
   letter-spacing: -.055em;
@@ -60,7 +60,7 @@
 .introCopy {
   margin: 0;
   color: #1b4058bd;
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 500;
   letter-spacing: .13em;
   text-transform: uppercase;
@@ -94,8 +94,8 @@
     overflow: hidden visible;
   }
   .introduction { padding: 0 8px 2px; }
-  .introduction h1 { font-size: 21px; }
-  .introCopy { font-size: 8px; }
+  .introduction h1 { font-size: var(--type-size-subheading, 21px); }
+  .introCopy { font-size: var(--type-size-caption, 8px); }
   .introCopy { color:#cfe1ecb8; }
 }
 

@@ -1,0 +1,19 @@
+{
+  "samePublishedContent": true,
+  "revision": 24,
+  "draftRevision": 78,
+  "fields": 0,
+  "collections": 0,
+  "tests": {
+    "full": {
+      "files": 102,
+      "passed": 409
+    },
+    "afterFixes": {
+      "files": 15,
+      "passed": 53
+    }
+  },
+  "typescript": "passed",
+  "editedFileLint": "passed"
+}

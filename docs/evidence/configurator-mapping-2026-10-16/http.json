@@ -1,0 +1,30 @@
+[
+  {
+    "model": "forza",
+    "asset": "/configurator/models/v2/forza-ec129c111fc6.glb",
+    "hashMatches": true,
+    "routeStatus": 200,
+    "cacheControl": "public, max-age=31536000, immutable"
+  },
+  {
+    "model": "tengo",
+    "asset": "/configurator/models/v2/tengo-07a4d45eda3d.glb",
+    "hashMatches": true,
+    "routeStatus": 200,
+    "cacheControl": "public, max-age=31536000, immutable"
+  },
+  {
+    "model": "kray",
+    "asset": "/configurator/models/v2/kray-32f31b2a0ca8.glb",
+    "hashMatches": true,
+    "routeStatus": 200,
+    "cacheControl": "public, max-age=31536000, immutable"
+  },
+  {
+    "model": "tish",
+    "asset": "/configurator/models/v2/tish-d1b4a6c112a2.glb",
+    "hashMatches": true,
+    "routeStatus": 200,
+    "cacheControl": "public, max-age=31536000, immutable"
+  }
+]

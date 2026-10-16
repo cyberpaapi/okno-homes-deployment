@@ -1,5 +1,9 @@
 # Admin documentation
 
+For editors: [OKNO-ADMIN-001 version 2.0 — production operating procedure](production-operating-procedure.md). Editable text companion to the delivered 61-page PDF with 53 actual production screenshots, individual workflows for all 15 panels, media, recovery and publication checks. The guide reflects deployed controls; the new font/numeric-size interface is not present in the captured production release.
+
+Historical implementation guide: [version 1.0](operating-procedure.md).
+
 Current: [11 October full inventory, local browser cycles and production publishing block](../admin-audit-2026-10-11.md).
 
 - [Current implementation, scope and decision ledger](../admin-system.md)

@@ -180,12 +180,12 @@ export default function EnquiryForm({ isOpen }: EnquiryFormProps) {
     >
       <FluidField className={styles.fluid} />
       <div className={styles.layout}>
-        <div className={styles.intro}>
+        <div className={styles.intro} data-type-section="enquiry.intro">
           <div className={styles.introInner}>
-            <h1 className={styles.heading}>
+            <h1 className={styles.heading} data-type-field={"enquiry.intro.heading-line-1"}>
               <TextBlock lines={[t("intro.heading-line-1", "Tell us what"), t("intro.heading-line-2", "you’re building.")]} />
             </h1>
-            <p>{t("intro.copy", "Bring what you have: a place, an ambition, or the beginning of an idea.")}</p>
+            <p data-type-field={"enquiry.intro.copy"}>{t("intro.copy", "Bring what you have: a place, an ambition, or the beginning of an idea.")}</p>
           </div>
         </div>
 
@@ -200,7 +200,7 @@ export default function EnquiryForm({ isOpen }: EnquiryFormProps) {
             <div className={styles.formPanel}>
               <AnimatePresence initial={false} mode="popLayout" custom={slideDirection}>
                 <motion.div
-                  className={styles.formSlide}
+                  className={styles.formSlide} data-type-section={`enquiry.${activeValue}-tab`}
                   key={activeValue}
                   custom={slideDirection}
                   variants={{

@@ -1,0 +1,98 @@
+{
+  "applications": [
+    {
+      "group": "External wall",
+      "finish": "Golden Oak Thermowood",
+      "available": [
+        "Obsidian ShieldMetal cladding",
+        "Titanium VeilMetal cladding",
+        "Ivory ArmorMetal cladding",
+        "Ebony TimberThermowood",
+        "Golden OakThermowood",
+        "Desert SandPaint",
+        "Brick EmberPaint",
+        "Terracotta HuePaint",
+        "Urban StonePaint",
+        "Mink GrayPaint"
+      ]
+    },
+    {
+      "group": "External roof",
+      "finish": "Castile Crest Shingles",
+      "available": [
+        "Obsidian ShieldMetal cladding",
+        "Titanium VeilMetal cladding",
+        "Ivory ArmorMetal cladding",
+        "Castile CrestShingles",
+        "Barcelona BlazeShingles",
+        "Lone Star ShinglesShingles",
+        "Heartland ShinglesShingles",
+        "Rustic CanopyThatched roof",
+        "Ebony TimberThermowood",
+        "PearlwoodThermowood"
+      ]
+    },
+    {
+      "group": "Internal wall",
+      "finish": "Brick Ember Paint",
+      "available": [
+        "Ebony TimberThermowood",
+        "Golden OakThermowood",
+        "PearlwoodThermowood",
+        "Desert SandPaint",
+        "Brick EmberPaint",
+        "Urban StonePaint",
+        "Mink GrayPaint",
+        "Alpine WhitePaint",
+        "Sienna NutwoodLaminated wood",
+        "Brione DriftwoodLaminated wood",
+        "Lime GroveLaminated wood",
+        "Silea SandstoneLaminated wood"
+      ]
+    },
+    {
+      "group": "Internal ceiling",
+      "finish": "Golden Oak Thermowood",
+      "available": [
+        "Obsidian ShieldMetal cladding",
+        "Titanium VeilMetal cladding",
+        "Ivory ArmorMetal cladding",
+        "Ebony TimberThermowood",
+        "Golden OakThermowood",
+        "PearlwoodThermowood",
+        "Desert SandPaint",
+        "Brick EmberPaint",
+        "Urban StonePaint",
+        "Mink GrayPaint",
+        "Alpine WhitePaint",
+        "Walnut WeaveLaminated wood · Herringbone",
+        "Oak FrostLaminated wood · Herringbone",
+        "Sienna NutwoodLaminated wood",
+        "Brione DriftwoodLaminated wood",
+        "Lime GroveLaminated wood",
+        "Ontario HemlockLaminated wood"
+      ]
+    },
+    {
+      "group": "Flooring",
+      "finish": "Tuscan Elegance Tiles",
+      "available": [
+        "Tuscan EleganceTiles",
+        "Urban SlateTiles",
+        "Walnut WeaveLaminated wood · Herringbone",
+        "Oak FrostLaminated wood · Herringbone",
+        "Sienna NutwoodLaminated wood",
+        "Brione DriftwoodLaminated wood",
+        "Lime GroveLaminated wood",
+        "Silea SandstoneLaminated wood"
+      ]
+    }
+  ],
+  "phone": {
+    "documentWidth": 390,
+    "loaded": "true",
+    "model": "tish",
+    "width": 390
+  },
+  "logs": []
+}

@@ -106,7 +106,7 @@ canvas.journeyVideo:not([data-scrub-presented-frames]) { opacity: 0; }
   text-align: center;
 }
 .brand .wordmark { width: clamp(220px, 32vw, 460px); height: auto; }
-.brand p { max-width: 40ch; margin: 0; font-size: clamp(16px, 1.8vw, 25px); line-height: 1.4; color: #f4f0e9; text-shadow: 0 2px 18px #000; }
+.brand p { max-width: 40ch; margin: 0; font-size: var(--type-size-subheading, clamp(16px, 1.8vw, 25px)); line-height: 1.4; color: #f4f0e9; text-shadow: 0 2px 18px #000; }
 
 .grade {
   z-index: 6;

@@ -1,0 +1,50 @@
+{
+  "forza": {
+    "bytes": 1696916,
+    "sha256": "ec129c111fc62b9ff7c68712b0a7d8ae93140933341ed9abe6e262415d1bf8d0",
+    "dimensions": [
+      6.1971715092659,
+      4.986333072185518,
+      9.305924747409911
+    ],
+    "metersPerUnit": 1,
+    "triangles": 18019,
+    "url": "/configurator/models/v2/forza-ec129c111fc6.glb"
+  },
+  "tengo": {
+    "bytes": 8087804,
+    "sha256": "07a4d45eda3d9f3afc5102d9e29f9e675a9e65f1ebc65e51ed34ba8b365c877f",
+    "dimensions": [
+      16.34969139099121,
+      4.571999967098236,
+      12.232892990112305
+    ],
+    "metersPerUnit": 1,
+    "triangles": 267837,
+    "url": "/configurator/models/v2/tengo-07a4d45eda3d.glb"
+  },
+  "kray": {
+    "bytes": 6364060,
+    "sha256": "32f31b2a0ca874ace3e20f7b3a07d4efce223aa4f9ab498206bb2450d604b26e",
+    "dimensions": [
+      9.239994049072266,
+      5.204902112483978,
+      9.064878463745117
+    ],
+    "metersPerUnit": 1,
+    "triangles": 389008,
+    "url": "/configurator/models/v2/kray-32f31b2a0ca8.glb"
+  },
+  "tish": {
+    "bytes": 358392,
+    "sha256": "d1b4a6c112a2b41855fea6865d6f29f1df385423e1a8d5639e60324ff5b3d872",
+    "dimensions": [
+      12.047948837280273,
+      4.851399838924408,
+      9.296399772167206
+    ],
+    "metersPerUnit": 1,
+    "triangles": 17391,
+    "url": "/configurator/models/v2/tish-d1b4a6c112a2.glb"
+  }
+}

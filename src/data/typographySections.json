@@ -1,0 +1,941 @@
+[
+  {
+    "scope": "hero-v1.opening",
+    "fields": [
+      "hero-v1.opening.tagline"
+    ]
+  },
+  {
+    "scope": "home.timeline",
+    "fields": [
+      "home.timeline.heading-start",
+      "home.timeline.heading-emphasis",
+      "home.timeline.action",
+      "home.timeline.image-caption",
+      "home.timeline.stage-1.days",
+      "home.timeline.stage-1.title",
+      "home.timeline.stage-1.copy",
+      "home.timeline.stage-2.days",
+      "home.timeline.stage-2.title",
+      "home.timeline.stage-2.copy",
+      "home.timeline.stage-3.days",
+      "home.timeline.stage-3.title",
+      "home.timeline.stage-3.copy",
+      "home.timeline.stage-4.days",
+      "home.timeline.stage-4.title",
+      "home.timeline.stage-4.copy",
+      "home.timeline.stage-5.days",
+      "home.timeline.stage-5.title",
+      "home.timeline.stage-5.copy"
+    ]
+  },
+  {
+    "scope": "home.signature-preview",
+    "fields": [
+      "home.signature.label",
+      "home.signature.heading-1",
+      "home.signature.heading-2",
+      "home.signature.copy",
+      "home.signature.action"
+    ]
+  },
+  {
+    "scope": "home.bespoke-preview",
+    "fields": [
+      "home.bespoke.word",
+      "home.bespoke.heading-1",
+      "home.bespoke.heading-2",
+      "home.bespoke.copy",
+      "home.bespoke.action"
+    ]
+  },
+  {
+    "scope": "home.sustainability-preview",
+    "fields": [
+      "home.sustainability.label",
+      "home.sustainability.heading-1",
+      "home.sustainability.heading-2",
+      "home.sustainability.copy",
+      "home.sustainability.action"
+    ]
+  },
+  {
+    "scope": "home.editorial-preview",
+    "fields": [
+      "home.editorial.journal.title",
+      "home.editorial.journal.copy",
+      "home.editorial.journal.action",
+      "home.editorial.about.title",
+      "home.editorial.about.copy",
+      "home.editorial.about.action"
+    ]
+  },
+  {
+    "scope": "hero-v2.ending",
+    "fields": [
+      "hero-v2.ending.heading",
+      "hero-v2.ending.description",
+      "hero-v2.ending.primary-label",
+      "hero-v2.ending.secondary-label"
+    ]
+  },
+  {
+    "scope": "projects.intro",
+    "fields": [
+      "projects.intro.eyebrow",
+      "projects.intro.title",
+      "projects.intro.subtitle",
+      "projects.intro.action"
+    ]
+  },
+  {
+    "scope": "projects.globe-pins",
+    "fields": []
+  },
+  {
+    "scope": "projects.project-library",
+    "fields": []
+  },
+  {
+    "scope": "projects.detail-controls",
+    "fields": [
+      "projects.detail.return",
+      "projects.detail.photos-tab",
+      "projects.detail.films-tab"
+    ]
+  },
+  {
+    "scope": "models.selector",
+    "fields": [
+      "models.selector.heading-start",
+      "models.selector.heading-end",
+      "models.selector.intro"
+    ]
+  },
+  {
+    "scope": "models.selector-signature",
+    "fields": [
+      "models.selector.signature.title",
+      "models.selector.signature.description",
+      "models.selector.signature.action",
+      "models.selector.signature.mode"
+    ]
+  },
+  {
+    "scope": "models.selector-bespoke",
+    "fields": [
+      "models.selector.bespoke.title",
+      "models.selector.bespoke.description",
+      "models.selector.bespoke.action",
+      "models.selector.bespoke.mode"
+    ]
+  },
+  {
+    "scope": "signature.signature-controls",
+    "fields": [
+      "models.signature.eyebrow",
+      "models.signature.loading",
+      "models.signature.filter-all",
+      "models.signature.filter-studio",
+      "models.signature.filter-2-bhk",
+      "models.signature.filter-3-bhk",
+      "models.signature.scroll-cue",
+      "models.signature.details-action",
+      "models.signature.home-singular",
+      "models.signature.home-plural",
+      "models.signature.available",
+      "models.signature.feature-eyebrow",
+      "models.signature.detail.close",
+      "models.signature.detail.internal-area",
+      "models.signature.detail.starting-price",
+      "models.signature.detail.delivery",
+      "models.signature.detail.delivery-value",
+      "models.signature.detail.spaces",
+      "models.signature.detail.configure-action",
+      "models.signature.detail.build-eyebrow",
+      "models.signature.detail.build-line-1",
+      "models.signature.detail.build-line-2",
+      "models.signature.detail.warranty-eyebrow",
+      "models.signature.detail.warranty-value"
+    ]
+  },
+  {
+    "scope": "signature.forza-story",
+    "fields": [
+      "models.signature.forza.feature-1.title",
+      "models.signature.forza.feature-1.copy",
+      "models.signature.forza.feature-2.title",
+      "models.signature.forza.feature-2.copy",
+      "models.signature.forza.feature-3.title",
+      "models.signature.forza.feature-3.copy"
+    ]
+  },
+  {
+    "scope": "signature.forza-explore",
+    "fields": [
+      "models.signature.forza.display-name",
+      "models.signature.forza.explore-action"
+    ]
+  },
+  {
+    "scope": "signature.forza-plan-1",
+    "fields": [
+      "models.signature.forza.variant-1.name",
+      "models.signature.forza.variant-1.area",
+      "models.signature.forza.variant-1.price",
+      "models.signature.forza.variant-1.spaces"
+    ]
+  },
+  {
+    "scope": "signature.forza-plan-2",
+    "fields": [
+      "models.signature.forza.variant-2.name",
+      "models.signature.forza.variant-2.area",
+      "models.signature.forza.variant-2.price",
+      "models.signature.forza.variant-2.spaces"
+    ]
+  },
+  {
+    "scope": "signature.kray-story",
+    "fields": [
+      "models.signature.kray.feature-1.title",
+      "models.signature.kray.feature-1.copy",
+      "models.signature.kray.feature-2.title",
+      "models.signature.kray.feature-2.copy",
+      "models.signature.kray.feature-3.title",
+      "models.signature.kray.feature-3.copy"
+    ]
+  },
+  {
+    "scope": "signature.kray-explore",
+    "fields": [
+      "models.signature.kray.display-name",
+      "models.signature.kray.explore-action"
+    ]
+  },
+  {
+    "scope": "signature.kray-plan-1",
+    "fields": [
+      "models.signature.kray.variant-1.name",
+      "models.signature.kray.variant-1.area",
+      "models.signature.kray.variant-1.price",
+      "models.signature.kray.variant-1.spaces"
+    ]
+  },
+  {
+    "scope": "signature.kray-plan-2",
+    "fields": [
+      "models.signature.kray.variant-2.name",
+      "models.signature.kray.variant-2.area",
+      "models.signature.kray.variant-2.price",
+      "models.signature.kray.variant-2.spaces"
+    ]
+  },
+  {
+    "scope": "signature.gaze-story",
+    "fields": [
+      "models.signature.gaze.feature-1.title",
+      "models.signature.gaze.feature-1.copy",
+      "models.signature.gaze.feature-2.title",
+      "models.signature.gaze.feature-2.copy",
+      "models.signature.gaze.feature-3.title",
+      "models.signature.gaze.feature-3.copy"
+    ]
+  },
+  {
+    "scope": "signature.gaze-explore",
+    "fields": [
+      "models.signature.gaze.display-name",
+      "models.signature.gaze.explore-action"
+    ]
+  },
+  {
+    "scope": "signature.gaze-plan-1",
+    "fields": [
+      "models.signature.gaze.variant-1.name",
+      "models.signature.gaze.variant-1.area",
+      "models.signature.gaze.variant-1.price",
+      "models.signature.gaze.variant-1.spaces"
+    ]
+  },
+  {
+    "scope": "signature.tengo-story",
+    "fields": [
+      "models.signature.tengo.feature-1.title",
+      "models.signature.tengo.feature-1.copy",
+      "models.signature.tengo.feature-2.title",
+      "models.signature.tengo.feature-2.copy",
+      "models.signature.tengo.feature-3.title",
+      "models.signature.tengo.feature-3.copy"
+    ]
+  },
+  {
+    "scope": "signature.tengo-explore",
+    "fields": [
+      "models.signature.tengo.display-name",
+      "models.signature.tengo.explore-action"
+    ]
+  },
+  {
+    "scope": "signature.tengo-plan-1",
+    "fields": [
+      "models.signature.tengo.variant-1.name",
+      "models.signature.tengo.variant-1.area",
+      "models.signature.tengo.variant-1.price",
+      "models.signature.tengo.variant-1.spaces"
+    ]
+  },
+  {
+    "scope": "signature.tengo-plan-2",
+    "fields": [
+      "models.signature.tengo.variant-2.name",
+      "models.signature.tengo.variant-2.area",
+      "models.signature.tengo.variant-2.price",
+      "models.signature.tengo.variant-2.spaces"
+    ]
+  },
+  {
+    "scope": "signature.trib-story",
+    "fields": [
+      "models.signature.trib.feature-1.title",
+      "models.signature.trib.feature-1.copy",
+      "models.signature.trib.feature-2.title",
+      "models.signature.trib.feature-2.copy",
+      "models.signature.trib.feature-3.title",
+      "models.signature.trib.feature-3.copy"
+    ]
+  },
+  {
+    "scope": "signature.trib-explore",
+    "fields": [
+      "models.signature.trib.display-name",
+      "models.signature.trib.explore-action"
+    ]
+  },
+  {
+    "scope": "signature.trib-plan-1",
+    "fields": [
+      "models.signature.trib.variant-1.name",
+      "models.signature.trib.variant-1.area",
+      "models.signature.trib.variant-1.price",
+      "models.signature.trib.variant-1.spaces"
+    ]
+  },
+  {
+    "scope": "signature.octapod-story",
+    "fields": [
+      "models.signature.octapod.feature-1.title",
+      "models.signature.octapod.feature-1.copy",
+      "models.signature.octapod.feature-2.title",
+      "models.signature.octapod.feature-2.copy",
+      "models.signature.octapod.feature-3.title",
+      "models.signature.octapod.feature-3.copy"
+    ]
+  },
+  {
+    "scope": "signature.octapod-explore",
+    "fields": [
+      "models.signature.octapod.display-name",
+      "models.signature.octapod.explore-action"
+    ]
+  },
+  {
+    "scope": "signature.octapod-plan-1",
+    "fields": [
+      "models.signature.octapod.variant-1.name",
+      "models.signature.octapod.variant-1.area",
+      "models.signature.octapod.variant-1.price",
+      "models.signature.octapod.variant-1.spaces"
+    ]
+  },
+  {
+    "scope": "bespoke.hero",
+    "fields": [
+      "models.bespoke.hero.background-word",
+      "models.bespoke.hero.eyebrow",
+      "models.bespoke.hero.line-1",
+      "models.bespoke.hero.line-2"
+    ]
+  },
+  {
+    "scope": "bespoke.manifesto",
+    "fields": [
+      "models.bespoke.manifesto.eyebrow",
+      "models.bespoke.manifesto.line-1",
+      "models.bespoke.manifesto.line-2",
+      "models.bespoke.manifesto.line-3",
+      "models.bespoke.manifesto.copy"
+    ]
+  },
+  {
+    "scope": "bespoke.decisions",
+    "fields": [
+      "models.bespoke.stages.next-action"
+    ]
+  },
+  {
+    "scope": "bespoke.decision-1",
+    "fields": [
+      "models.bespoke.stage-1.label",
+      "models.bespoke.stage-1.detail",
+      "models.bespoke.stage-1.copy"
+    ]
+  },
+  {
+    "scope": "bespoke.decision-2",
+    "fields": [
+      "models.bespoke.stage-2.label",
+      "models.bespoke.stage-2.detail",
+      "models.bespoke.stage-2.copy"
+    ]
+  },
+  {
+    "scope": "bespoke.decision-3",
+    "fields": [
+      "models.bespoke.stage-3.label",
+      "models.bespoke.stage-3.detail",
+      "models.bespoke.stage-3.copy"
+    ]
+  },
+  {
+    "scope": "bespoke.decision-4",
+    "fields": [
+      "models.bespoke.stage-4.label",
+      "models.bespoke.stage-4.detail",
+      "models.bespoke.stage-4.copy"
+    ]
+  },
+  {
+    "scope": "bespoke.result",
+    "fields": [
+      "models.bespoke.result.word-1",
+      "models.bespoke.result.word-2",
+      "models.bespoke.result.eyebrow",
+      "models.bespoke.result.heading"
+    ]
+  },
+  {
+    "scope": "hospitality.opening",
+    "fields": [
+      "hospitality.opening.heading",
+      "hospitality.opening.caption",
+      "hospitality.opening.action"
+    ]
+  },
+  {
+    "scope": "hospitality.proof",
+    "fields": [
+      "hospitality.bento.1.eyebrow",
+      "hospitality.bento.1.value",
+      "hospitality.bento.1.title",
+      "hospitality.bento.2.eyebrow",
+      "hospitality.bento.2.value",
+      "hospitality.bento.2.title",
+      "hospitality.bento.3.eyebrow",
+      "hospitality.bento.3.value",
+      "hospitality.bento.3.title",
+      "hospitality.bento.4.eyebrow",
+      "hospitality.bento.4.value",
+      "hospitality.bento.4.title",
+      "hospitality.bento.5.eyebrow",
+      "hospitality.bento.5.value",
+      "hospitality.bento.5.title"
+    ]
+  },
+  {
+    "scope": "hospitality.projects",
+    "fields": [
+      "hospitality.selected.heading"
+    ]
+  },
+  {
+    "scope": "hospitality.timeline",
+    "fields": [
+      "hospitality.timeline.label",
+      "hospitality.timeline.title",
+      "hospitality.timeline.range",
+      "hospitality.timeline.stage-1.number",
+      "hospitality.timeline.stage-1.title",
+      "hospitality.timeline.stage-1.copy",
+      "hospitality.timeline.stage-2.number",
+      "hospitality.timeline.stage-2.title",
+      "hospitality.timeline.stage-2.copy",
+      "hospitality.timeline.stage-3.number",
+      "hospitality.timeline.stage-3.title",
+      "hospitality.timeline.stage-3.copy",
+      "hospitality.timeline.stage-4.number",
+      "hospitality.timeline.stage-4.title",
+      "hospitality.timeline.stage-4.copy",
+      "hospitality.timeline.stage-5.number",
+      "hospitality.timeline.stage-5.title",
+      "hospitality.timeline.stage-5.copy",
+      "hospitality.timeline.stage-6.number",
+      "hospitality.timeline.stage-6.title",
+      "hospitality.timeline.stage-6.copy",
+      "hospitality.timeline.stage-7.number",
+      "hospitality.timeline.stage-7.title",
+      "hospitality.timeline.stage-7.copy"
+    ]
+  },
+  {
+    "scope": "hospitality.enquiry",
+    "fields": [
+      "hospitality.closing.heading",
+      "hospitality.closing.action"
+    ]
+  },
+  {
+    "scope": "process.opening",
+    "fields": [
+      "process.opening.eyebrow",
+      "process.opening.title",
+      "process.opening.summary",
+      "process.opening.cue",
+      "process.opening.loading"
+    ]
+  },
+  {
+    "scope": "process.sequence",
+    "fields": [
+      "process.sequence.rail-heading",
+      "process.sequence.rail-summary"
+    ]
+  },
+  {
+    "scope": "process.stage-land",
+    "fields": [
+      "process.stage-land.days",
+      "process.stage-land.label",
+      "process.stage-land.title",
+      "process.stage-land.copy"
+    ]
+  },
+  {
+    "scope": "process.stage-architecture",
+    "fields": [
+      "process.stage-architecture.days",
+      "process.stage-architecture.label",
+      "process.stage-architecture.title",
+      "process.stage-architecture.copy"
+    ]
+  },
+  {
+    "scope": "process.stage-design-lock",
+    "fields": [
+      "process.stage-design-lock.days",
+      "process.stage-design-lock.label",
+      "process.stage-design-lock.title",
+      "process.stage-design-lock.copy"
+    ]
+  },
+  {
+    "scope": "process.stage-assembly",
+    "fields": [
+      "process.stage-assembly.days",
+      "process.stage-assembly.label",
+      "process.stage-assembly.title",
+      "process.stage-assembly.copy"
+    ]
+  },
+  {
+    "scope": "process.stage-enclosure",
+    "fields": [
+      "process.stage-enclosure.days",
+      "process.stage-enclosure.label",
+      "process.stage-enclosure.title",
+      "process.stage-enclosure.copy"
+    ]
+  },
+  {
+    "scope": "process.stage-handover",
+    "fields": [
+      "process.stage-handover.days",
+      "process.stage-handover.label",
+      "process.stage-handover.title",
+      "process.stage-handover.copy"
+    ]
+  },
+  {
+    "scope": "process.details",
+    "fields": [
+      "process.details.eyebrow",
+      "process.details.heading"
+    ]
+  },
+  {
+    "scope": "process.detail-1",
+    "fields": [
+      "process.details.phase-1.days",
+      "process.details.phase-1.title",
+      "process.details.phase-1.copy"
+    ]
+  },
+  {
+    "scope": "process.detail-2",
+    "fields": [
+      "process.details.phase-2.days",
+      "process.details.phase-2.title",
+      "process.details.phase-2.copy"
+    ]
+  },
+  {
+    "scope": "process.detail-3",
+    "fields": [
+      "process.details.phase-3.days",
+      "process.details.phase-3.title",
+      "process.details.phase-3.copy"
+    ]
+  },
+  {
+    "scope": "process.detail-4",
+    "fields": [
+      "process.details.phase-4.days",
+      "process.details.phase-4.title",
+      "process.details.phase-4.copy"
+    ]
+  },
+  {
+    "scope": "process.detail-5",
+    "fields": [
+      "process.details.phase-5.days",
+      "process.details.phase-5.title",
+      "process.details.phase-5.copy"
+    ]
+  },
+  {
+    "scope": "sustainability.journey",
+    "fields": [
+      "sustainability.journey.hero-line-1",
+      "sustainability.journey.hero-line-2",
+      "sustainability.journey.hero-emphasis",
+      "sustainability.journey.hero-copy"
+    ]
+  },
+  {
+    "scope": "sustainability.journey-site",
+    "fields": [
+      "sustainability.journey.site.title"
+    ]
+  },
+  {
+    "scope": "sustainability.journey-canopy",
+    "fields": [
+      "sustainability.journey.canopy.title"
+    ]
+  },
+  {
+    "scope": "sustainability.journey-production",
+    "fields": [
+      "sustainability.journey.production.title"
+    ]
+  },
+  {
+    "scope": "sustainability.journey-longevity",
+    "fields": [
+      "sustainability.journey.longevity.title"
+    ]
+  },
+  {
+    "scope": "sustainability.material-truth",
+    "fields": [
+      "sustainability.journey.proof-line-1",
+      "sustainability.journey.proof-line-2",
+      "sustainability.journey.proof-copy"
+    ]
+  },
+  {
+    "scope": "sustainability.proof",
+    "fields": [
+      "sustainability.proof.opening-line-1",
+      "sustainability.proof.opening-line-2",
+      "sustainability.proof.opening-emphasis",
+      "sustainability.proof.press-heading",
+      "sustainability.proof.press-copy"
+    ]
+  },
+  {
+    "scope": "sustainability.press-1",
+    "fields": [
+      "sustainability.proof.press-1.source",
+      "sustainability.proof.press-1.date",
+      "sustainability.proof.press-1.title"
+    ]
+  },
+  {
+    "scope": "sustainability.press-2",
+    "fields": [
+      "sustainability.proof.press-2.source",
+      "sustainability.proof.press-2.date",
+      "sustainability.proof.press-2.title"
+    ]
+  },
+  {
+    "scope": "sustainability.press-3",
+    "fields": [
+      "sustainability.proof.press-3.source",
+      "sustainability.proof.press-3.date",
+      "sustainability.proof.press-3.title"
+    ]
+  },
+  {
+    "scope": "sustainability.press-4",
+    "fields": [
+      "sustainability.proof.press-4.source",
+      "sustainability.proof.press-4.date",
+      "sustainability.proof.press-4.title"
+    ]
+  },
+  {
+    "scope": "sustainability.facts-intro",
+    "fields": [
+      "sustainability.proof.final-credit",
+      "sustainability.proof.facts-heading",
+      "sustainability.proof.facts-close"
+    ]
+  },
+  {
+    "scope": "sustainability.fact-1",
+    "fields": [
+      "sustainability.proof.fact-1.value",
+      "sustainability.proof.fact-1.label"
+    ]
+  },
+  {
+    "scope": "sustainability.fact-2",
+    "fields": [
+      "sustainability.proof.fact-2.value",
+      "sustainability.proof.fact-2.label"
+    ]
+  },
+  {
+    "scope": "sustainability.fact-3",
+    "fields": [
+      "sustainability.proof.fact-3.value",
+      "sustainability.proof.fact-3.label"
+    ]
+  },
+  {
+    "scope": "sustainability.fact-4",
+    "fields": [
+      "sustainability.proof.fact-4.value",
+      "sustainability.proof.fact-4.label"
+    ]
+  },
+  {
+    "scope": "sustainability.ending",
+    "fields": [
+      "sustainability.ending.eyebrow",
+      "sustainability.ending.heading-line-1",
+      "sustainability.ending.heading-line-2",
+      "sustainability.ending.heading-emphasis",
+      "sustainability.ending.action"
+    ]
+  },
+  {
+    "scope": "journal.hero",
+    "fields": [
+      "journal.hero.eyebrow",
+      "journal.hero.heading",
+      "journal.hero.dek",
+      "journal.hero.featured-id"
+    ]
+  },
+  {
+    "scope": "journal.press-intro",
+    "fields": [
+      "journal.press.eyebrow",
+      "journal.press.heading",
+      "journal.press.caption",
+      "journal.press.action"
+    ]
+  },
+  {
+    "scope": "journal.notes-intro",
+    "fields": [
+      "journal.notes.caption",
+      "journal.notes.action"
+    ]
+  },
+  {
+    "scope": "journal.archive",
+    "fields": [
+      "journal.archive.heading",
+      "journal.archive.copy",
+      "journal.archive.action"
+    ]
+  },
+  {
+    "scope": "journal.article-reader",
+    "fields": [
+      "journal.article.back",
+      "journal.article.breadcrumb",
+      "journal.article.reading-suffix",
+      "journal.article.contents",
+      "journal.article.related",
+      "journal.article.closing-heading",
+      "journal.article.closing-action"
+    ]
+  },
+  {
+    "scope": "about.opening",
+    "fields": [
+      "about.opening.title",
+      "about.opening.line-one",
+      "about.opening.line-two"
+    ]
+  },
+  {
+    "scope": "about.vision",
+    "fields": [
+      "about.vision.title",
+      "about.vision.copy"
+    ]
+  },
+  {
+    "scope": "about.future",
+    "fields": [
+      "about.future.title",
+      "about.future.copy"
+    ]
+  },
+  {
+    "scope": "about.founders",
+    "fields": [
+      "about.founders.title",
+      "about.founders.copy"
+    ]
+  },
+  {
+    "scope": "about.assurances",
+    "fields": [
+      "about.assurances.title",
+      "about.assurances.sustainability-title",
+      "about.assurances.sustainability-detail",
+      "about.assurances.move-in-title",
+      "about.assurances.move-in-detail",
+      "about.assurances.warranty-title",
+      "about.assurances.warranty-detail",
+      "about.assurances.energy-title",
+      "about.assurances.energy-detail",
+      "about.assurances.resilience-title",
+      "about.assurances.resilience-detail"
+    ]
+  },
+  {
+    "scope": "about.fit",
+    "fields": [
+      "about.fit.title",
+      "about.fit.copy"
+    ]
+  },
+  {
+    "scope": "enquiry.intro",
+    "fields": [
+      "enquiry.intro.heading-line-1",
+      "enquiry.intro.heading-line-2",
+      "enquiry.intro.copy"
+    ]
+  },
+  {
+    "scope": "enquiry.home-tab",
+    "fields": [
+      "enquiry.tab-home.label",
+      "enquiry.home.name.label",
+      "enquiry.home.name.placeholder",
+      "enquiry.home.contact.label",
+      "enquiry.home.contact.placeholder",
+      "enquiry.home.land.label",
+      "enquiry.home.land.placeholder",
+      "enquiry.home.land-status.label",
+      "enquiry.home.home-type.label",
+      "enquiry.home.timeline.label",
+      "enquiry.home.submit"
+    ]
+  },
+  {
+    "scope": "enquiry.hospitality-tab",
+    "fields": [
+      "enquiry.tab-hospitality.label",
+      "enquiry.hospitality.name.label",
+      "enquiry.hospitality.name.placeholder",
+      "enquiry.hospitality.contact.label",
+      "enquiry.hospitality.contact.placeholder",
+      "enquiry.hospitality.site.label",
+      "enquiry.hospitality.site.placeholder",
+      "enquiry.hospitality.programme.label",
+      "enquiry.hospitality.keys.label",
+      "enquiry.hospitality.timeline.label",
+      "enquiry.hospitality.submit"
+    ]
+  },
+  {
+    "scope": "enquiry.press-tab",
+    "fields": [
+      "enquiry.tab-press.label",
+      "enquiry.press.name.label",
+      "enquiry.press.name.placeholder",
+      "enquiry.press.contact.label",
+      "enquiry.press.contact.placeholder",
+      "enquiry.press.purpose.label",
+      "enquiry.press.purpose.placeholder",
+      "enquiry.press.nature.label",
+      "enquiry.press.submit"
+    ]
+  },
+  {
+    "scope": "footer.footer-brand",
+    "fields": [
+      "footer.brand.line"
+    ]
+  },
+  {
+    "scope": "footer.footer-homes",
+    "fields": [
+      "footer.homes.heading",
+      "footer.homes.signature.label",
+      "footer.homes.bespoke.label",
+      "footer.homes.hospitality.label"
+    ]
+  },
+  {
+    "scope": "footer.footer-explore",
+    "fields": [
+      "footer.explore.heading",
+      "footer.explore.projects.label",
+      "footer.explore.process.label",
+      "footer.explore.journal.label"
+    ]
+  },
+  {
+    "scope": "footer.footer-okno",
+    "fields": [
+      "footer.okno.heading",
+      "footer.okno.about.label",
+      "footer.okno.sustainability.label",
+      "footer.okno.enquire.label"
+    ]
+  },
+  {
+    "scope": "footer.footer-bottom",
+    "fields": [
+      "footer.bottom.copyright",
+      "footer.bottom.closing"
+    ]
+  },
+  {
+    "scope": "shared.header",
+    "fields": [
+      "header.nav.home",
+      "header.nav.projects",
+      "header.nav.models",
+      "header.nav.hospitality",
+      "header.nav.process",
+      "header.nav.sustainability",
+      "header.nav.journal",
+      "header.nav.about",
+      "header.action.enquire",
+      "header.menu.open",
+      "header.menu.close"
+    ]
+  }
+]

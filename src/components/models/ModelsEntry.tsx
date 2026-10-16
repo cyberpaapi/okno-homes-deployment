@@ -44,20 +44,20 @@ export default function ModelsEntry() {
       <ModelsEntrance ready={mediaReady} />
       <main ref={pageRef} className={styles.page} data-route="models">
         <ModelsHeader />
-        <section className={styles.introduction}>
+        <section className={styles.introduction} data-type-section="models.selector">
           <motion.h1
             initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: .75, ease: [.22, 1, .36, 1] }}
           >
-            {titleStart} <span>{titleEnd}</span>
+            {titleStart} <span data-type-highlight data-type-field={"models.selector.heading-end"}>{titleEnd}</span>
           </motion.h1>
           <motion.p
             className={styles.introCopy}
             initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-          >
+           data-type-field={"models.selector.intro"}>
             {intro}
           </motion.p>
         </section>

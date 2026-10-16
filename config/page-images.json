@@ -829,6 +829,110 @@
       "src": "/page-images/fad5768af66b158b-1920.webp"
     }
   ],
+  "/models/bespoke/bespoke-brief-v3.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/6747fa2ce8b140cf-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/6747fa2ce8b140cf-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/6747fa2ce8b140cf-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/6747fa2ce8b140cf-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/6747fa2ce8b140cf-1280.webp"
+    },
+    {
+      "width": 1672,
+      "src": "/page-images/6747fa2ce8b140cf-1672.webp"
+    }
+  ],
+  "/models/bespoke/bespoke-form-v3.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/28fe4434e682bd8e-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/28fe4434e682bd8e-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/28fe4434e682bd8e-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/28fe4434e682bd8e-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/28fe4434e682bd8e-1280.webp"
+    },
+    {
+      "width": 1672,
+      "src": "/page-images/28fe4434e682bd8e-1672.webp"
+    }
+  ],
+  "/models/bespoke/bespoke-pearl-courtyard-v1.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/bd93653ad2e63c4f-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/bd93653ad2e63c4f-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/bd93653ad2e63c4f-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/bd93653ad2e63c4f-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/bd93653ad2e63c4f-1280.webp"
+    },
+    {
+      "width": 1672,
+      "src": "/page-images/bd93653ad2e63c4f-1672.webp"
+    }
+  ],
+  "/models/bespoke/bespoke-pearl-exterior-v1.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/cc84211916644f24-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/cc84211916644f24-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/cc84211916644f24-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/cc84211916644f24-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/cc84211916644f24-1280.webp"
+    },
+    {
+      "width": 1672,
+      "src": "/page-images/cc84211916644f24-1672.webp"
+    }
+  ],
   "/models/forza/interiors/forza-living.webp": [
     {
       "width": 384,
@@ -853,6 +957,84 @@
     {
       "width": 1444,
       "src": "/page-images/1dc40a54c44bd168-1444.webp"
+    }
+  ],
+  "/models/forza/orbit-keyframes-invisible-glow-1080p/forza-invisible-a00.png": [
+    {
+      "width": 384,
+      "src": "/page-images/a6ce9ae3396fc8fb-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/a6ce9ae3396fc8fb-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/a6ce9ae3396fc8fb-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/a6ce9ae3396fc8fb-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/a6ce9ae3396fc8fb-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/a6ce9ae3396fc8fb-1920.webp"
+    }
+  ],
+  "/process/generated/process-factory-keyframe-v2.webp": [
+    {
+      "width": 384,
+      "src": "/page-images/f60605df44d07b90-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/f60605df44d07b90-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/f60605df44d07b90-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/f60605df44d07b90-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/f60605df44d07b90-1280.webp"
+    },
+    {
+      "width": 1672,
+      "src": "/page-images/f60605df44d07b90-1672.webp"
+    }
+  ],
+  "/sustainability/shared-poster.png": [
+    {
+      "width": 384,
+      "src": "/page-images/2ddfd185e2c31f27-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/2ddfd185e2c31f27-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/2ddfd185e2c31f27-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/2ddfd185e2c31f27-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/2ddfd185e2c31f27-1280.webp"
+    },
+    {
+      "width": 1672,
+      "src": "/page-images/2ddfd185e2c31f27-1672.webp"
     }
   ]
 }

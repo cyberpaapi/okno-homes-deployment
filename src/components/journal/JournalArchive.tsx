@@ -38,7 +38,7 @@ function BlogCard({ post, index, actionLabel }: { post: PublishedJournalArticle;
           <p>{post.category}</p>
           <h3>{post.title}</h3>
           <p>{post.excerpt}</p>
-          <span className={styles.blogRead}>{actionLabel} <ArrowUpRight size={16} strokeWidth={1.6} aria-hidden="true" /></span>
+          <span className={styles.blogRead} data-type-field={"journal.archive.action"}>{actionLabel} <ArrowUpRight size={16} strokeWidth={1.6} aria-hidden="true" /></span>
         </div>
       </Link>
     </motion.article>
@@ -52,10 +52,10 @@ export default function JournalArchive() {
   const actionLabel = useSiteContent("journal.archive.action", "Read article");
   if (posts.length === 0) return null;
   return (
-    <section className={styles.archive} aria-labelledby="journal-blog-title">
+    <section  data-type-section="journal.archive"className={styles.archive} aria-labelledby="journal-blog-title">
       <div className={styles.archiveHead}>
-        <h2 id="journal-blog-title"><JournalTextReveal text={heading} /></h2>
-        <p>{copy}</p>
+        <h2 id="journal-blog-title" data-type-field={"journal.archive.heading"}><JournalTextReveal text={heading} /></h2>
+        <p data-type-field={"journal.archive.copy"}>{copy}</p>
       </div>
       <div className={styles.blogGrid}>
         {posts.map((post, index) => <BlogCard key={post.id} post={post} index={index} actionLabel={actionLabel} />)}

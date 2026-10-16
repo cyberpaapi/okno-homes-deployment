@@ -1,3 +1,4 @@
+import { heroV2EndingDefaults } from "./heroV2Ending";
 import type { ContentItem } from "@/lib/contentCollections";
 
 export const homeVariantDefaults: ContentItem[] = [
@@ -13,12 +14,13 @@ export const homeVariantDefaults: ContentItem[] = [
     accessibleTitle: "OKNO Modhomes", tagline: "Live better, live modular.",
   } },
   { id: "hero-v2", fields: {
-    name: "Hero V2 · city to Forza", template: "v2",
-    openingVideo: "/hero-v2/city-to-forza.mp4",
-    loopVideo: "/hero-v2/forza-island-loop.mp4",
-    poster: "/hero-v2/journey-poster.jpg",
-    loopPoster: "/hero-v2/forza-island-poster.webp",
-    openingAlt: "OKNO Modhomes - from the city to Forza",
-    accessibleTitle: "OKNO Modhomes - from the city to Forza", buttonLabel: "Skip the film and view Forza",
+    name: "Hero V2 · nighttime scroll", template: "v2",
+    ...heroV2EndingDefaults,
+    scrollVideo: "",
+    poster: "/hero-v2/nighttime-first.webp",
+    endImage: "/hero-v2/nighttime-last.webp",
+    openingAlt: "A nighttime journey from a cave into an illuminated home",
+    endAlt: "The illuminated home among trees in the original final nighttime frame",
+    accessibleTitle: "OKNO Modhomes",
   } },
 ];

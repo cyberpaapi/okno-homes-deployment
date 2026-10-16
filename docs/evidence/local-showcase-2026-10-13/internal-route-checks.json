@@ -1,0 +1,132 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/projects",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/models",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/hospitality",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/process",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/sustainability",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/journal",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/about",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/enquiry",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/projects/forrest",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/projects/lakewood",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/projects/trib-birdseye",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/projects/kioo",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/projects/octapod-layana",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/projects/kray-sangareddy",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/projects/rasa-vikarabad",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/models/signature",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/models/bespoke",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/enquiry?intent=home",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/journal/compact-site",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/journal/sloped-land",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/journal/small-retreat",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/journal/material-comfort",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/journal/factory-to-site",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/journal/hospitality-rooms",
+    "status": 200,
+    "pass": true
+  },
+  {
+    "path": "/enquiry?intent=hospitality",
+    "status": 200,
+    "pass": true
+  }
+]

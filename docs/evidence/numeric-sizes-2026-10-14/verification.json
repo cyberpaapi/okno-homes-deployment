@@ -1,0 +1,43 @@
+{
+  "verifiedDate": "2026-10-15",
+  "scope": "local only",
+  "originalSizeDeclarations": 754,
+  "cssFiles": 58,
+  "registeredSections": 101,
+  "numericControls": 1010,
+  "apiDraftIsolation": true,
+  "apiPublishedRevision": 37,
+  "restoredRevision": 38,
+  "draftFieldsAfterRestore": 0,
+  "draftCollectionsAfterRestore": 0,
+  "originalPublishedFieldsAndCollectionsRestored": true,
+  "browserStates": 177,
+  "browserCustomPropertyMismatches": [],
+  "browserScopesByWidth": {
+    "390": 90,
+    "1440": 101
+  },
+  "focusedTests": {
+    "files": 7,
+    "tests": 77,
+    "passed": true
+  },
+  "limits": [
+    "Admin browser inspection blocked by URL safety policy; authenticated local CMS API verified separately.",
+    "Phone CSS reflection covers 90 of 101 scopes; desktop covers all 101.",
+    "Final restored-default visual pass interrupted after system memory pressure; source fallback consistency verified.",
+    "No cloud write or deployment."
+  ],
+  "productionBuild": {
+    "status": "stopped",
+    "reason": "Very low progress under constrained memory; stopped to avoid prolonged swapping.",
+    "memoryMaxBytes": 3221225472,
+    "memorySwapMaxBytes": 536870912,
+    "cpuQuotaPercent": 200,
+    "nextWorkers": 1
+  },
+  "localServices": "Stopped to conserve memory after owner report",
+  "targetedEslint": "passed, zero warnings",
+  "typeScript": "tsc --noEmit passed",
+  "sourceCheckMemoryMaxBytes": 1610612736
+}

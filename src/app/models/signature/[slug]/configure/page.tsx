@@ -1,27 +1,24 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import CustomerStudio from "@/components/configurator/studio/CustomerStudio";
-import CustomerUnavailable from "@/components/configurator/studio/CustomerUnavailable";
-import { resolvePublishedConfiguration } from "@/data/configurator/studio/publishedCatalogue";
+import { signatureAsset } from "@/data/configurator/signatureAssets";
+import { gazePrototype, oknoModels } from "@/data/models";
+import SuppliedConfigurator from "@/components/configurator/supplied/SuppliedConfigurator";
 
 type Props = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ variant?: string | string[] }>;
 };
 export async function generateMetadata({ params }: Pick<Props, "params">): Promise<Metadata> {
   const { slug } = await params;
-  const configuration = resolvePublishedConfiguration(slug);
   return {
-    title: configuration ? `Configure ${slug[0].toUpperCase() + slug.slice(1)} | OKNO` : "Configurator | OKNO",
+    title: `${signatureAsset(slug)?.name ?? "Studio Cabin"} Configurator | OKNO`,
     robots: { index: false, follow: true },
   };
 }
-export default async function Page({ params, searchParams }: Props) {
-  const [{ slug }, query] = await Promise.all([params, searchParams]);
-  const configuration = resolvePublishedConfiguration(slug, query.variant);
-  if (!configuration) notFound();
-  if (configuration.status === "unsupported-variant") {
-    return <CustomerUnavailable slug={configuration.slug} availableVariant={configuration.catalogue.variant} requestedVariant={typeof query.variant === "string" ? query.variant : undefined} />;
-  }
-  return <CustomerStudio key={`${slug}-${configuration.catalogue.revision}`} catalogue={configuration.catalogue} />;
+export default async function Page({ params }: Props) {
+  const { slug } = await params;
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) notFound();
+  const model = [...oknoModels, gazePrototype].find(model => model.slug === slug);
+  if (!model) notFound();
+  // Family geometry is labeled honestly; query plans never substitute another house.
+  return <SuppliedConfigurator asset={signatureAsset(slug)} requestedName={model.name} />;
 }

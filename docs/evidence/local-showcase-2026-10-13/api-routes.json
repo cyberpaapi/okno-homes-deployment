@@ -1,0 +1,123 @@
+{
+  "at": "2026-10-13T12:54:36.990Z",
+  "checks": [
+    {
+      "name": "Only authorized QA fields changed",
+      "pass": true
+    },
+    {
+      "name": "Text/image published",
+      "pass": true
+    },
+    {
+      "name": "Published image delivery",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "bytes": 476256
+      }
+    },
+    {
+      "name": "No concurrent changes",
+      "pass": true
+    },
+    {
+      "name": "Original content and collections restored exactly",
+      "pass": true
+    },
+    {
+      "name": "Unauthorized admin read rejected",
+      "pass": true
+    },
+    {
+      "name": "Unauthorized admin write rejected",
+      "pass": true
+    },
+    {
+      "name": "Local upload backend",
+      "pass": true
+    },
+    {
+      "name": "Stale revision rejected",
+      "pass": true
+    },
+    {
+      "name": "Invalid day range rejected",
+      "pass": true
+    },
+    {
+      "name": "Admin gateway cannot serve public pages",
+      "pass": true
+    },
+    {
+      "name": "No QA drafts remain",
+      "pass": true,
+      "detail": {
+        "revision": 22,
+        "draftRevision": 75
+      }
+    }
+  ],
+  "routes": [
+    {
+      "path": "/models/signature/trib/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/kioo/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/octapod/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/kray/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/forza/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/tish/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/orgo/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/tengo/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/caddy/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/kasten/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/bosca/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    },
+    {
+      "path": "/models/signature/gaze/configure",
+      "status": 200,
+      "sameSuppliedConfigurator": true
+    }
+  ]
+}

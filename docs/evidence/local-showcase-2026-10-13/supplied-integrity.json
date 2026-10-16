@@ -1,0 +1,172 @@
+[
+  {
+    "original": "app/cabinScene.ts",
+    "path": "src/components/configurator/supplied/cabinScene.ts.source",
+    "pass": true
+  },
+  {
+    "original": "app/materialProjection.mjs",
+    "path": "src/components/configurator/supplied/materialProjection.mjs",
+    "pass": true
+  },
+  {
+    "original": "public/textures/background-forest.jpg",
+    "path": "public/textures/background-forest.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/background-hill.jpg",
+    "path": "public/textures/background-hill.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/background-island.jpg",
+    "path": "public/textures/background-island.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/brick-running-bond.jpg",
+    "path": "public/textures/brick-running-bond.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/bronze.jpg",
+    "path": "public/textures/bronze.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/cedar.jpg",
+    "path": "public/textures/cedar.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/charred-timber.jpg",
+    "path": "public/textures/charred-timber.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/clay-tile.jpg",
+    "path": "public/textures/clay-tile.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/concrete.jpg",
+    "path": "public/textures/concrete.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/corten-steel.jpg",
+    "path": "public/textures/corten-steel.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/grass.jpg",
+    "path": "public/textures/grass.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/larch.jpg",
+    "path": "public/textures/larch.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/lime-plaster.jpg",
+    "path": "public/textures/lime-plaster.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/meadow-blue.jpg",
+    "path": "public/textures/meadow-blue.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/meadow-day.jpg",
+    "path": "public/textures/meadow-day.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/meadow-golden.jpg",
+    "path": "public/textures/meadow-golden.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/meadow-grass.jpg",
+    "path": "public/textures/meadow-grass.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/meadow-overcast.jpg",
+    "path": "public/textures/meadow-overcast.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/oak.jpg",
+    "path": "public/textures/oak.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/patinated-copper.jpg",
+    "path": "public/textures/patinated-copper.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/plaster.jpg",
+    "path": "public/textures/plaster.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/polished-concrete.jpg",
+    "path": "public/textures/polished-concrete.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/sandstone.jpg",
+    "path": "public/textures/sandstone.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/sky-day.jpg",
+    "path": "public/textures/sky-day.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/sky-golden.jpg",
+    "path": "public/textures/sky-golden.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/slate.jpg",
+    "path": "public/textures/slate.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/stone.jpg",
+    "path": "public/textures/stone.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/terrazzo.jpg",
+    "path": "public/textures/terrazzo.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/thatch.jpg",
+    "path": "public/textures/thatch.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/travertine.jpg",
+    "path": "public/textures/travertine.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/woven-rattan.jpg",
+    "path": "public/textures/woven-rattan.jpg",
+    "pass": true
+  },
+  {
+    "original": "public/textures/zinc.jpg",
+    "path": "public/textures/zinc.jpg",
+    "pass": true
+  }
+]

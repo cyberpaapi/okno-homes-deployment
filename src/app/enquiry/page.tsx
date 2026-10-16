@@ -16,7 +16,9 @@ export default function EnquiryPage() {
   return (
     <>
       <Header tone="dark" currentHref="/enquiry" />
-      <EnquiryForm isOpen={isOpen} />
+      <main>
+        <EnquiryForm isOpen={isOpen} />
+      </main>
     </>
   );
 }

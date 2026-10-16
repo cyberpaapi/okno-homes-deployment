@@ -12,15 +12,15 @@
 
 @media (min-width: 1024px) and (max-width: 1300px) {
   .stage :global([data-copy]) h3 {
-    font-size: 24px;
+    font-size: var(--type-size-subheading, 24px);
   }
 
   .stage :global([data-copy]) p {
-    font-size: 12px;
+    font-size: var(--type-size-caption, 12px);
   }
 
   .stage :global([data-copy]) b {
-    font-size: 10px;
+    font-size: var(--type-size-caption, 10px);
   }
 }
 
@@ -52,7 +52,7 @@
 .mobileHeader small,
 .mobileHeader span {
   color: rgba(244, 241, 233, .62);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 650;
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -61,7 +61,7 @@
 .mobileHeader h2 {
   max-width: 8ch;
   margin: 12px 0 24px;
-  font-size: clamp(50px, 15vw, 70px);
+  font-size: var(--type-size-display, clamp(50px, 15vw, 70px));
   font-weight: 540;
   letter-spacing: -.075em;
   line-height: .88;
@@ -120,14 +120,14 @@
 .mobileList b {
   padding-left: 20px;
   color: var(--milestone-accent);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   letter-spacing: .12em;
 }
 
 .mobileList h3 {
   margin: 0;
   color: var(--milestone-accent);
-  font-size: 28px;
+  font-size: var(--type-size-subheading, 28px);
   font-weight: 520;
   letter-spacing: -.055em;
   line-height: .95;
@@ -137,7 +137,7 @@
   max-width: 28ch;
   margin: 10px 0 0;
   color: rgba(244, 241, 233, .62);
-  font-size: 14px;
+  font-size: var(--type-size-caption, 14px);
   line-height: 1.35;
 }
 
@@ -166,7 +166,7 @@
   }
 
   .mobileHeader h2 {
-    font-size: clamp(62px, 10vw, 92px);
+    font-size: var(--type-size-display, clamp(62px, 10vw, 92px));
   }
 
   .mobileList {

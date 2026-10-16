@@ -1,0 +1,22 @@
+/* Supplied scene backdrop styles retained; UI styles live in the module. */
+/* Scoped adaptation of owner-supplied app/globals.css. */.okno-cabin .environment,.okno-cabin .stage,.okno-cabin .vignette{position:absolute;inset:0}.okno-cabin .environment{z-index:-3;overflow:hidden;background:url('/textures/meadow-day.jpg') center 43%/cover no-repeat;transform:scale(1.012);filter:saturate(.82) contrast(.97) brightness(1.05);transition:.6s}.okno-cabin .environment:before{content:'';position:absolute;inset:0;pointer-events:none;background:url('/textures/sky-day.jpg') center top/cover no-repeat;opacity:.72;-webkit-mask-image:linear-gradient(#000 0 38%,rgba(0,0,0,.75) 50%,transparent 72%);mask-image:linear-gradient(#000 0 38%,rgba(0,0,0,.75) 50%,transparent 72%);transition:opacity .6s}.okno-cabin.scene-golden .environment{background-image:url('/textures/meadow-golden.jpg');filter:saturate(.9) contrast(.99) brightness(.86)}.okno-cabin.scene-golden .environment:before{background-image:url('/textures/sky-golden.jpg');background-position:center 68%;background-size:auto 135%;opacity:.94;-webkit-mask-image:linear-gradient(#000 0 48%,rgba(0,0,0,.82) 62%,transparent 84%);mask-image:linear-gradient(#000 0 48%,rgba(0,0,0,.82) 62%,transparent 84%)}.okno-cabin .stage{z-index:-2}.okno-cabin .stage canvas{display:block;width:100%;height:100%;touch-action:none}.okno-cabin .vignette{z-index:-1;pointer-events:none;background:radial-gradient(circle at 50%,transparent 45%,rgba(17,20,15,.13) 115%),linear-gradient(180deg,rgba(255,255,255,.04),transparent 30%,rgba(14,18,12,.11))}
+
+/* Give the imported-model material browser room to work. */
+
+/* Imported-model history and custom component groups. */
+
+/* Scene settings stay in the active right-hand panel. */
+.okno-cabin.scene-env-forest .environment{background-image:url('/textures/background-forest.jpg');background-position:center 58%}
+.okno-cabin.scene-env-hill .environment{background-image:url('/textures/background-hill.jpg');background-position:center 55%}
+.okno-cabin.scene-env-island .environment{background-image:url('/textures/background-island.jpg');background-position:center 56%}
+.okno-cabin.scene-env-full-island .environment{background-image:url('/textures/sky-day.jpg');background-position:center 35%;filter:saturate(.86) contrast(.96) brightness(1.06)}
+.okno-cabin.scene-env-forest .environment:before,.okno-cabin.scene-env-hill .environment:before,.okno-cabin.scene-env-island .environment:before{background:linear-gradient(180deg,rgba(221,231,235,.12),transparent 58%,rgba(37,45,32,.1));opacity:1;-webkit-mask-image:none;mask-image:none}
+.okno-cabin.scene-env-full-island .environment:before{background:linear-gradient(180deg,rgba(235,245,248,.05),rgba(181,211,218,.18) 60%,rgba(58,111,122,.2));opacity:1;-webkit-mask-image:none;mask-image:none}
+.okno-cabin.scene-golden.scene-env-forest .environment,.okno-cabin.scene-golden.scene-env-hill .environment,.okno-cabin.scene-golden.scene-env-island .environment{filter:saturate(.9) contrast(1.02) brightness(.82) sepia(.14)}
+.okno-cabin.scene-golden.scene-env-full-island .environment{background-image:url('/textures/sky-golden.jpg');background-position:center 52%;filter:saturate(.92) contrast(1.01) brightness(.87)}
+.okno-cabin.scene-golden.scene-env-forest .environment:before,.okno-cabin.scene-golden.scene-env-hill .environment:before,.okno-cabin.scene-golden.scene-env-island .environment:before{background:linear-gradient(180deg,rgba(255,187,112,.28),rgba(255,211,151,.08) 48%,rgba(58,37,24,.2));opacity:1;-webkit-mask-image:none;mask-image:none}
+.okno-cabin.scene-golden.scene-env-full-island .environment:before{background:linear-gradient(180deg,rgba(255,190,117,.16),rgba(255,211,151,.06) 55%,rgba(77,53,34,.18));opacity:1;-webkit-mask-image:none;mask-image:none}
+
+/* Avoid recompositing large blurred surfaces over the animated WebGL canvas. */
+
+/* OKNO UI theme only; the supplied environment and model stay unchanged. */

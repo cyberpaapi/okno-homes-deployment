@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import HomeVariant from "@/components/landing/HomeVariant";
 
 export const metadata: Metadata = {
-  title: "OKNO Modhomes | Forza and beyond",
-  description: "Travel from the city to Forza, then discover OKNO Signature, Bespoke, and the thinking behind each home.",
+  title: "OKNO Modhomes | Nighttime journey",
+  description: "Scroll from the cave into the home, then discover OKNO Signature, Bespoke, and the thinking behind each home.",
 };
 
 export default function HeroV2Page() {

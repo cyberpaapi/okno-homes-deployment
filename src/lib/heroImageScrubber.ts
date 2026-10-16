@@ -1,16 +1,20 @@
-import film from '../../config/hero-v1-frames.json';
+import desktopFilm from '../../config/hero-v1-frames.json';
+import mobileFilm from '../../config/hero-v1-mobile-frames.json';
 
-export const heroImageDuration = film.sourceFrames / film.fps;
+export const heroImageDuration = desktopFilm.sourceFrames / desktopFilm.fps;
 
 /** Independently decoded poses from the accepted film. The scroll position
  * chooses the image; nothing advances on a playback clock. */
 export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, present: (time: number) => void) {
   if (typeof createImageBitmap !== 'function' || signal.aborted) return null;
+  const compact = typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 800px)').matches;
+  const film = compact ? mobileFilm : desktopFilm;
   const context = canvas.getContext('2d', { alpha: false, desynchronized: true });
   if (!context) return null;
   canvas.width = film.width; canvas.height = film.height;
+  canvas.dataset.delivery = compact ? 'mobile' : 'desktop';
   const CHUNK = 512 * 1024, MAX_CHUNKS = 32;
-  const MAX_FRAMES = ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 0) >= 8 ? 28 : 18;
+  const MAX_FRAMES = compact ? 10 : ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 0) >= 8 ? 28 : 18;
   const lastPose = film.frames.length-1;
   const anchors = new Set([0,lastPose-2,lastPose-1,lastPose]);
   const anchorChunks = new Set([...anchors].flatMap(index => {

@@ -1,0 +1,53 @@
+{
+  "assets": [
+    {
+      "slug": "forza",
+      "bytes": 2850968,
+      "hash": "dc6edc12751bfa5864767eb5dc6c2934f27ea56cacb02553b119d0b2a50cba73",
+      "surfaces": [
+        "external-roof",
+        "internal-ceiling",
+        "external-wall",
+        "internal-wall",
+        "flooring"
+      ]
+    },
+    {
+      "slug": "tengo",
+      "bytes": 8086368,
+      "hash": "826844d8c52dc56da5e2528bf56f88b5175d7a63d28d501671d7dcbc563e8619",
+      "surfaces": [
+        "internal-wall",
+        "external-wall",
+        "flooring",
+        "internal-ceiling",
+        "external-roof"
+      ]
+    },
+    {
+      "slug": "kray",
+      "bytes": 15084640,
+      "hash": "f8ba20d138285533a9034031a683a4d6aa54007ee040bd24a97b49a8eb814548",
+      "surfaces": [
+        "internal-wall",
+        "external-roof",
+        "internal-ceiling",
+        "flooring",
+        "external-wall"
+      ]
+    },
+    {
+      "slug": "tish",
+      "bytes": 355028,
+      "hash": "a703fafb59d6bbb5ea3778a30cb8d364c9117bb047f8838c4a37cc6bca8fa81c",
+      "surfaces": [
+        "internal-wall",
+        "external-wall",
+        "internal-ceiling",
+        "external-roof",
+        "flooring"
+      ]
+    }
+  ],
+  "shaderSourceUnchanged": true
+}

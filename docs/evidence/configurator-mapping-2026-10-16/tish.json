@@ -1,0 +1,70 @@
+{
+  "slug": "tish",
+  "sourceBytes": 1727596,
+  "sourceHash": "9dc35563db99303d7d79de4211499da96f030e0a4c67031e1a42edf6c88adf71",
+  "bytes": 358392,
+  "sha256": "d1b4a6c112a2b41855fea6865d6f29f1df385423e1a8d5639e60324ff5b3d872",
+  "metersPerUnit": 1,
+  "bounds": {
+    "min": [
+      30.780134201049805,
+      -0.7620000243186951,
+      -9.986474990844727
+    ],
+    "max": [
+      42.82808303833008,
+      4.089399814605713,
+      -0.6900752186775208
+    ]
+  },
+  "dimensions": [
+    12.047948837280273,
+    4.851399838924408,
+    9.296399772167206
+  ],
+  "nodes": 16,
+  "triangles": 17391,
+  "removed": [],
+  "reducedProfiles": [],
+  "textureSizes": [
+    {
+      "before": [
+        256,
+        256
+      ],
+      "after": [
+        256,
+        256
+      ]
+    },
+    {
+      "before": [
+        256,
+        256
+      ],
+      "after": [
+        256,
+        256
+      ]
+    },
+    {
+      "before": [
+        512,
+        256
+      ],
+      "after": [
+        512,
+        256
+      ]
+    }
+  ],
+  "materials": 17,
+  "peakRssMiB": 135,
+  "surfaces": [
+    "external-wall",
+    "internal-wall",
+    "internal-ceiling",
+    "external-roof",
+    "flooring"
+  ]
+}

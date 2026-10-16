@@ -17,11 +17,11 @@ export default function JournalExperience() {
   const notesCaption = useSiteContent("journal.notes.caption", "From the archive");
   const notesAction = useSiteContent("journal.notes.action", "View");
   return (
-    <div className={styles.journalContainer}>
+    <div className={styles.journalContainer} data-type-field={"journal.press.caption"}>
       <JournalHero />
-      {press.length > 0 && <section className={styles.pressIntro} aria-labelledby="press-title">
-        <p>{eyebrow}</p>
-        <h2 id="press-title">{heading}</h2>
+      {press.length > 0 && <section className={styles.pressIntro} data-type-section="journal.press-intro" aria-labelledby="press-title">
+        <p data-type-field={"journal.press.eyebrow"}>{eyebrow}</p>
+        <h2 id="press-title" data-type-field={"journal.press.heading"}>{heading}</h2>
       </section>}
       <JournalMarquee caption={pressCaption} entries={press} direction="left" actionVerb={pressAction} />
       <PublicationMarquee />

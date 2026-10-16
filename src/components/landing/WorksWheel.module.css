@@ -10,11 +10,11 @@
 .face{position:relative;width:100%;height:100%;overflow:hidden;border:1px solid #f4f0e91f;border-radius:26px;background:#252a23;box-shadow:0 28px 70px -22px #0306039c}
 .face img{object-fit:cover}
 .ringLabel{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
-.ringLabel h2{font-size:clamp(26px,3vw,48px);font-weight:400;letter-spacing:-.055em;max-width:180px;text-align:center;line-height:1.02;margin:0}
+.ringLabel h2{font-size:var(--type-size-heading, clamp(26px,3vw,48px));font-weight:400;letter-spacing:-.055em;max-width:180px;text-align:center;line-height:1.02;margin:0}
 .activeLabel{position:absolute;top:49%;left:5%;width:22%;pointer-events:none;opacity:0}
-.activeLabel h3{font-size:clamp(26px,3.2vw,52px);line-height:1.04;font-weight:400;letter-spacing:-.045em;margin:0}
+.activeLabel h3{font-size:var(--type-size-heading, clamp(26px,3.2vw,52px));line-height:1.04;font-weight:400;letter-spacing:-.045em;margin:0}
 .controls{position:absolute;right:5%;bottom:6%;display:flex;align-items:center;gap:10px;z-index:5}
-.arrow,.action{font-size:12px}
+.arrow,.action{font-size:var(--type-size-caption, 12px)}
 .arrow{min-width:96px}
 .action{min-width:118px}
 .controls :focus-visible{outline:2px solid #a7bbb0;outline-offset:4px}
@@ -27,11 +27,11 @@
 .section[data-compact=true] .face{transform:none!important;box-shadow:none}
 .section[data-compact=true] .ringLabel{display:none}
 .section[data-compact=true] .activeLabel{top:32px;left:5%;width:90%;opacity:1!important}
-.section[data-compact=true] .activeLabel h3{font-size:30px}
+.section[data-compact=true] .activeLabel h3{font-size:var(--type-size-subheading, 30px)}
 .section[data-compact=true] .controls{bottom:42px;left:5%;right:5%;justify-content:flex-end}
 .section[data-compact=true] .action{margin-left:auto}
 @media(max-width:767px),(max-height:600px),(prefers-reduced-motion:reduce){
  .section{height:auto}.sticky{height:620px;min-height:0;position:relative}
 }
 @media(max-width:520px){.section[data-compact=true] .controls{display:grid;grid-template-columns:1fr 1fr}.section[data-compact=true] .action{grid-column:1/-1;margin-left:0}.arrow,.action{width:100%;min-width:0}}
-@media(max-width:400px){.section[data-compact=true] .sticky{height:620px}.arrow,.action{font-size:11px}}
+@media(max-width:400px){.section[data-compact=true] .sticky{height:620px}.arrow,.action{font-size:var(--type-size-caption, 11px)}}

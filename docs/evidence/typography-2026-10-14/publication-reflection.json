@@ -1,0 +1,1657 @@
+{
+  "registeredScopes": 100,
+  "coveredScopes": 100,
+  "settingsPublished": 811,
+  "failures": [],
+  "scopes": [
+    "hero-v1.opening",
+    "shared.header",
+    "home.timeline",
+    "home.signature-preview",
+    "home.bespoke-preview",
+    "home.sustainability-preview",
+    "home.editorial-preview",
+    "footer.footer-brand",
+    "footer.footer-homes",
+    "footer.footer-explore",
+    "footer.footer-okno",
+    "footer.footer-bottom",
+    "models.selector",
+    "models.selector-signature",
+    "models.selector-bespoke",
+    "signature.signature-controls",
+    "signature.forza-story",
+    "signature.forza-explore",
+    "bespoke.hero",
+    "bespoke.manifesto",
+    "bespoke.decisions",
+    "bespoke.decision-1",
+    "bespoke.result",
+    "bespoke.decision-2",
+    "bespoke.decision-3",
+    "bespoke.decision-4",
+    "projects.intro",
+    "projects.globe-pins",
+    "projects.project-library",
+    "hospitality.opening",
+    "hospitality.proof",
+    "hospitality.projects",
+    "hospitality.timeline",
+    "hospitality.enquiry",
+    "process.opening",
+    "process.stage-land",
+    "process.sequence",
+    "process.details",
+    "process.detail-1",
+    "process.detail-2",
+    "process.detail-3",
+    "process.detail-4",
+    "process.detail-5",
+    "sustainability.journey",
+    "sustainability.material-truth",
+    "sustainability.proof",
+    "sustainability.facts-intro",
+    "sustainability.press-1",
+    "sustainability.press-2",
+    "sustainability.press-3",
+    "sustainability.press-4",
+    "sustainability.fact-1",
+    "sustainability.fact-2",
+    "sustainability.fact-3",
+    "sustainability.fact-4",
+    "sustainability.ending",
+    "journal.press-intro",
+    "journal.hero",
+    "journal.notes-intro",
+    "journal.archive",
+    "about.opening",
+    "about.vision",
+    "about.future",
+    "about.founders",
+    "about.assurances",
+    "about.fit",
+    "enquiry.intro",
+    "enquiry.home-tab",
+    "signature.forza-plan-1",
+    "signature.forza-plan-2",
+    "signature.kray-plan-1",
+    "signature.kray-story",
+    "signature.kray-explore",
+    "signature.kray-plan-2",
+    "signature.gaze-plan-1",
+    "signature.gaze-story",
+    "signature.gaze-explore",
+    "signature.tengo-plan-1",
+    "signature.tengo-story",
+    "signature.tengo-explore",
+    "signature.tengo-plan-2",
+    "signature.trib-plan-1",
+    "signature.trib-story",
+    "signature.trib-explore",
+    "signature.octapod-plan-1",
+    "signature.octapod-story",
+    "signature.octapod-explore",
+    "projects.detail-controls",
+    "process.stage-architecture",
+    "process.stage-design-lock",
+    "process.stage-assembly",
+    "process.stage-enclosure",
+    "sustainability.journey-site",
+    "sustainability.journey-canopy",
+    "sustainability.journey-production",
+    "sustainability.journey-longevity",
+    "journal.article-reader",
+    "enquiry.hospitality-tab",
+    "enquiry.press-tab",
+    "process.stage-handover"
+  ],
+  "observationsChecked": 2819,
+  "routes": [
+    "/",
+    "/about",
+    "/enquiry",
+    "/hero-v1",
+    "/hero-v2",
+    "/hospitality",
+    "/journal",
+    "/journal/compact-site",
+    "/models",
+    "/models/bespoke",
+    "/models/signature",
+    "/models/signature/tengo/configure",
+    "/process",
+    "/projects",
+    "/projects/forrest",
+    "/sustainability"
+  ],
+  "observations": [
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "hero-v1.opening"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.timeline"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.signature-preview"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.bespoke-preview"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.sustainability-preview"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.editorial-preview"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "hero-v1.opening"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.timeline"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.signature-preview"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.bespoke-preview"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.sustainability-preview"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.editorial-preview"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/hero-v1",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.timeline"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.signature-preview"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.bespoke-preview"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.sustainability-preview"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "home.editorial-preview"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/hero-v2",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/models",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/models",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "models.selector"
+    },
+    {
+      "route": "/models",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "models.selector-signature"
+    },
+    {
+      "route": "/models",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "models.selector-bespoke"
+    },
+    {
+      "route": "/models",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/models",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/models",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/models",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/models",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.signature-controls"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.forza-story"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.forza-explore"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "bespoke.hero"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "bespoke.manifesto"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "bespoke.decisions"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "bespoke.decision-1"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "bespoke.result"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "bespoke.decision-2"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "bespoke.decision-3"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "bespoke.decision-4"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/models/bespoke",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/projects",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/projects",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "projects.intro"
+    },
+    {
+      "route": "/projects",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "projects.globe-pins"
+    },
+    {
+      "route": "/projects",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "projects.project-library"
+    },
+    {
+      "route": "/projects",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/projects",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/projects",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/projects",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/projects",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "hospitality.opening"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "hospitality.proof"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "hospitality.projects"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "hospitality.timeline"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "hospitality.enquiry"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/hospitality",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.opening"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.stage-land"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.sequence"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.details"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.detail-1"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.detail-2"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.detail-3"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.detail-4"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.detail-5"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.journey"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.material-truth"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.proof"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.facts-intro"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.press-1"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.press-2"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.press-3"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.press-4"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.fact-1"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.fact-2"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.fact-3"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.fact-4"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.ending"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/journal",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/journal",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "journal.press-intro"
+    },
+    {
+      "route": "/journal",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "journal.hero"
+    },
+    {
+      "route": "/journal",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "journal.notes-intro"
+    },
+    {
+      "route": "/journal",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "journal.archive"
+    },
+    {
+      "route": "/journal",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/journal",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/journal",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/journal",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/journal",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "about.opening"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "about.vision"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "about.future"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "about.founders"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "about.assurances"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "about.fit"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/about",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/enquiry",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/enquiry",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "enquiry.intro"
+    },
+    {
+      "route": "/enquiry",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "enquiry.home-tab"
+    },
+    {
+      "route": "/enquiry",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/enquiry",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/enquiry",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/enquiry",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/enquiry",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/models/signature/tengo/configure",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.forza-plan-1"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.forza-plan-2"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.kray-plan-1"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.kray-story"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.kray-explore"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.kray-plan-2"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.gaze-plan-1"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.gaze-story"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.gaze-explore"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.tengo-plan-1"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.tengo-story"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.tengo-explore"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.tengo-plan-2"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.trib-plan-1"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.trib-story"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.trib-explore"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.octapod-plan-1"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.octapod-story"
+    },
+    {
+      "route": "/models/signature",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "signature.octapod-explore"
+    },
+    {
+      "route": "/projects/forrest",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/projects/forrest",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "projects.detail-controls"
+    },
+    {
+      "route": "/projects/forrest",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/projects/forrest",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/projects/forrest",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/projects/forrest",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/projects/forrest",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.stage-architecture"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.stage-design-lock"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.stage-assembly"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.stage-enclosure"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.journey-site"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.journey-canopy"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.journey-production"
+    },
+    {
+      "route": "/sustainability",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "sustainability.journey-longevity"
+    },
+    {
+      "route": "/journal/compact-site",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "shared.header"
+    },
+    {
+      "route": "/journal/compact-site",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "journal.article-reader"
+    },
+    {
+      "route": "/journal/compact-site",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-brand"
+    },
+    {
+      "route": "/journal/compact-site",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-homes"
+    },
+    {
+      "route": "/journal/compact-site",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-explore"
+    },
+    {
+      "route": "/journal/compact-site",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-okno"
+    },
+    {
+      "route": "/journal/compact-site",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "footer.footer-bottom"
+    },
+    {
+      "route": "/enquiry",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "enquiry.hospitality-tab"
+    },
+    {
+      "route": "/enquiry",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "enquiry.press-tab"
+    },
+    {
+      "route": "/process",
+      "body": "\"Manrope OKNO\", Arial, sans-serif",
+      "heading": "\"Bodoni OKNO\", Georgia, serif",
+      "highlight": "Georgia, \"Times New Roman\", serif",
+      "rolesMatch": true,
+      "scope": "process.stage-handover"
+    }
+  ]
+}

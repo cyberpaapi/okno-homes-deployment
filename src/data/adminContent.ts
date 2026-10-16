@@ -1,3 +1,5 @@
+import { heroV2EndingDefaults as v2Ending } from "./heroV2Ending";
+import { withTypography } from "@/lib/typography";
 import { siteNavigationItems } from "@/data/siteNavigation";
 import projectMedia from "@/data/realProjectMedia.json";
 import { projectPreviewClips } from "@/data/projectPreviewClips";
@@ -25,6 +27,7 @@ export type ContentSection = {
   label: string;
   fields: readonly ContentField[];
   note?: string;
+  typography?: readonly ContentField[];
 };
 export type ContentPage = {
   id: string;
@@ -68,10 +71,11 @@ const sharedHomeSections: readonly ContentSection[] = [
   { id: "signature-preview", label: "Signature preview", fields: [
     { id: "home.signature.image", label: "Forza image", kind: "image", defaultValue: "/models/forza/orbit-keyframes-invisible-glow-1080p/forza-invisible-a00.png" },
     { id: "home.signature.image-alt", label: "Forza image description", kind: "text", defaultValue: "Forza Signature home exterior" },
-    { id: "home.signature.video", label: "Scroll rotation film", kind: "video", defaultValue: "/models/forza/video/forza-360-scroll-648p-24fps-fluid.mp4", help: "Keep this film seekable; scrolling controls playback position." },
+    { id: "home.signature.video", label: "Rotation film", kind: "video", defaultValue: "/models/forza/video/forza-360-scroll-648p-24fps-fluid.mp4", help: "Keep this film seekable for desktop scrolling. Phones use native playback and controls." },
     { id: "home.signature.label", label: "Section label", kind: "text", defaultValue: "Signature homes" },
     { id: "home.signature.heading-1", label: "Heading · first line", kind: "text", defaultValue: "Meet Forza." },
     { id: "home.signature.heading-2", label: "Heading · second line", kind: "text", defaultValue: "Turn the home with your scroll." },
+    { id: "home.signature.mobile-heading-2", label: "Phone heading · second line", kind: "text", defaultValue: "See the home from every angle." },
     { id: "home.signature.copy", label: "Closing copy", kind: "text", defaultValue: "Explore Forza and the complete Signature collection." },
     { id: "home.signature.action", label: "Models button", kind: "text", defaultValue: "View the models" },
     { id: "home.signature.action-href", label: "Models button destination", kind: "text", defaultValue: "/models/signature", help: "Same-site path beginning with /." },
@@ -331,7 +335,7 @@ function enquirySection(id: string, label: string, entries: readonly (readonly [
 
 // The visible order is intentional. Unmapped sections remain explicit and read-only
 // until their owning component consumes typed content values.
-export const adminPages: readonly ContentPage[] = [
+const baseAdminPages: readonly ContentPage[] = [
   {
     id: "home", label: "Home", href: "/", sections: [], children: [
       { id: "homepage", label: "Published homepage", href: "/", sections: [
@@ -356,13 +360,20 @@ export const adminPages: readonly ContentPage[] = [
         ],
       },
       {
-        id: "hero-v2", label: "Hero V2 · city to Forza", href: "/hero-v2", sections: [
-          { id: "opening", label: "City-to-Forza opening", fields: [
-            { id: "hero-v2.opening.journey-video", label: "City-to-Forza film", kind: "video", defaultValue: "/hero-v2/city-to-forza.mp4" },
-            { id: "hero-v2.opening.journey-poster", label: "Opening poster", kind: "image", defaultValue: "/hero-v2/journey-poster.jpg" },
-            { id: "hero-v2.opening.island-loop", label: "Forza island loop", kind: "video", defaultValue: "/hero-v2/forza-island-loop.mp4" },
-            { id: "hero-v2.opening.island-poster", label: "Island poster", kind: "image", defaultValue: "/hero-v2/forza-island-poster.webp" },
-            { id: "hero-v2.opening.accessible-title", label: "Accessible page title", kind: "text", defaultValue: "OKNO Modhomes - from the city to Forza" },
+        id: "hero-v2", label: "Hero V2 · nighttime scroll", href: "/hero-v2", sections: [
+          { id: "opening", label: "Scroll journey · no intro", fields: [
+            { id: "hero-v2.opening.scroll-video", label: "Replacement scroll film", kind: "video", defaultValue: "", help: "Leave empty to use the approved lossless frame film. Uploaded replacements are scroll-only too." },
+            { id: "hero-v2.opening.start-image", label: "Cave starting still", kind: "image", defaultValue: "/hero-v2/nighttime-first.webp" },
+            { id: "hero-v2.opening.end-image", label: "Journey ending still", kind: "image", defaultValue: "/hero-v2/nighttime-last.webp" },
+            { id: "hero-v2.opening.accessible-title", label: "Accessible page title", kind: "text", defaultValue: "OKNO Modhomes" },
+          ] },
+          { id: "ending", label: "Hero after the final frame", fields: [
+            { id: "hero-v2.ending.heading", label: "Hero headline", kind: "text", defaultValue: v2Ending.endingHeading },
+            { id: "hero-v2.ending.description", label: "Supporting text", kind: "text", defaultValue: v2Ending.endingDescription },
+            { id: "hero-v2.ending.primary-label", label: "Primary link text", kind: "text", defaultValue: v2Ending.endingPrimaryLabel },
+            { id: "hero-v2.ending.primary-href", label: "Primary link destination", kind: "text", defaultValue: v2Ending.endingPrimaryHref, help: "Same-site path beginning with / or an in-page #anchor." },
+            { id: "hero-v2.ending.secondary-label", label: "Secondary link text", kind: "text", defaultValue: v2Ending.endingSecondaryLabel },
+            { id: "hero-v2.ending.secondary-href", label: "Secondary link destination", kind: "text", defaultValue: v2Ending.endingSecondaryHref, help: "Same-site path beginning with / or an in-page #anchor." },
           ] },
           ...sharedHomeSections,
         ],
@@ -798,11 +809,13 @@ export const adminPages: readonly ContentPage[] = [
   ] },
 ];
 
+export const adminPages: readonly ContentPage[] = withTypography(baseAdminPages);
+
 export function allContentFields(pages: readonly ContentPage[] = adminPages): ContentField[] {
   const unique = new Map<string, ContentField>();
   const walk = (items: readonly ContentPage[]) => {
     for (const page of items) {
-      for (const section of page.sections) for (const field of section.fields) unique.set(field.id, field);
+      for (const section of page.sections) for (const field of [...section.fields, ...(section.typography ?? [])]) unique.set(field.id, field);
       walk(page.children ?? []);
     }
   };

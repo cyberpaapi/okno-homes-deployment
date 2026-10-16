@@ -42,6 +42,17 @@ if (!forza || !kray || !tengo || !trib || !octapod) {
 const signatureModels = [forza, kray, gazePrototype, tengo, trib, octapod];
 
 describe("ForzaExperience", () => {
+  it('loads one rotation decoder on phones without the hidden refinement video', () => {
+    const previous = window.matchMedia;
+    window.matchMedia = vi.fn(query => ({ matches: query === '(max-width: 700px)', addEventListener: vi.fn(), removeEventListener: vi.fn() })) as unknown as typeof window.matchMedia;
+    try {
+      const view = render(<ForzaExperience models={signatureModels} />);
+      expect(view.container.querySelectorAll('video')).toHaveLength(1);
+      expect(view.container.querySelector('source[src*="1080p"]')).toBeNull();
+      expect(screen.getByRole('button', { name: 'Explore details' })).toBeInTheDocument();
+      view.unmount();
+    } finally { window.matchMedia = previous; }
+  });
   it("returns to the requested model and stable variant instead of reopening Forza", () => {
     render(<ForzaExperience models={signatureModels} initialModelSlug="kray" initialDetailsOpen initialVariantId="1-bhk" />);
     const dialog = screen.getByRole("dialog", { name: "Kray" });

@@ -1,5 +1,25 @@
 # Final Showcase documentation map
 
+Product and operating reference: [complete project specification](../PROJECT-SPECIFICATION.md).
+
+Current mapping repair: [visible exterior/interior faces, glazing, artifact fixes and verification](configurator-mapping-2026-10-16.md).
+
+Previous house asset audit: [source audit, cleanup, physical scale, Signature mapping and GPU verification](configurator-assets-2026-10-15.md).
+
+Admin user guide: [OKNO-ADMIN-001 version 2.0 — production operating procedure and illustrated PDF text companion](admin/production-operating-procedure.md).
+
+Current Models entrance correction: [compositor-friendly loader reveal and local verification](models-loading-2026-10-14.md).
+
+Current responsive correction: [Hospitality alignment, mobile controls, landscape text and site-wide route coverage](responsive-audit-2026-10-14.md).
+
+Current typography system: [original responsive sizes, optional numeric section controls and retained Geist master](numeric-typography-2026-10-15.md).
+
+Current local showcase acceptance: [running services, admin text/photo/collection publication, restart persistence, route checks and configurator verification](local-showcase-verification-2026-10-13.md).
+
+Current configurator UI refinement: [retrieved popular 21st.dev components, shared header, coordinated controls and local verification](configurator-21st-ui-2026-10-12.md).
+
+Current local configurator replacement: [supplied Studio Cabin integration plan, grouped register materials, preservation and verification](configurator-local-integration-2026-10-12.md).
+
 Current admin preview correction: [fresh-session checks, readiness, native embedded films and Configurator deferral](admin-preview-reliability-2026-10-12.md).
 
 Previous admin audit and Process footer boundary: [coverage, corrections, local publish/restore and the production storage block](admin-audit-2026-10-11.md).
@@ -42,7 +62,7 @@ Start at the [deployment index](deployment/README.md) for architecture, operatio
 | Local start and route checks | [`start-the-website.md`](start-the-website.md) | `scripts/start-website.mjs` |
 | Shared header, footer and not-found | [`site-integration-2026-09-27.md`](site-integration-2026-09-27.md), [`footer-21st-components.md`](footer-21st-components.md) | `src/app/layout.tsx`, `src/components/Header`, `src/components/Footer` |
 | Hero V1 | [`landing-refinement-2026-09-27.md`](landing-refinement-2026-09-27.md), [`homepage-hero-brand-depth-2026-09-28.md`](homepage-hero-brand-depth-2026-09-28.md) | `src/components/landing-options/ForestEntryOption.tsx` |
-| Hero V2 | [`hero-v2-2026-10-04.md`](hero-v2-2026-10-04.md) | `src/components/hero-v2/HeroV2.tsx` |
+| Hero V2 | [`hero-v2-scroll-2026-10-14.md`](hero-v2-scroll-2026-10-14.md) | `src/components/hero-v2/HeroV2.tsx` |
 | Hospitality | [`hospitality-21st-components.md`](hospitality-21st-components.md) | `src/components/hospitality/HospitalityExperience.tsx` |
 | Models selector | [`models-selector-2026-09-23.md`](models-selector-2026-09-23.md) | `src/app/models/page.tsx` |
 | Bespoke | [`bespoke-redesign-2026-09-23.md`](bespoke-redesign-2026-09-23.md) | `src/app/models/bespoke/page.tsx` |

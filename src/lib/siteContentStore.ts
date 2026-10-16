@@ -1,3 +1,4 @@
+import { typographyValueError, validateTypographySizes } from "@/lib/typography";
 import "server-only";
 
 import { timingSafeEqual } from "node:crypto";
@@ -39,6 +40,7 @@ const localActionFields = new Set([
   "projects.intro.action-href", "projects.detail.return-href",
   "hospitality.opening.action-href", "hospitality.closing.action-href",
   "sustainability.ending.action-href",
+  "hero-v2.ending.primary-href", "hero-v2.ending.secondary-href",
 ]);
 let queue = Promise.resolve();
 
@@ -56,6 +58,7 @@ function processTextLimit(id: string): number | null {
 }
 
 function validateProcessPublish(values: Record<string, string>) {
+  validateTypographySizes(values);
   for (let index = 1; index <= 5; index++) {
     const prefix = `process.details.phase-${index}`;
     for (const key of ["days", "title", "alt"] as const) {
@@ -168,6 +171,9 @@ export function isAdminAuthorized(request: Request) {
 export function validateContentValue(id: string, value: string): string | null {
   const field = contentFieldsById.get(id);
   if (!field) return "Unknown content field.";
+  const typographyError = typographyValueError(id, value);
+  if (typographyError !== undefined) return typographyError;
+
   if (value.length > (field.kind === "text" ? 4000 : 512)) return "Value is too long.";
   if (field.kind === "text") {
     const processLimit = processTextLimit(id);
@@ -183,6 +189,7 @@ export function validateContentValue(id: string, value: string): string | null {
     return null;
   }
   if (field.kind === "choice") return field.options?.some(option => option.value === value) ? null : "Choose one of the listed options.";
+  if (field.kind === "video" && value === "" && field.defaultValue === "") return null;
   if (field.kind === "image" && value === field.defaultValue && (/^brand\.logo\./.test(id) || /^footer\.social\.[a-z-]+\.icon$/.test(id)) && /\.(?:svg|ico)$/i.test(value)) return null;
   if (field.kind === "image" && value === field.defaultValue && /^journal\.entry-press-[a-z0-9-]+\.logo$/.test(id) && trustedJournalSvgLogos.has(value)) return null;
   if (!value.startsWith("/") || value.startsWith("//") || value.includes("\\") || value.includes("..") || /[?#]/.test(value)) {
@@ -218,7 +225,7 @@ export async function saveFieldsDraft(rawValues: unknown, revision: number, draf
     if (typeof value !== "string") throw new Error(`Invalid value for ${id}.`);
     const error = validateContentValue(id, value);
     if (error) throw new Error(`${id}: ${error}`);
-    if (["image", "video"].includes(contentFieldsById.get(id)?.kind ?? "") && !(await mediaExists(value))) {
+    if (["image", "video"].includes(contentFieldsById.get(id)?.kind ?? "") && value && !(await mediaExists(value))) {
       throw new Error(`${id}: this media path does not exist on the local website.`);
     }
     values[id] = value;

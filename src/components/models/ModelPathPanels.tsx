@@ -108,7 +108,7 @@ export default function ModelPathPanels({ onReady }: { onReady?: () => void }) {
           onMouseEnter={() => !leavingFor && setActiveIndex(index)}
           onMouseLeave={() => setActiveIndex(null)}
           data-active={activeIndex === index}
-          data-path={path.id}
+          data-path={path.id} data-type-section={`models.selector-${path.id}`}
         >
           <Link
             href={`/models/${path.id}`}

@@ -27,6 +27,7 @@ import { footerLinkDefaults } from "@/lib/footerLinkCollections";
 import { parseProcessDayRange } from "@/lib/processDayRange";
 import SignatureModelPanel from "./SignatureModelPanel";
 import { PREVIEW_READY, PREVIEW_UPDATE } from "@/lib/sitePreview";
+import { isTypographySizeField } from "@/lib/typography";
 
 type Snapshot = { revision: number; draftRevision: number; published: Record<string, string>; draft: Record<string, string>; publishedCollections: ContentCollections; draftCollections: ContentCollections; history: { revision: number; publishedCollections: ContentCollections; publishedAt: string }[]; demoExpiresAt?: string };
 type View = "content" | "site";
@@ -76,7 +77,7 @@ function editableSections(page: ContentPage) {
 function mergeLegacyHeroValues(items: ContentItem[], values: Record<string, string>): ContentItem[] {
   const mappings: Record<string, Record<string, string>> = {
     "hero-v1": { openingVideo: "hero-v1.opening.intro-video", scrollVideo: "hero-v1.opening.scroll-video", poster: "hero-v1.opening.start-image", endImage: "hero-v1.opening.end-image", introLastFrame: "hero-v1.opening.intro-last-frame", openingAlt: "hero-v1.opening.start-alt", endAlt: "hero-v1.opening.end-alt", accessibleTitle: "hero-v1.opening.accessible-title", tagline: "hero-v1.opening.tagline" },
-    "hero-v2": { openingVideo: "hero-v2.opening.journey-video", loopVideo: "hero-v2.opening.island-loop", poster: "hero-v2.opening.journey-poster", loopPoster: "hero-v2.opening.island-poster", accessibleTitle: "hero-v2.opening.accessible-title" },
+    "hero-v2": { scrollVideo: "hero-v2.opening.scroll-video", poster: "hero-v2.opening.start-image", endImage: "hero-v2.opening.end-image", accessibleTitle: "hero-v2.opening.accessible-title", endingHeading: "hero-v2.ending.heading", endingDescription: "hero-v2.ending.description", endingPrimaryLabel: "hero-v2.ending.primary-label", endingPrimaryHref: "hero-v2.ending.primary-href", endingSecondaryLabel: "hero-v2.ending.secondary-label", endingSecondaryHref: "hero-v2.ending.secondary-href" },
   };
   return items.map(item => ({ ...item, fields: { ...item.fields, ...Object.fromEntries(Object.entries(mappings[item.id] ?? {}).flatMap(([key, fieldId]) => values[fieldId] !== undefined ? [[key, values[fieldId]]] : [])) } }));
 }
@@ -209,14 +210,14 @@ function FieldEditor({ field, value, published, changed, busy, onChange, onSave,
   const shownJournalPress = journalPress?.filter(item => item.fields.visibility !== "hidden");
   const invalidDayRange = /^process\.(?:details\.phase-[1-5]|stage-[a-z-]+)\.days$/.test(field.id) && Boolean(value.trim()) && !parseProcessDayRange(value);
   return <div className={styles.field}>
-    <div className={styles.fieldHeading}><Icon size={17} aria-hidden="true" /><div><label id={`${field.id}-label`} htmlFor={field.kind === "choice" && field.id !== "home.publishing.hero" ? undefined : field.id}>{field.label}</label><small>{field.id === "home.publishing.hero" || field.id === "journal.hero.featured-id" ? "Choice" : field.kind === "text" ? "Text" : field.kind === "image" ? "Image" : field.kind === "video" ? "Video" : "Choice"}</small></div></div>
+    <div className={styles.fieldHeading}><Icon size={17} aria-hidden="true" /><div><label id={`${field.id}-label`} htmlFor={field.kind === "choice" && !field.id.startsWith("typography.") && field.id !== "home.publishing.hero" ? undefined : field.id}>{field.label}</label><small>{field.id === "home.publishing.hero" || field.id === "journal.hero.featured-id" ? "Choice" : field.kind === "text" ? "Text" : field.kind === "image" ? "Image" : field.kind === "video" ? "Video" : "Choice"}</small></div></div>
     {field.help && <p className={styles.fieldHelp}>{field.help}</p>}
     <div className={styles.fieldBody}>
       {field.id === "home.publishing.hero" ? <select id={field.id} value={value} onChange={event => onChange(event.target.value)} disabled={busy}>{homeVariants?.map(item => <option key={item.id} value={item.id}>{item.fields.name || item.id}</option>)}</select> : field.id === "journal.hero.featured-id" ? <select id={field.id} value={value} onChange={event => onChange(event.target.value)} disabled={busy}>
         {value !== "none" && !shownJournalPress?.some(item => item.id === value) && <option value={value}>Selected story hidden or removed · choose a replacement</option>}
         <option value="none">No featured story</option>
         {shownJournalPress?.map(item => <option key={item.id} value={item.id}>{item.fields.title || item.id}</option>)}
-      </select> : field.kind === "text" && /^models\.signature\.[a-z0-9-]+\.variant-\d+\.(area|price)$/.test(field.id) ? <input id={field.id} className={styles.shortTextInput} type="text" maxLength={80} value={value} onChange={event => onChange(event.target.value)} /> : field.kind === "text" ? <textarea id={field.id} value={value} onChange={event => onChange(event.target.value)} rows={Math.min(6, Math.max(2, Math.ceil(value.length / 55)))} /> : field.kind === "choice" ? <SegmentedChoice field={field} value={value} onChange={onChange} disabled={busy} /> : <>
+      </select> : isTypographySizeField(field.id) ? <input id={field.id} className={styles.shortTextInput} type="number" min={6} max={400} step={0.1} placeholder="Original size" value={value} onChange={event => onChange(event.target.value)} disabled={busy} /> : field.kind === "text" && /^models\.signature\.[a-z0-9-]+\.variant-\d+\.(area|price)$/.test(field.id) ? <input id={field.id} className={styles.shortTextInput} type="text" maxLength={80} value={value} onChange={event => onChange(event.target.value)} /> : field.kind === "text" ? <textarea id={field.id} value={value} onChange={event => onChange(event.target.value)} rows={Math.min(6, Math.max(2, Math.ceil(value.length / 55)))} /> : field.kind === "choice" && field.id.startsWith("typography.") ? <select id={field.id} value={value} onChange={event => onChange(event.target.value)} disabled={busy}>{field.options?.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}</select> : field.kind === "choice" ? <SegmentedChoice field={field} value={value} onChange={onChange} disabled={busy} /> : <>
         <div className={styles.mediaSample}>
           {field.kind === "image" ? <Image src={value} alt={`${field.label} draft preview`} width={640} height={360} unoptimized /> : <video src={value} controls muted preload="none" aria-label={`${field.label} draft preview`} />}
         </div>
@@ -454,10 +455,11 @@ export default function AdminStudio() {
 
   function sectionPanel(section: ContentSection, index: number) {
     return <div key={`${page.id}:${section.id}`}><details className={styles.section}>
-      <summary><span className={styles.sectionOrder}>{String(index + 1).padStart(2, "0")}</span><span className={styles.sectionName}>{section.label}<small>{section.fields.length ? `${section.fields.length} connected fields` : collectionsAfter(section.id).length ? "Connected collection" : "Mapping in progress"}</small></span><ChevronDown aria-hidden="true" size={20} /></summary>
+      <summary><span className={styles.sectionOrder}>{String(index + 1).padStart(2, "0")}</span><span className={styles.sectionName}>{section.label}<small>{section.fields.length ? `${section.fields.length} connected fields` : section.typography?.length ? `${section.typography.length} connected typography controls` : collectionsAfter(section.id).length ? "Connected collection" : "Mapping in progress"}</small></span><ChevronDown aria-hidden="true" size={20} /></summary>
       <div className={styles.sectionBody}>
         {section.note && <p className={styles.unmapped}>{section.note}</p>}
         {section.fields.map(field => <FieldEditor key={field.id} field={field} value={valueFor(field)} published={publishedFor(field)} changed={Boolean(snapshot && valueFor(field) !== (snapshot.draft[field.id] ?? snapshot.published[field.id] ?? field.defaultValue))} busy={busy} onChange={value => setLocal(previous => ({ ...previous, [field.id]: value }))} onSave={() => void save(field)} onUpload={file => void upload(field, file)} homeVariants={field.id === "home.publishing.hero" ? collectionFor(collectionDefinitionsForPage("homepage")[0]) : undefined} journalPress={field.id === "journal.hero.featured-id" ? collectionFor(collectionDefinitionsForPage("journal").find(definition => definition.id === "journal.press")!) : undefined} />)}
+        {Boolean(section.typography?.length) && <details className={styles.typeControls}><summary>Fonts and numeric text sizes</summary><p>Choose fonts for this section, its headings and highlighted phrases. Enter an optional pixel size for desktop or phone. Blank inputs preserve the original responsive sizes; Use original clears an override.</p>{(section.typography ?? []).map(field => <FieldEditor key={field.id} field={field} value={valueFor(field)} published={publishedFor(field)} changed={Boolean(snapshot && valueFor(field) !== (snapshot.draft[field.id] ?? snapshot.published[field.id] ?? field.defaultValue))} busy={busy} onChange={value => setLocal(previous => ({ ...previous, [field.id]: value }))} onSave={() => void save(field)} onUpload={file => void upload(field, file)} homeVariants={field.id === "home.publishing.hero" ? collectionFor(collectionDefinitionsForPage("homepage")[0]) : undefined} journalPress={field.id === "journal.hero.featured-id" ? collectionFor(collectionDefinitionsForPage("journal").find(definition => definition.id === "journal.press")!) : undefined} />)}</details>}
         {section.id === "global-brand" && <GlobalBrandPreview values={{ ...(snapshot?.published ?? {}), ...previewValues }} />}
         {(page.id === "footer" || page.id === "projects") && collectionsAfter(section.id).map(definition => collectionPanel(definition))}
       </div>
@@ -524,6 +526,7 @@ export default function AdminStudio() {
                 return { url: result.url, detailUrl: result.detailUrl, posterUrl: result.posterUrl };
               }}
             />
+            {visibleSections.filter(section => section.id.startsWith(`${record.id}-plan-`)).map((section,planIndex) => sectionPanel({ ...section, label: `${section.label} · typography`, fields: [] }, planIndex))}
           </div>
         </details>;
       })}

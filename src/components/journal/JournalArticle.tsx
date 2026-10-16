@@ -30,14 +30,14 @@ export default function JournalArticle({ slug, initialItems }: { slug: string; i
   const readMinutes = Math.max(2, Math.ceil(wordCount / 220));
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-type-section="journal.article-reader">
       <div className={styles.topline}>
-        <Link href="/journal" className={styles.back}><ArrowLeft size={16} strokeWidth={1.6} aria-hidden="true" /> {backLabel}</Link>
-        <span>{breadcrumb}</span>
+        <Link href="/journal" className={styles.back} data-type-field={"journal.article.back"}><ArrowLeft size={16} strokeWidth={1.6} aria-hidden="true" /> {backLabel}</Link>
+        <span data-type-field={"journal.article.breadcrumb"}>{breadcrumb}</span>
       </div>
 
       <header className={styles.intro}>
-        <div className={styles.introMeta}><span>{post.category}</span><span>{readMinutes} {readingSuffix}</span></div>
+        <div className={styles.introMeta}><span>{post.category}</span><span data-type-field={"journal.article.reading-suffix"}>{readMinutes} {readingSuffix}</span></div>
         <h1>{post.title}</h1>
         <p>{post.excerpt}</p>
       </header>
@@ -68,7 +68,7 @@ export default function JournalArticle({ slug, initialItems }: { slug: string; i
 
         <aside className={styles.sidebar} aria-label={navigationLabel}>
           <div className={styles.sideBlock}>
-            <p className={styles.sideTitle}>{contentsHeading}</p>
+            <p className={styles.sideTitle} data-type-field={"journal.article.contents"}>{contentsHeading}</p>
             <nav aria-label={onPageLabel}>
               {post.sections.map((section) => (
                 <a key={section.id} href={`#${journalSectionAnchorId(section)}`}>{section.heading}</a>
@@ -76,15 +76,15 @@ export default function JournalArticle({ slug, initialItems }: { slug: string; i
             </nav>
           </div>
           {related.length > 0 && <div className={styles.sideBlock}>
-            <p className={styles.sideTitle}>{relatedHeading}</p>
+            <p className={styles.sideTitle} data-type-field={"journal.article.related"}>{relatedHeading}</p>
             {related.map((item) => <Link className={styles.relatedLink} key={item.id} href={`/journal/${item.id}`}><span>{item.category}</span><strong>{item.title}</strong><ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" /></Link>)}
           </div>}
         </aside>
       </div>
 
       <footer className={styles.closing}>
-        <span>{closingHeading}</span>
-        <Link href="/journal"><ArrowLeft size={19} strokeWidth={1.5} aria-hidden="true" /> {closingAction}</Link>
+        <span data-type-field={"journal.article.closing-heading"}>{closingHeading}</span>
+        <Link href="/journal" data-type-field={"journal.article.closing-action"}><ArrowLeft size={19} strokeWidth={1.5} aria-hidden="true" /> {closingAction}</Link>
       </footer>
     </div>
   );

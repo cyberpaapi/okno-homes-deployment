@@ -33,10 +33,10 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
     "**/*.mts",
-    ".next-release/types/**/*.ts",
-    ".next-release/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    ".next-release-mobile-2026-10-16/types/**/*.ts",
+    ".next-release-mobile-2026-10-16/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

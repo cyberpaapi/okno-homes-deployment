@@ -24,6 +24,47 @@ import { useSiteContent, useSiteContentMap } from "@/lib/useSiteContent";
 import { resolveProcessDayRange } from "@/lib/processDayRange";
 import useProcessScrollGuard from "./useProcessScrollGuard";
 import { PROCESS_DAY_RANGES } from "@/lib/processChapters";
+import { useMediaQuery } from "@/lib/useMediaQuery";
+
+function MobileProcess() {
+  const opening = useProcessOpening();
+  const currentStages = useProcessStages();
+  const source = useSiteContent('process.opening.master-scrub', '/process/process-master.scrub.mp4');
+  const poster = useSiteContent('process.opening.poster', '/process/land-poster.webp');
+  const video = useRef<HTMLVideoElement>(null);
+  const root = useRef<HTMLElement>(null);
+  const [activeStage, setActiveStage] = useState(0);
+  useEffect(() => {
+    const element = video.current;
+    if (!element || !root.current) return;
+    let visible = false;
+    let manuallyPaused = false;
+    let autoPause = false;
+    const sync = () => {
+      autoPause = !visible || document.hidden;
+      if (autoPause) element.pause();
+      else if (!manuallyPaused && !element.ended) void element.play().catch(() => undefined);
+    };
+    const pause = () => { if (!autoPause && !element.ended) manuallyPaused = true; };
+    const play = () => { manuallyPaused = false; };
+    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: .35 });
+    observer.observe(element);
+    element.addEventListener('pause', pause);
+    element.addEventListener('play', play);
+    document.addEventListener('visibilitychange', sync);
+    return () => { observer.disconnect(); element.removeEventListener('pause', pause); element.removeEventListener('play', play); document.removeEventListener('visibilitychange', sync); element.pause(); };
+  }, []);
+  const active = currentStages[activeStage];
+  return <section ref={root} className={styles.mobileSequence} data-playback="autoplay" aria-labelledby="process-title">
+    <div className={styles.mobileOpening} data-type-section="process.opening"><h1 id="process-title">{opening.title}</h1><p>{opening.summary}</p></div>
+    <video ref={video} src={source === '/process/process-master.scrub.mp4' ? '/process/process-mobile-build.mp4' : source} poster={poster} muted playsInline controls preload="metadata" aria-label="OKNO build sequence from land to handover" onTimeUpdate={event => {
+      const duration = event.currentTarget.duration;
+      if (Number.isFinite(duration) && duration > 0) setActiveStage(processStageAt(event.currentTarget.currentTime / duration));
+    }} />
+    <div className={styles.mobileChapter} data-type-section={`process.stage-${active.id}`}><p>{active.days}</p><h2>{active.label}</h2><p>{active.title}</p><p>{active.copy}</p></div>
+    <StaticProcessDeliveryTimeline items={currentStages} />
+  </section>;
+}
 
 type Stage = ProcessTimelineItem & {
   days: string;
@@ -159,7 +200,7 @@ function StaticProcessHero() {
   const poster = useSiteContent("process.opening.cover", "/process/opening-cover.webp");
   return (
     <section className={styles.staticHero} aria-labelledby="process-title">
-      <div className={styles.staticHeroCopy}>
+      <div className={styles.staticHeroCopy} data-type-section="process.opening">
         <p className={styles.heroLabel}>{opening.eyebrow}</p>
         <div id="process-title"><ProcessTextReveal text={opening.title} /></div>
         <p className={styles.heroSummary}>{opening.summary}</p>
@@ -177,12 +218,12 @@ function ReducedProcess() {
   const timelineItems = currentStages.map(({ id, days, label, title, poster }) => ({ id, days, label, title, poster }));
   const sequenceTitle = useSiteContent("process.sequence.title", "The OKNO build sequence");
   return (
-    <section className={styles.reducedSequence} aria-labelledby="process-sequence-title">
+    <section className={styles.reducedSequence} data-type-section="process.sequence" aria-labelledby="process-sequence-title">
       <h2 className={styles.srOnly} id="process-sequence-title">{sequenceTitle}</h2>
       <StaticProcessDeliveryTimeline items={timelineItems} />
       <div className={styles.reducedStages}>
         {currentStages.map((stage) => (
-          <section className={styles.reducedScene} key={stage.id} aria-labelledby={`process-${stage.id}`}>
+          <section className={styles.reducedScene} data-type-section={`process.stage-${stage.id}`} key={stage.id} aria-labelledby={`process-${stage.id}`}>
             <div className={styles.reducedMedia} style={{ backgroundImage: `url(${stage.poster})` }} aria-hidden="true" />
             <div className={styles.reducedShade} aria-hidden="true" />
             <div className={styles.reducedCopy}>
@@ -243,7 +284,7 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
   return (
     <section className={styles.storyTrack} ref={trackRef} aria-labelledby="process-title" data-playback="scroll" data-chapter={active.id}>
       <div className={styles.stickyViewport}>
-        <div className={styles.heroCopy}>
+        <div className={styles.heroCopy} data-type-section="process.opening">
           <p className={styles.heroLabel}>{opening.eyebrow}</p>
           <div id="process-title"><ProcessTextReveal text={opening.title} /></div>
           <p className={styles.heroSummary}>{opening.summary}</p>
@@ -268,7 +309,7 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
           </div>
           <div className={styles.mediaTreatment} aria-hidden="true" />
 
-          <div className={styles.storyCopy}>
+          <div className={styles.storyCopy} data-type-section={`process.stage-${active.id}`}>
               <div className={styles.copyInner}>
                 <p className={styles.stageLabel}>{active.days}</p>
                 <h2>{active.label}</h2>
@@ -288,6 +329,7 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
 
 export default function ProcessJourney() {
   const reducedMotion = useReducedMotion();
+  const compact = useMediaQuery('(max-width: 700px)');
   const [filmCovering, setFilmCovering] = useState(false);
 
   return (
@@ -297,7 +339,7 @@ export default function ProcessJourney() {
       </div>
       <ProcessNavigation />
       <main className={styles.pageContent} data-route="process">
-        {reducedMotion ? <><StaticProcessHero /><ReducedProcess /></> : <AnimatedProcess onFilmCovering={setFilmCovering} />}
+        {reducedMotion ? <><StaticProcessHero /><ReducedProcess /></> : compact ? <MobileProcess /> : <AnimatedProcess onFilmCovering={setFilmCovering} />}
         <ProcessDetailTimeline />
       </main>
     </div>

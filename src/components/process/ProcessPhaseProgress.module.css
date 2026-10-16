@@ -54,16 +54,16 @@
 .milestones li:last-child .point { left: 100%; }
 .milestones li[data-complete='true'] .point { background: #c8dac7; }
 .milestones li[aria-current] { color: #eef3ed; }
-.dayLabel { margin-right: 7px; font-size: 10px; }
-.dayRange { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.dayLabel { margin-right: 7px; font-size: var(--type-size-caption, 10px); }
+.dayRange { font-size: var(--type-size-caption, 14px); font-weight: 600; font-variant-numeric: tabular-nums; }
 @media (max-width: 700px) {
   .progress { height: 44px; bottom: 18px; }
   .milestones li { padding-top: 13px; }
-  .dayLabel { display: block; margin: 0 0 3px; font-size: 9px; }
-  .dayRange { font-size: 11px; }
+  .dayLabel { display: block; margin: 0 0 3px; font-size: var(--type-size-caption, 9px); }
+  .dayRange { font-size: var(--type-size-caption, 11px); }
   .point { width: 5px; height: 5px; }
 }
-@media (max-width: 700px) and (max-height: 620px), (prefers-reduced-motion: reduce) {
+@media (max-height: 620px), (prefers-reduced-motion: reduce) {
   .progress { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {

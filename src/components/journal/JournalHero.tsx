@@ -23,13 +23,13 @@ export default function JournalHero() {
   const dek = useSiteContent("journal.hero.dek", "Press coverage and project notes from OKNO.");
   const reduced = useReducedMotion();
   return (
-    <section className={styles.hero} aria-labelledby="journal-title">
+    <section  data-type-section="journal.hero"className={styles.hero} aria-labelledby="journal-title">
       <ShaderBackground className={styles.heroShader} />
       <div className={styles.heroShade} aria-hidden="true" />
       <div className={styles.heroCopy}>
-        <motion.p className={styles.eyebrow} initial={reduced ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.6 }}>{eyebrow}</motion.p>
-        <h1 id="journal-title"><JournalTextReveal text={heading} amount={0.1} /></h1>
-        <motion.p className={styles.heroDek} initial={reduced ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.65, delay: reduced ? 0 : 0.3 }}>{dek}</motion.p>
+        <motion.p className={styles.eyebrow} initial={reduced ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.6 }} data-type-field={"journal.hero.eyebrow"}>{eyebrow}</motion.p>
+        <h1 id="journal-title" data-type-field={"journal.hero.heading"}><JournalTextReveal text={heading} amount={0.1} /></h1>
+        <motion.p className={styles.heroDek} initial={reduced ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.65, delay: reduced ? 0 : 0.3 }} data-type-field={"journal.hero.dek"}>{dek}</motion.p>
       </div>
 
       {featured && <motion.article className={styles.heroFeature} data-photo={Boolean(featured.image)} initial={reduced ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.8, delay: reduced ? 0 : 0.25 }}>
@@ -48,7 +48,7 @@ export default function JournalHero() {
             {featured.credit && <span>{featured.credit}</span>}
           </div>}
         </div>
-        <div className={styles.heroAction}>
+        <div className={styles.heroAction} data-type-field={"journal.press.action"}>
           <JournalArrowLink href={featured.href} external={featured.external} label={`${actionVerb} ${featured.title}${featured.source ? ` at ${featured.source}` : ""}`} inverse />
         </div>
       </motion.article>}

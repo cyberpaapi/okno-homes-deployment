@@ -1,0 +1,24 @@
+
+> okno-homes-final-showcase@2026.10.5 website:check
+> node scripts/start-website.mjs --check
+
+Reusing the verified development Final Showcase server on 3134. Its process is not owned by this command.
+Ready /
+Ready /hero-v1
+Ready /hero-v2
+Ready /models
+Ready /models/signature
+Ready /models/bespoke
+Ready /projects
+Ready /hospitality
+Ready /process
+Ready /sustainability
+Ready /journal
+Ready /about
+Ready /enquiry
+Ready /models/signature/tengo/configure
+Ready /models/signature/kray/configure
+Ready 16 stylesheet assets
+
+OKNO website: http://127.0.0.1:3134
+All editorial pages and the published Tengo/Kray configurators run in this one application.

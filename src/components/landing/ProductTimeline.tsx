@@ -128,14 +128,14 @@ export default function ProductTimeline() {
     <section
       id="process"
       ref={sectionRef}
-      className={styles.section}
+      className={styles.section} data-type-section="home.timeline"
       aria-labelledby="landing-process-title"
       data-pinned={animated || undefined}
       style={animated ? { height: `calc(100svh + ${travel}px)` } : undefined}
     >
       <div className={styles.viewport} ref={viewportRef}>
         <div className={styles.composition}>
-          <div className={styles.heading}><h2 id="landing-process-title" className={styles.title} data-landing-heading>{value("home.timeline.heading-start", "A home in")} <em>{value("home.timeline.heading-emphasis", "90 days.")}</em></h2><SubtleLink href={localDestination(value("home.timeline.action-href", "/process"), "/process")} className={styles.processLink}>{value("home.timeline.action", "See the process")}</SubtleLink></div>
+          <div className={styles.heading}><h2 id="landing-process-title" className={styles.title} data-landing-heading data-type-field={"home.timeline.heading-start"}>{value("home.timeline.heading-start", "A home in")} <em data-type-field={"home.timeline.heading-emphasis"}>{value("home.timeline.heading-emphasis", "90 days.")}</em></h2><SubtleLink href={localDestination(value("home.timeline.action-href", "/process"), "/process")} className={styles.processLink} data-type-field={"home.timeline.action"}>{value("home.timeline.action", "See the process")}</SubtleLink></div>
           <motion.div className={styles.track} ref={trackRef} style={{ x: animated ? x : 0 }}>
             <motion.div className={styles.image} style={{ scale: animated ? mediaScale : 1, y: animated ? mediaY : 0 }}>
               <Image
@@ -145,7 +145,7 @@ export default function ProductTimeline() {
                 sizes="(min-width: 1000px) 38vw, (min-width: 600px) 45vw, 90vw"
                 quality={90}
               />
-              <span className={styles.mediaLabel}>{value("home.timeline.image-caption", "Day 90 · Ready for handover")}</span>
+              <span className={styles.mediaLabel} data-type-field={"home.timeline.image-caption"}>{value("home.timeline.image-caption", "Day 90 · Ready for handover")}</span>
             </motion.div>
             <div className={styles.storyline}>
               <div aria-hidden="true" className={styles.axis}>

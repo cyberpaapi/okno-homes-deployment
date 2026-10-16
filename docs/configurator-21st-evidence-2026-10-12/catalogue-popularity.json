@@ -1,0 +1,2156 @@
+{
+  "retrieved": "2026-10-12",
+  "sources": [
+    "https://21st.dev/community/components/s/dock",
+    "https://21st.dev/community/components/s/tabs"
+  ],
+  "scope": "39 dock demos and 199 tab demos returned by the category pages; not a claim about unreturned or private entries",
+  "comparisons": {
+    "dock": [
+      {
+        "demoId": 990,
+        "componentId": 233,
+        "name": "Dock",
+        "author": "ibelick",
+        "downloads": 1606,
+        "bookmarks": 2984,
+        "url": "https://21st.dev/@ibelick/components/dock"
+      },
+      {
+        "demoId": 28,
+        "componentId": 1089,
+        "name": "Dock",
+        "author": "anurag-mishra22",
+        "downloads": 609,
+        "bookmarks": 2133,
+        "url": "https://21st.dev/@anurag-mishra22/components/dock-two"
+      },
+      {
+        "demoId": 2515,
+        "componentId": 2386,
+        "name": "Message Dock",
+        "author": "isaiahbjork",
+        "downloads": 436,
+        "bookmarks": 817,
+        "url": "https://21st.dev/@isaiahbjork/components/message-dock"
+      },
+      {
+        "demoId": 2572,
+        "componentId": 2443,
+        "name": "macOS Dock",
+        "author": "dhmnpunit",
+        "downloads": 381,
+        "bookmarks": 1494,
+        "url": "https://21st.dev/@dhmnpunit/components/mac-os-dock"
+      },
+      {
+        "demoId": 1025,
+        "componentId": 362,
+        "name": "Dock",
+        "author": "dillionverma",
+        "downloads": 355,
+        "bookmarks": 343,
+        "url": "https://21st.dev/@dillionverma/components/dock"
+      },
+      {
+        "demoId": 7758,
+        "componentId": 5111,
+        "name": "Dock",
+        "author": "ruixen.ui",
+        "downloads": 220,
+        "bookmarks": 645,
+        "url": "https://21st.dev/@ruixen.ui/components/dock"
+      },
+      {
+        "demoId": 8468,
+        "componentId": 5731,
+        "name": "Dock ",
+        "author": "lyanchouss",
+        "downloads": 158,
+        "bookmarks": 391,
+        "url": "https://21st.dev/@lyanchouss/components/dock"
+      },
+      {
+        "demoId": 5104,
+        "componentId": 3713,
+        "name": "Dock Tabs",
+        "author": "designali-in",
+        "downloads": 113,
+        "bookmarks": 542,
+        "url": "https://21st.dev/@designali-in/components/dock-tabs"
+      },
+      {
+        "demoId": 1972,
+        "componentId": 1796,
+        "name": "Animated Dock",
+        "author": "preetsuthar17",
+        "downloads": 113,
+        "bookmarks": 625,
+        "url": "https://21st.dev/@preetsuthar17/components/animated-dock"
+      },
+      {
+        "demoId": 5837,
+        "componentId": 4184,
+        "name": "Hover Gradient NavBar",
+        "author": "ruixen.ui",
+        "downloads": 100,
+        "bookmarks": 307,
+        "url": "https://21st.dev/@ruixen.ui/components/hover-gradient-nav-bar"
+      },
+      {
+        "demoId": 9596,
+        "componentId": 6486,
+        "name": "Social Icons",
+        "author": "jatin-yadav05",
+        "downloads": 98,
+        "bookmarks": 591,
+        "url": "https://21st.dev/@jatin-yadav05/components/social-icons"
+      },
+      {
+        "demoId": 3226,
+        "componentId": 2993,
+        "name": "Minimal Dock",
+        "author": "jatin-yadav05",
+        "downloads": 93,
+        "bookmarks": 420,
+        "url": "https://21st.dev/@jatin-yadav05/components/minimal-dock"
+      },
+      {
+        "demoId": 7784,
+        "componentId": 5132,
+        "name": "DockMorph",
+        "author": "ruixen.ui",
+        "downloads": 81,
+        "bookmarks": 173,
+        "url": "https://21st.dev/@ruixen.ui/components/dock-morph"
+      },
+      {
+        "demoId": 2600,
+        "componentId": 2471,
+        "name": "Docks",
+        "author": "ruixen.ui",
+        "downloads": 70,
+        "bookmarks": 322,
+        "url": "https://21st.dev/@ruixen.ui/components/docks"
+      },
+      {
+        "demoId": 5004,
+        "componentId": 3674,
+        "name": "dock",
+        "author": "badtzx0",
+        "downloads": 68,
+        "bookmarks": 325,
+        "url": "https://21st.dev/@badtzx0/components/dock"
+      },
+      {
+        "demoId": 2499,
+        "componentId": 2370,
+        "name": "Spotlight Button",
+        "author": "waleedkibhen",
+        "downloads": 66,
+        "bookmarks": 365,
+        "url": "https://21st.dev/@waleedkibhen/components/spotlight-button"
+      },
+      {
+        "demoId": 7785,
+        "componentId": 5133,
+        "name": "Tilted Dock",
+        "author": "ruixen.ui",
+        "downloads": 52,
+        "bookmarks": 173,
+        "url": "https://21st.dev/@ruixen.ui/components/tilted-dock"
+      },
+      {
+        "demoId": 7208,
+        "componentId": 4861,
+        "name": "Magnetic Dock",
+        "author": "dhileepkumargm",
+        "downloads": 46,
+        "bookmarks": 155,
+        "url": "https://21st.dev/@dhileepkumargm/components/magnetic-dock"
+      },
+      {
+        "demoId": 10571,
+        "componentId": 7279,
+        "name": "Expanding Search Dock",
+        "author": "moumensoliman",
+        "downloads": 43,
+        "bookmarks": 742,
+        "url": "https://21st.dev/@moumensoliman/components/expanding-search-dock-shadcnui"
+      },
+      {
+        "demoId": 8476,
+        "componentId": 5738,
+        "name": "Floating Dock Navigation",
+        "author": "erikvalencia1",
+        "downloads": 41,
+        "bookmarks": 65,
+        "url": "https://21st.dev/@erikvalencia1/components/floating-dock-navigation"
+      },
+      {
+        "demoId": 10458,
+        "componentId": 7158,
+        "name": "Bottom Menu",
+        "author": "0xUrvish",
+        "downloads": 39,
+        "bookmarks": 294,
+        "url": "https://21st.dev/@0xUrvish/components/bottom-menu"
+      },
+      {
+        "demoId": 3057,
+        "componentId": 2855,
+        "name": "Dock",
+        "author": "cult-ui",
+        "downloads": 38,
+        "bookmarks": 117,
+        "url": "https://21st.dev/@cult-ui/components/dock"
+      },
+      {
+        "demoId": 9102,
+        "componentId": 6065,
+        "name": "Social Links",
+        "author": "wasifgee0012",
+        "downloads": 37,
+        "bookmarks": 262,
+        "url": "https://21st.dev/@wasifgee0012/components/social-links"
+      },
+      {
+        "demoId": 7833,
+        "componentId": 5180,
+        "name": "Gooey Dock",
+        "author": "ruixen.ui",
+        "downloads": 31,
+        "bookmarks": 123,
+        "url": "https://21st.dev/@ruixen.ui/components/gooey-dock"
+      },
+      {
+        "demoId": 10163,
+        "componentId": 6931,
+        "name": "Apple Dock",
+        "author": "shadcnspace",
+        "downloads": 26,
+        "bookmarks": 213,
+        "url": "https://21st.dev/@shadcnspace/components/apple-dock"
+      },
+      {
+        "demoId": 19177,
+        "componentId": 9762,
+        "name": "Dock Nav",
+        "author": "soralabs",
+        "downloads": 17,
+        "bookmarks": 118,
+        "url": "https://21st.dev/@soralabs/components/dock-nav"
+      },
+      {
+        "demoId": 18014,
+        "componentId": 8937,
+        "name": "Floating Dock",
+        "author": "manuarora700",
+        "downloads": 15,
+        "bookmarks": 372,
+        "url": "https://21st.dev/@manuarora700/components/floating-dock"
+      },
+      {
+        "demoId": 7850,
+        "componentId": 5197,
+        "name": "Magnetic Dock",
+        "author": "ruixen.ui",
+        "downloads": 13,
+        "bookmarks": 45,
+        "url": "https://21st.dev/@ruixen.ui/components/magnetic-dock"
+      },
+      {
+        "demoId": 7295,
+        "componentId": 4912,
+        "name": "MacOS dock",
+        "author": "n38693842",
+        "downloads": 11,
+        "bookmarks": 194,
+        "url": "https://21st.dev/@n38693842/components/mac-os-dock"
+      },
+      {
+        "demoId": 2694,
+        "componentId": 2565,
+        "name": "Dynamic Action ",
+        "author": "ln-dev7",
+        "downloads": 10,
+        "bookmarks": 205,
+        "url": "https://21st.dev/@ln-dev7/components/dynamic-action"
+      },
+      {
+        "demoId": 16632,
+        "componentId": 8772,
+        "name": "Agent Dock",
+        "author": "dqnamo",
+        "downloads": 10,
+        "bookmarks": 511,
+        "url": "https://21st.dev/@dqnamo/components/agent-dock"
+      },
+      {
+        "demoId": 15742,
+        "componentId": 8682,
+        "name": "Dock",
+        "author": "starc007",
+        "downloads": 7,
+        "bookmarks": 77,
+        "url": "https://21st.dev/@starc007/components/dock"
+      },
+      {
+        "demoId": 27197,
+        "componentId": 13741,
+        "name": "Techstack",
+        "author": "carolinaraulino",
+        "downloads": 7,
+        "bookmarks": 138,
+        "url": "https://21st.dev/@carolinaraulino/components/techstack"
+      },
+      {
+        "demoId": 19178,
+        "componentId": 9763,
+        "name": "Magnetic Dock",
+        "author": "componentry",
+        "downloads": 6,
+        "bookmarks": 91,
+        "url": "https://21st.dev/@componentry/components/magnetic-dock"
+      },
+      {
+        "demoId": 23415,
+        "componentId": 11366,
+        "name": "Magnetic Dock",
+        "author": "rmahammad",
+        "downloads": 6,
+        "bookmarks": 143,
+        "url": "https://21st.dev/@rmahammad/components/magnetic-dock"
+      },
+      {
+        "demoId": 14092,
+        "componentId": 8446,
+        "name": "Toolbar Dock",
+        "author": "ruixen.ui",
+        "downloads": 5,
+        "bookmarks": 186,
+        "url": "https://21st.dev/@ruixen.ui/components/toolbar-dock"
+      },
+      {
+        "demoId": 16171,
+        "componentId": 8708,
+        "name": "BeUI Expandable Tabs",
+        "author": "starc007",
+        "downloads": 4,
+        "bookmarks": 316,
+        "url": "https://21st.dev/@starc007/components/be-ui-expandable-tabs"
+      },
+      {
+        "demoId": 16170,
+        "componentId": 8707,
+        "name": "BeUI Expanable Action Bar",
+        "author": "starc007",
+        "downloads": 4,
+        "bookmarks": 169,
+        "url": "https://21st.dev/@starc007/components/be-ui-expanable-action-bar"
+      },
+      {
+        "demoId": 23492,
+        "componentId": 11380,
+        "name": "macOS Dock",
+        "author": "ssychui",
+        "downloads": 2,
+        "bookmarks": 30,
+        "url": "https://21st.dev/@ssychui/components/macos-dock"
+      }
+    ],
+    "tabs": [
+      {
+        "demoId": 1428,
+        "componentId": 272,
+        "name": "Expandable Tabs",
+        "author": "victorwelander",
+        "downloads": 2355,
+        "bookmarks": 3246,
+        "url": "https://21st.dev/@victorwelander/components/expandable-tabs"
+      },
+      {
+        "demoId": 953,
+        "componentId": 161,
+        "name": "Tabs",
+        "author": "shadcn",
+        "downloads": 1274,
+        "bookmarks": 30,
+        "url": "https://21st.dev/@shadcn/components/tabs"
+      },
+      {
+        "demoId": 1589,
+        "componentId": 161,
+        "name": "Tabs",
+        "author": "shadcn",
+        "downloads": 1274,
+        "bookmarks": 35,
+        "url": "https://21st.dev/@shadcn/components/tabs"
+      },
+      {
+        "demoId": 429,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 30,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 423,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 27,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 419,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 119,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 435,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 19,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 434,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 31,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 428,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 35,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 431,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 31,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 427,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 62,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 430,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 20,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 433,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 42,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 420,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 6,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 432,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 114,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 424,
+        "componentId": 1177,
+        "name": "Tabs",
+        "author": "originui",
+        "downloads": 1151,
+        "bookmarks": 10,
+        "url": "https://21st.dev/@originui/components/tabs"
+      },
+      {
+        "demoId": 607,
+        "componentId": 1281,
+        "name": "Feature 108",
+        "author": "shadcnblockscom",
+        "downloads": 1077,
+        "bookmarks": 1318,
+        "url": "https://21st.dev/@shadcnblockscom/components/shadcnblocks-com-feature108"
+      },
+      {
+        "demoId": 2197,
+        "componentId": 2068,
+        "name": "Hero 195",
+        "author": "shadcnblockscom",
+        "downloads": 1006,
+        "bookmarks": 2193,
+        "url": "https://21st.dev/@shadcnblockscom/components/hero-195-1"
+      },
+      {
+        "demoId": 1103,
+        "componentId": 739,
+        "name": "Pricing Tab",
+        "author": "aymanch-03",
+        "downloads": 755,
+        "bookmarks": 186,
+        "url": "https://21st.dev/@aymanch-03/components/pricing-tab"
+      },
+      {
+        "demoId": 7005,
+        "componentId": 4744,
+        "name": "Login / Signup",
+        "author": "lyanchouss",
+        "downloads": 569,
+        "bookmarks": 40,
+        "url": "https://21st.dev/@lyanchouss/components/login-signup"
+      },
+      {
+        "demoId": 1597,
+        "componentId": 1418,
+        "name": "Vercel Tabs",
+        "author": "yadwinder",
+        "downloads": 557,
+        "bookmarks": 340,
+        "url": "https://21st.dev/@yadwinder/components/vercel-tabs"
+      },
+      {
+        "demoId": 4087,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 24,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 4085,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 12,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 3866,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 55,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 3869,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 47,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 3867,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 24,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 3871,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 52,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 3870,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 23,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 4084,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 50,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 4086,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 98,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 3872,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 15,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 3868,
+        "componentId": 3165,
+        "name": "Tabs",
+        "author": "sean0205",
+        "downloads": 322,
+        "bookmarks": 29,
+        "url": "https://21st.dev/@sean0205/components/tabs"
+      },
+      {
+        "demoId": 619,
+        "componentId": 1305,
+        "name": "Dorpdown Navigation",
+        "author": "ln-dev7",
+        "downloads": 261,
+        "bookmarks": 218,
+        "url": "https://21st.dev/@ln-dev7/components/dorpdown-navigation"
+      },
+      {
+        "demoId": 525,
+        "componentId": 1205,
+        "name": "Animated Tabs",
+        "author": "chetanverma16",
+        "downloads": 250,
+        "bookmarks": 1448,
+        "url": "https://21st.dev/@chetanverma16/components/animated-tabs"
+      },
+      {
+        "demoId": 9309,
+        "componentId": 6222,
+        "name": "Feature Showcase",
+        "author": "ruixen.ui",
+        "downloads": 239,
+        "bookmarks": 725,
+        "url": "https://21st.dev/@ruixen.ui/components/feature-showcase"
+      },
+      {
+        "demoId": 4200,
+        "componentId": 3318,
+        "name": "FAQ tabs",
+        "author": "vaib215",
+        "downloads": 228,
+        "bookmarks": 1151,
+        "url": "https://21st.dev/@vaib215/components/faq-tabs"
+      },
+      {
+        "demoId": 1226,
+        "componentId": 813,
+        "name": "Tabs in cell for navigation",
+        "author": "k3menn",
+        "downloads": 216,
+        "bookmarks": 91,
+        "url": "https://21st.dev/@k3menn/components/tabs-in-cell-for-navigation"
+      },
+      {
+        "demoId": 1113,
+        "componentId": 250,
+        "name": "Animated Tabs",
+        "author": "builduilabs",
+        "downloads": 211,
+        "bookmarks": 81,
+        "url": "https://21st.dev/@builduilabs/components/animated-tabs"
+      },
+      {
+        "demoId": 1115,
+        "componentId": 225,
+        "name": "Animated Tabs",
+        "author": "ibelick",
+        "downloads": 210,
+        "bookmarks": 158,
+        "url": "https://21st.dev/@ibelick/components/animated-tabs"
+      },
+      {
+        "demoId": 1949,
+        "componentId": 1773,
+        "name": "AI Gen",
+        "author": "designali-in",
+        "downloads": 205,
+        "bookmarks": 668,
+        "url": "https://21st.dev/@designali-in/components/ai-gen"
+      },
+      {
+        "demoId": 1962,
+        "componentId": 1786,
+        "name": "Animated Tabs",
+        "author": "preetsuthar17",
+        "downloads": 203,
+        "bookmarks": 375,
+        "url": "https://21st.dev/@preetsuthar17/components/animated-tabs"
+      },
+      {
+        "demoId": 4106,
+        "componentId": 3237,
+        "name": "Theme Tabs",
+        "author": "designali-in",
+        "downloads": 181,
+        "bookmarks": 210,
+        "url": "https://21st.dev/@designali-in/components/theme-tabs"
+      },
+      {
+        "demoId": 6274,
+        "componentId": 4394,
+        "name": "Progressive Carousel",
+        "author": "uilayout.contact",
+        "downloads": 174,
+        "bookmarks": 627,
+        "url": "https://21st.dev/@uilayout.contact/components/progressive-carousel"
+      },
+      {
+        "demoId": 8245,
+        "componentId": 5535,
+        "name": "NotificationIn box Popover",
+        "author": "ruixen.ui",
+        "downloads": 162,
+        "bookmarks": 159,
+        "url": "https://21st.dev/@ruixen.ui/components/notification-inbox-popover"
+      },
+      {
+        "demoId": 7233,
+        "componentId": 4877,
+        "name": "Slide Tabs",
+        "author": "minhxthanh",
+        "downloads": 161,
+        "bookmarks": 1010,
+        "url": "https://21st.dev/@minhxthanh/components/slide-tabs"
+      },
+      {
+        "demoId": 6222,
+        "componentId": 4365,
+        "name": "Notifications Menu",
+        "author": "ahmedmayara",
+        "downloads": 155,
+        "bookmarks": 635,
+        "url": "https://21st.dev/@ahmedmayara/components/notifications-menu"
+      },
+      {
+        "demoId": 2075,
+        "componentId": 1921,
+        "name": "Command Palette",
+        "author": "rafa-porto",
+        "downloads": 148,
+        "bookmarks": 209,
+        "url": "https://21st.dev/@rafa-porto/components/command-palette"
+      },
+      {
+        "demoId": 7540,
+        "componentId": 5022,
+        "name": "Pricing Section",
+        "author": "brijr",
+        "downloads": 147,
+        "bookmarks": 56,
+        "url": "https://21st.dev/@brijr/components/pricing-section"
+      },
+      {
+        "demoId": 18143,
+        "componentId": 9060,
+        "name": "Highlight",
+        "author": "unlumen",
+        "downloads": 146,
+        "bookmarks": 7,
+        "url": "https://21st.dev/@unlumen/components/highlight"
+      },
+      {
+        "demoId": 5131,
+        "componentId": 3734,
+        "name": "FeaturesDetail",
+        "author": "ruixen.ui",
+        "downloads": 126,
+        "bookmarks": 191,
+        "url": "https://21st.dev/@ruixen.ui/components/features-detail"
+      },
+      {
+        "demoId": 1252,
+        "componentId": 808,
+        "name": "Simple Tabs with underline and bold font",
+        "author": "k3menn",
+        "downloads": 115,
+        "bookmarks": 24,
+        "url": "https://21st.dev/@k3menn/components/simple-tabs-with-underline-and-bold-font"
+      },
+      {
+        "demoId": 23552,
+        "componentId": 11414,
+        "name": "Segmented Control",
+        "author": "ddoemonn",
+        "downloads": 110,
+        "bookmarks": 78,
+        "url": "https://21st.dev/@ddoemonn/components/segmented-control"
+      },
+      {
+        "demoId": 10457,
+        "componentId": 7157,
+        "name": "Bento Card",
+        "author": "0xUrvish",
+        "downloads": 104,
+        "bookmarks": 1070,
+        "url": "https://21st.dev/@0xUrvish/components/bento-card"
+      },
+      {
+        "demoId": 1361,
+        "componentId": 933,
+        "name": "Code block",
+        "author": "ayushmxxn",
+        "downloads": 91,
+        "bookmarks": 26,
+        "url": "https://21st.dev/@ayushmxxn/components/code-block"
+      },
+      {
+        "demoId": 4677,
+        "componentId": 3565,
+        "name": "Featured Image Section",
+        "author": "ruixen.ui",
+        "downloads": 89,
+        "bookmarks": 282,
+        "url": "https://21st.dev/@ruixen.ui/components/ruixen-featured-image-section"
+      },
+      {
+        "demoId": 575,
+        "componentId": 1240,
+        "name": "Animated Navigation Tabs",
+        "author": "ln-dev7",
+        "downloads": 84,
+        "bookmarks": 189,
+        "url": "https://21st.dev/@ln-dev7/components/animated-navigation-tabs"
+      },
+      {
+        "demoId": 10473,
+        "componentId": 7180,
+        "name": "Vertical Tabs",
+        "author": "0xUrvish",
+        "downloads": 84,
+        "bookmarks": 1435,
+        "url": "https://21st.dev/@0xUrvish/components/vertical-tabs"
+      },
+      {
+        "demoId": 7878,
+        "componentId": 5220,
+        "name": "Pill Morph Tabs",
+        "author": "ruixen.ui",
+        "downloads": 68,
+        "bookmarks": 167,
+        "url": "https://21st.dev/@ruixen.ui/components/pill-morph-tabs"
+      },
+      {
+        "demoId": 1649,
+        "componentId": 232,
+        "name": "Transition Panel",
+        "author": "ibelick",
+        "downloads": 68,
+        "bookmarks": 30,
+        "url": "https://21st.dev/@ibelick/components/transition-panel"
+      },
+      {
+        "demoId": 2089,
+        "componentId": 1948,
+        "name": "3D Icon Tabs",
+        "author": "andrewlu0",
+        "downloads": 66,
+        "bookmarks": 286,
+        "url": "https://21st.dev/@andrewlu0/components/3d-icon-tabs-1"
+      },
+      {
+        "demoId": 11647,
+        "componentId": 7710,
+        "name": "Tabs",
+        "author": "coss.com",
+        "downloads": 63,
+        "bookmarks": 9,
+        "url": "https://21st.dev/@coss.com/components/tabs"
+      },
+      {
+        "demoId": 11648,
+        "componentId": 7710,
+        "name": "Tabs",
+        "author": "coss.com",
+        "downloads": 63,
+        "bookmarks": 10,
+        "url": "https://21st.dev/@coss.com/components/tabs"
+      },
+      {
+        "demoId": 11644,
+        "componentId": 7710,
+        "name": "Tabs",
+        "author": "coss.com",
+        "downloads": 63,
+        "bookmarks": 6,
+        "url": "https://21st.dev/@coss.com/components/tabs"
+      },
+      {
+        "demoId": 11646,
+        "componentId": 7710,
+        "name": "Tabs",
+        "author": "coss.com",
+        "downloads": 63,
+        "bookmarks": 7,
+        "url": "https://21st.dev/@coss.com/components/tabs"
+      },
+      {
+        "demoId": 11645,
+        "componentId": 7710,
+        "name": "Tabs",
+        "author": "coss.com",
+        "downloads": 63,
+        "bookmarks": 21,
+        "url": "https://21st.dev/@coss.com/components/tabs"
+      },
+      {
+        "demoId": 11638,
+        "componentId": 7710,
+        "name": "Tabs",
+        "author": "coss.com",
+        "downloads": 63,
+        "bookmarks": 21,
+        "url": "https://21st.dev/@coss.com/components/tabs"
+      },
+      {
+        "demoId": 11640,
+        "componentId": 7710,
+        "name": "Tabs",
+        "author": "coss.com",
+        "downloads": 63,
+        "bookmarks": 18,
+        "url": "https://21st.dev/@coss.com/components/tabs"
+      },
+      {
+        "demoId": 11643,
+        "componentId": 7710,
+        "name": "Tabs",
+        "author": "coss.com",
+        "downloads": 63,
+        "bookmarks": 8,
+        "url": "https://21st.dev/@coss.com/components/tabs"
+      },
+      {
+        "demoId": 633,
+        "componentId": 1319,
+        "name": "Snippet",
+        "author": "haydenbleasel",
+        "downloads": 61,
+        "bookmarks": 20,
+        "url": "https://21st.dev/@haydenbleasel/components/snippet"
+      },
+      {
+        "demoId": 1095,
+        "componentId": 958,
+        "name": "Script Copy Button",
+        "author": "dillionverma",
+        "downloads": 60,
+        "bookmarks": 20,
+        "url": "https://21st.dev/@dillionverma/components/script-copy-button"
+      },
+      {
+        "demoId": 1779,
+        "componentId": 1562,
+        "name": "Tabs",
+        "author": "bankkroll",
+        "downloads": 56,
+        "bookmarks": 17,
+        "url": "https://21st.dev/@bankkroll/components/tabs"
+      },
+      {
+        "demoId": 1243,
+        "componentId": 810,
+        "name": "Tabs like bookmark",
+        "author": "k3menn",
+        "downloads": 55,
+        "bookmarks": 61,
+        "url": "https://21st.dev/@k3menn/components/tabs-like-bookmark"
+      },
+      {
+        "demoId": 6083,
+        "componentId": 4327,
+        "name": "Tabs Component",
+        "author": "anubra266",
+        "downloads": 51,
+        "bookmarks": 4,
+        "url": "https://21st.dev/@anubra266/components/tabs-component"
+      },
+      {
+        "demoId": 6075,
+        "componentId": 4327,
+        "name": "Tabs Component",
+        "author": "anubra266",
+        "downloads": 51,
+        "bookmarks": 2,
+        "url": "https://21st.dev/@anubra266/components/tabs-component"
+      },
+      {
+        "demoId": 6085,
+        "componentId": 4327,
+        "name": "Tabs Component",
+        "author": "anubra266",
+        "downloads": 51,
+        "bookmarks": 4,
+        "url": "https://21st.dev/@anubra266/components/tabs-component"
+      },
+      {
+        "demoId": 6074,
+        "componentId": 4327,
+        "name": "Tabs Component",
+        "author": "anubra266",
+        "downloads": 51,
+        "bookmarks": 2,
+        "url": "https://21st.dev/@anubra266/components/tabs-component"
+      },
+      {
+        "demoId": 6077,
+        "componentId": 4327,
+        "name": "Tabs Component",
+        "author": "anubra266",
+        "downloads": 51,
+        "bookmarks": 1,
+        "url": "https://21st.dev/@anubra266/components/tabs-component"
+      },
+      {
+        "demoId": 6073,
+        "componentId": 4327,
+        "name": "Tabs Component",
+        "author": "anubra266",
+        "downloads": 51,
+        "bookmarks": 28,
+        "url": "https://21st.dev/@anubra266/components/tabs-component"
+      },
+      {
+        "demoId": 6080,
+        "componentId": 4327,
+        "name": "Tabs Component",
+        "author": "anubra266",
+        "downloads": 51,
+        "bookmarks": 1,
+        "url": "https://21st.dev/@anubra266/components/tabs-component"
+      },
+      {
+        "demoId": 6081,
+        "componentId": 4327,
+        "name": "Tabs Component",
+        "author": "anubra266",
+        "downloads": 51,
+        "bookmarks": 5,
+        "url": "https://21st.dev/@anubra266/components/tabs-component"
+      },
+      {
+        "demoId": 6086,
+        "componentId": 4327,
+        "name": "Tabs Component",
+        "author": "anubra266",
+        "downloads": 51,
+        "bookmarks": 2,
+        "url": "https://21st.dev/@anubra266/components/tabs-component"
+      },
+      {
+        "demoId": 4902,
+        "componentId": 3637,
+        "name": "Input Modal",
+        "author": "arihantcodes_1f7b8c4d",
+        "downloads": 50,
+        "bookmarks": 279,
+        "url": "https://21st.dev/@arihantcodes_1f7b8c4d/components/input-modal"
+      },
+      {
+        "demoId": 4060,
+        "componentId": 3220,
+        "name": "Slide Tabs",
+        "author": "uniquesonu",
+        "downloads": 49,
+        "bookmarks": 141,
+        "url": "https://21st.dev/@uniquesonu/components/slide-tabs"
+      },
+      {
+        "demoId": 2925,
+        "componentId": 2777,
+        "name": "Animated Tabs",
+        "author": "skyleen77",
+        "downloads": 47,
+        "bookmarks": 66,
+        "url": "https://21st.dev/@skyleen77/components/animated-tabs"
+      },
+      {
+        "demoId": 9847,
+        "componentId": 6667,
+        "name": "Core Header Navbar",
+        "author": "kumail_ali_r",
+        "downloads": 45,
+        "bookmarks": 63,
+        "url": "https://21st.dev/@kumail_ali_r/components/core-header-navbar"
+      },
+      {
+        "demoId": 2579,
+        "componentId": 2450,
+        "name": "Expandable Tabs",
+        "author": "preetsuthar17",
+        "downloads": 44,
+        "bookmarks": 99,
+        "url": "https://21st.dev/@preetsuthar17/components/expandable-tabs-1"
+      },
+      {
+        "demoId": 4909,
+        "componentId": 3640,
+        "name": "Login Card",
+        "author": "arihantcodes_1f7b8c4d",
+        "downloads": 41,
+        "bookmarks": 3,
+        "url": "https://21st.dev/@arihantcodes_1f7b8c4d/components/login-card-1"
+      },
+      {
+        "demoId": 4407,
+        "componentId": 3411,
+        "name": "Expanded Tabs",
+        "author": "larsen66",
+        "downloads": 40,
+        "bookmarks": 54,
+        "url": "https://21st.dev/@larsen66/components/expanded-tabs"
+      },
+      {
+        "demoId": 3901,
+        "componentId": 3172,
+        "name": "Tabs",
+        "author": "shugar",
+        "downloads": 39,
+        "bookmarks": 1,
+        "url": "https://21st.dev/@shugar/components/tabs-1"
+      },
+      {
+        "demoId": 3899,
+        "componentId": 3172,
+        "name": "Tabs",
+        "author": "shugar",
+        "downloads": 39,
+        "bookmarks": 14,
+        "url": "https://21st.dev/@shugar/components/tabs-1"
+      },
+      {
+        "demoId": 3902,
+        "componentId": 3172,
+        "name": "Tabs",
+        "author": "shugar",
+        "downloads": 39,
+        "bookmarks": 4,
+        "url": "https://21st.dev/@shugar/components/tabs-1"
+      },
+      {
+        "demoId": 3900,
+        "componentId": 3172,
+        "name": "Tabs",
+        "author": "shugar",
+        "downloads": 39,
+        "bookmarks": 2,
+        "url": "https://21st.dev/@shugar/components/tabs-1"
+      },
+      {
+        "demoId": 3903,
+        "componentId": 3172,
+        "name": "Tabs",
+        "author": "shugar",
+        "downloads": 39,
+        "bookmarks": 8,
+        "url": "https://21st.dev/@shugar/components/tabs-1"
+      },
+      {
+        "demoId": 7804,
+        "componentId": 5152,
+        "name": "Swap Card",
+        "author": "ravikatiyar162",
+        "downloads": 39,
+        "bookmarks": 99,
+        "url": "https://21st.dev/@ravikatiyar162/components/swap-card"
+      },
+      {
+        "demoId": 4419,
+        "componentId": 3422,
+        "name": "Tabs",
+        "author": "preetsuthar17",
+        "downloads": 38,
+        "bookmarks": 30,
+        "url": "https://21st.dev/@preetsuthar17/components/tabs"
+      },
+      {
+        "demoId": 7881,
+        "componentId": 5223,
+        "name": "Fade Slide Tabs",
+        "author": "ruixen.ui",
+        "downloads": 38,
+        "bookmarks": 57,
+        "url": "https://21st.dev/@ruixen.ui/components/fade-slide-tabs"
+      },
+      {
+        "demoId": 8315,
+        "componentId": 5594,
+        "name": "Animated Tabs Background",
+        "author": "erikvalencia1",
+        "downloads": 38,
+        "bookmarks": 41,
+        "url": "https://21st.dev/@erikvalencia1/components/animated-tabs-background"
+      },
+      {
+        "demoId": 1718,
+        "componentId": 1503,
+        "name": "Tabs",
+        "author": "shugar",
+        "downloads": 37,
+        "bookmarks": 53,
+        "url": "https://21st.dev/@shugar/components/tabs"
+      },
+      {
+        "demoId": 629,
+        "componentId": 1315,
+        "name": "Sandbox",
+        "author": "haydenbleasel",
+        "downloads": 37,
+        "bookmarks": 64,
+        "url": "https://21st.dev/@haydenbleasel/components/sandbox"
+      },
+      {
+        "demoId": 13343,
+        "componentId": 8293,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 35,
+        "bookmarks": 5,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs"
+      },
+      {
+        "demoId": 13344,
+        "componentId": 8293,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 35,
+        "bookmarks": 9,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs"
+      },
+      {
+        "demoId": 13351,
+        "componentId": 8293,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 35,
+        "bookmarks": 39,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs"
+      },
+      {
+        "demoId": 13346,
+        "componentId": 8293,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 35,
+        "bookmarks": 2,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs"
+      },
+      {
+        "demoId": 13348,
+        "componentId": 8293,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 35,
+        "bookmarks": 5,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs"
+      },
+      {
+        "demoId": 13350,
+        "componentId": 8293,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 35,
+        "bookmarks": 2,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs"
+      },
+      {
+        "demoId": 13349,
+        "componentId": 8293,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 35,
+        "bookmarks": 1,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs"
+      },
+      {
+        "demoId": 13345,
+        "componentId": 8293,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 35,
+        "bookmarks": 1,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs"
+      },
+      {
+        "demoId": 7243,
+        "componentId": 4883,
+        "name": "Animated Shifting Tab Component",
+        "author": "uniquesonu",
+        "downloads": 33,
+        "bookmarks": 162,
+        "url": "https://21st.dev/@uniquesonu/components/animated-shifting-tab-component"
+      },
+      {
+        "demoId": 1261,
+        "componentId": 855,
+        "name": "Tabs [react-aria-components]",
+        "author": "jolbol1",
+        "downloads": 31,
+        "bookmarks": 6,
+        "url": "https://21st.dev/@jolbol1/components/tabs"
+      },
+      {
+        "demoId": 1308,
+        "componentId": 1024,
+        "name": "Tabs",
+        "author": "fuma-nama",
+        "downloads": 29,
+        "bookmarks": 6,
+        "url": "https://21st.dev/@fuma-nama/components/tabs"
+      },
+      {
+        "demoId": 7880,
+        "componentId": 5222,
+        "name": "Hybrid Tabs",
+        "author": "ruixen.ui",
+        "downloads": 28,
+        "bookmarks": 48,
+        "url": "https://21st.dev/@ruixen.ui/components/hybrid-tabs"
+      },
+      {
+        "demoId": 10479,
+        "componentId": 7181,
+        "name": "Vercel Notification Popover",
+        "author": "patrick-xin",
+        "downloads": 26,
+        "bookmarks": 155,
+        "url": "https://21st.dev/@patrick-xin/components/vercel-notification-popover"
+      },
+      {
+        "demoId": 8197,
+        "componentId": 5490,
+        "name": "Package Installer Tabs",
+        "author": "ruixen.ui",
+        "downloads": 25,
+        "bookmarks": 21,
+        "url": "https://21st.dev/@ruixen.ui/components/package-installer-tabs"
+      },
+      {
+        "demoId": 6157,
+        "componentId": 4351,
+        "name": "Segment Group",
+        "author": "anubra266",
+        "downloads": 25,
+        "bookmarks": 4,
+        "url": "https://21st.dev/@anubra266/components/segment-group"
+      },
+      {
+        "demoId": 6159,
+        "componentId": 4351,
+        "name": "Segment Group",
+        "author": "anubra266",
+        "downloads": 25,
+        "bookmarks": 4,
+        "url": "https://21st.dev/@anubra266/components/segment-group"
+      },
+      {
+        "demoId": 7885,
+        "componentId": 5227,
+        "name": "Badge  Tabs",
+        "author": "ruixen.ui",
+        "downloads": 24,
+        "bookmarks": 76,
+        "url": "https://21st.dev/@ruixen.ui/components/badge-tabs"
+      },
+      {
+        "demoId": 29425,
+        "componentId": 15735,
+        "name": "Tabs with Count Badge",
+        "author": "coss.com",
+        "downloads": 22,
+        "bookmarks": 5,
+        "url": "https://21st.dev/@coss.com/components/tabs-count-badge"
+      },
+      {
+        "demoId": 3047,
+        "componentId": 2846,
+        "name": "Family Button",
+        "author": "cult-ui",
+        "downloads": 21,
+        "bookmarks": 38,
+        "url": "https://21st.dev/@cult-ui/components/family-button"
+      },
+      {
+        "demoId": 7877,
+        "componentId": 5219,
+        "name": "Sliding Tabs",
+        "author": "ruixen.ui",
+        "downloads": 20,
+        "bookmarks": 21,
+        "url": "https://21st.dev/@ruixen.ui/components/sliding-tabs"
+      },
+      {
+        "demoId": 8090,
+        "componentId": 5404,
+        "name": "Interactive Pricing Component",
+        "author": "uniquesonu",
+        "downloads": 20,
+        "bookmarks": 78,
+        "url": "https://21st.dev/@uniquesonu/components/interactive-pricing-component"
+      },
+      {
+        "demoId": 6921,
+        "componentId": 4719,
+        "name": "Animated Chip Tab Component",
+        "author": "uniquesonu",
+        "downloads": 19,
+        "bookmarks": 50,
+        "url": "https://21st.dev/@uniquesonu/components/animated-chip-tab-component"
+      },
+      {
+        "demoId": 7882,
+        "componentId": 5224,
+        "name": "Magnetic Tabs",
+        "author": "ruixen.ui",
+        "downloads": 18,
+        "bookmarks": 24,
+        "url": "https://21st.dev/@ruixen.ui/components/magnetic-tabs"
+      },
+      {
+        "demoId": 26923,
+        "componentId": 13555,
+        "name": "Segmented Tabs",
+        "author": "micka_design",
+        "downloads": 18,
+        "bookmarks": 35,
+        "url": "https://21st.dev/@micka_design/components/tabs-base"
+      },
+      {
+        "demoId": 19015,
+        "componentId": 9607,
+        "name": "Settings Page Skeleton",
+        "author": "cnippet-dev",
+        "downloads": 18,
+        "bookmarks": 1,
+        "url": "https://21st.dev/@cnippet-dev/components/v-skeleton-10"
+      },
+      {
+        "demoId": 23570,
+        "componentId": 11431,
+        "name": "Tabs",
+        "author": "ddoemonn",
+        "downloads": 18,
+        "bookmarks": 53,
+        "url": "https://21st.dev/@ddoemonn/components/tabs"
+      },
+      {
+        "demoId": 10463,
+        "componentId": 7163,
+        "name": "Discrete Tab",
+        "author": "0xUrvish",
+        "downloads": 17,
+        "bookmarks": 110,
+        "url": "https://21st.dev/@0xUrvish/components/discrete-tab"
+      },
+      {
+        "demoId": 24930,
+        "componentId": 12164,
+        "name": "Animated Tabs",
+        "author": "educalvolpz",
+        "downloads": 15,
+        "bookmarks": 34,
+        "url": "https://21st.dev/@educalvolpz/components/animated-tabs"
+      },
+      {
+        "demoId": 24960,
+        "componentId": 12194,
+        "name": "Tabs Subtle",
+        "author": "micka_design",
+        "downloads": 14,
+        "bookmarks": 20,
+        "url": "https://21st.dev/@micka_design/components/tabs-subtle"
+      },
+      {
+        "demoId": 27081,
+        "componentId": 13643,
+        "name": "Feature Tab Switcher",
+        "author": "mohammadshehadeh",
+        "downloads": 13,
+        "bookmarks": 20,
+        "url": "https://21st.dev/@mohammadshehadeh/components/feature-11"
+      },
+      {
+        "demoId": 35020,
+        "componentId": 19544,
+        "name": "Segmented Control",
+        "author": "kuratlielia",
+        "downloads": 13,
+        "bookmarks": 5,
+        "url": "https://21st.dev/@kuratlielia/components/segmented-control"
+      },
+      {
+        "demoId": 30168,
+        "componentId": 16385,
+        "name": "Expanding Tabs",
+        "author": "aicanvas",
+        "downloads": 13,
+        "bookmarks": 92,
+        "url": "https://21st.dev/@aicanvas/components/expanding-tabs"
+      },
+      {
+        "demoId": 24959,
+        "componentId": 12193,
+        "name": "Tabs with Count Badges",
+        "author": "felipemenezes098",
+        "downloads": 12,
+        "bookmarks": 7,
+        "url": "https://21st.dev/@felipemenezes098/components/tabs-07"
+      },
+      {
+        "demoId": 16783,
+        "componentId": 8785,
+        "name": "Image Expansion",
+        "author": "pulseawan",
+        "downloads": 12,
+        "bookmarks": 294,
+        "url": "https://21st.dev/@pulseawan/components/image-expansion"
+      },
+      {
+        "demoId": 7884,
+        "componentId": 5226,
+        "name": "Capsule Tabs",
+        "author": "ruixen.ui",
+        "downloads": 11,
+        "bookmarks": 16,
+        "url": "https://21st.dev/@ruixen.ui/components/capsule-tabs"
+      },
+      {
+        "demoId": 13432,
+        "componentId": 8295,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 11,
+        "bookmarks": 23,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs-more"
+      },
+      {
+        "demoId": 13434,
+        "componentId": 8295,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 11,
+        "bookmarks": 21,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs-more"
+      },
+      {
+        "demoId": 7886,
+        "componentId": 5228,
+        "name": "ZoomDepthTabs",
+        "author": "ruixen.ui",
+        "downloads": 11,
+        "bookmarks": 22,
+        "url": "https://21st.dev/@ruixen.ui/components/zoom-depth-tabs"
+      },
+      {
+        "demoId": 13433,
+        "componentId": 8295,
+        "name": "Flexnative Tabs",
+        "author": "felipemenezes098",
+        "downloads": 11,
+        "bookmarks": 10,
+        "url": "https://21st.dev/@felipemenezes098/components/flexnative-tabs-more"
+      },
+      {
+        "demoId": 28148,
+        "componentId": 14579,
+        "name": "Logo Cloud Story Tabs",
+        "author": "mohammadshehadeh",
+        "downloads": 11,
+        "bookmarks": 13,
+        "url": "https://21st.dev/@mohammadshehadeh/components/logo-cloud-04"
+      },
+      {
+        "demoId": 24956,
+        "componentId": 12190,
+        "name": "Underline Tabs",
+        "author": "cnippet-dev",
+        "downloads": 11,
+        "bookmarks": 5,
+        "url": "https://21st.dev/@cnippet-dev/components/v-tabs-2"
+      },
+      {
+        "demoId": 16247,
+        "componentId": 8720,
+        "name": "Service Changelog",
+        "author": "ruixen.ui",
+        "downloads": 11,
+        "bookmarks": 99,
+        "url": "https://21st.dev/@ruixen.ui/components/service-changelog"
+      },
+      {
+        "demoId": 24937,
+        "componentId": 12171,
+        "name": "Vertical Settings Tabs",
+        "author": "cnippet-dev",
+        "downloads": 10,
+        "bookmarks": 56,
+        "url": "https://21st.dev/@cnippet-dev/components/v-tabs-13"
+      },
+      {
+        "demoId": 5347,
+        "componentId": 3840,
+        "name": "Navbar",
+        "author": "AliFarooqDev",
+        "downloads": 10,
+        "bookmarks": 14,
+        "url": "https://21st.dev/@AliFarooqDev/components/navbar"
+      },
+      {
+        "demoId": 2694,
+        "componentId": 2565,
+        "name": "Dynamic Action ",
+        "author": "ln-dev7",
+        "downloads": 10,
+        "bookmarks": 205,
+        "url": "https://21st.dev/@ln-dev7/components/dynamic-action"
+      },
+      {
+        "demoId": 20041,
+        "componentId": 10334,
+        "name": "Family Sign In Drawer",
+        "author": "stackingsu",
+        "downloads": 10,
+        "bookmarks": 50,
+        "url": "https://21st.dev/@stackingsu/components/family-signin-drawer"
+      },
+      {
+        "demoId": 4460,
+        "componentId": 3456,
+        "name": "Tabs",
+        "author": "olivier_1b6cd5bc",
+        "downloads": 9,
+        "bookmarks": 7,
+        "url": "https://21st.dev/@olivier_1b6cd5bc/components/tabs-1"
+      },
+      {
+        "demoId": 13029,
+        "componentId": 8217,
+        "name": "8-bit Tabs",
+        "author": "theorcdev",
+        "downloads": 8,
+        "bookmarks": 18,
+        "url": "https://21st.dev/@theorcdev/components/8bit-tabs"
+      },
+      {
+        "demoId": 29984,
+        "componentId": 16245,
+        "name": "Tabs Line",
+        "author": "uiable",
+        "downloads": 8,
+        "bookmarks": 7,
+        "url": "https://21st.dev/@uiable/components/tabs-line"
+      },
+      {
+        "demoId": 24961,
+        "componentId": 12195,
+        "name": "Icon Only Tabs",
+        "author": "felipemenezes098",
+        "downloads": 8,
+        "bookmarks": 29,
+        "url": "https://21st.dev/@felipemenezes098/components/tabs-08"
+      },
+      {
+        "demoId": 19375,
+        "componentId": 9952,
+        "name": "Empty State with Tabs",
+        "author": "shadcnui-blocks",
+        "downloads": 8,
+        "bookmarks": 17,
+        "url": "https://21st.dev/@shadcnui-blocks/components/empty-state-03"
+      },
+      {
+        "demoId": 24859,
+        "componentId": 12095,
+        "name": "Categorized FAQ",
+        "author": "educalvolpz",
+        "downloads": 8,
+        "bookmarks": 34,
+        "url": "https://21st.dev/@educalvolpz/components/faq-4"
+      },
+      {
+        "demoId": 18328,
+        "componentId": 9191,
+        "name": "Reshaped Tabs",
+        "author": "reshaped",
+        "downloads": 7,
+        "bookmarks": 0,
+        "url": "https://21st.dev/@reshaped/components/reshaped-tabs"
+      },
+      {
+        "demoId": 18327,
+        "componentId": 9191,
+        "name": "Reshaped Tabs",
+        "author": "reshaped",
+        "downloads": 7,
+        "bookmarks": 1,
+        "url": "https://21st.dev/@reshaped/components/reshaped-tabs"
+      },
+      {
+        "demoId": 18325,
+        "componentId": 9191,
+        "name": "Reshaped Tabs",
+        "author": "reshaped",
+        "downloads": 7,
+        "bookmarks": 0,
+        "url": "https://21st.dev/@reshaped/components/reshaped-tabs"
+      },
+      {
+        "demoId": 18326,
+        "componentId": 9191,
+        "name": "Reshaped Tabs",
+        "author": "reshaped",
+        "downloads": 7,
+        "bookmarks": 0,
+        "url": "https://21st.dev/@reshaped/components/reshaped-tabs"
+      },
+      {
+        "demoId": 9748,
+        "componentId": 6623,
+        "name": "Sidebar with Browser like Tabs",
+        "author": "arunachalam",
+        "downloads": 7,
+        "bookmarks": 126,
+        "url": "https://21st.dev/@arunachalam/components/sidebar-with-chrome-like-tabs"
+      },
+      {
+        "demoId": 18324,
+        "componentId": 9191,
+        "name": "Reshaped Tabs",
+        "author": "reshaped",
+        "downloads": 7,
+        "bookmarks": 0,
+        "url": "https://21st.dev/@reshaped/components/reshaped-tabs"
+      },
+      {
+        "demoId": 18323,
+        "componentId": 9191,
+        "name": "Reshaped Tabs",
+        "author": "reshaped",
+        "downloads": 7,
+        "bookmarks": 3,
+        "url": "https://21st.dev/@reshaped/components/reshaped-tabs"
+      },
+      {
+        "demoId": 29421,
+        "componentId": 15731,
+        "name": "Underline Tabs with Icons",
+        "author": "coss.com",
+        "downloads": 7,
+        "bookmarks": 7,
+        "url": "https://21st.dev/@coss.com/components/p-tabs-9"
+      },
+      {
+        "demoId": 18330,
+        "componentId": 9191,
+        "name": "Reshaped Tabs",
+        "author": "reshaped",
+        "downloads": 7,
+        "bookmarks": 0,
+        "url": "https://21st.dev/@reshaped/components/reshaped-tabs"
+      },
+      {
+        "demoId": 18329,
+        "componentId": 9191,
+        "name": "Reshaped Tabs",
+        "author": "reshaped",
+        "downloads": 7,
+        "bookmarks": 0,
+        "url": "https://21st.dev/@reshaped/components/reshaped-tabs"
+      },
+      {
+        "demoId": 18331,
+        "componentId": 9191,
+        "name": "Reshaped Tabs",
+        "author": "reshaped",
+        "downloads": 7,
+        "bookmarks": 0,
+        "url": "https://21st.dev/@reshaped/components/reshaped-tabs"
+      },
+      {
+        "demoId": 28166,
+        "componentId": 14596,
+        "name": "Tabbed Feature Categories",
+        "author": "olewandowski1",
+        "downloads": 6,
+        "bookmarks": 42,
+        "url": "https://21st.dev/@olewandowski1/components/features-4"
+      },
+      {
+        "demoId": 28358,
+        "componentId": 14745,
+        "name": "Settings Tabbed Sections",
+        "author": "felipemenezes098",
+        "downloads": 6,
+        "bookmarks": 3,
+        "url": "https://21st.dev/@felipemenezes098/components/settings-1"
+      },
+      {
+        "demoId": 28385,
+        "componentId": 14771,
+        "name": "Tabbed Changelog",
+        "author": "olewandowski1",
+        "downloads": 6,
+        "bookmarks": 5,
+        "url": "https://21st.dev/@olewandowski1/components/changelog-2"
+      },
+      {
+        "demoId": 28432,
+        "componentId": 14818,
+        "name": "Notification Center Tabs",
+        "author": "olewandowski1",
+        "downloads": 6,
+        "bookmarks": 4,
+        "url": "https://21st.dev/@olewandowski1/components/notifications-3"
+      },
+      {
+        "demoId": 7695,
+        "componentId": 5074,
+        "name": "Menu",
+        "author": "antdesign",
+        "downloads": 6,
+        "bookmarks": 19,
+        "url": "https://21st.dev/@antdesign/components/menu-1"
+      },
+      {
+        "demoId": 28490,
+        "componentId": 14872,
+        "name": "Activity Tabs With Unread",
+        "author": "olewandowski1",
+        "downloads": 6,
+        "bookmarks": 1,
+        "url": "https://21st.dev/@olewandowski1/components/activity-4"
+      },
+      {
+        "demoId": 29794,
+        "componentId": 16055,
+        "name": "Vertical Icon Tabs",
+        "author": "sean0205",
+        "downloads": 6,
+        "bookmarks": 4,
+        "url": "https://21st.dev/@sean0205/components/c-tabs-8"
+      },
+      {
+        "demoId": 24941,
+        "componentId": 12175,
+        "name": "Underline Tabs Card",
+        "author": "cnippet-dev",
+        "downloads": 6,
+        "bookmarks": 1,
+        "url": "https://21st.dev/@cnippet-dev/components/v-tabs-6"
+      },
+      {
+        "demoId": 24931,
+        "componentId": 12165,
+        "name": "Segmented Control Tabs",
+        "author": "cnippet-dev",
+        "downloads": 6,
+        "bookmarks": 23,
+        "url": "https://21st.dev/@cnippet-dev/components/segmented-control-tabs"
+      },
+      {
+        "demoId": 24990,
+        "componentId": 12214,
+        "name": "Tabs with Icons",
+        "author": "cnippet-dev",
+        "downloads": 6,
+        "bookmarks": 8,
+        "url": "https://21st.dev/@cnippet-dev/components/tabs-with-icons"
+      },
+      {
+        "demoId": 16353,
+        "componentId": 8741,
+        "name": "Apple Color Picker",
+        "author": "pulseawan",
+        "downloads": 6,
+        "bookmarks": 117,
+        "url": "https://21st.dev/@pulseawan/components/apple-color-picker"
+      },
+      {
+        "demoId": 24986,
+        "componentId": 12210,
+        "name": "Icon with Title Tabs",
+        "author": "felipemenezes098",
+        "downloads": 6,
+        "bookmarks": 9,
+        "url": "https://21st.dev/@felipemenezes098/components/tabs-10"
+      },
+      {
+        "demoId": 34763,
+        "componentId": 19363,
+        "name": "Segmented Control",
+        "author": "halaska-studio",
+        "downloads": 5,
+        "bookmarks": 2,
+        "url": "https://21st.dev/@halaska-studio/components/segmented-control"
+      },
+      {
+        "demoId": 34764,
+        "componentId": 19363,
+        "name": "Segmented Control",
+        "author": "halaska-studio",
+        "downloads": 5,
+        "bookmarks": 2,
+        "url": "https://21st.dev/@halaska-studio/components/segmented-control"
+      },
+      {
+        "demoId": 17747,
+        "componentId": 8870,
+        "name": "Reshaped Divider",
+        "author": "reshaped",
+        "downloads": 5,
+        "bookmarks": 0,
+        "url": "https://21st.dev/@reshaped/components/reshaped-divider"
+      },
+      {
+        "demoId": 34762,
+        "componentId": 19363,
+        "name": "Segmented Control",
+        "author": "halaska-studio",
+        "downloads": 5,
+        "bookmarks": 4,
+        "url": "https://21st.dev/@halaska-studio/components/segmented-control"
+      },
+      {
+        "demoId": 25145,
+        "componentId": 12369,
+        "name": "Tabs (Radix UI)",
+        "author": "edwinvakayil",
+        "downloads": 5,
+        "bookmarks": 13,
+        "url": "https://21st.dev/@edwinvakayil/components/r-tabs"
+      },
+      {
+        "demoId": 35021,
+        "componentId": 19545,
+        "name": "Animated Tabs",
+        "author": "kuratlielia",
+        "downloads": 5,
+        "bookmarks": 2,
+        "url": "https://21st.dev/@kuratlielia/components/tabs"
+      },
+      {
+        "demoId": 25323,
+        "componentId": 12539,
+        "name": "Settings Card with Sidebar",
+        "author": "cnippet-dev",
+        "downloads": 5,
+        "bookmarks": 31,
+        "url": "https://21st.dev/@cnippet-dev/components/v-card-17"
+      },
+      {
+        "demoId": 34765,
+        "componentId": 19363,
+        "name": "Segmented Control",
+        "author": "halaska-studio",
+        "downloads": 5,
+        "bookmarks": 0,
+        "url": "https://21st.dev/@halaska-studio/components/segmented-control"
+      },
+      {
+        "demoId": 29953,
+        "componentId": 16214,
+        "name": "FAQ Tabs Card",
+        "author": "arihantcodes_1f7b8c4d",
+        "downloads": 5,
+        "bookmarks": 6,
+        "url": "https://21st.dev/@arihantcodes_1f7b8c4d/components/faq-tabs-card"
+      },
+      {
+        "demoId": 27358,
+        "componentId": 13858,
+        "name": "Bjork Tabs",
+        "author": "isaiahbjork",
+        "downloads": 5,
+        "bookmarks": 4,
+        "url": "https://21st.dev/@isaiahbjork/components/primitive-tabs"
+      },
+      {
+        "demoId": 29314,
+        "componentId": 15624,
+        "name": "Card Tabs",
+        "author": "uiable",
+        "downloads": 4,
+        "bookmarks": 65,
+        "url": "https://21st.dev/@uiable/components/card-tabs"
+      },
+      {
+        "demoId": 2647,
+        "componentId": 2518,
+        "name": "indevuiTabs",
+        "author": "ln-dev7",
+        "downloads": 4,
+        "bookmarks": 8,
+        "url": "https://21st.dev/@ln-dev7/components/indevui-tabs"
+      },
+      {
+        "demoId": 16171,
+        "componentId": 8708,
+        "name": "BeUI Expandable Tabs",
+        "author": "starc007",
+        "downloads": 4,
+        "bookmarks": 316,
+        "url": "https://21st.dev/@starc007/components/be-ui-expandable-tabs"
+      },
+      {
+        "demoId": 15690,
+        "componentId": 8671,
+        "name": "BeUI Tabs",
+        "author": "starc007",
+        "downloads": 4,
+        "bookmarks": 62,
+        "url": "https://21st.dev/@starc007/components/beui-tabs"
+      },
+      {
+        "demoId": 27897,
+        "componentId": 14371,
+        "name": "Mobile Navigation Tabs",
+        "author": "shadcnui-blocks",
+        "downloads": 4,
+        "bookmarks": 3,
+        "url": "https://21st.dev/@shadcnui-blocks/components/tabs-08"
+      },
+      {
+        "demoId": 28879,
+        "componentId": 15191,
+        "name": "Pricing 6",
+        "author": "odysseyui",
+        "downloads": 2,
+        "bookmarks": 31,
+        "url": "https://21st.dev/@odysseyui/components/components-pricings-pricing-6"
+      },
+      {
+        "demoId": 34904,
+        "componentId": 19465,
+        "name": "Halo Toggle Group",
+        "author": "cult-ui",
+        "downloads": 2,
+        "bookmarks": 11,
+        "url": "https://21st.dev/@cult-ui/components/halo-toggle-group"
+      },
+      {
+        "demoId": 28429,
+        "componentId": 14815,
+        "name": "Assistant Tabs",
+        "author": "shadcnspace",
+        "downloads": 2,
+        "bookmarks": 38,
+        "url": "https://21st.dev/@shadcnspace/components/tabs-10"
+      },
+      {
+        "demoId": 24523,
+        "componentId": 11837,
+        "name": "Shared layout animation",
+        "author": "motiondotdev",
+        "downloads": 2,
+        "bookmarks": 13,
+        "url": "https://21st.dev/@motiondotdev/components/motion-shared-layout-animation"
+      },
+      {
+        "demoId": 25138,
+        "componentId": 12362,
+        "name": "Tabs With Icons",
+        "author": "shadcnspace",
+        "downloads": 2,
+        "bookmarks": 8,
+        "url": "https://21st.dev/@shadcnspace/components/tabs-03"
+      },
+      {
+        "demoId": 24874,
+        "componentId": 12108,
+        "name": "FAQ Tabbed Explorer",
+        "author": "uilayout.contact",
+        "downloads": 2,
+        "bookmarks": 56,
+        "url": "https://21st.dev/@uilayout.contact/components/faq-tabbed-explorer"
+      },
+      {
+        "demoId": 34849,
+        "componentId": 19411,
+        "name": "Expandable Tabs",
+        "author": "rjcuff2000",
+        "downloads": 2,
+        "bookmarks": 10,
+        "url": "https://21st.dev/@rjcuff2000/components/expandable-tabs"
+      },
+      {
+        "demoId": 34918,
+        "componentId": 19479,
+        "name": "Tabs Illustration Vercel",
+        "author": "cult-ui",
+        "downloads": 2,
+        "bookmarks": 3,
+        "url": "https://21st.dev/@cult-ui/components/tabs-illustration-vercel"
+      },
+      {
+        "demoId": 24992,
+        "componentId": 12216,
+        "name": "Headless Tabs",
+        "author": "skyleen77",
+        "downloads": 2,
+        "bookmarks": 0,
+        "url": "https://21st.dev/@skyleen77/components/headless-tabs"
+      },
+      {
+        "demoId": 33158,
+        "componentId": 18913,
+        "name": "Handle Reel",
+        "author": "adrielzimbril",
+        "downloads": 2,
+        "bookmarks": 44,
+        "url": "https://21st.dev/@adrielzimbril/components/handle-reel"
+      }
+    ]
+  }
+}

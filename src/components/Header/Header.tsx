@@ -115,7 +115,7 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
           onClick={() => setOpen((current) => !current)}
           data-open={open}
         >
-          <span>{open ? closeLabel : menuLabel}</span>
+          <span data-type-field={"header.menu.close"}>{open ? closeLabel : menuLabel}</span>
           <span className={styles.menuIcon} aria-hidden="true">
             <motion.i animate={{ rotate: open ? 45 : 0, y: open ? 0 : -3 }} transition={{ duration: reduced ? 0 : 0.3 }} />
             <motion.i animate={{ rotate: open ? -45 : 0, y: open ? 0 : 3 }} transition={{ duration: reduced ? 0 : 0.3 }} />
@@ -158,7 +158,7 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", curren
   const navigationLabel = get("menu.navigation-label", "Site navigation");
   const compactForCopy = navigation.some(item => item.label.length > 20) || navigation.reduce((length, item) => length + item.label.length, 0) > 90;
   return (
-    <header className={styles.header} data-tone={resolvedTone} data-copy-compact={compactForCopy} data-site-header>
+    <header className={styles.header} data-type-section="shared.header" data-tone={resolvedTone} data-copy-compact={compactForCopy} data-site-header>
       <div className={styles.shell}>
         <MagneticLink href="/" className={styles.logo} aria-label={`${brandName} home`} data-models-magnetic>
           <OknoLogo tone={resolvedTone === "light" ? "dark" : "light"} priority />
@@ -166,8 +166,8 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", curren
         <nav className={styles.navigation} aria-label={get("nav.accessible-label", "Primary navigation")}>
           {navigation.map((item) => <RollingLink key={item.href} {...item} current={isSiteNavigationActive(activePath, item.href)} />)}
         </nav>
-        <div className={styles.actions}>
-          <SubtleLink href={enquiryHref} className={styles.enquire} tone={resolvedTone === "light" ? "paper" : "glass"} data-models-magnetic>{enquireLabel}</SubtleLink>
+        <div className={styles.actions} data-type-field={"header.menu.open"}>
+          <SubtleLink href={enquiryHref} className={styles.enquire} tone={resolvedTone === "light" ? "paper" : "glass"} data-models-magnetic data-type-field={"header.action.enquire"}>{enquireLabel}</SubtleLink>
           <SiteMorphMenu items={items} currentHref={activePath} menuLabel={menuLabel} closeLabel={closeLabel} navigationLabel={navigationLabel}
             mobileNavigationLabel={get("menu.mobile-navigation-label", "Mobile navigation")}
             openAccessible={get("menu.open-accessible", "Open navigation")}

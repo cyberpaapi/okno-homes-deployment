@@ -1,40 +1,38 @@
-.page {
-  color: #f4f0e9;
-  background: #000;
-  font-family: "Geist OKNO", sans-serif;
-}
-.skipFilm {
-  position: fixed;
-  top: -100px;
-  left: 12px;
-  z-index: 120;
-  padding: 13px 18px;
-  border: 0;
-  background: #eef2e8;
-  color: #0b1b17;
-  font: inherit;
-  cursor: pointer;
-}
-.skipFilm:focus-visible { top: 12px; outline: 2px solid #ddf1d7; outline-offset: 5px; }
-.sequence { position: relative; height: 100svh; }
-.scene { position: relative; width: 100%; height: 100svh; overflow: hidden; background: #000; }
-.filmWindow, .loopWindow, .opening, .film, .loopFilm { position: absolute; inset: 0; width: 100%; height: 100%; }
-.filmWindow { z-index: 1; clip-path: inset(0 49.96%); transition: clip-path .8s cubic-bezier(.16, 1, .3, 1); }
-.filmWindowOpen { clip-path: inset(0 0); }
-.film, .loopFilm { object-fit: cover; object-position: center center; }
-.loopWindow { z-index: 2; opacity: 0; pointer-events: none; transition: opacity .42s ease-out; }
-.loopWindowVisible { opacity: 1; }
-.opening { z-index: 3; display: grid; place-items: center; pointer-events: none; transition: opacity .5s ease-out, visibility .5s; }
-.openingHidden { opacity: 0; visibility: hidden; }
-.openingMark { width: clamp(264px, 37vw, 570px); }
-.openingMark img { width: 100%; height: auto; }
+.page { color: #f4f0e9; background: #000; font-family: "Geist OKNO", sans-serif; }
+.sequence { position: relative; height: 620svh; }
+/* This track preserves the accepted film's scroll distance. Only the held
+   final frame gets an extra viewport for reading the closing hero. */
+.scrollTrack { position: absolute; inset: 0 0 auto; height: 520svh; pointer-events: none; }
+.scene { position: sticky; top: 0; width: 100%; height: 100svh; overflow: hidden; background: #000; }
+.film { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.loading { opacity: 0; }
+.visible { opacity: 1; }
+.still, .still .scrollTrack { height: 100svh; }
 .visuallyHidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.ending { position: absolute; inset: 0; z-index: 1; display: flex; align-items: flex-end; padding: clamp(32px, 6vw, 88px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease-out, visibility .45s; }
+.ending::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(4 13 10 / 88%), rgb(4 13 10 / 42%) 48%, transparent 82%); }
+.endingVisible { opacity: 1; visibility: visible; pointer-events: auto; }
+.endingContent { max-width: 650px; transform: translateY(14px); transition: transform .45s cubic-bezier(.16, 1, .3, 1); }
+.endingVisible .endingContent { transform: translateY(0); }
+.headline { margin: 0; color: #f4f0e9; font-size: var(--type-size-display, clamp(3rem, calc(3rem + 48 * (100vw - 24.375rem) / 1050), 6rem)); font-weight: 400; line-height: 1.02; letter-spacing: -.035em; white-space: pre-line; text-wrap: balance; }
+.description { max-width: 32ch; margin: 24px 0 0; color: #e4e7df; font-size: var(--type-size-body, clamp(1rem, calc(1rem + 2 * (100vw - 24.375rem) / 1050), 1.125rem)); line-height: 1.55; text-wrap: pretty; }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 18px 28px; margin-top: 30px; }
+.primaryAction { border-radius: 999px; }
+.secondaryAction { padding: 12px 0; color: #f4f0e9; font-size: var(--type-size-caption, clamp(.75rem, calc(.75rem + 2 * (100vw - 24.375rem) / 1050), .875rem)); text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgb(244 240 233 / 45%); transition: text-decoration-color .2s; }
+.secondaryAction:hover { text-decoration-color: currentColor; }
+.secondaryAction:focus-visible { outline: 2px solid #e4e7df; outline-offset: 6px; border-radius: 2px; }
 @media (max-width: 600px) {
-  .film, .loopFilm { object-position: 48% center; }
-  .openingMark { width: min(68vw, 350px); }
+  .sequence { height: 578svh; }
+  .scrollTrack { height: 478svh; }
+  .film { object-position: 48% center; }
+  .ending { padding: 28px 24px 64px; }
+  .ending::before { background: linear-gradient(0deg, rgb(4 13 10 / 93%), rgb(4 13 10 / 55%) 58%, transparent); }
+  .endingContent { width: 100%; }
+  .actions { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .description { margin-top: 20px; }
+  .still, .still .scrollTrack { height: 100svh; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .filmWindow, .opening { display: none; }
-  .loopWindow { opacity: 1 !important; }
-  .skipFilm { display: none; }
+  .sequence, .scrollTrack { height: 100svh; }
+  .ending, .endingContent { transition: none; transform: none; }
 }

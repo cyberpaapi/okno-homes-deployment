@@ -13,6 +13,7 @@ import styles from "./SustainabilityProof.module.css";
 import { useSiteContentMap } from "@/lib/useSiteContent";
 
 type PressItem = {
+  index?: number;
   source: string;
   date: string;
   title: string;
@@ -102,7 +103,7 @@ function PressCitation({
   );
 
   return (
-    <motion.article className={styles.pressCitation} style={{ opacity, y }}>
+    <motion.article className={styles.pressCitation} data-type-section={`sustainability.press-${(item.index ?? 0) + 1}`} style={{ opacity, y }}>
       <div className={styles.citationMeta}>
         <strong>{item.source}</strong>
         <time>{item.date}</time>
@@ -116,6 +117,7 @@ export default function SustainabilityProof() {
   const values = useSiteContentMap();
   const get = (key: string, fallback: string) => values[`sustainability.proof.${key}`] ?? fallback;
   const currentPress = pressItems.map((item, index) => ({
+    index,
     ...item,
     source: get(`press-${index + 1}.source`, item.source),
     date: get(`press-${index + 1}.date`, item.date),
@@ -197,14 +199,14 @@ export default function SustainabilityProof() {
   const finalImageOpacity = useTransform(scrollYProgress, [0.75, 0.82], [0, 1]);
 
   return (
-    <section ref={trackRef} className={styles.track} aria-labelledby="press-proof-heading">
+    <section ref={trackRef} className={styles.track} data-type-section="sustainability.proof" aria-labelledby="press-proof-heading">
       <div className={styles.stickyScene}>
         <div className={styles.blackField} aria-hidden="true" />
 
         <motion.div className={styles.opening} style={{ opacity: openingOpacity, y: openingY }}>
-          <h2 id="press-proof-heading">
+          <h2 id="press-proof-heading" data-type-field={"sustainability.proof.opening-line-1"}>
             {get("opening-line-1", "The land leads.")}<br />
-            {get("opening-line-2", "The home ")}<span>{get("opening-emphasis", "follows.")}</span>
+            {get("opening-line-2", "The home ")}<span data-type-highlight data-type-field={"sustainability.proof.opening-emphasis"}>{get("opening-emphasis", "follows.")}</span>
           </h2>
         </motion.div>
 
@@ -226,15 +228,15 @@ export default function SustainabilityProof() {
                   quality={90}
                 />
               </motion.div>
-              <span className={styles.photoCredit}>{get("final-credit", "Photography · Inclined Studio")}</span>
+              <span className={styles.photoCredit} data-type-field={"sustainability.proof.final-credit"}>{get("final-credit", "Photography · Inclined Studio")}</span>
             </div>
           </figure>
 
           <aside className={styles.proofSidebar}>
             <motion.div className={styles.pressStage} style={{ opacity: pressOpacity, y: pressY }}>
               <div className={styles.sideCopy}>
-                <h3>{get("press-heading", "Reflections travelled beyond the forest.")}</h3>
-                <p>{get("press-copy", "Four publications found different stories in the same compact home.")}</p>
+                <h3 data-type-field={"sustainability.proof.press-heading"}>{get("press-heading", "Reflections travelled beyond the forest.")}</h3>
+                <p data-type-field={"sustainability.proof.press-copy"}>{get("press-copy", "Four publications found different stories in the same compact home.")}</p>
               </div>
 
               <div className={styles.pressRail} aria-label="Press coverage">
@@ -252,18 +254,18 @@ export default function SustainabilityProof() {
           </aside>
         </motion.div>
 
-        <motion.section className={styles.detailsSheet} style={{ y: sheetY, opacity: sheetOpacity }} aria-labelledby="reflections-details-title">
+        <motion.section className={styles.detailsSheet} data-type-section="sustainability.facts-intro" style={{ y: sheetY, opacity: sheetOpacity }} aria-labelledby="reflections-details-title">
           <motion.div className={styles.detailsInner} style={{ opacity: sheetContentOpacity, y: sheetContentY }}>
-            <h3 id="reflections-details-title">{get("facts-heading", "What the coverage points back to.")}</h3>
+            <h3 id="reflections-details-title" data-type-field={"sustainability.proof.facts-heading"}>{get("facts-heading", "What the coverage points back to.")}</h3>
             <ul className={styles.factGrid}>
               {currentFacts.map((item, index) => (
-                <li key={index}>
+                <li key={index} data-type-section={`sustainability.fact-${index + 1}`}>
                   <i aria-hidden="true" />
                   <span><strong>{item.value}</strong><small>{item.label}</small></span>
                 </li>
               ))}
             </ul>
-            <p className={styles.closingLine}>{get("facts-close", "A compact home can still make a large architectural argument.")}</p>
+            <p className={styles.closingLine} data-type-field={"sustainability.proof.facts-close"}>{get("facts-close", "A compact home can still make a large architectural argument.")}</p>
           </motion.div>
         </motion.section>
       </div>

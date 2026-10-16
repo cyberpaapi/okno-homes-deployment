@@ -124,7 +124,7 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
   return <div ref={surface} style={{ position: 'absolute', inset: 0 }}>{nativeSource
     ? <video ref={video} className={className} src={nativeSource} poster={poster} muted playsInline preload="auto" aria-label={label} data-process-master-video data-film-renderer="native" onError={() => onReady(false)} />
     : <canvas ref={canvas} className={className} width={1920} height={1080} role="img" aria-label={label} data-process-master-video data-film-renderer="frames" />}
-    <picture>
+    <picture style={{ position: 'absolute', inset: 0 }}>
       <source media="(max-width: 1023px)" srcSet="/process/process-final-house-mobile.webp" />
       <Image ref={finish} src="/process/process-final-house.webp" alt="" aria-hidden="true" fill unoptimized loading="eager" className={className} data-process-finish style={{ opacity: 0, pointerEvents: 'none' }} />
     </picture>

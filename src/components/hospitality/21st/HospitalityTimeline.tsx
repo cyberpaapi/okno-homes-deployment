@@ -163,14 +163,14 @@ export function HospitalityTimeline({ steps }: { steps: readonly TimelineStep[] 
 
   if (mobile || reduced) {
     return (
-      <section id="delivery" ref={sectionRef} className={overrides.mobileStage} aria-labelledby="delivery-title" data-header-tone="dark">
+      <section id="delivery" data-type-section="hospitality.timeline" ref={sectionRef} className={overrides.mobileStage} aria-labelledby="delivery-title" data-header-tone="dark">
         <figure className={overrides.mobileCover}>
           <Image loader={pageImageLoader} src={get("cover", "/assets/projects/real-v1/octapod-layana-08.webp")} alt={get("cover-alt", "Aerial view of a hospitality estate arranged around a central pool")} fill sizes="(max-width: 1023px) 100vw, 30vw" draggable={false} />
         </figure>
         <header className={overrides.mobileHeader}>
-          <small>{get("label", "Delivery path")}</small>
-          <h2 id="delivery-title">{get("title", "Brief to opening.")}</h2>
-          <span>{get("range", "01 — 07")}</span>
+          <small data-type-field={"hospitality.timeline.label"}>{get("label", "Delivery path")}</small>
+          <h2 id="delivery-title" data-type-field={"hospitality.timeline.title"}>{get("title", "Brief to opening.")}</h2>
+          <span data-type-field={"hospitality.timeline.range"}>{get("range", "01 — 07")}</span>
         </header>
         <ol className={overrides.mobileList}>
           {currentSteps.map(([number, title, copy], index) => (
@@ -185,7 +185,7 @@ export function HospitalityTimeline({ steps }: { steps: readonly TimelineStep[] 
   }
 
   return (
-    <section id="delivery" ref={sectionRef} className={`${styles.stage} ${overrides.stage}`} aria-labelledby="delivery-title" data-header-tone="dark">
+    <section id="delivery" data-type-section="hospitality.timeline" ref={sectionRef} className={`${styles.stage} ${overrides.stage}`} aria-labelledby="delivery-title" data-header-tone="dark">
       <div className={`${styles.sticky} ${overrides.stickyCentered}`}>
         <div ref={sliderRef} className={styles.slider}>
           <figure className={styles.cover}>
@@ -194,10 +194,10 @@ export function HospitalityTimeline({ steps }: { steps: readonly TimelineStep[] 
           <div className={styles.timeline}>
             <div className={styles.axis} aria-hidden="true"><i /><span ref={activeLineRef} /><i /></div>
             <div className={styles.timelineTitle}>
-              <small>{get("label", "Delivery path")}</small>
-              <h2 id="delivery-title">{get("title", "Brief to opening.")}</h2>
+              <small data-type-field={"hospitality.timeline.label"}>{get("label", "Delivery path")}</small>
+              <h2 id="delivery-title" data-type-field={"hospitality.timeline.title"}>{get("title", "Brief to opening.")}</h2>
             </div>
-            <p className={styles.period}>{get("range", "01 — 07")}</p>
+            <p className={styles.period} data-type-field={"hospitality.timeline.range"}>{get("range", "01 — 07")}</p>
             {currentSteps.map(([number, title, copy], index) => (
               <article
                 key={index}

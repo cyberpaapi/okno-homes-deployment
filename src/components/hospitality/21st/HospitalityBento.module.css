@@ -49,40 +49,41 @@
   display: grid;
   align-self: flex-end;
   width: 100%;
-  grid-template-columns: auto 1fr;
-  gap: 8px 26px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
   padding: clamp(26px, 3vw, 42px);
   overflow-wrap: anywhere;
 }
 
 .copy p {
-  grid-column: 1 / -1;
   margin: 0;
   color: rgba(255, 255, 255, .6);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 500;
   letter-spacing: .18em;
   text-transform: uppercase;
 }
 
 .copy strong {
-  font-size: clamp(44px, 5vw, 76px);
+  min-width: 0;
+  font-size: var(--type-size-heading, clamp(44px, 5vw, 76px));
   font-weight: 500;
   letter-spacing: -.075em;
-  line-height: .83;
+  line-height: 1;
 }
 
 .copy h3 {
-  align-self: end;
-  max-width: 20ch;
-  margin: 0 0 2px;
-  font-size: clamp(17px, 1.5vw, 24px);
+  min-width: 0;
+  min-height: 3.15em;
+  max-width: 32ch;
+  margin: 0;
+  font-size: var(--type-size-subheading, clamp(17px, 1.5vw, 24px));
   font-weight: 450;
   letter-spacing: -.035em;
   line-height: 1.05;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: auto;
@@ -108,13 +109,11 @@
   }
 
   .copy {
-    display: block;
     padding: 28px;
   }
 
-  .copy p { margin-bottom: 18px; }
-  .copy strong { display: block; margin-bottom: 16px; }
-  .copy h3 { font-size: 23px; line-height: 1.05; }
+  .copy h3 { min-height: 0; }
+  .copy h3 { font-size: var(--type-size-subheading, 23px); line-height: 1.05; }
 }
 
 @media (prefers-reduced-motion: reduce) {

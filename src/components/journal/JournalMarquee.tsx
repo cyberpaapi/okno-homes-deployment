@@ -49,13 +49,15 @@ export default function JournalMarquee({ caption, entries, direction = "left", a
   const firstGroup = useRef<HTMLDivElement>(null);
   const groupWidth = useRef(0);
   const offset = useRef(0);
-  const coarsePointer = useRef(false);
   const visible = useRef(true);
   const hovered = useRef(false);
   const dragging = useRef(false);
   const lastX = useRef(0);
   const dragVelocity = useRef(0);
+  const focused = useRef(false);
+  const moved = useRef(false);
   const [dragActive, setDragActive] = useState(false);
+  const [paused, setPaused] = useState(false);
   const reduced = useReducedMotion();
 
   const paintPosition = () => {
@@ -84,23 +86,14 @@ export default function JournalMarquee({ caption, entries, direction = "left", a
     const resizeObserver = new ResizeObserver(measureAndPosition);
     resizeObserver.observe(group);
     measureAndPosition();
-    const pointerQuery = typeof window.matchMedia === "function" ? window.matchMedia("(hover: none), (pointer: coarse)") : null;
-    const updatePointerMode = () => {
-      coarsePointer.current = pointerQuery?.matches ?? false;
-      if (coarsePointer.current) node.style.transform = "translate3d(0,0,0)";
-      else paintPosition();
-    };
-    updatePointerMode();
-    pointerQuery?.addEventListener("change", updatePointerMode);
     return () => {
       observer.disconnect();
       resizeObserver.disconnect();
-      pointerQuery?.removeEventListener("change", updatePointerMode);
     };
   }, [direction, entries.length]);
 
   useAnimationFrame((_, delta) => {
-    if (entries.length < 2 || !track.current || reduced || coarsePointer.current || !visible.current || dragging.current || document.visibilityState !== "visible") return;
+    if (entries.length < 2 || !track.current || reduced || paused || focused.current || !visible.current || dragging.current || document.visibilityState !== "visible") return;
     const frame = Math.min(delta, 32) / 16.667;
     if (Math.abs(dragVelocity.current) > 0.08) {
       offset.current += dragVelocity.current * frame;
@@ -115,16 +108,18 @@ export default function JournalMarquee({ caption, entries, direction = "left", a
   });
 
   const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (entries.length < 2 || event.pointerType !== "mouse" || (event.target as Element).closest("a,button")) return;
+    if (entries.length < 2 || reduced || (event.target as Element).closest("a,button")) return;
     event.currentTarget.setPointerCapture(event.pointerId);
     dragging.current = true;
     dragVelocity.current = 0;
+    moved.current = false;
     lastX.current = event.clientX;
     setDragActive(true);
   };
   const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (!dragging.current || !track.current) return;
     const delta = event.clientX - lastX.current;
+    if (Math.abs(delta) > 3) moved.current = true;
     offset.current += delta;
     dragVelocity.current = delta * 0.92;
     lastX.current = event.clientX;
@@ -140,17 +135,20 @@ export default function JournalMarquee({ caption, entries, direction = "left", a
   if (entries.length === 0) return null;
 
   return (
-    <section ref={root} className={styles.marqueeWrap} aria-label={caption} data-direction={direction} data-single={entries.length === 1}>
-      <div className={styles.marqueeCaption}><p>{caption}</p></div>
+    <section ref={root} className={styles.marqueeWrap} data-type-section={direction === "left" ? "journal.press-intro" : "journal.notes-intro"} aria-label={caption} data-direction={direction} data-single={entries.length === 1}>
+      <div className={styles.marqueeCaption}><p>{caption}</p>{entries.length > 1 && !reduced && <button type="button" onClick={() => setPaused(value => !value)} aria-label={`${paused ? 'Resume' : 'Pause'} ${caption.toLowerCase()} motion`}>{paused ? 'Resume motion' : 'Pause motion'}</button>}</div>
       <div
         className={styles.marqueeViewport}
         data-dragging={dragActive}
-        onPointerEnter={() => { hovered.current = true; }}
+        onPointerEnter={(event) => { hovered.current = event.pointerType === 'mouse'; }}
         onPointerLeave={(event) => { hovered.current = false; endDrag(event); }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
+        onFocusCapture={() => { focused.current = true; }}
+        onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) focused.current = false; }}
+        onClickCapture={(event) => { if (moved.current) { event.preventDefault(); event.stopPropagation(); moved.current = false; } }}
       >
         <div ref={track} className={styles.marqueeTrack} data-marquee-track>
           <div ref={firstGroup} className={styles.marqueeGroup}>{entries.map((entry) => <JournalCard key={entry.id} entry={entry} actionVerb={actionVerb} />)}</div>

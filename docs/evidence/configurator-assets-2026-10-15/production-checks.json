@@ -1,0 +1,238 @@
+{
+  "mode": "local-production",
+  "desktopDpr": 1.5,
+  "models": [
+    {
+      "slug": "forza",
+      "readyMs": 1080,
+      "desktopTiming": {
+        "frames": 103,
+        "webglFrames": 103,
+        "medianMs": 17.59999999999991,
+        "p95Ms": 18.5
+      },
+      "phoneTiming": {
+        "frames": 101,
+        "webglFrames": 101,
+        "medianMs": 17.30000000000291,
+        "p95Ms": 20.700000000004366
+      },
+      "idleFrames": 0,
+      "cameras": [
+        "front",
+        "side",
+        "rear",
+        "plan",
+        "inside",
+        "hero"
+      ],
+      "applications": [
+        [
+          "External roof",
+          "Castile Crest"
+        ],
+        [
+          "External wall",
+          "Golden Oak"
+        ],
+        [
+          "Flooring",
+          "Tuscan Elegance"
+        ],
+        [
+          "Internal ceiling",
+          "Ontario Hemlock"
+        ],
+        [
+          "Internal wall",
+          "Alpine White"
+        ]
+      ],
+      "overflow": false,
+      "phoneOverflow": false,
+      "metrics": {
+        "renderFrames": "815",
+        "drawCalls": "61",
+        "triangles": "139459",
+        "modelLoaded": "true"
+      },
+      "errors": []
+    },
+    {
+      "slug": "tengo",
+      "readyMs": 703,
+      "desktopTiming": {
+        "frames": 104,
+        "webglFrames": 104,
+        "medianMs": 17.5,
+        "p95Ms": 18.699999999999818
+      },
+      "phoneTiming": {
+        "frames": 99,
+        "webglFrames": 99,
+        "medianMs": 17.599999999998545,
+        "p95Ms": 34.400000000001455
+      },
+      "idleFrames": 0,
+      "cameras": [
+        "front",
+        "side",
+        "rear",
+        "plan",
+        "inside",
+        "hero"
+      ],
+      "applications": [
+        [
+          "External roof",
+          "Castile Crest"
+        ],
+        [
+          "External wall",
+          "Golden Oak"
+        ],
+        [
+          "Flooring",
+          "Tuscan Elegance"
+        ],
+        [
+          "Internal ceiling",
+          "Ontario Hemlock"
+        ],
+        [
+          "Internal wall",
+          "Alpine White"
+        ]
+      ],
+      "overflow": false,
+      "phoneOverflow": false,
+      "metrics": {
+        "renderFrames": "961",
+        "drawCalls": "66",
+        "triangles": "268877",
+        "modelLoaded": "true"
+      },
+      "errors": []
+    },
+    {
+      "slug": "kray",
+      "readyMs": 674,
+      "desktopTiming": {
+        "frames": 102,
+        "webglFrames": 102,
+        "medianMs": 17.899999999999636,
+        "p95Ms": 18.800000000000182
+      },
+      "phoneTiming": {
+        "frames": 100,
+        "webglFrames": 100,
+        "medianMs": 17.80000000000291,
+        "p95Ms": 20.099999999998545
+      },
+      "idleFrames": 0,
+      "cameras": [
+        "front",
+        "side",
+        "rear",
+        "plan",
+        "inside",
+        "hero"
+      ],
+      "applications": [
+        [
+          "External roof",
+          "Castile Crest"
+        ],
+        [
+          "External wall",
+          "Golden Oak"
+        ],
+        [
+          "Flooring",
+          "Tuscan Elegance"
+        ],
+        [
+          "Internal ceiling",
+          "Ontario Hemlock"
+        ],
+        [
+          "Internal wall",
+          "Alpine White"
+        ]
+      ],
+      "overflow": false,
+      "phoneOverflow": false,
+      "metrics": {
+        "renderFrames": "816",
+        "drawCalls": "39",
+        "triangles": "1476109",
+        "modelLoaded": "true"
+      },
+      "errors": []
+    },
+    {
+      "slug": "tish",
+      "readyMs": 490,
+      "desktopTiming": {
+        "frames": 104,
+        "webglFrames": 104,
+        "medianMs": 17.5,
+        "p95Ms": 18.599999999999454
+      },
+      "phoneTiming": {
+        "frames": 102,
+        "webglFrames": 102,
+        "medianMs": 17.30000000000291,
+        "p95Ms": 18.599999999998545
+      },
+      "idleFrames": 0,
+      "cameras": [
+        "front",
+        "side",
+        "rear",
+        "plan",
+        "inside",
+        "hero"
+      ],
+      "applications": [
+        [
+          "External roof",
+          "Castile Crest"
+        ],
+        [
+          "External wall",
+          "Golden Oak"
+        ],
+        [
+          "Flooring",
+          "Tuscan Elegance"
+        ],
+        [
+          "Internal ceiling",
+          "Ontario Hemlock"
+        ],
+        [
+          "Internal wall",
+          "Alpine White"
+        ]
+      ],
+      "overflow": false,
+      "phoneOverflow": false,
+      "metrics": {
+        "renderFrames": "844",
+        "drawCalls": "25",
+        "triangles": "18783",
+        "modelLoaded": "true"
+      },
+      "errors": []
+    }
+  ],
+  "recovery": {
+    "contextRestored": true,
+    "missingIdentityExplicit": true,
+    "unknownRouteStatus": 404,
+    "assetFailureVisible": true,
+    "failedPageCanvasCount": 1,
+    "failedViewerCanvasCount": 0
+  }
+}

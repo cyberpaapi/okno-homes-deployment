@@ -78,10 +78,10 @@ export default function ProcessDeliveryTimeline({
   const lineScale = useTransform(progress, [0, 1], [0, 1]);
 
   return (
-    <aside className={styles.timeline} aria-label={ariaLabel}>
+    <aside className={styles.timeline} aria-label={ariaLabel} data-type-section="process.sequence">
       <div className={styles.heading}>
-        <h3>{heading}</h3>
-        <p>{items[activeIndex] ? `${items[activeIndex].days} · ${items[activeIndex].label}` : summary}</p>
+        <h3 data-type-field={"process.sequence.rail-heading"}>{heading}</h3>
+        <p data-type-field={"process.sequence.rail-summary"}>{items[activeIndex] ? `${items[activeIndex].days} · ${items[activeIndex].label}` : summary}</p>
       </div>
       <div className={styles.track}>
         <span className={styles.trackBase} aria-hidden="true" />
@@ -103,11 +103,11 @@ export function StaticProcessDeliveryTimeline({ items }: { items: readonly Proce
   return (
     <aside
       className={`${styles.timeline} ${styles.staticTimeline}`}
-      aria-label={ariaLabel}
+      aria-label={ariaLabel} data-type-section="process.sequence"
     >
       <div className={styles.heading}>
-        <h3>{heading}</h3>
-        <p>{summary}</p>
+        <h3 data-type-field={"process.sequence.rail-heading"}>{heading}</h3>
+        <p data-type-field={"process.sequence.rail-summary"}>{summary}</p>
       </div>
       <div className={styles.track}>
         <span className={styles.trackBase} aria-hidden="true" />

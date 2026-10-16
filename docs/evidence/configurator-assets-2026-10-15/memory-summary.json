@@ -1,0 +1,17 @@
+{
+  "samples": 328,
+  "intervalSeconds": 5,
+  "first": {
+    "utc": "2026-10-15T15:11:15.341603+00:00",
+    "availableMiB": 6312,
+    "swapUsedMiB": 1356
+  },
+  "last": {
+    "utc": "2026-10-15T15:38:30.492028+00:00",
+    "availableMiB": 7508,
+    "swapUsedMiB": 2978
+  },
+  "minimumSampledAvailableMiB": 1236,
+  "maximumSampledSwapUsedMiB": 3193,
+  "note": "Sampled host available memory includes other desktop applications; not a continuous peak measurement."
+}

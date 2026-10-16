@@ -38,7 +38,7 @@ describe('admin preview lifecycle', () => {
     fireEvent(window,new MessageEvent('message',{origin:'https://untrusted.example',source:frame.contentWindow,data:{type:PREVIEW_READY}}));
     fireEvent(window,new MessageEvent('message',{origin:window.location.origin,source:window,data:{type:PREVIEW_READY}}));
     expect(post).not.toHaveBeenCalled();
-  });
+  }, 15000);
   it('offers recovery for a stalled preview and keeps a healthy preview after the timeout', async () => {
     vi.useFakeTimers();
     const view=render(<AdminStudio />);

@@ -1,0 +1,10 @@
+{
+  "buildDirectory": ".next-release-mapping-idle-2026-10-16",
+  "buildId": "Y-WqmiRvVukSaiUPZgxi_",
+  "port": 3134,
+  "files": {
+    "src/components/configurator/supplied/cabinScene.js": "de82b414726a59facf256b4c9abc9e1e21e47e4c82a8c297e77d9ee771030b0c",
+    "src/components/configurator/supplied/modelFraming.ts": "4fc1d21b0ca53b5308c04792ad9b23dc41dc31bfffcb463e3aa3e9f7a454aa5c",
+    "src/data/configurator/signatureAssetManifest.json": "f538556dc1c2a63b12204bc594cdbfc3038d18486297da94e8af2d81b561602c"
+  }
+}

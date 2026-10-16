@@ -21,7 +21,10 @@ describe("admin page hierarchy", () => {
     expect(new Set(fields.map(field => field.id)).size).toBe(fields.length);
     for (const field of fields) {
       expect(field.id).toMatch(/^[a-z0-9-]+(\.[a-z0-9-]+)+$/);
-      if (field.kind === "image" || field.kind === "video") expect(field.defaultValue).toMatch(/^\/(?!\/)/);
+      if (field.kind === "image" || field.kind === "video") {
+        if (field.id === "hero-v2.opening.scroll-video") expect(field.defaultValue).toBe("");
+        else expect(field.defaultValue).toMatch(/^\/(?!\/)/);
+      }
       if (field.kind === "choice") expect(field.options?.map(option => option.value)).toContain(field.defaultValue);
     }
   });
@@ -67,7 +70,7 @@ describe("admin page hierarchy", () => {
     const home = adminPages[0];
     const [published, v1, v2] = home.children ?? [];
     expect(published.sections[0].fields[0].id).toBe("home.publishing.hero");
-    const lowerIds = (page: typeof v1) => page.sections.slice(1).flatMap(section => section.fields.map(field => field.id));
+    const lowerIds = (page: typeof v1) => page.sections.filter(section => section.id !== "opening" && section.id !== "ending").flatMap(section => section.fields.map(field => field.id));
     expect(lowerIds(v1)).toEqual(lowerIds(v2));
     expect(lowerIds(v1)).toContain("home.timeline.heading-start");
     expect(lowerIds(v1)).toContain("home.signature.action");
@@ -76,7 +79,7 @@ describe("admin page hierarchy", () => {
   it("places the featured Press selector in the Journal opening before its collection", () => {
     const journal = adminPages.find(page => page.id === "journal")!;
     expect(journal.sections[0].id).toBe("hero");
-    expect(journal.sections[0].fields.at(-1)).toMatchObject({ id: "journal.hero.featured-id", defaultValue: pressEntries[0].id });
+    expect(journal.sections[0].fields.find(field => field.id === "journal.hero.featured-id")).toMatchObject({ id: "journal.hero.featured-id", defaultValue: pressEntries[0].id });
     expect(journal.sections[1].id).toBe("press-intro");
     expect(journal.sections[2].id).toBe("publication-ticker");
     expect(journal.sections.find(section => section.id === "article-reader")?.fields.map(field => field.id)).toContain("journal.article.on-page-label");

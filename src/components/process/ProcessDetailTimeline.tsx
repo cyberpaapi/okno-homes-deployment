@@ -37,16 +37,16 @@ export default function ProcessDetailTimeline() {
 
   return (
     <section className={styles.section} aria-labelledby="process-detail-title">
-      <header className={styles.intro}>
-        <p>{eyebrow}</p>
-        <h2 id="process-detail-title">{heading}</h2>
+      <header className={styles.intro} data-type-section="process.details">
+        <p data-type-field={"process.details.eyebrow"}>{eyebrow}</p>
+        <h2 id="process-detail-title" data-type-field={"process.details.heading"}>{heading}</h2>
       </header>
 
       <div className={styles.timeline} ref={timelineRef} data-process-detail-timeline>
         <div className={styles.stage}>
           <motion.div className={styles.track} style={{ x: reducedMotion ? '0%' : trackX }}>
             {currentPhases.map((phase, index) => (
-              <article className={styles.phase} data-process-phase={index + 1} key={index}>
+              <article className={styles.phase} data-process-phase={index + 1} data-type-section={`process.detail-${index + 1}`} key={index}>
                 <div className={styles.phaseCopy}>
                   <p className={styles.days}>
                     <span className={styles.daysPrefix}>{phase.days.label}</span>

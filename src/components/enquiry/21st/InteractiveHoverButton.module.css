@@ -11,7 +11,7 @@
   background: transparent;
   color: #24231f;
   cursor: pointer;
-  font: 600 11px/1 "Enquiry Geist", "Geist OKNO", Arial, sans-serif;
+  font: 600 var(--type-size-caption, 11px)/1 "Enquiry Geist", "Geist OKNO", Arial, sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }

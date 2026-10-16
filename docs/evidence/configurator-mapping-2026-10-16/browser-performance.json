@@ -1,0 +1,51 @@
+{
+  "before": {
+    "time": 1792115899205,
+    "frames": 733,
+    "end": {
+      "time": 1792115944640,
+      "frames": 2253
+    },
+    "elapsedSeconds": 45.435,
+    "renderedFrames": 1520,
+    "framesPerSecond": 33.45438538571586
+  },
+  "after": {
+    "start": {
+      "time": 1792116320154,
+      "frames": 321,
+      "triangles": 391177
+    },
+    "end": {
+      "time": 1792116340508,
+      "frames": 1194
+    },
+    "elapsedSeconds": 20.354,
+    "renderedFrames": 873,
+    "framesPerSecond": 42.89083226884151
+  },
+  "idle": {
+    "start": {
+      "time": 1792116610593,
+      "frames": 297
+    },
+    "end": {
+      "time": 1792116628067,
+      "frames": 297
+    },
+    "renderedFrames": 0
+  },
+  "logs": [],
+  "idleBeforeCameraFix": {
+    "start": {
+      "time": 1792116379463,
+      "frames": 2230
+    },
+    "end": {
+      "time": 1792116395484,
+      "frames": 2653
+    },
+    "renderedFrames": 423
+  },
+  "finalLogs": []
+}

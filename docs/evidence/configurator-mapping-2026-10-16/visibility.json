@@ -1,0 +1,791 @@
+{
+  "passed": 36,
+  "results": [
+    {
+      "slug": "forza",
+      "name": "left",
+      "origin": [
+        -9,
+        1.5,
+        4
+      ],
+      "direction": [
+        1,
+        0,
+        0
+      ],
+      "expected": "external-wall",
+      "distance": 2.8463475136810077,
+      "actual": {
+        "surfaces": [
+          "external-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "forza",
+      "name": "right",
+      "origin": [
+        2,
+        2.5,
+        4
+      ],
+      "direction": [
+        -1,
+        0,
+        0
+      ],
+      "expected": "external-wall",
+      "distance": 2.895852485522672,
+      "actual": {
+        "surfaces": [
+          "external-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "forza",
+      "name": "rear",
+      "origin": [
+        -5.8,
+        1.5,
+        -5
+      ],
+      "direction": [
+        0,
+        0,
+        1
+      ],
+      "expected": "external-wall",
+      "distance": 3.5598586869018685,
+      "actual": {
+        "surfaces": [
+          "external-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "forza",
+      "name": "roofL",
+      "origin": [
+        -5,
+        8,
+        4
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "external-roof",
+      "distance": 4.990146316345722,
+      "actual": {
+        "surfaces": [
+          "external-roof"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "forza",
+      "name": "roofR",
+      "origin": [
+        -2,
+        8,
+        4
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "external-roof",
+      "distance": 4.331411668847287,
+      "actual": {
+        "surfaces": [
+          "external-roof"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "forza",
+      "name": "wall",
+      "origin": [
+        -3.5,
+        1.5,
+        4
+      ],
+      "direction": [
+        -1,
+        0,
+        0
+      ],
+      "expected": "internal-wall",
+      "distance": 2.5045545195449943,
+      "actual": {
+        "surfaces": [
+          "internal-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "forza",
+      "name": "ceilingL",
+      "origin": [
+        -5,
+        1.5,
+        4
+      ],
+      "direction": [
+        0,
+        1,
+        0
+      ],
+      "expected": "internal-ceiling",
+      "distance": 1.3640416600990362,
+      "actual": {
+        "surfaces": [
+          "internal-ceiling"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "forza",
+      "name": "ceilingR",
+      "origin": [
+        -2,
+        1.5,
+        4
+      ],
+      "direction": [
+        0,
+        1,
+        0
+      ],
+      "expected": "internal-ceiling",
+      "distance": 2.0226936040509917,
+      "actual": {
+        "surfaces": [
+          "internal-ceiling"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "forza",
+      "name": "floor",
+      "origin": [
+        -3.5,
+        1.5,
+        4
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "flooring",
+      "distance": 1.47332999982804,
+      "actual": {
+        "surfaces": [
+          "flooring"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "forza",
+      "name": "window-aperture",
+      "origin": [
+        2,
+        1.5,
+        4
+      ],
+      "direction": [
+        -1,
+        0,
+        0
+      ],
+      "expected": "glazing",
+      "distance": 3.010452751715113,
+      "actual": {
+        "surfaces": [],
+        "glass": true
+      }
+    },
+    {
+      "slug": "tengo",
+      "name": "left",
+      "origin": [
+        2,
+        1.5,
+        -38
+      ],
+      "direction": [
+        1,
+        0,
+        0
+      ],
+      "expected": "external-wall",
+      "distance": 2.1265835762023926,
+      "actual": {
+        "surfaces": [
+          "external-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tengo",
+      "name": "wall",
+      "origin": [
+        15.4,
+        1.65,
+        -33.2
+      ],
+      "direction": [
+        0,
+        0,
+        -1
+      ],
+      "expected": "internal-wall",
+      "distance": 2.200787353515622,
+      "actual": {
+        "surfaces": [
+          "internal-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tengo",
+      "name": "floor",
+      "origin": [
+        15.4,
+        1.65,
+        -33.2
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "flooring",
+      "distance": 1.6499999999999984,
+      "actual": {
+        "surfaces": [
+          "flooring"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tengo",
+      "name": "ceiling",
+      "origin": [
+        15.4,
+        1.65,
+        -33.2
+      ],
+      "direction": [
+        0,
+        1,
+        0
+      ],
+      "expected": "internal-ceiling",
+      "distance": 1.453034233353454,
+      "actual": {
+        "surfaces": [
+          "internal-ceiling"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tengo",
+      "name": "roof",
+      "origin": [
+        15.4,
+        8,
+        -33.2
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "external-roof",
+      "distance": 4.5919657547152015,
+      "actual": {
+        "surfaces": [
+          "external-roof"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "kray",
+      "name": "wall3",
+      "origin": [
+        24,
+        1.8,
+        -17.3
+      ],
+      "direction": [
+        -1,
+        0,
+        0
+      ],
+      "expected": "internal-wall",
+      "distance": 2.129009246826172,
+      "actual": {
+        "surfaces": [
+          "internal-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "kray",
+      "name": "wall4",
+      "origin": [
+        24,
+        1.8,
+        -17.3
+      ],
+      "direction": [
+        0,
+        0,
+        -1
+      ],
+      "expected": "internal-wall",
+      "distance": 2.22426528930664,
+      "actual": {
+        "surfaces": [
+          "internal-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "kray",
+      "name": "roofL",
+      "origin": [
+        23,
+        8,
+        -21
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "external-roof",
+      "distance": 3.509686167908603,
+      "actual": {
+        "surfaces": [
+          "external-roof"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "kray",
+      "name": "roofR",
+      "origin": [
+        26,
+        8,
+        -21
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "external-roof",
+      "distance": 4.342673175213263,
+      "actual": {
+        "surfaces": [
+          "external-roof"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "kray",
+      "name": "ceilingL",
+      "origin": [
+        23,
+        1.8,
+        -21
+      ],
+      "direction": [
+        0,
+        1,
+        0
+      ],
+      "expected": "internal-ceiling",
+      "distance": 2.6698656821730156,
+      "actual": {
+        "surfaces": [
+          "internal-ceiling"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "kray",
+      "name": "ceilingR",
+      "origin": [
+        26,
+        1.8,
+        -21
+      ],
+      "direction": [
+        0,
+        1,
+        0
+      ],
+      "expected": "internal-ceiling",
+      "distance": 1.8368784733576102,
+      "actual": {
+        "surfaces": [
+          "internal-ceiling"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "kray",
+      "name": "floor",
+      "origin": [
+        24,
+        1.8,
+        -21
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "flooring",
+      "distance": 1.2105579257011414,
+      "actual": {
+        "surfaces": [
+          "flooring"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "kray",
+      "name": "right",
+      "origin": [
+        32,
+        1.5,
+        -21
+      ],
+      "direction": [
+        -1,
+        0,
+        0
+      ],
+      "expected": "external-wall",
+      "distance": 5.8061796533963985,
+      "actual": {
+        "surfaces": [
+          "external-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "kray",
+      "name": "window-aperture",
+      "origin": [
+        24,
+        1.8,
+        -17.3
+      ],
+      "direction": [
+        1,
+        0,
+        0
+      ],
+      "expected": "glazing",
+      "distance": 3.236989974975586,
+      "actual": {
+        "surfaces": [],
+        "glass": true
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "wall2",
+      "origin": [
+        33.1,
+        1.65,
+        -8.8
+      ],
+      "direction": [
+        -1,
+        0,
+        0
+      ],
+      "expected": "internal-wall",
+      "distance": 2.184516525268556,
+      "actual": {
+        "surfaces": [
+          "internal-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "left",
+      "origin": [
+        28,
+        1.5,
+        -8.8
+      ],
+      "direction": [
+        1,
+        0,
+        0
+      ],
+      "expected": "external-wall",
+      "distance": 2.788484573364258,
+      "actual": {
+        "surfaces": [
+          "external-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "rear",
+      "origin": [
+        32,
+        1.5,
+        -12
+      ],
+      "direction": [
+        0,
+        0,
+        1
+      ],
+      "expected": "external-wall",
+      "distance": 2.0135250091552734,
+      "actual": {
+        "surfaces": [
+          "external-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "right",
+      "origin": [
+        45,
+        1.5,
+        -6
+      ],
+      "direction": [
+        -1,
+        0,
+        0
+      ],
+      "expected": "external-wall",
+      "distance": 3.6959152221679688,
+      "actual": {
+        "surfaces": [
+          "external-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "wallR",
+      "origin": [
+        33.1,
+        1.65,
+        -2.5
+      ],
+      "direction": [
+        1,
+        0,
+        0
+      ],
+      "expected": "internal-wall",
+      "distance": 2.8446830749511705,
+      "actual": {
+        "surfaces": [
+          "internal-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "floor",
+      "origin": [
+        33.1,
+        1.65,
+        -2.5
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "flooring",
+      "distance": 1.65,
+      "actual": {
+        "surfaces": [
+          "flooring"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "ceilingL",
+      "origin": [
+        32,
+        1.65,
+        -4
+      ],
+      "direction": [
+        0,
+        1,
+        0
+      ],
+      "expected": "internal-ceiling",
+      "distance": 1.8214432639812346,
+      "actual": {
+        "surfaces": [
+          "internal-ceiling"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "ceilingR",
+      "origin": [
+        34,
+        1.65,
+        -4
+      ],
+      "direction": [
+        0,
+        1,
+        0
+      ],
+      "expected": "internal-ceiling",
+      "distance": 2.312399959564209,
+      "actual": {
+        "surfaces": [
+          "internal-ceiling"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "roofL",
+      "origin": [
+        32,
+        8,
+        -4
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "external-roof",
+      "distance": 4.401557338751649,
+      "actual": {
+        "surfaces": [
+          "external-roof"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "roofR",
+      "origin": [
+        34,
+        8,
+        -4
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "expected": "external-roof",
+      "distance": 3.910600185394287,
+      "actual": {
+        "surfaces": [
+          "external-roof"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "recess",
+      "origin": [
+        38,
+        1.5,
+        -1.5
+      ],
+      "direction": [
+        -1,
+        0,
+        0
+      ],
+      "expected": "external-wall",
+      "distance": 1.928314208984375,
+      "actual": {
+        "surfaces": [
+          "external-wall"
+        ],
+        "glass": false
+      }
+    },
+    {
+      "slug": "tish",
+      "name": "window-aperture",
+      "origin": [
+        33.1,
+        1.65,
+        -2.5
+      ],
+      "direction": [
+        -1,
+        0,
+        0
+      ],
+      "expected": "glazing",
+      "distance": 2.2182651519775405,
+      "actual": {
+        "surfaces": [],
+        "glass": true
+      }
+    }
+  ]
+}

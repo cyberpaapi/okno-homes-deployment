@@ -46,7 +46,7 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
         <SilkBackground className={styles.openingCanvas} maxPixels={620_000} fps={24} interactive={false} />
         <HospitalityIntro enquiryHref={enquiryHref} />
 
-        <section className={styles.proof} aria-label="Hospitality estate capabilities" data-header-tone="dark">
+        <section className={styles.proof} data-type-section="hospitality.proof" aria-label="Hospitality estate capabilities" data-header-tone="dark">
           <HospitalityBento />
         </section>
       </div>
@@ -54,20 +54,20 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
       <div className={styles.atmosphere}>
         <SilkBackground className={styles.atmosphereCanvas} maxPixels={520_000} fps={18} interactive={false} />
 
-        {selectedWork.length > 0 && <section id="projects" className={styles.projects} aria-labelledby="projects-title" data-header-tone="dark">
-          <h2 id="projects-title" className={styles.srOnly}>{selectedHeading}</h2>
+        {selectedWork.length > 0 && <section id="projects" data-type-section="hospitality.projects" className={styles.projects} aria-labelledby="projects-title" data-header-tone="dark">
+          <h2 id="projects-title" className={styles.srOnly} data-type-field={"hospitality.selected.heading"}>{selectedHeading}</h2>
           <TextBlockAnimation blockColor="#b9cbb8" className={styles.blockHeading}>
-            <h2 aria-hidden="true"><HospitalityTextLens text={selectedHeading} /></h2>
+            <h2 aria-hidden="true" data-type-field={"hospitality.selected.heading"}><HospitalityTextLens text={selectedHeading} /></h2>
           </TextBlockAnimation>
           <HospitalityGallery projects={selectedWork} />
         </section>}
 
         <HospitalityTimeline steps={journey} />
 
-        <section className={styles.enquire} aria-labelledby="enquire-title" data-header-tone="dark">
-          <h2 id="enquire-title" className={styles.srOnly}>{closingHeading}</h2>
+        <section className={styles.enquire} data-type-section="hospitality.enquiry" aria-labelledby="enquire-title" data-header-tone="dark">
+          <h2 id="enquire-title" className={styles.srOnly} data-type-field={"hospitality.closing.heading"}>{closingHeading}</h2>
           <TextBlockAnimation blockColor="#b9cbb8" duration={0.42} className={styles.enquireTitle}>
-            <h2 aria-hidden="true"><HospitalityTextLens text={closingHeading} /></h2>
+            <h2 aria-hidden="true" data-type-field={"hospitality.closing.heading"}><HospitalityTextLens text={closingHeading} /></h2>
           </TextBlockAnimation>
           <MagneticLink
             href={localDestination(closingHref, enquiryHref)}

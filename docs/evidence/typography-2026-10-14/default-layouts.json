@@ -1,0 +1,342 @@
+[
+  {
+    "device": "desktop",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "32px",
+        "text": "A home. Your way."
+      }
+    ],
+    "height": 900,
+    "overflow": false,
+    "route": "/models",
+    "width": 1440
+  },
+  {
+    "device": "desktop",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "64px",
+        "text": "Forza"
+      }
+    ],
+    "height": 900,
+    "overflow": false,
+    "route": "/models/signature",
+    "width": 1440
+  },
+  {
+    "device": "desktop",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "96px",
+        "text": "A home authoredfrom place."
+      }
+    ],
+    "height": 900,
+    "overflow": false,
+    "route": "/models/bespoke",
+    "width": 1440
+  },
+  {
+    "device": "desktop",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "96px",
+        "text": "Homes, everywhere.Homes, everywhere."
+      }
+    ],
+    "height": 900,
+    "overflow": false,
+    "route": "/projects",
+    "width": 1440
+  },
+  {
+    "device": "desktop",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "96px",
+        "text": "Builttowelcome.Designedtoscale."
+      }
+    ],
+    "height": 900,
+    "overflow": false,
+    "route": "/hospitality",
+    "width": 1440
+  },
+  {
+    "device": "desktop",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "96px",
+        "text": "Builtin90days."
+      }
+    ],
+    "height": 900,
+    "overflow": false,
+    "route": "/process",
+    "width": 1440
+  },
+  {
+    "device": "desktop",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "96px",
+        "text": "Build lessagainst the land."
+      }
+    ],
+    "height": 900,
+    "overflow": false,
+    "route": "/sustainability",
+    "width": 1440
+  },
+  {
+    "device": "desktop",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "96px",
+        "text": "News from the practice.News from the practice."
+      }
+    ],
+    "height": 900,
+    "overflow": false,
+    "route": "/journal",
+    "width": 1440
+  },
+  {
+    "device": "desktop",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "96px",
+        "text": "About OKNOAboutOKNO"
+      }
+    ],
+    "height": 900,
+    "overflow": false,
+    "route": "/about",
+    "width": 1440
+  },
+  {
+    "device": "desktop",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "96px",
+        "text": "Tell us what you’re building.Tell us whatyou’re building."
+      }
+    ],
+    "height": 900,
+    "overflow": false,
+    "route": "/enquiry",
+    "width": 1440
+  },
+  {
+    "device": "mobile",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "24px",
+        "text": "A home. Your way."
+      }
+    ],
+    "height": 844,
+    "overflow": false,
+    "route": "/models",
+    "width": 390
+  },
+  {
+    "device": "mobile",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "36px",
+        "text": "Forza"
+      }
+    ],
+    "height": 844,
+    "overflow": false,
+    "route": "/models/signature",
+    "width": 390
+  },
+  {
+    "device": "mobile",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "48px",
+        "text": "A home authoredfrom place."
+      }
+    ],
+    "height": 844,
+    "overflow": false,
+    "route": "/models/bespoke",
+    "width": 390
+  },
+  {
+    "device": "mobile",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "48px",
+        "text": "Homes, everywhere.Homes, everywhere."
+      }
+    ],
+    "height": 844,
+    "overflow": false,
+    "route": "/projects",
+    "width": 390
+  },
+  {
+    "device": "mobile",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "48px",
+        "text": "Builttowelcome.Designedtoscale."
+      }
+    ],
+    "height": 844,
+    "overflow": false,
+    "route": "/hospitality",
+    "width": 390
+  },
+  {
+    "device": "mobile",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "48px",
+        "text": "Builtin90days."
+      }
+    ],
+    "height": 844,
+    "overflow": false,
+    "route": "/process",
+    "width": 390
+  },
+  {
+    "device": "mobile",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "48px",
+        "text": "Build lessagainst the land."
+      }
+    ],
+    "height": 844,
+    "overflow": false,
+    "route": "/sustainability",
+    "width": 390
+  },
+  {
+    "device": "mobile",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "48px",
+        "text": "News from the practice.News from the practice."
+      }
+    ],
+    "height": 844,
+    "overflow": false,
+    "route": "/journal",
+    "width": 390
+  },
+  {
+    "device": "mobile",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "48px",
+        "text": "About OKNOAboutOKNO"
+      }
+    ],
+    "height": 844,
+    "overflow": false,
+    "route": "/about",
+    "width": 390
+  },
+  {
+    "device": "mobile",
+    "fonts": [
+      "\"Geist OKNO\", Arial, sans-serif"
+    ],
+    "heading": [
+      {
+        "font": "\"Geist OKNO\", Arial, sans-serif",
+        "size": "48px",
+        "text": "Tell us what you’re building.Tell us whatyou’re building."
+      }
+    ],
+    "height": 844,
+    "overflow": false,
+    "route": "/enquiry",
+    "width": 390
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "sha256": {
+    "src/components/configurator/supplied/Configurator.module.css": "75262869e4bff9c61dde361527c62f1b4095b7600d7c5f839b206e41f2fbb543",
+    "src/components/configurator/supplied/environment.css": "51571bde07142d1de976507e1373292d4bec4dfc54f6b862d99d4e9e1507e738",
+    "src/components/configurator/supplied/SuppliedConfigurator.tsx": "ba6a18684fe693f05cfc352d0b24c1a1eb507ad66f432df9d7de99a0c9f29e1e"
+  },
+  "allUnchanged": true
+}

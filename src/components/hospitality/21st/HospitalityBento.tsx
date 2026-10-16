@@ -43,7 +43,7 @@ function BentoCard({ card, index }: { card: BentoCardContent; index: number }) {
           src={card.image}
           alt={card.alt}
           fill
-          sizes="(max-width: 620px) 100vw, (max-width: 900px) 50vw, 33vw"
+          sizes="(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 33vw"
           onLoad={() => setImageReady(true)}
           onError={() => setImageReady(true)}
         />

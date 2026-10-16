@@ -169,7 +169,7 @@
   padding: 0 14px 0 17px;
   color: var(--ivory);
   text-decoration: none;
-  font-size: 13px;
+  font-size: var(--type-size-caption, 13px);
   font-weight: 600;
   letter-spacing: 0.28em;
 }
@@ -190,7 +190,7 @@
   border-radius: 5px;
   color: rgba(244, 241, 233, 0.58);
   text-decoration: none;
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 600;
   letter-spacing: 0.04em;
   transition: color 220ms ease, background-color 220ms ease;
@@ -217,7 +217,7 @@
   padding: 0 12px 0 14px;
   color: var(--ivory);
   text-decoration: none;
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -276,7 +276,7 @@
   border-bottom: 1px solid rgba(244, 241, 233, 0.08);
   color: var(--ivory);
   text-decoration: none;
-  font-size: 18px;
+  font-size: var(--type-size-subheading, 18px);
   letter-spacing: -0.02em;
 }
 
@@ -307,7 +307,7 @@
 
 .loader p {
   color: rgba(244, 241, 233, 0.56);
-  font-size: 9px;
+  font-size: var(--type-size-caption, 9px);
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -330,7 +330,7 @@
 
 .intro > p {
   color: var(--gold);
-  font-size: 9px;
+  font-size: var(--type-size-caption, 9px);
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -338,7 +338,7 @@
 
 .intro h1 {
   margin-top: 7px;
-  font-size: clamp(30px, 4vw, 62px);
+  font-size: var(--type-size-heading, clamp(30px, 4vw, 62px));
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.95;
@@ -359,7 +359,7 @@
   padding-right: 14px;
   border-right: 1px solid rgba(244, 241, 233, 0.22);
   color: rgba(244, 241, 233, 0.72);
-  font-size: 12px;
+  font-size: var(--type-size-caption, 12px);
   font-weight: 500;
   line-height: 1.35;
   overflow-wrap: anywhere;
@@ -407,7 +407,7 @@
   display: flex;
   justify-content: space-between;
   color: rgba(244, 241, 233, 0.44);
-  font-size: 9px;
+  font-size: var(--type-size-caption, 9px);
   font-weight: 700;
   letter-spacing: 0.14em;
 }
@@ -422,12 +422,12 @@
   border-radius: 4px;
   background: rgba(244, 241, 233, 0.1);
   color: var(--gold);
-  font-size: 11px;
+  font-size: var(--type-size-caption, 11px);
 }
 
 .featureCard h2 {
   margin-top: 18px;
-  font-size: clamp(17px, 1.6vw, 23px);
+  font-size: var(--type-size-subheading, clamp(17px, 1.6vw, 23px));
   font-weight: 450;
   letter-spacing: -0.035em;
   line-height: 1.05;
@@ -436,7 +436,7 @@
 .featureCard > p {
   margin-top: 8px;
   color: rgba(244, 241, 233, 0.61);
-  font-size: 11px;
+  font-size: var(--type-size-caption, 11px);
   line-height: 1.5;
 }
 
@@ -492,12 +492,12 @@
   border-radius: 6px;
   background: rgba(3, 7, 5, 0.9);
   color: var(--gold);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
 }
 
 .scrollCue p {
   color: rgba(244, 241, 233, 0.52);
-  font-size: 9px;
+  font-size: var(--type-size-caption, 9px);
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -548,7 +548,7 @@
   background: transparent;
   color: rgba(244, 241, 233, 0.58);
   font-family: inherit;
-  font-size: 9px;
+  font-size: var(--type-size-caption, 9px);
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -615,7 +615,7 @@
   background: transparent;
   color: rgba(244, 241, 233, 0.62);
   font-family: inherit;
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 550;
   letter-spacing: 0.01em;
   white-space: nowrap;
@@ -647,7 +647,7 @@
   gap: 10px;
   padding: 0 14px;
   font-family: inherit;
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 550;
   cursor: pointer;
   transition: color 220ms ease, background-color 220ms ease;
@@ -655,7 +655,7 @@
 
 .detailsButton span {
   color: var(--gold);
-  font-size: 13px;
+  font-size: var(--type-size-caption, 13px);
 }
 
 .detailsButton:hover,
@@ -712,7 +712,7 @@
 .detailsHeader > span {
   padding: 0 14px;
   color: rgba(244, 241, 233, 0.55);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -723,7 +723,7 @@
   padding: 0 11px 0 14px;
   color: var(--ivory);
   font-family: inherit;
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -732,7 +732,7 @@
 
 .detailsHeader button span {
   color: var(--gold);
-  font-size: 17px;
+  font-size: var(--type-size-body, 17px);
   font-weight: 300;
 }
 
@@ -788,7 +788,7 @@
 
 .specCard > p {
   color: var(--gold);
-  font-size: 9px;
+  font-size: var(--type-size-caption, 9px);
   font-weight: 700;
   letter-spacing: 0.18em;
 }
@@ -796,7 +796,7 @@
 .specCard h2 {
   margin-top: 14px;
   max-width: 100%;
-  font-size: clamp(46px, 14cqw, 64px);
+  font-size: var(--type-size-heading, clamp(46px, 14cqw, 64px));
   font-weight: 350;
   letter-spacing: -0.065em;
   line-height: 0.9;
@@ -822,7 +822,7 @@
   background: transparent;
   color: rgba(244, 241, 233, 0.65);
   font-family: inherit;
-  font-size: 9px;
+  font-size: var(--type-size-caption, 9px);
   font-weight: 700;
   cursor: pointer;
   max-width: 100%;
@@ -884,7 +884,7 @@
 .specRow span {
   overflow-wrap: anywhere;
   color: rgba(244, 241, 233, 0.4);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -894,7 +894,7 @@
   min-width: 0;
   overflow-wrap: anywhere;
   color: rgba(244, 241, 233, 0.84);
-  font-size: 13px;
+  font-size: var(--type-size-caption, 13px);
   font-weight: 450;
   line-height: 1.45;
   text-align: right;
@@ -915,7 +915,7 @@
 
 .specRowEmphasis strong {
   color: var(--gold);
-  font-size: clamp(19px, 5.2cqw, 23px);
+  font-size: var(--type-size-subheading, clamp(19px, 5.2cqw, 23px));
   font-weight: 650;
   letter-spacing: -0.025em;
   line-height: 1.1;
@@ -932,7 +932,7 @@
   background: var(--gold);
   color: #11140f;
   text-decoration: none;
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 700;
   max-width: 100%;
   height: auto;
@@ -984,7 +984,7 @@
 
 .galleryMeta span {
   color: var(--gold);
-  font-size: 9px;
+  font-size: var(--type-size-caption, 9px);
   font-weight: 700;
   letter-spacing: 0.12em;
 }
@@ -992,7 +992,7 @@
 .galleryMeta strong {
   overflow-wrap: anywhere;
   color: var(--ivory);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1030,7 +1030,7 @@
   background: transparent;
   color: rgba(244, 241, 233, 0.63);
   font-family: inherit;
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 600;
   cursor: pointer;
   max-width: 100%;
@@ -1042,7 +1042,7 @@
 
 .galleryTabs button span {
   color: rgba(212, 185, 126, 0.62);
-  font-size: 8px;
+  font-size: var(--type-size-caption, 8px);
   font-weight: 700;
 }
 
@@ -1070,7 +1070,7 @@
 
 .noteCard > p {
   color: var(--gold);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -1080,7 +1080,7 @@
   display: block;
   max-width: 18ch;
   margin-top: 18px;
-  font-size: clamp(16px, 1.8vw, 25px);
+  font-size: var(--type-size-subheading, clamp(16px, 1.8vw, 25px));
   font-weight: 380;
   letter-spacing: -0.035em;
   line-height: 1.15;
@@ -1143,7 +1143,7 @@
   .wordmark {
     min-height: 44px;
     padding-inline: 13px;
-    font-size: 11px;
+    font-size: var(--type-size-caption, 11px);
   }
 
   .menuButton {
@@ -1170,7 +1170,7 @@
     display: flex;
     align-items: center;
     padding: 0 8px;
-    font-size: 25px;
+    font-size: var(--type-size-subheading, 25px);
   }
 
   .productMedia {
@@ -1198,7 +1198,7 @@
   }
 
   .intro h1 {
-    font-size: 40px;
+    font-size: var(--type-size-heading, 40px);
   }
 
   .featureCard,
@@ -1207,7 +1207,7 @@
   .lowerRight {
     top: auto;
     right: 18px;
-    bottom: 70px;
+    bottom: calc(max(10px, env(safe-area-inset-bottom)) + 122px);
     left: 18px;
     width: auto;
   }
@@ -1217,11 +1217,11 @@
   }
 
   .featureCard h2 {
-    font-size: 20px;
+    font-size: var(--type-size-subheading, 20px);
   }
 
   .scrollCue {
-    bottom: 62px;
+    bottom: calc(max(10px, env(safe-area-inset-bottom)) + 122px);
     left: 18px;
   }
 
@@ -1265,7 +1265,7 @@
     justify-content: center;
     flex: 0 0 auto;
     padding-inline: 8px;
-    font-size: 9px;
+    font-size: var(--type-size-caption, 9px);
   }
 
   .detailsButton {
@@ -1326,7 +1326,7 @@
   }
 
   .specCard h2 {
-    font-size: clamp(42px, 14vw, 58px);
+    font-size: var(--type-size-heading, clamp(42px, 14vw, 58px));
   }
 
   .imageCard {
@@ -1346,7 +1346,7 @@
 
   .introFacts span {
     padding-right: 12px;
-    font-size: 11px;
+    font-size: var(--type-size-caption, 11px);
   }
 
   .specRow {
@@ -1354,11 +1354,28 @@
   }
 
   .specRow strong {
-    font-size: 13px;
+    font-size: var(--type-size-caption, 13px);
   }
 
   .specRowEmphasis strong {
-    font-size: 21px;
+    font-size: var(--type-size-subheading, 21px);
+  }
+}
+
+@media (max-height: 620px) {
+  .stage { min-height: 0; }
+}
+
+@media (min-width: 701px) and (max-height: 620px) {
+  .featureCard,
+  .upperLeft,
+  .upperRight,
+  .lowerRight {
+    top: 96px;
+    right: 24px;
+    bottom: auto;
+    left: auto;
+    width: min(280px, 34vw);
   }
 }
 
@@ -1384,4 +1401,11 @@
   .scrollCue {
     display: none;
   }
+}
+
+@media (max-width: 700px) {
+  .scrollTrack { height: 340svh; }
+  .modelSelector { max-width: calc(100% - 138px); }
+  .detailsButton { width: 126px; min-width: 126px; gap: 8px; padding-inline: 12px; color: #f4f1e9; font-size: var(--type-size-caption, 11px); }
+  .detailsButton span { font-size: 18px; }
 }

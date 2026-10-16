@@ -8,6 +8,10 @@ Private source for the Final Showcase website and its content studio. One Next.j
 - Admin: https://okno-homes-deployment.vercel.app/admin
 - Private repository: https://github.com/CodeAcc2007-dev/okno-homes-deployment
 
+## Project specification
+
+[Complete project specification](PROJECT-SPECIFICATION.md) covers all public pages, mobile motion, the content studio, configurator, APIs, media delivery and operating limits.
+
 ## Start here
 
 - [Working version](WORKING-VERSION.md)
@@ -22,12 +26,12 @@ Private source for the Final Showcase website and its content studio. One Next.j
 
 Node.js 22. Install with `npm ci`. Start the website with `npm run website` at `http://127.0.0.1:3134`. Start the admin with `npm run admin`, then open `http://127.0.0.1:3140/admin`; the gateway reuses the website process. Ports are owned by `config/local-ports.json`.
 
-Generate a new owner key using `npm run admin:key`, then configure the server-only `OKNO_CMS_ADMIN_TOKEN` in an ignored local environment file. Read the key guide before production setup. Never commit real keys, local content history, demo tokens, dependencies or build output.
+Reuse the configured fixed owner credential through the server-only `OKNO_CMS_ADMIN_TOKEN` in the ignored local environment file. Routine startup does not require key generation or renewal. Never commit real keys, local content history, demo tokens, dependencies or build output.
 
 ## Checks
 
 ```sh
-npm test -- --maxWorkers=2
+npm test -- --maxWorkers=1
 npm run lint -- --max-warnings=0
 npx tsc --noEmit
 npm run build

@@ -1,6 +1,6 @@
 import Script from "next/script";
 import { heroReloadBootstrap } from "@/lib/heroReloadPosition";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import SiteFrame from '@/components/SiteFrame';
 import SiteTypography from '@/components/SiteTypography/SiteTypography';
@@ -11,13 +11,15 @@ export const metadata: Metadata = {
   description: "Homes, built differently.",
 };
 
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#101810" };
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-site-typography suppressHydrationWarning>
       <body id="top">
         <Script id="hero-v1-reload-position" strategy="beforeInteractive">{heroReloadBootstrap}</Script>
         <BrandBrowserIcon />

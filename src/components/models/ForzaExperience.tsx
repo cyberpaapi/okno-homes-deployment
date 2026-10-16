@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import {
   AnimatePresence,
   motion,
@@ -21,6 +20,8 @@ import styles from "./ForzaExperience.module.css";
 import { getVideoSeekRequest, mapProgressToTime } from "./forzaMotion";
 import { useSiteCollection, useSiteCollectionsMap, useSiteContentMap } from "@/lib/useSiteContent";
 import { exploreVariantId } from "@/data/configurator/studio/variantIds";
+import { configurationHref } from "@/lib/configuratorHref";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 import { parseSignatureFeatures, parseSignatureGallery, signatureModelDefaults, signaturePlanDefaults } from "@/lib/signatureCollections";
 
 type PlanFilter = "all" | "studio" | "2-bhk" | "3-bhk";
@@ -464,6 +465,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
   const scheduleDetailRef = useRef<() => void>(() => undefined);
   const detailsTriggerRef = useRef<HTMLButtonElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const compact = useMediaQuery('(max-width: 700px)');
   const [videoReady, setVideoReady] = useState(false);
   const [detailVisible, setDetailVisible] = useState(false);
   const initialModelExists = modelRecords.some(record => record.id === initialModelSlug);
@@ -628,10 +630,12 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
   ]);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || compact) return;
 
     const detailVideo = detailVideoRef.current;
     if (!detailVideo) return;
+    detailVideo.preload = 'auto';
+    detailVideo.load();
     let cancelled = false;
 
     const refineFrame = (requestId: number) => {
@@ -695,7 +699,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
         detailSettleTimerRef.current = null;
       }
     };
-  }, [activeModel.slug, experience.detailVideoSrc, prefersReducedMotion, scrubFrameRate]);
+  }, [activeModel.slug, compact, experience.detailVideoSrc, prefersReducedMotion, scrubFrameRate]);
 
   useEffect(() => {
     if (prefersReducedMotion || !videoReady) return;
@@ -861,7 +865,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
         }`}
         aria-label={`${presentationModel.name} scroll-controlled ${experience.orbitDegrees ?? 360} degree experience`}
       >
-        <div className={styles.stage}>
+        <div className={styles.stage} data-type-section="signature.signature-controls">
           <div
             className={`${styles.ambientGlow} ${
               activeModel.slug === "gaze" ? styles.ambientGlowGaze : ""
@@ -913,7 +917,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
                     <source src={experience.videoSrc} type="video/mp4" />
                   </video>
                 )}
-                {!prefersReducedMotion && (
+                {!prefersReducedMotion && !compact && (
                   <video
                     ref={detailVideoRef}
                     className={`${styles.productMedia} ${styles.detailMedia}`}
@@ -922,7 +926,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
                     playsInline
                     disablePictureInPicture
                     controls={false}
-                    preload="auto"
+                    preload="none"
                     poster={experience.posterSrc}
                     aria-hidden="true"
                   >
@@ -943,18 +947,18 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
                 transition={{ duration: 0.35 }}
               >
                 <span />
-                <p>{get("loading", "Loading")} {presentationModel.name}</p>
+                <p data-type-field={"models.signature.loading"}>{get("loading", "Loading")} {presentationModel.name}</p>
               </motion.div>
             )}
           </AnimatePresence>
 
           <motion.div
-            className={styles.intro}
+            className={styles.intro} data-type-section={`signature.${activeModel.slug}-media`}
             style={{ opacity: introOpacity, y: introY }}
           >
-            <p>{get("eyebrow", "Signature collection")}</p>
-            <h1>{presentationModel.name}</h1>
-            <div className={styles.introFacts}>
+            <p data-type-field={"models.signature.eyebrow"}>{get("eyebrow", "Signature collection")}</p>
+            <h1 data-type-section={`signature.${activeModel.slug}-media`}>{presentationModel.name}</h1>
+            <div className={styles.introFacts} data-type-section={`signature.${activeModel.slug}-plan-${activeVariantIndex + 1}`}>
               <span>{presentationModel.variants[activeVariantIndex]?.name ?? activeVariant?.name}</span>
               <span>{formatArea(presentationModel, activeVariantIndex)}</span>
               <span className={styles.introPrice}>
@@ -984,7 +988,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
                       }
                     />
                   )}
-                  <span className={styles.planFilterText}>{get(`filter-${filter.value}`, filter.label)}</span>
+                  <span className={styles.planFilterText} data-type-field={`models.signature.filter-${filter.value}`}>{get(`filter-${filter.value}`, filter.label)}</span>
                 </button>
               );
             })}
@@ -993,6 +997,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
           {!prefersReducedMotion && (
             <>
               <FeatureCard
+                typographyScope={`signature.${activeModel.slug}-story`}
                 progress={progress}
                 range={[0.12, 0.18, 0.3, 0.38]}
                 placement="upperLeft"
@@ -1001,6 +1006,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
                 copy={experience.features[0].copy}
               />
               <FeatureCard
+                typographyScope={`signature.${activeModel.slug}-story`}
                 progress={progress}
                 range={[0.32, 0.39, 0.51, 0.59]}
                 placement="upperRight"
@@ -1009,6 +1015,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
                 copy={experience.features[1].copy}
               />
               <FeatureCard
+                typographyScope={`signature.${activeModel.slug}-story`}
                 progress={progress}
                 range={[0.54, 0.61, 0.77, 0.85]}
                 placement="lowerRight"
@@ -1021,7 +1028,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
 
           <motion.div className={styles.scrollCue} style={{ opacity: cueOpacity }}>
             <span aria-hidden="true">↓</span>
-            <p>{get("scroll-cue", "Scroll to rotate")}</p>
+            <p data-type-field={"models.signature.scroll-cue"}>{get("scroll-cue", "Scroll to rotate")}</p>
           </motion.div>
 
           <motion.div className={styles.bottomDock} style={{ opacity: actionOpacity }}>
@@ -1054,7 +1061,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
                 ))}
               </AnimatePresence>
             </motion.div>
-            <p className={styles.filterStatus} aria-live="polite">
+            <p className={styles.filterStatus} aria-live="polite" data-type-field={"models.signature.home-singular"}>
               {filteredModels.length} {filteredModels.length === 1 ? get("home-singular", "home") : get("home-plural", "homes")} {get("available", "available")}
             </p>
             <button
@@ -1062,7 +1069,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
               type="button"
               className={styles.detailsButton}
               onClick={openDetails}
-            >
+             data-type-field={`models.signature.${activeModel.slug}.explore-action`}>
               <span aria-hidden="true">⊞</span>
               {activeRecord?.fields.exploreAction || get(`${activeModel.slug}.explore-action`, get("details-action", "Explore details"))}
             </button>
@@ -1091,6 +1098,7 @@ function FeatureCard({
   progress,
   range,
   placement,
+  typographyScope,
   eyebrow,
   title,
   copy,
@@ -1098,6 +1106,7 @@ function FeatureCard({
   progress: MotionValue<number>;
   range: [number, number, number, number];
   placement: "upperLeft" | "upperRight" | "lowerRight";
+  typographyScope: string;
   eyebrow: string;
   title: string;
   copy: string;
@@ -1108,7 +1117,7 @@ function FeatureCard({
 
   return (
     <motion.article
-      className={`${styles.featureCard} ${styles[placement]}`}
+      className={`${styles.featureCard} ${styles[placement]}`} data-type-section={typographyScope}
       style={{ opacity, y, scale }}
     >
       <div className={styles.featureTopline}>
@@ -1285,7 +1294,7 @@ function DetailsLayer({
   return (
     <motion.div
       ref={panelRef}
-      className={styles.detailsLayer}
+      className={styles.detailsLayer} data-type-section={`signature.${model.slug}-explore`}
       role="dialog"
       aria-modal="true"
       aria-labelledby={`${model.slug}-details-title`}
@@ -1312,8 +1321,8 @@ function DetailsLayer({
           ease: settleEase,
         }}
       >
-          <span>{get("eyebrow", "Signature collection")}</span>
-        <button ref={closeRef} type="button" onClick={onClose}>
+          <span data-type-field={"models.signature.eyebrow"}>{get("eyebrow", "Signature collection")}</span>
+        <button ref={closeRef} type="button" onClick={onClose} data-type-field={"models.signature.detail.close"}>
           {get("detail.close", "Close")} <span aria-hidden="true">×</span>
         </button>
       </motion.div>
@@ -1329,12 +1338,12 @@ function DetailsLayer({
         exit={prefersReducedMotion ? "visible" : "exit"}
       >
         <motion.section
-          className={styles.specCard}
+          className={styles.specCard} data-type-section={`signature.${model.slug}-plan-${variantIndex + 1}`}
           data-bento-card="specification"
           variants={bentoCardVariants}
           custom={bentoOrigins?.specification ?? collapsedBentoOrigin}
         >
-          <p>{get("eyebrow", "Signature collection")}</p>
+          <p data-type-field={"models.signature.eyebrow"}>{get("eyebrow", "Signature collection")}</p>
           <h2 id={`${model.slug}-details-title`}>{model.name}</h2>
           <div className={styles.variantTabs} role="tablist" aria-label={`${model.name} variants`}>
             {model.variants.map((item, index) => (
@@ -1353,7 +1362,7 @@ function DetailsLayer({
                     aria-hidden="true"
                   />
                 )}
-                <span className={styles.variantTabLabel}>{item.name}</span>
+                <span className={styles.variantTabLabel} data-type-section={`signature.${model.slug}-plan-${index + 1}`}>{item.name}</span>
               </button>
             ))}
           </div>
@@ -1400,9 +1409,9 @@ function DetailsLayer({
                     ease: [0.22, 1, 0.36, 1],
                   }}
                 >
-                  <Link href={configurationVariantId ? `/models/signature/${model.slug}/configure?variant=${configurationVariantId}` : `/enquiry?model=${model.slug}&intent=configure`} className={styles.configureButton}>
+                  <a href={configurationHref(model.slug, configurationVariantId)} className={styles.configureButton} data-type-field={"models.signature.detail.configure-action"}>
                     {get("detail.configure-action", "Configure")} {model.name} <span aria-hidden="true">↗</span>
-                  </Link>
+                  </a>
                 </motion.div>
               </AccessibleVariantStack>
             </AnimatePresence>
@@ -1472,8 +1481,8 @@ function DetailsLayer({
           variants={bentoCardVariants}
           custom={bentoOrigins?.build ?? collapsedBentoOrigin}
         >
-          <p>{get("detail.build-eyebrow", "Built indoors")}</p>
-          <strong>{get("detail.build-line-1", "Factory precision.")}<br />{get("detail.build-line-2", "Landscape presence.")}</strong>
+          <p data-type-field={"models.signature.detail.build-eyebrow"}>{get("detail.build-eyebrow", "Built indoors")}</p>
+          <strong data-type-field={"models.signature.detail.build-line-1"}>{get("detail.build-line-1", "Factory precision.")}<br />{get("detail.build-line-2", "Landscape presence.")}</strong>
         </motion.section>
 
         <motion.section
@@ -1482,8 +1491,8 @@ function DetailsLayer({
           variants={bentoCardVariants}
           custom={bentoOrigins?.warranty ?? collapsedBentoOrigin}
         >
-          <p>{get("detail.warranty-eyebrow", "Included")}</p>
-          <strong>{get("detail.warranty-value", "20-year structural warranty")}</strong>
+          <p data-type-field={"models.signature.detail.warranty-eyebrow"}>{get("detail.warranty-eyebrow", "Included")}</p>
+          <strong data-type-field={"models.signature.detail.warranty-value"}>{get("detail.warranty-value", "20-year structural warranty")}</strong>
         </motion.section>
       </motion.div>
     </motion.div>

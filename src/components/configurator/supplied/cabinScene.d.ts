@@ -1,0 +1,42 @@
+export type Group = "cladding"|"timber"|"roof"|"frames"|"deck"|"foundation";
+export type Background = "meadow"|"forest"|"hill"|"island"|"full-island";
+export type Finish = {color:string;texture?:string;roughness?:number;metalness?:number;scale?:number;kind?:"surface"|"glass";transmission?:number;opacity?:number;ior?:number;thickness?:number;clearcoat?:number};
+export type EditGroup = {id:string;name:string;count:number;category?:Group};
+export type SelectedPart = {id:string;name:string;category?:Group;material:string;groupId?:string;groupName?:string};
+export type ImportSummary = {parts:number;triangles:number;labeled:number;categories:Record<Group,number>};
+export type SceneApi = {
+  finish:(g:Group,f:Finish)=>void;
+  surface:(application:string,f:Finish,name:string)=>number;
+  light:(m:"day"|"golden")=>void;
+  background:(v:Background)=>void;
+  moveCamera:(direction:"forward"|"backward"|"left"|"right",distance?:number)=>void;
+  view:(v:string)=>void;
+  turn:(v:boolean)=>void;
+  glb:(f:Blob,metersPerUnit?:number)=>Promise<ImportSummary>;
+  cabin:()=>void;
+  showImported:()=>void;
+  clearSelection:()=>void;
+  selectAll:()=>void;
+  selectCategory:(g:Group)=>void;
+  selectEditGroup:(id:string)=>void;
+  editGroups:()=>EditGroup[];
+  groupSelection:(category:Group|undefined,label:string,custom?:boolean)=>EditGroup|undefined;
+  ungroupSelection:()=>number;
+  addSelectionToGroup:(id:string)=>number;
+  deleteEditGroup:(id:string)=>number;
+  labelSelection:(g:Group)=>void;
+  applySelection:(f:Finish,name:string)=>void;
+  applyCategory:(g:Group,f:Finish,name:string)=>number;
+  restoreSelection:()=>void;
+  restoreCategory:(g:Group)=>number;
+  categoryCounts:()=>Record<Group,number>;
+  deleteSelection:()=>void;
+  restoreDeleted:()=>void;
+  undo:()=>boolean;
+  frameImported:()=>void;
+  exportGlb:()=>Promise<Blob>;
+  dispose:()=>void;
+};
+
+
+export declare function createScene(mount: HTMLDivElement, onReady: () => void, onSelection: (parts: SelectedPart[]) => void, onHistory?: (count: number) => void, customerModel?: boolean): SceneApi;

@@ -139,7 +139,7 @@
   min-height: 44px;
   padding: 16px 0 12px;
   color: rgba(242, 244, 237, .76);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 500;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -155,7 +155,7 @@
   gap: 12px;
   min-height: 44px;
   padding: 0;
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 500;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -170,7 +170,7 @@
   border-radius: 3px;
   background: var(--lichen);
   color: var(--deep-forest);
-  font-size: 12px;
+  font-size: var(--type-size-caption, 12px);
 }
 
 .menuButton { display: none; }
@@ -197,7 +197,7 @@
 .heroTitle h1 {
   margin: 0;
   color: var(--mist);
-  font-size: clamp(64px, 6vw, 96px);
+  font-size: var(--type-size-display, clamp(64px, 6vw, 96px));
   font-weight: 500;
   letter-spacing: -.05em;
   line-height: .95;
@@ -214,7 +214,7 @@
 }
 .heroIntro > p {
   color: rgba(242, 244, 237, .85);
-  font-size: clamp(18px, 1.75vw, 25px);
+  font-size: var(--type-size-subheading, clamp(18px, 1.75vw, 25px));
   letter-spacing: -.04em;
   line-height: 1.02;
   text-wrap: pretty;
@@ -280,7 +280,7 @@
   max-width: 760px;
   margin: 0;
   color: var(--mist);
-  font-size: clamp(48px, 5.3vw, 82px);
+  font-size: var(--type-size-display, clamp(48px, 5.3vw, 82px));
   font-weight: 500;
   letter-spacing: -.05em;
   line-height: .96;
@@ -310,7 +310,7 @@
   max-width: 760px;
   margin: 0;
   color: #fbfcf8;
-  font-size: clamp(54px, 6vw, 92px);
+  font-size: var(--type-size-display, clamp(54px, 6vw, 92px));
   font-weight: 500;
   letter-spacing: -.055em;
   line-height: .95;
@@ -325,7 +325,7 @@
   max-width: 510px;
   margin: 0 0 clamp(50px, 8vh, 92px);
   color: #fbfcf8;
-  font-size: clamp(18px, 1.7vw, 25px);
+  font-size: var(--type-size-subheading, clamp(18px, 1.7vw, 25px));
   font-weight: 400;
   letter-spacing: -.04em;
   line-height: 1.05;
@@ -345,8 +345,8 @@
 
 @media (max-width: 1100px) {
   .desktopNav { gap: 18px; }
-  .desktopNav a { font-size: 8px; }
-  .heroTitle h1 { font-size: clamp(60px, 6.6vw, 78px); }
+  .desktopNav a { font-size: var(--type-size-caption, 8px); }
+  .heroTitle h1 { font-size: var(--type-size-display, clamp(60px, 6.6vw, 78px)); }
   .evidenceStage { grid-template-columns: minmax(260px, .7fr) minmax(440px, 1.3fr); }
 }
 
@@ -365,7 +365,7 @@
   }
   .wordmark { min-height: 44px; width: 105px; }
   .desktopNav { display: none; }
-  .enquireLink { min-height: 40px; margin-right: 16px; font-size: 9px; }
+  .enquireLink { min-height: 40px; margin-right: 16px; font-size: var(--type-size-caption, 9px); }
   .menuButton {
     position: relative;
     z-index: 62;
@@ -403,7 +403,7 @@
     justify-content: space-between;
     padding: 8px 0;
     border-bottom: 1px solid rgba(242, 244, 237, .16);
-    font-size: clamp(30px, 7vw, 48px);
+    font-size: var(--type-size-heading, clamp(30px, 7vw, 48px));
     font-weight: 400;
     letter-spacing: -.05em;
   }
@@ -413,7 +413,7 @@
     align-items: center;
     justify-content: space-between;
     margin-top: auto;
-    font-size: 12px;
+    font-size: var(--type-size-caption, 12px);
   }
 
   .heroContent {
@@ -423,9 +423,9 @@
     left: 22px;
   }
   .heroTitle { top: clamp(34px, 7vh, 68px); width: min(620px, 92vw); }
-  .heroTitle h1 { font-size: clamp(53px, 12vw, 82px); line-height: .96; }
+  .heroTitle h1 { font-size: var(--type-size-display, clamp(53px, 12vw, 82px)); line-height: .96; }
   .heroIntro { bottom: 46px; max-width: min(420px, 86vw); }
-  .heroIntro > p { font-size: clamp(17px, 4.5vw, 22px); }
+  .heroIntro > p { font-size: var(--type-size-subheading, clamp(17px, 4.5vw, 22px)); }
   .scanField { inset: 76px 0 0; }
   .scanOne { top: 28%; left: auto; right: 12%; }
   .scanTwo { display: none; }
@@ -436,7 +436,7 @@
     right: 24px;
     width: min(600px, calc(100vw - 48px));
   }
-  .storyPanel h2 { font-size: clamp(45px, 9.7vw, 70px); }
+  .storyPanel h2 { font-size: var(--type-size-display, clamp(45px, 9.7vw, 70px)); }
 
   .evidenceStage {
     inset: 76px 22px 0;
@@ -444,17 +444,17 @@
     grid-template-rows: 1fr 1fr;
   }
   .evidenceHeading { grid-column: 1; grid-row: 1; align-self: end; margin-bottom: 24px; }
-  .evidenceHeading h2 { font-size: clamp(48px, 10vw, 74px); }
+  .evidenceHeading h2 { font-size: var(--type-size-display, clamp(48px, 10vw, 74px)); }
   .evidenceCopy { grid-column: 1; grid-row: 2; max-width: min(450px, 86vw); margin-bottom: 48px; }
 }
 
 @media (max-width: 520px) {
   .enquireLink { display: none; }
   .header { grid-template-columns: 1fr auto; }
-  .heroTitle h1 { font-size: clamp(48px, 14.5vw, 68px); }
-  .storyPanel h2 { font-size: clamp(42px, 12vw, 60px); }
-  .evidenceHeading h2 { font-size: clamp(44px, 12vw, 62px); }
-  .evidenceCopy { font-size: 18px; }
+  .heroTitle h1 { font-size: var(--type-size-display, clamp(48px, 14.5vw, 68px)); }
+  .storyPanel h2 { font-size: var(--type-size-display, clamp(42px, 12vw, 60px)); }
+  .evidenceHeading h2 { font-size: var(--type-size-display, clamp(44px, 12vw, 62px)); }
+  .evidenceCopy { font-size: var(--type-size-subheading, 18px); }
 }
 
 @media (prefers-reduced-motion: reduce) {

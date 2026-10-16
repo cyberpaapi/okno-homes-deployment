@@ -53,14 +53,14 @@
   display: block;
   margin-bottom: 20px;
   color: rgba(230, 237, 229, .72);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 500;
   letter-spacing: .16em;
   text-transform: uppercase;
 }
-.signatureHeading h2 { max-width: 1020px; margin: 0; font-size: clamp(58px, 7vw, 112px); font-weight: 400; line-height: .97; letter-spacing: -.06em; }
+.signatureHeading h2 { max-width: 1020px; margin: 0; font-size: var(--type-size-display, clamp(58px, 7vw, 112px)); font-weight: 400; line-height: .97; letter-spacing: -.06em; }
 .signatureClosing { right: 6vw; bottom: 8svh; display: flex; align-items: flex-end; gap: 28px; flex-direction: column; text-align: right; }
-.signatureClosing p { max-width: 28ch; margin: 0; font-size: clamp(18px, 1.5vw, 24px); line-height: 1.35; text-shadow: 0 2px 24px #000; }
+.signatureClosing p { max-width: 28ch; margin: 0; font-size: var(--type-size-subheading, clamp(18px, 1.5vw, 24px)); line-height: 1.35; text-shadow: 0 2px 24px #000; }
 
 .bespoke {
   position: relative;
@@ -80,7 +80,7 @@
   left: -3vw;
   margin: 0;
   color: rgba(245, 241, 233, .16);
-  font-size: clamp(130px, 22vw, 360px);
+  font-size: var(--type-size-display, clamp(130px, 22vw, 360px));
   font-weight: 500;
   line-height: .8;
   letter-spacing: -.09em;
@@ -90,8 +90,8 @@
 .bespokeCard { position: absolute; z-index: 1; top: 16%; right: 7vw; width: min(31vw, 470px); aspect-ratio: .72; margin: 0; overflow: hidden; border-radius: 28px; box-shadow: 0 36px 100px rgba(0, 0, 0, .3); }
 .bespokeCard img { object-fit: cover; }
 .bespokeCopy { position: absolute; z-index: 2; bottom: 10svh; left: 6vw; width: min(760px, 55vw); }
-.bespokeCopy h2 { margin: 0 0 32px; font-size: clamp(62px, 7.2vw, 118px); font-weight: 400; line-height: .92; letter-spacing: -.065em; }
-.bespokeCopy p { max-width: 36ch; margin: 0 0 28px; color: rgba(245, 241, 233, .82); font-size: 18px; line-height: 1.55; }
+.bespokeCopy h2 { margin: 0 0 32px; font-size: var(--type-size-display, clamp(62px, 7.2vw, 118px)); font-weight: 400; line-height: .92; letter-spacing: -.065em; }
+.bespokeCopy p { max-width: 36ch; margin: 0 0 28px; color: rgba(245, 241, 233, .82); font-size: var(--type-size-body, 18px); line-height: 1.55; }
 
 .sustainability {
   position: relative;
@@ -111,8 +111,8 @@
 .sustainabilityMedia > video { z-index: 1; }
 .sustainabilityGrade { z-index: 2; background: linear-gradient(90deg, rgba(4, 12, 7, .76), rgba(4, 12, 7, .18) 64%, rgba(4, 12, 7, .35)), linear-gradient(180deg, rgba(2, 8, 4, .25), transparent 60%, rgba(2, 8, 4, .52)); }
 .sustainabilityCopy { position: absolute; z-index: 3; top: 50%; left: 6vw; width: min(760px, 58vw); transform: translateY(-50%); }
-.sustainabilityCopy h2 { margin: 0 0 32px; font-size: clamp(64px, 7.6vw, 122px); font-weight: 400; line-height: .92; letter-spacing: -.065em; }
-.sustainabilityCopy p { max-width: 37ch; margin: 0 0 30px; color: rgba(238, 242, 232, .83); font-size: 18px; line-height: 1.55; }
+.sustainabilityCopy h2 { margin: 0 0 32px; font-size: var(--type-size-display, clamp(64px, 7.6vw, 122px)); font-weight: 400; line-height: .92; letter-spacing: -.065em; }
+.sustainabilityCopy p { max-width: 37ch; margin: 0 0 30px; color: rgba(238, 242, 232, .83); font-size: var(--type-size-body, 18px); line-height: 1.55; }
 
 .editorial { display: flex; min-height: 86svh; gap: 12px; padding: 12px 12px 116px; background: #141713; }
 .editorialPanel { position: relative; min-width: 0; overflow: hidden; border: 1px solid rgba(244, 240, 233, .1); border-radius: 28px; background: #1b211c; }
@@ -126,33 +126,33 @@
 }
 .editorialShade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 28%, rgba(4, 10, 6, .85)); }
 .editorialCopy { position: absolute; right: 34px; bottom: 32px; left: 34px; }
-.editorialCopy h2 { max-width: 12ch; margin: 0 0 15px; font-size: clamp(46px, 5vw, 82px); font-weight: 400; line-height: .96; letter-spacing: -.055em; }
-.editorialCopy p { max-width: 34ch; margin: 0; color: rgba(240, 237, 229, .78); font-size: 16px; line-height: 1.5; }
-.editorialCopy > span { position: absolute; right: 0; bottom: 0; color: rgba(244, 240, 233, .78); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.editorialCopy h2 { max-width: 12ch; margin: 0 0 15px; font-size: var(--type-size-display, clamp(46px, 5vw, 82px)); font-weight: 400; line-height: .96; letter-spacing: -.055em; }
+.editorialCopy p { max-width: 34ch; margin: 0; color: rgba(240, 237, 229, .78); font-size: var(--type-size-body, 16px); line-height: 1.5; }
+.editorialCopy > span { position: absolute; right: 0; bottom: 0; color: rgba(244, 240, 233, .78); font-size: var(--type-size-caption, 11px); letter-spacing: .12em; text-transform: uppercase; }
 
 @media (max-width: 800px) {
   .signature { height: 290svh; }
   .signatureSticky { min-height: 580px; }
   .signatureMedia { clip-path: inset(8% 5% 8% 5% round 24px); }
   .signatureHeading { top: 10svh; right: 7vw; left: 7vw; }
-  .signatureHeading h2 { font-size: clamp(48px, 13.2vw, 74px); }
+  .signatureHeading h2 { font-size: var(--type-size-display, clamp(48px, 13.2vw, 74px)); }
   .signatureClosing { right: 7vw; bottom: 10svh; left: 7vw; align-items: flex-start; text-align: left; }
-  .signatureClosing p { max-width: 22ch; font-size: 17px; }
+  .signatureClosing p { max-width: 22ch; font-size: var(--type-size-subheading, 17px); }
   .bespoke { min-height: 118svh; }
-  .bespokeWord { top: 12svh; font-size: 34vw; }
+  .bespokeWord { top: 12svh; font-size: var(--type-size-display, 34vw); }
   .bespokeCard { top: 18%; right: 7vw; width: 54vw; border-radius: 22px; }
   .bespokeCopy { right: 7vw; bottom: 8svh; left: 7vw; width: auto; }
-  .bespokeCopy h2 { font-size: clamp(50px, 14vw, 76px); }
-  .bespokeCopy p { max-width: 30ch; font-size: 16px; }
+  .bespokeCopy h2 { font-size: var(--type-size-display, clamp(50px, 14vw, 76px)); }
+  .bespokeCopy p { max-width: 30ch; font-size: var(--type-size-body, 16px); }
   .sustainability { min-height: 120svh; }
   .sustainabilityCopy { right: 7vw; left: 7vw; width: auto; }
-  .sustainabilityCopy h2 { font-size: clamp(52px, 14.5vw, 78px); }
-  .sustainabilityCopy p { max-width: 29ch; font-size: 16px; }
+  .sustainabilityCopy h2 { font-size: var(--type-size-display, clamp(52px, 14.5vw, 78px)); }
+  .sustainabilityCopy p { max-width: 29ch; font-size: var(--type-size-body, 16px); }
   .editorial { min-height: 0; flex-direction: column; padding: 8px 8px 78px; }
   .editorialPanel { flex: none !important; height: 68svh; min-height: 520px; border-radius: 22px; }
   .editorialCopy { right: 24px; bottom: 25px; left: 24px; }
-  .editorialCopy h2 { font-size: 13vw; }
-  .editorialCopy p { max-width: 25ch; padding-right: 36px; font-size: 14px; }
+  .editorialCopy h2 { font-size: var(--type-size-display, 13vw); }
+  .editorialCopy p { max-width: 25ch; padding-right: 36px; font-size: var(--type-size-body, 14px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -160,4 +160,19 @@
   .signatureMedia > video,
   .sustainabilityMedia > video { display: none; }
   .editorialPanel img { transition: none; }
+}
+
+@media (max-width: 800px) {
+  .signature { height: auto; padding: 48px 20px 36px; }
+  .signatureSticky { position: relative; height: auto; min-height: 0; display: flex; flex-direction: column; gap: 22px; overflow: visible; }
+  .signatureHeading, .signatureClosing { position: relative; inset: auto; opacity: 1; transform: none; }
+  .signatureHeading { order: -1; }
+  .signatureHeading > span { margin-bottom: 12px; }
+  .signatureHeading h2 { font-size: var(--type-size-display, clamp(34px, 9vw, 58px)); line-height: 1.08; }
+  .signatureMedia { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 4/3; clip-path: none !important; border-radius: 16px; overflow: hidden; will-change: auto; }
+  .signatureMedia > img, .signatureMedia > video { object-fit: contain; filter: none; }
+  .signatureGrade { display: none; }
+  .signatureClosing { gap: 16px; align-items: flex-start; text-align: left; }
+  .signatureClosing p { max-width: 32ch; }
+  .signature::before, .signature::after { display: none; }
 }

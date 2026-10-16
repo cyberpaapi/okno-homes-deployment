@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "forza",
+    "status": 200,
+    "bytes": "2850968",
+    "cache": "public, max-age=31536000, immutable"
+  },
+  {
+    "slug": "tengo",
+    "status": 200,
+    "bytes": "8086368",
+    "cache": "public, max-age=31536000, immutable"
+  },
+  {
+    "slug": "kray",
+    "status": 200,
+    "bytes": "15084640",
+    "cache": "public, max-age=31536000, immutable"
+  },
+  {
+    "slug": "tish",
+    "status": 200,
+    "bytes": "355028",
+    "cache": "public, max-age=31536000, immutable"
+  }
+]

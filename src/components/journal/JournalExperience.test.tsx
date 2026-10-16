@@ -11,6 +11,22 @@ beforeEach(() => {
 });
 
 describe('Journal press and blog experience', () => {
+  it('offers a persistent pause and touch dragging without hiding duplicate loop cards', () => {
+    render(<JournalExperience />);
+    const pause = screen.getByRole('button', { name: 'Pause in the press motion' });
+    fireEvent.click(pause);
+    expect(screen.getByRole('button', { name: 'Resume in the press motion' })).toBeInTheDocument();
+    const reel = screen.getByRole('region', { name: 'In the press' });
+    const viewport = reel.querySelector<HTMLElement>('[data-dragging]')!;
+    const track = reel.querySelector<HTMLElement>('[data-marquee-track]')!;
+    Object.assign(viewport, { setPointerCapture: vi.fn(), hasPointerCapture: () => true, releasePointerCapture: vi.fn() });
+    fireEvent.pointerDown(viewport, { pointerType: 'touch', pointerId: 2, clientX: 300 });
+    fireEvent.pointerMove(viewport, { pointerType: 'touch', pointerId: 2, clientX: 180 });
+    expect(track.style.transform).toContain('-120.000px');
+    fireEvent.pointerCancel(viewport, { pointerType: 'touch', pointerId: 2 });
+    expect(viewport).toHaveAttribute('data-dragging', 'false');
+    expect(reel.querySelector('[data-duplicate]')).toBeInTheDocument();
+  });
   it('leads with verified press, preserves two straight reels, and follows with a conventional blog grid', () => {
     render(<JournalExperience />);
     expect(screen.getByRole('heading', { name: 'News from the practice.' })).toBeInTheDocument();
@@ -55,7 +71,8 @@ describe('Journal press and blog experience', () => {
 
   it('keeps photography inert and exposes only explicit, named arrow links', () => {
     render(<JournalExperience />);
-    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Pause in the press motion' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Pause from the archive motion' })).toBeInTheDocument();
     const pressAction = screen.getByRole('link', { name: /Read AD Small Spaces.*Architectural Digest India/ });
     expect(pressAction).toHaveAttribute('data-journal-cursor-action');
     expect(pressAction).toHaveAttribute('target', '_blank');

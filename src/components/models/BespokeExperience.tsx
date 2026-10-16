@@ -15,6 +15,8 @@ import ModelsHeader from "./ModelsHeader";
 import OknoLogo from "@/components/Brand/OknoLogo";
 import styles from "./BespokeExperience.module.css";
 import { useSiteContentMap } from "@/lib/useSiteContent";
+import { pageImageLoader } from "@/lib/pageImageLoader";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const horizontalStages = [
   { label: "PLACE", detail: "Topography, weather and view", copy: "Read orientation, access, climate and long views before drawing a room.", image: "/assets/projects/real-v1/forrest-01.webp", alt: "Completed OKNO residence following a curved garden path and reflecting pool through established planting", tone: "mist" },
@@ -88,49 +90,49 @@ export default function BespokeExperience() {
         <AuroraWallpaper />
         <ModelsHeader tone="light" />
 
-        <section ref={heroRef} className={styles.hero} aria-labelledby="bespoke-title">
+        <section ref={heroRef} className={styles.hero} data-type-section="bespoke.hero" aria-labelledby="bespoke-title">
           <div className={styles.heroSticky}>
-            <motion.div className={styles.heroBackdrop} style={{ opacity: heroBackdropOpacity }} aria-hidden="true"><Image src={get("hero.image", "/models/bespoke/bespoke-pearl-exterior-v1.webp")} alt="" fill priority sizes="100vw" className={styles.image} /></motion.div>
-            <motion.div className={styles.heroLayers} style={{ opacity: heroTextOpacity, y: heroTextY }} aria-hidden="true"><span>{get("hero.background-word", "BESPOKE")}</span><span>{get("hero.background-word", "BESPOKE")}</span><span>{get("hero.background-word", "BESPOKE")}</span></motion.div>
+            <motion.div className={styles.heroBackdrop} style={{ opacity: heroBackdropOpacity }} aria-hidden="true"><Image loader={pageImageLoader} src={get("hero.image", "/models/bespoke/bespoke-pearl-exterior-v1.webp")} alt="" fill priority sizes="100vw" className={styles.image} /></motion.div>
+            <motion.div className={styles.heroLayers} style={{ opacity: heroTextOpacity, y: heroTextY }} aria-hidden="true"><span data-type-field={"models.bespoke.hero.background-word"}>{get("hero.background-word", "BESPOKE")}</span><span data-type-field={"models.bespoke.hero.background-word"}>{get("hero.background-word", "BESPOKE")}</span><span data-type-field={"models.bespoke.hero.background-word"}>{get("hero.background-word", "BESPOKE")}</span></motion.div>
             <motion.div className={styles.heroFrame} style={{ width: heroWidth, height: heroHeight, borderRadius: heroRadius }}>
               <motion.div className={styles.heroImage} style={{ scale: heroScale }}>
-                <Image src={get("hero.image", "/models/bespoke/bespoke-pearl-exterior-v1.webp")} alt={get("hero.alt", "A luminous site-specific limestone and oak residence integrated into a wooded hillside")} fill priority sizes="100vw" className={styles.image} onLoad={() => setHeroReady(true)} onError={() => setHeroReady(true)} />
+                <Image loader={pageImageLoader} src={get("hero.image", "/models/bespoke/bespoke-pearl-exterior-v1.webp")} alt={get("hero.alt", "A luminous site-specific limestone and oak residence integrated into a wooded hillside")} fill priority sizes="100vw" className={styles.image} onLoad={() => setHeroReady(true)} onError={() => setHeroReady(true)} />
               </motion.div>
               <div className={styles.heroShade} aria-hidden="true" />
-              <motion.div className={styles.heroWords} style={{ opacity: heroTextOpacity }}><p>{get("hero.eyebrow", "Bespoke by OKNO")}</p><h1 id="bespoke-title" aria-label={`${get("hero.line-1", "A home authored")} ${get("hero.line-2", "from place.")}`}>{get("hero.line-1", "A home authored")}<br />{get("hero.line-2", "from place.")}</h1></motion.div>
+              <motion.div className={styles.heroWords} style={{ opacity: heroTextOpacity }}><p data-type-field={"models.bespoke.hero.eyebrow"}>{get("hero.eyebrow", "Bespoke by OKNO")}</p><h1 id="bespoke-title" aria-label={`${get("hero.line-1", "A home authored")} ${get("hero.line-2", "from place.")}`} data-type-field={"models.bespoke.hero.line-1"}>{get("hero.line-1", "A home authored")}<br />{get("hero.line-2", "from place.")}</h1></motion.div>
             </motion.div>
           </div>
         </section>
 
-        <section id="manifesto" className={styles.manifesto} aria-labelledby="manifesto-title">
-          <div className={styles.manifestoCopy}>
-            <p className={styles.kicker}>{get("manifesto.eyebrow", "One commission")}</p>
+        <section id="manifesto" className={styles.manifesto} data-type-section="bespoke.manifesto" aria-labelledby="manifesto-title">
+          <div className={styles.manifestoCopy} data-type-field={"models.bespoke.manifesto.line-1"}>
+            <p className={styles.kicker} data-type-field={"models.bespoke.manifesto.eyebrow"}>{get("manifesto.eyebrow", "One commission")}</p>
             <LayeredHeading id="manifesto-title" lines={[get("manifesto.line-1", "NOT SELECTED."), get("manifesto.line-2", "NOT ADAPTED."), get("manifesto.line-3", "AUTHORED.")]} />
-            <p className={styles.bodyCopy}>{get("manifesto.copy", "Bespoke begins where a catalogue ends. The architecture is developed around the site, the life it will hold and the atmosphere it should create.")}</p>
+            <p className={styles.bodyCopy} data-type-field={"models.bespoke.manifesto.copy"}>{get("manifesto.copy", "Bespoke begins where a catalogue ends. The architecture is developed around the site, the life it will hold and the atmosphere it should create.")}</p>
           </div>
           <motion.figure className={styles.manifestoMedia} initial={reduced ? false : { clipPath: "inset(18% 10% 18% 10% round 32px)" }} whileInView={{ clipPath: "inset(0% 0% 0% 0% round 32px)" }} viewport={{ once: true, amount: .28 }} transition={{ duration: 1.2, ease: [.22, 1, .36, 1] }}>
-            <Image src={get("manifesto.image", "/models/bespoke/bespoke-pearl-courtyard-v1.webp")} alt={get("manifesto.alt", "Luminous limestone courtyard residence shaped around water and mature trees")} fill sizes="(max-width: 800px) 100vw, 58vw" className={styles.image} />
+            <Image loader={pageImageLoader} src={get("manifesto.image", "/models/bespoke/bespoke-pearl-courtyard-v1.webp")} alt={get("manifesto.alt", "Luminous limestone courtyard residence shaped around water and mature trees")} fill sizes="(max-width: 800px) 100vw, 58vw" className={styles.image} />
           </motion.figure>
         </section>
 
         <GlyphPortal />
 
-        <section id="decisions" ref={horizontalRef} className={styles.horizontal} aria-labelledby="decisions-title">
+        <section id="decisions" ref={horizontalRef} className={styles.horizontal} data-type-section="bespoke.decisions" aria-labelledby="decisions-title">
           <div className={styles.horizontalSticky}><motion.div className={styles.horizontalTrack} style={{ x: horizontalX }}>
-            {currentStages.map((stage, index) => <article id={`decision-${index}`} key={index} className={styles.horizontalPanel} data-tone={stage.tone}>
+            {currentStages.map((stage, index) => <article id={`decision-${index}`} key={index} className={styles.horizontalPanel} data-type-section={`bespoke.decision-${index + 1}`} data-tone={stage.tone}>
               <div className={styles.panelHeading}><h2 id={index === 0 ? "decisions-title" : undefined}>{stage.label}</h2></div>
-              <figure className={styles.panelMedia}><Image src={stage.image} alt={stage.alt} fill sizes="(max-width: 800px) 100vw, 62vw" className={styles.image} /></figure>
-              <div className={styles.panelCaption}><div><p>{stage.detail}</p><strong>{stage.copy}</strong></div><button type="button" onClick={() => moveToDecision(index + 1)} aria-label={`${get("stages.next-action", "Next step")}: ${index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}`}><span>{get("stages.next-action", "Next step")}</span><b>{index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}</b><i aria-hidden="true">→</i></button></div>
+              <figure className={styles.panelMedia}><Image loader={pageImageLoader} src={stage.image} alt={stage.alt} fill sizes="(max-width: 800px) 100vw, 62vw" className={styles.image} /></figure>
+              <div className={styles.panelCaption}><div><p>{stage.detail}</p><strong>{stage.copy}</strong></div><button type="button" onClick={() => moveToDecision(index + 1)} aria-label={`${get("stages.next-action", "Next step")}: ${index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}`}><span data-type-field={"models.bespoke.stages.next-action"}>{get("stages.next-action", "Next step")}</span><b data-type-field={"models.bespoke.result.eyebrow"}>{index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}</b><i aria-hidden="true">→</i></button></div>
             </article>)}
           </motion.div></div>
         </section>
 
-        <section id="original" ref={parallaxRef} className={styles.parallax} aria-labelledby="parallax-title">
+        <section id="original" ref={parallaxRef} className={styles.parallax} data-type-section="bespoke.result" aria-labelledby="parallax-title">
           <div className={styles.parallaxSticky}>
-            <motion.div className={styles.parallaxImage} style={{ y: parallaxImageY, scale: parallaxImageScale, clipPath: parallaxImageClip }}><Image src={get("result.image", "/models/bespoke/bespoke-pearl-courtyard-v1.webp")} alt={get("result.alt", "Open-air courtyard connecting architecture, water and landscape")} fill sizes="100vw" className={styles.image} /></motion.div>
-            <motion.div className={styles.parallaxWords} style={{ y: parallaxWordY }} aria-hidden="true"><span>{get("result.word-1", "ONE PLACE")}</span><span>{get("result.word-2", "ONE HOME")}</span></motion.div>
-            <motion.figure className={styles.parallaxCard} style={{ y: parallaxCardY }}><Image src={get("result.card-image", "/models/bespoke/bespoke-pearl-exterior-v1.webp")} alt={get("result.card-alt", "Pale limestone and oak bespoke residence in its landscape")} fill sizes="(max-width: 700px) 70vw, 34vw" className={styles.image} /></motion.figure>
-            <div className={styles.parallaxCopy}><p className={styles.kicker}>{get("result.eyebrow", "The result")}</p><h2 id="parallax-title">{get("result.heading", "Architecture that could belong nowhere else.")}</h2></div>
+            <motion.div className={styles.parallaxImage} style={{ y: parallaxImageY, scale: parallaxImageScale, clipPath: parallaxImageClip }}><Image loader={pageImageLoader} src={get("result.image", "/models/bespoke/bespoke-pearl-courtyard-v1.webp")} alt={get("result.alt", "Open-air courtyard connecting architecture, water and landscape")} fill sizes="100vw" className={styles.image} /></motion.div>
+            <motion.div className={styles.parallaxWords} style={{ y: parallaxWordY }} aria-hidden="true"><span data-type-field={"models.bespoke.result.word-1"}>{get("result.word-1", "ONE PLACE")}</span><span data-type-field={"models.bespoke.result.word-2"}>{get("result.word-2", "ONE HOME")}</span></motion.div>
+            <motion.figure className={styles.parallaxCard} style={{ y: parallaxCardY }}><Image loader={pageImageLoader} src={get("result.card-image", "/models/bespoke/bespoke-pearl-exterior-v1.webp")} alt={get("result.card-alt", "Pale limestone and oak bespoke residence in its landscape")} fill sizes="(max-width: 700px) 70vw, 34vw" className={styles.image} /></motion.figure>
+            <div className={styles.parallaxCopy}><p className={styles.kicker} data-type-field={"models.bespoke.result.eyebrow"}>{get("result.eyebrow", "The result")}</p><h2 id="parallax-title" data-type-field={"models.bespoke.result.heading"}>{get("result.heading", "Architecture that could belong nowhere else.")}</h2></div>
           </div>
         </section>
       </main>
@@ -145,9 +147,9 @@ function AuroraWallpaper() {
     if (!element) return;
     const context = element.getContext("2d");
     if (!context) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0, last: number | null = null, elapsed = 0;
-    const resize = () => { const ratio = Math.min(1.5, window.devicePixelRatio || 1); element.width = Math.round(window.innerWidth * ratio); element.height = Math.round(window.innerHeight * ratio); element.style.width = `${window.innerWidth}px`; element.style.height = `${window.innerHeight}px`; context.setTransform(ratio, 0, 0, ratio, 0, 0); };
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce), (max-width: 700px)");
+    let frame = 0, last: number | null = null, elapsed = 0, lastPaint = 0;
+    const resize = () => { const ratio = Math.min(1, window.devicePixelRatio || 1); element.width = Math.round(window.innerWidth * ratio); element.height = Math.round(window.innerHeight * ratio); element.style.width = `${window.innerWidth}px`; element.style.height = `${window.innerHeight}px`; context.setTransform(ratio, 0, 0, ratio, 0, 0); paint(elapsed); };
     const paint = (time = 0) => {
       const width = window.innerWidth, height = window.innerHeight;
       context.fillStyle = "#fbfcfd"; context.fillRect(0, 0, width, height);
@@ -160,7 +162,7 @@ function AuroraWallpaper() {
       const delta = last === null ? 0 : Math.min(100, time - last);
       last = time;
       elapsed += delta;
-      paint(elapsed);
+      if (time - lastPaint >= 1000 / 24) { paint(elapsed); lastPaint = time; }
       frame = window.requestAnimationFrame(loop);
     };
     const start = () => {
@@ -191,13 +193,14 @@ function GlyphPortal() {
   const maskId = `glyph-${useId().replace(/:/g, "")}`;
   const inkId = `${maskId}-ink`;
   const reduced = useReducedMotion();
+  const compact = useMediaQuery('(max-width: 700px)');
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const maskScale = useTransform(scrollYProgress, [0, .78], reduced ? [1, 1] : [1, 12]);
   const maskRotate = useTransform(scrollYProgress, [0, .78], reduced ? [0, 0] : [0, -7]);
   const maskOpacity = useTransform(scrollYProgress, [.58, .86], [1, 0]);
   return <section id="okno-portal" ref={ref} className={styles.portal} aria-label="OKNO bespoke architecture transition"><div className={styles.portalSticky}>
-    <div className={styles.portalScene}><Image src={portalImage} alt={portalAlt} fill sizes="100vw" className={styles.image} /></div>
-    <motion.svg className={styles.portalMask} style={{ scale: maskScale, rotate: maskRotate, opacity: maskOpacity }} viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><filter id={inkId}><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" /></filter><mask id={maskId}><rect width="1600" height="900" fill="white" />{brandMask ? <image href={brandMask} x="300" y="320" width="1000" height="330" preserveAspectRatio="xMidYMid meet" filter={`url(#${inkId})`} /> : <text x="800" y="520" textAnchor="middle" fill="black">OKNO</text>}</mask></defs><rect width="1600" height="900" fill="#f9fbfc" mask={`url(#${maskId})`} /></motion.svg>
+    <div className={styles.portalScene}><Image loader={pageImageLoader} src={portalImage} alt={portalAlt} fill sizes="100vw" className={styles.image} /></div>
+    <motion.svg className={styles.portalMask} style={{ scale: reduced ? 1 : maskScale, rotate: compact || reduced ? 0 : maskRotate, opacity: reduced ? 1 : maskOpacity }} viewBox={compact ? "0 0 600 1300" : "0 0 1600 900"} preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><filter id={inkId}><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" /></filter><mask id={maskId}><rect width="1600" height={compact ? 1300 : 900} fill="white" />{brandMask ? <image href={brandMask} x={compact ? 75 : 300} y={compact ? 485 : 320} width={compact ? 450 : 1000} height="330" preserveAspectRatio="xMidYMid meet" filter={`url(#${inkId})`} /> : <text x={compact ? 300 : 800} y={compact ? 700 : 520} textAnchor="middle" fill="black">OKNO</text>}</mask></defs><rect width="1600" height={compact ? 1300 : 900} fill="#f9fbfc" mask={`url(#${maskId})`} /></motion.svg>
   </div></section>;
 }
 
@@ -210,7 +213,7 @@ function BespokeEntrance({ ready }: { ready: boolean }) {
     const timer = window.setTimeout(() => { if (fromSelector) setShow(false); document.documentElement.removeAttribute("data-model-transition"); }, 0);
     return () => window.clearTimeout(timer);
   }, []);
-  useEffect(() => { const minimumTimer = window.setTimeout(() => setMinimum(true), 300), deadline = window.setTimeout(() => setShow(false), 2200); return () => { window.clearTimeout(minimumTimer); window.clearTimeout(deadline); }; }, []);
+  useEffect(() => { const minimumTimer = window.setTimeout(() => setMinimum(true), 120), deadline = window.setTimeout(() => setShow(false), 1000); return () => { window.clearTimeout(minimumTimer); window.clearTimeout(deadline); }; }, []);
   useEffect(() => { if (!ready || !minimum) return; const timer = window.setTimeout(() => setShow(false), 0); return () => window.clearTimeout(timer); }, [minimum, ready]);
-  return <AnimatePresence>{show && !reduced && <motion.div data-bespoke-entrance className={styles.entrance} initial={{ y: 0 }} exit={{ y: "-105%", borderBottomLeftRadius: "50% 18%", borderBottomRightRadius: "50% 18%" }} transition={{ duration: .82, ease: [.65, 0, .35, 1] }} aria-label="Loading Bespoke"><OknoLogo tone="dark" variant="compact" priority /></motion.div>}</AnimatePresence>;
+  return <AnimatePresence>{show && !reduced && <motion.div data-bespoke-entrance className={styles.entrance} initial={{ transform: 'translate3d(0,0,0)' }} exit={{ transform: 'translate3d(0,-105%,0)' }} transition={{ duration: .4, ease: [.22, 1, .36, 1] }} aria-label="Loading Bespoke"><OknoLogo tone="dark" variant="compact" priority /></motion.div>}</AnimatePresence>;
 }

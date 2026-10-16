@@ -1,0 +1,431 @@
+{
+  "adminPageChecks": [
+    {
+      "name": "Published homepage 2",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Hero V1 · default home 62",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Hero V2 · city to Forza 67",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Projects 11",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Hospitality 76",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Process 71",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Sustainability 62",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Journal 26",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "About 37",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Enquiry 44",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Footer 22",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Shared site settings 21",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Models overview 18",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Signature models 112",
+      "previewMain": true,
+      "failed": false
+    },
+    {
+      "name": "Bespoke 44",
+      "previewMain": true,
+      "failed": false
+    }
+  ],
+  "publicPageChecks": [
+    {
+      "path": "/",
+      "main": true,
+      "headings": [
+        "OKNO Modhomes",
+        "A home in 90 days.",
+        "Client brief and site",
+        "Design and approvals",
+        "Factory manufacturing",
+        "Packing and transportation",
+        "Assembly and handover",
+        "Meet Forza. Turn the home with your scroll.Meet Forza.Turn the home with your scroll.",
+        "One site. One original home.One site.One original home.",
+        "Build less against the land.Build lessagainst the land.",
+        "From the journal",
+        "About OKNO",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/hero-v1",
+      "main": true,
+      "headings": [
+        "OKNO Modhomes",
+        "A home in 90 days.",
+        "Client brief and site",
+        "Design and approvals",
+        "Factory manufacturing",
+        "Packing and transportation",
+        "Assembly and handover",
+        "Meet Forza. Turn the home with your scroll.Meet Forza.Turn the home with your scroll.",
+        "One site. One original home.One site.One original home.",
+        "Build less against the land.Build lessagainst the land.",
+        "From the journal",
+        "About OKNO",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/hero-v2",
+      "main": true,
+      "headings": [
+        "OKNO Modhomes - from the city to Forza",
+        "A home in 90 days.",
+        "Client brief and site",
+        "Design and approvals",
+        "Factory manufacturing",
+        "Packing and transportation",
+        "Assembly and handover",
+        "Meet Forza. Turn the home with your scroll.Meet Forza.Turn the home with your scroll.",
+        "One site. One original home.One site.One original home.",
+        "Build less against the land.Build lessagainst the land.",
+        "From the journal",
+        "About OKNO",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/models",
+      "main": true,
+      "headings": [
+        "A home. Your way.",
+        "Signature",
+        "Bespoke",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/models/bespoke",
+      "main": true,
+      "headings": [
+        "A home authoredfrom place.",
+        "NOT SELECTED.NOT ADAPTED.AUTHORED.",
+        "PLACE",
+        "BRIEF",
+        "FORM",
+        "ATMOSPHERE",
+        "Architecture that could belong nowhere else.",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/projects",
+      "main": true,
+      "headings": [
+        "Homes, everywhere.Homes, everywhere.",
+        "Forrest",
+        "Lakewood Villa",
+        "Trib BirdsEye",
+        "Kioo",
+        "Octapod Layana",
+        "Kray Sangareddy",
+        "Rasa Vikarabad",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/hospitality",
+      "main": true,
+      "headings": [
+        "Builttowelcome.Designedtoscale.",
+        "Residences, one coordinated brief.",
+        "A delivery programme measured for opening.",
+        "Terrain, utilities and resilience planned.",
+        "Guest-ready or architectural shell.",
+        "Warranty, handover and long-term care.",
+        "Selected work.",
+        "Brief to opening.",
+        "Private consultation",
+        "Site study",
+        "Design curation",
+        "Craftsmanship",
+        "Delivery",
+        "Installation",
+        "Opening",
+        "Begin a hospitality conversation.",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/process",
+      "main": true,
+      "headings": [
+        "Builtin90days.",
+        "Land",
+        "Build sequence",
+        "From brief to handover.",
+        "Brief and site",
+        "Design and approvals",
+        "Factory manufacturing",
+        "Sequenced for site",
+        "Assembly and handover",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/sustainability",
+      "main": true,
+      "headings": [
+        "Build lessagainst the land.",
+        "The land leads.The home follows.",
+        "Reflections travelled beyond the forest.",
+        "A 300-square-foot holiday home that is one with nature.",
+        "A mirrored tiny house with a bed that slides under the stars.",
+        "A modular holiday home blurring indoor and outdoor.",
+        "A home among the trees, where nature and the built meld as one.",
+        "What the coverage points back to.",
+        "Build with whatthe land gives.",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/journal",
+      "main": true,
+      "headings": [
+        "News from the practice.News from the practice.",
+        "AD Small Spaces: This 300-square-foot holiday home in Karnataka is one with nature",
+        "Published stories and project records.",
+        "AD Small Spaces: This 300-square-foot holiday home in Karnataka is one with nature",
+        "Mirrored tiny house slides out its bed so owners can sleep under the stars",
+        "Reflections is a Modular Holiday Home in India That Blurs Boundaries of Indoor and Outdoor",
+        "Okno Modhomes Completes A Serene Sanctuary With A Mirrored Façade In Karnataka",
+        "Reflections Holiday Home / OKNO MODHOMES",
+        "Kioo — the 300 sq ft mirror-house model",
+        "Kray — two compact layouts, 306 and 550 sq ft",
+        "Octapod — a 300 sq ft resort studio shaped by an octagonal plan",
+        "Forrest — a photographic project file",
+        "Rasa Vikarabad — cabins around a central pool",
+        "Latest from the JournalLatest from the Journal",
+        "Choosing a modular home for a compact site",
+        "What to check before building on sloped land",
+        "Planning a 300 sq ft retreat that still feels open",
+        "Materials that shape comfort in a prefab home",
+        "From factory preparation to site assembly",
+        "Designing modular rooms for hospitality",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/about",
+      "main": true,
+      "headings": [
+        "About OKNOAboutOKNO",
+        "Our vision",
+        "Fabricating the Future",
+        "Meet our founders",
+        "Why OKNO?",
+        "A perfect fit. Everywhere, every time.",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    },
+    {
+      "path": "/enquiry",
+      "main": true,
+      "headings": [
+        "Tell us what you’re building.",
+        "Homes",
+        "Explore",
+        "OKNO"
+      ],
+      "error": false,
+      "brokenImages": []
+    }
+  ],
+  "configureButtonChecks": [
+    {
+      "model": "Forza",
+      "href": "/models/signature/forza/configure",
+      "pass": true
+    },
+    {
+      "model": "Kray",
+      "href": "/models/signature/kray/configure?variant=studio",
+      "pass": true
+    },
+    {
+      "model": "Gaze",
+      "href": "/models/signature/gaze/configure",
+      "pass": true
+    },
+    {
+      "model": "Tengo",
+      "href": "/models/signature/tengo/configure?variant=2-bhk",
+      "pass": true
+    },
+    {
+      "model": "Trib",
+      "href": "/models/signature/trib/configure",
+      "pass": true
+    },
+    {
+      "model": "Octapod",
+      "href": "/models/signature/octapod/configure",
+      "pass": true
+    }
+  ],
+  "materialChecks": [
+    {
+      "group": "External roof",
+      "optionCount": 10,
+      "selected": "true"
+    },
+    {
+      "group": "External wall",
+      "optionCount": 10,
+      "selected": "true"
+    },
+    {
+      "group": "Flooring",
+      "optionCount": 8,
+      "selected": "true"
+    },
+    {
+      "group": "Internal ceiling",
+      "optionCount": 17,
+      "selected": "true"
+    },
+    {
+      "group": "Internal wall",
+      "optionCount": 12,
+      "selected": "true"
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/projects",
+    "/models",
+    "/hospitality",
+    "/process",
+    "/sustainability",
+    "/journal",
+    "/about",
+    "/enquiry",
+    "/projects/forrest",
+    "/projects/lakewood",
+    "/projects/trib-birdseye",
+    "/projects/kioo",
+    "/projects/octapod-layana",
+    "/projects/kray-sangareddy",
+    "/projects/rasa-vikarabad",
+    "/models/signature",
+    "/models/bespoke",
+    "/enquiry?intent=home",
+    "/journal/compact-site",
+    "/journal/sloped-land",
+    "/journal/small-retreat",
+    "/journal/material-comfort",
+    "/journal/factory-to-site",
+    "/journal/hospitality-rooms",
+    "/enquiry?intent=hospitality"
+  ],
+  "additionalChecks": {
+    "collectionPreviewIsolation": true,
+    "collectionLivePublication": true,
+    "disconnectClearsAccess": true,
+    "projectLightboxNextAndClose": true,
+    "journalArticleRendered": true,
+    "processFinishParentPosition": "absolute",
+    "phoneAdmin": {
+      "width": 390,
+      "documentWidth": 382
+    },
+    "phoneConfigurator": {
+      "width": 390,
+      "documentWidth": 390
+    }
+  }
+}

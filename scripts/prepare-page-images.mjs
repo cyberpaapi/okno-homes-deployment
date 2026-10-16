@@ -5,7 +5,7 @@ import sharp from 'sharp';
 
 // Precompute only the accepted photographs used by this performance pass.
 // Uploaded CMS images deliberately retain the authenticated media pipeline.
-const roots = ['src/components/journal', 'src/components/hospitality', 'src/components/ui/about-section.tsx'];
+const roots = ['src/components/journal', 'src/components/hospitality', 'src/components/ui/about-section.tsx', 'src/components/models/BespokeExperience.tsx', 'src/components/landing/LandingPathways.tsx'];
 async function sources(entry) {
   if ((await stat(entry)).isFile()) return [entry];
   return (await Promise.all((await readdir(entry)).map(name => sources(path.join(entry, name))))).flat();

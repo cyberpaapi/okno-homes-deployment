@@ -17,12 +17,12 @@ export function HospitalityIntro({ enquiryHref }: { enquiryHref: string }) {
   const [imageReady, setImageReady] = useState(false);
 
   return (
-    <section className={styles.stage} aria-labelledby="hospitality-title" data-header-tone="dark">
+    <section  data-type-section="hospitality.opening"className={styles.stage} aria-labelledby="hospitality-title" data-header-tone="dark">
       <h1
         id="hospitality-title"
         className={styles.title}
         aria-label={heading}
-      >
+       data-type-field={"hospitality.opening.heading"}>
         {heading.trim().split(/\s+/).map((word, index) => (
           <motion.span
             key={`${word}-${index}`}
@@ -68,7 +68,7 @@ export function HospitalityIntro({ enquiryHref }: { enquiryHref: string }) {
           animate={imageReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: reducedMotion ? 0.2 : 0.55, delay: reducedMotion ? 0 : 0.42, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p>{get("caption", "One architectural language, coordinated across every residence and shared space.")}</p>
+          <p data-type-field={"hospitality.opening.caption"}>{get("caption", "One architectural language, coordinated across every residence and shared space.")}</p>
           <MagneticLink href={localDestination(get("action-href", enquiryHref), enquiryHref)} className={styles.cta} data-magnetic>
             {get("action", "Begin a project")} <span aria-hidden="true">↗</span>
           </MagneticLink>

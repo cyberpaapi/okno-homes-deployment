@@ -1,0 +1,15 @@
+{
+  "krayTurntable": {
+    "time": 1792115899205,
+    "frames": 733,
+    "end": {
+      "time": 1792115944640,
+      "frames": 2253
+    },
+    "elapsedSeconds": 45.435,
+    "renderedFrames": 1520,
+    "framesPerSecond": 33.45438538571586
+  },
+  "krayLogs": [],
+  "forzaRuntimeLogs": []
+}

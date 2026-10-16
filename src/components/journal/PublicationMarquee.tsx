@@ -31,7 +31,7 @@ export default function PublicationMarquee() {
   );
   if (publishers.length === 0) return null;
   return (
-    <div ref={root} className={styles.publicationMarquee} data-paused={reduced || !visible || publishers.length < 2} data-single={publishers.length === 1} aria-label={accessibleLabel}>
+    <div ref={root} className={styles.publicationMarquee} data-type-section="journal.publication-ticker" data-paused={reduced || !visible || publishers.length < 2} data-single={publishers.length === 1} aria-label={accessibleLabel}>
       <div className={styles.publicationTrack}>
         <div className={styles.publicationGroup}>{publishers.map(renderPublisher)}</div>
         {publishers.length > 1 && <div className={styles.publicationGroup} aria-hidden="true" inert>{publishers.map(renderPublisher)}</div>}

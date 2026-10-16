@@ -1,0 +1,7 @@
+
+> okno-homes-final-showcase@2026.10.5 admin:check
+> node scripts/start-admin.mjs --check
+
+Reusing the verified admin gateway; no second server was started.
+OKNO admin: http://127.0.0.1:3140/admin
+Fixed admin port 3140; website dependency stays on 3134.

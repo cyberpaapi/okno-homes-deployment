@@ -15,7 +15,7 @@ export function AnimatedProjectIndex({projectsFallback=defaultProjects}:{project
   const rotateX=useTransform(progress,[0,.4],[32,0]);
   const scale=useTransform(progress,[0,.4],[.94,1]);
   const middleY=useTransform(progress,[0,1],[140,-100]);
-  return <section ref={root} id="index" className={styles.index} aria-label="Project photography">
+  return <section data-type-section="projects.project-library" ref={root} id="index" className={styles.index} aria-label="Project photography">
 
     <motion.div className={styles.grid} style={{rotateX:reduced?0:rotateX,scale:reduced?1:scale}}>
       {[0,1,2].map(column=><motion.div className={styles.column} key={column} style={{y:reduced||column!==1?0:middleY}}>

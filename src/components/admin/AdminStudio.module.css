@@ -105,3 +105,5 @@
 @media(max-width:520px){.signatureToolbar,.signatureSave{align-items:stretch;flex-direction:column}.signatureToolbar .action,.signatureSave .action{width:100%}.modelTray>summary{padding:16px}.modelBody{padding:14px}}
 @media(max-width:520px){.uploadProgress{grid-template-columns:minmax(0,1fr) auto}.uploadProgress progress{grid-column:1/-1;grid-row:2}.uploadProgress .action{grid-column:2;grid-row:1}}
 @media(prefers-reduced-motion:reduce){.studio *{transition:none!important}}
+
+.typeControls{border-top:1px solid #d9e1d6;padding-top:16px}.typeControls>summary{cursor:pointer;color:#284d35;font-weight:600;font-size:14px;min-height:40px}.typeControls>p{color:#566d5b;font-size:13px;line-height:1.5;max-width:65ch}.typeControls select{width:100%;min-height:42px;padding:9px;background:#fbfcfa;border:1px solid #cbd5ca;border-radius:8px;font:inherit}.typeControls .field{margin-top:16px}

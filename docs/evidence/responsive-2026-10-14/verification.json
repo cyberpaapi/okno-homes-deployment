@@ -1,0 +1,1134 @@
+{
+  "date": "2026-10-14",
+  "environment": "local development server http://127.0.0.1:3134",
+  "routes": [
+    "/",
+    "/about",
+    "/enquiry",
+    "/hero-v1",
+    "/hero-v2",
+    "/hospitality",
+    "/journal",
+    "/journal/compact-site",
+    "/journal/factory-to-site",
+    "/journal/hospitality-rooms",
+    "/journal/material-comfort",
+    "/journal/sloped-land",
+    "/journal/small-retreat",
+    "/models",
+    "/models/bespoke",
+    "/models/signature",
+    "/models/signature/kray/configure",
+    "/models/signature/tengo/configure",
+    "/process",
+    "/projects",
+    "/projects/forrest",
+    "/projects/kioo",
+    "/projects/kray-sangareddy",
+    "/projects/lakewood",
+    "/projects/octapod-layana",
+    "/projects/rasa-vikarabad",
+    "/projects/trib-birdseye",
+    "/sustainability"
+  ],
+  "mainWidths": [
+    320,
+    360,
+    390,
+    620,
+    768,
+    844,
+    900,
+    1024,
+    1280,
+    1440,
+    1920
+  ],
+  "breakpointStates": 172,
+  "elementObservations": 17552,
+  "breakpointIssues": 0,
+  "horizontalDocumentOverflow": 0,
+  "scrollCaptureStates": 283,
+  "scrollSweeps": [
+    "/ @ 1440",
+    "/ @ 390",
+    "/about @ 1440",
+    "/about @ 390",
+    "/enquiry @ 1440",
+    "/enquiry @ 390",
+    "/hospitality @ 1440",
+    "/hospitality @ 390",
+    "/hospitality @ 768",
+    "/journal @ 1440",
+    "/journal @ 390",
+    "/models @ 1440",
+    "/models @ 390",
+    "/models/bespoke @ 1440",
+    "/models/bespoke @ 390",
+    "/models/signature @ 1440",
+    "/models/signature @ 390",
+    "/process @ 1440",
+    "/process @ 390",
+    "/projects @ 1440",
+    "/projects @ 390",
+    "/sustainability @ 1440",
+    "/sustainability @ 390"
+  ],
+  "settledDialogStates": 18,
+  "settledDialogIssues": 0,
+  "enquiryTabStates": 9,
+  "navigationStates": 4,
+  "limits": [
+    "Single Chromium browser with viewport resizing; no physical touch devices or cross-browser certification.",
+    "Finite breakpoint and state coverage; no guarantee for arbitrary admin copy or maximum custom font sizes.",
+    "Fast scroll captures include transitions; initial dialog scale flags were rechecked after entrance transforms completed.",
+    "No deployment or external enquiry submission."
+  ],
+  "fixes": [
+    "Hospitality stacked card copy and heading preset, two-column grid through 1000px.",
+    "Hospitality gallery two-column tablet layout through 900px, reserved desktop parallax space, tablet transforms disabled.",
+    "Signature story cards clear mobile controls; short-screen controls remain in viewport.",
+    "Process detail phases use vertical document flow below 621px height; guard already follows non-sticky layout.",
+    "Sustainability short-screen proof and facts panels allow reading overflowing content."
+  ],
+  "hospitalityCards": [
+    {
+      "cards": [
+        {
+          "copyWidth": 230.6666717529297,
+          "font": "36px",
+          "height": 612,
+          "text": "5+",
+          "valueHeight": 36
+        },
+        {
+          "copyWidth": 230.6666717529297,
+          "font": "36px",
+          "height": 612,
+          "text": "Months",
+          "valueHeight": 36
+        },
+        {
+          "copyWidth": 230.6666717529297,
+          "font": "36px",
+          "height": 612,
+          "text": "Ready",
+          "valueHeight": 36
+        },
+        {
+          "copyWidth": 230.6666717529297,
+          "font": "36px",
+          "height": 612,
+          "text": "Two",
+          "valueHeight": 36
+        },
+        {
+          "copyWidth": 230.6666717529297,
+          "font": "36px",
+          "height": 612,
+          "text": "Ongoing",
+          "valueHeight": 36
+        }
+      ],
+      "width": 320
+    },
+    {
+      "cards": [
+        {
+          "copyWidth": 300.66668701171875,
+          "font": "36px",
+          "height": 612,
+          "text": "5+",
+          "valueHeight": 36
+        },
+        {
+          "copyWidth": 300.66668701171875,
+          "font": "36px",
+          "height": 612,
+          "text": "Months",
+          "valueHeight": 36
+        },
+        {
+          "copyWidth": 300.66668701171875,
+          "font": "36px",
+          "height": 612,
+          "text": "Ready",
+          "valueHeight": 36
+        },
+        {
+          "copyWidth": 300.66668701171875,
+          "font": "36px",
+          "height": 612,
+          "text": "Two",
+          "valueHeight": 36
+        },
+        {
+          "copyWidth": 300.66668701171875,
+          "font": "36px",
+          "height": 612,
+          "text": "Ongoing",
+          "valueHeight": 36
+        }
+      ],
+      "width": 390
+    },
+    {
+      "cards": [
+        {
+          "copyWidth": 530.6666870117188,
+          "font": "42.1333px",
+          "height": 612,
+          "text": "5+",
+          "valueHeight": 42.13541793823242
+        },
+        {
+          "copyWidth": 530.6666870117188,
+          "font": "42.1333px",
+          "height": 612,
+          "text": "Months",
+          "valueHeight": 42.13541793823242
+        },
+        {
+          "copyWidth": 530.6666870117188,
+          "font": "42.1333px",
+          "height": 612,
+          "text": "Ready",
+          "valueHeight": 42.13541793823242
+        },
+        {
+          "copyWidth": 530.6666870117188,
+          "font": "42.1333px",
+          "height": 612,
+          "text": "Two",
+          "valueHeight": 42.13541793823242
+        },
+        {
+          "copyWidth": 530.6666870117188,
+          "font": "42.1333px",
+          "height": 612,
+          "text": "Ongoing",
+          "valueHeight": 42.13541793823242
+        }
+      ],
+      "width": 620
+    },
+    {
+      "cards": [
+        {
+          "copyWidth": 281.2708435058594,
+          "font": "46.08px",
+          "height": 430,
+          "text": "5+",
+          "valueHeight": 46.08333587646485
+        },
+        {
+          "copyWidth": 281.2708435058594,
+          "font": "46.08px",
+          "height": 430,
+          "text": "Months",
+          "valueHeight": 46.08333587646485
+        },
+        {
+          "copyWidth": 281.2708435058594,
+          "font": "46.08px",
+          "height": 430,
+          "text": "Ready",
+          "valueHeight": 46.08333587646485
+        },
+        {
+          "copyWidth": 281.2708435058594,
+          "font": "46.08px",
+          "height": 430,
+          "text": "Two",
+          "valueHeight": 46.08333587646485
+        },
+        {
+          "copyWidth": 578.7708740234375,
+          "font": "46.08px",
+          "height": 430,
+          "text": "Ongoing",
+          "valueHeight": 46.08333587646485
+        }
+      ],
+      "width": 768
+    },
+    {
+      "cards": [
+        {
+          "copyWidth": 339.2083435058594,
+          "font": "49.6356px",
+          "height": 430,
+          "text": "5+",
+          "valueHeight": 49.63541793823242
+        },
+        {
+          "copyWidth": 339.2083435058594,
+          "font": "49.6356px",
+          "height": 430,
+          "text": "Months",
+          "valueHeight": 49.63541793823242
+        },
+        {
+          "copyWidth": 339.2083435058594,
+          "font": "49.6356px",
+          "height": 430,
+          "text": "Ready",
+          "valueHeight": 49.63541793823242
+        },
+        {
+          "copyWidth": 339.2083435058594,
+          "font": "49.6356px",
+          "height": 430,
+          "text": "Two",
+          "valueHeight": 49.63541793823242
+        },
+        {
+          "copyWidth": 600.53125,
+          "font": "49.6356px",
+          "height": 430,
+          "text": "Ongoing",
+          "valueHeight": 49.63541793823242
+        }
+      ],
+      "width": 901
+    },
+    {
+      "cards": [
+        {
+          "copyWidth": 378.1979370117187,
+          "font": "52.3022px",
+          "height": 390,
+          "text": "5+",
+          "valueHeight": 52.30208587646485
+        },
+        {
+          "copyWidth": 378.2083435058594,
+          "font": "52.3022px",
+          "height": 390,
+          "text": "Months",
+          "valueHeight": 52.30208587646485
+        },
+        {
+          "copyWidth": 227,
+          "font": "52.3022px",
+          "height": 390,
+          "text": "Ready",
+          "valueHeight": 52.30208587646485
+        },
+        {
+          "copyWidth": 227.0104217529297,
+          "font": "52.3022px",
+          "height": 390,
+          "text": "Two",
+          "valueHeight": 52.30208587646485
+        },
+        {
+          "copyWidth": 227,
+          "font": "52.3022px",
+          "height": 390,
+          "text": "Ongoing",
+          "valueHeight": 52.30208587646485
+        }
+      ],
+      "width": 1001
+    },
+    {
+      "cards": [
+        {
+          "copyWidth": 387.03125,
+          "font": "52.9067px",
+          "height": 390,
+          "text": "5+",
+          "valueHeight": 52.90625
+        },
+        {
+          "copyWidth": 387.03125,
+          "font": "52.9067px",
+          "height": 390,
+          "text": "Months",
+          "valueHeight": 52.90625
+        },
+        {
+          "copyWidth": 232.42709350585935,
+          "font": "52.9067px",
+          "height": 390,
+          "text": "Ready",
+          "valueHeight": 52.90625
+        },
+        {
+          "copyWidth": 232.42709350585935,
+          "font": "52.9067px",
+          "height": 390,
+          "text": "Two",
+          "valueHeight": 52.90625
+        },
+        {
+          "copyWidth": 232.4375,
+          "font": "52.9067px",
+          "height": 390,
+          "text": "Ongoing",
+          "valueHeight": 52.90625
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "cards": [
+        {
+          "copyWidth": 456.1979370117187,
+          "font": "57.6356px",
+          "height": 390,
+          "text": "5+",
+          "valueHeight": 57.63541793823242
+        },
+        {
+          "copyWidth": 456.2083435058594,
+          "font": "57.6356px",
+          "height": 390,
+          "text": "Months",
+          "valueHeight": 57.63541793823242
+        },
+        {
+          "copyWidth": 275,
+          "font": "57.6356px",
+          "height": 390,
+          "text": "Ready",
+          "valueHeight": 57.63541793823242
+        },
+        {
+          "copyWidth": 275.01043701171875,
+          "font": "57.6356px",
+          "height": 390,
+          "text": "Two",
+          "valueHeight": 57.63541793823242
+        },
+        {
+          "copyWidth": 275,
+          "font": "57.6356px",
+          "height": 390,
+          "text": "Ongoing",
+          "valueHeight": 57.63541793823242
+        }
+      ],
+      "width": 1201
+    },
+    {
+      "cards": [
+        {
+          "copyWidth": 551.6666870117188,
+          "font": "64px",
+          "height": 390,
+          "text": "5+",
+          "valueHeight": 64
+        },
+        {
+          "copyWidth": 551.6666870117188,
+          "font": "64px",
+          "height": 390,
+          "text": "Months",
+          "valueHeight": 64
+        },
+        {
+          "copyWidth": 334.66668701171875,
+          "font": "64px",
+          "height": 390,
+          "text": "Ready",
+          "valueHeight": 64
+        },
+        {
+          "copyWidth": 334.66668701171875,
+          "font": "64px",
+          "height": 390,
+          "text": "Two",
+          "valueHeight": 64
+        },
+        {
+          "copyWidth": 334.66668701171875,
+          "font": "64px",
+          "height": 390,
+          "text": "Ongoing",
+          "valueHeight": 64
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "cards": [
+        {
+          "copyWidth": 689.1458740234375,
+          "font": "64px",
+          "height": 390,
+          "text": "5+",
+          "valueHeight": 64
+        },
+        {
+          "copyWidth": 689.1458740234375,
+          "font": "64px",
+          "height": 390,
+          "text": "Months",
+          "valueHeight": 64
+        },
+        {
+          "copyWidth": 494.6666870117187,
+          "font": "64px",
+          "height": 390,
+          "text": "Ready",
+          "valueHeight": 64
+        },
+        {
+          "copyWidth": 494.6666870117187,
+          "font": "64px",
+          "height": 390,
+          "text": "Two",
+          "valueHeight": 64
+        },
+        {
+          "copyWidth": 494.6666870117187,
+          "font": "64px",
+          "height": 390,
+          "text": "Ongoing",
+          "valueHeight": 64
+        }
+      ],
+      "width": 1920
+    }
+  ],
+  "settledDialogObservations": [
+    {
+      "check": "Settled Signature details",
+      "model": "forza",
+      "docWidth": 390,
+      "elements": 106,
+      "height": 844,
+      "issues": [],
+      "pageHeight": 4220,
+      "width": 390
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "kray",
+      "docWidth": 390,
+      "elements": 106,
+      "height": 844,
+      "issues": [],
+      "pageHeight": 4220,
+      "width": 390
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "gaze",
+      "docWidth": 390,
+      "elements": 104,
+      "height": 844,
+      "issues": [],
+      "pageHeight": 4220,
+      "width": 390
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "tengo",
+      "docWidth": 390,
+      "elements": 106,
+      "height": 844,
+      "issues": [],
+      "pageHeight": 4220,
+      "width": 390
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "trib",
+      "docWidth": 390,
+      "elements": 104,
+      "height": 844,
+      "issues": [],
+      "pageHeight": 4220,
+      "width": 390
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "octapod",
+      "docWidth": 390,
+      "elements": 104,
+      "height": 844,
+      "issues": [],
+      "pageHeight": 4220,
+      "width": 390
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "forza",
+      "docWidth": 768,
+      "elements": 107,
+      "height": 1024,
+      "issues": [],
+      "pageHeight": 5735,
+      "width": 768
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "kray",
+      "docWidth": 768,
+      "elements": 107,
+      "height": 1024,
+      "issues": [],
+      "pageHeight": 5735,
+      "width": 768
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "gaze",
+      "docWidth": 768,
+      "elements": 105,
+      "height": 1024,
+      "issues": [],
+      "pageHeight": 5735,
+      "width": 768
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "tengo",
+      "docWidth": 768,
+      "elements": 107,
+      "height": 1024,
+      "issues": [],
+      "pageHeight": 5735,
+      "width": 768
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "trib",
+      "docWidth": 768,
+      "elements": 105,
+      "height": 1024,
+      "issues": [],
+      "pageHeight": 5735,
+      "width": 768
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "octapod",
+      "docWidth": 768,
+      "elements": 105,
+      "height": 1024,
+      "issues": [],
+      "pageHeight": 5735,
+      "width": 768
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "forza",
+      "docWidth": 1440,
+      "elements": 113,
+      "height": 900,
+      "issues": [],
+      "pageHeight": 5040,
+      "width": 1440
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "kray",
+      "docWidth": 1440,
+      "elements": 113,
+      "height": 900,
+      "issues": [],
+      "pageHeight": 5040,
+      "width": 1440
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "gaze",
+      "docWidth": 1440,
+      "elements": 111,
+      "height": 900,
+      "issues": [],
+      "pageHeight": 5040,
+      "width": 1440
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "tengo",
+      "docWidth": 1440,
+      "elements": 113,
+      "height": 900,
+      "issues": [],
+      "pageHeight": 5040,
+      "width": 1440
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "trib",
+      "docWidth": 1440,
+      "elements": 111,
+      "height": 900,
+      "issues": [],
+      "pageHeight": 5040,
+      "width": 1440
+    },
+    {
+      "check": "Settled Signature details",
+      "model": "octapod",
+      "docWidth": 1440,
+      "elements": 111,
+      "height": 900,
+      "issues": [],
+      "pageHeight": 5040,
+      "width": 1440
+    }
+  ],
+  "finalInteractions": [
+    {
+      "check": "short Process",
+      "phases": [
+        {
+          "bottom": 2587.2708435058594,
+          "copyBottom": 2531.2708435058594,
+          "height": 438.0520935058594,
+          "overflow": false,
+          "phase": "1"
+        },
+        {
+          "bottom": 3181.14599609375,
+          "copyBottom": 3125.14599609375,
+          "height": 529.875,
+          "overflow": false,
+          "phase": "2"
+        },
+        {
+          "bottom": 3775.02099609375,
+          "copyBottom": 3719.02099609375,
+          "height": 529.875,
+          "overflow": false,
+          "phase": "3"
+        },
+        {
+          "bottom": 4301.52099609375,
+          "copyBottom": 4245.52099609375,
+          "height": 462.5,
+          "overflow": false,
+          "phase": "4"
+        },
+        {
+          "bottom": 4870.948089599609,
+          "copyBottom": 4814.948089599609,
+          "height": 505.4270935058594,
+          "overflow": false,
+          "phase": "5"
+        }
+      ],
+      "progress": "none",
+      "stagePosition": "relative"
+    },
+    {
+      "check": "Hospitality next photograph",
+      "dialog": "Miraya photograph"
+    },
+    {
+      "check": "Hospitality Escape close",
+      "closed": false
+    },
+    {
+      "check": "Sustainability landscape final panel",
+      "client": 390,
+      "closingBottom": 351.8229179382324,
+      "closingTop": 292.53125,
+      "panelBottom": 390,
+      "scroll": 671,
+      "scrollTop": 281.3333435058594,
+      "top": 0,
+      "closingVisible": true
+    },
+    {
+      "check": "Signature mobile card clearance",
+      "cards": [
+        {
+          "bottom": 710.4251327514648,
+          "opacity": "0.842516",
+          "text": "Signature detail\u2197ApertureFull-height glazing holds the horizon inside the room.",
+          "top": 594.8939208984375
+        },
+        {
+          "bottom": 724.6647186279297,
+          "opacity": "0",
+          "text": "Signature detail\u2197ThresholdA sheltered verandah makes the edge between home and landscape disappear.",
+          "top": 593.8040771484375
+        },
+        {
+          "bottom": 724.6647186279297,
+          "opacity": "0",
+          "text": "Signature detail\u2197Precisely resolvedOne bed, one bath and one considered kitchenette within 376 square feet.",
+          "top": 593.8040771484375
+        }
+      ],
+      "filterTop": 724.6666870117188
+    },
+    {
+      "check": "Settled Signature plan tab",
+      "model": "forza",
+      "width": 390,
+      "label": "Studio",
+      "selected": "true"
+    },
+    {
+      "check": "Settled Signature plan tab",
+      "model": "forza",
+      "width": 390,
+      "label": "1 BHK",
+      "selected": "true"
+    },
+    {
+      "check": "Settled Signature plan tab",
+      "model": "kray",
+      "width": 390,
+      "label": "Kray Studio",
+      "selected": "true"
+    },
+    {
+      "check": "Settled Signature plan tab",
+      "model": "kray",
+      "width": 390,
+      "label": "Kray 1 BHK",
+      "selected": "true"
+    },
+    {
+      "check": "Settled Signature plan tab",
+      "model": "gaze",
+      "width": 390,
+      "label": "Studio retreat",
+      "selected": "true"
+    },
+    {
+      "check": "Settled Signature plan tab",
+      "model": "tengo",
+      "width": 390,
+      "label": "2 BHK",
+      "selected": "true"
+    },
+    {
+      "check": "Settled Signature plan tab",
+      "model": "tengo",
+      "width": 390,
+      "label": "3 BHK",
+      "selected": "true"
+    },
+    {
+      "check": "Settled Signature plan tab",
+      "model": "trib",
+      "width": 390,
+      "label": "Trib Studio",
+      "selected": "true"
+    },
+    {
+      "check": "Settled Signature plan tab",
+      "model": "octapod",
+      "width": 390,
+      "label": "Studio",
+      "selected": "true"
+    },
+    {
+      "check": "Enquiry form tab",
+      "name": "A home of my own",
+      "docWidth": 312,
+      "elements": 62,
+      "height": 740,
+      "issues": [],
+      "pageHeight": 1895,
+      "width": 320
+    },
+    {
+      "check": "Enquiry form tab",
+      "name": "Hospitality & estates",
+      "docWidth": 312,
+      "elements": 88,
+      "height": 740,
+      "issues": [],
+      "pageHeight": 1895,
+      "width": 320
+    },
+    {
+      "check": "Enquiry form tab",
+      "name": "Press & other",
+      "docWidth": 312,
+      "elements": 106,
+      "height": 740,
+      "issues": [],
+      "pageHeight": 1714,
+      "width": 320
+    },
+    {
+      "check": "Enquiry form tab",
+      "name": "A home of my own",
+      "docWidth": 760,
+      "elements": 62,
+      "height": 1024,
+      "issues": [],
+      "pageHeight": 1779,
+      "width": 768
+    },
+    {
+      "check": "Enquiry form tab",
+      "name": "Hospitality & estates",
+      "docWidth": 760,
+      "elements": 88,
+      "height": 1024,
+      "issues": [],
+      "pageHeight": 1779,
+      "width": 768
+    },
+    {
+      "check": "Enquiry form tab",
+      "name": "Press & other",
+      "docWidth": 760,
+      "elements": 106,
+      "height": 1024,
+      "issues": [],
+      "pageHeight": 1683,
+      "width": 768
+    },
+    {
+      "check": "Enquiry form tab",
+      "name": "A home of my own",
+      "docWidth": 1432,
+      "elements": 69,
+      "height": 900,
+      "issues": [],
+      "pageHeight": 1263,
+      "width": 1440
+    },
+    {
+      "check": "Enquiry form tab",
+      "name": "Hospitality & estates",
+      "docWidth": 1432,
+      "elements": 95,
+      "height": 900,
+      "issues": [],
+      "pageHeight": 1263,
+      "width": 1440
+    },
+    {
+      "check": "Enquiry form tab",
+      "name": "Press & other",
+      "docWidth": 1432,
+      "elements": 113,
+      "height": 900,
+      "issues": [],
+      "pageHeight": 1263,
+      "width": 1440
+    },
+    {
+      "check": "Mobile navigation",
+      "route": "/enquiry",
+      "bottom": 506.1250228881836,
+      "client": 418,
+      "height": 740,
+      "links": [
+        {
+          "href": "/",
+          "text": "HHoommee"
+        },
+        {
+          "href": "/projects",
+          "text": "PPrroojjeeccttss"
+        },
+        {
+          "href": "/models",
+          "text": "MMooddeellss"
+        },
+        {
+          "href": "/hospitality",
+          "text": "HHoossppiittaalliittyy"
+        },
+        {
+          "href": "/process",
+          "text": "PPrroocceessss"
+        },
+        {
+          "href": "/sustainability",
+          "text": "SSuussttaaiinnaabbiilliittyy"
+        },
+        {
+          "href": "/journal",
+          "text": "JJoouurrnnaall"
+        },
+        {
+          "href": "/about",
+          "text": "AAbboouutt"
+        },
+        {
+          "href": "/enquiry",
+          "text": "EEnnqquuiirree"
+        }
+      ],
+      "scroll": 434,
+      "top": 88.33333587646484,
+      "width": 320
+    },
+    {
+      "check": "Navigation Escape",
+      "route": "/enquiry",
+      "width": 320,
+      "closed": true
+    },
+    {
+      "check": "Mobile navigation",
+      "route": "/enquiry",
+      "bottom": 342.30208587646484,
+      "client": 250,
+      "height": 390,
+      "links": [
+        {
+          "href": "/",
+          "text": "HHoommee"
+        },
+        {
+          "href": "/projects",
+          "text": "PPrroojjeeccttss"
+        },
+        {
+          "href": "/models",
+          "text": "MMooddeellss"
+        },
+        {
+          "href": "/hospitality",
+          "text": "HHoossppiittaalliittyy"
+        },
+        {
+          "href": "/process",
+          "text": "PPrroocceessss"
+        },
+        {
+          "href": "/sustainability",
+          "text": "SSuussttaaiinnaabbiilliittyy"
+        },
+        {
+          "href": "/journal",
+          "text": "JJoouurrnnaall"
+        },
+        {
+          "href": "/about",
+          "text": "AAbboouutt"
+        },
+        {
+          "href": "/enquiry",
+          "text": "EEnnqquuiirree"
+        }
+      ],
+      "scroll": 432,
+      "top": 92.33333587646484,
+      "width": 844
+    },
+    {
+      "check": "Navigation Escape",
+      "route": "/enquiry",
+      "width": 844,
+      "closed": true
+    },
+    {
+      "check": "Mobile navigation",
+      "route": "/models",
+      "bottom": 504.2187728881836,
+      "client": 416,
+      "height": 740,
+      "links": [
+        {
+          "href": "/",
+          "text": "HHoommee"
+        },
+        {
+          "href": "/projects",
+          "text": "PPrroojjeeccttss"
+        },
+        {
+          "href": "/models",
+          "text": "MMooddeellss"
+        },
+        {
+          "href": "/hospitality",
+          "text": "HHoossppiittaalliittyy"
+        },
+        {
+          "href": "/process",
+          "text": "PPrroocceessss"
+        },
+        {
+          "href": "/sustainability",
+          "text": "SSuussttaaiinnaabbiilliittyy"
+        },
+        {
+          "href": "/journal",
+          "text": "JJoouurrnnaall"
+        },
+        {
+          "href": "/about",
+          "text": "AAbboouutt"
+        },
+        {
+          "href": "/enquiry",
+          "text": "EEnnqquuiirree"
+        }
+      ],
+      "scroll": 434,
+      "top": 88.33333587646484,
+      "width": 320
+    },
+    {
+      "check": "Navigation Escape",
+      "route": "/models",
+      "width": 320,
+      "closed": true
+    },
+    {
+      "check": "Mobile navigation",
+      "route": "/models",
+      "bottom": 322.2916793823242,
+      "client": 230,
+      "height": 390,
+      "links": [
+        {
+          "href": "/",
+          "text": "HHoommee"
+        },
+        {
+          "href": "/projects",
+          "text": "PPrroojjeeccttss"
+        },
+        {
+          "href": "/models",
+          "text": "MMooddeellss"
+        },
+        {
+          "href": "/hospitality",
+          "text": "HHoossppiittaalliittyy"
+        },
+        {
+          "href": "/process",
+          "text": "PPrroocceessss"
+        },
+        {
+          "href": "/sustainability",
+          "text": "SSuussttaaiinnaabbiilliittyy"
+        },
+        {
+          "href": "/journal",
+          "text": "JJoouurrnnaall"
+        },
+        {
+          "href": "/about",
+          "text": "AAbboouutt"
+        },
+        {
+          "href": "/enquiry",
+          "text": "EEnnqquuiirree"
+        }
+      ],
+      "scroll": 432,
+      "top": 92.33333587646484,
+      "width": 844
+    },
+    {
+      "check": "Navigation Escape",
+      "route": "/models",
+      "width": 844,
+      "closed": true
+    }
+  ]
+}

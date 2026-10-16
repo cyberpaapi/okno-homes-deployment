@@ -102,9 +102,20 @@ canvas {
   max-width: 100%;
 }
 
-html[data-site-font="geist"] body :where(*) {
-  font-family: "Geist OKNO", Arial, sans-serif;
+/* Public typography is driven by the published master and section tokens.
+   The admin keeps its stable editor scale; SVG/image logos retain their artwork. */
+body:not(:has([data-admin-studio])) :where(*) {
+  font-family: var(--type-font-body, var(--type-font-master, "Geist OKNO", Arial, sans-serif)) !important;
 }
+body:not(:has([data-admin-studio])) :where(h1, h2, h3, h4, h5, h6),
+body:not(:has([data-admin-studio])) :where(h1, h2, h3, h4, h5, h6) :where(*) {
+  font-family: var(--type-font-heading, var(--type-font-master, "Geist OKNO", Arial, sans-serif)) !important;
+}
+body:not(:has([data-admin-studio])) :where(em, strong, [data-type-highlight]) {
+  font-family: var(--type-font-highlight, var(--type-font-heading, var(--type-font-master, "Geist OKNO", Arial, sans-serif))) !important;
+}
+@font-face { font-family: "Manrope OKNO"; src: url("/fonts/manrope.ttf") format("truetype"); font-display: swap; font-weight: 200 800; }
+@font-face { font-family: "Bodoni OKNO"; src: url("/fonts/bodoni-moda.ttf") format("truetype"); font-display: swap; font-weight: 400 900; }
 
 @media (prefers-reduced-motion: reduce) {
   html {

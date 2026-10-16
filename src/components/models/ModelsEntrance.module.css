@@ -1,6 +1,6 @@
-.loader { position: fixed; inset: 0; z-index: 15000; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 50% 45%, #174c72, #061421 52%, #02060c); pointer-events: none; }
+.loader { position: fixed; inset: 0; z-index: 15000; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 50% 45%, #174c72, #061421 52%, #02060c); pointer-events: none; will-change: transform; }
 .loader::before { content: ""; position: absolute; inset: 0; opacity: .4; background: radial-gradient(ellipse at 30% 15%, #42b9e735, transparent 43%), radial-gradient(ellipse at 75% 75%, #163e6845, transparent 46%); }
-.loader > div { position: relative; width: 185px; }
+.loader > div { position: relative; width: 185px; will-change: transform, opacity; }
 .loader img { display: block; width: 100%; height: auto; }
 
 @media (prefers-reduced-motion: reduce) {

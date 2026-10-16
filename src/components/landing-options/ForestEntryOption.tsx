@@ -161,7 +161,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     >
       <section
         ref={sectionRef}
-        className={styles.sequence}
+        className={styles.sequence} data-type-section="hero-v1.opening"
         aria-label="A journey from the forest into an OKNO home"
         data-component="25482"
       >
@@ -188,9 +188,9 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
           <div className={styles.introStill}>
             <Image src={introLastFrame} alt="" fill sizes="100vw" priority />
           </div>
-          <div className={styles.brand} aria-label="OKNO Modhomes">
+          <div className={styles.brand} aria-label="OKNO Modhomes" data-type-field={"hero-v1.opening.tagline"}>
             <OknoLogo className={styles.wordmark} />
-            {tagline && <p data-hero-v1-tagline>{tagline}</p>}
+            {tagline && <p data-hero-v1-tagline data-type-field={"hero-v1.opening.tagline"}>{tagline}</p>}
           </div>
 
           {animated && (

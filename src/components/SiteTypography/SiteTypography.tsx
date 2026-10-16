@@ -1,26 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
-
-const PRESERVED_MODEL_ROUTES = ["/models/signature", "/models/bespoke"];
+import { usePathname } from 'next/navigation';
+import bindings from '@/data/typographySections.json';
+import { useSiteContentMap } from '@/lib/useSiteContent';
+import { isTypographySizeField, typographyCss, typographyFonts } from '@/lib/typography';
 
 export default function SiteTypography() {
   const pathname = usePathname();
-
-  useEffect(() => {
-    const preservesModelTypography = PRESERVED_MODEL_ROUTES.some((route) => (
-      pathname === route || pathname.startsWith(`${route}/`)
-    ));
-
-    document.documentElement.dataset.siteFont = preservesModelTypography
-      ? "preserve"
-      : "geist";
-
-    return () => {
-      delete document.documentElement.dataset.siteFont;
-    };
-  }, [pathname]);
-
-  return null;
+  const values = useSiteContentMap();
+  if (pathname?.startsWith('/admin')) return null;
+  const sizeOverrides = Object.keys(values).filter(id => isTypographySizeField(id) && values[id] !== '').length;
+  return <style data-okno-typography data-type-size-overrides={sizeOverrides} data-type-master={typographyFonts.find(font => font.value === values["typography.master-font"])?.value ?? "geist"}>{typographyCss(values, bindings)}</style>;
 }

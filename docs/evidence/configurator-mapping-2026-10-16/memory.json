@@ -1,0 +1,30 @@
+{
+  "samples": 309,
+  "first": {
+    "utc": "2026-10-16T01:44:01.645678+00:00",
+    "availableMiB": 7195,
+    "swapUsedMiB": 3930
+  },
+  "last": {
+    "utc": "2026-10-16T02:12:40.459943+00:00",
+    "availableMiB": 7468,
+    "swapUsedMiB": 5908
+  },
+  "minimumAvailableMiB": 1767,
+  "maximumSwapUsedMiB": 5952,
+  "note": "Five-second samples plus manual checks. Builds used 2 workers and a 2 GiB Node heap cap. Conversion and build jobs were sequential.",
+  "samplingGaps": [
+    {
+      "from": "2026-10-16T01:50:51.673648+00:00",
+      "to": "2026-10-16T01:53:55.376325+00:00",
+      "seconds": 183.702677
+    }
+  ],
+  "maximumObservedConversionRssMiB": 1420,
+  "finalConversionRssMiB": {
+    "forza": 508,
+    "tengo": 659,
+    "kray": 731,
+    "tish": 135
+  }
+}

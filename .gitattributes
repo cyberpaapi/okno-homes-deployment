@@ -1,0 +1,5 @@
+# Preserve retrieved third-party source and captured logs verbatim.
+docs/21st-source/** -whitespace
+docs/evidence/** -whitespace
+# These Markdown metadata lines use intentional hard breaks.
+docs/admin/operating-procedure.md whitespace=-blank-at-eol

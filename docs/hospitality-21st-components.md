@@ -1,5 +1,9 @@
 # Hospitality — active implementation
 
+## Shared-type responsive repair — 14 October 2026
+
+The preserved Bento 6541 geometry now stacks each card's copy, uses the admin-controlled Heading preset for values and Subheading for descriptions, and switches to two columns through 1000px. This prevents large values squeezing descriptions into single-letter columns. Gallery spacing reserves desktop parallax travel; the existing photographic gallery becomes two columns and disables tilt/parallax through 900px. Image size hints follow the new breakpoints. Source provenance, photography, copy and viewer controls remain as documented below. [Verification and site-wide responsive coverage](responsive-audit-2026-10-14.md).
+
 Route: `/hospitality`
 
 This is the 4 October 2026 revision. The rejected scroll-expansion video and zoom-parallax opening are no longer served. Their source remains recoverable in the historical demo checkout and the earlier component record is under `docs/archive/hospitality/`.
@@ -55,3 +59,8 @@ The two Hospitality headings retain the two-pass block wipe adapted from [21st.d
 `src/components/hospitality/HospitalityTextLens.tsx` is a route-local adaptation of the actual archived [21st.dev Morphing Cursor source](https://21st.dev/@jatin-yadav05/components/morphing-cursor), component `9643` by `jatin-yadav05` (`docs/21st-source/9643.tsx.txt`). It retains the counter-translated negative-colour circle and lerp, but measures the visible text fragments on wrapped lines and switches off outside them. This prevents a floating cream circle beside the closing heading while leaving the Projects page's shared lens source unchanged. Browser retest confirmed both headings reveal only over text; the shared cursor remains mounted once through the root layout. See the [public mouse interaction audit](public-mouse-interaction-audit-2026-10-07.md).
 
 The closing Hospitality Enquiry link retains its magnetic hover and uses native navigation for an ordinary primary click. A client route transition from after the pinned timeline requested Enquiry but could stall without changing the page; browser retest confirmed native navigation reaches `/enquiry?intent=hospitality`. Modified clicks keep their standard browser behaviour.
+
+
+## Editorial selected work — 16 October 2026
+
+Owner requests differentiation between the approved photographic bento and the selected-project gallery. The existing gallery/viewer is refined into a full-width lead photograph, alternating desktop image widths and a full-width phone sequence with captions below. The bento, copy, project linkage and viewer focus/keyboard/close behaviour remain. This is a layout adaptation of the existing sourced gallery, without a newly introduced component or library. Phone gallery transforms no longer run the former tilt/parallax composition.

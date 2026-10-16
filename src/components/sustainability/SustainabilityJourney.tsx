@@ -69,7 +69,7 @@ function StoryTitle({ title }: { title: string }) {
   return (
     <>
       {title.slice(0, finalSpace + 1)}
-      <span>{title.slice(finalSpace + 1)}</span>
+      <span data-type-highlight>{title.slice(finalSpace + 1)}</span>
     </>
   );
 }
@@ -285,7 +285,7 @@ export default function SustainabilityJourney() {
           <Header currentHref="/sustainability" />
 
           <section
-            className={styles.heroContent}
+            className={styles.heroContent} data-type-section="sustainability.journey"
             aria-label={get("proof-label", "The material truth")}
             aria-hidden={scene !== "hero"}
           >
@@ -295,7 +295,7 @@ export default function SustainabilityJourney() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
               className={styles.heroTitle}
             >
-              <h1>{get("hero-line-1", "Build less")}<br />{get("hero-line-2", "against the ")}<span>{get("hero-emphasis", "land.")}</span></h1>
+              <h1 data-type-field={"sustainability.journey.hero-line-1"}>{get("hero-line-1", "Build less")}<br />{get("hero-line-2", "against the ")}<span data-type-highlight data-type-field={"sustainability.journey.hero-emphasis"}>{get("hero-emphasis", "land.")}</span></h1>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 18 }}
@@ -303,7 +303,7 @@ export default function SustainabilityJourney() {
               transition={{ duration: 0.8, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
               className={styles.heroIntro}
             >
-              <p>
+              <p data-type-field={"sustainability.journey.hero-copy"}>
                 {get("hero-copy", "An OKNO home begins with what is already there—the slope, the trees, the light and the path water takes.")}
               </p>
             </motion.div>
@@ -326,7 +326,7 @@ export default function SustainabilityJourney() {
               {story && (
                 <motion.article
                   key={scene}
-                  className={styles.storyPanel}
+                  className={styles.storyPanel} data-type-section={`sustainability.journey-${scene}`}
                   variants={narrativeVariants}
                   initial="hidden"
                   animate="visible"
@@ -339,7 +339,7 @@ export default function SustainabilityJourney() {
           </div>
 
           <section
-            className={styles.evidenceStage}
+            className={styles.evidenceStage} data-type-section="sustainability.material-truth"
             aria-label={get("proof-label", "The material truth")}
             aria-hidden={!fogVisible}
           >
@@ -349,14 +349,14 @@ export default function SustainabilityJourney() {
               animate={{ opacity: fogVisible ? 1 : 0, y: fogVisible ? 0 : 20 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h2>{get("proof-line-1", "The material")}<br /><span>{get("proof-line-2", "truth.")}</span></h2>
+              <h2 data-type-field={"sustainability.journey.proof-line-1"}>{get("proof-line-1", "The material")}<br /><span data-type-highlight data-type-field={"sustainability.journey.proof-line-2"}>{get("proof-line-2", "truth.")}</span></h2>
             </motion.div>
             <motion.p
               className={styles.evidenceCopy}
               initial={false}
               animate={{ opacity: fogVisible ? 1 : 0, y: fogVisible ? 0 : 16 }}
               transition={{ duration: 0.65, delay: fogVisible ? 0.08 : 0, ease: [0.22, 1, 0.36, 1] }}
-            >
+             data-type-field={"sustainability.journey.proof-copy"}>
               {get("proof-copy", "Site, structure and making are considered as one continuous decision—so the home can belong to the landscape instead of competing with it.")}
             </motion.p>
           </section>

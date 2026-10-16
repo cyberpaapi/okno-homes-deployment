@@ -1,0 +1,86 @@
+[
+  {
+    "slug": "forza",
+    "assetReadyMs": 1617,
+    "storyMs": 12412,
+    "idleFrames": 0,
+    "overflow": false,
+    "errors": [],
+    "metrics": {
+      "renderFrames": "99",
+      "drawCalls": "62",
+      "triangles": "139603",
+      "modelLoaded": "true"
+    },
+    "renderer": "ANGLE (Intel, Mesa Intel(R) Graphics (RPL-S), OpenGL ES 3.2)",
+    "phoneOverflow": false,
+    "hardwarePhoneTiming": {
+      "frames": 143,
+      "medianMs": 17.600000000002183,
+      "p95Ms": 18.600000000002183
+    }
+  },
+  {
+    "slug": "tengo",
+    "assetReadyMs": 933,
+    "storyMs": 11667,
+    "idleFrames": 0,
+    "overflow": false,
+    "errors": [],
+    "metrics": {
+      "renderFrames": "114",
+      "drawCalls": "69",
+      "triangles": "269309",
+      "modelLoaded": "true"
+    },
+    "renderer": "ANGLE (Intel, Mesa Intel(R) Graphics (RPL-S), OpenGL ES 3.2)",
+    "phoneOverflow": false,
+    "hardwarePhoneTiming": {
+      "frames": 143,
+      "medianMs": 17.700000000000728,
+      "p95Ms": 18.900000000001455
+    }
+  },
+  {
+    "slug": "kray",
+    "assetReadyMs": 873,
+    "storyMs": 11624,
+    "idleFrames": 0,
+    "overflow": false,
+    "errors": [],
+    "metrics": {
+      "renderFrames": "106",
+      "drawCalls": "39",
+      "triangles": "1476109",
+      "modelLoaded": "true"
+    },
+    "renderer": "ANGLE (Intel, Mesa Intel(R) Graphics (RPL-S), OpenGL ES 3.2)",
+    "phoneOverflow": false,
+    "hardwarePhoneTiming": {
+      "frames": 143,
+      "medianMs": 17.700000000000728,
+      "p95Ms": 18.80000000000291
+    }
+  },
+  {
+    "slug": "tish",
+    "assetReadyMs": 745,
+    "storyMs": 11414,
+    "idleFrames": 0,
+    "overflow": false,
+    "errors": [],
+    "metrics": {
+      "renderFrames": "115",
+      "drawCalls": "28",
+      "triangles": "19149",
+      "modelLoaded": "true"
+    },
+    "renderer": "ANGLE (Intel, Mesa Intel(R) Graphics (RPL-S), OpenGL ES 3.2)",
+    "phoneOverflow": false,
+    "hardwarePhoneTiming": {
+      "frames": 144,
+      "medianMs": 17.599999999998545,
+      "p95Ms": 18.600000000002183
+    }
+  }
+]

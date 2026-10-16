@@ -40,13 +40,16 @@ export function Typewriter({ text, start = true, speed = 65, children }: {
     data-typed={complete || reduced ? text.length : 0}
   >
     {children(<span aria-hidden="true" className={styles.text}>
-      {[...text].map((character, index) => character === '\n'
-        ? <br key={index} />
-        : <span
-            className={styles.character}
-            key={index}
-            style={{ '--character-index': index, '--character-delay': `${speed}ms` } as CharacterStyle}
-          >{character}</span>)}
+      {[...text.matchAll(/\s+|\S+/g)].map((match, index) => {
+        const part = match[0];
+        const startIndex = match.index;
+        if (/^\s+$/.test(part)) return part.includes('\n') ? <br key={index} /> : part;
+        return <span className={styles.word} key={index}>{[...part].map((character, offset) => <span
+          className={styles.character}
+          key={offset}
+          style={{ '--character-index': startIndex + offset, '--character-delay': `${speed}ms` } as CharacterStyle}
+        >{character}</span>)}</span>;
+      })}
     </span>)}
   </span>;
 }

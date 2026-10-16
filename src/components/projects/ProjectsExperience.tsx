@@ -58,14 +58,14 @@ export default function ProjectsExperience({initialId='forrest',initialProjects=
         <div className={styles.collectionAnchor} id="collection"/>
         <div className={styles.sticky}>
           <section id="atlas" className={styles.hero} aria-labelledby="atlas-title" inert={!reduced&&filmActive}>
-            <motion.div className={styles.intro} data-project-intro style={{opacity:reduced?1:textOpacity,y:reduced?0:textY}}>
+            <motion.div className={styles.intro} data-type-section="projects.intro" data-project-intro style={{opacity:reduced?1:textOpacity,y:reduced?0:textY}}>
               <motion.div initial={reduced?false:{opacity:0,y:12,filter:'blur(6px)'}} animate={{opacity:1,y:0,filter:'blur(0px)'}} transition={{duration:.5,ease:[.22,1,.36,1]}}>
-                <p>{eyebrow}</p><h1 id="atlas-title"><Typewriter text={title} start={entered} speed={38}>{content=><MorphingText>{content}</MorphingText>}</Typewriter></h1>
-                <p className={styles.subtitle}>{subtitle}</p>
+                <p data-type-field={"projects.intro.eyebrow"}>{eyebrow}</p><h1 id="atlas-title"><Typewriter text={title} start={entered} speed={38}>{content=><MorphingText>{content}</MorphingText>}</Typewriter></h1>
+                <p className={styles.subtitle} data-type-field={"projects.intro.subtitle"}>{subtitle}</p>
                 <MagneticLink href={projectContentHref(actionHref, '#collection')} className={styles.discover} aria-label={action}>{action} <span aria-hidden="true">↗</span></MagneticLink>
               </motion.div>
             </motion.div>
-            <div className={styles.globe}><motion.div className={styles.globeInner} style={{scale:reduced?1:scale,opacity:reduced?1:globeOpacity}}><AtlasGlobe locations={pins} onReady={onReady} paused={!entered||filmActive}/></motion.div></div>
+            <div className={styles.globe} data-type-section="projects.globe-pins"><motion.div className={styles.globeInner} style={{scale:reduced?1:scale,opacity:reduced?1:globeOpacity}}><AtlasGlobe locations={pins} onReady={onReady} paused={!entered||filmActive}/></motion.div></div>
           </section>
           <motion.div className={styles.filmReveal} style={{clipPath:reduced?undefined:clipPath}} inert={!reduced&&!filmActive} aria-hidden={!reduced&&!filmActive}>
             <PrismaProjectCinema activeId={activeId} onSelect={setRequestedId} projectsFallback={initialProjects} embedded enabled={!!reduced||filmActive}/>

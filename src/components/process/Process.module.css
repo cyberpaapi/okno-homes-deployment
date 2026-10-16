@@ -77,7 +77,7 @@
 .stageLabel {
   margin: 0 0 22px;
   color: var(--process-accent);
-  font-size: 10px;
+  font-size: var(--type-size-caption, 10px);
   font-weight: 500;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -87,7 +87,7 @@
   max-width: 40ch;
   margin: clamp(30px, 4.5vh, 50px) 0 0;
   color: rgb(232 239 233 / 70%);
-  font-size: clamp(14px, 1.1vw, 17px);
+  font-size: var(--type-size-body, clamp(14px, 1.1vw, 17px));
   line-height: 1.62;
   text-wrap: pretty;
 }
@@ -98,7 +98,7 @@
   gap: 11px;
   margin: 34px 0 0;
   color: rgb(232 239 233 / 52%);
-  font-size: 9px;
+  font-size: var(--type-size-caption, 9px);
   font-weight: 500;
   letter-spacing: .13em;
   text-transform: uppercase;
@@ -178,7 +178,7 @@
   max-width: 12ch;
   margin: 0;
   font-family: "OKNO Bodoni", Georgia, serif;
-  font-size: clamp(50px, 6vw, 92px);
+  font-size: var(--type-size-display, clamp(50px, 6vw, 92px));
   font-weight: 700;
   line-height: .88;
   letter-spacing: -.035em;
@@ -189,7 +189,7 @@
   max-width: 42ch;
   margin: clamp(24px, 3vh, 38px) 0 0;
   color: rgb(235 241 236 / 72%);
-  font-size: clamp(13px, 1vw, 16px);
+  font-size: var(--type-size-body, clamp(13px, 1vw, 16px));
   line-height: 1.58;
   text-wrap: pretty;
 }
@@ -259,9 +259,9 @@
 .reducedMedia { background-position: center; background-size: cover; filter: saturate(.84) contrast(1.02) brightness(.88); }
 .reducedShade { z-index: -1; background: linear-gradient(90deg, rgb(3 9 6 / 62%), rgb(3 9 6 / 6%) 72%), linear-gradient(180deg, transparent 45%, rgb(3 9 6 / 66%)); }
 .reducedCopy { max-width: 760px; }
-.reducedCopy > p { margin: 0 0 20px; color: var(--process-accent); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
-.reducedCopy h3 { max-width: 12ch; margin: 0; font-family: "OKNO Bodoni", Georgia, serif; font-size: clamp(50px, 6vw, 94px); font-weight: 400; line-height: .9; letter-spacing: -.035em; }
-.reducedCopy > span { display: block; max-width: 42ch; margin-top: 26px; color: rgb(235 241 236 / 72%); font-size: 15px; line-height: 1.58; }
+.reducedCopy > p { margin: 0 0 20px; color: var(--process-accent); font-size: var(--type-size-caption, 10px); letter-spacing: .14em; text-transform: uppercase; }
+.reducedCopy h3 { max-width: 12ch; margin: 0; font-family: "OKNO Bodoni", Georgia, serif; font-size: var(--type-size-display, clamp(50px, 6vw, 94px)); font-weight: 400; line-height: .9; letter-spacing: -.035em; }
+.reducedCopy > span { display: block; max-width: 42ch; margin-top: 26px; color: rgb(235 241 236 / 72%); font-size: var(--type-size-body, 15px); line-height: 1.58; }
 
 .srOnly {
   position: absolute;
@@ -283,7 +283,7 @@
   .heroCopy { top: clamp(130px, 20vh, 190px); width: min(46vw, 540px); }
   .timelineShell { height: 154px; }
   .storyCopy { right: clamp(24px, 5vw, 66px); bottom: 184px; }
-  .copyInner h2 { font-size: clamp(50px, 8vw, 82px); }
+  .copyInner h2 { font-size: var(--type-size-display, clamp(50px, 8vw, 82px)); }
   .staticHero { min-height: max(100svh, 720px); grid-template-columns: minmax(0, 1fr) minmax(300px, .72fr); gap: 36px; }
   .staticHeroFilm { max-height: 62svh; }
   .reducedSequence { grid-template-columns: 1fr; }
@@ -295,14 +295,14 @@
   .stickyViewport { min-height: 0; }
   .heroCopy { top: 106px; right: 20px; left: 20px; width: auto; }
   .heroLabel { margin-bottom: 16px; }
-  .heroSummary { max-width: 34ch; margin-top: 22px; font-size: 13px; line-height: 1.5; }
+  .heroSummary { max-width: 34ch; margin-top: 22px; font-size: var(--type-size-body, 13px); line-height: 1.5; }
   .scrollCue { margin-top: 20px; }
   .sceneVideo { object-position: 56% center; }
   .mediaTreatment { background: linear-gradient(90deg, rgb(4 10 7 / 42%), rgb(4 10 7 / 4%) 82%), linear-gradient(180deg, rgb(3 8 5 / 18%), transparent 26%, transparent 50%, rgb(3 8 5 / 74%)); }
   .storyCopy { right: 20px; bottom: 132px; left: 20px; }
   .stageLabel { margin-bottom: 14px; }
-  .copyInner h2 { max-width: 10ch; font-size: clamp(46px, 13vw, 68px); line-height: .9; }
-  .stageCopy { max-width: 35ch; margin-top: 18px; font-size: 13px; line-height: 1.45; }
+  .copyInner h2 { max-width: 10ch; font-size: var(--type-size-display, clamp(46px, 13vw, 68px)); line-height: .9; }
+  .stageCopy { max-width: 35ch; margin-top: 18px; font-size: var(--type-size-body, 13px); line-height: 1.45; }
   .timelineShell { height: 108px; }
   .staticHero { display: flex; min-height: max(100svh, 680px); flex-direction: column; justify-content: flex-end; padding: 112px 20px 24px; gap: 34px; }
   .staticHeroCopy { width: 100%; }
@@ -310,8 +310,8 @@
   .reducedSequence { padding: 88px 16px; }
   .reducedStages { gap: 16px; }
   .reducedScene { min-height: 620px; padding: 28px 20px; border-radius: 10px; }
-  .reducedCopy h3 { font-size: clamp(48px, 13vw, 68px); }
-  .reducedCopy > span { margin-top: 22px; font-size: 14px; }
+  .reducedCopy h3 { font-size: var(--type-size-display, clamp(48px, 13vw, 68px)); }
+  .reducedCopy > span { margin-top: 22px; font-size: var(--type-size-body, 14px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -326,19 +326,28 @@
 .coverLayer { position: absolute; z-index: 1; inset: var(--cover-inset, 0); pointer-events: none; opacity: 1; }
 .coverLayer[data-revealed="true"] { opacity: var(--cover-opacity); }
 .coverLayer img { object-fit: cover; }
-.stageLabel { margin-bottom: 16px; font-size: clamp(14px, 1.3vw, 19px); font-weight: 700; letter-spacing: .08em; color: #d4e1d5; }
-.stageTitle { margin: 16px 0 0; font-family: "OKNO Bodoni", Georgia, serif; font-size: clamp(24px, 2.7vw, 38px); line-height: 1.12; }
+.stageLabel { margin-bottom: 16px; font-size: var(--type-size-body, clamp(14px, 1.3vw, 19px)); font-weight: 700; letter-spacing: .08em; color: #d4e1d5; }
+.stageTitle { margin: 16px 0 0; font-family: "OKNO Bodoni", Georgia, serif; font-size: var(--type-size-heading, clamp(24px, 2.7vw, 38px)); line-height: 1.12; }
 .stageCopy { max-width: 46ch; margin-top: 16px; }
 @media (max-width: 700px) {
   .storyCopy { bottom: 132px; }
-  .copyInner h2 { font-size: clamp(42px, 11vw, 64px); font-weight: 700; }
-  .stageLabel { margin-bottom: 12px; font-size: 14px; }
-  .stageTitle { font-size: 24px; margin-top: 12px; }
-  .stageCopy { margin-top: 12px; font-size: 12px; }
+  .copyInner h2 { font-size: var(--type-size-display, clamp(42px, 11vw, 64px)); font-weight: 700; }
+  .stageLabel { margin-bottom: 12px; font-size: var(--type-size-body, 14px); }
+  .stageTitle { font-size: var(--type-size-heading, 24px); margin-top: 12px; }
+  .stageCopy { margin-top: 12px; font-size: var(--type-size-body, 12px); }
 }
 @media (max-height: 560px) and (min-width: 701px) {
   .storyCopy { bottom: 148px; }
-  .copyInner h2 { font-size: 48px; }
+  .copyInner h2 { font-size: var(--type-size-display, 48px); }
   .stageCopy { display: none; }
   .timelineShell { height: 108px; }
 }
+
+.mobileSequence { padding: 112px 20px 36px; }
+.mobileOpening h1 { margin: 0 0 24px; font-family: "OKNO Bodoni", Georgia, serif; font-size: var(--type-size-display, clamp(42px, 12vw, 64px)); font-weight: 400; line-height: 1.05; letter-spacing: -.035em; }
+.mobileOpening p { max-width: 38ch; margin-bottom: 28px; font-size: var(--type-size-body, 15px); line-height: 1.6; }
+.mobileSequence > video { display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 12px; background: #101810; }
+.mobileChapter { min-height: 225px; padding-top: 24px; }
+.mobileChapter h2 { margin: 8px 0; font-size: var(--type-size-heading, 30px); line-height: 1.15; }
+.mobileChapter p { margin: 8px 0; font-size: var(--type-size-body, 14px); line-height: 1.5; }
+.mobileChapter > p:first-child { color: #c3d3ca; font-size: 13px; }

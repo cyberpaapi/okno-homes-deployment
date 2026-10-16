@@ -38,14 +38,14 @@ export default function SiteFooter({ tone = 'forest' }: { tone?: FooterTone }) {
     <footer className={styles.footer} data-component="site-footer" data-tone={tone}>
       <div className={styles.footerMain}>
         <FooterColumn>
-          <div className={styles.brandColumn}>
+          <div className={styles.brandColumn} data-type-section="footer.footer-brand">
             <Link href="/" aria-label={`${brandName} home`} className={styles.footerLogo}>
               {tone === 'enquiry' ? <>
                 <span className={styles.enquiryLogoDesktop}><OknoLogo tone="light" /></span>
                 <span className={styles.enquiryLogoMobile}><OknoLogo tone="dark" /></span>
               </> : <OknoLogo tone={tone === 'bespoke' ? 'dark' : 'light'} />}
             </Link>
-            <p className={styles.brandLine}>{content('footer.brand.line', 'Live better, live modular.')}</p>
+            <p className={styles.brandLine} data-type-field={"footer.brand.line"}>{content('footer.brand.line', 'Live better, live modular.')}</p>
             <nav className={styles.socialLinks} aria-label={content('footer.social.navigation-label', 'Social media')}>
               {footerSocialLinks.map(({ id, name, href, icon }) => (
                 <a
@@ -64,17 +64,17 @@ export default function SiteFooter({ tone = 'forest' }: { tone?: FooterTone }) {
         </FooterColumn>
 
         {footerGroups.map(({ id, heading, links }, index) => <FooterColumn key={id} delay={(index + 1) * .04}>
-          <nav className={styles.linkGroup} aria-label={content(`footer.${id}.heading`, heading)}>
-            <h2>{content(`footer.${id}.heading`, heading)}</h2>
+          <nav className={styles.linkGroup} data-type-section={`footer.footer-${id}`} aria-label={content(`footer.${id}.heading`, heading)}>
+            <h2 data-type-field={`footer.${id}.heading`}>{content(`footer.${id}.heading`, heading)}</h2>
             {(collections[`footer.links.${id}`] ?? footerLinkDefaults(values)[`footer.links.${id}`]).map(link => <Link key={link.id} href={localDestination(link.fields.href, links.find(defaultLink => defaultLink.id === link.id)?.href ?? '/enquiry')}>{link.fields.label}</Link>)}
           </nav>
         </FooterColumn>)}
       </div>
 
-      <div className={styles.footerBottom}>
+      <div className={styles.footerBottom} data-type-section="footer.footer-bottom">
         <div className={styles.footerBottomInner}>
           <span>{copyright}</span>
-          <span>{content('footer.bottom.closing', 'Designed with intent.')}</span>
+          <span data-type-field={"footer.bottom.closing"}>{content('footer.bottom.closing', 'Designed with intent.')}</span>
         </div>
       </div>
     </footer>

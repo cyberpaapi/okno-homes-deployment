@@ -36,7 +36,7 @@ function subscribe(listener: () => void) {
   listeners.add(listener);
   if (!interval) {
     void refresh();
-    interval = setInterval(() => { void refresh(); }, 2500);
+    interval = setInterval(() => { void refresh(); }, 15000);
     document.addEventListener("visibilitychange", refresh);
     window.addEventListener("message", receivePreview);
     announcePreviewReady();

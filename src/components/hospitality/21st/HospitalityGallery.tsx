@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { pageImageLoader } from "@/lib/pageImageLoader";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./HospitalityGallery.module.css";
 import type { SelectedHospitalityProject } from '@/data/hospitalitySelectedWork';
@@ -34,11 +34,6 @@ export function HospitalityGallery({ projects }: { projects: HospitalityProject[
   const opener = useRef<HTMLButtonElement | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const reducedMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: root, offset: ["start end", "end end"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 82, damping: 24, mass: 0.34 });
-  const rotateX = useTransform(progress, [0, 0.42], [18, 0]);
-  const scale = useTransform(progress, [0, 0.42], [0.97, 1]);
-  const middleY = useTransform(progress, [0, 1], [72, -56]);
   const selected = selectedId === null ? -1 : projects.findIndex(project => project.id === selectedId);
   const selectedProject = selected < 0 ? null : projects[selected];
   const viewerOpen = selectedProject !== null;
@@ -138,41 +133,19 @@ export function HospitalityGallery({ projects }: { projects: HospitalityProject[
   return (
     <>
       <section ref={root} className={styles.gallery} aria-label="Hospitality project photography">
-        <motion.div
-          className={styles.grid}
-          data-count={Math.min(projects.length, 3)}
-          style={{ rotateX: reducedMotion ? 0 : rotateX, scale: reducedMotion ? 1 : scale }}
-        >
-          {Array.from({ length: Math.min(projects.length, 3) }, (_, column) => (
-            <motion.div
-              className={styles.column}
-              key={column}
-              style={{ y: reducedMotion || column !== 1 ? 0 : middleY }}
-            >
-              {projects.filter((_, index) => index % 3 === column).map((project) => {
-                return (
-                  <motion.button
-                    type="button"
-                    className={styles.card}
-                    key={project.id}
-                    onClick={(event) => { opener.current = event.currentTarget; setSelectedId(project.id); }}
-                    whileHover={reducedMotion ? undefined : { y: -4 }}
-                    transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
-                    aria-label={`View ${project.name} photography`}
-                    data-magnetic-ignore
-                  >
-                    <span className={styles.image}>
-                      <Image loader={pageImageLoader} src={project.image} alt={project.alt} fill sizes="(max-width: 560px) 92vw, (max-width: 760px) 46vw, 30vw" />
-                    </span>
-                    <span className={styles.shade} aria-hidden="true" />
-                    <span className={styles.name}>{project.name}</span>
-                    <span className={styles.open} data-magnetic aria-hidden="true"><Arrow direction="open" /></span>
-                  </motion.button>
-                );
-              })}
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className={styles.editorialGallery} data-count={Math.min(projects.length, 3)}>
+          {projects.map(project => <button
+            type="button"
+            className={styles.editorialProject}
+            key={project.id}
+            onClick={event => { opener.current = event.currentTarget; setSelectedId(project.id); }}
+            aria-label={`View ${project.name} photography`}
+            data-magnetic-ignore
+          >
+            <span className={styles.editorialImage}><Image loader={pageImageLoader} src={project.image} alt={project.alt} fill sizes="(max-width: 700px) 100vw, 70vw" /></span>
+            <span className={styles.editorialCaption}><span>{project.name}</span><span className={styles.editorialArrow} aria-hidden="true"><Arrow direction="open" /></span></span>
+          </button>)}
+        </div>
       </section>
       {viewer}
     </>

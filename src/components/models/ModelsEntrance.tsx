@@ -40,11 +40,13 @@ export default function ModelsEntrance({ ready }: { ready: boolean }) {
           role="status"
           aria-label="Loading OKNO models"
           className={styles.loader}
-          initial={{ y: 0 }}
-          exit={{ y: reduced ? 0 : "-105%", opacity: reduced ? 0 : 1, borderBottomLeftRadius: "50% 20%", borderBottomRightRadius: "50% 20%" }}
-          transition={{ duration: reduced || skip ? 0 : 0.9, ease: [0.65, 0, 0.35, 1] }}
+          initial={{ transform: "translate3d(0, 0, 0)" }}
+          // A full transform lets Motion use a native compositor animation.
+          // Morphing the full-screen border radius repainted the gradient on exit.
+          exit={{ transform: reduced ? "translate3d(0, 0, 0)" : "translate3d(0, -105%, 0)", opacity: reduced ? 0 : 1 }}
+          transition={{ duration: reduced || skip ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.div exit={{ scale: reduced ? 1 : 4.5, opacity: 0 }} transition={{ duration: reduced || skip ? 0 : 0.75 }}>
+          <motion.div initial={{ transform: "scale(1)" }} exit={{ transform: reduced ? "scale(1)" : "scale(1.6)", opacity: 0 }} transition={{ duration: reduced || skip ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}>
             <OknoLogo variant="compact" priority />
           </motion.div>
         </motion.div>
