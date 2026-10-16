@@ -5,7 +5,7 @@ import sharp from 'sharp';
 
 // Precompute only the accepted photographs used by this performance pass.
 // Uploaded CMS images deliberately retain the authenticated media pipeline.
-const roots = ['src/components/journal', 'src/components/hospitality', 'src/components/ui/about-section.tsx', 'src/components/models/BespokeExperience.tsx', 'src/components/landing/LandingPathways.tsx'];
+const roots = ['src/components/journal', 'src/components/hospitality', 'src/components/ui/about-section.tsx', 'src/components/models/BespokeExperience.tsx', 'src/components/landing/LandingPathways.tsx', 'src/components/landing-options/ForestEntryOption.tsx'];
 async function sources(entry) {
   if ((await stat(entry)).isFile()) return [entry];
   return (await Promise.all((await readdir(entry)).map(name => sources(path.join(entry, name))))).flat();
@@ -18,6 +18,8 @@ for (const file of files) {
 // Hospitality's viewer resolves its accepted selection from the project catalogue.
 const projects = JSON.parse(await readFile('src/data/realProjectMedia.json', 'utf8'));
 for (const project of projects) if (project.gallery[0]) paths.add(project.gallery[0].src);
+sharp.concurrency(1);
+sharp.cache(false);
 const output = 'public/page-images';
 await mkdir(output, { recursive: true });
 const manifest = {};

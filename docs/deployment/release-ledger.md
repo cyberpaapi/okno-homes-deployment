@@ -1,5 +1,16 @@
 # Release decision and evidence ledger
 
+## Homepage loading incident — 16 October 2026
+
+Live investigation of runtime `8ef834a`: deployment READY, team not blocked/soft-blocked, static media HTTP 206 and public API 200. The Blob-only usage block remains. No production error logs were returned for the preceding hour. This does not certify transfer headroom or every visitor connection.
+
+The browser reproduced the intro paused at time zero with buffered data (readyState 3), cold hero preparation 8–13.9 seconds and a later frame wait of 6.6 seconds. A full 22,439,964-byte intro transfer took 30 seconds in the sampled connection. Document scroll moved while the picture waited. Lazy images outside the viewport were not broken URLs; completed sampled images had valid dimensions.
+
+Repair: explicitly start muted intro playback and retry on buffered-data events/user input, recover errors to the existing static ending, prioritize the newest frame independently of slow older work, reduce startup speculation and use 256 KiB ranges with the unchanged 16 MiB cap. The original intro remains; a fingerprinted 11,926,832-byte delivery preserves 1080p/24fps/361 frames/15.042 seconds. Full decode passes, full-film SSIM 0.984550 and opening/midpoint visual comparisons are recorded privately. Prepared responsive hero photographs bypass cold Next image conversion. Custom intro selections remain supported.
+
+Local acceptance: 28 focused tests, zero-warning scoped lint, production compile/TypeScript and 30 trace checks pass (largest 179.7 MiB). Actual desktop and 390×844 reloads play at 1.75×/y=0; forward/reverse responds, exact 24-second ending presents before handoff. First decoded poses measured 23–45 ms locally; these are local results, not a live-network guarantee. Available RAM samples stayed above 6 GiB during this repair. Evidence and the tracked incident plan are outside the release checkout under `Documents/ChatGPT/OKNO Homes/loading-incident-2026-10-16`. Production verification follows the Git release.
+
+
 ## Latest Process reverse and page ending — 11 October 2026
 
 Source `fc30dd64658beaae0a5bfc297344c0aa581728ab`, READY `dpl_DfCwmVtogtSwBqxuhxx9m4iuouHj`, canonical alias verified. Reverse film travel limit is 25% higher; forward cadence/damping/original media and fast-scroll guards remain. The long bottom line is replaced by a read-only phase count/segments; a new preparation/conversation close follows the five photographs, with 11 matching editor fields. Actual 21st.dev Stepper 03 source (shadcnspace, 28558) retrieved and adaptation recorded. 57 tests, lint, TS/local/cloud builds and 30 traces pass. Live desktop/mobile-width checks verify inverse restoration, marker state, normal-flow close and both destination links; five HEADs 200 and both original media ranges 206. [Full decisions and evidence](../process-ending-2026-10-11.md). No cloud CMS/key/store/billing write or other project change; Blob recovery and email delivery are not claimed.

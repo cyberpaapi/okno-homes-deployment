@@ -127,6 +127,84 @@
       "src": "/page-images/b4d30339d1ea0f27-180.webp"
     }
   ],
+  "/assets/landing-options/forest-entry-intro-last-frame.png": [
+    {
+      "width": 384,
+      "src": "/page-images/ddebc0a380c28532-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/ddebc0a380c28532-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/ddebc0a380c28532-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/ddebc0a380c28532-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/ddebc0a380c28532-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/ddebc0a380c28532-1920.webp"
+    }
+  ],
+  "/assets/landing-options/forest-entry-start-v2.jpg": [
+    {
+      "width": 384,
+      "src": "/page-images/46f36eb27bb3e74a-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/46f36eb27bb3e74a-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/46f36eb27bb3e74a-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/46f36eb27bb3e74a-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/46f36eb27bb3e74a-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/46f36eb27bb3e74a-1920.webp"
+    }
+  ],
+  "/assets/landing-options/forest-entry-window-finish.jpg": [
+    {
+      "width": 384,
+      "src": "/page-images/851d448b66952dc7-384.webp"
+    },
+    {
+      "width": 640,
+      "src": "/page-images/851d448b66952dc7-640.webp"
+    },
+    {
+      "width": 828,
+      "src": "/page-images/851d448b66952dc7-828.webp"
+    },
+    {
+      "width": 1080,
+      "src": "/page-images/851d448b66952dc7-1080.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/page-images/851d448b66952dc7-1280.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/page-images/851d448b66952dc7-1920.webp"
+    }
+  ],
   "/assets/projects/real-v1/forrest-01.webp": [
     {
       "width": 384,

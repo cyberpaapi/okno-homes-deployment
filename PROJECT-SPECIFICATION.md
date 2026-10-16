@@ -41,7 +41,7 @@ Navigation and configurable CTA destinations use existing same-site paths and an
 
 The accepted forest-to-interior film retains its original source and endpoint. Scroll position selects independently decoded poses; rapid input replaces the current target and does not queue an old chronological playback. The page keeps normal document scrolling. Hero-only wheel sensitivity remains separate from lower content. Touch input stays native.
 
-The intro plays at 1.75× on a fresh opening load/reload. Leaving it releases its video source. Returning by reverse scroll or Home holds the static intro-ending pose. Reload within the hero restarts the intro; reload within lower content restores the section and offset. Decoder failure can reveal the accepted endpoint rather than trap document scrolling.
+The intro plays at 1.75× on a fresh opening load/reload. Its fingerprinted delivery copy is 11,926,832 bytes (47% smaller than the retained original), preserving 1,920×1,080, 24 fps, all 361 frames and the 15.042-second duration. Muted playback starts explicitly from buffered data instead of relying solely on a full-playthrough estimate. Leaving it releases its video source. Returning by reverse scroll or Home holds the static intro-ending pose. Reload within the hero restarts the intro; reload within lower content restores the section and offset. Decoder failure can reveal the accepted endpoint rather than trap document scrolling.
 
 Desktop V1 uses 1,920×1,080 poses from the existing 46,739,190-byte frame bundle. The phone delivery uses 1,280×720 WebP poses, 26,704,366 bytes, with the same 289 sampled source positions and original final pose. The original 24 fps source and desktop bytes are unchanged. Phone delivery is a lossy compressed derivative, not a pixel-identical master.
 
@@ -180,7 +180,7 @@ Phone compositions use normal document flow where a desktop sticky effect would 
 
 Motion respects reduced-motion preferences and data-saving fallbacks where supported. Decorative cursor effects disable for coarse/no-hover input and reduced motion. Animation/decoder loops stop or release resources when hidden, offscreen or unmounted. Geographic functionality is preserved while reducing rendering work.
 
-Caching is content-aware: fingerprinted frame/model/media paths are immutable; changing bytes requires a different fingerprint. Range-aware frame fetches avoid downloading an entire source before presenting a later pose. Current-target work replaces stale work. Public-content polling is shared and skips hidden tabs.
+Caching is content-aware: fingerprinted frame/model/media paths are immutable; changing bytes requires a different fingerprint. Range-aware frame fetches avoid downloading an entire source before presenting a later pose. Current-target work replaces stale work; a slow older frame does not serialize a newer scroll target. V1 starts with 256 KiB ranges and defers speculative forward poses until scrolling starts, inside the same 16 MiB compressed-cache cap. Public-content polling is shared and skips hidden tabs.
 
 Chromium viewport checks demonstrate layout and selected browser behaviour. They do not certify physical-phone frame rate, Safari touch/keyboard behaviour, every network, or real-user Core Web Vitals. Native controls provide recovery where autoplay is blocked.
 

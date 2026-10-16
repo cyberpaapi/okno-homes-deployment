@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import ForestEntryOption from './ForestEntryOption';
+import introDelivery from '../../../config/hero-v1-intro.json';
 
 const motionState = vi.hoisted(() => ({
   progress: 0,
@@ -32,7 +33,10 @@ vi.mock('motion/react', () => ({
 }));
 
 describe('ForestEntryOption', () => {
-  beforeEach(()=>{ vi.spyOn(HTMLMediaElement.prototype,'load').mockImplementation(()=>{}); });
+  beforeEach(()=>{
+    vi.spyOn(HTMLMediaElement.prototype,'load').mockImplementation(()=>{});
+    vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue(undefined);
+  });
   afterEach(() => {
     motionState.progress = 0;
     motionState.onChange = null;
@@ -49,11 +53,38 @@ describe('ForestEntryOption', () => {
     expect(intro.playbackRate).toBe(1.75);
   });
 
+  it('explicitly starts buffered muted video and retries without replaying a completed intro', () => {
+    const {container}=render(<ForestEntryOption/>);
+    const intro=container.querySelector('video')!;
+    const play=vi.mocked(intro.play);
+    expect(play).toHaveBeenCalled();
+    play.mockClear();
+    fireEvent.loadedData(intro);
+    fireEvent.canPlay(intro);
+    expect(play).toHaveBeenCalledTimes(2);
+    expect(intro.muted).toBe(true);
+    fireEvent.ended(intro);
+    play.mockClear();
+    fireEvent.canPlay(intro);
+    fireEvent.pointerDown(window);
+    expect(play).not.toHaveBeenCalled();
+  });
+
+  it('recovers an unavailable intro to its static ending without blocking the page', () => {
+    vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});
+    const {container}=render(<ForestEntryOption/>);
+    const intro=container.querySelector('video')!;
+    fireEvent.error(intro);
+    expect(intro.className).toContain('introComplete');
+    expect(container.querySelector('[style*="--brand-opacity"]')).toHaveStyle('--brand-opacity: 1.0000');
+  });
+
   it('releases the intro and keeps a static base when returning to the opening',()=>{
     vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});
     const play=vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue(undefined);
     const {container}=render(<ForestEntryOption/>);
     const intro=container.querySelector('video')!;
+    play.mockClear();
     act(()=>{motionState.progress=.2;motionState.onChange?.(.2);});
     expect(intro.hasAttribute('src')).toBe(false);
     expect(intro.load).toHaveBeenCalledOnce();
@@ -97,7 +128,7 @@ describe('ForestEntryOption', () => {
     );
     expect(container.firstElementChild).not.toHaveAttribute('data-ambient-video');
     expect([...container.querySelectorAll('video')].map(video => video.getAttribute('src'))).toEqual([
-      '/assets/landing-options/forest-entry-intro-15s.mp4',
+      introDelivery.source,
       '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4',
     ]);
   });
@@ -109,6 +140,7 @@ describe('ForestEntryOption', () => {
     expect(container.querySelector('img[src="/assets/landing-options/forest-entry-intro-last-frame.png"]')).toBeInTheDocument();
     expect(screen.getByText('A home in the forest.')).toBeInTheDocument();
     expect(container.querySelectorAll('video')).toHaveLength(2);
+    play.mockClear();
     fireEvent.focus(window);
     expect(play).not.toHaveBeenCalled();
     rerender(<ForestEntryOption variant={{ id: 'hero-v1', fields: { tagline: '' } }} />);

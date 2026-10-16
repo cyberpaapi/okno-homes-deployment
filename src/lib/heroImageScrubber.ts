@@ -13,7 +13,7 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   if (!context) return null;
   canvas.width = film.width; canvas.height = film.height;
   canvas.dataset.delivery = compact ? 'mobile' : 'desktop';
-  const CHUNK = 512 * 1024, MAX_CHUNKS = 32;
+  const CHUNK = 256 * 1024, MAX_CHUNKS = 64;
   const MAX_FRAMES = compact ? 10 : ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 0) >= 8 ? 28 : 18;
   const lastPose = film.frames.length-1;
   const anchors = new Set([0,lastPose-2,lastPose-1,lastPose]);
@@ -26,7 +26,8 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   const images = new Map<number, ImageBitmap>();
   const decoding = new Map<number, Promise<ImageBitmap>>();
   let target = 0, drawn = -1, direction = 1, disposed = false, failed = false;
-  let busy = false, warming = false, raf = 0, received = 0, draws = 0;
+  const foreground = new Set<number>();
+  let warming = false, raf = 0, received = 0, draws = 0;
   let requestedAt = performance.now(), maxLatency = 0;
   const chunkAt = () => Math.floor(film.frames[target][0] / CHUNK);
   const distance = (id: number) => Math.abs(id-chunkAt()) + ((id-chunkAt())*direction < 0 ? .5 : 0);
@@ -104,7 +105,7 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   };
   const queue = () => { if (!disposed && !raf && !document.hidden) raf = requestAnimationFrame(draw); };
   async function warm() {
-    if (warming || disposed || failed || document.hidden) return;
+    if (warming || disposed || failed || document.hidden || target === 0) return;
     warming = true;
     const origin = target, heading = direction;
     try {
@@ -122,8 +123,8 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   }
   async function pump() {
     queue();
-    if (busy || disposed || failed || document.hidden || images.has(target)) return;
-    busy = true; const index = target; let retry = false;
+    if (foreground.has(target) || disposed || failed || document.hidden || images.has(target)) return;
+    const index = target; foreground.add(index); let retry = false;
     try { await image(index); }
     catch (error) {
       if (error instanceof Error && error.name === 'AbortError') retry = true;
@@ -133,7 +134,7 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
         fail();
       }
     } finally {
-      busy = false; queue();
+      foreground.delete(index); queue();
       if (!disposed && !failed && (retry || index !== target)) void pump();
     }
   }
@@ -145,7 +146,7 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
     for (const [id,request] of requests) {
       if (!anchorChunks.has(id) && Math.abs(id-chunkAt()) > 4) { request.abort.abort(); requests.delete(id); }
     }
-    for (let step=0;step<=2;step++) {
+    for (let step=0;step <= (target === 0 ? 0 : 1);step++) {
       const id = chunkAt()+direction*step;
       if (id >= 0 && id*CHUNK < film.bytes) void bytes(id).catch(() => {});
     }
@@ -165,6 +166,10 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   canvas.dataset.scrubMode = 'scroll'; setTime(0);
   // Prepare the real ending during the intro. Reserve its bitmap within the
   // same cache cap, so a fast handoff does not fetch it at the boundary.
-  for (const index of anchors) if (index !== 0) void image(index).catch(() => {});
+  // Fetch the opening before reserving the ending; speculative data must not
+  // compete with the first visible frame and the autoplay intro.
+  void image(0).then(() => {
+    for (const index of anchors) if (index !== 0) void image(index).catch(() => {});
+  }).catch(() => {});
   return { setTime, seek: setTime, dispose };
 }

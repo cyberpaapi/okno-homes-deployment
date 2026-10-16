@@ -47,6 +47,29 @@ describe('independent Hero scroll frames',()=>{
     expect(Number(canvas.dataset.scrubCacheFrames)).toBeLessThanOrEqual(18);
     abort.abort();expect(mocks.close).toHaveBeenCalled();
   });
+  it('presents a new target while an older nearby range remains slow',async()=>{
+    const mocks=setup(),canvas=document.createElement('canvas'),abort=new AbortController();
+    const original=mocks.fetch.getMockImplementation()!;
+    let blocked=false;
+    mocks.fetch.mockImplementation(async(url,options)=>{
+      const start=Number(options.headers.Range.match(/\d+/)![0]);
+      if(blocked && start >= 8*256*1024 && start < 10*256*1024) return new Promise<never>(()=>{});
+      return original(url,options);
+    });
+    const scrubber=createHeroImageScrubber(canvas,abort.signal,vi.fn(),vi.fn(),vi.fn())!;
+    await vi.advanceTimersByTimeAsync(40);
+    // These are different uncached ranges: slow network for the old target
+    // must not serialize the most recent scroll position behind it.
+    blocked=true;
+    const slow=film.frames.find(frame=>frame[0]>=8*256*1024)![2]/film.fps;
+    scrubber.setTime(slow);
+    await vi.advanceTimersByTimeAsync(10);
+    scrubber.setTime(12);
+    await vi.advanceTimersByTimeAsync(50);
+    expect(canvas.dataset.scrubPresentedTime).toBe('12.0000');
+    abort.abort();
+  });
+
   it('does not wait to download the whole movie to reach the accepted window',async()=>{
     const mocks=setup(),canvas=document.createElement('canvas'),abort=new AbortController();
     const scrubber=createHeroImageScrubber(canvas,abort.signal,vi.fn(),vi.fn(),vi.fn())!;

@@ -18,8 +18,10 @@ import { useHeroFilmExit } from './useHeroFilmExit';
 import { useSiteContent } from '@/lib/useSiteContent';
 import { homeVariantAccessibleTitle } from '@/lib/homeVariantContent';
 import { heroWheelDelta } from '@/lib/heroWheelSensitivity';
+import { pageImageLoader } from '@/lib/pageImageLoader';
 import type { ContentItem } from '@/lib/contentCollections';
 import styles from './ForestEntryOption.module.css';
+import introDelivery from '../../../config/hero-v1-intro.json';
 
 const INTRO_VIDEO = '/assets/landing-options/forest-entry-intro-15s.mp4';
 const INTRO_LAST_FRAME = '/assets/landing-options/forest-entry-intro-last-frame.png';
@@ -53,7 +55,8 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const savedAccessibleTitle = useSiteContent('hero-v1.opening.accessible-title', 'OKNO Modhomes');
   const savedStartAlt = useSiteContent('hero-v1.opening.start-alt', 'A single illuminated Kioo home within dense forest at blue hour');
   const savedEndAlt = useSiteContent('hero-v1.opening.end-alt', 'The timber-lined interior of the Kioo home opening to the forest');
-  const introVideo = variant?.fields.openingVideo || savedIntroVideo;
+  const selectedIntro = variant?.fields.openingVideo || savedIntroVideo;
+  const introVideo = selectedIntro === INTRO_VIDEO ? introDelivery.source : selectedIntro;
   const journeyVideo = variant?.fields.scrollVideo || savedJourneyVideo;
   const startImage = variant?.fields.poster || savedStartImage;
   const endImage = variant?.fields.endImage || savedEndImage;
@@ -138,10 +141,31 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     video.addEventListener('loadedmetadata', tunePlayback);
     video.addEventListener('playing', tunePlayback);
     tunePlayback();
+    // Autoplay alone can wait for a can-play-through estimate on slow links.
+    // Explicit muted playback starts as soon as the first frames are buffered.
+    const start = () => {
+      if (introFinished.current || mediaProgress.get() > .005 || document.hidden || !video.hasAttribute('src')) return;
+      video.muted = true;
+      void video.play().catch(() => { /* A later canplay or user gesture retries. */ });
+    };
+    const recover = () => { video.pause(); finishIntro(); };
+    video.addEventListener('loadeddata', start);
+    video.addEventListener('canplay', start);
+    video.addEventListener('error', recover);
+    window.addEventListener('pointerdown', start, { passive: true });
+    window.addEventListener('keydown', start);
+    start();
     return () => {
+      video.removeEventListener('loadeddata', start);
+      video.removeEventListener('canplay', start);
+      video.removeEventListener('error', recover);
+      window.removeEventListener('pointerdown', start);
+      window.removeEventListener('keydown', start);
       video.removeEventListener('loadedmetadata', tunePlayback);
       video.removeEventListener('playing', tunePlayback);
     };
+    // Reads the current Motion position and mounted intro, never an old target.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animated]);
 
   useEffect(() => {
@@ -170,6 +194,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
           <div className={styles.startFrame}>
             <Image
               src={startImage}
+              loader={pageImageLoader}
               alt={startAlt}
               fill
               priority
@@ -179,6 +204,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
           <div className={styles.endFrame}>
             <Image
               src={endImage}
+              loader={pageImageLoader}
               alt={endAlt}
               fill
               sizes="100vw"
@@ -186,7 +212,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
           </div>
 
           <div className={styles.introStill}>
-            <Image src={introLastFrame} alt="" fill sizes="100vw" priority />
+            <Image src={introLastFrame} loader={pageImageLoader} alt="" fill sizes="100vw" />
           </div>
           <div className={styles.brand} aria-label="OKNO Modhomes" data-type-field={"hero-v1.opening.tagline"}>
             <OknoLogo className={styles.wordmark} />
