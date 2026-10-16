@@ -27,12 +27,14 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
       hero.removeAttribute('data-film-exit-pending');
     };
     const finish = () => {
-      if (pendingY === null || (!fallback && shown.get() < 1) || release || paint) return;
+      if (document.body.style.overflow === 'hidden' || pendingY === null || (!fallback && shown.get() < 1) || release || paint) return;
       // Let the endpoint and its matching still render before moving the page.
       paint = requestAnimationFrame(() => {
         paint = requestAnimationFrame(() => {
           paint = 0;
           release = window.setTimeout(() => {
+            release = 0;
+            if (document.body.style.overflow === 'hidden') return;
             const y = pendingY;
             pendingY = null; clear();
             if (y !== null) { previousY = y; move(y, false); }
@@ -41,6 +43,7 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
       });
     };
     const check = () => {
+      if (document.body.style.overflow === 'hidden') return;
       const y = window.scrollY, end = boundary();
       if (pendingY !== null) {
         if (y < end - 3) { pendingY = null; clear(); }
@@ -60,7 +63,7 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
       previousY = Math.min(y, pendingY === null ? y : end);
     };
     const wheel = (event: WheelEvent) => {
-      if (pendingY === null || event.ctrlKey) return;
+      if (document.body.style.overflow === 'hidden' || pendingY === null || event.ctrlKey) return;
       if (event.deltaY < 0) { pendingY = null; clear(); return; }
       if (event.deltaY > 0) {
         const unit = event.deltaMode === 2 ? window.innerHeight : event.deltaMode === 1 ? 16 : 1;
@@ -70,17 +73,19 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
     };
     const unsubscribe = shown.on('change', finish);
     const key = (event: KeyboardEvent) => {
-      if (event.key !== 'Home' || (event.target instanceof Element && event.target.closest('input,textarea,select,[contenteditable]'))) return;
+      if (document.body.style.overflow === 'hidden' || event.key !== 'Home' || (event.target instanceof Element && event.target.closest('input,textarea,select,[contenteditable]'))) return;
       // Native Home must supersede a still-running wheel animation; otherwise
       // its next Lenis tick can pull the document back down again.
       if (lenis) { pendingY = null; clear(); lenis.scrollTo(0,{immediate:true,force:true}); }
     };
+    const lockObserver = new MutationObserver(finish);
+    lockObserver.observe(document.body, { attributes: true, attributeFilter: ['style'] });
     window.addEventListener('scroll', check, { passive: true });
     window.addEventListener('wheel', wheel, { passive: false, capture: true });
     window.addEventListener('keydown',key);
     lenis?.on('scroll', check);
     return () => {
-      clear(); unsubscribe(); lenis?.off('scroll', check);
+      lockObserver.disconnect(); clear(); unsubscribe(); lenis?.off('scroll', check);
       window.removeEventListener('scroll', check);
       window.removeEventListener('wheel', wheel, true);
       window.removeEventListener('keydown',key);

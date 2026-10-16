@@ -104,12 +104,14 @@
   }
 
   .card {
-    min-height: 68svh;
+    min-height: clamp(320px, 54svh, 440px);
     border-radius: 14px;
   }
 
+  .third { min-height: clamp(280px, 44svh, 360px); }
+
   .copy {
-    padding: 28px;
+    padding: 24px;
   }
 
   .copy h3 { min-height: 0; }

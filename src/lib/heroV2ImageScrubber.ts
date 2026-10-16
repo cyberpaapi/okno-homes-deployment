@@ -26,7 +26,8 @@ export function createHeroV2ImageScrubber(canvas: HTMLCanvasElement, signal: Abo
   const images = new Map<number, ImageBitmap>();
   const decoding = new Map<number, Promise<ImageBitmap>>();
   let target = 0, drawn = -1, direction = 1, disposed = false, failed = false;
-  let busy = false, warming = false, raf = 0, received = 0, draws = 0;
+  const foreground = new Set<number>();
+  let warming = false, raf = 0, received = 0, draws = 0;
   let requestedAt = performance.now(), maxLatency = 0;
   const chunkAt = () => Math.floor(film.frames[target][0] / CHUNK);
   const distance = (id: number) => Math.abs(id-chunkAt()) + ((id-chunkAt())*direction < 0 ? .5 : 0);
@@ -106,7 +107,7 @@ export function createHeroV2ImageScrubber(canvas: HTMLCanvasElement, signal: Abo
   };
   const queue = () => { if (!disposed && !raf && !document.hidden) raf = requestAnimationFrame(draw); };
   async function warm() {
-    if (warming || disposed || failed || document.hidden) return;
+    if (warming || disposed || failed || document.hidden || target === 0) return;
     warming = true;
     const origin = target, heading = direction;
     try {
@@ -124,8 +125,8 @@ export function createHeroV2ImageScrubber(canvas: HTMLCanvasElement, signal: Abo
   }
   async function pump() {
     queue();
-    if (busy || disposed || failed || document.hidden || images.has(target)) return;
-    busy = true; const index = target; let retry = false;
+    if (foreground.has(target) || disposed || failed || document.hidden || images.has(target)) return;
+    const index = target; foreground.add(index); let retry = false;
     try { await image(index); }
     catch (error) {
       if (error instanceof Error && error.name === 'AbortError') retry = true;
@@ -135,7 +136,7 @@ export function createHeroV2ImageScrubber(canvas: HTMLCanvasElement, signal: Abo
         fail();
       }
     } finally {
-      busy = false; queue();
+      foreground.delete(index); queue();
       if (!disposed && !failed && (retry || index !== target)) void pump();
     }
   }
@@ -147,7 +148,7 @@ export function createHeroV2ImageScrubber(canvas: HTMLCanvasElement, signal: Abo
     for (const [id,request] of requests) {
       if (!anchorChunks.has(id) && Math.abs(id-chunkAt()) > 4) { request.abort.abort(); requests.delete(id); }
     }
-    for (let step=0;step<=2;step++) {
+    for (let step=0;step <= (target === 0 ? 0 : 1);step++) {
       const id = chunkAt()+direction*step;
       if (id >= 0 && id*CHUNK < film.bytes) void bytes(id).catch(() => {});
     }
@@ -166,6 +167,8 @@ export function createHeroV2ImageScrubber(canvas: HTMLCanvasElement, signal: Abo
   document.addEventListener('visibilitychange',visibility);
   canvas.dataset.scrubMode = 'scroll'; setTime(0);
   // Reserve the ending within the same cache cap for immediate fast-scroll handoff.
-  for (const index of anchors) if (index !== 0) void image(index).catch(() => {});
+  void image(0).then(() => {
+    for (const index of anchors) if (index !== 0) void image(index).catch(() => {});
+  }).catch(() => {});
   return { setTime, seek: setTime, dispose };
 }

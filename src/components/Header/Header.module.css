@@ -5,7 +5,7 @@
 .logo { display: block; width: 126px; line-height: 0; }
 .logo img { display: block; width: 100%; height: auto; }
 .navigation { position: absolute; left: 50%; display: flex; align-items: center; gap: clamp(16px, 1.8vw, 28px); transform: translateX(-50%); font-size: var(--type-size-caption, 11px); }
-.rolling { display: inline-block; color: #eee8d3bc; text-decoration: none; white-space: nowrap; }
+.rolling { display: inline-flex; align-items: center; min-height: 24px; color: #eee8d3bc; text-decoration: none; white-space: nowrap; }
 .rolling[aria-current="page"], .rolling:hover, .rolling:focus-visible { color: #f4f0e7; }
 .header[data-tone="light"] .rolling { color: #53564a; }
 .header[data-tone="light"] .rolling[aria-current="page"], .header[data-tone="light"] .rolling:hover, .header[data-tone="light"] .rolling:focus-visible { color: #806a42; }
@@ -25,7 +25,7 @@
 .menuLinks { position: absolute; inset: 72px 24px 24px; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: clamp(13px, 2.2svh, 22px); overflow-y: auto; overscroll-behavior: contain; color: #f1e7da; font-size: var(--type-size-subheading, clamp(18px, 2.5svh, 24px)); scrollbar-width: none; }
 .menuLinks::-webkit-scrollbar { display: none; }
 .menuLinks > div { flex: 0 0 auto; }
-.menuLinks .rolling { display: block; width: 100%; padding-block: 2px; line-height: 1.15; }
+.menuLinks .rolling { display: flex; min-height: 44px; width: 100%; padding-block: 2px; line-height: 1.15; }
 .menuLinks .letters { display: flex; flex-wrap: wrap; }
 .menuLinks[aria-hidden="true"] { visibility: hidden; }
 .menuLinks a[aria-current="page"] { color: #dccb98; }

@@ -5,3 +5,6 @@ button.marker{padding:0;border:0;background:none}.locationNote{position:absolute
 @media(max-width:760px){.locationNote{right:25px;top:25px;width:175px}}
 
 .poster{filter:brightness(.42) sepia(.15)}.pin{background:#d2ae89;box-shadow:0 0 0 3px #d2ae8912}.label{color:#e7e2d5;background:#17231be8;border:1px solid #899d792b}.locationNote{background:#19251c;border-color:#9aab7840}.locationNote span{color:#bdc5b0}
+
+/* Enlarge the hit area without moving the authored marker or its label. */
+.marker::before{content:"";position:absolute;inset:-12px;pointer-events:auto}

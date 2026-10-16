@@ -1,5 +1,5 @@
-import { fireEvent, render, screen, within, waitFor } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { act, fireEvent, render, screen, within, waitFor } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { signatureAsset } from "@/data/configurator/signatureAssets";
 import SuppliedConfigurator from "./SuppliedConfigurator";
 
@@ -8,6 +8,7 @@ vi.mock("./cabinScene", () => ({ createScene: (_mount: HTMLElement, ready: () =>
 vi.mock("next/navigation", () => ({ usePathname: () => "/models/signature/forza/configure" }));
 
 describe("supplied cabin customer controls", () => {
+  afterEach(() => { vi.useRealTimers(); });
   beforeEach(() => {
     vi.clearAllMocks();
     vi.unstubAllGlobals();
@@ -81,6 +82,27 @@ describe("supplied cabin customer controls", () => {
     expect(scene.glb).not.toHaveBeenCalled();
     expect(screen.getByRole("button", { name: /Golden Oak/ })).toBeDisabled();
     expect(scene.dispose).toHaveBeenCalledOnce();
+  });
+
+  it("retries a failed house load without leaving an abandoned scene", async () => {
+    const fetchAsset=vi.fn().mockResolvedValue({ok:false}); vi.stubGlobal("fetch",fetchAsset);
+    render(<SuppliedConfigurator asset={signatureAsset("forza")} />);
+    expect(await screen.findByRole("alert")).toHaveTextContent("could not load");
+    fetchAsset.mockResolvedValue({ok:true,blob:async()=>new Blob(["house"])});
+    fireEvent.click(screen.getByRole("button",{name:"Try again"}));
+    await waitFor(()=>expect(screen.getByRole("button",{name:/Golden Oak/})).toBeEnabled());
+    expect(screen.queryByRole("alert")).toBeNull(); expect(scene.dispose).toHaveBeenCalledOnce();
+  });
+  it("aborts a stalled model request and offers recovery rather than an endless loader", async () => {
+    vi.useFakeTimers();
+    vi.stubGlobal("fetch",vi.fn((url,options)=>String(url).startsWith("/configurator/models/")
+      ? new Promise((_resolve,reject)=>options.signal.addEventListener("abort",()=>reject(new DOMException("Aborted","AbortError"))))
+      : Promise.resolve({ok:false})));
+    render(<SuppliedConfigurator asset={signatureAsset("forza")} />);
+    await act(async()=>{await vi.advanceTimersByTimeAsync(45000);});
+    expect(screen.getByRole("alert")).toHaveTextContent("taking too long");
+    expect(screen.getByRole("button",{name:"Try again"})).toBeEnabled();
+    expect(screen.getByRole("button",{name:/Golden Oak/})).toBeDisabled();
   });
 
 });

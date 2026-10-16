@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Box, Check, ChevronDown, Grid2X2, House, Maximize, Moon, PanelLeft, PanelRightClose, PanelRightOpen, PanelTop, RotateCw, Sun, View } from "lucide-react";
+import { SubtleButton } from "@/components/ui/SubtleAction";
 import Header from "@/components/Header/Header";
 import type { SignatureAsset } from "@/data/configurator/signatureAssets";
 import type { MaterialApplicationId } from "@/data/configurator";
@@ -33,6 +34,7 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
   const api = useRef<SceneApi | null>(null);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState("");
+  const [attempt, setAttempt] = useState(0);
   const [light, setLight] = useState<"day" | "golden">("day");
   const [background, setBackground] = useState<Background>("meadow");
   const [active, setActive] = useState<MaterialApplicationId>("external-wall");
@@ -50,7 +52,10 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
     let scene: SceneApi | undefined;
     let cancelled = false;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let timedOut = false;
+    const timeout = window.setTimeout(() => { timedOut = true; controller.abort(); }, 45000);
     const start = async () => {
+      setLight("day"); setBackground("meadow"); setCamera("hero");
       setReady(false); setError(""); setSelected({}); setInteriorPreview("");
       try {
         scene = createScene(mount.current!, () => {}, () => {}, undefined, Boolean(asset));
@@ -70,13 +75,13 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
       } catch {
         if (!cancelled) {
           scene?.dispose(); scene = undefined; api.current = null;
-          setError("The 3D preview could not load. Check your connection and WebGL support, then reload.");
+          setError(timedOut ? "The house is taking too long to load. Check your connection, then try again." : "The 3D preview could not load. Check your connection and WebGL support, then try again.");
         }
-      }
+      } finally { window.clearTimeout(timeout); }
     };
     void start();
-    return () => { cancelled = true; controller.abort(); scene?.dispose(); api.current = null; };
-  }, [asset]);
+    return () => { cancelled = true; window.clearTimeout(timeout); controller.abort(); scene?.dispose(); api.current = null; };
+  }, [asset, attempt]);
 
   useEffect(() => {
     const directions = { ArrowUp: "forward", ArrowDown: "backward", ArrowLeft: "left", ArrowRight: "right" } as const;
@@ -103,7 +108,7 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
     <a className={styles.skipLink} href={finishesOpen ? "#finishes" : "#viewer-controls"}>Skip to controls</a>
     <div className="environment" /><div ref={mount} className="stage" /><div className="vignette" />
     {!ready && !error && <div className={styles.loader} role="status"><span>Preparing {asset?.name ?? "Studio Cabin"}</span></div>}
-    {error && <div className={styles.error} role="alert">{error}</div>}
+    {error && <div className={styles.error} role="alert"><p>{error}</p><SubtleButton tone="paper" onClick={() => setAttempt(value => value + 1)}>Try again</SubtleButton></div>}
 
     <div className={styles.siteHeader}><Header tone="dark" currentHref="/models" /></div>
 

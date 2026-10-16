@@ -59,6 +59,25 @@ describe('V2 lossless scroll-only delivery', () => {
     expect(mocks.decode).not.toHaveBeenCalled(); expect(ready).toHaveBeenCalledOnce(); expect(failed).not.toHaveBeenCalled();
     abort.abort(); expect(mocks.close).toHaveBeenCalled();
   });
+  it('does not serialize a current pose behind a slow obsolete range', async () => {
+    const mocks=setup(),canvas=document.createElement('canvas'),abort=new AbortController();
+    const original=mocks.fetch.getMockImplementation()!;
+    let stalled=false;
+    const slowOffset=film.frames[96][0];
+    const slowPart=film.parts[Math.floor(slowOffset/film.partBytes)].source;
+    const slowStart=Math.floor((slowOffset%film.partBytes)/(512*1024))*512*1024;
+    mocks.fetch.mockImplementation(async(url,options)=>{
+      const start=Number(options.headers.Range.match(/\d+/)![0]);
+      if(stalled && url===slowPart && start===slowStart) return new Promise<never>(()=>{});
+      return original(url,options);
+    });
+    const scrubber=createHeroV2ImageScrubber(canvas,abort.signal,vi.fn(),vi.fn(),vi.fn())!;
+    await vi.advanceTimersByTimeAsync(40);
+    stalled=true; scrubber.setTime(4); await vi.advanceTimersByTimeAsync(10);
+    scrubber.setTime(12); await vi.advanceTimersByTimeAsync(80);
+    expect(canvas.dataset.scrubPresentedTime).toBe('12.0000'); abort.abort();
+  });
+
   it('rejects broken range delivery and ignores decodes completing after disposal', async () => {
     const mocks = setup(), canvas = document.createElement('canvas'), abort = new AbortController();
     let resolve!: (bitmap: { close: typeof mocks.close }) => void;

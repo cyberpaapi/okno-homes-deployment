@@ -12,7 +12,7 @@ beforeEach(() => {
   vi.stubGlobal('innerHeight', 1000);
   vi.spyOn(window, 'scrollTo').mockImplementation((...args) => { y = Number(args[1]); });
 });
-afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
+afterEach(() => { document.body.style.overflow = ''; vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 function setup() {
   const hero = document.createElement('section');
   Object.defineProperty(hero, 'offsetHeight', { value: 2000 });
@@ -42,6 +42,17 @@ describe('Hero movie handoff', () => {
     await act(async () => { view.shown.set(1); await vi.advanceTimersByTimeAsync(200); });
     expect(y).toBe(1500); expect(view.hero.dataset.filmExitPending).toBeUndefined();
     expect(view.fallback).not.toHaveBeenCalled(); view.unmount();
+  });
+  it('defers a pending ending handoff until an open menu closes', async () => {
+    const view=setup();
+    act(()=>{y=1300;window.dispatchEvent(new Event('scroll'));});
+    await act(async()=>{document.body.style.overflow='hidden';await vi.advanceTimersByTimeAsync(2250);});
+    expect(y).toBe(950);
+    const wheel=new WheelEvent('wheel',{deltaY:500,cancelable:true});
+    act(()=>window.dispatchEvent(wheel)); expect(wheel.defaultPrevented).toBe(false);
+    await act(async()=>{document.body.style.overflow='';});
+    await act(async()=>{await vi.advanceTimersByTimeAsync(200);});
+    expect(y).toBe(1300);view.unmount();
   });
   it('allows immediate reverse input and does not rewind a lower-section reload', async () => {
     const view = setup();

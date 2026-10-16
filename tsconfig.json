@@ -38,7 +38,11 @@
     ".next-release-mobile-2026-10-16/types/**/*.ts",
     ".next-release-mobile-2026-10-16/dev/types/**/*.ts",
     ".next-release-loading-2026-10-16/types/**/*.ts",
-    ".next-release-loading-2026-10-16/dev/types/**/*.ts"
+    ".next-release-loading-2026-10-16/dev/types/**/*.ts",
+    ".next-release-review-2026-10-16/types/**/*.ts",
+    ".next-release-review-2026-10-16/dev/types/**/*.ts",
+    ".next-release-review-final-2026-10-16/types/**/*.ts",
+    ".next-release-review-final-2026-10-16/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

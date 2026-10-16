@@ -1,3 +1,4 @@
+import { BlobNotFoundError } from "@vercel/blob";
 import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import path from "node:path";
@@ -32,7 +33,9 @@ export async function GET(request: Request, context: { params: Promise<{ name: s
       "Cache-Control": "public, max-age=31536000, immutable",
       ...(match ? { "Content-Range": `bytes ${start}-${end}/${info.size}` } : {}),
     } });
-  } catch {
-    return new Response(null, { status: 404 });
+  } catch (error) {
+    if (error instanceof BlobNotFoundError || (error as NodeJS.ErrnoException).code === "ENOENT") return new Response(null, { status: 404 });
+    // An outage is temporary; do not turn valid published media into a cached 404.
+    return new Response(null, { status: 503, headers: { "Cache-Control": "no-store", "Retry-After": "60" } });
   }
 }

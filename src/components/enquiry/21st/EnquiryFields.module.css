@@ -36,7 +36,7 @@
 }
 
 .control::placeholder {
-  color: #9a958b;
+  color: #6d685f;
   opacity: 1;
 }
 
@@ -88,4 +88,9 @@
   .control {
     transition: none;
   }
+}
+
+/* Keep phone focus from triggering browser zoom while preserving owner sizes. */
+@media (max-width: 700px), (pointer: coarse) {
+  .control { font-size: max(16px, var(--type-size-body, 15px)); }
 }

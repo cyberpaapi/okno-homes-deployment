@@ -86,6 +86,8 @@ Reviewed geometry derivatives are recorded by URL, byte size, SHA-256, dimension
 
 Only catalogue-valid slugs resolve. Models without a reviewed dedicated derivative retain the labelled Studio Cabin fallback rather than substituting another named house without explanation. Material choices do not change the identity of the geometry. The asset manifest is `src/data/configurator/signatureAssetManifest.json`.
 
+House-download requests time out after 45 seconds and offer Try again without requiring a page reload. Failed and abandoned scenes release their resources. Short phone and landscape layouts keep camera, lighting and finish controls inside the viewport; the material list retains its own scrolling.
+
 The configurator is a visual exploration tool. It does not provide an engineering certification, building approval, checkout, quotation or saved customer account. Configurator-specific admin navigation remains deferred while established content IDs and existing stored data are retained.
 
 ## Bespoke
@@ -98,9 +100,9 @@ The phone OKNO portal uses a portrait SVG coordinate space and centred transform
 
 ## Hospitality
 
-The opening retains the Silk surface and architectural photography. The existing bento communicates estate capabilities using its approved source geometry and content.
+The opening retains the Silk surface and architectural photography. The existing bento communicates estate capabilities using its approved source geometry and content. Phone capability cards use shorter, differentiated heights so the five items do not each consume most of a screen.
 
-Selected work uses an editorial photographic sequence: a full-width lead, alternating image widths on desktop and full-width photographs on phones, each with its caption below. It avoids repeating the bento's overlaid-card treatment. Selecting a photograph opens the existing fullscreen viewer with named previous/next/close controls, keyboard navigation, background inertness and focus restoration. Single-item selections omit unnecessary previous/next controls.
+Selected work uses an editorial photographic sequence: a full-width lead, alternating image widths on desktop and full-width photographs on phones, each with its caption below. It avoids repeating the bento's overlaid-card treatment. Selecting a photograph opens the existing fullscreen viewer with named previous/next/close controls, keyboard navigation, background inertness and focus restoration. Single-item selections omit unnecessary previous/next controls. The viewer retains named controls without a decorative slide counter.
 
 The delivery programme and hospitality enquiry retain their existing content and linkage. The studio controls the selected work through linked project records.
 
@@ -124,7 +126,7 @@ Duplicate loop cards retain visible arrow controls but remove duplicate actions 
 
 About retains the approved composition. Phone opening, manifesto and chapter heading sizes are reduced; body text, desktop sizes and optional CMS numeric overrides remain available.
 
-Enquiry retains its established layout and behaviour. The three intent tabs and validation remain included. The current form prevents submission in the browser and has no configured message-delivery API, CRM, email sender or payment connection. A visual submit control must not be interpreted as evidence that an enquiry was delivered. Connecting delivery is a separate integration.
+Enquiry retains its established layout and behaviour. Phone/touch form controls use at least 16px text to avoid browser focus zoom, and placeholder contrast is increased. The owner explicitly deferred enquiry delivery during this review. The three intent tabs and their fields remain included. The current form prevents submission in the browser and has no configured message-delivery API, CRM, email sender or payment connection. A visual submit control must not be interpreted as evidence that an enquiry was delivered. Connecting delivery is a separate integration.
 
 ## Content studio
 
@@ -164,7 +166,7 @@ The application uses Node.js 22, Next.js 16.4.0, React 19, TypeScript, CSS Modul
 | --- | --- |
 | `/api/site-status` | Runtime identity, mode and configurator identity metadata. |
 | `/api/site-content` | Published scalar/collection snapshot; supports revision-aware unchanged responses. No drafts or credentials. |
-| `/api/site-media/[name]` | Validated content-addressed published media, including supported byte-range requests. |
+| `/api/site-media/[name]` | Validated content-addressed media, including supported byte-range requests. Missing files return 404; temporary storage failures return uncached 503 with a retry hint. |
 | `/api/admin/content` | Authenticated snapshot, draft and publication operations with revision/conflict validation. |
 | `/api/admin/upload` | Authenticated image/video preparation workflow. |
 | `/api/admin/upload/blob` | Authenticated private direct-upload authorization/finalization. |
@@ -180,7 +182,7 @@ Phone compositions use normal document flow where a desktop sticky effect would 
 
 Motion respects reduced-motion preferences and data-saving fallbacks where supported. Decorative cursor effects disable for coarse/no-hover input and reduced motion. Animation/decoder loops stop or release resources when hidden, offscreen or unmounted. Geographic functionality is preserved while reducing rendering work.
 
-Caching is content-aware: fingerprinted frame/model/media paths are immutable; changing bytes requires a different fingerprint. Range-aware frame fetches avoid downloading an entire source before presenting a later pose. Current-target work replaces stale work; a slow older frame does not serialize a newer scroll target. V1 starts with 256 KiB ranges and defers speculative forward poses until scrolling starts, inside the same 16 MiB compressed-cache cap. Public-content polling is shared and skips hidden tabs.
+Caching is content-aware: fingerprinted frame/model/media paths are immutable; changing bytes requires a different fingerprint. Range-aware frame fetches avoid downloading an entire source before presenting a later pose. Current-target work replaces stale work; a slow older frame does not serialize a newer scroll target. V1 starts with 256 KiB ranges and defers speculative forward poses until scrolling starts, inside the same 16 MiB compressed-cache cap. Public-content polling is shared and skips hidden tabs. Both hero renderers prioritize current target requests independently of older slow frames. Shared homepage menus stop smooth-scroll inertia as well as native scrolling; their inner navigation remains scrollable, and pending film handoffs resume only after the modal closes.
 
 Chromium viewport checks demonstrate layout and selected browser behaviour. They do not certify physical-phone frame rate, Safari touch/keyboard behaviour, every network, or real-user Core Web Vitals. Native controls provide recovery where autoplay is blocked.
 

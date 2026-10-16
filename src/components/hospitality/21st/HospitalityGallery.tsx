@@ -120,7 +120,6 @@ export function HospitalityGallery({ projects }: { projects: HospitalityProject[
             <button className={styles.close} type="button" onClick={() => setSelectedId(null)} aria-label="Close photograph">Close</button>
             <div className={styles.navigation} onClick={(event) => event.stopPropagation()}>
               {projects.length > 1 && <button type="button" onClick={() => step(-1)} aria-label="Previous project"><Arrow direction="previous" /></button>}
-              <span>{String(selected + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
               {projects.length > 1 && <button type="button" onClick={() => step(1)} aria-label="Next project"><Arrow /></button>}
             </div>
           </div>

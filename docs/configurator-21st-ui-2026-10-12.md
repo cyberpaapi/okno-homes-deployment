@@ -36,3 +36,8 @@ Complete locally. The supplied page now uses the actual shared header, controlle
 - Current local Configure URL returned HTTP 200. The existing 3134 website process is reused and left running. No dependency/package change, second website, admin write, deployment or remote operation was needed.
 
 The earlier `supplied.css` stays preserved beside the input source; the active page uses scoped `Configurator.module.css`/21st control styles and the retained backdrop-only `environment.css`. No shared/global website design was rewritten.
+
+
+## Loading recovery and short-screen controls — 16 October 2026
+
+House fetches now abort after 45 seconds, dispose a failed scene and offer a local retry. The retry reuses the existing [Subtle Button](https://21st.dev/@jatin-yadav05/components/subtle-button), author `jatin-yadav05`, component/demo `3373`; actual archived source `docs/21st-source/revision-3373.tsx.txt` was read. The shared native-button adaptation and paper tone retain its border, sheen and dot; the action only restarts the selected house load. No replacement catalogue component or 3D/media asset was introduced. Small-phone and short-landscape layouts keep the bottom controls within the visible viewport and use a compact model heading/material list. Loading failure, retry and stalled-request cancellation have regression coverage.

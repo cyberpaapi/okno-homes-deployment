@@ -17,6 +17,7 @@ import { useHeroReloadPosition } from './useHeroReloadPosition';
 import { useHeroFilmExit } from './useHeroFilmExit';
 import { useSiteContent } from '@/lib/useSiteContent';
 import { homeVariantAccessibleTitle } from '@/lib/homeVariantContent';
+import { useLenisDocumentLock } from '@/lib/useLenisDocumentLock';
 import { heroWheelDelta } from '@/lib/heroWheelSensitivity';
 import { pageImageLoader } from '@/lib/pageImageLoader';
 import type { ContentItem } from '@/lib/contentCollections';
@@ -74,6 +75,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     return true;
   }, []);
   useHeroReloadPosition(sectionRef);
+  useLenisDocumentLock();
   const viewportRef = useRef<HTMLDivElement>(null);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const introFinished = useRef(false);
@@ -256,5 +258,5 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
 
   // Smooth Scroll, 21st.dev 2836. Touch and reduced-motion keep native scroll.
   // A shorter document tail keeps the Process spring responsive on reversal.
-  return reducedMotion ? page : <ReactLenis root options={{ lerp: .18, wheelMultiplier: 1, virtualScroll: adjustHeroWheel }}>{page}</ReactLenis>;
+  return reducedMotion ? page : <ReactLenis root options={{ lerp: .18, wheelMultiplier: 1, virtualScroll: adjustHeroWheel, prevent: node => !!node.closest('[role="dialog"], [data-lenis-prevent]') }}>{page}</ReactLenis>;
 }
