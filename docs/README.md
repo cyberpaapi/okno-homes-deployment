@@ -1,5 +1,7 @@
 # Final Showcase documentation map
 
+Current loading and reliability audit: [fresh visits, supervised local preview, delivery checks and recovery fixes](reliability-review-2026-10-18.md).
+
 Product and operating reference: [complete project specification](../PROJECT-SPECIFICATION.md).
 
 Current mapping repair: [visible exterior/interior faces, glazing, artifact fixes and verification](configurator-mapping-2026-10-16.md).

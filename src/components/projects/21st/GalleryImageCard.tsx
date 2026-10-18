@@ -4,6 +4,7 @@
 // unlumen / Scroll Reveal Image, demo 24466 supplies the scroll-linked image zoom.
 import { useRef } from 'react';
 import Image from 'next/image';
+import { pageImageLoader } from '@/lib/pageImageLoader';
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import type { AtlasProject } from '@/data/projectAtlas';
 import GalleryLink from '../GalleryLink';
@@ -20,7 +21,7 @@ export function GalleryImageCard({project}:{project:AtlasProject}) {
   const sizes = `(max-width:600px) ${Math.ceil(88 * crop)}vw, (max-width:900px) ${Math.ceil(42 * crop)}vw, ${Math.ceil(29 * crop)}vw`;
   return <GalleryLink project={project} className={styles.card} ariaLabel={`View ${project.title} project`}>
     <div ref={ref} className={styles.image}>
-      <motion.div className={styles.imageMotion} style={{scale:reduced?1:scale}}><Image src={image.src} alt={image.alt || project.title} fill sizes={sizes} quality={90}/></motion.div>
+      <motion.div className={styles.imageMotion} style={{scale:reduced?1:scale}}><Image loader={pageImageLoader} src={image.src} alt={image.alt || project.title} fill sizes={sizes} quality={90}/></motion.div>
       <div className={styles.cardShade} aria-hidden="true"/>
       <div className={styles.overlay}><h2>{project.title}</h2><span aria-hidden="true">↗</span></div>
     </div>

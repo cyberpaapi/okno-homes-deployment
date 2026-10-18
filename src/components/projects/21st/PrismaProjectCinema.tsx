@@ -2,6 +2,7 @@
 // rahil1202 / PrismaHero, 21st.dev demo 12200: full-bleed footage and low-set kinetic typography.
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { pageImageLoader } from '@/lib/pageImageLoader';
 import { AnimatePresence, motion, useInView, useIsPresent, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
 import { atlasProjects as defaultProjects, type AtlasProject } from '@/data/projectAtlas';
 import { useProjectsContent, useProjectPreview } from '@/lib/useProjectContent';
@@ -28,7 +29,7 @@ function ProjectFootage({ project, paused, reset, onEnded, onPlaying, onFailed, 
     return()=>{active=false;media.pause();document.removeEventListener('visibilitychange',sync);};
   },[present,inView,paused,reduced,seen,reset,onFailed]);
   return <div ref={root} className={styles.footage}>
-    <Image src={project.previewPoster || project.image.src} alt={project.image.alt} fill sizes="100vw" />
+    <Image loader={pageImageLoader} src={project.previewPoster || project.image.src} alt={project.image.alt} fill sizes="100vw" />
     {preview&&seen&&!reduced&&<video ref={video} src={preview} muted playsInline preload="auto" onTimeUpdate={event=>{
       if(!present)return;
       const media=event.currentTarget;

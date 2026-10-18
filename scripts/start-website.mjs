@@ -13,7 +13,7 @@ const requestedPort = process.argv.find(argument => argument.startsWith("--port=
 const port = Number(requestedPort);
 if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error("OKNO_PORT must be an integer between 1024 and 65535.");
 const origin = `http://127.0.0.1:${port}`;
-const routes = ["/", "/hero-v1", "/hero-v2", "/models", "/models/signature", "/models/bespoke", "/projects", "/hospitality", "/process", "/sustainability", "/journal", "/about", "/enquiry", "/models/signature/tengo/configure", "/models/signature/kray/configure"];
+const routes = ["/", "/hero-v1", "/hero-v2", "/models", "/models/signature", "/models/bespoke", "/projects", "/hospitality", "/process", "/sustainability", "/journal", "/about", "/enquiry", "/models/signature/forza/configure", "/models/signature/tengo/configure", "/models/signature/kray/configure", "/models/signature/tish/configure"];
 const delay = milliseconds => new Promise(done => setTimeout(done, milliseconds));
 // Cold Turbopack routes can spend more than a minute compiling on this checkout.
 // Production routes should keep the tighter health-check deadline.
@@ -51,7 +51,7 @@ async function verify() {
     if (!response.ok) throw new Error(`Stylesheet ${url} returned HTTP ${response.status}. Rebuild and restart the server on port ${port}.`);
   }
   console.log(`Ready ${stylesheets.size} stylesheet assets`);
-  console.log(`\nOKNO website: ${origin}\nAll editorial pages and the published Tengo/Kray configurators run in this one application.`);
+  console.log(`\nOKNO website: ${origin}\nAll editorial pages and the published customer configurators run in this one application.`);
 }
 
 const existing = await identity();
@@ -63,7 +63,7 @@ if (existing) {
 } else {
   if (!await available()) throw new Error(`Port ${port} belongs to another or older server. It has not been stopped. Stop its owning terminal before restarting the Final Showcase on canonical port 3134. Override --port only when a second simultaneous server is intentionally required.`);
   if (!existsSync(resolve(root, "node_modules/next/dist/bin/next"))) throw new Error("Dependencies are missing. Run npm ci in the Final Showcase folder.");
-  if (production && !existsSync(resolve(root, ".next/BUILD_ID"))) throw new Error("Production build is missing. Run npm run build, then npm run website:production.");
+  if (production && !existsSync(resolve(root, process.env.OKNO_BUILD_DIR || ".next", "BUILD_ID"))) throw new Error("Production build is missing in the selected build directory. Run npm run build with the same OKNO_BUILD_DIR, then npm run website:production.");
   const logDirectory = resolve(root, ".local-preview");
   mkdirSync(logDirectory, { recursive: true });
   const logPath = resolve(logDirectory, `website-${port}.log`);

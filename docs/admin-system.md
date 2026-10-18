@@ -1,5 +1,11 @@
 # Admin system — active implementation record
 
+## Loading recovery review — 18 October 2026
+
+The public content subscriber now gives each refresh an eight-second deadline and aborts it when its last subscriber leaves. A stalled request can no longer permanently block later refreshes; source/public content remains visible during recovery. Existing preview-origin checks and the fifteen-second publication polling interval are preserved. Regression coverage verifies timeout/retry and unsubscribe/reconnect behavior.
+
+Production owner-key read was rechecked against the current READY release: `/api/admin/content` returns **503**, reporting that the existing Blob store is unavailable. Public `/api/site-content` still returns published-only content. No cloud draft, publication, upload, storage, credential or billing state was changed. The [loading/reliability review](reliability-review-2026-10-18.md) separates this remaining cloud editing block from public-site delivery and local changes.
+
 ## Whole-site review — 16 October 2026
 
 The owner resumed an extensive bug, layout and access-boundary review. All 15 page-ordered panels opened at the fixed local gateway with one correctly mapped preview frame, no alert errors and no horizontal overflow. This was signed-out shell/mapping inspection, not production draft/save/upload/publish acceptance. Authenticated local content reads remain revision 38 with zero drafts; no owner content was changed. Public APIs expose revision/published fields/published collections only. Unauthenticated protected reads/writes/uploads/geocoding are rejected; the local cloud-upload endpoint is intentionally disabled.

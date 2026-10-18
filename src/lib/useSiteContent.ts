@@ -11,24 +11,28 @@ let snapshot = initial;
 let preview: Record<string, string> = {};
 let previewCollections: ContentCollections = {};
 let interval: ReturnType<typeof setInterval> | null = null;
-let fetching = false;
+let pending: AbortController | null = null;
 const listeners = new Set<() => void>();
 
 async function refresh() {
-  if (fetching || typeof document === "undefined" || document.hidden) return;
-  fetching = true;
+  if (pending || typeof document === "undefined" || document.hidden || !listeners.size) return;
+  const request = new AbortController();
+  pending = request;
+  const deadline = setTimeout(() => request.abort(), 8000);
   try {
-    const response = await fetch(`/api/site-content?since=${snapshot.revision}`, { cache: "no-store" });
+    const response = await fetch(`/api/site-content?since=${snapshot.revision}`, { cache: "no-store", signal: request.signal });
     if (response.status === 204) return;
     if (!response.ok) return;
     const next = await response.json() as PublicSnapshot;
+    if (request.signal.aborted) return;
     if (next.revision === snapshot.revision) return;
     snapshot = next;
     listeners.forEach(listener => listener());
   } catch {
     // Existing source values remain visible when the local CMS is unavailable.
   } finally {
-    fetching = false;
+    clearTimeout(deadline);
+    if (pending === request) pending = null;
   }
 }
 
@@ -46,6 +50,8 @@ function subscribe(listener: () => void) {
     if (!listeners.size && interval) {
       clearInterval(interval);
       interval = null;
+      pending?.abort();
+      pending = null;
       document.removeEventListener("visibilitychange", refresh);
       window.removeEventListener("message", receivePreview);
     }

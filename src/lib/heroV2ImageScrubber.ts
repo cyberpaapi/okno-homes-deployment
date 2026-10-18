@@ -1,5 +1,6 @@
 import desktopFilm from '../../config/hero-v2-frames.json';
 import mobileFilm from '../../config/hero-v2-mobile-frames.json';
+import { fetchFrameRange } from './fetchFrameRange';
 
 export const heroV2ImageDuration = desktopFilm.sourceFrames / desktopFilm.fps;
 
@@ -41,9 +42,7 @@ export function createHeroV2ImageScrubber(canvas: HTMLCanvasElement, signal: Abo
     const part = film.parts[Math.floor(globalStart / film.partBytes)];
     const start = globalStart % film.partBytes, end = Math.min(part.bytes-1, start+CHUNK-1);
     const promise = (async () => {
-      const response = await fetch(part.source, { signal: abort.signal, cache: 'force-cache', headers: { Range: `bytes=${start}-${end}` } });
-      if (response.status !== 206 || response.headers.get('content-range') !== `bytes ${start}-${end}/${part.bytes}`) throw new Error('Frame range differs from index');
-      const data = new Uint8Array(await response.arrayBuffer());
+      const data = await fetchFrameRange(part.source, start, end, part.bytes, abort.signal);
       if (disposed || data.length !== end-start+1) throw new Error('Incomplete frame range');
       received += data.length; chunks.set(id,data);
       while (chunks.size > MAX_CHUNKS) chunks.delete([...chunks.keys()].reduce((a,b) => distance(a) > distance(b) ? a : b));
@@ -158,9 +157,10 @@ export function createHeroV2ImageScrubber(canvas: HTMLCanvasElement, signal: Abo
   const dispose = () => {
     if (disposed) return;
     disposed = true; cancelAnimationFrame(raf);
+    signal.removeEventListener('abort',dispose);
     for (const request of requests.values()) request.abort.abort();
     for (const bitmap of images.values()) bitmap.close();
-    chunks.clear(); images.clear();
+    chunks.clear(); images.clear(); requests.clear(); decoding.clear(); foreground.clear();
     document.removeEventListener('visibilitychange',visibility);
   };
   signal.addEventListener('abort',dispose,{once:true});
