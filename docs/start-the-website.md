@@ -6,7 +6,7 @@ Run from `OKNO-homes-final-showcase-2026-09-23`:
 npm run website
 ```
 
-The one application serves Hero V1, Hero V2, Models/Signature/Bespoke, Projects, Hospitality, Process, Sustainability, Journal, About, Enquiry and the published Tengo/Kray customer configurators at the fixed Final Showcase address **http://127.0.0.1:3134**. No separate customer-configurator server is required. All recovered customer implementation and assets are physically inside this final folder.
+The one application serves Hero V1, Hero V2, Models/Signature/Bespoke, Projects, Hospitality, Process, Sustainability, Journal, About, Enquiry and the published Forza/Tengo/Kray/Tish customer configurators at the fixed Final Showcase address **http://127.0.0.1:3134**. No separate customer-configurator server is required. All recovered customer implementation and assets are physically inside this final folder.
 
 The content admin has a separate fixed local address, **http://127.0.0.1:3140/admin**. Start it with `npm run admin`; its gateway reuses this same website process on 3134 instead of launching a duplicate Next.js server. `npm run admin:check` only checks an existing admin gateway. For admin-only requests, open the admin address, not the public website address. Both reserved ports are declared in `config/local-ports.json`.
 

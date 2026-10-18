@@ -10,7 +10,7 @@ The deployment is complete only after private repository, source SHA, READY stat
 
 ## Verified release
 
-Current package: source `7463faf7e9c501a11d45ba3277988dceb6491d51`, READY `dpl_GBJSzMRCvUqG8DEi9aNfaJwPyZJH`, canonical alias assigned on 16 October 2026. [The release ledger](release-ledger.md) records responsive/performance corrections, the included studio/configurator and live verification. [The complete project specification](../../PROJECT-SPECIFICATION.md) describes the product and operating boundaries. Cloud CMS writes remain blocked by the existing Blob feature block.
+Current package: source `e01c6a5cdd1a62772e830e4b50c650a1b59005f3`, READY `dpl_9tCdrYWojKfDW9MxYHak4kGAmrNX`, canonical alias assigned on 18 October 2026. [The release ledger](release-ledger.md) records responsive/performance corrections, the included studio/configurator and live verification. [The complete project specification](../../PROJECT-SPECIFICATION.md) describes the product and operating boundaries. Cloud CMS writes remain blocked by the existing Blob feature block.
 
 Earlier Hero V1 baseline:
 

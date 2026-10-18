@@ -11,7 +11,7 @@ Scope: diagnose reported lag on fresh local and Vercel visits, preserve the acce
 - [x] Reproduce failure paths and fix bounded resource/recovery issues.
 - [x] Run regression tests, lint, typecheck and an isolated low-memory production build.
 - [x] Confirm fixes against the local production build and record remaining limits.
-- [ ] Publish the owner-approved change and confirm the exact READY deployment and live checks.
+- [x] Publish the owner-approved change and confirm the exact READY deployment and live checks.
 
 Baseline: Vercel alias serves READY `dpl_GBJSzMRCvUqG8DEi9aNfaJwPyZJH`, application SHA `7463faf7e9c501a11d45ba3277988dceb6491d51`, region `bom1`. The connector returned a team-scope 403; the already-authenticated CLI successfully inspected this exact project and deployment. Local ports were unoccupied. Prior detached shell launches did not remain available; the production launcher now runs under the transient `okno-local-website.service` user unit, with restart-on-failure and the existing `.next-release-mobile-2026-10-16` build for baseline comparison. This does not change automatic login startup.
 
@@ -47,4 +47,8 @@ The production owner-key content read still returns **503**, explicitly reportin
 
 No three-day soak, physical phone, Safari, measured Lighthouse/Web Vitals or every possible admin/media/content combination is claimed. The deterministic stalled/corrupt request tests validate recovery logic; they are separate from live network measurements.
 
-The owner approved publication of these tested fixes during this review. Deployment and final live acceptance are in progress; the previous READY deployment above remains the verified production baseline until the new release is confirmed.
+The owner approved publication of these tested fixes during this review and authorized the saved PAT for the private GitHub push. Application source `e01c6a5cdd1a62772e830e4b50c650a1b59005f3` is published on `main`; production `dpl_9tCdrYWojKfDW9MxYHak4kGAmrNX` is **READY**, and the canonical alias resolves to that exact source in `bom1`. Cloud TypeScript/build and all 30 trace guards passed (largest 177.5 MiB).
+
+Post-release: 34 route/API checks, 125 referenced assets and 12 source-matching film ranges passed. All 42 new cover files matched local SHA-256 values and served immutable headers. The live Projects gallery loaded all seven covers, and the Next/Pause showcase controls worked. Mobile V1 reached 24.0000s, returned Home at offset zero without replaying the intro, and V2 reached 32.9167s with no film failure or overflow. The inspected release flows produced no console warnings/errors; the new deployment's available error-log query returned zero entries. The valid-key admin read still returned the documented Blob 503. This release did not mutate CMS content, credentials, storage or billing.
+
+Documentation-only follow-up records acceptance; the application deployment identity above is authoritative.

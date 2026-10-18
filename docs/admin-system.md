@@ -6,6 +6,8 @@ The public content subscriber now gives each refresh an eight-second deadline an
 
 Production owner-key read was rechecked against the current READY release: `/api/admin/content` returns **503**, reporting that the existing Blob store is unavailable. Public `/api/site-content` still returns published-only content. No cloud draft, publication, upload, storage, credential or billing state was changed. The [loading/reliability review](reliability-review-2026-10-18.md) separates this remaining cloud editing block from public-site delivery and local changes.
 
+Live public acceptance: application `e01c6a5cdd1a62772e830e4b50c650a1b59005f3`, READY `dpl_9tCdrYWojKfDW9MxYHak4kGAmrNX`, canonical alias assigned. All 34 public/API checks and 42 new cover integrity checks passed; production owner content still returns 503, while local revision 38 remains readable with zero drafts. No CMS write or credential change occurred.
+
 ## Whole-site review — 16 October 2026
 
 The owner resumed an extensive bug, layout and access-boundary review. All 15 page-ordered panels opened at the fixed local gateway with one correctly mapped preview frame, no alert errors and no horizontal overflow. This was signed-out shell/mapping inspection, not production draft/save/upload/publish acceptance. Authenticated local content reads remain revision 38 with zero drafts; no owner content was changed. Public APIs expose revision/published fields/published collections only. Unauthenticated protected reads/writes/uploads/geocoding are rejected; the local cloud-upload endpoint is intentionally disabled.
