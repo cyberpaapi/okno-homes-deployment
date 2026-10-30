@@ -271,3 +271,6 @@
   .ambient canvas { filter: saturate(0.82) brightness(0.72); }
   .media { transition: none; }
 }
+
+.founderCaptions { display:flex; justify-content:space-between; gap:20px; font-size:12px; line-height:1.5; color:inherit; }
+.founderCaptions p:last-child { text-align:right; }

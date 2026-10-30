@@ -172,3 +172,5 @@
   .enquire > a,
   .enquire > a span { transition: none; }
 }
+
+.closingCopy { max-width:40ch; margin:24px auto 32px; font-size:clamp(15px,1.4vw,19px); line-height:1.6; }

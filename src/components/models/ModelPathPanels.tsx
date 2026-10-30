@@ -14,23 +14,23 @@ import { useSiteContentMap } from "@/lib/useSiteContent";
 const paths = [
   {
     id: "signature",
-    title: "Signature",
+    title: "Collection",
     label: "Enter the Signature Collection",
-    image: "/models/selector/signature-blue-hour-v1.webp",
-    alt: "Concept visualization of a compact timber and glass Signature home beside still water at blue hour",
-    description: "Considered models, composed for your land.",
-    action: "View Signature",
-    mode: "Dark luxury",
+    image: "/models/forza/interiors/forza-exterior.webp",
+    alt: "Forza Signature home with timber cladding and full-height glazing",
+    description: "Pre designed homes, placed with care on your land.",
+    action: "View the collection",
+    mode: "Precisely engineered",
   },
   {
     id: "bespoke",
     title: "Bespoke",
     label: "Begin a Bespoke home",
-    image: "/models/bespoke/bespoke-pearl-exterior-v1.webp",
-    alt: "Concept visualization of a luminous site-specific limestone and oak Bespoke residence",
+    image: "/assets/projects/real-v1/lakewood-01.webp",
+    alt: "Lakewood Villa and its pool at dusk",
     description: "One site. One brief. One original home.",
-    action: "Begin Bespoke",
-    mode: "Light luxury",
+    action: "Begin crafting",
+    mode: "Calibrated luxury",
   },
 ] as const;
 

@@ -12,6 +12,10 @@ import {
   useReducedMotion, useScroll, useTransform,
 } from "motion/react";
 import ModelsHeader from "./ModelsHeader";
+import { MagneticLink } from "@/components/projects/21st/Magnetic";
+import { MasonryLightbox } from "@/components/projects/21st/MasonryLightbox";
+import { useProjectsContent } from "@/lib/useProjectContent";
+import { localDestination } from "@/lib/localDestination";
 import OknoLogo from "@/components/Brand/OknoLogo";
 import styles from "./BespokeExperience.module.css";
 import { useSiteContentMap } from "@/lib/useSiteContent";
@@ -19,14 +23,16 @@ import { pageImageLoader } from "@/lib/pageImageLoader";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const horizontalStages = [
-  { label: "PLACE", detail: "Topography, weather and view", copy: "Read orientation, access, climate and long views before drawing a room.", image: "/assets/projects/real-v1/forrest-01.webp", alt: "Completed OKNO residence following a curved garden path and reflecting pool through established planting", tone: "mist" },
-  { label: "BRIEF", detail: "Ritual, privacy and gathering", copy: "Translate arrival, gathering, privacy and retreat into clear spatial priorities.", image: "/models/bespoke/bespoke-brief-v3.webp", alt: "Luminous architecture table with a floor plan, material samples and tracing paper", tone: "pearl" },
-  { label: "FORM", detail: "Volume, structure and material", copy: "Develop volume, structure, material and landscape as one architectural response.", image: "/models/bespoke/bespoke-form-v3.webp", alt: "Pale stone and oak architectural massing model on a layered topographic base", tone: "ice" },
-  { label: "ATMOSPHERE", detail: "Light, texture and landscape", copy: "Tune light, texture and thresholds until the home feels inseparable from its setting.", image: "/models/bespoke/bespoke-pearl-courtyard-v1.webp", alt: "Luminous limestone courtyard residence with water and mature trees", tone: "blue" },
+  { label: "PLACE", detail: "Topography, weather and view", copy: "Read orientation, access, climate and long views before drawing a room.", image: "/assets/projects/real-v1/lakewood-01.webp", alt: "Lakewood Villa entrance and planted garden", tone: "mist" },
+  { label: "BRIEF", detail: "Life, ritual and investment", copy: "Understand how you live and what you wish to invest, then design back from both.", image: "/assets/projects/real-v1/lakewood-06.webp", alt: "Lakewood Villa living room opening to the landscaped garden", tone: "pearl" },
+  { label: "FORM", detail: "Volume, structure and material", copy: "Shape volume, structure, material and landscape as one response, true to the investment agreed.", image: "/assets/projects/real-v1/lakewood-10.webp", alt: "Aerial view of Lakewood Villa, its pool and gardens at dusk", tone: "ice" },
+  { label: "ATMOSPHERE", detail: "Light, texture and landscape", copy: "Tune light, texture and thresholds until the home feels inseparable from its setting.", image: "/assets/projects/real-v1/lakewood-02.webp", alt: "Lakewood Villa framed by its landscape and swimming pool", tone: "blue" },
 ] as const;
 
 export default function BespokeExperience() {
   const content = useSiteContentMap();
+  const projects = useProjectsContent();
+  const lakewood = projects.find(project => project.id === "lakewood");
   const get = (id: string, fallback: string) => content[`models.bespoke.${id}`] ?? fallback;
   const currentStages = horizontalStages.map((stage, index) => ({
     ...stage,
@@ -92,11 +98,11 @@ export default function BespokeExperience() {
 
         <section ref={heroRef} className={styles.hero} data-type-section="bespoke.hero" aria-labelledby="bespoke-title">
           <div className={styles.heroSticky}>
-            <motion.div className={styles.heroBackdrop} style={{ opacity: heroBackdropOpacity }} aria-hidden="true"><Image loader={pageImageLoader} src={get("hero.image", "/models/bespoke/bespoke-pearl-exterior-v1.webp")} alt="" fill priority sizes="100vw" className={styles.image} /></motion.div>
+            <motion.div className={styles.heroBackdrop} style={{ opacity: heroBackdropOpacity }} aria-hidden="true"><Image loader={pageImageLoader} src={get("hero.image", "/assets/projects/real-v1/lakewood-01.webp")} alt="" fill priority sizes="100vw" className={styles.image} /></motion.div>
             <motion.div className={styles.heroLayers} style={{ opacity: heroTextOpacity, y: heroTextY }} aria-hidden="true"><span data-type-field={"models.bespoke.hero.background-word"}>{get("hero.background-word", "BESPOKE")}</span><span data-type-field={"models.bespoke.hero.background-word"}>{get("hero.background-word", "BESPOKE")}</span><span data-type-field={"models.bespoke.hero.background-word"}>{get("hero.background-word", "BESPOKE")}</span></motion.div>
             <motion.div className={styles.heroFrame} style={{ width: heroWidth, height: heroHeight, borderRadius: heroRadius }}>
               <motion.div className={styles.heroImage} style={{ scale: heroScale }}>
-                <Image loader={pageImageLoader} src={get("hero.image", "/models/bespoke/bespoke-pearl-exterior-v1.webp")} alt={get("hero.alt", "A luminous site-specific limestone and oak residence integrated into a wooded hillside")} fill priority sizes="100vw" className={styles.image} onLoad={() => setHeroReady(true)} onError={() => setHeroReady(true)} />
+                <Image loader={pageImageLoader} src={get("hero.image", "/assets/projects/real-v1/lakewood-01.webp")} alt={get("hero.alt", "Lakewood Villa and its pool at dusk")} fill priority sizes="100vw" className={styles.image} onLoad={() => setHeroReady(true)} onError={() => setHeroReady(true)} />
               </motion.div>
               <div className={styles.heroShade} aria-hidden="true" />
               <motion.div className={styles.heroWords} style={{ opacity: heroTextOpacity }}><p data-type-field={"models.bespoke.hero.eyebrow"}>{get("hero.eyebrow", "Bespoke by OKNO")}</p><h1 id="bespoke-title" aria-label={`${get("hero.line-1", "A home authored")} ${get("hero.line-2", "from place.")}`} data-type-field={"models.bespoke.hero.line-1"}>{get("hero.line-1", "A home authored")}<br />{get("hero.line-2", "from place.")}</h1></motion.div>
@@ -106,12 +112,12 @@ export default function BespokeExperience() {
 
         <section id="manifesto" className={styles.manifesto} data-type-section="bespoke.manifesto" aria-labelledby="manifesto-title">
           <div className={styles.manifestoCopy} data-type-field={"models.bespoke.manifesto.line-1"}>
-            <p className={styles.kicker} data-type-field={"models.bespoke.manifesto.eyebrow"}>{get("manifesto.eyebrow", "One commission")}</p>
+            <p className={styles.kicker} data-type-field={"models.bespoke.manifesto.eyebrow"}>{get("manifesto.eyebrow", "One of one. Calibrated.")}</p>
             <LayeredHeading id="manifesto-title" lines={[get("manifesto.line-1", "NOT SELECTED."), get("manifesto.line-2", "NOT ADAPTED."), get("manifesto.line-3", "AUTHORED.")]} />
-            <p className={styles.bodyCopy} data-type-field={"models.bespoke.manifesto.copy"}>{get("manifesto.copy", "Bespoke begins where a catalogue ends. The architecture is developed around the site, the life it will hold and the atmosphere it should create.")}</p>
+            <p className={styles.bodyCopy} data-type-field={"models.bespoke.manifesto.copy"}>{get("manifesto.copy", "Bespoke begins where a catalogue ends. Every home is calibrated: designed back from your land, your life and your investment.")}</p>
           </div>
           <motion.figure className={styles.manifestoMedia} initial={reduced ? false : { clipPath: "inset(18% 10% 18% 10% round 32px)" }} whileInView={{ clipPath: "inset(0% 0% 0% 0% round 32px)" }} viewport={{ once: true, amount: .28 }} transition={{ duration: 1.2, ease: [.22, 1, .36, 1] }}>
-            <Image loader={pageImageLoader} src={get("manifesto.image", "/models/bespoke/bespoke-pearl-courtyard-v1.webp")} alt={get("manifesto.alt", "Luminous limestone courtyard residence shaped around water and mature trees")} fill sizes="(max-width: 800px) 100vw, 58vw" className={styles.image} />
+            <Image loader={pageImageLoader} src={get("manifesto.image", "/assets/projects/real-v1/lakewood-02.webp")} alt={get("manifesto.alt", "Lakewood Villa framed by its landscape and swimming pool")} fill sizes="(max-width: 800px) 100vw, 58vw" className={styles.image} />
           </motion.figure>
         </section>
 
@@ -129,12 +135,21 @@ export default function BespokeExperience() {
 
         <section id="original" ref={parallaxRef} className={styles.parallax} data-type-section="bespoke.result" aria-labelledby="parallax-title">
           <div className={styles.parallaxSticky}>
-            <motion.div className={styles.parallaxImage} style={{ y: parallaxImageY, scale: parallaxImageScale, clipPath: parallaxImageClip }}><Image loader={pageImageLoader} src={get("result.image", "/models/bespoke/bespoke-pearl-courtyard-v1.webp")} alt={get("result.alt", "Open-air courtyard connecting architecture, water and landscape")} fill sizes="100vw" className={styles.image} /></motion.div>
+            <motion.div className={styles.parallaxImage} style={{ y: parallaxImageY, scale: parallaxImageScale, clipPath: parallaxImageClip }}><Image loader={pageImageLoader} src={get("result.image", "/assets/projects/real-v1/lakewood-02.webp")} alt={get("result.alt", "Lakewood Villa and its pool")} fill sizes="100vw" className={styles.image} /></motion.div>
             <motion.div className={styles.parallaxWords} style={{ y: parallaxWordY }} aria-hidden="true"><span data-type-field={"models.bespoke.result.word-1"}>{get("result.word-1", "ONE PLACE")}</span><span data-type-field={"models.bespoke.result.word-2"}>{get("result.word-2", "ONE HOME")}</span></motion.div>
-            <motion.figure className={styles.parallaxCard} style={{ y: parallaxCardY }}><Image loader={pageImageLoader} src={get("result.card-image", "/models/bespoke/bespoke-pearl-exterior-v1.webp")} alt={get("result.card-alt", "Pale limestone and oak bespoke residence in its landscape")} fill sizes="(max-width: 700px) 70vw, 34vw" className={styles.image} /></motion.figure>
+            <motion.figure className={styles.parallaxCard} style={{ y: parallaxCardY }}><Image loader={pageImageLoader} src={get("result.card-image", "/assets/projects/real-v1/lakewood-01.webp")} alt={get("result.card-alt", "Lakewood Villa in its landscape")} fill sizes="(max-width: 700px) 70vw, 34vw" className={styles.image} /></motion.figure>
             <div className={styles.parallaxCopy}><p className={styles.kicker} data-type-field={"models.bespoke.result.eyebrow"}>{get("result.eyebrow", "The result")}</p><h2 id="parallax-title" data-type-field={"models.bespoke.result.heading"}>{get("result.heading", "Architecture that could belong nowhere else.")}</h2></div>
           </div>
         </section>
+        <section className={styles.closing} aria-label="Begin your Bespoke home" data-type-section="bespoke.result">
+          <MagneticLink href={localDestination(get("closing.href", "/enquiry?intent=home&model=bespoke"), "/enquiry?intent=home&model=bespoke")}>{get("closing.action", "Begin crafting")} <span aria-hidden="true">↗</span></MagneticLink>
+        </section>
+        {lakewood && lakewood.gallery.length > 0 && <section className={styles.gallery} aria-labelledby="bespoke-gallery-title">
+          <p className={styles.kicker}>{get("gallery.label", "Bespoke projects")}</p>
+          <h2 id="bespoke-gallery-title">{lakewood.title}</h2>
+          <p className={styles.bodyCopy}>{lakewood.description}</p>
+          <MasonryLightbox images={lakewood.gallery} title={lakewood.title} />
+        </section>}
       </main>
     </MotionConfig>
   );
@@ -152,8 +167,8 @@ function AuroraWallpaper() {
     const resize = () => { const ratio = Math.min(1, window.devicePixelRatio || 1); element.width = Math.round(window.innerWidth * ratio); element.height = Math.round(window.innerHeight * ratio); element.style.width = `${window.innerWidth}px`; element.style.height = `${window.innerHeight}px`; context.setTransform(ratio, 0, 0, ratio, 0, 0); paint(elapsed); };
     const paint = (time = 0) => {
       const width = window.innerWidth, height = window.innerHeight;
-      context.fillStyle = "#fbfcfd"; context.fillRect(0, 0, width, height);
-      const colors = [[76, 145, 255], [102, 91, 232], [137, 201, 246]];
+      context.fillStyle = "#f4f1e9"; context.fillRect(0, 0, width, height);
+      const colors = [[97, 116, 91], [139, 147, 115], [183, 173, 146]];
       colors.forEach((color, index) => { const phase = time * .00013 * (index + 1); const x = width * (.18 + index * .33 + Math.sin(phase + index) * .19); const y = height * (.2 + Math.cos(phase * 1.45 + index) * .29); const radius = Math.max(width, height) * (.43 + index * .07); const gradient = context.createRadialGradient(x, y, 0, x, y, radius); gradient.addColorStop(0, `rgba(${color.join(",")},.32)`); gradient.addColorStop(.56, `rgba(${color.join(",")},.1)`); gradient.addColorStop(1, `rgba(${color.join(",")},0)`); context.fillStyle = gradient; context.fillRect(0, 0, width, height); });
     };
     const loop = (time: number) => {
@@ -186,9 +201,9 @@ function LayeredHeading({ id, lines }: { id: string; lines: string[] }) {
 
 function GlyphPortal() {
   const content = useSiteContentMap();
-  const portalImage = content["models.bespoke.portal.image"] ?? "/models/bespoke/bespoke-pearl-courtyard-v1.webp";
+  const portalImage = content["models.bespoke.portal.image"] ?? "/assets/projects/real-v1/lakewood-02.webp";
   const portalAlt = content["models.bespoke.portal.image-alt"] ?? "";
-  const brandMask = content["brand.logo.light"];
+  const brandMask = content["brand.logo.light"] || "/assets/projects/brand/okno-modhomes-white.svg";
   const ref = useRef<HTMLElement>(null);
   const maskId = `glyph-${useId().replace(/:/g, "")}`;
   const inkId = `${maskId}-ink`;
@@ -200,7 +215,7 @@ function GlyphPortal() {
   const maskOpacity = useTransform(scrollYProgress, [.58, .86], [1, 0]);
   return <section id="okno-portal" ref={ref} className={styles.portal} aria-label="OKNO bespoke architecture transition"><div className={styles.portalSticky}>
     <div className={styles.portalScene}><Image loader={pageImageLoader} src={portalImage} alt={portalAlt} fill sizes="100vw" className={styles.image} /></div>
-    <motion.svg className={styles.portalMask} style={{ scale: reduced ? 1 : maskScale, rotate: compact || reduced ? 0 : maskRotate, opacity: reduced ? 1 : maskOpacity }} viewBox={compact ? "0 0 600 1300" : "0 0 1600 900"} preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><filter id={inkId}><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" /></filter><mask id={maskId}><rect width="1600" height={compact ? 1300 : 900} fill="white" />{brandMask ? <image href={brandMask} x={compact ? 75 : 300} y={compact ? 485 : 320} width={compact ? 450 : 1000} height="330" preserveAspectRatio="xMidYMid meet" filter={`url(#${inkId})`} /> : <text x={compact ? 300 : 800} y={compact ? 700 : 520} textAnchor="middle" fill="black">OKNO</text>}</mask></defs><rect width="1600" height={compact ? 1300 : 900} fill="#f9fbfc" mask={`url(#${maskId})`} /></motion.svg>
+    <motion.svg className={styles.portalMask} style={{ scale: reduced ? 1 : maskScale, rotate: compact || reduced ? 0 : maskRotate, opacity: reduced ? 1 : maskOpacity }} viewBox={compact ? "0 0 600 1300" : "0 0 1600 900"} preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><filter id={inkId}><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" /></filter><mask id={maskId}><rect width="1600" height={compact ? 1300 : 900} fill="white" />{<image href={brandMask} x={compact ? 75 : 300} y={compact ? 485 : 320} width={compact ? 450 : 1000} height="330" preserveAspectRatio="xMidYMid meet" filter={`url(#${inkId})`} />}</mask></defs><rect width="1600" height={compact ? 1300 : 900} fill="#f4f1e9" mask={`url(#${maskId})`} /></motion.svg>
   </div></section>;
 }
 

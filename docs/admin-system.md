@@ -1,5 +1,23 @@
 # Admin system — active implementation record
 
+## Typography refinement — 31 October 2026
+
+At the user's request, the shared master font now defaults to bundled Manrope across public headings, body copy, captions and controls, with section fonts inheriting the master by default. The editor default, generated CSS and unloaded-content fallbacks agree. Existing font and numeric size controls remain available. The homepage opening tagline retains the supplied wording “Homes for rare places.”, renders in uppercase, and uses a 1.35 multiplier on its responsive or editor-supplied size. Logo artwork is unchanged.
+
+## Copy deck and website changes — 30 October 2026
+
+Local implementation follows `OKNO Website Copy Deck v1.pdf` (19 October, 21 pages) and `Website_Changes_new.pdf`. The user explicitly confirmed removing the large homepage wordmark while retaining the header logo. The supplied tagline is “Homes for rare places.” Shared defaults and public fallbacks now agree across Home, Models, Signature, Bespoke, Hospitality, Process, Projects, Sustainability, Journal, About and Enquiry.
+
+The six existing Signature story editors contain the supplied three-card copy. Price values remain editable and are qualified as Indicative at presentation time; unknown Gaze values remain on request. Model-specific enquiry links preserve their model parameter in the form. Bespoke uses Lakewood photographs throughout, the actual shared logo in its portal, a consistent warm neutral/green palette, more space around stages, a closing enquiry link and the existing accessible Masonry Lightbox. Its gallery reads the editable Lakewood project record rather than duplicating photographs. Home gains an editable Hospitality preview. The new closing, reassurance, founder-caption and naming-note fields remain in the existing content workflow, with regenerated typography bindings.
+
+Project descriptions and metadata follow the deck; public Projects routes no longer declare noindex/nofollow. Hospitality selections retain stable selection IDs but reference the same project records as Projects, so renames and archival constraints apply consistently. No cloud content, credentials, repository remote, or production deployment was changed.
+
+Confirmation items remain separate from implementation: the final Bespoke palette, founders' titles, the scope of the 90-day promise and the Hospitality 20-year warranty. The latter is deliberately not asserted because the deck explicitly requires confirmation before it goes live. Unprovided sustainability certificates/material details, Hospitality proof points and Experience Centre information have not been invented. Enquiry delivery remains unconnected, as in the existing implementation; this work changes its copy and optional fields without representing a successful submission.
+
+Verification: the full suite ran 459 tests (457 passed, with two stale timeline/hero assertions subsequently resolved); the final seven-file, 54-test rerun passes, including both affected files, model navigation/pricing, enquiry context and regenerated typography bindings. TypeScript, source lint with zero warnings and the isolated Node 22 production build pass. Eighteen local routes return 200; all seven project descriptions and removal of noindex were checked. Browser inspection covered the homepage, selector, Signature model switching/enquiry navigation, Bespoke stage spacing/gallery, optional Hospitality form fields, founder captions and Lakewood project gallery. The existing enquiry delivery boundary was not tested as a working submission.
+
+Deployment limits: Next.js 16.4.0 reports an existing security advisory; the build completes on retry. The separate Vercel function-size gate fails for this Windows build: admin upload traces include public media and multiple platform binaries, with the largest about 1,927 MiB. This is not production-deployment acceptance. The development site remains on port 3134; the isolated build is `.next-release-copy-review`, and temporary TypeScript include changes made by that build were removed.
+
 ## Loading recovery review — 18 October 2026
 
 The public content subscriber now gives each refresh an eight-second deadline and aborts it when its last subscriber leaves. A stalled request can no longer permanently block later refreshes; source/public content remains visible during recovery. Existing preview-origin checks and the fifteen-second publication polling interval are preserved. Regression coverage verifies timeout/retry and unsubscribe/reconnect behavior.

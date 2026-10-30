@@ -11,7 +11,7 @@ export const homeVariantDefaults: ContentItem[] = [
     introLastFrame: "/assets/landing-options/forest-entry-intro-last-frame.png",
     openingAlt: "A single illuminated Kioo home within dense forest at blue hour",
     endAlt: "The timber-lined interior of the Kioo home opening to the forest",
-    accessibleTitle: "OKNO Modhomes", tagline: "Live better, live modular.",
+    accessibleTitle: "OKNO Modhomes", tagline: "Homes for rare places.",
   } },
   { id: "hero-v2", fields: {
     name: "Hero V2 · nighttime scroll", template: "v2",

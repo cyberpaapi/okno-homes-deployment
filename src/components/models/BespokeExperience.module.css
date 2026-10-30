@@ -3,16 +3,16 @@
 @font-face { font-family: "Bespoke Manrope"; src: url("/fonts/manrope.ttf") format("truetype"); font-display: swap; font-weight: 200 800; }
 
 .page {
-  --ink: #0b1b31;
-  --muted: #51627a;
-  --line: #183d761f;
-  --paper: #fbfcfd;
-  --ice: #e7f3ff;
-  --accent: #2f4bd3;
+  --ink: #23382c;
+  --muted: #596453;
+  --line: #23382c26;
+  --paper: #f4f1e9;
+  --ice: #e5e7dc;
+  --accent: #36543d;
   position: relative;
   min-height: 100svh;
   overflow-x: clip;
-  background: #fbfcfd;
+  background: #f4f1e9;
   color: var(--ink);
   font-family: "Bespoke Manrope", sans-serif;
 }
@@ -21,16 +21,16 @@
 .srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .wallpaper { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; opacity:.86; pointer-events: none; }
 .hero,.manifesto,.portal,.horizontal,.parallax { position: relative; z-index: 1; }
-.kicker,.heroWords p { margin: 0 0 18px; color: #3659a7; font: 550 var(--type-size-caption, 10px)/1.2 "Bespoke Geist", sans-serif; letter-spacing: .19em; text-transform: uppercase; }
+.kicker,.heroWords p { margin: 0 0 18px; color: #456149; font: 550 var(--type-size-caption, 10px)/1.2 "Bespoke Geist", sans-serif; letter-spacing: .19em; text-transform: uppercase; }
 
 .hero { height: 260svh; background: #ffffff24; }
 .heroSticky { position: sticky; top: 0; display: grid; width: 100%; height: 100svh; place-items: center; overflow: hidden; }
 .heroBackdrop { position: absolute; inset: 0; overflow: hidden; }
-.heroBackdrop::after { content: ""; position: absolute; inset: 0; background: #edf4fb8c; backdrop-filter: blur(18px) saturate(.72); }
+.heroBackdrop::after { content: ""; position: absolute; inset: 0; background: #e9e5d78c; backdrop-filter: blur(18px) saturate(.72); }
 .heroBackdrop .image { filter: saturate(.65) brightness(1.12); transform: scale(1.08); }
-.heroLayers { position: absolute; inset: 15% 0 auto; display: grid; color: #183f7914; font: 550 var(--type-size-display, clamp(92px, 15vw, 235px))/.61 "Bespoke Geist", sans-serif; letter-spacing: -.09em; text-align: center; }
-.heroLayers span:nth-child(2) { transform: translateX(-4vw); color: #3852bf17; }
-.heroLayers span:nth-child(3) { transform: translateX(5vw); color: #2779c713; }
+.heroLayers { position: absolute; inset: 15% 0 auto; display: grid; color: #36543d14; font: 550 var(--type-size-display, clamp(92px, 15vw, 235px))/.61 "Bespoke Geist", sans-serif; letter-spacing: -.09em; text-align: center; }
+.heroLayers span:nth-child(2) { transform: translateX(-4vw); color: #36543d17; }
+.heroLayers span:nth-child(3) { transform: translateX(5vw); color: #36543d13; }
 .heroFrame { container-type: inline-size; position: relative; overflow: hidden; isolation: isolate; border: 1px solid #fff; box-shadow: 0 35px 100px #2c555c2b, inset 0 1px #fff; transform: translateZ(0); }
 .heroImage { position: absolute; inset: -3%; transform-origin: center; }
 .heroShade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 42%, #081419a6 100%); }
@@ -42,9 +42,9 @@
 .manifestoCopy { align-self: center; }
 .layeredHeading { margin: 0; font: 550 var(--type-size-display, clamp(50px, 6.6vw, 104px))/.82 "Bespoke Geist", sans-serif; letter-spacing: -.075em; }
 .layeredHeading span { display: block; overflow-wrap: anywhere; }
-.layeredHeading span:nth-child(1) { color: #aebbd0; }
-.layeredHeading span:nth-child(2) { margin-left: clamp(10px, 3vw, 54px); color: #687da7; }
-.layeredHeading span:nth-child(3) { margin-left: clamp(24px, 7vw, 112px); color: #102b50; }
+.layeredHeading span:nth-child(1) { color: #a8b09b; }
+.layeredHeading span:nth-child(2) { margin-left: clamp(10px, 3vw, 54px); color: #708267; }
+.layeredHeading span:nth-child(3) { margin-left: clamp(24px, 7vw, 112px); color: #23382c; }
 .bodyCopy { max-width: 540px; margin: 56px 0 0; color: var(--muted); font-size: var(--type-size-body, clamp(14px, 1.2vw, 18px)); line-height: 1.7; }
 .manifestoMedia { position: relative; height: min(78svh, 860px); margin: 0; overflow: hidden; box-shadow: 0 35px 90px #22474e20; }
 
@@ -57,31 +57,31 @@
 .portalMask text { font: 550 var(--type-size-display, 310px) "Bespoke Geist", sans-serif; letter-spacing: -.09em; }
 .parallaxCopy h2 { margin: 0; font-family: "Bespoke Geist", sans-serif; font-weight: 550; letter-spacing: -.075em; }
 
-.horizontal { height: 520svh; background: #f8fafc; }
+.horizontal { height: 520svh; background: #f4f1e9; }
 .horizontalSticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
 .horizontalTrack { display: flex; width: 400vw; height: 100%; }
-.horizontalPanel { position:relative; width:100vw; height:100%; flex:0 0 100vw; overflow:hidden; background:#edf3f9; }
-.horizontalPanel[data-tone="pearl"] { background:#f4f1ec; }
-.horizontalPanel[data-tone="ice"] { background:#edf3f8; }
-.horizontalPanel[data-tone="blue"] { background:#e4eff8; }
+.horizontalPanel { position:relative; width:100vw; height:100%; flex:0 0 100vw; overflow:hidden; background:#f4f1e9; }
+.horizontalPanel[data-tone="pearl"] { background:#f4f1e9; }
+.horizontalPanel[data-tone="ice"] { background:#f4f1e9; }
+.horizontalPanel[data-tone="blue"] { background:#f4f1e9; }
 .panelHeading { position:absolute; z-index:5; top:clamp(88px,10vh,118px); right:clamp(24px,5vw,78px); left:clamp(24px,5vw,78px); display:flex; align-items:flex-start; justify-content:space-between; pointer-events:none; }
 .panelHeading span { padding-top:10px; color:#173d747a; font:550 var(--type-size-caption, 10px) "Bespoke Geist",sans-serif; letter-spacing:.2em; }
-.panelHeading h2 { margin:0; color:#102847; font:550 var(--type-size-display, clamp(86px,12vw,184px))/.72 "Bespoke Geist",sans-serif; letter-spacing:-.085em; }
-.panelMedia { position:absolute; z-index:2; top:51%; left:50%; width:min(78vw,1180px); height:min(68svh,760px); margin:0; overflow:hidden; border-radius:clamp(24px,3vw,46px); box-shadow:0 34px 100px #264a5226; transform:translate(-50%,-50%); }
+.panelHeading h2 { margin:0; color:#23382c; font:550 var(--type-size-display, clamp(86px,12vw,184px))/.72 "Bespoke Geist",sans-serif; letter-spacing:-.085em; }
+.panelMedia { position:absolute; z-index:2; top:51%; left:50%; width:min(72vw,1080px); height:min(52svh,620px); margin:0; overflow:hidden; border-radius:clamp(24px,3vw,46px); box-shadow:0 34px 100px #264a5226; transform:translate(-50%,-50%); }
 .panelMedia::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 48%,#07152278 100%); }
-.panelCaption { position:absolute; z-index:4; right:clamp(24px,5vw,78px); bottom:clamp(26px,4vh,44px); left:clamp(24px,5vw,78px); display:flex; align-items:flex-end; justify-content:space-between; gap:40px; color:#10243e; }
+.panelCaption { position:absolute; z-index:4; right:clamp(24px,5vw,78px); bottom:clamp(26px,4vh,44px); left:clamp(24px,5vw,78px); display:flex; align-items:flex-end; justify-content:space-between; gap:40px; color:#23382c; }
 .panelCaption > div { max-width:570px; padding:20px 22px; border:1px solid #ffffff73; border-radius:20px; background:#f9fbfbd9; box-shadow:0 15px 50px #0d2a3c1a; backdrop-filter:blur(16px); }
-.panelCaption p { margin:0 0 8px; color:#385a82; font-size:var(--type-size-caption, 10px); font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
-.panelCaption strong { display:block; color:#132a46; font-size:var(--type-size-body, clamp(13px,1.1vw,16px)); font-weight:450; line-height:1.55; }
-.panelCaption button { display:grid; min-width:205px; grid-template-columns:1fr auto; grid-template-areas:"eyebrow arrow" "label arrow"; align-items:center; gap:4px 24px; padding:14px 14px 14px 20px; border:1px solid #1739682e; border-radius:999px; background:#ffffffdc; color:#102847; text-align:left; cursor:pointer; box-shadow:0 14px 42px #1231521a; backdrop-filter:blur(16px); transition:transform .4s cubic-bezier(.22,1,.36,1),background .3s ease; }
-.panelCaption button span { grid-area:eyebrow; color:#607797; font:550 var(--type-size-caption, 8px) "Bespoke Manrope",sans-serif; letter-spacing:.15em; text-transform:uppercase; }
+.panelCaption p { margin:0 0 8px; color:#456149; font-size:var(--type-size-caption, 10px); font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
+.panelCaption strong { display:block; color:#23382c; font-size:var(--type-size-body, clamp(13px,1.1vw,16px)); font-weight:450; line-height:1.55; }
+.panelCaption button { display:grid; min-width:205px; grid-template-columns:1fr auto; grid-template-areas:"eyebrow arrow" "label arrow"; align-items:center; gap:4px 24px; padding:14px 14px 14px 20px; border:1px solid #1739682e; border-radius:999px; background:#ffffffdc; color:#23382c; text-align:left; cursor:pointer; box-shadow:0 14px 42px #1231521a; backdrop-filter:blur(16px); transition:transform .4s cubic-bezier(.22,1,.36,1),background .3s ease; }
+.panelCaption button span { grid-area:eyebrow; color:#596453; font:550 var(--type-size-caption, 8px) "Bespoke Manrope",sans-serif; letter-spacing:.15em; text-transform:uppercase; }
 .panelCaption button b { grid-area:label; font:550 var(--type-size-caption, 12px) "Bespoke Manrope",sans-serif; letter-spacing:.03em; text-transform:uppercase; }
-.panelCaption button i { grid-area:arrow; display:grid; width:42px; height:42px; place-items:center; border-radius:50%; background:#2f4bd3; color:#fff; font-style:normal; font-size:var(--type-size-body, 18px); transition:transform .4s cubic-bezier(.22,1,.36,1); }
+.panelCaption button i { grid-area:arrow; display:grid; width:42px; height:42px; place-items:center; border-radius:50%; background:#36543d; color:#fff; font-style:normal; font-size:var(--type-size-body, 18px); transition:transform .4s cubic-bezier(.22,1,.36,1); }
 .panelCaption button:hover,.panelCaption button:focus-visible { transform:translateX(5px); background:#fff; }
 .panelCaption button:hover i,.panelCaption button:focus-visible i { transform:translateX(3px); }
-.panelCaption button:focus-visible { outline:2px solid #2f4bd3; outline-offset:4px; }
+.panelCaption button:focus-visible { outline:2px solid #36543d; outline-offset:4px; }
 
-.parallax { height: 190svh; margin-top:-1px; background: #dfeaf1; }
+.parallax { height: 190svh; margin-top:-1px; background: #e5e7dc; }
 .parallaxSticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
 .parallaxImage { position: absolute; inset: -12%; }
 .parallaxImage::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,#09212b94,transparent 65%),linear-gradient(180deg,transparent 46%,#09212b63); }
@@ -92,7 +92,7 @@
 .parallaxCopy .kicker { color: #dceff3; }
 .parallaxCopy h2 { font-size: var(--type-size-display, clamp(52px,7.5vw,116px)); line-height: .86; }
 
-.entrance { position:fixed; inset:0; z-index:15000; display:grid; place-items:center; overflow:hidden; background:radial-gradient(circle at 50% 42%,#fff,#e8f1f2 66%,#dae7ea); }
+.entrance { position:fixed; inset:0; z-index:15000; display:grid; place-items:center; overflow:hidden; background:radial-gradient(circle at 50% 42%,#fff,#e5e7dc 66%,#d5dacb); }
 .entrance img { width:185px; height:auto; }
 
 @media (max-width: 1000px) {
@@ -144,4 +144,25 @@
   .horizontalSticky { position:relative; height:auto; }
   .horizontalTrack { width:100%; flex-direction:column; transform:none!important; }
   .horizontalPanel { width:100%; height:100svh; flex-basis:100svh; }
+}
+
+/* The same palette and generous frame continue through every brief stage. */
+.closing,.gallery { position:relative; z-index:1; background:var(--paper); padding:clamp(64px,10vw,150px) clamp(24px,6vw,96px); }
+.closing { text-align:center; }
+.gallery { padding-top:30px; }
+.gallery h2 { margin:0; font-size:clamp(38px,6vw,80px); letter-spacing:-.05em; font-weight:500; }
+.gallery .bodyCopy { margin:20px 0 48px; }
+@media (max-width:700px), (prefers-reduced-motion:reduce) {
+  .horizontal { height:auto; }
+  .horizontalSticky { position:relative; height:auto; overflow:visible; }
+  .horizontalTrack { width:100%; height:auto; flex-direction:column; transform:none!important; }
+  .horizontalPanel { display:flex; flex-direction:column; gap:32px; width:100%; height:auto; min-height:100svh; flex-basis:auto; padding:100px 24px 72px; overflow:visible; }
+  .panelHeading,.panelMedia,.panelCaption { position:relative; inset:auto; transform:none; }
+  .panelHeading h2 { font-size:clamp(40px,10vw,76px); overflow-wrap:anywhere; }
+  .panelMedia { width:100%; height:48svh; flex:none; }
+  .panelCaption { display:grid; gap:24px; }
+  .panelCaption > div { padding:0; background:transparent; border:0; box-shadow:none; }
+  .panelCaption strong { font-size:15px; line-height:1.65; }
+  .panelCaption p { font-size:10px; }
+  .panelCaption button { justify-self:start; min-width:190px; }
 }

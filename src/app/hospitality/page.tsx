@@ -6,7 +6,7 @@ import { readPublicContent } from '@/lib/publicContent';
 
 export const metadata = {
   title: 'OKNO — Hospitality',
-  description: 'Bespoke modular hospitality estates for five residences and beyond, from site study to guest-ready delivery.',
+  description: 'Boutique hospitality estates of five residences and more, from site study to first guest.',
 };
 
 export const dynamic = 'force-dynamic';

@@ -210,3 +210,5 @@
     will-change: auto;
   }
 }
+
+.helper { margin:12px 0 0; max-width:48ch; font-size:12px; line-height:1.6; color:inherit; opacity:.78; }

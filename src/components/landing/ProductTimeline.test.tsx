@@ -34,7 +34,7 @@ describe('90-day product timeline', () => {
     const { container } = render(<ProductTimeline />);
     const image = screen.getByRole('img', { name: 'A completed OKNO Kioo home surrounded by mature forest' });
     expect(image).toHaveAttribute('src', '/assets/projects/real-v1/kioo-03.webp');
-    expect(screen.getByText('Day 90 · Ready for handover')).toBeInTheDocument();
+    expect(screen.getByText('Day 90 · Keys in hand')).toBeInTheDocument();
     expect(container.querySelector('video')).toBeNull();
     expect(container.querySelector('[src*="factory-manufacturing"]')).toBeNull();
   });

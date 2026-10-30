@@ -1409,3 +1409,11 @@
   .detailsButton { width: 126px; min-width: 126px; gap: 8px; padding-inline: 12px; color: #f4f1e9; font-size: var(--type-size-caption, 11px); }
   .detailsButton span { font-size: 18px; }
 }
+
+.detailsButton span { display:inline-flex; align-items:center; justify-content:center; flex:0 0 30px; font-size:30px; line-height:1; }
+.staticFeatures { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:36px; padding:70px 6vw; background:#102019; }
+.staticFeatures h2 { font-size:28px; margin:16px 0; }
+.staticFeatures p { font-size:15px; line-height:1.7; }
+@media(max-width:700px) { .staticFeatures { grid-template-columns:1fr; } .detailsButton { min-width:150px; } }
+
+.intro .investmentNote { margin:12px auto 0; max-width:48ch; padding-inline:12px; font-size:10px; line-height:1.5; letter-spacing:0; text-transform:none; color:#c6cbbf; }

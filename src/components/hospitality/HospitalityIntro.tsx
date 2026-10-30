@@ -12,7 +12,7 @@ import styles from "./HospitalityIntro.module.css";
 export function HospitalityIntro({ enquiryHref }: { enquiryHref: string }) {
   const values = useSiteContentMap();
   const get = (key: string, fallback: string) => values[`hospitality.opening.${key}`] ?? fallback;
-  const heading = get("heading", "Built to welcome. Designed to scale.");
+  const heading = get("heading", "Built to welcome. Designed to perform.");
   const reducedMotion = useReducedMotion();
   const [imageReady, setImageReady] = useState(false);
 
@@ -70,7 +70,7 @@ export function HospitalityIntro({ enquiryHref }: { enquiryHref: string }) {
         >
           <p data-type-field={"hospitality.opening.caption"}>{get("caption", "One architectural language, coordinated across every residence and shared space.")}</p>
           <MagneticLink href={localDestination(get("action-href", enquiryHref), enquiryHref)} className={styles.cta} data-magnetic>
-            {get("action", "Begin a project")} <span aria-hidden="true">↗</span>
+            {get("action", "Arrange a consultation")} <span aria-hidden="true">↗</span>
           </MagneticLink>
         </motion.figcaption>
       </figure>

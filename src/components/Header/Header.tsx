@@ -136,6 +136,7 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
 type HeaderProps = {
   tone?: "dark" | "light";
   enquiryHref?: string;
+  enquiryLabel?: string;
   currentHref?: string;
   // Accepted while existing page compositions move to this shared header.
   variant?: "glass" | "immersive";
@@ -143,7 +144,7 @@ type HeaderProps = {
   trapFocus?: boolean;
 };
 
-export default function Header({ tone, variant, enquiryHref = "/enquiry", currentHref }: HeaderProps) {
+export default function Header({ tone, variant, enquiryHref = "/enquiry", enquiryLabel, currentHref }: HeaderProps) {
   const values = useSiteContentMap();
   const get = (key: string, fallback: string) => values[`header.${key}`] || fallback;
   const brandName = values["brand.logo.alt"] || "OKNO Modhomes";
@@ -151,7 +152,7 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", curren
   const activePath = currentHref ?? pathname ?? "/";
   const resolvedTone = tone ?? (variant === "glass" ? "light" : "dark");
   const navigation = siteNavigationItems.map(item => ({ ...item, label: get(`nav.${item.href.slice(1)}`, item.label) }));
-  const enquireLabel = get("action.enquire", "Enquire");
+  const enquireLabel = enquiryLabel ?? get("action.enquire", "Enquire");
   const items = [{ href: "/", label: get("nav.home", "Home") }, ...navigation, { href: enquiryHref, label: enquireLabel }];
   const menuLabel = get("menu.open", "Menu");
   const closeLabel = get("menu.close", "Close");

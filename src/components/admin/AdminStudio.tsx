@@ -37,10 +37,10 @@ const studioPages = adminPages.map(page => ({ ...page, children: page.children?.
 const subscribeToLocation = () => () => {};
 const enquiryOptionDefaults: Record<string, readonly string[]> = {
   "home.land-status": ["I own it", "I'm buying it", "I'm still looking"],
-  "home.home-type": ["Cabins / villas", "Family home", "Hospitality", "Developer project"],
+  "home.home-type": ["Retreat or second home", "Primary residence", "Hospitality estate", "Development"],
   "home.timeline": ["This year", "Next year", "Exploring"],
   "hospitality.programme": ["Cabins / villas", "Resort / Hotel", "Other"],
-  "hospitality.keys": ["5–10", "11–25", "26+"],
+  "hospitality.keys": ["5–10", "10–20", "20+"],
   "hospitality.timeline": ["This year", "Next year", "Exploring"],
   "press.nature": ["Press feature", "Partnership", "Career", "Other"],
 };

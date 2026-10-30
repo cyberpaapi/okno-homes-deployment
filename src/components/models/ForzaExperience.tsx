@@ -16,6 +16,7 @@ import {
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import type { OknoModel } from "@/data/models";
 import ModelsHeader from "./ModelsHeader";
+import { indicativePrice, planLabel } from "@/lib/signaturePresentation";
 import styles from "./ForzaExperience.module.css";
 import { getVideoSeekRequest, mapProgressToTime } from "./forzaMotion";
 import { useSiteCollection, useSiteCollectionsMap, useSiteContentMap } from "@/lib/useSiteContent";
@@ -29,8 +30,8 @@ type PlanFilter = "all" | "studio" | "2-bhk" | "3-bhk";
 const planFilters: { value: PlanFilter; label: string }[] = [
   { value: "all", label: "All" },
   { value: "studio", label: "Studio" },
-  { value: "2-bhk", label: "2 BHK" },
-  { value: "3-bhk", label: "3 BHK" },
+  { value: "2-bhk", label: "Two-bedroom" },
+  { value: "3-bhk", label: "Three-bedroom" },
 ];
 
 const MAX_SCRUB_FPS = 24;
@@ -253,16 +254,16 @@ const experienceBySlug: Record<string, ExperienceConfig> = {
     gallery: krayGallery,
     features: [
       {
-        title: "Ascent",
-        copy: "A rising roofline turns a compact footprint into a room with presence.",
+        title: "Rising roofline",
+        copy: "The roof climbs towards the view, drawing light deep into the room.",
       },
       {
-        title: "Outlook",
-        copy: "Full-height glazing opens the living space to mountain, forest and sky.",
+        title: "Open front",
+        copy: "Floor-to-ceiling glass gives the living room entirely to the view.",
       },
       {
-        title: "Compact retreat",
-        copy: "A complete studio home resolved within 306 square feet.",
+        title: "Two measures",
+        copy: "Two layouts, 306 or 550 square feet, each resolved with the same care.",
       },
     ],
   },
@@ -275,16 +276,16 @@ const experienceBySlug: Record<string, ExperienceConfig> = {
     gallery: gazeGallery,
     features: [
       {
-        title: "Framed outlook",
-        copy: "A full-height glazed gable turns the landscape into the room's principal surface.",
+        title: "Glazed gable",
+        copy: "The entire end wall is glass, so the bed faces the landscape.",
       },
       {
-        title: "Quiet volume",
-        copy: "A vaulted timber ceiling gives the compact sleeping room a calm, generous proportion.",
+        title: "Timber skin",
+        copy: "Warm vertical timber wraps the walls and folds into the frame of the view.",
       },
       {
-        title: "Private retreat",
-        copy: "One focused interior, a warm timber envelope and a footprint made for remote settings.",
+        title: "Built for waking",
+        copy: "A studio retreat composed around a single moment: first light.",
       },
     ],
   },
@@ -297,16 +298,16 @@ const experienceBySlug: Record<string, ExperienceConfig> = {
     gallery: tengoGallery,
     features: [
       {
-        title: "Long horizon",
-        copy: "An extended roofline gives the home a calm, grounded silhouette.",
+        title: "The porch",
+        copy: "A timber-lined gable shelters a deep verandah, lit for long evenings.",
       },
       {
-        title: "Gathering room",
-        copy: "Generous living and dining spaces open toward the deck and landscape.",
+        title: "Quiet rhythm",
+        copy: "Diagonal panels in slate tones give the long facade a measured rhythm.",
       },
       {
-        title: "Room to arrive",
-        copy: "Two- and three-bedroom plans begin at 1,426 square feet.",
+        title: "Room to gather",
+        copy: "Two bedrooms and generous living, across 1,426 square feet.",
       },
     ],
   },
@@ -319,16 +320,16 @@ const experienceBySlug: Record<string, ExperienceConfig> = {
     gallery: tribGallery,
     features: [
       {
-        title: "A-frame clarity",
-        copy: "A steep, uninterrupted roof gives the retreat its unmistakable silhouette.",
+        title: "One line",
+        copy: "Roof and wall become a single form, drawn in one continuous pitch.",
       },
       {
-        title: "Glazed arrival",
-        copy: "The full-height triangular facade opens the compact interior toward the landscape.",
+        title: "Lantern",
+        copy: "After dark, the glazed gable glows like a lantern among the trees.",
       },
       {
-        title: "Compact escape",
-        copy: "One bed, one bath and a kitchenette resolved within 436 square feet.",
+        title: "Soaring studio",
+        copy: "The A-frame lifts the ceiling high, so 436 square feet feels far larger.",
       },
     ],
   },
@@ -341,16 +342,16 @@ const experienceBySlug: Record<string, ExperienceConfig> = {
     gallery: octapodGallery,
     features: [
       {
-        title: "Eight-sided calm",
-        copy: "A disciplined octagonal shell gives the compact retreat its unmistakable silhouette.",
+        title: "Wraparound",
+        copy: "Glass turns the corners, framing the landscape on three sides.",
       },
       {
-        title: "Panoramic aperture",
-        copy: "Full-height front glazing opens the studio to its setting while opaque facets provide shelter.",
+        title: "Dark crown",
+        copy: "A band of dark vertical timber caps the glass and grounds the form.",
       },
       {
-        title: "Resort-ready studio",
-        copy: "One bed, one bath and one kitchenette resolved within 300 square feet.",
+        title: "Made for retreats",
+        copy: "A 300 sq ft studio suite, designed to be clustered into a boutique estate.",
       },
     ],
   },
@@ -878,7 +879,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             }`}
           />
 
-          <ModelsHeader tone="dark" enquireHref={`/enquiry?model=${activeModel.slug}`} />
+          <ModelsHeader tone="dark" enquireHref={`/enquiry?intent=home&model=${activeModel.slug}`} enquiryLabel={`${get("enquire-prefix", "Enquire about")} ${activeModel.name}`} />
 
           <motion.div
             className={styles.productStage}
@@ -959,12 +960,13 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             <p data-type-field={"models.signature.eyebrow"}>{get("eyebrow", "Signature collection")}</p>
             <h1 data-type-section={`signature.${activeModel.slug}-media`}>{presentationModel.name}</h1>
             <div className={styles.introFacts} data-type-section={`signature.${activeModel.slug}-plan-${activeVariantIndex + 1}`}>
-              <span>{presentationModel.variants[activeVariantIndex]?.name ?? activeVariant?.name}</span>
+              <span>{planLabel(presentationModel.variants[activeVariantIndex]?.name ?? activeVariant?.name)}</span>
               <span>{formatArea(presentationModel, activeVariantIndex)}</span>
               <span className={styles.introPrice}>
-                {presentationModel.variants[activeVariantIndex]?.price.display ?? activeVariant?.price.display}
+                {indicativePrice(presentationModel.variants[activeVariantIndex]?.price.display ?? activeVariant?.price.display)}
               </span>
             </div>
+            <p className={styles.investmentNote}>{get("investment-note", "Final investment depends on site, specification and finish.")}</p>
           </motion.div>
 
           <div className={styles.planFilter} role="group" aria-label={get("plan-filter-label", "Filter by floor plan")}>
@@ -1062,7 +1064,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
               </AnimatePresence>
             </motion.div>
             <p className={styles.filterStatus} aria-live="polite" data-type-field={"models.signature.home-singular"}>
-              {filteredModels.length} {filteredModels.length === 1 ? get("home-singular", "home") : get("home-plural", "homes")} {get("available", "available")}
+              {filteredModels.length === 6 && planFilter === "all" ? get("collection-count", "Six precision engineered homes") : `${filteredModels.length} ${get("count-qualifier", "precision engineered")} ${filteredModels.length === 1 ? get("home-singular", "home") : get("home-plural", "homes")}`}
             </p>
             <button
               ref={detailsTriggerRef}
@@ -1077,6 +1079,9 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
 
         </div>
       </section>
+      {prefersReducedMotion && <section className={styles.staticFeatures} aria-label={`${activeModel.name} Signature details`}>
+        {experience.features.map(feature => <article key={feature.title}><p>{get("feature-eyebrow", "Signature detail")}</p><h2>{feature.title}</h2><p>{feature.copy}</p></article>)}
+      </section>}
 
       <AnimatePresence>
         {detailsOpen && (
@@ -1190,7 +1195,7 @@ function DetailsLayer({
         variant.areaDisplay ??
         `${variant.areaSqFt.toLocaleString("en-IN")} sq ft`,
     },
-    { label: get("detail.starting-price", "Starting price"), value: variant.price.display, emphasis: true },
+    { label: get("detail.starting-price", "Indicative price"), value: indicativePrice(variant.price.display), emphasis: true },
     { label: get("detail.delivery", "Delivery"), value: get("detail.delivery-value", "90 days") },
     { label: get("detail.spaces", "Spaces"), value: variant.spaces.join(" · ") },
   ];
@@ -1362,7 +1367,7 @@ function DetailsLayer({
                     aria-hidden="true"
                   />
                 )}
-                <span className={styles.variantTabLabel} data-type-section={`signature.${model.slug}-plan-${index + 1}`}>{item.name}</span>
+                <span className={styles.variantTabLabel} data-type-section={`signature.${model.slug}-plan-${index + 1}`}>{planLabel(item.name)}</span>
               </button>
             ))}
           </div>

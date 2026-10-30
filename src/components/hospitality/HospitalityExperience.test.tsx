@@ -35,9 +35,9 @@ describe("HospitalityExperience", () => {
   it("speaks directly to multi-residence hospitality buyers", () => {
     render(<HospitalityExperience />);
 
-    expect(screen.getByRole("heading", { name: "Built to welcome. Designed to scale." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Built to welcome. Designed to perform." })).toBeInTheDocument();
     expect(screen.getByText(/coordinated across every residence and shared space/i)).toBeInTheDocument();
-    for (const link of screen.getAllByRole("link", { name: /begin a project|hospitality enquiry/i })) {
+    for (const link of screen.getAllByRole("link", { name: /arrange a consultation|arrange a private consultation/i })) {
       expect(link).toHaveAttribute("href", "/enquiry?intent=hospitality");
     }
   });
@@ -45,13 +45,13 @@ describe("HospitalityExperience", () => {
   it("covers every estate, delivery stage and care pillar from the brief", () => {
     render(<HospitalityExperience />);
 
-    for (const estate of ["Forrest", "Miraya", "Nova Valley", "Layana Farms", "Project Thiru"]) {
+    for (const estate of ["Forrest", "Kioo", "Lakewood Villa", "Octapod Layana", "Rasa Vikarabad"]) {
       expect(screen.getByRole("button", { name: `View ${estate} photography` })).toBeInTheDocument();
     }
     for (const stage of ["Private consultation", "Site study", "Design curation", "Craftsmanship", "Delivery", "Installation", "Opening"]) {
       expect(screen.getByRole("heading", { name: stage })).toBeInTheDocument();
     }
-    expect(screen.getByText("Terrain, utilities and resilience planned.")).toBeInTheDocument();
+    expect(screen.getByText("Terrain, access, utilities and resilience resolved first.")).toBeInTheDocument();
     expect(screen.getByText("Warranty, handover and long-term care.")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Brief to opening." })).toBeInTheDocument();
   });
@@ -60,7 +60,7 @@ describe("HospitalityExperience", () => {
     render(<HospitalityExperience />);
 
     expect(screen.getAllByText("5+")).toHaveLength(1);
-    expect(screen.getByText("Guest-ready or architectural shell.")).toBeInTheDocument();
+    expect(screen.getByText("Delivered guest-ready, Operational.")).toBeInTheDocument();
     expect(screen.queryByText("Places with a life of their own")).not.toBeInTheDocument();
     expect(screen.queryByText("Projects from five residences")).not.toBeInTheDocument();
     expect(screen.queryByRole("form")).not.toBeInTheDocument();

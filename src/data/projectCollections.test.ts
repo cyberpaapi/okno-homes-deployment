@@ -58,11 +58,11 @@ describe('published project and Hospitality collections', () => {
     expect(findProjectByPath([{ ...item, fields: { ...item.fields, status: 'archived' } }], 'forrest')).toBeNull();
   });
 
-  it('preserves five current Hospitality cards without assuming reused photos prove project identity', () => {
+  it('uses the same approved project identities in Projects and Hospitality', () => {
     const selected = resolveHospitalitySelections(initialHospitalitySelections, atlasProjects);
-    expect(selected.map(project => project.name)).toEqual(['Forrest', 'Miraya', 'Nova Valley', 'Layana Farms', 'Project Thiru']);
+    expect(selected.map(project => project.name)).toEqual(['Forrest', 'Kioo', 'Lakewood Villa', 'Octapod Layana', 'Rasa Vikarabad']);
     expect(selected[0].projectId).toBe('forrest');
-    expect(selected.slice(1).every(project => !project.projectId)).toBe(true);
+    expect(selected.map(project => project.projectId)).toEqual(['forrest', 'kioo', 'lakewood', 'octapod-layana', 'rasa-vikarabad']);
   });
 
   it('inherits chosen project data and omits a selection if its project is archived', () => {

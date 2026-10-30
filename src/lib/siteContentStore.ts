@@ -35,6 +35,7 @@ const file = path.join(directory, "content.json");
 const empty: ContentSnapshot = { revision: 0, draftRevision: 0, published: {}, draft: {}, publishedCollections: {}, draftCollections: {}, history: [] };
 const trustedJournalSvgLogos = new Set(Object.values(publicationLogos).filter(value => value.endsWith(".svg")));
 const localActionFields = new Set([
+  "home.hospitality.href", "models.bespoke.closing.href",
   "home.timeline.action-href", "home.signature.action-href", "home.bespoke.action-href",
   "home.sustainability.action-href", "home.editorial.journal.href", "home.editorial.about.href",
   "projects.intro.action-href", "projects.detail.return-href",

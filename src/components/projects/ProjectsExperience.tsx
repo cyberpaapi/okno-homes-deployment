@@ -23,7 +23,7 @@ export default function ProjectsExperience({initialId='forrest',initialProjects=
   const eyebrow=useSiteContent('projects.intro.eyebrow','OKNO PROJECTS');
   const title=useSiteContent('projects.intro.title','Homes,\n everywhere.');
   const subtitle=useSiteContent('projects.intro.subtitle','Distinct places. A shared way of living.');
-  const action=useSiteContent('projects.intro.action','Our projects');
+  const action=useSiteContent('projects.intro.action','Enter the collection');
   const actionHref=useSiteContent('projects.intro.action-href','#collection');
   const [requestedId,setRequestedId]=useState(initialId),[ready,setReady]=useState(false),[filmActive,setFilmActive]=useState(false),[entered,setEntered]=useState(false),[introSettled,setIntroSettled]=useState(false);
   const projects=useProjectsContent(initialProjects,true);

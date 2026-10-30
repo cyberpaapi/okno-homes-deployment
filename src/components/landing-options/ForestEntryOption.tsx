@@ -11,7 +11,6 @@ import {
 import { ReactLenis } from 'lenis/react';
 import type { VirtualScrollData } from 'lenis';
 import LandingExperience from '@/components/landing/LandingExperience';
-import OknoLogo from '@/components/Brand/OknoLogo';
 import ScrollJourneyFilm from './ScrollJourneyFilm';
 import { useHeroReloadPosition } from './useHeroReloadPosition';
 import { useHeroFilmExit } from './useHeroFilmExit';
@@ -51,7 +50,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const savedStartImage = useSiteContent('hero-v1.opening.start-image', START);
   const savedEndImage = useSiteContent('hero-v1.opening.end-image', END);
   const savedIntroLastFrame = useSiteContent('hero-v1.opening.intro-last-frame', INTRO_LAST_FRAME);
-  const savedTagline = useSiteContent('hero-v1.opening.tagline', 'Live better, live modular.');
+  const savedTagline = useSiteContent('hero-v1.opening.tagline', 'Homes for rare places.');
   const tagline = variant?.fields.tagline ?? savedTagline;
   const savedAccessibleTitle = useSiteContent('hero-v1.opening.accessible-title', 'OKNO Modhomes');
   const savedStartAlt = useSiteContent('hero-v1.opening.start-alt', 'A single illuminated Kioo home within dense forest at blue hour');
@@ -217,7 +216,6 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
             <Image src={introLastFrame} loader={pageImageLoader} alt="" fill sizes="100vw" />
           </div>
           <div className={styles.brand} aria-label="OKNO Modhomes" data-type-field={"hero-v1.opening.tagline"}>
-            <OknoLogo className={styles.wordmark} />
             {tagline && <p data-hero-v1-tagline data-type-field={"hero-v1.opening.tagline"}>{tagline}</p>}
           </div>
 

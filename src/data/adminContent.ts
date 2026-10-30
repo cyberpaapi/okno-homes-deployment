@@ -2,6 +2,7 @@ import { heroV2EndingDefaults as v2Ending } from "./heroV2Ending";
 import { withTypography } from "@/lib/typography";
 import { siteNavigationItems } from "@/data/siteNavigation";
 import projectMedia from "@/data/realProjectMedia.json";
+import { projectDescriptions } from "@/data/projectCopy";
 import { projectPreviewClips } from "@/data/projectPreviewClips";
 import { pressEntries, projectNotes, publicationLogos } from "@/components/journal/journalData";
 import { journalBlogPosts } from "@/components/journal/journalBlogData";
@@ -49,19 +50,19 @@ const assuranceIconOptions = [
 // field IDs are stored only once; editing either variant updates both pages.
 const sharedHomeSections: readonly ContentSection[] = [
   { id: "timeline", label: "90-day process timeline", fields: [
-    { id: "home.timeline.heading-start", label: "Heading · opening", kind: "text", defaultValue: "A home in" },
-    { id: "home.timeline.heading-emphasis", label: "Heading · emphasis", kind: "text", defaultValue: "90 days." },
+    { id: "home.timeline.heading-start", label: "Heading · opening", kind: "text", defaultValue: "Your land," },
+    { id: "home.timeline.heading-emphasis", label: "Heading · emphasis", kind: "text", defaultValue: "our ninety days." },
     { id: "home.timeline.action", label: "Process button", kind: "text", defaultValue: "See the process" },
     { id: "home.timeline.action-href", label: "Process button destination", kind: "text", defaultValue: "/process", help: "Same-site path beginning with / or an in-page #anchor." },
     { id: "home.timeline.image", label: "Completed home image", kind: "image", defaultValue: "/assets/projects/real-v1/kioo-03.webp" },
     { id: "home.timeline.image-alt", label: "Image description", kind: "text", defaultValue: "A completed OKNO Kioo home surrounded by mature forest" },
-    { id: "home.timeline.image-caption", label: "Image caption", kind: "text", defaultValue: "Day 90 · Ready for handover" },
+    { id: "home.timeline.image-caption", label: "Image caption", kind: "text", defaultValue: "Day 90 · Keys in hand" },
     ...[
-      ["Days 01–10", "Client brief and site", "The site and the brief are understood together before a model is selected or a custom design begins."],
-      ["Days 11–25", "Design and approvals", "Design development, approvals, engineering and material planning are completed before manufacturing."],
-      ["Days 26–60", "Factory manufacturing", "The approved home moves through factory manufacturing and quality inspection."],
-      ["Days 61–72", "Packing and transportation", "The completed parts are packed and transported for assembly."],
-      ["Days 73–90", "Assembly and handover", "Site assembly, interior completion and final handover close the process."],
+      ["Days 01–10", "The land and the brief", "We study your land and how you mean to live on it before a single line is drawn."],
+      ["Days 11–25", "Design, resolved", "Architecture, engineering, materials and approvals are settled in full before anything is made."],
+      ["Days 26–60", "Made off-site", "Your home is built under controlled conditions and inspected at every stage."],
+      ["Days 61–72", "Carried to your land", "Every element is protected and delivered in the order it will be assembled."],
+      ["Days 73–90", "Assembled and handed over", "Your home is assembled, finished and reviewed as a whole. Then it is yours."],
     ].flatMap(([days, title, copy], index): ContentField[] => [
       { id: `home.timeline.stage-${index + 1}.days`, label: `Stage ${index + 1} · day range`, kind: "text", defaultValue: days },
       { id: `home.timeline.stage-${index + 1}.title`, label: `Stage ${index + 1} · heading`, kind: "text", defaultValue: title },
@@ -72,25 +73,33 @@ const sharedHomeSections: readonly ContentSection[] = [
     { id: "home.signature.image", label: "Forza image", kind: "image", defaultValue: "/models/forza/orbit-keyframes-invisible-glow-1080p/forza-invisible-a00.png" },
     { id: "home.signature.image-alt", label: "Forza image description", kind: "text", defaultValue: "Forza Signature home exterior" },
     { id: "home.signature.video", label: "Rotation film", kind: "video", defaultValue: "/models/forza/video/forza-360-scroll-648p-24fps-fluid.mp4", help: "Keep this film seekable for desktop scrolling. Phones use native playback and controls." },
-    { id: "home.signature.label", label: "Section label", kind: "text", defaultValue: "Signature homes" },
+    { id: "home.signature.label", label: "Section label", kind: "text", defaultValue: "Signature collection" },
     { id: "home.signature.heading-1", label: "Heading · first line", kind: "text", defaultValue: "Meet Forza." },
-    { id: "home.signature.heading-2", label: "Heading · second line", kind: "text", defaultValue: "Turn the home with your scroll." },
-    { id: "home.signature.mobile-heading-2", label: "Phone heading · second line", kind: "text", defaultValue: "See the home from every angle." },
-    { id: "home.signature.copy", label: "Closing copy", kind: "text", defaultValue: "Explore Forza and the complete Signature collection." },
-    { id: "home.signature.action", label: "Models button", kind: "text", defaultValue: "View the models" },
+    { id: "home.signature.heading-2", label: "Heading · second line", kind: "text", defaultValue: "Every angle, considered." },
+    { id: "home.signature.mobile-heading-2", label: "Phone heading · second line", kind: "text", defaultValue: "Every angle, considered." },
+    { id: "home.signature.copy", label: "Closing copy", kind: "text", defaultValue: "Six homes, each resolved to the last detail." },
+    { id: "home.signature.action", label: "Models button", kind: "text", defaultValue: "View the collection" },
     { id: "home.signature.action-href", label: "Models button destination", kind: "text", defaultValue: "/models/signature", help: "Same-site path beginning with /." },
   ] },
   { id: "bespoke-preview", label: "Bespoke preview", fields: [
-    { id: "home.bespoke.image", label: "Bespoke background", kind: "image", defaultValue: "/models/bespoke/bespoke-pearl-exterior-v1.webp" },
-    { id: "home.bespoke.image-alt", label: "Background description", kind: "text", defaultValue: "Bespoke limestone and oak home shaped around a wooded site" },
-    { id: "home.bespoke.card-image", label: "Courtyard image", kind: "image", defaultValue: "/models/bespoke/bespoke-pearl-courtyard-v1.webp" },
-    { id: "home.bespoke.card-alt", label: "Courtyard description", kind: "text", defaultValue: "Bespoke courtyard opening to water and mature trees" },
+    { id: "home.bespoke.image", label: "Bespoke background", kind: "image", defaultValue: "/assets/projects/real-v1/lakewood-01.webp" },
+    { id: "home.bespoke.image-alt", label: "Background description", kind: "text", defaultValue: "Lakewood Villa and its pool at dusk" },
+    { id: "home.bespoke.card-image", label: "Courtyard image", kind: "image", defaultValue: "/assets/projects/real-v1/lakewood-02.webp" },
+    { id: "home.bespoke.card-alt", label: "Courtyard description", kind: "text", defaultValue: "Lakewood Villa beside its swimming pool" },
     { id: "home.bespoke.word", label: "Background word", kind: "text", defaultValue: "Bespoke" },
     { id: "home.bespoke.heading-1", label: "Heading · first line", kind: "text", defaultValue: "One site." },
     { id: "home.bespoke.heading-2", label: "Heading · second line", kind: "text", defaultValue: "One original home." },
-    { id: "home.bespoke.copy", label: "Description", kind: "text", defaultValue: "The architecture begins with your land, your routines and a brief of your own." },
+    { id: "home.bespoke.copy", label: "Description", kind: "text", defaultValue: "Calibrated to your land, your life and your investment. Never the other way round." },
     { id: "home.bespoke.action", label: "Bespoke button", kind: "text", defaultValue: "Enter Bespoke" },
     { id: "home.bespoke.action-href", label: "Bespoke button destination", kind: "text", defaultValue: "/models/bespoke", help: "Same-site path beginning with /." },
+  ] },
+  { id: "hospitality-preview", label: "Hospitality preview", fields: [
+      { id: "home.hospitality.label", label: "Hospitality \u00b7 label", kind: "text", defaultValue: "Hospitality" },
+      { id: "home.hospitality.heading", label: "Hospitality \u00b7 heading", kind: "text", defaultValue: "Built to welcome." },
+      { id: "home.hospitality.copy", label: "Hospitality \u00b7 copy", kind: "text", defaultValue: "Retreats and boutique estates, delivered as one coordinated whole, from site study to first guest." },
+      { id: "home.hospitality.action", label: "Hospitality \u00b7 action", kind: "text", defaultValue: "Explore hospitality" },
+      { id: "home.hospitality.href", label: "Hospitality \u00b7 href", kind: "text", defaultValue: "/hospitality" },
+      { id: "home.hospitality.image", label: "Hospitality \u00b7 image", kind: "image", defaultValue: "/assets/projects/real-v1/octapod-layana-01.webp" },
   ] },
   { id: "sustainability-preview", label: "Sustainability preview", fields: [
     { id: "home.sustainability.poster", label: "Opening still", kind: "image", defaultValue: "/sustainability/shared-poster.png" },
@@ -99,7 +108,7 @@ const sharedHomeSections: readonly ContentSection[] = [
     { id: "home.sustainability.label", label: "Section label", kind: "text", defaultValue: "Sustainability" },
     { id: "home.sustainability.heading-1", label: "Heading · first line", kind: "text", defaultValue: "Build less" },
     { id: "home.sustainability.heading-2", label: "Heading · second line", kind: "text", defaultValue: "against the land." },
-    { id: "home.sustainability.copy", label: "Description", kind: "text", defaultValue: "The slope, trees, light and path of water are inputs to the architecture." },
+    { id: "home.sustainability.copy", label: "Description", kind: "text", defaultValue: "We read the slope, the trees, the light and the water before we sketch." },
     { id: "home.sustainability.action", label: "Approach button", kind: "text", defaultValue: "See the approach" },
     { id: "home.sustainability.action-href", label: "Approach button destination", kind: "text", defaultValue: "/sustainability", help: "Same-site path beginning with /." },
   ] },
@@ -125,7 +134,7 @@ const projectRecordSections: ContentSection[] = projectMedia.map(project => ({
   note: "Globe pins and the Project library are separate. Location lookup gives an approximate pin, not verified site coordinates.",
   fields: [
     { id: `projects.${project.id}.title`, label: "Project title", kind: "text", defaultValue: project.title },
-    { id: `projects.${project.id}.description`, label: "Gallery description", kind: "text", defaultValue: `Photography and films from the supplied ${project.title} project collection.` },
+    { id: `projects.${project.id}.description`, label: "Gallery description", kind: "text", defaultValue: projectDescriptions[project.id] ?? "" },
     ...project.gallery.flatMap((image, index): ContentField[] => [
       { id: `projects.${project.id}.image-${index + 1}.src`, label: `Photograph ${index + 1}`, kind: "image", defaultValue: image.src },
       { id: `projects.${project.id}.image-${index + 1}.alt`, label: `Photograph ${index + 1} · description`, kind: "text", defaultValue: image.alt },
@@ -143,7 +152,7 @@ const processStages = [
   ["land", PROCESS_DAY_RANGES["land"], "Land", "The brief meets the land.", "The site and the brief are read together before a model is selected or a bespoke design begins.", "/process/land-poster.webp"],
   ["architecture", PROCESS_DAY_RANGES["architecture"], "Architecture", "The plan takes shape.", "The site, programme and chosen model are translated into a clear architectural direction.", "/process/drawing-poster.webp"],
   ["design-lock", PROCESS_DAY_RANGES["design-lock"], "Design lock", "Every decision is resolved.", "Design development, approvals, engineering and material planning are completed before the build advances.", "/process/design-lock-poster.webp"],
-  ["assembly", PROCESS_DAY_RANGES["assembly"], "Assembly", "The structure takes shape.", "Prepared floor and wall panels are aligned into the resolved structure on the finished base.", "/process/generated/process-panel-base-v1.webp"],
+  ["assembly", PROCESS_DAY_RANGES["assembly"], "Assembly", "The structure rises.", "Prepared floor and wall panels are aligned into the resolved structure on the finished base.", "/process/generated/process-panel-base-v1.webp"],
   ["enclosure", PROCESS_DAY_RANGES["enclosure"], "Enclosure", "The home closes around the view.", "Roof, glazing and envelope complete the form while keeping the architecture tied to its setting.", "/process/generated/process-panel-walls-v1.webp"],
   ["handover", PROCESS_DAY_RANGES["handover"], "Handover", "Finished where it belongs.", "The completed home is checked as one resolved whole before the final handover.", "/process/generated/process-panel-complete-v1.webp"],
 ] as const;
@@ -163,10 +172,10 @@ const sustainabilityFacts = [
 ] as const;
 
 const bespokeStages = [
-  ["PLACE", "Topography, weather and view", "Read orientation, access, climate and long views before drawing a room.", "/assets/projects/real-v1/forrest-01.webp", "Completed OKNO residence following a curved garden path and reflecting pool through established planting"],
-  ["BRIEF", "Ritual, privacy and gathering", "Translate arrival, gathering, privacy and retreat into clear spatial priorities.", "/models/bespoke/bespoke-brief-v3.webp", "Luminous architecture table with a floor plan, material samples and tracing paper"],
-  ["FORM", "Volume, structure and material", "Develop volume, structure, material and landscape as one architectural response.", "/models/bespoke/bespoke-form-v3.webp", "Pale stone and oak architectural massing model on a layered topographic base"],
-  ["ATMOSPHERE", "Light, texture and landscape", "Tune light, texture and thresholds until the home feels inseparable from its setting.", "/models/bespoke/bespoke-pearl-courtyard-v1.webp", "Luminous limestone courtyard residence with water and mature trees"],
+  ["PLACE", "Topography, weather and view", "Read orientation, access, climate and long views before drawing a room.", "/assets/projects/real-v1/lakewood-01.webp", "Lakewood Villa entrance and planted garden"],
+  ["BRIEF", "Life, ritual and investment", "Understand how you live and what you wish to invest, then design back from both.", "/assets/projects/real-v1/lakewood-06.webp", "Lakewood Villa living room opening to the landscaped garden"],
+  ["FORM", "Volume, structure and material", "Shape volume, structure, material and landscape as one response, true to the investment agreed.", "/assets/projects/real-v1/lakewood-10.webp", "Aerial view of Lakewood Villa, its pool and gardens at dusk"],
+  ["ATMOSPHERE", "Light, texture and landscape", "Tune light, texture and thresholds until the home feels inseparable from its setting.", "/assets/projects/real-v1/lakewood-02.webp", "Lakewood Villa framed by its landscape and swimming pool"],
 ] as const;
 
 const signatureStories = [
@@ -182,35 +191,35 @@ const signatureStories = [
       ["Exterior", "/models/kray/gallery/kray-exterior-water.webp", "Kray modular home beside a reflective mountain pool"], ["Living", "/models/kray/gallery/kray-interior-panorama.webp", "Kray living room looking through full-height glazing toward the mountains"],
       ["Kitchen", "/models/kray/gallery/kray-interior-kitchen-lounge.webp", "Kray timber kitchen and lounge interior"], ["Deck", "/models/kray/gallery/kray-exterior-deck.webp", "Kray exterior with its integrated waterside deck"], ["Setting", "/models/kray/gallery/kray-mountain-community.webp", "A collection of Kray homes in a mountain landscape"],
     ], features: [
-      ["Ascent", "A rising roofline turns a compact footprint into a room with presence."], ["Outlook", "Full-height glazing opens the living space to mountain, forest and sky."], ["Compact retreat", "A complete studio home resolved within 306 square feet."],
+      ["Rising roofline", "The roof climbs towards the view, drawing light deep into the room."], ["Open front", "Floor-to-ceiling glass gives the living room entirely to the view."], ["Two measures", "Two layouts, 306 or 550 square feet, each resolved with the same care."],
     ] },
   { slug: "gaze", film: "/models/gaze/video/gaze-360-scroll-648p-24fps-fluid.mp4", detail: "/models/gaze/video/gaze-360-scroll-1080p-24fps-smooth.mp4", poster: "/models/gaze/orbit-keyframes-moonlit-cyan-1080p/gaze-a00.png",
     gallery: [
       ["Exterior", "/models/gaze/gallery/gaze-exterior-three-quarter.webp", "Gaze timber retreat in a mountain setting"], ["Bedroom", "/models/gaze/gallery/gaze-bedroom-wide.webp", "Gaze vaulted bedroom with warm timber ceiling"],
       ["Interior", "/models/gaze/gallery/gaze-interior-front.webp", "Gaze bedroom and sitting space beneath the vaulted roof"], ["Setting", "/models/gaze/gallery/gaze-retreat-setting.webp", "A collection of Gaze retreats beside a mountain pool"], ["Axonometric", "/models/gaze/gallery/gaze-axonometric.webp", "Cutaway axonometric view of the Gaze interior"],
     ], features: [
-      ["Framed outlook", "A full-height glazed gable turns the landscape into the room's principal surface."], ["Quiet volume", "A vaulted timber ceiling gives the compact sleeping room a calm, generous proportion."], ["Private retreat", "One focused interior, a warm timber envelope and a footprint made for remote settings."],
+      ["Glazed gable", "The entire end wall is glass, so the bed faces the landscape."], ["Timber skin", "Warm vertical timber wraps the walls and folds into the frame of the view."], ["Built for waking", "A studio retreat composed around a single moment: first light."],
     ] },
   { slug: "tengo", film: "/models/tengo/video/tengo-360-scroll-648p-24fps-fluid.mp4", detail: "/models/tengo/video/tengo-360-scroll-1080p-24fps-smooth.mp4", poster: "/models/tengo/blender-accurate/styled-imagen-final-1080p/tengo-a000-roof-final-1920x1080.png",
     gallery: [
       ["Exterior", "/models/tengo/gallery/tengo-exterior-pool.webp", "Tengo modular home beside a reflective pool"], ["Living", "/models/tengo/gallery/tengo-living.webp", "Tengo living room with full-height garden glazing"],
       ["Bedroom", "/models/tengo/gallery/tengo-bedroom.webp", "Tengo bedroom with warm timber ceiling and framed garden views"], ["Dining", "/models/tengo/gallery/tengo-dining.webp", "Tengo dining room beneath a timber ceiling"], ["Plan", "/models/tengo/gallery/tengo-axonometric.webp", "Tengo cutaway axonometric interior plan"],
     ], features: [
-      ["Long horizon", "An extended roofline gives the home a calm, grounded silhouette."], ["Gathering room", "Generous living and dining spaces open toward the deck and landscape."], ["Room to arrive", "Two- and three-bedroom plans begin at 1,426 square feet."],
+      ["The porch", "A timber-lined gable shelters a deep verandah, lit for long evenings."], ["Quiet rhythm", "Diagonal panels in slate tones give the long facade a measured rhythm."], ["Room to gather", "Two bedrooms and generous living, across 1,426 square feet."],
     ] },
   { slug: "trib", film: "/models/trib/video/trib-360-scroll-648p-24fps-fluid.mp4", detail: "/models/trib/video/trib-360-scroll-1080p-24fps-smooth.mp4", poster: "/models/trib/orbit-keyframes-smoked-amber-clean-geometry-v2-1080p/trib-a00.png",
     gallery: [
       ["Exterior", "/models/trib/gallery/trib-exterior-front.webp", "Trib A-frame retreat among tall forest trees"], ["Bedroom", "/models/trib/gallery/trib-bedroom.webp", "Trib bedroom beneath the warm timber A-frame ceiling"],
       ["Kitchenette", "/models/trib/gallery/trib-kitchenette.webp", "Trib compact kitchenette beside the sleeping space"], ["Bath", "/models/trib/gallery/trib-bathroom.webp", "Trib compact bathroom with timber finishes"], ["Setting", "/models/trib/gallery/trib-setting.webp", "A collection of Trib retreats in a forest clearing"],
     ], features: [
-      ["A-frame clarity", "A steep, uninterrupted roof gives the retreat its unmistakable silhouette."], ["Glazed arrival", "The full-height triangular facade opens the compact interior toward the landscape."], ["Compact escape", "One bed, one bath and a kitchenette resolved within 436 square feet."],
+      ["One line", "Roof and wall become a single form, drawn in one continuous pitch."], ["Lantern", "After dark, the glazed gable glows like a lantern among the trees."], ["Soaring studio", "The A-frame lifts the ceiling high, so 436 square feet feels far larger."],
     ] },
   { slug: "octapod", film: "/models/octapod/video/octapod-360-scroll-648p-24fps-fluid.mp4", detail: "/models/octapod/video/octapod-360-scroll-1080p-24fps-smooth.mp4", poster: "/models/octapod/orbit-keyframes-muted-aubergine-geometry-v2-1080p/octapod-a00.png",
     gallery: [
       ["Exterior", "/models/octapod/gallery/octapod-exterior-forest.webp", "Octapod glazed exterior in a forest clearing"], ["Bedroom", "/models/octapod/gallery/octapod-bedroom-wide.webp", "Octapod timber-lined bedroom with warm afternoon light"],
       ["Interior", "/models/octapod/gallery/octapod-bedroom-detail.webp", "Octapod bedroom with a timber feature wall and pendant lights"], ["Setting", "/models/octapod/gallery/octapod-landscape-setting.webp", "Octapod retreat placed in a sunlit woodland landscape"], ["Cutaway", "/models/octapod/gallery/octapod-cutaway-plan.webp", "Octapod cutaway showing the bedroom and compact bathroom arrangement"],
     ], features: [
-      ["Eight-sided calm", "A disciplined octagonal shell gives the compact retreat its unmistakable silhouette."], ["Panoramic aperture", "Full-height front glazing opens the studio to its setting while opaque facets provide shelter."], ["Resort-ready studio", "One bed, one bath and one kitchenette resolved within 300 square feet."],
+      ["Wraparound", "Glass turns the corners, framing the landscape on three sides."], ["Dark crown", "A band of dark vertical timber caps the glass and grounds the form."], ["Made for retreats", "A 300 sq ft studio suite, designed to be clustered into a boutique estate."],
     ] },
 ] as const;
 
@@ -224,13 +233,17 @@ export const signatureGalleryDefaults: Record<string, ContentItem[]> = Object.fr
 
 const signatureCommonSections: readonly ContentSection[] = [
   { id: "signature-controls", label: "Collection controls", fields: [
+      { id: "models.signature.enquire-prefix", label: "Enquiry button prefix", kind: "text", defaultValue: "Enquire about" },
+      { id: "models.signature.collection-count", label: "Full collection count", kind: "text", defaultValue: "Six precision engineered homes" },
+      { id: "models.signature.count-qualifier", label: "Filtered collection description", kind: "text", defaultValue: "precision engineered" },
+    { id: "models.signature.investment-note", label: "Investment qualification", kind: "text", defaultValue: "Final investment depends on site, specification and finish." },
     { id: "models.signature.eyebrow", label: "Collection eyebrow", kind: "text", defaultValue: "Signature collection" },
     { id: "models.signature.loading", label: "Loading message", kind: "text", defaultValue: "Loading" },
     { id: "models.signature.plan-filter-label", label: "Plan filter accessible label", kind: "text", defaultValue: "Filter by floor plan" },
     { id: "models.signature.filter-all", label: "All plans button", kind: "text", defaultValue: "All" },
     { id: "models.signature.filter-studio", label: "Studio button", kind: "text", defaultValue: "Studio" },
-    { id: "models.signature.filter-2-bhk", label: "Two bedroom button", kind: "text", defaultValue: "2 BHK" },
-    { id: "models.signature.filter-3-bhk", label: "Three bedroom button", kind: "text", defaultValue: "3 BHK" },
+    { id: "models.signature.filter-2-bhk", label: "Two bedroom button", kind: "text", defaultValue: "Two-bedroom" },
+    { id: "models.signature.filter-3-bhk", label: "Three bedroom button", kind: "text", defaultValue: "Three-bedroom" },
     { id: "models.signature.scroll-cue", label: "Scroll instruction", kind: "text", defaultValue: "Scroll to rotate" },
     { id: "models.signature.models-label", label: "Model selector accessible label", kind: "text", defaultValue: "Signature models" },
     { id: "models.signature.details-action", label: "Explore details button", kind: "text", defaultValue: "Explore details" },
@@ -240,7 +253,7 @@ const signatureCommonSections: readonly ContentSection[] = [
     { id: "models.signature.feature-eyebrow", label: "Feature card label", kind: "text", defaultValue: "Signature detail" },
     { id: "models.signature.detail.close", label: "Explore close button", kind: "text", defaultValue: "Close" },
     { id: "models.signature.detail.internal-area", label: "Internal area label", kind: "text", defaultValue: "Internal area" },
-    { id: "models.signature.detail.starting-price", label: "Starting price label", kind: "text", defaultValue: "Starting price" },
+    { id: "models.signature.detail.starting-price", label: "Starting price label", kind: "text", defaultValue: "Indicative price" },
     { id: "models.signature.detail.delivery", label: "Delivery label", kind: "text", defaultValue: "Delivery" },
     { id: "models.signature.detail.delivery-value", label: "Delivery value", kind: "text", defaultValue: "90 days" },
     { id: "models.signature.detail.spaces", label: "Spaces label", kind: "text", defaultValue: "Spaces" },
@@ -351,7 +364,7 @@ const baseAdminPages: readonly ContentPage[] = [
             { id: "hero-v1.opening.intro-video", label: "Intro film", kind: "video", defaultValue: "/assets/landing-options/forest-entry-intro-15s.mp4" },
             { id: "hero-v1.opening.scroll-video", label: "Scroll journey film", kind: "video", defaultValue: "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4", help: "Replacement must remain seekable; the scroll interaction reads video time." },
             { id: "hero-v1.opening.intro-last-frame", label: "Intro handoff still", kind: "image", defaultValue: "/assets/landing-options/forest-entry-intro-last-frame.png" },
-            { id: "hero-v1.opening.tagline", label: "Still-frame tagline · V1", kind: "text", defaultValue: "Live better, live modular.", help: "Shown with OKNO Modhomes on the frozen intro frame. Leave empty to hide the tagline." },
+            { id: "hero-v1.opening.tagline", label: "Still-frame tagline · V1", kind: "text", defaultValue: "Homes for rare places.", help: "Shown with OKNO Modhomes on the frozen intro frame. Leave empty to hide the tagline." },
             { id: "hero-v1.opening.accessible-title", label: "Accessible page title", kind: "text", defaultValue: "OKNO Modhomes" },
             { id: "hero-v1.opening.start-alt", label: "Opening image description", kind: "text", defaultValue: "A single illuminated Kioo home within dense forest at blue hour" },
             { id: "hero-v1.opening.end-alt", label: "Interior image description", kind: "text", defaultValue: "The timber-lined interior of the Kioo home opening to the forest" },
@@ -385,7 +398,7 @@ const baseAdminPages: readonly ContentPage[] = [
       { id: "projects.intro.eyebrow", label: "Section label", kind: "text", defaultValue: "OKNO PROJECTS" },
       { id: "projects.intro.title", label: "Main heading", kind: "text", defaultValue: "Homes,\n everywhere." },
       { id: "projects.intro.subtitle", label: "Supporting line", kind: "text", defaultValue: "Distinct places. A shared way of living." },
-      { id: "projects.intro.action", label: "View projects button", kind: "text", defaultValue: "Our projects" },
+      { id: "projects.intro.action", label: "View projects button", kind: "text", defaultValue: "Enter the collection" },
       { id: "projects.intro.action-href", label: "View projects button destination", kind: "text", defaultValue: "#collection", help: "Same-site path beginning with / or an in-page #anchor." },
     ], note: "The Globe pins section below owns location lookup and coordinates independently of project pages." },
     { id: "globe-pins", label: "Globe pins", fields: [], note: "Add locations to the globe without adding project photographs or a project page. Search for a place or enter its decimal coordinates." },
@@ -399,14 +412,14 @@ const baseAdminPages: readonly ContentPage[] = [
   ] },
   { id: "models", label: siteNavigationItems[1].label, href: "/models", sections: [
     { id: "selector", label: "Model selector opening", fields: [
-      { id: "models.selector.heading-start", label: "Heading · opening", kind: "text", defaultValue: "A home." },
-      { id: "models.selector.heading-end", label: "Heading · emphasis", kind: "text", defaultValue: "Your way." },
-      { id: "models.selector.intro", label: "Supporting line", kind: "text", defaultValue: "Signature or Bespoke" },
+      { id: "models.selector.heading-start", label: "Heading · opening", kind: "text", defaultValue: "Two ways" },
+      { id: "models.selector.heading-end", label: "Heading · emphasis", kind: "text", defaultValue: "to begin." },
+      { id: "models.selector.intro", label: "Supporting line", kind: "text", defaultValue: "A collection, or one of one." },
       { id: "models.selector.accessible-label", label: "Accessible selector label", kind: "text", defaultValue: "Choose how to build your OKNO home" },
     ] },
     ...([
-      ["signature", "Signature", "Enter the Signature Collection", "/models/selector/signature-blue-hour-v1.webp", "Concept visualization of a compact timber and glass Signature home beside still water at blue hour", "Considered models, composed for your land.", "View Signature", "Dark luxury"],
-      ["bespoke", "Bespoke", "Begin a Bespoke home", "/models/bespoke/bespoke-pearl-exterior-v1.webp", "Concept visualization of a luminous site-specific limestone and oak Bespoke residence", "One site. One brief. One original home.", "Begin Bespoke", "Light luxury"],
+      ["signature", "Collection", "Enter the Signature Collection", "/models/forza/interiors/forza-exterior.webp", "Forza Signature home with timber cladding and full-height glazing", "Pre designed homes, placed with care on your land.", "View the collection", "Precisely engineered"],
+      ["bespoke", "Bespoke", "Begin a Bespoke home", "/assets/projects/real-v1/lakewood-01.webp", "Lakewood Villa and its pool at dusk", "One site. One brief. One original home.", "Begin crafting", "Calibrated luxury"],
     ] as const).map(([id, title, label, image, alt, description, action, mode]): ContentSection => ({ id: `selector-${id}`, label: `${title} selector card`, fields: [
       { id: `models.selector.${id}.title`, label: "Card heading", kind: "text", defaultValue: title },
       { id: `models.selector.${id}.label`, label: "Accessible card label", kind: "text", defaultValue: label },
@@ -437,24 +450,24 @@ const baseAdminPages: readonly ContentPage[] = [
     ] },
     { id: "bespoke", label: "Bespoke", href: "/models/bespoke", sections: [
       { id: "hero", label: "Opening", fields: [
-        { id: "models.bespoke.hero.image", label: "Opening photograph", kind: "image", defaultValue: "/models/bespoke/bespoke-pearl-exterior-v1.webp" },
-        { id: "models.bespoke.hero.alt", label: "Image description", kind: "text", defaultValue: "A luminous site-specific limestone and oak residence integrated into a wooded hillside" },
+        { id: "models.bespoke.hero.image", label: "Opening photograph", kind: "image", defaultValue: "/assets/projects/real-v1/lakewood-01.webp" },
+        { id: "models.bespoke.hero.alt", label: "Image description", kind: "text", defaultValue: "Lakewood Villa and its pool at dusk" },
         { id: "models.bespoke.hero.background-word", label: "Background word", kind: "text", defaultValue: "BESPOKE" },
         { id: "models.bespoke.hero.eyebrow", label: "Section label", kind: "text", defaultValue: "Bespoke by OKNO" },
         { id: "models.bespoke.hero.line-1", label: "Heading · first line", kind: "text", defaultValue: "A home authored" },
         { id: "models.bespoke.hero.line-2", label: "Heading · second line", kind: "text", defaultValue: "from place." },
       ] },
       { id: "manifesto", label: "Manifesto", fields: [
-        { id: "models.bespoke.manifesto.eyebrow", label: "Section label", kind: "text", defaultValue: "One commission" },
+        { id: "models.bespoke.manifesto.eyebrow", label: "Section label", kind: "text", defaultValue: "One of one. Calibrated." },
         { id: "models.bespoke.manifesto.line-1", label: "Heading · first line", kind: "text", defaultValue: "NOT SELECTED." },
         { id: "models.bespoke.manifesto.line-2", label: "Heading · second line", kind: "text", defaultValue: "NOT ADAPTED." },
         { id: "models.bespoke.manifesto.line-3", label: "Heading · third line", kind: "text", defaultValue: "AUTHORED." },
-        { id: "models.bespoke.manifesto.copy", label: "Description", kind: "text", defaultValue: "Bespoke begins where a catalogue ends. The architecture is developed around the site, the life it will hold and the atmosphere it should create." },
-        { id: "models.bespoke.manifesto.image", label: "Courtyard photograph", kind: "image", defaultValue: "/models/bespoke/bespoke-pearl-courtyard-v1.webp" },
-        { id: "models.bespoke.manifesto.alt", label: "Image description", kind: "text", defaultValue: "Luminous limestone courtyard residence shaped around water and mature trees" },
+        { id: "models.bespoke.manifesto.copy", label: "Description", kind: "text", defaultValue: "Bespoke begins where a catalogue ends. Every home is calibrated: designed back from your land, your life and your investment." },
+        { id: "models.bespoke.manifesto.image", label: "Courtyard photograph", kind: "image", defaultValue: "/assets/projects/real-v1/lakewood-02.webp" },
+        { id: "models.bespoke.manifesto.alt", label: "Image description", kind: "text", defaultValue: "Lakewood Villa framed by its landscape and swimming pool" },
       ] },
       { id: "portal", label: "Architecture transition", fields: [
-        { id: "models.bespoke.portal.image", label: "Portal photograph", kind: "image", defaultValue: "/models/bespoke/bespoke-pearl-courtyard-v1.webp" },
+        { id: "models.bespoke.portal.image", label: "Portal photograph", kind: "image", defaultValue: "/assets/projects/real-v1/lakewood-02.webp" },
         { id: "models.bespoke.portal.image-alt", label: "Portal image description", kind: "text", defaultValue: "" },
       ] },
       { id: "decisions", label: "Design decisions", fields: [
@@ -468,32 +481,35 @@ const baseAdminPages: readonly ContentPage[] = [
         { id: `models.bespoke.stage-${index + 1}.alt`, label: "Image description", kind: "text", defaultValue: alt },
       ] })),
       { id: "result", label: "The result", fields: [
-        { id: "models.bespoke.result.image", label: "Background photograph", kind: "image", defaultValue: "/models/bespoke/bespoke-pearl-courtyard-v1.webp" },
-        { id: "models.bespoke.result.alt", label: "Background description", kind: "text", defaultValue: "Open-air courtyard connecting architecture, water and landscape" },
+        { id: "models.bespoke.result.image", label: "Background photograph", kind: "image", defaultValue: "/assets/projects/real-v1/lakewood-02.webp" },
+        { id: "models.bespoke.result.alt", label: "Background description", kind: "text", defaultValue: "Lakewood Villa and its pool" },
         { id: "models.bespoke.result.word-1", label: "Background word · one", kind: "text", defaultValue: "ONE PLACE" },
         { id: "models.bespoke.result.word-2", label: "Background word · two", kind: "text", defaultValue: "ONE HOME" },
-        { id: "models.bespoke.result.card-image", label: "Inset photograph", kind: "image", defaultValue: "/models/bespoke/bespoke-pearl-exterior-v1.webp" },
-        { id: "models.bespoke.result.card-alt", label: "Inset image description", kind: "text", defaultValue: "Pale limestone and oak bespoke residence in its landscape" },
+        { id: "models.bespoke.result.card-image", label: "Inset photograph", kind: "image", defaultValue: "/assets/projects/real-v1/lakewood-01.webp" },
+        { id: "models.bespoke.result.card-alt", label: "Inset image description", kind: "text", defaultValue: "Lakewood Villa in its landscape" },
         { id: "models.bespoke.result.eyebrow", label: "Section label", kind: "text", defaultValue: "The result" },
+      { id: "models.bespoke.closing.action", label: "Closing button", kind: "text", defaultValue: "Begin crafting" },
+      { id: "models.bespoke.closing.href", label: "Closing destination", kind: "text", defaultValue: "/enquiry?intent=home&model=bespoke" },
+      { id: "models.bespoke.gallery.label", label: "Gallery label", kind: "text", defaultValue: "Bespoke projects" },
         { id: "models.bespoke.result.heading", label: "Closing heading", kind: "text", defaultValue: "Architecture that could belong nowhere else." },
       ] },
     ] },
   ] },
   { id: "hospitality", label: siteNavigationItems[2].label, href: "/hospitality", sections: [
     { id: "opening", label: "Opening", fields: [
-      { id: "hospitality.opening.heading", label: "Opening heading", kind: "text", defaultValue: "Built to welcome. Designed to scale." },
+      { id: "hospitality.opening.heading", label: "Opening heading", kind: "text", defaultValue: "Built to welcome. Designed to perform." },
       { id: "hospitality.opening.image", label: "Opening photograph", kind: "image", defaultValue: "/assets/projects/real-v1/lakewood-08.webp" },
       { id: "hospitality.opening.alt", label: "Photograph description", kind: "text", defaultValue: "Lakewood hospitality buildings reflected in water at dusk" },
       { id: "hospitality.opening.caption", label: "Opening caption", kind: "text", defaultValue: "One architectural language, coordinated across every residence and shared space." },
-      { id: "hospitality.opening.action", label: "Begin project button", kind: "text", defaultValue: "Begin a project" },
+      { id: "hospitality.opening.action", label: "Begin project button", kind: "text", defaultValue: "Arrange a consultation" },
       { id: "hospitality.opening.action-href", label: "Begin project destination", kind: "text", defaultValue: "/enquiry?intent=hospitality", help: "Same-site path beginning with /." },
     ] },
     { id: "proof", label: "Estate capabilities", fields: [
       ...([
         ["Estate scale", "5+", "Residences, one coordinated brief.", "/assets/projects/real-v1/octapod-layana-01.webp"],
-        ["Opening path", "Months", "A delivery programme measured for opening.", "/assets/projects/real-v1/forrest-01.webp"],
-        ["Site", "Ready", "Terrain, utilities and resilience planned.", "/assets/projects/real-v1/lakewood-01.webp"],
-        ["Finish", "Two", "Guest-ready or architectural shell.", "/assets/projects/real-v1/kioo-01.webp"],
+        ["Time to revenue", "Parallel", "Built off-site while your land is prepared, so you open sooner.", "/assets/projects/real-v1/forrest-01.webp"],
+        ["Site", "Studied", "Terrain, access, utilities and resilience resolved first.", "/assets/projects/real-v1/lakewood-01.webp"],
+        ["Finish", "Two", "Delivered guest-ready, Operational.", "/assets/projects/real-v1/kioo-01.webp"],
         ["Aftercare", "Ongoing", "Warranty, handover and long-term care.", "/assets/projects/real-v1/rasa-vikarabad-01.webp"],
       ] as const).flatMap(([eyebrow, value, title, image], index) => [
         { id: `hospitality.bento.${index + 1}.eyebrow`, label: `Card ${index + 1} label`, kind: "text" as const, defaultValue: eyebrow },
@@ -529,8 +545,9 @@ const baseAdminPages: readonly ContentPage[] = [
       ]),
     ] },
     { id: "enquiry", label: "Enquiry close", fields: [
+      { id: "hospitality.closing.copy", label: "Consultation description", kind: "text", defaultValue: "Investment is shaped in private consultation." },
       { id: "hospitality.closing.heading", label: "Closing heading", kind: "text", defaultValue: "Begin a hospitality conversation." },
-      { id: "hospitality.closing.action", label: "Enquiry button", kind: "text", defaultValue: "Hospitality enquiry" },
+      { id: "hospitality.closing.action", label: "Enquiry button", kind: "text", defaultValue: "Arrange a private consultation" },
       { id: "hospitality.closing.action-href", label: "Enquiry destination", kind: "text", defaultValue: "/enquiry?intent=hospitality", help: "Same-site path beginning with /." },
     ] },
   ] },
@@ -605,6 +622,7 @@ const baseAdminPages: readonly ContentPage[] = [
       { id: "sustainability.proof.opening-line-1", label: "Opening heading · first line", kind: "text", defaultValue: "The land leads." },
       { id: "sustainability.proof.opening-line-2", label: "Opening heading · second line", kind: "text", defaultValue: "The home " },
       { id: "sustainability.proof.opening-emphasis", label: "Opening heading · emphasis", kind: "text", defaultValue: "follows." },
+      { id: "sustainability.proof.model-note", label: "Project naming note", kind: "text", defaultValue: "Reflections, built on our Kioo model." },
       { id: "sustainability.proof.press-heading", label: "Press heading", kind: "text", defaultValue: "Reflections travelled beyond the forest." },
       { id: "sustainability.proof.press-copy", label: "Press introduction", kind: "text", defaultValue: "Four publications found different stories in the same compact home." },
     ] },
@@ -679,52 +697,54 @@ const baseAdminPages: readonly ContentPage[] = [
   { id: "about", label: siteNavigationItems[6].label, href: "/about", sections: [
     { id: "opening", label: "About opening", fields: [
       { id: "about.opening.title", label: "Page title", kind: "text", defaultValue: "About OKNO" },
-      { id: "about.opening.line-one", label: "First statement", kind: "text", defaultValue: "Revolutionise construction." },
-      { id: "about.opening.line-two", label: "Second statement", kind: "text", defaultValue: "Driving the world's transition to sustainable luxury living." },
+      { id: "about.opening.line-one", label: "First statement", kind: "text", defaultValue: "We build for the places people love most," },
+      { id: "about.opening.line-two", label: "Second statement", kind: "text", defaultValue: "with the precision those places deserve." },
       { id: "about.opening.image", label: "Opening photograph", kind: "image", defaultValue: "/about/storyboard/about-film-frame-01.png" },
       { id: "about.opening.image-alt", label: "Opening image description", kind: "text", defaultValue: "An OKNO home in a natural landscape at dusk" },
     ] },
     { id: "vision", label: "Our vision", fields: [
       { id: "about.vision.title", label: "Section title", kind: "text", defaultValue: "Our vision" },
-      { id: "about.vision.copy", label: "Vision statement", kind: "text", defaultValue: "As the world turns, it is startlingly apparent that construction, the way it is right now, is wreaking havoc on the environment. We at OKNO aim to be pioneers in sustainable construction for the world at large. We seek to innovate every day, putting people first and earning their trust through our passionate efforts." },
+      { id: "about.vision.copy", label: "Vision statement", kind: "text", defaultValue: "Building in beautiful places has always been slow, uncertain and hard on the land. We exist to change that. OKNO designs and makes homes off-site, then places them with care, so a remote site can hold a considered home without months of disruption around it." },
       { id: "about.vision.image", label: "Vision photograph", kind: "image", defaultValue: "/models/forza/interiors/forza-living.webp" },
       { id: "about.vision.image-alt", label: "Vision image description", kind: "text", defaultValue: "An OKNO living space opening toward a natural landscape" },
     ] },
-    { id: "future", label: "Fabricating the Future", fields: [
-      { id: "about.future.title", label: "Section title", kind: "text", defaultValue: "Fabricating the Future" },
+    { id: "future", label: "Made, then placed.", fields: [
+      { id: "about.future.title", label: "Section title", kind: "text", defaultValue: "Made, then placed." },
       { id: "about.future.image", label: "Architecture photograph", kind: "image", defaultValue: "/about/storyboard/about-film-frame-02.png" },
       { id: "about.future.image-alt", label: "Architecture image description", kind: "text", defaultValue: "A precision-fabricated OKNO home" },
-      { id: "about.future.copy", label: "Section copy", kind: "text", defaultValue: "Our homes, sculpted by esteemed architects, are symphonies of sophistication. With a fusion of eco-conscious design and bespoke craftsmanship, each residence exudes timeless grace. Discover the art of living at OKNO Modhomes, where elegance is eternalised." },
+      { id: "about.future.copy", label: "Section copy", kind: "text", defaultValue: "Every OKNO home is drawn by architects and made by craftspeople working side by side. Structure, services and finishes are resolved together, so what arrives on your land is complete, considered and built to last." },
     ] },
-    { id: "founders", label: "Meet our founders", fields: [
-      { id: "about.founders.title", label: "Section title", kind: "text", defaultValue: "Meet our founders" },
+    { id: "founders", label: "The founders", fields: [
+      { id: "about.founders.left-caption", label: "Left founder caption", kind: "text", defaultValue: "Harshit Puram · Co-founder" },
+      { id: "about.founders.right-caption", label: "Right founder caption", kind: "text", defaultValue: "Parikshit Linga · Co-founder" },
+      { id: "about.founders.title", label: "Section title", kind: "text", defaultValue: "The founders" },
       { id: "about.founders.image", label: "Founders photograph", kind: "image", defaultValue: "/about/okno-founders.jpeg" },
       { id: "about.founders.image-alt", label: "Founders image description", kind: "text", defaultValue: "OKNO Modhomes founders" },
-      { id: "about.founders.copy", label: "Founders story", kind: "text", defaultValue: "Our journey started with a simple idea: to make elegant housing solutions that care for our planet. We envisioned spaces where style meets sustainability, where every family can thrive in a cosy, eco-friendly haven. Guided by this vision, we crafted OKNO Modhomes, a place where elegant designs and green living unite. Each home we create reflects our passion for simplicity, blending sophistication with environmental consciousness. With us, you are not just getting a house; you are stepping into a lifestyle that values elegance, sustainability, and the warmth of a home. Welcome to OKNO Modhomes, where your dream living begins." },
+      { id: "about.founders.copy", label: "Founders story", kind: "text", defaultValue: "Harshit Puram and Parikshit Linga founded OKNO on a simple conviction: a home in a remarkable place should not take years of compromise to build. They brought architecture and making together under one practice, so that design intent survives all the way to the site. Today OKNO works with private clients and hospitality owners who want something rare, and want it built with certainty." },
     ] },
-    { id: "assurances", label: "Why OKNO?", fields: [
-      { id: "about.assurances.title", label: "Section title", kind: "text", defaultValue: "Why OKNO?" },
+    { id: "assurances", label: "What we stand behind.", fields: [
+      { id: "about.assurances.title", label: "Section title", kind: "text", defaultValue: "What we stand behind." },
       { id: "about.assurances.sustainability-title", label: "Sustainability title", kind: "text", defaultValue: "Sustainability" },
-      { id: "about.assurances.sustainability-detail", label: "Sustainability detail", kind: "text", defaultValue: "certificate" },
+      { id: "about.assurances.sustainability-detail", label: "Sustainability detail", kind: "text", defaultValue: "certified" },
       { id: "about.assurances.sustainability-icon", label: "Sustainability icon", kind: "choice", defaultValue: "badge", options: assuranceIconOptions },
-      { id: "about.assurances.move-in-title", label: "Move-in title", kind: "text", defaultValue: "90 days move-in" },
-      { id: "about.assurances.move-in-detail", label: "Move-in detail", kind: "text", defaultValue: "guarantee" },
+      { id: "about.assurances.move-in-title", label: "Move-in title", kind: "text", defaultValue: "90-day" },
+      { id: "about.assurances.move-in-detail", label: "Move-in detail", kind: "text", defaultValue: "handover" },
       { id: "about.assurances.move-in-icon", label: "Move-in icon", kind: "choice", defaultValue: "calendar", options: assuranceIconOptions },
-      { id: "about.assurances.warranty-title", label: "Warranty title", kind: "text", defaultValue: "20 years" },
+      { id: "about.assurances.warranty-title", label: "Warranty title", kind: "text", defaultValue: "20-year" },
       { id: "about.assurances.warranty-detail", label: "Warranty detail", kind: "text", defaultValue: "warranty" },
       { id: "about.assurances.warranty-icon", label: "Warranty icon", kind: "choice", defaultValue: "shield", options: assuranceIconOptions },
-      { id: "about.assurances.energy-title", label: "Energy title", kind: "text", defaultValue: "Energy-efficient" },
-      { id: "about.assurances.energy-detail", label: "Energy detail", kind: "text", defaultValue: "LED lights" },
-      { id: "about.assurances.energy-icon", label: "Energy icon", kind: "choice", defaultValue: "bulb", options: assuranceIconOptions },
-      { id: "about.assurances.resilience-title", label: "Resilience title", kind: "text", defaultValue: "Earthquake-storm" },
-      { id: "about.assurances.resilience-detail", label: "Resilience detail", kind: "text", defaultValue: "resistant" },
+      { id: "about.assurances.energy-title", label: "Energy title", kind: "text", defaultValue: "One team" },
+      { id: "about.assurances.energy-detail", label: "Energy detail", kind: "text", defaultValue: "design to handover" },
+      { id: "about.assurances.energy-icon", label: "Energy icon", kind: "choice", defaultValue: "home", options: assuranceIconOptions },
+      { id: "about.assurances.resilience-title", label: "Resilience title", kind: "text", defaultValue: "Engineered" },
+      { id: "about.assurances.resilience-detail", label: "Resilience detail", kind: "text", defaultValue: "for earthquake and storm" },
       { id: "about.assurances.resilience-icon", label: "Resilience icon", kind: "choice", defaultValue: "home", options: assuranceIconOptions },
     ] },
     { id: "fit", label: "A perfect fit", fields: [
-      { id: "about.fit.title", label: "Section title", kind: "text", defaultValue: "A perfect fit. Everywhere, every time." },
+      { id: "about.fit.title", label: "Section title", kind: "text", defaultValue: "Precise, by design." },
       { id: "about.fit.image", label: "Home photograph", kind: "image", defaultValue: "/about/storyboard/about-film-frame-03.png" },
       { id: "about.fit.image-alt", label: "Home image description", kind: "text", defaultValue: "The timber facade and entrance of an OKNO home" },
-      { id: "about.fit.copy", label: "Closing copy", kind: "text", defaultValue: "Don't sweat the details; we've taken care of it all for you. Our walls, ceilings, floors, and everything in between are designed and precision-manufactured to work with one another from beginning to end. What you get is a cohesive aesthetic and perfect lines everywhere you look." },
+      { id: "about.fit.copy", label: "Closing copy", kind: "text", defaultValue: "Walls, ceilings and floors are designed and made to fit one another exactly. The result is clean lines, quiet junctions and nothing left to chance." },
     ] },
   ] },
   { id: "enquiry", label: "Enquiry", href: "/enquiry", sections: [
@@ -742,17 +762,19 @@ const baseAdminPages: readonly ContentPage[] = [
       ["home.land-status.label", "Land status · label", "Land status"],
       ["home.land-status.option-1", "Land status · option 1", "I own it"], ["home.land-status.option-2", "Land status · option 2", "I'm buying it"], ["home.land-status.option-3", "Land status · option 3", "I'm still looking"],
       ["home.home-type.label", "Home type · label", "Home type"],
-      ["home.home-type.option-1", "Home type · option 1", "Cabins / villas"], ["home.home-type.option-2", "Home type · option 2", "Family home"], ["home.home-type.option-3", "Home type · option 3", "Hospitality"], ["home.home-type.option-4", "Home type · option 4", "Developer project"],
+      ["home.home-type.option-1", "Home type · option 1", "Retreat or second home"], ["home.home-type.option-2", "Home type · option 2", "Primary residence"], ["home.home-type.option-3", "Home type · option 3", "Hospitality estate"], ["home.home-type.option-4", "Home type · option 4", "Development"],
       ["home.timeline.label", "Timeline · label", "Timeline"], ["home.timeline.option-1", "Timeline · option 1", "This year"], ["home.timeline.option-2", "Timeline · option 2", "Next year"], ["home.timeline.option-3", "Timeline · option 3", "Exploring"],
       ["home.submit", "Submit button", "Begin the conversation"],
+      ["reassurance", "Enquiry reassurance", "Every enquiry is read by our team and answered personally."],
     ]),
-    enquirySection("hospitality-tab", "Hospitality enquiry tab", [
+    enquirySection("hospitality-tab", "Arrange a private consultation tab", [
       ["tab-hospitality.label", "Visible tab label", "Hospitality"], ["tab-hospitality.accessible", "Accessible form name", "Hospitality & estates"],
       ["hospitality.name.label", "Name and company · label", "Name & company"], ["hospitality.name.placeholder", "Name and company · placeholder", "You and the developing entity"],
       ["hospitality.contact.label", "Contact · label", "Phone or email"], ["hospitality.contact.placeholder", "Contact · placeholder", "How we reach you"],
       ["hospitality.site.label", "Site · label", "Site location"], ["hospitality.site.placeholder", "Site · placeholder", "District, state"],
       ["hospitality.programme.label", "Programme · label", "Programme"], ["hospitality.programme.option-1", "Programme · option 1", "Cabins / villas"], ["hospitality.programme.option-2", "Programme · option 2", "Resort / Hotel"], ["hospitality.programme.option-3", "Programme · option 3", "Other"],
-      ["hospitality.keys.label", "Keys · label", "Keys planned"], ["hospitality.keys.option-1", "Keys · option 1", "5–10"], ["hospitality.keys.option-2", "Keys · option 2", "11–25"], ["hospitality.keys.option-3", "Keys · option 3", "26+"],
+      ["hospitality.investment.label", "Investment field", "Investment range (optional)"], ["hospitality.investment.help", "Investment helper", "Shared in confidence. Helps us prepare for your consultation."],
+      ["hospitality.keys.label", "Keys · label", "Number of residences"], ["hospitality.keys.option-1", "Keys · option 1", "5–10"], ["hospitality.keys.option-2", "Keys · option 2", "10–20"], ["hospitality.keys.option-3", "Keys · option 3", "20+"],
       ["hospitality.timeline.label", "Timeline · label", "Timeline to revenue"], ["hospitality.timeline.option-1", "Timeline · option 1", "This year"], ["hospitality.timeline.option-2", "Timeline · option 2", "Next year"], ["hospitality.timeline.option-3", "Timeline · option 3", "Exploring"],
       ["hospitality.submit", "Submit button", "Request the deck"],
     ]),
@@ -767,7 +789,7 @@ const baseAdminPages: readonly ContentPage[] = [
   ] },
   { id: "footer", label: "Footer", href: "/about", sections: [
     { id: "footer-brand", label: "Brand line and social row", fields: [
-      { id: "footer.brand.line", label: "Brand line", kind: "text", defaultValue: "Live better, live modular." },
+      { id: "footer.brand.line", label: "Brand line", kind: "text", defaultValue: "Homes for rare places." },
       { id: "footer.social.navigation-label", label: "Social links accessibility name", kind: "text", defaultValue: "Social media" },
     ], note: "The footer logo is managed in Shared site settings → Global Brand. Edit each social profile in the next disclosures." },
     ...footerSocialLinks.map(({ id, name, href, icon }) => ({ id: `footer-social-${id}`, label: `${name} profile`, fields: [

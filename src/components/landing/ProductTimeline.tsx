@@ -14,28 +14,28 @@ import styles from "./ProductTimeline.module.css";
 const stages = [
   {
     days: "Days 01–10",
-    title: "Client brief and site",
-    copy: "The site and the brief are understood together before a model is selected or a custom design begins.",
+    title: "The land and the brief",
+    copy: "We study your land and how you mean to live on it before a single line is drawn.",
   },
   {
     days: "Days 11–25",
-    title: "Design and approvals",
-    copy: "Design development, approvals, engineering and material planning are completed before manufacturing.",
+    title: "Design, resolved",
+    copy: "Architecture, engineering, materials and approvals are settled in full before anything is made.",
   },
   {
     days: "Days 26–60",
-    title: "Factory manufacturing",
-    copy: "The approved home moves through factory manufacturing and quality inspection.",
+    title: "Made off-site",
+    copy: "Your home is built under controlled conditions and inspected at every stage.",
   },
   {
     days: "Days 61–72",
-    title: "Packing and transportation",
-    copy: "The completed parts are packed and transported for assembly.",
+    title: "Carried to your land",
+    copy: "Every element is protected and delivered in the order it will be assembled.",
   },
   {
     days: "Days 73–90",
-    title: "Assembly and handover",
-    copy: "Site assembly, interior completion and final handover close the process.",
+    title: "Assembled and handed over",
+    copy: "Your home is assembled, finished and reviewed as a whole. Then it is yours.",
   },
 ] as const;
 
@@ -135,7 +135,7 @@ export default function ProductTimeline() {
     >
       <div className={styles.viewport} ref={viewportRef}>
         <div className={styles.composition}>
-          <div className={styles.heading}><h2 id="landing-process-title" className={styles.title} data-landing-heading data-type-field={"home.timeline.heading-start"}>{value("home.timeline.heading-start", "A home in")} <em data-type-field={"home.timeline.heading-emphasis"}>{value("home.timeline.heading-emphasis", "90 days.")}</em></h2><SubtleLink href={localDestination(value("home.timeline.action-href", "/process"), "/process")} className={styles.processLink} data-type-field={"home.timeline.action"}>{value("home.timeline.action", "See the process")}</SubtleLink></div>
+          <div className={styles.heading}><h2 id="landing-process-title" className={styles.title} data-landing-heading data-type-field={"home.timeline.heading-start"}>{value("home.timeline.heading-start", "Your land,")} <em data-type-field={"home.timeline.heading-emphasis"}>{value("home.timeline.heading-emphasis", "our ninety days.")}</em></h2><SubtleLink href={localDestination(value("home.timeline.action-href", "/process"), "/process")} className={styles.processLink} data-type-field={"home.timeline.action"}>{value("home.timeline.action", "See the process")}</SubtleLink></div>
           <motion.div className={styles.track} ref={trackRef} style={{ x: animated ? x : 0 }}>
             <motion.div className={styles.image} style={{ scale: animated ? mediaScale : 1, y: animated ? mediaY : 0 }}>
               <Image
@@ -145,7 +145,7 @@ export default function ProductTimeline() {
                 sizes="(min-width: 1000px) 38vw, (min-width: 600px) 45vw, 90vw"
                 quality={90}
               />
-              <span className={styles.mediaLabel} data-type-field={"home.timeline.image-caption"}>{value("home.timeline.image-caption", "Day 90 · Ready for handover")}</span>
+              <span className={styles.mediaLabel} data-type-field={"home.timeline.image-caption"}>{value("home.timeline.image-caption", "Day 90 · Keys in hand")}</span>
             </motion.div>
             <div className={styles.storyline}>
               <div aria-hidden="true" className={styles.axis}>

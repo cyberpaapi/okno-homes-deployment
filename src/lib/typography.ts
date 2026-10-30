@@ -10,6 +10,7 @@ export const typographyFonts = [
   { value: 'system', label: 'System sans serif', family: 'Arial, Helvetica, sans-serif' },
   { value: 'serif', label: 'System serif', family: 'Georgia, "Times New Roman", serif' },
 ] as const;
+export const defaultTypographyFont = typographyFonts[1];
 const fontChoices = typographyFonts.map(({ value, label }) => ({ value, label }));
 const sectionFontChoices = [{ value: 'inherit', label: 'Use master font' }, ...fontChoices];
 
@@ -34,7 +35,7 @@ export function sectionTypographyFields(scope: string): ContentField[] {
 export const masterTypographySection: ContentSection = {
   id: 'typography', label: 'Master font', note: 'The master font applies across the website, including Signature and Bespoke. Logo artwork stays unchanged. Each page keeps its original responsive text sizes. Optional numeric size overrides live inside each section.',
   fields: [
-    { id: 'typography.master-font', label: 'Master font', kind: 'choice', defaultValue: 'geist', options: fontChoices },
+    { id: 'typography.master-font', label: 'Master font', kind: 'choice', defaultValue: defaultTypographyFont.value, options: fontChoices },
   ],
 };
 export function withTypography(pages: readonly ContentPage[]): ContentPage[] {
@@ -67,7 +68,7 @@ function numericSize(value: string | undefined) {
   return value && typographyValueError('typography.section.any.body-size', value) === null ? `${Number(value)}px` : 'initial';
 }
 export function typographyCss(values: Record<string, string>, bindings: TypographyBinding[]) {
-  const root = [`--type-font-master:${fontFamily(values['typography.master-font']) ?? typographyFonts[0].family}`];
+  const root = [`--type-font-master:${fontFamily(values['typography.master-font']) ?? defaultTypographyFont.family}`];
   const rules = [`html[data-site-typography]{${root.join(';')}}`];
   const phoneRules: string[] = [];
   for (const binding of bindings) {

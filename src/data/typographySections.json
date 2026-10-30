@@ -51,6 +51,15 @@
     ]
   },
   {
+    "scope": "home.hospitality-preview",
+    "fields": [
+      "home.hospitality.label",
+      "home.hospitality.heading",
+      "home.hospitality.copy",
+      "home.hospitality.action"
+    ]
+  },
+  {
     "scope": "home.sustainability-preview",
     "fields": [
       "home.sustainability.label",
@@ -134,6 +143,10 @@
   {
     "scope": "signature.signature-controls",
     "fields": [
+      "models.signature.enquire-prefix",
+      "models.signature.collection-count",
+      "models.signature.count-qualifier",
+      "models.signature.investment-note",
       "models.signature.eyebrow",
       "models.signature.loading",
       "models.signature.filter-all",
@@ -412,6 +425,8 @@
       "models.bespoke.result.word-1",
       "models.bespoke.result.word-2",
       "models.bespoke.result.eyebrow",
+      "models.bespoke.closing.action",
+      "models.bespoke.gallery.label",
       "models.bespoke.result.heading"
     ]
   },
@@ -481,6 +496,7 @@
   {
     "scope": "hospitality.enquiry",
     "fields": [
+      "hospitality.closing.copy",
       "hospitality.closing.heading",
       "hospitality.closing.action"
     ]
@@ -650,6 +666,7 @@
       "sustainability.proof.opening-line-1",
       "sustainability.proof.opening-line-2",
       "sustainability.proof.opening-emphasis",
+      "sustainability.proof.model-note",
       "sustainability.proof.press-heading",
       "sustainability.proof.press-copy"
     ]
@@ -802,6 +819,8 @@
   {
     "scope": "about.founders",
     "fields": [
+      "about.founders.left-caption",
+      "about.founders.right-caption",
       "about.founders.title",
       "about.founders.copy"
     ]
@@ -850,7 +869,8 @@
       "enquiry.home.land-status.label",
       "enquiry.home.home-type.label",
       "enquiry.home.timeline.label",
-      "enquiry.home.submit"
+      "enquiry.home.submit",
+      "enquiry.reassurance"
     ]
   },
   {
@@ -864,6 +884,8 @@
       "enquiry.hospitality.site.label",
       "enquiry.hospitality.site.placeholder",
       "enquiry.hospitality.programme.label",
+      "enquiry.hospitality.investment.label",
+      "enquiry.hospitality.investment.help",
       "enquiry.hospitality.keys.label",
       "enquiry.hospitality.timeline.label",
       "enquiry.hospitality.submit"

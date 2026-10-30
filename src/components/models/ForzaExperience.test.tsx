@@ -78,7 +78,7 @@ describe("ForzaExperience", () => {
     fireEvent.click(within(screen.getByRole("group",{name:"Signature models"})).getByRole("button",{name:"Aurora"}));
     await waitFor(() => expect(screen.getByRole("heading",{name:"Aurora"})).toBeInTheDocument());
     expect(screen.getByText("410 sq ft")).toBeInTheDocument();
-    expect(screen.getByText("₹23 lakh")).toBeInTheDocument();
+    expect(screen.getByText("Indicative ₹ 23 lakh")).toBeInTheDocument();
     expect(container.querySelector('source[src="/qa/aurora-a.mp4"]')).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button",{name:"Explore Aurora"}));
     const dialog=screen.getByRole("dialog",{name:"Aurora"});
@@ -117,16 +117,16 @@ describe("ForzaExperience", () => {
     await waitFor(() => expect(screen.getByRole("heading", { name: "Tengo" })).toBeInTheDocument());
     expect(screen.getByText("Two-bedroom edition")).toBeInTheDocument();
     expect(screen.getByText("1,500 sq ft")).toBeInTheDocument();
-    expect(screen.getByText("₹75 lakh")).toBeInTheDocument();
+    expect(screen.getByText("Indicative ₹ 75 lakh")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Explore details" }));
     const dialog = screen.getByRole("dialog", { name: "Tengo" });
     expect(within(dialog).getByText("1,500 sq ft")).toBeInTheDocument();
-    expect(within(dialog).getByText("₹75 lakh")).toBeInTheDocument();
+    expect(within(dialog).getByText("Indicative ₹ 75 lakh")).toBeInTheDocument();
     expect(within(dialog).getByRole("link", { name: /Configure Tengo/ })).toHaveAttribute(
       "href", "/models/signature/tengo/configure?variant=2-bhk",
     );
-    fireEvent.click(within(dialog).getByRole("tab", { name: "3 BHK" }));
+    fireEvent.click(within(dialog).getByRole("tab", { name: "Three-bedroom" }));
     expect(within(dialog).getAllByRole("link", { name: /Configure Tengo/ })).toHaveLength(1);
     const outgoing = dialog.querySelector('[data-variant-stack="0"]');
     if (outgoing) {
@@ -195,7 +195,7 @@ describe("ForzaExperience", () => {
     await waitFor(() => {
       expect(screen.getByRole("heading", { name: "Kray" })).toBeInTheDocument();
     });
-    expect(screen.getByText("Ascent")).toBeInTheDocument();
+    expect(screen.getByText("Rising roofline")).toBeInTheDocument();
     await waitFor(() => {
       expect(
         container.querySelector(
@@ -210,7 +210,7 @@ describe("ForzaExperience", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /enquire/i })).toHaveAttribute(
       "href",
-      "/enquiry?model=kray",
+      "/enquiry?intent=home&model=kray",
     );
 
     fireEvent.click(screen.getByRole("button", { name: "Explore details" }));
@@ -240,7 +240,7 @@ describe("ForzaExperience", () => {
       expect(screen.getByRole("heading", { name: "Gaze" })).toBeInTheDocument();
     });
     expect(screen.getByText("Area on request")).toBeInTheDocument();
-    expect(screen.getByText("Framed outlook")).toBeInTheDocument();
+    expect(screen.getByText("Glazed gable")).toBeInTheDocument();
     expect(
       container.querySelector(
         'source[src="/models/gaze/video/gaze-360-scroll-648p-24fps-fluid.mp4"]',
@@ -274,7 +274,7 @@ describe("ForzaExperience", () => {
     await waitFor(() => {
       expect(screen.getByRole("heading", { name: "Tengo" })).toBeInTheDocument();
     });
-    expect(screen.getByText("Long horizon")).toBeInTheDocument();
+    expect(screen.getByText("The porch")).toBeInTheDocument();
     expect(
       container.querySelector(
         'source[src="/models/tengo/video/tengo-360-scroll-648p-24fps-fluid.mp4"]',
@@ -311,7 +311,7 @@ describe("ForzaExperience", () => {
       expect(within(modelSelector).queryByRole("button", { name: "Tengo" })).not.toBeInTheDocument();
     });
 
-    fireEvent.click(screen.getByRole("button", { name: "2 BHK" }));
+    fireEvent.click(screen.getByRole("button", { name: "Two-bedroom" }));
     await waitFor(() => {
       expect(screen.getByRole("heading", { name: "Tengo" })).toBeInTheDocument();
     });
@@ -320,11 +320,11 @@ describe("ForzaExperience", () => {
     });
     expect(screen.getByText("1,426 sq ft")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "3 BHK" }));
+    fireEvent.click(screen.getByRole("button", { name: "Three-bedroom" }));
     expect(screen.getByText("1,686 sq ft")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Explore details" }));
     const dialog = screen.getByRole("dialog", { name: "Tengo" });
-    expect(within(dialog).getByRole("tab", { name: "3 BHK" })).toHaveAttribute(
+    expect(within(dialog).getByRole("tab", { name: "Three-bedroom" })).toHaveAttribute(
       "aria-selected",
       "true",
     );
@@ -344,7 +344,7 @@ describe("ForzaExperience", () => {
     await waitFor(() => {
       expect(screen.getByRole("heading", { name: "Trib" })).toBeInTheDocument();
     });
-    expect(screen.getByText("A-frame clarity")).toBeInTheDocument();
+    expect(screen.getByText("One line")).toBeInTheDocument();
     expect(
       container.querySelector(
         'source[src="/models/trib/video/trib-360-scroll-648p-24fps-fluid.mp4"]',
@@ -352,7 +352,7 @@ describe("ForzaExperience", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /enquire/i })).toHaveAttribute(
       "href",
-      "/enquiry?model=trib",
+      "/enquiry?intent=home&model=trib",
     );
 
     fireEvent.click(screen.getByRole("button", { name: "Explore details" }));
@@ -382,7 +382,7 @@ describe("ForzaExperience", () => {
     await waitFor(() => {
       expect(screen.getByRole("heading", { name: "Octapod" })).toBeInTheDocument();
     });
-    expect(screen.getByText("Eight-sided calm")).toBeInTheDocument();
+    expect(screen.getByText("Wraparound")).toBeInTheDocument();
     expect(
       container.querySelector(
         'source[src="/models/octapod/video/octapod-360-scroll-648p-24fps-fluid.mp4"]',
@@ -395,7 +395,7 @@ describe("ForzaExperience", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /enquire/i })).toHaveAttribute(
       "href",
-      "/enquiry?model=octapod",
+      "/enquiry?intent=home&model=octapod",
     );
 
     fireEvent.click(screen.getByRole("button", { name: "Explore details" }));

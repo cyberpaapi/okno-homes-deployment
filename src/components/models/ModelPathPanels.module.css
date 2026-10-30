@@ -39,3 +39,5 @@
 @media (max-width:700px) { .panels { flex:none; flex-direction:column; gap:12px; } .panel,.panels[data-active] .panel { flex:none!important; height:min(72svh,610px); min-height:500px; border-radius:28px; } .content { padding:25px 22px; } .content h2 { margin-bottom:18px; font-size:var(--type-size-display, clamp(48px,15vw,72px)); } .meta { align-items:flex-end; } .meta p { max-width:165px; font-size:var(--type-size-caption, 10px); } .action { min-height:42px; gap:11px; padding-left:14px; font-size:var(--type-size-caption, 9px); } .arrow { width:30px; height:30px; } }
 @media (max-width:380px) { .meta { display:block; } .meta p { margin-bottom:14px; } }
 @media (prefers-reduced-motion:reduce) { .panel,.image,.arrow { transition:none; } .image { transform:none!important; } .morphLoader b { animation:none; } }
+
+.panel[data-path="bespoke"] .mode { color:#23382c; background:#f4f1e9e8; padding:12px 16px; border-radius:999px; }

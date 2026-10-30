@@ -45,7 +45,7 @@ export default function SiteFooter({ tone = 'forest' }: { tone?: FooterTone }) {
                 <span className={styles.enquiryLogoMobile}><OknoLogo tone="dark" /></span>
               </> : <OknoLogo tone={tone === 'bespoke' ? 'dark' : 'light'} />}
             </Link>
-            <p className={styles.brandLine} data-type-field={"footer.brand.line"}>{content('footer.brand.line', 'Live better, live modular.')}</p>
+            <p className={styles.brandLine} data-type-field={"footer.brand.line"}>{content('footer.brand.line', 'Homes for rare places.')}</p>
             <nav className={styles.socialLinks} aria-label={content('footer.social.navigation-label', 'Social media')}>
               {footerSocialLinks.map(({ id, name, href, icon }) => (
                 <a

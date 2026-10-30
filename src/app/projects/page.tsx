@@ -6,8 +6,7 @@ import { initialGlobePinItems } from '@/data/globePinCollections';
 
 export const metadata = {
   title: 'OKNO — Projects',
-  description: 'An atlas of places. Explore OKNO’s photography and films from real project collections.',
-  robots: { index: false, follow: false },
+  description: 'An atlas of places. Photography and film of homes and retreats by OKNO.',
 };
 export const dynamic = 'force-dynamic';
 

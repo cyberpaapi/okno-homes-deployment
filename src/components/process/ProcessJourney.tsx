@@ -100,7 +100,7 @@ const stages: readonly Stage[] = [
     id: "assembly",
     days: PROCESS_DAY_RANGES.assembly,
     label: "Assembly",
-    title: "The structure takes shape.",
+    title: "The structure rises.",
     copy: "Prepared floor and wall panels are aligned into the resolved structure on the finished base.",
     poster: "/process/generated/process-panel-base-v1.webp",
   },

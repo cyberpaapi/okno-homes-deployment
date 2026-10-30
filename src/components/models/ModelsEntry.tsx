@@ -9,9 +9,9 @@ import styles from "./ModelsEntry.module.css";
 import { useSiteContent } from "@/lib/useSiteContent";
 
 export default function ModelsEntry() {
-  const titleStart = useSiteContent("models.selector.heading-start", "A home.");
-  const titleEnd = useSiteContent("models.selector.heading-end", "Your way.");
-  const intro = useSiteContent("models.selector.intro", "Signature or Bespoke");
+  const titleStart = useSiteContent("models.selector.heading-start", "Two ways");
+  const titleEnd = useSiteContent("models.selector.heading-end", "to begin.");
+  const intro = useSiteContent("models.selector.intro", "A collection, or one of one.");
   const prefersReducedMotion = useReducedMotion();
   const [mediaReady, setMediaReady] = useState(false);
   const pageRef = useRef<HTMLElement>(null);

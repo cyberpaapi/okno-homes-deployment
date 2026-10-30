@@ -1,5 +1,9 @@
 # Deployment and operation
 
+## New account deployment — 31 October 2026
+
+The user explicitly requested a new deployment in their connected account. The active target for this release is `okno-homes-aryan` (`prj_C6QGXCbhIGWw7P5NQadSz7eAAm1k`) in `aryanchandwani-gmailcoms-projects` (`team_hk3H7bGO5KFS2WnCV30fHHJj`), from `cyberpaapi/okno-homes-deployment`. The historical project below is not being changed. Node.js remains 22.x. This release uses the source defaults reviewed locally; its published fallback contains no legacy CMS overrides. Cloud editing remains unavailable until a private Blob store and server-only owner credential are configured for this new project. Local credentials are not uploaded.
+
 ## Verified target
 
 - Private repository: `CodeAcc2007-dev/okno-homes-deployment`

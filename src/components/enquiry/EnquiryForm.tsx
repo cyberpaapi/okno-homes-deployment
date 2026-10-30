@@ -30,6 +30,10 @@ function getIntentSnapshot() {
   return new URLSearchParams(window.location.search).get("intent") ?? "";
 }
 
+function getModelSnapshot() {
+  return new URLSearchParams(window.location.search).get("model") ?? "";
+}
+
 function getServerIntentSnapshot() {
   return "";
 }
@@ -48,14 +52,15 @@ export default function EnquiryForm({ isOpen }: EnquiryFormProps) {
     fields: { value: name, label: t(`${group}.option-${index + 1}`, name) },
   }));
   const landStatusOptions = useSiteCollection("enquiry.options.home.land-status", initialOptions("home.land-status", ["I own it", "I'm buying it", "I'm still looking"]));
-  const homeTypeOptions = useSiteCollection("enquiry.options.home.home-type", initialOptions("home.home-type", ["Cabins / villas", "Family home", "Hospitality", "Developer project"]));
+  const homeTypeOptions = useSiteCollection("enquiry.options.home.home-type", initialOptions("home.home-type", ["Retreat or second home", "Primary residence", "Hospitality estate", "Development"]));
   const homeTimelineOptions = useSiteCollection("enquiry.options.home.timeline", initialOptions("home.timeline", ["This year", "Next year", "Exploring"]));
   const programmeOptions = useSiteCollection("enquiry.options.hospitality.programme", initialOptions("hospitality.programme", ["Cabins / villas", "Resort / Hotel", "Other"]));
-  const keysOptions = useSiteCollection("enquiry.options.hospitality.keys", initialOptions("hospitality.keys", ["5–10", "11–25", "26+"]));
+  const keysOptions = useSiteCollection("enquiry.options.hospitality.keys", initialOptions("hospitality.keys", ["5–10", "10–20", "20+"]));
   const hospitalityTimelineOptions = useSiteCollection("enquiry.options.hospitality.timeline", initialOptions("hospitality.timeline", ["This year", "Next year", "Exploring"]));
   const pressNatureOptions = useSiteCollection("enquiry.options.press.nature", initialOptions("press.nature", ["Press feature", "Partnership", "Career", "Other"]));
   const optionNodes = (items: ContentItem[]) => items.map(item => <option key={item.id} value={item.fields.value}>{item.fields.label}</option>);
   const intent = useSyncExternalStore(subscribeToIntent, getIntentSnapshot, getServerIntentSnapshot);
+  const requestedModel = useSyncExternalStore(subscribeToIntent, getModelSnapshot, getServerIntentSnapshot);
   const [manualValue, setManualValue] = useState<string | null>(null);
   const activeValue = manualValue ?? valueForIntent(intent);
   const activeIndex = enquiries.findIndex((item) => item.value === activeValue);
@@ -132,10 +137,16 @@ export default function EnquiryForm({ isOpen }: EnquiryFormProps) {
             </FieldSelect>
           </Field>
           <Field>
-            <FieldLabel htmlFor="developer-keys">{t("hospitality.keys.label", "Keys planned")}</FieldLabel>
-            <FieldSelect key={keysOptions.map(item => item.id).join("|")} id="developer-keys" name="keys" defaultValue={keysOptions[0]?.fields.value}>
+            <FieldLabel htmlFor="developer-keys">{t("hospitality.keys.label", "Number of residences")}</FieldLabel>
+            <FieldSelect key={keysOptions.map(item => item.id).join("|")} id="developer-keys" name="keys" defaultValue="">
+              <option value="">Optional</option>
               {optionNodes(keysOptions)}
             </FieldSelect>
+          </Field>
+          <Field wide>
+            <FieldLabel htmlFor="developer-investment">{t("hospitality.investment.label", "Investment range (optional)")}</FieldLabel>
+            <FieldInput id="developer-investment" name="investmentRange" aria-describedby="investment-help" />
+            <p id="investment-help" className={styles.helper}>{t("hospitality.investment.help", "Shared in confidence. Helps us prepare for your consultation.")}</p>
           </Field>
           <Field>
             <FieldLabel htmlFor="developer-timeline">{t("hospitality.timeline.label", "Timeline to revenue")}</FieldLabel>
@@ -220,8 +231,10 @@ export default function EnquiryForm({ isOpen }: EnquiryFormProps) {
                     onSubmit={(event) => event.preventDefault()}
                   >
                     {activeValue === "hospitality" ? <input type="hidden" name="intent" value="hospitality" /> : null}
+                    {requestedModel && <input type="hidden" name="model" value={requestedModel} />}
                     {formFields()}
                     <InteractiveHoverButton type="submit" label={submitLabel} />
+                    <p className={styles.helper}>{t("reassurance", "Every enquiry is read by our team and answered personally.")}</p>
                   </form>
                 </motion.div>
               </AnimatePresence>

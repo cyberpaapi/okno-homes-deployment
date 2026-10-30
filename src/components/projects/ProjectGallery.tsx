@@ -46,6 +46,7 @@ function ProjectGalleryContent({ project, returnLabel, returnHref, photosLabel, 
       <motion.div className={styles.heading} initial={reduced ? false : { opacity: 0, y: 12, filter: 'blur(6px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: reduced ? 0 : .5, ease: [.22, 1, .36, 1] }}>
         <MagneticLink href={returnHref} className={styles.return}>← <span data-type-field={"projects.detail.return"}>{returnLabel}</span></MagneticLink>
         <h1 id="project-title">{project.title}</h1>
+        {project.description && <p className={styles.projectDescription}>{project.description}</p>}
         {(project.category || (project.location && project.location !== 'Project collection')) && <p className={styles.projectMeta}>{[project.category, project.location === 'Project collection' ? '' : project.location].filter(Boolean).join(' · ')}</p>}
         {project.films.length > 0 && <AnimatedTabs value={activeMode} onChange={id => setMode(id as 'photos' | 'films')} tabs={[{ id: 'photos', label: photosLabel }, { id: 'films', label: filmsLabel }]} />}
       </motion.div>

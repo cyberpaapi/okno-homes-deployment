@@ -3,6 +3,7 @@ import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import BespokeExperience from "./BespokeExperience";
 
 beforeAll(() => {
+  vi.stubGlobal("ResizeObserver", class { observe() {} disconnect() {} });
   vi.stubGlobal("matchMedia", vi.fn().mockImplementation((query: string) => ({
     matches: false,
     media: query,
@@ -18,7 +19,7 @@ beforeAll(() => {
 afterAll(() => vi.unstubAllGlobals());
 
 describe("BespokeExperience", () => {
-  it("presents the commission journey and a usable enquiry path", () => {
+  it("presents the calibrated journey and a usable enquiry path", () => {
     render(<BespokeExperience />);
 
     expect(
@@ -29,13 +30,21 @@ describe("BespokeExperience", () => {
       expect(screen.getByRole("heading", { name: stage })).toBeInTheDocument();
     }
     expect(screen.queryByRole("heading", { name: "One place. One home." })).not.toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /completed okno residence following a curved garden path/i })).toHaveAttribute("src", expect.stringContaining("/page-images/"));
+    expect(screen.getByRole("img", { name: /Lakewood Villa entrance and planted garden/i })).toHaveAttribute("src", expect.stringContaining("/page-images/"));
     expect(screen.getByRole("button", { name: "Next step: BRIEF" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next step: FORM" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next step: ATMOSPHERE" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next step: The result" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Begin a bespoke enquiry." })).not.toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: /begin a conversation/i })).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /begin crafting/i })).toHaveAttribute("href", "/enquiry?intent=home&model=bespoke");
+    const portal = screen.getByLabelText("OKNO bespoke architecture transition");
+    expect(portal.querySelector("mask image")).toHaveAttribute("href", "/assets/projects/brand/okno-modhomes-white.svg");
+    expect(portal.querySelector("mask text")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "View photograph 1" }));
+    expect(screen.getByRole("dialog", { name: "Lakewood Villa fullscreen photograph" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Next photograph" }));
+    expect(screen.getByText("Photograph 2 of 10")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Close fullscreen photograph" }));
   });
 
   it("removes the previous selector comparison and named concept cards", () => {

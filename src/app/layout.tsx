@@ -7,8 +7,8 @@ import SiteTypography from '@/components/SiteTypography/SiteTypography';
 import BrandBrowserIcon from '@/components/Brand/BrandBrowserIcon';
 
 export const metadata: Metadata = {
-  title: "OKNO Modhomes",
-  description: "Homes, built differently.",
+  title: "OKNO Modhomes · Homes for rare places",
+  description: "Architect-designed homes and hospitality estates, made off-site and delivered with certainty.",
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#101810" };

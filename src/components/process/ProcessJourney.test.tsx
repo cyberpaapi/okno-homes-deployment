@@ -27,7 +27,7 @@ describe("ProcessJourney", () => {
       "The brief meets the land.",
       "The plan takes shape.",
       "Every decision is resolved.",
-      "The structure takes shape.",
+      "The structure rises.",
       "The home closes around the view.",
       "Finished where it belongs.",
     ]) {
@@ -49,7 +49,7 @@ describe("ProcessJourney", () => {
       expect(within(schedule).getByRole('listitem', { name: `${days} · ${label}` })).toBeInTheDocument();
     }
     expect(screen.getByRole("heading", { name: "From brief to handover." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Factory manufacturing" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Made off-site" })).toBeInTheDocument();
     for (const range of ["01–10", "11–25", "26–60", "61–72", "73–90"]) {
       expect(within(screen.getByRole("list", { name: "Build day timeline" })).getByText(range)).toBeInTheDocument();
     }

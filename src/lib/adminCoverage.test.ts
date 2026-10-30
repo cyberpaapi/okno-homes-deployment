@@ -14,8 +14,9 @@ afterEach(async () => {
 
 it('round-trips every registered scalar through private drafts, publication and durable rereads', async () => {
   temporary = await mkdtemp(path.join(tmpdir(), 'okno-admin-coverage-'));
-  await symlink(path.join(root, 'public'), path.join(temporary, 'public'));
-  await symlink(path.join(root, 'src'), path.join(temporary, 'src'));
+  const directoryLink = process.platform === 'win32' ? 'junction' : 'dir';
+  await symlink(path.join(root, 'public'), path.join(temporary, 'public'), directoryLink);
+  await symlink(path.join(root, 'src'), path.join(temporary, 'src'), directoryLink);
   vi.spyOn(process, 'cwd').mockReturnValue(temporary);
   vi.resetModules();
   const store = await import('./siteContentStore');

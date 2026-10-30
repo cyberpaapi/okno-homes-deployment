@@ -14,7 +14,7 @@ async function findPublishedProject(slug: string) {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const result = await findPublishedProject(slug);
-  return { title: `${result?.project.title ?? 'Project'} — OKNO`, description: result?.project.description, robots: { index: false, follow: false } };
+  return { title: `${result?.project.title ?? 'Project'} — OKNO`, description: result ? `${result.project.title} by OKNO: ${result.project.description} In photographs and film.` : undefined };
 }
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

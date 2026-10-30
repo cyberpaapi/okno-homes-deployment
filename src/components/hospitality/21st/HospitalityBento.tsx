@@ -11,9 +11,9 @@ import styles from "./HospitalityBento.module.css";
 
 const cards = [
   { eyebrow: "Estate scale", value: "5+", title: "Residences, one coordinated brief.", image: "/assets/projects/real-v1/octapod-layana-01.webp", className: styles.wide },
-  { eyebrow: "Opening path", value: "Months", title: "A delivery programme measured for opening.", image: "/assets/projects/real-v1/forrest-01.webp", className: styles.wide },
-  { eyebrow: "Site", value: "Ready", title: "Terrain, utilities and resilience planned.", image: "/assets/projects/real-v1/lakewood-01.webp", className: styles.third },
-  { eyebrow: "Finish", value: "Two", title: "Guest-ready or architectural shell.", image: "/assets/projects/real-v1/kioo-01.webp", className: styles.third },
+  { eyebrow: "Time to revenue", value: "Parallel", title: "Built off-site while your land is prepared, so you open sooner.", image: "/assets/projects/real-v1/forrest-01.webp", className: styles.wide },
+  { eyebrow: "Site", value: "Studied", title: "Terrain, access, utilities and resilience resolved first.", image: "/assets/projects/real-v1/lakewood-01.webp", className: styles.third },
+  { eyebrow: "Finish", value: "Two", title: "Delivered guest-ready, Operational.", image: "/assets/projects/real-v1/kioo-01.webp", className: styles.third },
   { eyebrow: "Aftercare", value: "Ongoing", title: "Warranty, handover and long-term care.", image: "/assets/projects/real-v1/rasa-vikarabad-01.webp", className: styles.third },
 ] as const;
 

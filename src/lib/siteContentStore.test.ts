@@ -1,3 +1,4 @@
+import { initialProjectItems } from "@/data/projectCollections";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -216,7 +217,7 @@ describe("collection content store", () => {
 
   it("allows an incomplete new project to stay archived without appearing as publishable work", async () => {
     const store = await import("./siteContentStore");
-    await store.saveCollectionDraft("projects.records", [{ id: "unready", fields: { status: "archived" } }, { id: "forrest", fields: {
+    await store.saveCollectionDraft("projects.records", [...initialProjectItems.filter(item => item.id !== "forrest").map(item => project(item.id)), { id: "unready", fields: { status: "archived" } }, { id: "forrest", fields: {
       status: "active", title: "Forrest", coverSrc: "/photo.webp", coverAlt: "A home", gallery: "[]", films: "[]",
     } }], 0, 0);
     await expect(store.publishDraft(0, 1)).resolves.toMatchObject({ revision: 1 });
@@ -242,11 +243,11 @@ describe("collection content store", () => {
 
   it("preserves the old project URL when changing a published slug", async () => {
     const store = await import("./siteContentStore");
-    await store.saveCollectionDraft("projects.records", [project("forrest")], 0, 0);
+    await store.saveCollectionDraft("projects.records", [...initialProjectItems.filter(item => item.id !== "forrest").map(item => project(item.id)), project("forrest")], 0, 0);
     await store.publishDraft(0, 1);
-    await store.saveCollectionDraft("projects.records", [project("forrest", "forrest-new")], 1, 2);
+    await store.saveCollectionDraft("projects.records", [...initialProjectItems.filter(item => item.id !== "forrest").map(item => project(item.id)), project("forrest", "forrest-new")], 1, 2);
     await expect(store.publishDraft(1, 3)).rejects.toThrow("keep previous address forrest as a redirect");
-    await store.saveCollectionDraft("projects.records", [project("forrest", "forrest-new", { slugHistory: '["forrest"]' })], 1, 3);
+    await store.saveCollectionDraft("projects.records", [...initialProjectItems.filter(item => item.id !== "forrest").map(item => project(item.id)), project("forrest", "forrest-new", { slugHistory: '["forrest"]' })], 1, 3);
     await expect(store.publishDraft(1, 4)).resolves.toMatchObject({ revision: 2 });
   });
 

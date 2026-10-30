@@ -23,7 +23,7 @@
   padding: 104px clamp(14px, 1.4vw, 24px) clamp(14px, 1.4vw, 24px);
   isolation: isolate;
   overflow: hidden;
-  background: linear-gradient(112deg, #050a12 0 49.8%, #edf2f4 50.2% 100%);
+  background: linear-gradient(112deg, #101d16, #273a2d);
   color: #f4f8fa;
   font-family: "Models Manrope", "Geist OKNO", Arial, sans-serif;
 }
@@ -37,12 +37,10 @@
   padding: 0 14px 2px;
 }
 
-/* Keep the shared header silhouette while its foreground contrasts with the
-   selector's dark/paper split. Blend at the header's stacking context so the
-   rolling glyphs stay visible; no navigation container is drawn. */
+/* Keep the shared header legible against the consistent green surface. */
 @media (min-width: 1121px) {
   .page :global([data-site-header]) {
-    mix-blend-mode: difference;
+    mix-blend-mode: normal;
   }
 }
 
@@ -55,11 +53,11 @@
   letter-spacing: -.055em;
 }
 
-.introduction h1 span { color: #9ccff3; }
+.introduction h1 span { color: #c6d3bd; }
 
 .introCopy {
   margin: 0;
-  color: #1b4058bd;
+  color: #d9e2d6;
   font-size: var(--type-size-caption, 10px);
   font-weight: 500;
   letter-spacing: .13em;
@@ -72,7 +70,7 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: radial-gradient(circle at 22% 42%, #2a568b4d, transparent 36%), radial-gradient(circle at 78% 45%, #a8cbe080, transparent 42%);
+  background: radial-gradient(circle at 22% 42%, #52664b4d, transparent 36%), radial-gradient(circle at 78% 45%, #9ba88555, transparent 42%);
   animation: selector-light 9s ease-in-out infinite alternate;
   will-change: transform, opacity;
 }
@@ -96,7 +94,7 @@
   .introduction { padding: 0 8px 2px; }
   .introduction h1 { font-size: var(--type-size-subheading, 21px); }
   .introCopy { font-size: var(--type-size-caption, 8px); }
-  .introCopy { color:#cfe1ecb8; }
+  .introCopy { color:#d9e2d6; }
 }
 
 @media (max-width: 380px) {

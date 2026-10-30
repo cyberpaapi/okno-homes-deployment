@@ -55,7 +55,7 @@ describe("page-first admin structure", () => {
     expect(screen.queryByText(/Process content editing is paused/)).not.toBeInTheDocument();
     const opening = screen.getByText("Film opening", { exact: true }).closest("details");
     const timeline = screen.getByText("Five-phase timeline opening", { exact: true }).closest("details");
-    const firstPhase = screen.getByText("Detail 1 · Brief and site", { exact: true }).closest("details");
+    const firstPhase = screen.getByText("Detail 1 · The land and the brief", { exact: true }).closest("details");
     expect(opening).not.toHaveAttribute("open");
     expect(timeline).not.toHaveAttribute("open");
     expect(firstPhase).not.toHaveAttribute("open");

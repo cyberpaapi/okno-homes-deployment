@@ -36,7 +36,8 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
   const selectedWork = useMemo(() => resolveHospitalitySelections(selections, projects), [selections, projects]);
   const selectedHeading = useSiteContent('hospitality.selected.heading', 'Selected work.');
   const closingHeading = useSiteContent('hospitality.closing.heading', 'Begin a hospitality conversation.');
-  const closingAction = useSiteContent('hospitality.closing.action', 'Hospitality enquiry');
+  const closingCopy = useSiteContent('hospitality.closing.copy', 'Investment is shaped in private consultation.');
+  const closingAction = useSiteContent('hospitality.closing.action', 'Arrange a private consultation');
   const closingHref = useSiteContent('hospitality.closing.action-href', enquiryHref);
   return (
     <main className={styles.page} data-route="hospitality">
@@ -69,6 +70,7 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
           <TextBlockAnimation blockColor="#b9cbb8" duration={0.42} className={styles.enquireTitle}>
             <h2 aria-hidden="true" data-type-field={"hospitality.closing.heading"}><HospitalityTextLens text={closingHeading} /></h2>
           </TextBlockAnimation>
+          <p className={styles.closingCopy}>{closingCopy}</p>
           <MagneticLink
             href={localDestination(closingHref, enquiryHref)}
             data-magnetic

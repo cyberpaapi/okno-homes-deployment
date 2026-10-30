@@ -5,7 +5,7 @@ import { gazePrototype, oknoModels } from "@/data/models";
 export const metadata: Metadata = {
   title: "Signature Models | OKNO",
   description:
-    "Explore OKNO Signature models through a scroll-controlled product experience.",
+    "Six pre-designed homes by OKNO, each resolved in detail and placed with care on your land.",
 };
 
 export default function SignatureModelsPage() {

@@ -21,7 +21,7 @@ describe("ModelsEntry", () => {
     render(<ModelsEntry />);
 
     expect(
-      screen.getByRole("heading", { name: "A home. Your way." }),
+      screen.getByRole("heading", { name: "Two ways to begin." }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: /enter the signature collection/i }),

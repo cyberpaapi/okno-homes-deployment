@@ -13,12 +13,12 @@ describe("About experience", () => {
   it("keeps the complete OKNO story in the rebuilt photo-and-copy sequence", () => {
     render(<AboutExperience />);
     expect(screen.getByRole("heading", { name: "About OKNO" })).toBeInTheDocument();
-    expect(screen.getByText("Revolutionise construction.")).toBeInTheDocument();
-    expect(screen.getByText("Driving the world's transition to sustainable luxury living.")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Fabricating the Future" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Meet our founders" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Why OKNO?" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A perfect fit. Everywhere, every time." })).toBeInTheDocument();
+    expect(screen.getByText("We build for the places people love most,")).toBeInTheDocument();
+    expect(screen.getByText("with the precision those places deserve.")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Made, then placed." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The founders" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "What we stand behind." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Precise, by design." })).toBeInTheDocument();
     expect(
       Array.from(document.querySelectorAll("[data-about-21st]")).map((node) => node.getAttribute("data-about-21st")),
     ).toEqual(expect.arrayContaining(["kuratlielia/text-reveal", "24383"]));
@@ -32,8 +32,8 @@ describe("About experience", () => {
     expect(screen.queryByRole("heading", { name: "From brief to home in 90 days." })).not.toBeInTheDocument();
     expect(screen.queryByText("Days 01—10")).not.toBeInTheDocument();
     expect(screen.queryByText("Days 73—90")).not.toBeInTheDocument();
-    expect(screen.getByText("90 days move-in")).toBeInTheDocument();
-    expect(screen.getByText("20 years")).toBeInTheDocument();
+    expect(screen.getByText("90-day")).toBeInTheDocument();
+    expect(screen.getByText("20-year")).toBeInTheDocument();
     expect(document.querySelectorAll("[data-about-icon]")).toHaveLength(5);
     expect(screen.queryByText("The essentials are designed into every home, not added as decoration.")).not.toBeInTheDocument();
     expect(screen.queryByText("Built for the land")).not.toBeInTheDocument();

@@ -21,11 +21,11 @@ const assuranceIconComponents: Record<string, LucideIcon> = {
 type Assurance = { id: string; title: string; detail: string; icon: string };
 
 const assurances: Assurance[] = [
-  { id: "sustainability", title: "Sustainability", detail: "certificate", icon: "badge" },
-  { id: "move-in", title: "90 days move-in", detail: "guarantee", icon: "calendar" },
-  { id: "warranty", title: "20 years", detail: "warranty", icon: "shield" },
-  { id: "energy", title: "Energy-efficient", detail: "LED lights", icon: "bulb" },
-  { id: "resilience", title: "Earthquake-storm", detail: "resistant", icon: "home" },
+  { id: "sustainability", title: "Sustainability", detail: "certified", icon: "badge" },
+  { id: "move-in", title: "90-day", detail: "handover", icon: "calendar" },
+  { id: "warranty", title: "20-year", detail: "warranty", icon: "shield" },
+  { id: "energy", title: "One team", detail: "design to handover", icon: "home" },
+  { id: "resilience", title: "Engineered", detail: "for earthquake and storm", icon: "home" },
 ];
 
 export default function AboutSection() {
@@ -64,8 +64,8 @@ export default function AboutSection() {
       </section>
 
       <section className={styles.manifesto} data-type-section="about.opening" aria-label="Our purpose" data-about-viewport-section>
-        <p data-type-field={"about.opening.line-two"}><span data-type-highlight data-type-field={"about.opening.line-one"}>{value("about.opening.line-one", "Revolutionise construction.")}</span>{" "}
-          {value("about.opening.line-two", "Driving the world's transition to sustainable luxury living.")}
+        <p data-type-field={"about.opening.line-two"}><span data-type-highlight data-type-field={"about.opening.line-one"}>{value("about.opening.line-one", "We build for the places people love most,")}</span>{" "}
+          {value("about.opening.line-two", "with the precision those places deserve.")}
         </p>
       </section>
 
@@ -78,7 +78,7 @@ export default function AboutSection() {
           </motion.figure>
           <div className={styles.copy}>
             <h2 className={styles.heading} data-type-field={"about.vision.title"}>{value("about.vision.title", "Our vision")}</h2>
-            <p className={styles.body} data-type-field={"about.vision.copy"}>{value("about.vision.copy", "As the world turns, it is startlingly apparent that construction, the way it is right now, is wreaking havoc on the environment. We at OKNO aim to be pioneers in sustainable construction for the world at large. We seek to innovate every day, putting people first and earning their trust through our passionate efforts.")}</p>
+            <p className={styles.body} data-type-field={"about.vision.copy"}>{value("about.vision.copy", "Building in beautiful places has always been slow, uncertain and hard on the land. We exist to change that. OKNO designs and makes homes off-site, then places them with care, so a remote site can hold a considered home without months of disruption around it.")}</p>
           </div>
         </div>
       </section>
@@ -86,8 +86,8 @@ export default function AboutSection() {
       <section className={`${styles.chapter} ${styles.future}`} data-type-section="about.future" data-about-viewport-section>
         <div className={`${styles.inner} ${styles.split} ${styles.futureSplit}`}>
           <div className={styles.copy}>
-            <h2 className={styles.heading} data-type-field={"about.future.title"}>{value("about.future.title", "Fabricating the Future")}</h2>
-            <p className={styles.body} data-type-field={"about.future.copy"}>{value("about.future.copy", "Our homes, sculpted by esteemed architects, are symphonies of sophistication. With a fusion of eco-conscious design and bespoke craftsmanship, each residence exudes timeless grace. Discover the art of living at OKNO Modhomes, where elegance is eternalised.")}</p>
+            <h2 className={styles.heading} data-type-field={"about.future.title"}>{value("about.future.title", "Made, then placed.")}</h2>
+            <p className={styles.body} data-type-field={"about.future.copy"}>{value("about.future.copy", "Every OKNO home is drawn by architects and made by craftspeople working side by side. Structure, services and finishes are resolved together, so what arrives on your land is complete, considered and built to last.")}</p>
           </div>
           <motion.figure className={`${styles.media} ${styles.landscapeMedia}`} {...mediaEntrance}>
             <Image loader={pageImageLoader} src={value("about.future.image", "/about/storyboard/about-film-frame-02.png")}
@@ -100,21 +100,21 @@ export default function AboutSection() {
       <div ref={paperRef} className={styles.paperInterlude} data-about-paper>
       <section id="founders" data-type-section="about.founders" className={`${styles.chapter} ${styles.founders}`} data-about-viewport-section>
         <div className={`${styles.inner} ${styles.split} ${styles.foundersSplit}`}>
-          <motion.figure className={`${styles.media} ${styles.foundersMedia}`} {...mediaEntrance}>
+          <div><motion.figure className={`${styles.media} ${styles.foundersMedia}`} {...mediaEntrance}>
             <Image loader={pageImageLoader} src={value("about.founders.image", "/about/okno-founders.jpeg")}
               alt={value("about.founders.image-alt", "OKNO Modhomes founders")}
               fill sizes="(max-width: 840px) 100vw, 46vw" />
-          </motion.figure>
+          </motion.figure><div className={styles.founderCaptions}><p>{value("about.founders.left-caption", "Harshit Puram · Co-founder")}</p><p>{value("about.founders.right-caption", "Parikshit Linga · Co-founder")}</p></div></div>
           <div className={styles.copy}>
-            <h2 className={styles.heading} data-type-field={"about.founders.title"}>{value("about.founders.title", "Meet our founders")}</h2>
-            <p className={styles.body} data-type-field={"about.founders.copy"}>{value("about.founders.copy", "Our journey started with a simple idea: to make elegant housing solutions that care for our planet. We envisioned spaces where style meets sustainability, where every family can thrive in a cosy, eco-friendly haven. Guided by this vision, we crafted OKNO Modhomes, a place where elegant designs and green living unite. Each home we create reflects our passion for simplicity, blending sophistication with environmental consciousness. With us, you are not just getting a house; you are stepping into a lifestyle that values elegance, sustainability, and the warmth of a home. Welcome to OKNO Modhomes, where your dream living begins.")}</p>
+            <h2 className={styles.heading} data-type-field={"about.founders.title"}>{value("about.founders.title", "The founders")}</h2>
+            <p className={styles.body} data-type-field={"about.founders.copy"}>{value("about.founders.copy", "Harshit Puram and Parikshit Linga founded OKNO on a simple conviction: a home in a remarkable place should not take years of compromise to build. They brought architecture and making together under one practice, so that design intent survives all the way to the site. Today OKNO works with private clients and hospitality owners who want something rare, and want it built with certainty.")}</p>
           </div>
         </div>
       </section>
 
       <section className={`${styles.chapter} ${styles.why}`} data-type-section="about.assurances" data-about-viewport-section>
         <div className={styles.inner}>
-          <h2 className={styles.heading} data-type-field={"about.assurances.title"}>{value("about.assurances.title", "Why OKNO?")}</h2>
+          <h2 className={styles.heading} data-type-field={"about.assurances.title"}>{value("about.assurances.title", "What we stand behind.")}</h2>
           <ul aria-label="OKNO commitments" className={styles.assuranceList}>
             {assurances.map(({ id, title, detail, icon }, index) => {
               const Icon = assuranceIconComponents[value(`about.assurances.${id}-icon`, icon)] ?? assuranceIconComponents[icon];
@@ -137,8 +137,8 @@ export default function AboutSection() {
       <section className={`${styles.chapter} ${styles.fit}`} data-type-section="about.fit" data-about-viewport-section>
         <div className={`${styles.inner} ${styles.split} ${styles.fitSplit}`}>
           <div className={styles.copy}>
-            <h2 className={styles.heading} data-type-field={"about.fit.title"}>{value("about.fit.title", "A perfect fit. Everywhere, every time.")}</h2>
-            <p className={styles.body} data-type-field={"about.fit.copy"}>{value("about.fit.copy", "Don't sweat the details; we've taken care of it all for you. Our walls, ceilings, floors, and everything in between are designed and precision-manufactured to work with one another from beginning to end. What you get is a cohesive aesthetic and perfect lines everywhere you look.")}</p>
+            <h2 className={styles.heading} data-type-field={"about.fit.title"}>{value("about.fit.title", "Precise, by design.")}</h2>
+            <p className={styles.body} data-type-field={"about.fit.copy"}>{value("about.fit.copy", "Walls, ceilings and floors are designed and made to fit one another exactly. The result is clean lines, quiet junctions and nothing left to chance.")}</p>
           </div>
           <motion.figure className={`${styles.media} ${styles.landscapeMedia}`} {...mediaEntrance}>
             <Image loader={pageImageLoader} src={value("about.fit.image", "/about/storyboard/about-film-frame-03.png")}

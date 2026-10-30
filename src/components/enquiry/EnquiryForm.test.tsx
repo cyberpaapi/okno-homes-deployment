@@ -39,7 +39,16 @@ describe("EnquiryForm URL intent", () => {
     render(<EnquiryForm isOpen />);
     const form = screen.getByRole("form", { name: "Hospitality & estates" });
     expect(new FormData(form as HTMLFormElement).get("intent")).toBe("hospitality");
-    expect(screen.getByRole("combobox", { name: "Keys planned" })).toHaveTextContent("5–1011–2526+");
+    expect(screen.getByRole("combobox", { name: "Number of residences" })).toHaveTextContent("Optional5–1010–2020+");
+    expect(screen.getByRole("combobox", { name: "Number of residences" })).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "Investment range (optional)" })).not.toBeRequired();
+  });
+
+  it("retains the selected model when arriving from the collection", () => {
+    window.history.replaceState(null, "", "/enquiry?intent=home&model=kray");
+    render(<EnquiryForm isOpen />);
+    const form = screen.getByRole("form", { name: "A home of my own" });
+    expect(new FormData(form as HTMLFormElement).get("model")).toBe("kray");
   });
 
   it("keeps a visitor's manual selection across rerenders and history changes", () => {

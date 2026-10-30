@@ -236,6 +236,7 @@ export default function SustainabilityProof() {
             <motion.div className={styles.pressStage} style={{ opacity: pressOpacity, y: pressY }}>
               <div className={styles.sideCopy}>
                 <h3 data-type-field={"sustainability.proof.press-heading"}>{get("press-heading", "Reflections travelled beyond the forest.")}</h3>
+                <p>{get("model-note", "Reflections, built on our Kioo model.")}</p>
                 <p data-type-field={"sustainability.proof.press-copy"}>{get("press-copy", "Four publications found different stories in the same compact home.")}</p>
               </div>
 
