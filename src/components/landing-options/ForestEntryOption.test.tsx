@@ -9,6 +9,8 @@ const motionState = vi.hoisted(() => ({
   shown: 0,
   onShown: null as ((progress: number) => void) | null,
   onProgress: null as ((progress: number) => void) | null,
+  onReady: null as ((ready: boolean) => void) | null,
+  onLoadProgress: null as ((progress: number | null) => void) | null,
 }));
 const shownValue = { get:()=>motionState.shown, set:(value:number)=>{motionState.shown=value;motionState.onShown?.(value);}, on:()=>()=>{} };
 
@@ -17,7 +19,7 @@ vi.mock('next/image', () => ({ default: (props: React.ImgHTMLAttributes<HTMLImag
   // eslint-disable-next-line @next/next/no-img-element
   return <img {...imageProps} alt={props.alt} />;
 } }));
-vi.mock('./ScrollJourneyFilm', () => ({ default: ({ src, className,onProgress }: { src: string; className: string;onProgress:(value:number)=>void }) => {motionState.onProgress=onProgress;return <video src={src} className={className} />;} }));
+vi.mock('./ScrollJourneyFilm', () => ({ default: ({ src, className,onProgress,onReady,onLoadProgress }: { src: string; className: string;onProgress:(value:number)=>void;onReady:(value:boolean)=>void;onLoadProgress:(value:number|null)=>void }) => {motionState.onProgress=onProgress;motionState.onReady=onReady;motionState.onLoadProgress=onLoadProgress;return <video src={src} className={className} />;} }));
 vi.mock('@/components/landing/LandingExperience', () => ({ default: () => <div data-testid="option-one">Current landing page</div> }));
 vi.mock('lenis/react', () => ({ useLenis: () => undefined, ReactLenis: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
 vi.mock('motion/react', () => ({
@@ -33,6 +35,20 @@ vi.mock('motion/react', () => ({
 }));
 
 describe('ForestEntryOption', () => {
+  it('shows preparation below the tagline and offers a scroll cue when ready', () => {
+    const view=render(<ForestEntryOption/>);
+    const bar=screen.getByRole('progressbar',{name:'Preparing scroll video'});
+    expect(bar).toHaveAttribute('value','0');
+    act(()=>motionState.onLoadProgress?.(.5));
+    expect(bar).toHaveAttribute('value','0.5');
+    act(()=>motionState.onReady?.(true));
+    expect(bar).toHaveAttribute('value','1');
+    expect(screen.getByRole('status')).toHaveTextContent('Scroll to explore');
+    act(()=>{motionState.onReady?.(false);motionState.onLoadProgress?.(null);});
+    expect(screen.queryByRole('progressbar')).toBeNull();
+    expect(screen.getByRole('status')).toHaveTextContent('Scroll to continue');
+    view.unmount();
+  });
   beforeEach(()=>{
     vi.spyOn(HTMLMediaElement.prototype,'load').mockImplementation(()=>{});
     vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue(undefined);

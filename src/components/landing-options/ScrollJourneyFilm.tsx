@@ -8,8 +8,8 @@ import { heroFilmLastTime, heroFilmProgress } from '@/lib/heroFilmScroll';
 
 const indexedSource = '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4';
 type Controller = { setTime(time: number): void; seek(time: number): void; dispose(): void };
-export default function ScrollJourneyFilm({ src, poster, progress, className, onReady, onProgress }: {
-  src: string; poster: string; progress: MotionValue<number>; className: string; onReady(ready: boolean): void; onProgress(progress: number): void;
+export default function ScrollJourneyFilm({ src, poster, progress, className, onReady, onProgress, onLoadProgress }: {
+  src: string; poster: string; progress: MotionValue<number>; className: string; onReady(ready: boolean): void; onProgress(progress: number): void; onLoadProgress?(progress: number | null): void;
 }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const video = useRef<HTMLVideoElement>(null);
@@ -23,6 +23,8 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
   useMotionValueEvent(progress, 'change', sync);
   useEffect(() => {
     const abort = new AbortController();
+    onReady(false);
+    onLoadProgress?.(0);
     let local: Controller | null = null;
     const fallback = () => {
       if (abort.signal.aborted) return;
@@ -30,6 +32,8 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
       local?.dispose();
       local = null;
       controller.current = null;
+      onReady(false);
+      onLoadProgress?.(0);
       setNative(true);
     };
     void (async () => {
@@ -38,7 +42,7 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
       if (abort.signal.aborted) return;
       duration.current = heroImageDuration;
       local = createHeroImageScrubber(canvas.current, abort.signal, () => onReady(true), fallback,
-        time => onProgress(Math.min(1,time/Math.max(1/24,heroFilmLastTime(duration.current)))));
+        time => onProgress(Math.min(1,time/Math.max(1/24,heroFilmLastTime(duration.current)))), onLoadProgress);
       if (abort.signal.aborted) { local?.dispose(); return; }
       if (!local) { fallback(); return; }
       controller.current = local;
@@ -47,19 +51,30 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
     return () => { abort.abort(); local?.dispose(); controller.current = null; };
     // sync reads the current Motion value, rather than capturing a scroll position.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src, progress, onReady, onProgress]);
+  }, [src, progress, onReady, onProgress, onLoadProgress]);
   useEffect(() => {
     if (!native || !video.current) return;
     const element = video.current;
     const scrubber = createScrollVideoScrubber(element,24,time => onProgress(Math.min(1,time/Math.max(1/24,heroFilmLastTime(duration.current)))));
     controller.current = scrubber;
-    const ready = () => { duration.current = element.duration; onReady(true); onProgress(0); sync(); };
+    let prepared = false;
+    const ready = () => {
+      if (!Number.isFinite(element.duration) || element.duration <= 0) return;
+      duration.current = element.duration;
+      const runway = Math.min(2, element.duration);
+      const buffered = element.buffered.length && element.buffered.start(0) <= .05 ? element.buffered.end(0) : 0;
+      const amount = element.readyState >= 4 ? 1 : Math.min(1, buffered / runway);
+      if (!prepared) onLoadProgress?.(amount);
+      if (!prepared && amount >= 1 && element.readyState >= 2) { prepared = true; onReady(true); onProgress(0); sync(); }
+    };
     element.addEventListener('loadeddata',ready);
+    element.addEventListener('progress',ready);
+    element.addEventListener('canplaythrough',ready);
     if (element.readyState >= 2) ready();
-    return () => { element.removeEventListener('loadeddata',ready); scrubber.dispose(); controller.current = null; };
+    return () => { element.removeEventListener('loadeddata',ready); element.removeEventListener('progress',ready); element.removeEventListener('canplaythrough',ready); scrubber.dispose(); controller.current = null; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [native, src, progress, onReady, onProgress]);
+  }, [native, src, progress, onReady, onProgress, onLoadProgress]);
   return native
-    ? <video ref={video} className={className} src={src} poster={poster} muted playsInline preload="auto" aria-hidden="true" data-film-renderer="native" onError={() => onReady(false)} />
+    ? <video ref={video} className={className} src={src} poster={poster} muted playsInline preload="auto" aria-hidden="true" data-film-renderer="native" onError={() => { onReady(false); onLoadProgress?.(null); }} />
     : <canvas ref={canvas} className={className} width={1920} height={1080} aria-hidden="true" data-film-renderer="images" />;
 }

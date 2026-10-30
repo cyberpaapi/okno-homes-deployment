@@ -8,6 +8,24 @@ beforeEach(()=>{vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(
 afterEach(()=>{Object.defineProperty(window,'parent',parentDescriptor);vi.useRealTimers();vi.unstubAllGlobals();vi.restoreAllMocks();});
 
 describe('embedded Hero V1 preview',()=>{
+  it('reports real buffered preparation and clears the loader on media failure',()=>{
+    Object.defineProperty(window,'parent',{configurable:true,value:{}});
+    const onReady=vi.fn(),loading=vi.fn();
+    const view=render(<ScrollJourneyFilm src="/custom.mp4" poster="/cover.jpg" className="film" progress={motionValue(0)} onReady={onReady} onProgress={vi.fn()} onLoadProgress={loading}/>);
+    const video=view.container.querySelector('video')!;
+    let bufferedEnd=.5;
+    Object.defineProperties(video,{readyState:{value:2},duration:{value:24},buffered:{value:{length:1,start:()=>0,end:()=>bufferedEnd}}});
+    fireEvent.loadedData(video);
+    expect(loading).toHaveBeenLastCalledWith(.25);
+    expect(onReady).not.toHaveBeenCalledWith(true);
+    bufferedEnd=2;fireEvent.progress(video);
+    expect(loading).toHaveBeenLastCalledWith(1);
+    expect(onReady).toHaveBeenLastCalledWith(true);
+    fireEvent.error(video);
+    expect(loading).toHaveBeenLastCalledWith(null);
+    expect(onReady).toHaveBeenLastCalledWith(false);
+    view.unmount();
+  });
   it('uses native seeking without allocating an indexed decoder and stays responsive beyond five seconds',async()=>{
     vi.useFakeTimers();
     Object.defineProperty(window,'parent',{configurable:true,value:{}});

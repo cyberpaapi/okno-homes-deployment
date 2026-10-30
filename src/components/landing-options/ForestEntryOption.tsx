@@ -80,6 +80,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const introFinished = useRef(false);
   const [introComplete, setIntroComplete] = useState(false);
   const [journeyReady, setJourneyReady] = useState(false);
+  const [journeyLoading, setJourneyLoading] = useState<number | null>(0);
   const [endingFallback, setEndingFallback] = useState(false);
   const reducedMotion = useReducedMotion();
   const saveData = useDataSaver();
@@ -217,6 +218,10 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
           </div>
           <div className={styles.brand} aria-label="OKNO Modhomes" data-type-field={"hero-v1.opening.tagline"}>
             {tagline && <p data-hero-v1-tagline data-type-field={"hero-v1.opening.tagline"}>{tagline}</p>}
+            {animated && <div className={styles.journeyLoading} data-journey-loading={journeyReady ? 'ready' : journeyLoading === null ? 'unavailable' : 'loading'}>
+              {journeyLoading !== null && <progress className={styles.loadingBar} max={1} value={journeyReady ? 1 : journeyLoading} aria-label="Preparing scroll video" />}
+              <span role="status">{journeyReady ? 'Scroll to explore' : journeyLoading === null ? 'Scroll to continue' : 'Preparing your journey'}</span>
+            </div>}
           </div>
 
           {animated && (
@@ -243,6 +248,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
                 className={`${styles.video} ${styles.journeyVideo}`}
                 onReady={setJourneyReady}
                 onProgress={presentFilm}
+                onLoadProgress={setJourneyLoading}
               />
             </>
           )}

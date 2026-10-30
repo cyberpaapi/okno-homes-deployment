@@ -20,6 +20,19 @@ function setup() {
 }
 afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();vi.unstubAllGlobals();});
 describe('independent Hero scroll frames',()=>{
+  it('reports readiness only after preparing opening poses and presenting a frame',async()=>{
+    const mocks=setup(),canvas=document.createElement('canvas'),abort=new AbortController();
+    const ready=vi.fn(),loading=vi.fn();
+    createHeroImageScrubber(canvas,abort.signal,ready,vi.fn(),vi.fn(),loading);
+    expect(loading).toHaveBeenCalledWith(0);
+    expect(ready).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(40);
+    expect(mocks.decode.mock.calls.length).toBeGreaterThanOrEqual(6);
+    expect(ready).toHaveBeenCalledOnce();
+    expect(loading).toHaveBeenLastCalledWith(1);
+    expect(loading.mock.calls.some(([value])=>value>0 && value<1)).toBe(true);
+    abort.abort();
+  });
   it('indexes the original opening and ending with bounded delivery bytes and valid WebP poses',()=>{
     expect(createHash('sha256').update(data).digest('hex')).toBe(film.sha256);
     expect(data.length).toBeLessThan(47573337);

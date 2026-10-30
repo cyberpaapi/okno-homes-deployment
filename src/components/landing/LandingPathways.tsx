@@ -5,11 +5,10 @@
 // Hover Expand (28111). They use OKNO's own media, copy, and destinations.
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   motion,
   useInView,
-  useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -22,18 +21,17 @@ import { useMediaQuery } from '@/lib/useMediaQuery';
 import TextBlock from './TextBlock';
 import styles from './LandingPathways.module.css';
 
-const clamp = (value: number) => Math.min(1, Math.max(0, value));
-
 function SignaturePreview() {
   const content = useSiteContentMap();
   const value = (id: string, fallback: string) => content[id] ?? fallback;
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const targetTime = useRef(0);
+  const finishedSource = useRef<string | null>(null);
+  const videoSource = value('home.signature.video', '/models/forza/video/forza-360-scroll-648p-24fps-fluid.mp4');
   const reduced = useReducedMotion();
   const compact = useMediaQuery('(max-width: 800px)');
   const visible = useInView(sectionRef, { amount: .25 });
-  const near = useInView(sectionRef, { margin: '100% 0px' });
+  const near = useInView(sectionRef, { margin: '100% 0px', once: true });
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] });
   // The landing's Lenis scroll already has momentum; an extra spring delays
   // the rotation film and its reveal behind the visitor's actual position.
@@ -45,43 +43,25 @@ function SignaturePreview() {
   const closingOpacity = useTransform(progress, [.58, .72, .96], [0, 1, 1]);
   const closingY = useTransform(progress, [.58, .76], [42, 0]);
 
-  const sync = useCallback((value: number) => {
-    const video = videoRef.current;
-    if (compact || !video || video.seeking || !Number.isFinite(video.duration) || video.duration <= 0) return;
-    targetTime.current = clamp(value) * Math.max(0, video.duration - .04);
-    if (Math.abs(video.currentTime - targetTime.current) > .035) video.currentTime = targetTime.current;
-  }, [compact]);
-
-  useMotionValueEvent(progress, 'change', sync);
   useEffect(() => {
-    if (!near) return;
-    const video = videoRef.current;
-    if (!video) return;
-    const ready = () => sync(progress.get());
-    video.addEventListener('loadedmetadata', ready);
-    if (video.readyState >= 1) ready();
-    return () => video.removeEventListener('loadedmetadata', ready);
-  }, [near, progress, sync]);
-
-  useEffect(() => {
-    if (!compact) return;
     const video = videoRef.current;
     if (!video) return;
     const syncPlayback = () => {
-      if (visible && !reduced && !document.hidden) void video.play().catch(() => undefined);
+      if (visible && !reduced && !document.hidden && finishedSource.current !== videoSource && !video.ended) void video.play().catch(() => undefined);
       else video.pause();
     };
     syncPlayback();
+    video.addEventListener('canplay', syncPlayback);
     document.addEventListener('visibilitychange', syncPlayback);
-    return () => { video.pause(); document.removeEventListener('visibilitychange', syncPlayback); };
-  }, [compact, visible, reduced, near]);
+    return () => { video.pause(); video.removeEventListener('canplay', syncPlayback); document.removeEventListener('visibilitychange', syncPlayback); };
+  }, [visible, reduced, near, videoSource]);
 
   return (
     <section id="models-preview" data-type-section="home.signature-preview" ref={sectionRef} className={styles.signature} aria-labelledby="signature-preview-title" data-component="25482">
       <div className={styles.signatureSticky}>
         <motion.div className={styles.signatureMedia} style={{ clipPath: compact ? 'none' : clipPath }}>
           <Image loader={pageImageLoader} src={value('home.signature.image', '/models/forza/orbit-keyframes-invisible-glow-1080p/forza-invisible-a00.png')} alt={value('home.signature.image-alt', 'Forza Signature home exterior')} fill sizes="100vw" />
-          {near && !reduced && <video ref={videoRef} src={value('home.signature.video', '/models/forza/video/forza-360-scroll-648p-24fps-fluid.mp4')} muted playsInline loop={compact} controls={compact} preload="metadata" aria-label="Forza exterior rotation" aria-hidden={compact ? undefined : true} onSeeked={() => sync(progress.get())} />}
+          {near && !reduced && <video ref={videoRef} src={videoSource} muted playsInline controls={false} loop={false} disablePictureInPicture preload="auto" aria-label="Forza exterior rotation" onEnded={() => { finishedSource.current = videoSource; }} />}
           <div className={styles.signatureGrade} />
         </motion.div>
         <motion.div className={styles.signatureHeading} style={{ opacity: compact || reduced ? 1 : headingOpacity }}>

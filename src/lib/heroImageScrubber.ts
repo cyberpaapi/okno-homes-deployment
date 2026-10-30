@@ -6,7 +6,7 @@ export const heroImageDuration = desktopFilm.sourceFrames / desktopFilm.fps;
 
 /** Independently decoded poses from the accepted film. The scroll position
  * chooses the image; nothing advances on a playback clock. */
-export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, present: (time: number) => void) {
+export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, present: (time: number) => void, loading?: (progress: number) => void) {
   if (typeof createImageBitmap !== 'function' || signal.aborted) return null;
   const compact = typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 800px)').matches;
   const film = compact ? mobileFilm : desktopFilm;
@@ -18,6 +18,7 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   const MAX_FRAMES = compact ? 10 : ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 0) >= 8 ? 28 : 18;
   const lastPose = film.frames.length-1;
   const anchors = new Set([0,lastPose-2,lastPose-1,lastPose]);
+  const openingLastChunk = Math.floor((film.frames[5][0] + film.frames[5][1] - 1) / CHUNK);
   const anchorChunks = new Set([...anchors].flatMap(index => {
     const [offset,size] = film.frames[index];
     return [Math.floor(offset/CHUNK),Math.floor((offset+size-1)/CHUNK)];
@@ -29,6 +30,10 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   let target = 0, drawn = -1, direction = 1, disposed = false, failed = false;
   const foreground = new Set<number>();
   let warming = false, raf = 0, received = 0, draws = 0;
+  let prepared = false, reportedReady = false;
+  const reportReady = () => {
+    if (!disposed && prepared && draws > 0 && !reportedReady) { reportedReady = true; loading?.(1); ready(); }
+  };
   let requestedAt = performance.now(), maxLatency = 0;
   const chunkAt = () => Math.floor(film.frames[target][0] / CHUNK);
   const distance = (id: number) => Math.abs(id-chunkAt()) + ((id-chunkAt())*direction < 0 ? .5 : 0);
@@ -98,7 +103,8 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
     canvas.dataset.scrubMaxMs = maxLatency.toFixed(1);
     canvas.dataset.scrubPresentedFrames = String(++draws);
     canvas.dataset.scrubPresentedTime = (film.frames[drawn][2]/film.fps).toFixed(4);
-    if (draws === 1) { canvas.dataset.scrubLoadMs = latency.toFixed(1); ready(); }
+    if (draws === 1) canvas.dataset.scrubLoadMs = latency.toFixed(1);
+    reportReady();
     present(film.frames[drawn][2]/film.fps);
     void warm();
   };
@@ -143,7 +149,7 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
     canvas.dataset.scrubTarget = (film.frames[target][2]/film.fps).toFixed(4);
     // Fetch a small compressed runway; keep the existing 16 MiB cache cap.
     for (const [id,request] of requests) {
-      if (!anchorChunks.has(id) && Math.abs(id-chunkAt()) > 4) { request.abort.abort(); requests.delete(id); }
+      if (!anchorChunks.has(id) && (prepared || id > openingLastChunk) && Math.abs(id-chunkAt()) > 4) { request.abort.abort(); requests.delete(id); }
     }
     for (let step=0;step <= (target === 0 ? 0 : 1);step++) {
       const id = chunkAt()+direction*step;
@@ -168,8 +174,18 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   // same cache cap, so a fast handoff does not fetch it at the boundary.
   // Fetch the opening before reserving the ending; speculative data must not
   // compete with the first visible frame and the autoplay intro.
-  void image(0).then(() => {
+  loading?.(0);
+  // Prepare a short opening runway before declaring the scroll film ready.
+  // Six decoded poses plus the four reserved anchors fit the mobile cache.
+  void (async () => {
+    for (let index = 0; index < 6; index++) {
+      await image(index);
+      if (disposed) return;
+      loading?.((index + 1) / 7);
+    }
+    prepared = true;
+    reportReady();
     for (const index of anchors) if (index !== 0) void image(index).catch(() => {});
-  }).catch(() => {});
+  })().catch(() => { if (!disposed && !failed) { failed = true; fail(); } });
   return { setTime, seek: setTime, dispose };
 }
