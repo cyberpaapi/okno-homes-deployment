@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import optimizedFilm from '../../config/hero-v2-optimized-frames.json';
 import film from '../../config/hero-v2-frames.json';
 import { createHeroV2ImageScrubber } from './heroV2ImageScrubber';
 
@@ -21,6 +22,22 @@ function setup() {
 }
 afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 describe('V2 lossless scroll-only delivery', () => {
+  it('preloads every desktop pose in a smaller pack and seeks without further requests', async () => {
+    const data = readFileSync('public' + optimizedFilm.source);
+    expect(createHash('sha256').update(data).digest('hex')).toBe(optimizedFilm.sha256);
+    expect(optimizedFilm.frames.map(frame => frame[2])).toEqual(film.frames.map(frame => frame[2]));
+    expect([optimizedFilm.width, optimizedFilm.height]).toEqual([film.width, film.height]);
+    expect(data.length).toBeLessThan(film.bytes * .12);
+    const mocks = setup(), canvas = document.createElement('canvas'), abort = new AbortController();
+    const ready = vi.fn(), failed = vi.fn();
+    const scrubber = createHeroV2ImageScrubber(canvas, abort.signal, ready, failed, vi.fn(), new Uint8Array(data))!;
+    await vi.advanceTimersByTimeAsync(80);
+    for (const time of [25, 4, 790/24]) { scrubber.setTime(time); await vi.advanceTimersByTimeAsync(80); }
+    expect(canvas.dataset.scrubPresentedTime).toBe((790/24).toFixed(4));
+    expect(mocks.fetch).not.toHaveBeenCalled();
+    expect(ready).toHaveBeenCalledOnce(); expect(failed).not.toHaveBeenCalled();
+    abort.abort();
+  });
   it('retains every approved pose, with fingerprinted bounded shards and exact endpoint files', () => {
     expect([film.width, film.height, film.fps, film.sourceFrames, film.sampleStride, film.frames.length]).toEqual([1280, 720, 24, 791, 1, 791]);
     expect(film.lossless).toBe(true);

@@ -82,6 +82,11 @@ html {
   text-size-adjust: 100%;
 }
 
+html[data-hero-loading="true"], html[data-hero-loading="true"] body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
 body {
   background: var(--paper);
   color: var(--ink);

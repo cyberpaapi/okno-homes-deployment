@@ -48,9 +48,10 @@ describe('original-packet Process frame rendering', () => {
     const canvas = document.createElement('canvas');
     const abort = new AbortController();
     const ready = vi.fn(); const fail = vi.fn();
-    const scrubber = await createIndexedFrameScrubber(film,canvas,abort.signal,ready,fail,vi.fn());
+    const scrubber = await createIndexedFrameScrubber(film,canvas,abort.signal,ready,fail,vi.fn(),new Uint8Array(bytes));
     await vi.advanceTimersByTimeAsync(30);
     for (const time of [12,13,14,15,16]) { scrubber!.setTime(time); await vi.advanceTimersByTimeAsync(30); }
+    expect(fetch).not.toHaveBeenCalled();
     expect(canvas.dataset.scrubPresentedTime).toBe('16.0000');
     expect(Number(canvas.dataset.scrubCacheFrames)).toBe(48);
     expect(reset).toHaveBeenCalledOnce();

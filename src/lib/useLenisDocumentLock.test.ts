@@ -5,6 +5,17 @@ const driver = vi.hoisted(() => ({ start: vi.fn(), stop: vi.fn() }));
 vi.mock('lenis/react', () => ({ useLenis: () => driver }));
 afterEach(() => { document.body.style.overflow = ''; vi.restoreAllMocks(); vi.clearAllMocks(); });
 describe('smooth document modal lock', () => {
+  it('stops for hero loading and keeps a concurrent menu lock on completion', async () => {
+    const hook=renderHook(useLenisDocumentLock);
+    await act(async()=>{document.documentElement.dataset.heroLoading='true';});
+    expect(driver.stop).toHaveBeenCalled();
+    document.body.style.overflow='hidden';driver.start.mockClear();
+    await act(async()=>{delete document.documentElement.dataset.heroLoading;});
+    expect(driver.start).not.toHaveBeenCalled();
+    await act(async()=>{document.body.style.overflow='';});
+    expect(driver.start).toHaveBeenCalled();
+    hook.unmount();
+  });
   it('stops scrolling and inertia while a dialog is open and resumes after close', async () => {
     const hook = renderHook(useLenisDocumentLock);
     expect(driver.start).toHaveBeenCalledOnce();

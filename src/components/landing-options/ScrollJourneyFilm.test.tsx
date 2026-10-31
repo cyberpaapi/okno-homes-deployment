@@ -3,59 +3,64 @@ import { motionValue } from 'motion/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import ScrollJourneyFilm from './ScrollJourneyFilm';
 
-const parentDescriptor = Object.getOwnPropertyDescriptor(window,'parent')!;
-beforeEach(()=>{vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});});
-afterEach(()=>{Object.defineProperty(window,'parent',parentDescriptor);vi.useRealTimers();vi.unstubAllGlobals();vi.restoreAllMocks();});
+const download = vi.hoisted(() => ({ run: vi.fn() }));
+vi.mock('@/lib/downloadHeroMedia', () => ({ downloadHeroMedia: download.run }));
+vi.mock('@/lib/sitePreview', () => ({ isEmbeddedSitePreview: () => true }));
+beforeEach(() => {
+  download.run.mockReset();
+  download.run.mockResolvedValue(new Uint8Array([1, 2, 3]));
+  vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});
+  vi.stubGlobal('URL', Object.assign(URL, { createObjectURL: vi.fn(()=>'blob:complete-video'), revokeObjectURL: vi.fn() }));
+});
+afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();vi.unstubAllGlobals();});
 
-describe('embedded Hero V1 preview',()=>{
-  it('reports real buffered preparation and clears the loader on media failure',()=>{
-    Object.defineProperty(window,'parent',{configurable:true,value:{}});
-    const onReady=vi.fn(),loading=vi.fn();
-    const view=render(<ScrollJourneyFilm src="/custom.mp4" poster="/cover.jpg" className="film" progress={motionValue(0)} onReady={onReady} onProgress={vi.fn()} onLoadProgress={loading}/>);
+describe('complete native video preparation',()=>{
+  it('does not mount the video or declare readiness until the download finishes and a frame decodes',async()=>{
+    let finish!: (data: Uint8Array) => void;
+    download.run.mockImplementation((_src,_signal,progress)=>{progress(.4);return new Promise(resolve=>{finish=resolve;});});
+    const ready=vi.fn(),loading=vi.fn();
+    const view=render(<ScrollJourneyFilm src="/custom.mp4" poster="/cover.jpg" className="film" progress={motionValue(0)} onReady={ready} onProgress={vi.fn()} onLoadProgress={loading}/>);
+    expect(loading).toHaveBeenLastCalledWith(.4);
+    expect(view.container.querySelector('video')).toBeNull();
+    expect(ready).not.toHaveBeenCalledWith(true);
+    await act(async()=>{finish(new Uint8Array([1,2,3]));});
     const video=view.container.querySelector('video')!;
-    let bufferedEnd=.5;
-    Object.defineProperties(video,{readyState:{value:2},duration:{value:24},buffered:{value:{length:1,start:()=>0,end:()=>bufferedEnd}}});
+    expect(video.src).toContain('blob:complete-video');
+    expect(ready).not.toHaveBeenCalledWith(true);
+    Object.defineProperties(video,{readyState:{value:2},duration:{value:24}});
     fireEvent.loadedData(video);
-    expect(loading).toHaveBeenLastCalledWith(.25);
-    expect(onReady).not.toHaveBeenCalledWith(true);
-    bufferedEnd=2;fireEvent.progress(video);
-    expect(loading).toHaveBeenLastCalledWith(1);
-    expect(onReady).toHaveBeenLastCalledWith(true);
-    fireEvent.error(video);
+    expect(ready).toHaveBeenLastCalledWith(true);
+    view.unmount();
+    expect(URL.revokeObjectURL).toHaveBeenCalledWith('blob:complete-video');
+  });
+  it('reports failures without declaring the video ready',async()=>{
+    download.run.mockRejectedValue(new Error('Incomplete download'));
+    const ready=vi.fn(),loading=vi.fn();
+    const view=render(<ScrollJourneyFilm src="/custom.mp4" poster="/cover.jpg" className="film" progress={motionValue(0)} onReady={ready} onProgress={vi.fn()} onLoadProgress={loading}/>);
+    await act(async()=>{});
     expect(loading).toHaveBeenLastCalledWith(null);
-    expect(onReady).toHaveBeenLastCalledWith(false);
+    expect(ready).not.toHaveBeenCalledWith(true);
     view.unmount();
   });
-  it('uses native seeking without allocating an indexed decoder and stays responsive beyond five seconds',async()=>{
+  it('seeks forward, reverses and reaches the true ending using only the downloaded blob',async()=>{
     vi.useFakeTimers();
-    Object.defineProperty(window,'parent',{configurable:true,value:{}});
-    const Decoder=vi.fn();vi.stubGlobal('VideoDecoder',Decoder);
-    const progress=motionValue(.8),onReady=vi.fn(),onProgress=vi.fn();
-    const view=render(<ScrollJourneyFilm src="/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4" poster="/cover.jpg" className="film" progress={progress} onReady={onReady} onProgress={onProgress}/>);
-    const video=view.container.querySelector('video')!;
-    expect(video).toBeTruthy();expect(view.container.querySelector('canvas')).toBeNull();expect(Decoder).not.toHaveBeenCalled();
-    Object.defineProperties(video,{readyState:{value:4},duration:{value:24}});
-    fireEvent.loadedData(video);
-    await act(async()=>{await vi.advanceTimersByTimeAsync(6000);});
-    const forward=video.currentTime;expect(forward).toBeGreaterThan(10);expect(onReady).toHaveBeenCalledWith(true);
-    fireEvent.seeked(video);
-    await act(async()=>{progress.set(.5);await vi.advanceTimersByTimeAsync(1000);});
-    expect(video.currentTime).toBeLessThan(forward);
-    view.unmount();
-  });
-  it('reports the true ending after native metadata rounds the duration',async()=>{
-    vi.useFakeTimers();
-    Object.defineProperty(window,'parent',{configurable:true,value:{}});
-    const onProgress=vi.fn();
-    const view=render(<ScrollJourneyFilm src="/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4" poster="/cover.jpg" className="film" progress={motionValue(1)} onReady={vi.fn()} onProgress={onProgress}/>);
+    const progress=motionValue(.8),shown=vi.fn();
+    const view=render(<ScrollJourneyFilm src="/custom.mp4" poster="/cover.jpg" className="film" progress={progress} onReady={vi.fn()} onProgress={shown}/>);
+    await act(async()=>{});
     const video=view.container.querySelector('video')!;
     Object.defineProperties(video,{readyState:{value:4},duration:{value:24.042}});
     fireEvent.loadedData(video);
-    await act(async()=>{await vi.advanceTimersByTimeAsync(20);});
+    await act(async()=>{await vi.advanceTimersByTimeAsync(40);});
+    const forward=video.currentTime;
+    expect(forward).toBeGreaterThan(10);
     fireEvent.seeked(video);
-    expect(video.currentTime).toBeGreaterThan(24);
-    expect(video.currentTime).toBeLessThan(24.042);
-    expect(onProgress).toHaveBeenLastCalledWith(1);
+    await act(async()=>{progress.set(.5);await vi.advanceTimersByTimeAsync(40);});
+    expect(video.currentTime).toBeLessThan(forward);
+    fireEvent.seeked(video);
+    await act(async()=>{progress.set(1);await vi.advanceTimersByTimeAsync(40);});
+    fireEvent.seeked(video);
+    expect(shown).toHaveBeenLastCalledWith(1);
+    expect(download.run).toHaveBeenCalledOnce();
     view.unmount();
   });
 });

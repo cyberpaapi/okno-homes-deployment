@@ -7,27 +7,26 @@ import { HERO_FILM_EXIT } from '@/lib/heroFilmScroll';
 
 /** Only the handoff is gated. Keep the full input distance and release it once
  * the actual window frame has painted, rather than running the film offscreen. */
-export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: MotionValue<number>, enabled: boolean, showEnding: () => void) {
+export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: MotionValue<number>, enabled: boolean) {
   const lenis = useLenis();
   useEffect(() => {
     const hero = section.current;
     if (!enabled || !hero) return;
     let previousY = window.scrollY;
     let pendingY: number | null = null;
-    let timeout = 0, release = 0, paint = 0;
-    let fallback = false;
+    let release = 0, paint = 0;
     const boundary = () => hero.getBoundingClientRect().top + window.scrollY + (hero.offsetHeight - window.innerHeight) * HERO_FILM_EXIT;
     const move = (y: number, immediate: boolean) => {
       if (lenis) lenis.scrollTo(y, { immediate, force: true });
       else window.scrollTo(0, y);
     };
     const clear = () => {
-      window.clearTimeout(timeout); window.clearTimeout(release); cancelAnimationFrame(paint);
-      timeout = 0; release = 0; paint = 0;
+      window.clearTimeout(release); cancelAnimationFrame(paint);
+      release = 0; paint = 0;
       hero.removeAttribute('data-film-exit-pending');
     };
     const finish = () => {
-      if (document.body.style.overflow === 'hidden' || pendingY === null || (!fallback && shown.get() < 1) || release || paint) return;
+      if (document.body.style.overflow === 'hidden' || pendingY === null || (shown.get() < 1) || release || paint) return;
       // Let the endpoint and its matching still render before moving the page.
       paint = requestAnimationFrame(() => {
         paint = requestAnimationFrame(() => {
@@ -51,13 +50,12 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
           pendingY = Math.max(pendingY, y, lenis?.targetScroll ?? y);
           move(end, true);
         }
-      } else if (previousY <= end && y > end && shown.get() < 1 && !fallback) {
+      } else if (previousY <= end && y > end && shown.get() < 1) {
         pendingY = Math.max(y, lenis?.targetScroll ?? y);
         hero.setAttribute('data-film-exit-pending', 'true');
         move(end, true);
-        // A failed CDN/decoder must not trap the page. The accepted exact-end
-        // still is the recovery surface, never an unfinished room frame.
-        timeout = window.setTimeout(() => { fallback = true; showEnding(); finish(); }, 2000);
+        // Loading/failure is handled at the opening. Never replace a slow
+        // frame with an ending still just because a two-second timer elapsed.
         finish();
       }
       previousY = Math.min(y, pendingY === null ? y : end);
@@ -90,5 +88,5 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
       window.removeEventListener('wheel', wheel, true);
       window.removeEventListener('keydown',key);
     };
-  }, [section, shown, enabled, showEnding, lenis]);
+  }, [section, shown, enabled, lenis]);
 }

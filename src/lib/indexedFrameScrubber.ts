@@ -9,7 +9,7 @@ const LOOK_AHEAD = Math.floor(CACHE_LIMIT / 2) - 3;
 /** Decode original AVC packets, avoiding the native player's seek pipeline.
  * The compressed source is streamed once; at most 48/96 native frames live.
  */
-export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, onPresent: (time: number) => void) {
+export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, onPresent: (time: number) => void, fullData?: Uint8Array) {
   const last = film.packets.length - 1;
   if (typeof VideoDecoder === 'undefined') return null;
   const description = Uint8Array.from(atob(film.description), character => character.charCodeAt(0));
@@ -19,9 +19,10 @@ export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTML
   if (!context) return null;
   canvas.width = film.width;
   canvas.height = film.height;
-  const source = new Uint8Array(film.bytes);
+  if (fullData && fullData.length !== film.bytes) return null;
+  const source = fullData ?? new Uint8Array(film.bytes);
   const frames = new Map<number, VideoFrame>();
-  let available = 0;
+  let available = fullData?.length ?? 0;
   let target = 0;
   let drawn = -1;
   let requestedAt = performance.now();
@@ -121,7 +122,8 @@ export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTML
     frames.clear();
   };
   signal.addEventListener('abort', dispose, { once: true });
-  void (async () => {
+  if (fullData) void pump();
+  else void (async () => {
     try {
       const response = await fetch(film.source, { signal, cache: 'force-cache' });
       if (!response.ok || !response.body) throw new Error('Film unavailable');

@@ -17,9 +17,9 @@ function setup() {
   const hero = document.createElement('section');
   Object.defineProperty(hero, 'offsetHeight', { value: 2000 });
   hero.getBoundingClientRect = () => ({ top: -y } as DOMRect);
-  const shown = motionValue(0), fallback = vi.fn();
-  const hook = renderHook(() => useHeroFilmExit({ current: hero }, shown, true, fallback));
-  return { ...hook, hero, shown, fallback };
+  const shown = motionValue(0);
+  const hook = renderHook(() => useHeroFilmExit({ current: hero }, shown, true));
+  return { ...hook, hero, shown };
 }
 describe('Hero movie handoff', () => {
   it('makes Home interrupt wheel inertia while leaving editable controls alone',()=>{
@@ -41,7 +41,7 @@ describe('Hero movie handoff', () => {
     expect(wheel.defaultPrevented).toBe(true);
     await act(async () => { view.shown.set(1); await vi.advanceTimersByTimeAsync(200); });
     expect(y).toBe(1500); expect(view.hero.dataset.filmExitPending).toBeUndefined();
-    expect(view.fallback).not.toHaveBeenCalled(); view.unmount();
+    view.unmount();
   });
   it('defers a pending ending handoff until an open menu closes', async () => {
     const view=setup();
@@ -50,7 +50,7 @@ describe('Hero movie handoff', () => {
     expect(y).toBe(950);
     const wheel=new WheelEvent('wheel',{deltaY:500,cancelable:true});
     act(()=>window.dispatchEvent(wheel)); expect(wheel.defaultPrevented).toBe(false);
-    await act(async()=>{document.body.style.overflow='';});
+    await act(async()=>{view.shown.set(1); document.body.style.overflow='';});
     await act(async()=>{await vi.advanceTimersByTimeAsync(200);});
     expect(y).toBe(1300);view.unmount();
   });
@@ -61,16 +61,19 @@ describe('Hero movie handoff', () => {
     act(() => { window.dispatchEvent(wheel); });
     expect(wheel.defaultPrevented).toBe(false);
     await act(async () => { await vi.advanceTimersByTimeAsync(2500); });
-    expect(view.fallback).not.toHaveBeenCalled(); view.unmount();
+    view.unmount();
     y = 2100; const restored = setup();
     act(() => { y = 2200; window.dispatchEvent(new Event('scroll')); });
     expect(y).toBe(2200); restored.unmount();
   });
-  it('recovers to the matching ending still if decoding fails, without trapping the visitor', async () => {
+  it('does not skip to an ending still while a frame takes longer than two seconds', async () => {
     const view = setup();
     act(() => { y = 1300; window.dispatchEvent(new Event('scroll')); });
     await act(async () => { await vi.advanceTimersByTimeAsync(2250); });
-    expect(view.fallback).toHaveBeenCalledOnce(); expect(y).toBe(1300);
+    expect(y).toBe(950);
+    expect(view.hero.dataset.filmExitPending).toBe('true');
+    await act(async () => { view.shown.set(1); await vi.advanceTimersByTimeAsync(200); });
+    expect(y).toBe(1300);
     view.unmount();
   });
 });

@@ -3,13 +3,17 @@ import mobileFilm from '../../config/hero-v1-mobile-frames.json';
 import { fetchFrameRange } from './fetchFrameRange';
 
 export const heroImageDuration = desktopFilm.sourceFrames / desktopFilm.fps;
+export function heroImageAsset() {
+  return typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 800px)').matches ? mobileFilm : desktopFilm;
+}
 
 /** Independently decoded poses from the accepted film. The scroll position
  * chooses the image; nothing advances on a playback clock. */
-export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, present: (time: number) => void, loading?: (progress: number) => void) {
+export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, present: (time: number) => void, loading?: (progress: number) => void, fullData?: Uint8Array) {
   if (typeof createImageBitmap !== 'function' || signal.aborted) return null;
   const compact = typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 800px)').matches;
   const film = compact ? mobileFilm : desktopFilm;
+  if (fullData && fullData.length !== film.bytes) return null;
   const context = canvas.getContext('2d', { alpha: false, desynchronized: true });
   if (!context) return null;
   canvas.width = film.width; canvas.height = film.height;
@@ -38,6 +42,7 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
   const chunkAt = () => Math.floor(film.frames[target][0] / CHUNK);
   const distance = (id: number) => Math.abs(id-chunkAt()) + ((id-chunkAt())*direction < 0 ? .5 : 0);
   async function bytes(id: number) {
+    if (fullData) return fullData.subarray(id * CHUNK, Math.min(film.bytes, (id + 1) * CHUNK));
     const cached = chunks.get(id);
     if (cached) return cached;
     const job = requests.get(id);
@@ -151,7 +156,7 @@ export function createHeroImageScrubber(canvas: HTMLCanvasElement, signal: Abort
     for (const [id,request] of requests) {
       if (!anchorChunks.has(id) && (prepared || id > openingLastChunk) && Math.abs(id-chunkAt()) > 4) { request.abort.abort(); requests.delete(id); }
     }
-    for (let step=0;step <= (target === 0 ? 0 : 1);step++) {
+    for (let step=0;!fullData && step <= (target === 0 ? 0 : 1);step++) {
       const id = chunkAt()+direction*step;
       if (id >= 0 && id*CHUNK < film.bytes) void bytes(id).catch(() => {});
     }

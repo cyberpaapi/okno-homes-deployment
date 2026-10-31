@@ -24,47 +24,8 @@ import { useSiteContent, useSiteContentMap } from "@/lib/useSiteContent";
 import { resolveProcessDayRange } from "@/lib/processDayRange";
 import useProcessScrollGuard from "./useProcessScrollGuard";
 import { PROCESS_DAY_RANGES } from "@/lib/processChapters";
-import { useMediaQuery } from "@/lib/useMediaQuery";
-
-function MobileProcess() {
-  const opening = useProcessOpening();
-  const currentStages = useProcessStages();
-  const source = useSiteContent('process.opening.master-scrub', '/process/process-master.scrub.mp4');
-  const poster = useSiteContent('process.opening.poster', '/process/land-poster.webp');
-  const video = useRef<HTMLVideoElement>(null);
-  const root = useRef<HTMLElement>(null);
-  const [activeStage, setActiveStage] = useState(0);
-  useEffect(() => {
-    const element = video.current;
-    if (!element || !root.current) return;
-    let visible = false;
-    let manuallyPaused = false;
-    let autoPause = false;
-    const sync = () => {
-      autoPause = !visible || document.hidden;
-      if (autoPause) element.pause();
-      else if (!manuallyPaused && !element.ended) void element.play().catch(() => undefined);
-    };
-    const pause = () => { if (!autoPause && !element.ended) manuallyPaused = true; };
-    const play = () => { manuallyPaused = false; };
-    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: .35 });
-    observer.observe(element);
-    element.addEventListener('pause', pause);
-    element.addEventListener('play', play);
-    document.addEventListener('visibilitychange', sync);
-    return () => { observer.disconnect(); element.removeEventListener('pause', pause); element.removeEventListener('play', play); document.removeEventListener('visibilitychange', sync); element.pause(); };
-  }, []);
-  const active = currentStages[activeStage];
-  return <section ref={root} className={styles.mobileSequence} data-playback="autoplay" aria-labelledby="process-title">
-    <div className={styles.mobileOpening} data-type-section="process.opening"><h1 id="process-title">{opening.title}</h1><p>{opening.summary}</p></div>
-    <video ref={video} src={source === '/process/process-master.scrub.mp4' ? '/process/process-mobile-build.mp4' : source} poster={poster} muted playsInline controls preload="metadata" aria-label="OKNO build sequence from land to handover" onTimeUpdate={event => {
-      const duration = event.currentTarget.duration;
-      if (Number.isFinite(duration) && duration > 0) setActiveStage(processStageAt(event.currentTarget.currentTime / duration));
-    }} />
-    <div className={styles.mobileChapter} data-type-section={`process.stage-${active.id}`}><p>{active.days}</p><h2>{active.label}</h2><p>{active.title}</p><p>{active.copy}</p></div>
-    <StaticProcessDeliveryTimeline items={currentStages} />
-  </section>;
-}
+import { useHeroLoadingLock } from "@/lib/useHeroLoadingLock";
+import FilmLoadingStatus from "@/components/landing-options/FilmLoadingStatus";
 
 type Stage = ProcessTimelineItem & {
   days: string;
@@ -251,6 +212,9 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
   const cover = useSiteContent("process.opening.cover", "/process/opening-cover.webp");
   const [activeStage, setActiveStage] = useState(0);
   const [masterFilmReady, setMasterFilmReady] = useState(false);
+  const [loading, setLoading] = useState<number | null>(0);
+  const [attempt, setAttempt] = useState(0);
+  useHeroLoadingLock(!masterFilmReady);
   const sequenceProgress = useMotionValue(0);
   useProcessScrollGuard(trackRef, sequenceProgress);
   const presentedStage = useRef(0);
@@ -288,12 +252,12 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
           <p className={styles.heroLabel}>{opening.eyebrow}</p>
           <div id="process-title"><ProcessTextReveal text={opening.title} /></div>
           <p className={styles.heroSummary}>{opening.summary}</p>
-          <p className={styles.scrollCue}><span aria-hidden="true" /> {opening.cue}</p>
+          <div className={styles.scrollCue}>{masterFilmReady ? <><span aria-hidden="true" />{opening.cue}</> : <FilmLoadingStatus ready={false} progress={loading} retry={() => { setLoading(0); setAttempt(value => value + 1); }} />}</div>
         </div>
 
         <div className={styles.mediaFrame}>
           <ScrollProcessFilm
-            key={`${masterHq}|${masterScrub}`}
+            key={`${masterHq}|${masterScrub}|${attempt}`}
             className={styles.sceneVideo}
             hq={masterHq}
             mobile={masterScrub}
@@ -301,6 +265,7 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
             label={masterFilmReady ? filmLabel : loadingLabel}
             progress={scrollYProgress}
             onReady={setMasterFilmReady}
+            onLoadProgress={setLoading}
             onProgress={presentFrame}
           />
 
@@ -329,7 +294,6 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
 
 export default function ProcessJourney() {
   const reducedMotion = useReducedMotion();
-  const compact = useMediaQuery('(max-width: 700px)');
   const [filmCovering, setFilmCovering] = useState(false);
 
   return (
@@ -339,7 +303,7 @@ export default function ProcessJourney() {
       </div>
       <ProcessNavigation />
       <main className={styles.pageContent} data-route="process">
-        {reducedMotion ? <><StaticProcessHero /><ReducedProcess /></> : compact ? <MobileProcess /> : <AnimatedProcess onFilmCovering={setFilmCovering} />}
+        {reducedMotion ? <><StaticProcessHero /><ReducedProcess /></> : <AnimatedProcess onFilmCovering={setFilmCovering} />}
         <ProcessDetailTimeline />
       </main>
     </div>

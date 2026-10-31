@@ -2,6 +2,7 @@
  * rapid input replaces the pending target, including a change of direction. */
 export function createScrollVideoScrubber(video: HTMLVideoElement, fps: number, present: (time: number) => void) {
   let target = 0, shown = -1, frame = 0, waiting = false, disposed = false;
+  let watchdog: ReturnType<typeof setTimeout> | undefined;
   const indexAt = (time: number) => Math.min(Math.max(0, Math.round(video.duration * fps) - 1), Math.max(0, Math.round(time * fps)));
   const queue = () => { if (!disposed && !frame && !document.hidden) frame = requestAnimationFrame(tick); };
   const tick = () => {
@@ -9,9 +10,16 @@ export function createScrollVideoScrubber(video: HTMLVideoElement, fps: number, 
     if (disposed || waiting || document.hidden || !Number.isFinite(video.duration) || target === shown) return;
     waiting = true;
     video.currentTime = Math.min(video.duration - .0001, (target + .01) / fps);
+    clearTimeout(watchdog);
+    watchdog = setTimeout(() => {
+      if (disposed) return;
+      if (!video.seeking && video.readyState >= 2) seeked();
+      else { waiting = false; queue(); }
+    }, 1500);
   };
   const seeked = () => {
     if (disposed) return;
+    clearTimeout(watchdog);
     shown = Math.round(video.currentTime * fps);
     waiting = false;
     video.dataset.scrubPresentedTime = (shown / fps).toFixed(4);
@@ -34,6 +42,7 @@ export function createScrollVideoScrubber(video: HTMLVideoElement, fps: number, 
     dispose() {
       disposed = true;
       cancelAnimationFrame(frame);
+      clearTimeout(watchdog);
       video.removeEventListener('seeked', seeked);
       document.removeEventListener('visibilitychange', visibility);
     },

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMotionValueEvent, type MotionValue } from 'motion/react';
 import { createVideoScrubber } from '@/lib/videoScrubber';
+import { downloadHeroMedia } from '@/lib/downloadHeroMedia';
 import { isEmbeddedSitePreview } from '@/lib/sitePreview';
 import { ProcessPlayhead, processFilmProgress } from '@/lib/processScrub';
 import { PROCESS_END_TIME, PROCESS_FPS, processFinishOpacity, processPresentationPackets } from '@/lib/processChapters';
@@ -11,10 +12,10 @@ import { PROCESS_END_TIME, PROCESS_FPS, processFinishOpacity, processPresentatio
 type Controller = { setTime(time: number): void; dispose(): void };
 type Props = {
   hq: string; mobile: string; poster: string; label: string; className: string;
-  progress: MotionValue<number>; onReady(ready: boolean): void; onProgress(progress: number): void;
+  progress: MotionValue<number>; onReady(ready: boolean): void; onProgress(progress: number): void; onLoadProgress?(progress: number | null): void;
 };
 
-export default function ScrollProcessFilm({ hq, mobile, poster, label, className, progress, onReady, onProgress }: Props) {
+export default function ScrollProcessFilm({ hq, mobile, poster, label, className, progress, onReady, onProgress, onLoadProgress }: Props) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const surface = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
@@ -38,6 +39,12 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
     let previous = 0;
     let visible = true;
     let disposed = false;
+    let fullData: Uint8Array | undefined;
+    let objectUrl: string | null = null;
+    let fallingBack = false;
+    const loading = (amount: number) => { if (!disposed) onLoadProgress?.(amount); };
+    const failed = () => { if (!disposed) { onReady(false); onLoadProgress?.(null); } };
+    loading(0);
     playhead.current = new ProcessPlayhead();
     onReady(false);
     const target = () => processFilmProgress(progress.get()) * endTime.current;
@@ -71,12 +78,16 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
     originalFilm.current = source === '/process/process-master.hq.mp4' || source === '/process/process-master.scrub.mp4';
     if (finish.current) finish.current.style.opacity = '0';
     const fallback = () => {
-      if (disposed) return;
-      abort.abort();
-      local?.dispose();
-      local = null;
-      controller.current = null;
-      setNativeSource(source);
+      if (disposed || fallingBack) return;
+      fallingBack = true;
+      local?.dispose(); local = null; controller.current = null;
+      onReady(false);
+      void (async () => {
+        const data = fullData ?? await downloadHeroMedia(source, abort.signal, loading);
+        if (disposed) return;
+        objectUrl = URL.createObjectURL(new Blob([data as BlobPart], { type: 'video/mp4' }));
+        setNativeSource(objectUrl);
+      })().catch(failed);
     };
     void (async () => {
       if (isEmbeddedSitePreview() || source !== '/process/process-master.hq.mp4' && source !== '/process/process-master.scrub.mp4') { fallback(); return; }
@@ -89,28 +100,32 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
       // discarded outro while a late frame is still being decoded.
       const cut = { ...film, packets: processPresentationPackets(film.packets) };
       endTime.current = PROCESS_END_TIME;
-      local = await createIndexedFrameScrubber(cut, canvas.current, abort.signal, () => onReady(true), fallback, present);
+      fullData = await downloadHeroMedia(source, abort.signal, loading, film.bytes);
+      if (disposed) return;
+      local = await createIndexedFrameScrubber(cut, canvas.current, abort.signal, () => onReady(true), fallback, present, fullData);
       if (abort.signal.aborted) { local?.dispose(); return; }
       if (!local) { fallback(); return; }
       controller.current = local;
       queue();
-    })().catch(fallback);
+    })().catch(() => { if (fullData) fallback(); else failed(); });
     return () => {
       disposed = true;
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
       cancelAnimationFrame(frame);
       observer.disconnect();
       document.removeEventListener('visibilitychange', visibility);
       abort.abort(); local?.dispose(); controller.current = null; wake.current = () => {};
     };
-  }, [hq, mobile, progress, onReady, present]);
+  }, [hq, mobile, progress, onReady, present, onLoadProgress]);
 
   useEffect(() => {
     if (!nativeSource || !video.current) return;
     const element = video.current;
     const scrubber = createVideoScrubber(element, 30);
-    const original = nativeSource === '/process/process-master.hq.mp4' || nativeSource === '/process/process-master.scrub.mp4';
+    const original = originalFilm.current;
     controller.current = scrubber;
     const ready = () => {
+      if (!Number.isFinite(element.duration) || element.duration <= 0 || element.readyState < 2) return;
       endTime.current = original ? Math.min(PROCESS_END_TIME, element.duration - 1 / PROCESS_FPS) : Math.max(0, element.duration - 1 / PROCESS_FPS);
       onReady(true); wake.current();
     };
@@ -122,7 +137,7 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
   }, [nativeSource, onReady, present]);
 
   return <div ref={surface} style={{ position: 'absolute', inset: 0 }}>{nativeSource
-    ? <video ref={video} className={className} src={nativeSource} poster={poster} muted playsInline preload="auto" aria-label={label} data-process-master-video data-film-renderer="native" onError={() => onReady(false)} />
+    ? <video ref={video} className={className} src={nativeSource} poster={poster} muted playsInline preload="auto" aria-label={label} data-process-master-video data-film-renderer="native" onError={() => { onReady(false); onLoadProgress?.(null); }} />
     : <canvas ref={canvas} className={className} width={1920} height={1080} role="img" aria-label={label} data-process-master-video data-film-renderer="frames" />}
     <picture style={{ position: 'absolute', inset: 0 }}>
       <source media="(max-width: 1023px)" srcSet="/process/process-final-house-mobile.webp" />

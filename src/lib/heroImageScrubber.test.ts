@@ -20,6 +20,17 @@ function setup() {
 }
 afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();vi.unstubAllGlobals();});
 describe('independent Hero scroll frames',()=>{
+  it('serves arbitrary forward and reverse poses without network requests when fully preloaded',async()=>{
+    const mocks=setup(),canvas=document.createElement('canvas'),abort=new AbortController();
+    const ready=vi.fn();
+    const scrubber=createHeroImageScrubber(canvas,abort.signal,ready,vi.fn(),vi.fn(),undefined,data)!;
+    await vi.advanceTimersByTimeAsync(40);
+    expect(ready).toHaveBeenCalledOnce();
+    for(const time of [22,3,24,0]){scrubber.setTime(time);await vi.advanceTimersByTimeAsync(40);expect(Number(canvas.dataset.scrubPresentedTime)).toBe(time);}
+    expect(mocks.fetch).not.toHaveBeenCalled();
+    expect(Number(canvas.dataset.scrubCacheFrames)).toBeLessThanOrEqual(18);
+    abort.abort();
+  });
   it('reports readiness only after preparing opening poses and presenting a frame',async()=>{
     const mocks=setup(),canvas=document.createElement('canvas'),abort=new AbortController();
     const ready=vi.fn(),loading=vi.fn();

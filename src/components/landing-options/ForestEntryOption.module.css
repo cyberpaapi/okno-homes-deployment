@@ -113,6 +113,8 @@ canvas.journeyVideo:not([data-scrub-presented-frames]) { opacity: 0; }
 .loadingBar::-webkit-progress-bar { background: rgb(244 240 233 / .25); }
 .loadingBar::-webkit-progress-value { background: #f4f0e9; transition: width .25s ease; }
 .loadingBar::-moz-progress-bar { background: #f4f0e9; }
+.retryLoading { pointer-events: auto; border: 1px solid rgb(244 240 233 / .5); border-radius: 24px; padding: 10px 18px; background: rgb(16 20 16 / .65); color: #f4f0e9; cursor: pointer; }
+.retryLoading:focus-visible { outline: 2px solid #f4f0e9; outline-offset: 4px; }
 
 .grade {
   z-index: 6;

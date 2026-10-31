@@ -15,7 +15,9 @@ vi.mock('@/lib/useSiteContent', () => ({ useSiteContent: (_id: string, fallback:
 vi.mock('@/components/ui/SubtleAction', () => ({ SubtleLink: ({ href, children }: { href: string; children: ReactNode }) => <a href={href}>{children}</a> }));
 vi.mock('@/components/landing/LandingExperience', () => ({ default: () => <div data-testid="shared-page">Shared page</div> }));
 vi.mock('@/components/landing-options/useHeroReloadPosition', () => ({ useHeroReloadPosition: vi.fn() }));
-vi.mock('@/lib/heroV2ImageScrubber', () => ({ heroV2ImageDuration: 791 / 24, createHeroV2ImageScrubber: (_canvas: unknown, _signal: unknown, ready: () => void, _fail: unknown, present: (time: number) => void) => { mock.present = present; ready(); return { setTime: mock.setTime, dispose: mock.dispose }; } }));
+vi.mock('@/lib/heroV2ImageScrubber', () => ({ heroV2ImageDuration: 791 / 24, heroV2ImageAsset: () => ({ parts: [{source: '/optimized.bin'}], bytes: 3 }), createHeroV2ImageScrubber: (_canvas: unknown, _signal: unknown, ready: () => void, _fail: unknown, present: (time: number) => void) => { mock.present = present; ready(); return { setTime: mock.setTime, dispose: mock.dispose }; } }));
+vi.mock('@/lib/downloadHeroMedia', () => ({ downloadHeroMedia: async () => new Uint8Array([1,2,3]) }));
+
 afterEach(() => { mock.reduced = false; mock.progress = 0; mock.present = undefined; vi.clearAllMocks(); });
 
 describe('scroll-only V2 behavior', () => {

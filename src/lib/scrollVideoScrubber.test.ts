@@ -23,6 +23,20 @@ describe('scroll-driven native film', () => {
     expect(present).toHaveBeenCalledTimes(2);
     scrubber.dispose();
   });
+  it('recovers a missed seeked notification instead of permanently ignoring later scrolls', async () => {
+    vi.useFakeTimers();
+    vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
+    const video = document.createElement('video');
+    Object.defineProperties(video, { duration: { value: 24 }, readyState: { value: 2 } });
+    const present = vi.fn();
+    const scrubber = createScrollVideoScrubber(video,24,present);
+    scrubber.setTime(6); await vi.advanceTimersByTimeAsync(20);
+    scrubber.setTime(12); await vi.advanceTimersByTimeAsync(1520);
+    expect(video.currentTime).toBeCloseTo(12 + .01/24);
+    video.dispatchEvent(new Event('seeked'));
+    expect(present).toHaveBeenLastCalledWith(12);
+    scrubber.dispose();
+  });
   it('seeks the true last frame directly rather than playing hundreds of old targets', async () => {
     vi.useFakeTimers();
     vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});

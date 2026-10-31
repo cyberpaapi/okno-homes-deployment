@@ -12,11 +12,13 @@ import { ReactLenis } from 'lenis/react';
 import type { VirtualScrollData } from 'lenis';
 import LandingExperience from '@/components/landing/LandingExperience';
 import ScrollJourneyFilm from './ScrollJourneyFilm';
+import FilmLoadingStatus from './FilmLoadingStatus';
 import { useHeroReloadPosition } from './useHeroReloadPosition';
 import { useHeroFilmExit } from './useHeroFilmExit';
 import { useSiteContent } from '@/lib/useSiteContent';
 import { homeVariantAccessibleTitle } from '@/lib/homeVariantContent';
 import { useLenisDocumentLock } from '@/lib/useLenisDocumentLock';
+import { useHeroLoadingLock } from '@/lib/useHeroLoadingLock';
 import { heroWheelDelta } from '@/lib/heroWheelSensitivity';
 import { pageImageLoader } from '@/lib/pageImageLoader';
 import type { ContentItem } from '@/lib/contentCollections';
@@ -29,20 +31,9 @@ const JOURNEY_VIDEO = '/assets/landing-options/forest-entry-scroll-window-smooth
 const START = '/assets/landing-options/forest-entry-start-v2.jpg';
 const END = '/assets/landing-options/forest-entry-window-finish.jpg';
 
-type NetworkInformation = { saveData?: boolean };
-
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const range = (value: number, start: number, end: number) =>
   clamp((value - start) / (end - start));
-
-function useDataSaver() {
-  const [saveData] = useState(() => {
-    if (typeof navigator === 'undefined') return false;
-    const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
-    return Boolean(connection?.saveData);
-  });
-  return saveData;
-}
 
 export default function ForestEntryOption({ variant }: { variant?: ContentItem }) {
   const savedIntroVideo = useSiteContent('hero-v1.opening.intro-video', INTRO_VIDEO);
@@ -66,6 +57,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const endAlt = variant?.fields.endAlt || savedEndAlt;
   const sectionRef = useRef<HTMLElement>(null);
   const adjustHeroWheel = useCallback((data: VirtualScrollData) => {
+    if (document.documentElement.dataset.heroLoading === 'true') return false;
     const hero = sectionRef.current;
     if (hero && data.event.type === 'wheel') {
       const bounds = hero.getBoundingClientRect();
@@ -81,10 +73,11 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const [introComplete, setIntroComplete] = useState(false);
   const [journeyReady, setJourneyReady] = useState(false);
   const [journeyLoading, setJourneyLoading] = useState<number | null>(0);
-  const [endingFallback, setEndingFallback] = useState(false);
+  const [loadAttempt, setLoadAttempt] = useState(0);
   const reducedMotion = useReducedMotion();
-  const saveData = useDataSaver();
-  const animated = !reducedMotion && !saveData;
+  const animated = !reducedMotion;
+  const loadingLocked = animated && !journeyReady;
+  useHeroLoadingLock(loadingLocked);
   const presentedFilmProgress = useMotionValue(0);
   const presentFilm = useCallback((value: number) => presentedFilmProgress.set(value), [presentedFilmProgress]);
   const { scrollYProgress } = useScroll({
@@ -94,8 +87,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   // Lenis smooths the document once. A second spring and a chronological
   // playback queue make the camera continue after the visitor stops scrolling.
   const mediaProgress = scrollYProgress;
-  const fallbackEnding = useCallback(() => setEndingFallback(true), []);
-  useHeroFilmExit(sectionRef, presentedFilmProgress, animated, fallbackEnding);
+  useHeroFilmExit(sectionRef, presentedFilmProgress, animated);
 
   const finishIntro = () => {
     if (introFinished.current) return;
@@ -105,7 +97,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   };
 
   const syncMedia = (rawProgress: number) => {
-    const progress = clamp(rawProgress);
+    const progress = loadingLocked ? 0 : clamp(rawProgress);
     const viewport = viewportRef.current;
     const intro = introVideoRef.current;
     if (intro && animated && progress > .005) {
@@ -119,9 +111,9 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     if (viewport) {
       const introOpacity = 1 - range(progress, .005, .06);
       const stillOpacity = introFinished.current ? 1 - range(progress, .04, .08) : 0;
-      const brandOpacity = !animated ? 1 : introFinished.current ? 1 - range(progress, .005, .06) : 0;
-      const journeyOpacity = endingFallback && progress >= .9 ? 0 : range(progress, .04, .08);
-      const endOpacity = !animated || presentedFilmProgress.get() >= 1 || endingFallback ? range(progress, .9, .94) : 0;
+      const brandOpacity = loadingLocked || !animated ? 1 : introFinished.current ? 1 - range(progress, .005, .06) : 0;
+      const journeyOpacity = range(progress, .04, .08);
+      const endOpacity = !animated || presentedFilmProgress.get() >= 1 ? range(progress, .9, .94) : 0;
       viewport.style.setProperty('--intro-opacity', introOpacity.toFixed(4));
       viewport.style.setProperty('--still-opacity', stillOpacity.toFixed(4));
       viewport.style.setProperty('--brand-opacity', brandOpacity.toFixed(4));
@@ -174,7 +166,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     syncMedia(mediaProgress.get());
     // Motion owns the changing progress value; this only primes restored scroll positions.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animated, journeyReady, endingFallback]);
+  }, [animated, journeyReady]);
 
   const page = (
     <div
@@ -183,7 +175,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
       data-video-ready={journeyReady || undefined}
       data-static={!animated}
       data-journey-video={journeyVideo}
-      data-film-ending={endingFallback ? 'still-fallback' : 'decoded'}
+      data-film-ending="decoded"
     >
       <section
         ref={sectionRef}
@@ -218,10 +210,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
           </div>
           <div className={styles.brand} aria-label="OKNO Modhomes" data-type-field={"hero-v1.opening.tagline"}>
             {tagline && <p data-hero-v1-tagline data-type-field={"hero-v1.opening.tagline"}>{tagline}</p>}
-            {animated && <div className={styles.journeyLoading} data-journey-loading={journeyReady ? 'ready' : journeyLoading === null ? 'unavailable' : 'loading'}>
-              {journeyLoading !== null && <progress className={styles.loadingBar} max={1} value={journeyReady ? 1 : journeyLoading} aria-label="Preparing scroll video" />}
-              <span role="status">{journeyReady ? 'Scroll to explore' : journeyLoading === null ? 'Scroll to continue' : 'Preparing your journey'}</span>
-            </div>}
+            {animated && <FilmLoadingStatus ready={journeyReady} progress={journeyLoading} retry={() => { setJourneyLoading(0); setJourneyReady(false); setLoadAttempt(value => value + 1); }} />}
           </div>
 
           {animated && (
@@ -241,7 +230,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
                 }}
               />
               <ScrollJourneyFilm
-                key={journeyVideo}
+                key={`${journeyVideo}-${loadAttempt}`}
                 src={journeyVideo}
                 poster={startImage}
                 progress={mediaProgress}

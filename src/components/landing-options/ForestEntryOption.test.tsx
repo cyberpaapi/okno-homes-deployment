@@ -37,16 +37,24 @@ vi.mock('motion/react', () => ({
 describe('ForestEntryOption', () => {
   it('shows preparation below the tagline and offers a scroll cue when ready', () => {
     const view=render(<ForestEntryOption/>);
-    const bar=screen.getByRole('progressbar',{name:'Preparing scroll video'});
+    const bar=screen.getByRole('progressbar',{name:'Downloading complete scroll video'});
     expect(bar).toHaveAttribute('value','0');
     act(()=>motionState.onLoadProgress?.(.5));
     expect(bar).toHaveAttribute('value','0.5');
+    expect(document.documentElement.dataset.heroLoading).toBe('true');
+    expect(screen.getByRole('status')).toHaveTextContent('50%');
+    act(()=>motionState.onLoadProgress?.(1));
+    expect(document.documentElement.dataset.heroLoading).toBe('true');
     act(()=>motionState.onReady?.(true));
     expect(bar).toHaveAttribute('value','1');
     expect(screen.getByRole('status')).toHaveTextContent('Scroll to explore');
     act(()=>{motionState.onReady?.(false);motionState.onLoadProgress?.(null);});
     expect(screen.queryByRole('progressbar')).toBeNull();
-    expect(screen.getByRole('status')).toHaveTextContent('Scroll to continue');
+    expect(screen.getByRole('status')).toHaveTextContent('Video could not load');
+    expect(document.documentElement.dataset.heroLoading).toBe('true');
+    fireEvent.click(screen.getByRole('button',{name:'Retry loading'}));
+    expect(screen.getByRole('progressbar')).toHaveAttribute('value','0');
+    expect(document.documentElement.dataset.heroLoading).toBe('true');
     view.unmount();
   });
   beforeEach(()=>{
@@ -101,6 +109,7 @@ describe('ForestEntryOption', () => {
     const {container}=render(<ForestEntryOption/>);
     const intro=container.querySelector('video')!;
     play.mockClear();
+    act(()=>motionState.onReady?.(true));
     act(()=>{motionState.progress=.2;motionState.onChange?.(.2);});
     expect(intro.hasAttribute('src')).toBe(false);
     expect(intro.load).toHaveBeenCalledOnce();
@@ -110,8 +119,10 @@ describe('ForestEntryOption', () => {
     expect(play).not.toHaveBeenCalled();
     expect(intro.currentTime).toBe(0);
   });
-  it('leaves ordinary wheel input to the normal document scroller',()=>{
+  it('releases ordinary wheel input only when the complete movie is ready',()=>{
     render(<ForestEntryOption/>);
+    const blocked=new WheelEvent('wheel',{cancelable:true});fireEvent(window,blocked);expect(blocked.defaultPrevented).toBe(true);
+    act(()=>motionState.onReady?.(true));
     const event=new WheelEvent('wheel',{deltaY:2400,cancelable:true,bubbles:true});
     fireEvent(window,event);
     expect(event.defaultPrevented).toBe(false);
@@ -119,6 +130,7 @@ describe('ForestEntryOption', () => {
   it('waits for the presented last frame before showing the ending overlay',()=>{
     vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
     const {container}=render(<ForestEntryOption/>);
+    act(()=>motionState.onReady?.(true));
     act(()=>{motionState.progress=1;motionState.onChange?.(1);});
     const viewport=container.querySelector('[style*="--end-opacity"]') as HTMLElement;
     expect(viewport.style.getPropertyValue('--end-opacity')).toBe('0.0000');
@@ -171,6 +183,7 @@ describe('ForestEntryOption', () => {
     const { container } = render(<ForestEntryOption />);
     const [intro] = container.querySelectorAll('video');
     const introPlay = vi.spyOn(intro, 'play').mockResolvedValue(undefined);
+    act(()=>motionState.onReady?.(true));
 
     act(() => {
       motionState.progress = .2;
