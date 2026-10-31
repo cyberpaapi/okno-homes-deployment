@@ -1,5 +1,11 @@
 # Deployment and operation
 
+## Public Configure yours action — 31 October 2026
+
+The Signature page now exposes a persistent glass Configure yours link for the active model, with a gentle looping glow and reduced-motion support; Explore details shares the same editable label. Existing Subtle Button 3373 is reused. The supplied PDFs retain current Indicative prices and contain no replacement rate schedule.
+
+Live acceptance: source `91c9391ac0d633a36b7de40e5e43fb748560f946`, READY production `dpl_4fGgpLmkxVXWyLC12hQmEL7Ve1Tm`, canonical alias `https://okno-homes-aryan.vercel.app`. The live public button shows Configure yours, uses Manrope, 14 px backdrop blur and an infinite 5.6-second animation. Clicking it reaches Forza's configurator and its loaded state is true. Signature and the configure route return 200; published content remains revision 1. All 30 production function traces pass (largest 177.4 MiB); the scoped error/fatal runtime-log scan is empty. Screenshot: workspace `outputs/okno-configure-yours-live.png`.
+
 ## Supplied house configurators — 31 October 2026
 
 The Antigravity integration is live at source `0ae3f575e030d29401608bce1c809ec603c5a87c`, READY production `dpl_D7NFRZj9eZdBWuoAi85wWhQjCuQR`, canonical alias `https://okno-homes-aryan.vercel.app`. Forza, Tengo and Kray use their respective supplied GLBs. Admin → Models → Signature models → the model → **3D configurator and walkthrough** supports GLB upload, scale, starting finishes and optional mesh names, including added models. Save and Publish retain existing draft/publication semantics and private Blob storage.
