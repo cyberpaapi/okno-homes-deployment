@@ -9,6 +9,7 @@ beforeEach(async () => {
   root = await mkdtemp(path.join(tmpdir(), 'okno-owner-auth-'));
   vi.spyOn(process, 'cwd').mockReturnValue(root);
   vi.stubEnv('VERCEL', '');
+  vi.stubEnv('OKNO_ADMIN_PASSWORDLESS', '');
   vi.stubEnv('OKNO_CONTENT_BACKEND', '');
   vi.resetModules();
 });
@@ -57,5 +58,38 @@ describe('configured shared owner key', () => {
     vi.stubEnv('OKNO_CMS_ADMIN_TOKEN', key);
     const { GET } = await import('@/app/api/admin/content/route');
     expect((await GET(request(key))).status).toBe(200);
+  });
+});
+
+describe('explicit password-free admin mode', () => {
+  it('reads, saves and publishes without a key only when enabled', async () => {
+    vi.stubEnv('OKNO_ADMIN_PASSWORDLESS', 'true');
+    vi.stubEnv('OKNO_CMS_ADMIN_TOKEN', '');
+    const store = await import('./siteContentStore');
+    const { GET, PATCH, PUT } = await import('@/app/api/admin/content/route');
+    expect(store.adminTokenConfigured()).toBe(true);
+    expect(store.isAdminAuthorized(request())).toBe(true);
+    const initial = await (await GET(request())).json();
+    const patch = new Request('http://127.0.0.1:3134/api/admin/content', {
+      method: 'PATCH', headers: { 'content-type': 'application/json', origin: 'http://127.0.0.1:3134' },
+      body: JSON.stringify({ id: 'hero-v1.opening.tagline', value: 'Homes for rare places.', revision: initial.revision, draftRevision: initial.draftRevision }),
+    });
+    const saved = await PATCH(patch);
+    expect(saved.status).toBe(200);
+    const draft = await saved.json();
+    expect(draft.draft['hero-v1.opening.tagline']).toBe('Homes for rare places.');
+    const published = await PUT(new Request(patch.url, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ revision: draft.revision, draftRevision: draft.draftRevision }) }));
+    expect(published.status).toBe(200);
+    expect((await published.json()).published['hero-v1.opening.tagline']).toBe('Homes for rare places.');
+    vi.stubEnv('OKNO_ADMIN_PASSWORDLESS', 'false');
+    expect(store.isAdminAuthorized(request())).toBe(false);
+  });
+  it('still refuses browser cross-site writes without a password', async () => {
+    vi.stubEnv('OKNO_ADMIN_PASSWORDLESS', 'true');
+    const { isAdminAuthorized } = await import('./siteContentStore');
+    for (const headers of [{ origin: 'https://unrelated.example' }, { 'sec-fetch-site': 'cross-site' }] as Record<string, string>[]) {
+      expect(isAdminAuthorized(new Request('https://okno-homes-aryan.vercel.app/api/admin/content', { method: 'PATCH', headers }))).toBe(false);
+    }
+    expect(isAdminAuthorized(new Request('https://okno-homes-aryan.vercel.app/api/admin/content', { method: 'PATCH', headers: { origin: 'https://okno-homes-aryan.vercel.app' } }))).toBe(true);
   });
 });

@@ -23,7 +23,7 @@ function pause(ms: number, signal: AbortSignal) {
 }
 
 export async function uploadMedia(file: File, token: string, signal: AbortSignal, onProgress: (progress: UploadProgress) => void, profile?: "signature-orbit"): Promise<UploadedMedia> {
-  const headers = { Authorization: `Bearer ${token}` };
+  const headers: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
   const capability = await responseJson(await fetch("/api/admin/upload", { headers, signal, cache: "no-store" }));
   if (capability.mode === "blob") {
     const extension = ({ "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/avif": "avif", "image/gif": "gif", "video/mp4": "mp4", "video/webm": "webm" } as Record<string, string>)[file.type];

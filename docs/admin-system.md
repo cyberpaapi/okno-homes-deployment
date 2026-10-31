@@ -1,5 +1,11 @@
 # Admin system — active implementation record
 
+## Password-free Aryan deployment — 31 October 2026
+
+The owner explicitly requested removing the admin password completely. The `okno-homes-aryan` production project now opts into public editing with server-only `OKNO_ADMIN_PASSWORDLESS=true`: `/admin` opens automatically, has no password field or Disconnect action, and save/publish/upload requests need no owner key. Anyone with the URL can edit and publish; this consequence was explained before implementation. Browser cross-site writes remain rejected, while same-origin writes and validation/revision checks are retained. Other deployments keep key authentication unless they explicitly enable this setting.
+
+A new private Blob store `okno-homes-aryan-content` (`store_2g911aii1mGNP6bz`, Mumbai) is connected to this project's Production environment only. Its generated storage credential stays server-side. The initial CMS snapshot uses the current release defaults with no legacy copy overrides. This replaces the earlier missing-storage limitation for this deployment only. No older project's store or owner key was changed. All 84 focused admin, authentication, upload and content-route tests pass, along with scoped lint and TypeScript.
+
 ## Typography refinement — 31 October 2026
 
 At the user's request, the shared master font now defaults to bundled Manrope across public headings, body copy, captions and controls, with section fonts inheriting the master by default. The editor default, generated CSS and unloaded-content fallbacks agree. Existing font and numeric size controls remain available. The homepage opening tagline retains the supplied wording “Homes for rare places.”, renders in uppercase, and uses a 1.35 multiplier on its responsive or editor-supplied size. Logo artwork is unchanged.

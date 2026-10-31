@@ -146,7 +146,12 @@ async function updateContent(change: (current: ContentSnapshot) => ContentSnapsh
   }
 }
 
+export function passwordlessAdminEnabled() {
+  return process.env.OKNO_ADMIN_PASSWORDLESS === "true";
+}
+
 export function adminTokenConfigured() {
+  if (passwordlessAdminEnabled()) return true;
   return Boolean((process.env.OKNO_CMS_ADMIN_TOKEN && process.env.OKNO_CMS_ADMIN_TOKEN.length >= 8) || readLocalDemoCredential());
 }
 
@@ -164,6 +169,14 @@ export function demoAccessExpiresAt(request: Request) {
 }
 
 export function isAdminAuthorized(request: Request) {
+  // Explicit per-deployment public editing mode, requested by the owner.
+  // Keep browser cross-site mutation protection even without an admin key.
+  if (passwordlessAdminEnabled()) {
+    if (["GET", "HEAD", "OPTIONS"].includes(request.method)) return true;
+    if (request.headers.get("sec-fetch-site") === "cross-site") return false;
+    const origin = request.headers.get("origin");
+    return !origin || origin === new URL(request.url).origin;
+  }
   const supplied = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
   if (matchesToken(process.env.OKNO_CMS_ADMIN_TOKEN, supplied)) return true;
   return Boolean(demoAccessExpiresAt(request));

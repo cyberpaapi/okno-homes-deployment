@@ -114,7 +114,7 @@ function siteOriginSnapshot() {
 }
 
 async function readAdminSnapshot(credential: string): Promise<Snapshot> {
-  const response = await fetch("/api/admin/content", { headers: { Authorization: `Bearer ${credential}` }, cache: "no-store" });
+  const response = await fetch("/api/admin/content", { headers: credential ? { Authorization: `Bearer ${credential}` } : {}, cache: "no-store" });
   const result = await response.json();
   if (!response.ok) throw new Error(result.error || "Could not connect to the local editor.");
   return result as Snapshot;
@@ -229,7 +229,7 @@ function FieldEditor({ field, value, published, changed, busy, onChange, onSave,
   </div>;
 }
 
-export default function AdminStudio() {
+export default function AdminStudio({ passwordless = false }: { passwordless?: boolean }) {
   const [selectedId, setSelectedId] = useState("homepage");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
   const [view, setView] = useState<View>("content");
@@ -253,13 +253,14 @@ export default function AdminStudio() {
     finally { setBusy(false); }
   }, []);
   useEffect(() => {
+    if (passwordless) { queueMicrotask(() => { void connect(""); }); return; }
     if (window.location.hostname !== "127.0.0.1" || window.location.port !== String(localPorts.admin)) return;
     const params = new URLSearchParams(window.location.hash.slice(1));
     const demoToken = params.get("demo-token");
     if (!demoToken) return;
     window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
     queueMicrotask(() => { void connect(demoToken); });
-  }, [connect]);
+  }, [connect, passwordless]);
   const homeVariants = collectionFor(collectionDefinitionsForPage("homepage")[0]);
   const sharedHomeSections = adminPages[0].children?.find(child => child.id === "hero-v1")?.sections.slice(1) ?? [];
   const customHomePages: ContentPage[] = homeVariants
@@ -315,7 +316,7 @@ export default function AdminStudio() {
   }
 
   async function authenticated(url: string, method = "GET", body?: BodyInit, json = false) {
-    const response = await fetch(url, { method, body, headers: { Authorization: `Bearer ${token}`, ...(json ? { "Content-Type": "application/json" } : {}) }, cache: "no-store" });
+    const response = await fetch(url, { method, body, headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}), ...(json ? { "Content-Type": "application/json" } : {}) }, cache: "no-store" });
     const result = await response.json();
     if (!response.ok) throw new Error(result.error || "Request failed.");
     return result;
@@ -337,7 +338,7 @@ export default function AdminStudio() {
   }
 
   async function upload(field: ContentField, file: File) {
-    if (!snapshot) { setError("Connect with the admin token before uploading."); return; }
+    if (!snapshot) { setError("Load the content studio before uploading."); return; }
     setError("");
     try {
       const orbit = field.id.match(/^models\.signature\.([a-z0-9-]+)\.orbit-film$/);
@@ -362,7 +363,7 @@ export default function AdminStudio() {
   }
 
   async function uploadCollectionFile(file: File) {
-    if (!snapshot) throw new Error("Connect with the admin token before uploading.");
+    if (!snapshot) throw new Error("Load the content studio before uploading.");
     const result = await uploadFile(file);
     return result.url as string;
   }
@@ -558,12 +559,16 @@ export default function AdminStudio() {
     <main className={styles.main}>
       <header className={styles.topbar}>
         <div><p className={styles.context}>Website / {page.label}</p><h1>{page.label}</h1><p className={styles.subtitle}>Edit content in the same order it appears on this page.</p></div>
-        <div className={styles.topActions}>{snapshot && <ActionButton variant="secondary" disabled={busy} type="button" onClick={() => { uploadControllerRef.current?.abort(); setToken(""); setSnapshot(null); setLocal({}); setLocalCollections({}); setError(""); setMessage("Disconnected. Enter your key to reconnect."); }}>Disconnect</ActionButton>}<a href={pageUrl} target="_blank" rel="noopener noreferrer" className={styles.siteLink}>Open page <ExternalLink size={16} /></a><ActionButton disabled={!snapshot || !draftCount || busy} onClick={publish} type="button"><Send size={16} /> Publish {draftCount ? `${draftCount} draft${draftCount === 1 ? "" : "s"}` : "changes"}</ActionButton></div>
+        <div className={styles.topActions}>{snapshot && !passwordless && <ActionButton variant="secondary" disabled={busy} type="button" onClick={() => { uploadControllerRef.current?.abort(); setToken(""); setSnapshot(null); setLocal({}); setLocalCollections({}); setError(""); setMessage("Disconnected. Enter your key to reconnect."); }}>Disconnect</ActionButton>}<a href={pageUrl} target="_blank" rel="noopener noreferrer" className={styles.siteLink}>Open page <ExternalLink size={16} /></a><ActionButton disabled={!snapshot || !draftCount || busy} onClick={publish} type="button"><Send size={16} /> Publish {draftCount ? `${draftCount} draft${draftCount === 1 ? "" : "s"}` : "changes"}</ActionButton></div>
       </header>
-      {!snapshot && <div className={styles.auth}>
+      {!snapshot && !passwordless && <div className={styles.auth}>
         <LockKeyhole size={19} aria-hidden="true" /><div><strong>Connect the content studio</strong><p>Enter your admin action key. Reload or disconnect to clear access from this tab.</p></div>
         <input type="password" aria-label="Admin token" autoComplete="off" value={token} onChange={event => setToken(event.target.value)} onKeyDown={event => { if (event.key === "Enter") void connect(token); }} />
         <ActionButton variant="secondary" disabled={!token || busy} onClick={() => void connect(token)} type="button">Connect</ActionButton>
+      </div>}
+      {passwordless && !snapshot && <div className={styles.auth}>
+        <div><strong>{busy ? "Loading the content studio" : "Content studio"}</strong><p>Your editor opens without a password.</p></div>
+        <ActionButton variant="secondary" disabled={busy} onClick={() => void connect("")} type="button">{busy ? "Loading…" : "Retry connection"}</ActionButton>
       </div>}
       {message && <p className={styles.notice} role="status">{message}</p>}
       {error && <p className={styles.error} role="alert">{error}</p>}
