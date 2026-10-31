@@ -76,7 +76,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const [loadAttempt, setLoadAttempt] = useState(0);
   const reducedMotion = useReducedMotion();
   const animated = !reducedMotion;
-  const loadingLocked = animated && !journeyReady;
+  const loadingLocked = animated && (!journeyReady || !introComplete);
   useHeroLoadingLock(loadingLocked);
   const presentedFilmProgress = useMotionValue(0);
   const presentFilm = useCallback((value: number) => presentedFilmProgress.set(value), [presentedFilmProgress]);
@@ -111,7 +111,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     if (viewport) {
       const introOpacity = 1 - range(progress, .005, .06);
       const stillOpacity = introFinished.current ? 1 - range(progress, .04, .08) : 0;
-      const brandOpacity = loadingLocked || !animated ? 1 : introFinished.current ? 1 - range(progress, .005, .06) : 0;
+      const brandOpacity = !animated ? 1 : introFinished.current ? 1 - range(progress, .005, .06) : 0;
       const journeyOpacity = range(progress, .04, .08);
       const endOpacity = !animated || presentedFilmProgress.get() >= 1 ? range(progress, .9, .94) : 0;
       viewport.style.setProperty('--intro-opacity', introOpacity.toFixed(4));
@@ -166,7 +166,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
     syncMedia(mediaProgress.get());
     // Motion owns the changing progress value; this only primes restored scroll positions.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animated, journeyReady]);
+  }, [animated, journeyReady, introComplete]);
 
   const page = (
     <div
@@ -208,7 +208,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
           <div className={styles.introStill}>
             <Image src={introLastFrame} loader={pageImageLoader} alt="" fill sizes="100vw" />
           </div>
-          <div className={styles.brand} aria-label="OKNO Modhomes" data-type-field={"hero-v1.opening.tagline"}>
+          <div className={styles.brand} aria-hidden={animated && !introComplete} inert={animated && !introComplete} aria-label="OKNO Modhomes" data-type-field={"hero-v1.opening.tagline"}>
             {tagline && <p data-hero-v1-tagline data-type-field={"hero-v1.opening.tagline"}>{tagline}</p>}
             {animated && <FilmLoadingStatus ready={journeyReady} progress={journeyLoading} retry={() => { setJourneyLoading(0); setJourneyReady(false); setLoadAttempt(value => value + 1); }} />}
           </div>

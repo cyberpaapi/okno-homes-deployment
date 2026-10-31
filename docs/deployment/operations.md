@@ -1,5 +1,12 @@
 # Deployment and operation
 
+## Experience loading presentation — 31 October 2026
+
+At the owner's request, shared film loaders on Home V1, Home V2 and Process now say “Loading experience”. The homepage tagline and loading bar remain hidden and inert throughout the autoplay intro, then fade in over 750 ms when it finishes (or its media error recovery completes). Scrolling waits for both the intro completion and the fully downloaded, decoded journey. Reduced-motion presentation remains immediate.
+
+The existing native progress UI now advances with alternating quick/slow easing, bounded by real received progress; numeric percentages are omitted. It never reaches full completion before decoded readiness, never adds an artificial wait after readiness, resets on retry, and preserves indeterminate downloads. The existing component styling and typography remain unchanged. Verification: 19 focused tests across the two heroes, Process, loading feedback and scroll locks pass; scoped ESLint and TypeScript pass.
+
+
 ## Password-free admin release — 31 October 2026
 
 Live verification: production `dpl_5oyupnkoUQnme5kkT4SmakLRHvQu` is READY at source `f62d84f7c1d5e6a634b26a8b8af6835a9f9a36e4`, with the canonical alias `https://okno-homes-aryan.vercel.app`. The browser opens `/admin` automatically and shows “Editor connected.” with zero password inputs. A password-free same-origin PATCH saved the existing tagline without changing its text; PUT published revision 1, and separate admin/public GETs read revision 1 back with no remaining drafts. Homepage and admin return 200. The production build passed all 30 function traces (largest 177.3 MiB); no error/fatal runtime logs appeared in the post-deploy scan. This verifies content saving/publication; it does not claim a new end-to-end media-upload test.
