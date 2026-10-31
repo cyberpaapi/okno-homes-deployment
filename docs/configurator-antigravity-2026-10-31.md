@@ -26,3 +26,13 @@ Mesh metadata keys are `ext_roof`, `ext_wall`, `flooring`, `int_ceiling`, `int_w
 - PDF generation reports completion without a JavaScript error; the in-app browser did not expose a download event, so saved-PDF delivery is not claimed as verified.
 
 Physical-device GPU performance, collision-aware navigation and automatic segmentation of arbitrary untagged GLBs are not claimed. Walkthrough follows the supplied free-navigation model.
+
+## Production acceptance — 31 October 2026
+
+Source `0ae3f575e030d29401608bce1c809ec603c5a87c` is deployed as READY production `dpl_D7NFRZj9eZdBWuoAi85wWhQjCuQR` at `https://okno-homes-aryan.vercel.app`. Compilation, TypeScript and all 30 function traces pass (largest 177.4 MiB).
+
+Forza, Tengo, Kray, legacy Gaze and legacy Tish configure routes return 200; an unknown model returns 404. Admin, public content and all six viewer application files return 200. All three GLBs have their exact expected byte counts, `model/gltf-binary` MIME and one-year immutable cache headers. The full live Forza response also matches its source SHA-256. Published content remains revision 1; no production content was edited. The admin upload endpoint reports existing Blob mode.
+
+The first live browser download failed with a network error and the viewer exposed Retry; Retry completed, the loading overlay disappeared, Titanium Veil selected successfully, and the Foyer camera rendered the interior. No further browser errors appeared after recovery. The post-deploy error/fatal runtime-log scan returned no entries. This verifies recovery, not uninterrupted downloads on every connection. Screenshot: workspace `outputs/okno-antigravity-live.png`.
+
+Local QA content is restored to revision 0. The temporary password-free QA process was stopped and the normal localhost website restarted without that process-only override; `/` returns 200 and the unconfigured local admin API returns 503. No credentials were generated or changed.

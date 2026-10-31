@@ -1,5 +1,11 @@
 # Deployment and operation
 
+## Supplied house configurators — 31 October 2026
+
+The Antigravity integration is live at source `0ae3f575e030d29401608bce1c809ec603c5a87c`, READY production `dpl_D7NFRZj9eZdBWuoAi85wWhQjCuQR`, canonical alias `https://okno-homes-aryan.vercel.app`. Forza, Tengo and Kray use their respective supplied GLBs. Admin → Models → Signature models → the model → **3D configurator and walkthrough** supports GLB upload, scale, starting finishes and optional mesh names, including added models. Save and Publish retain existing draft/publication semantics and private Blob storage.
+
+73 targeted tests, TypeScript, scoped lint and all 30 production function traces pass. Live routes/assets and exact GLB sizes/MIME/cache headers pass; published content remains revision 1. Live Forza recovered an interrupted download through Retry, then material selection and its interior Foyer camera worked. The runtime error/fatal scan was empty. See [the integration ledger](../configurator-antigravity-2026-10-31.md) for source provenance, local add-model publication checks and limits. No Blender GPU service is deployed.
+
 ## Remaining editorial images and posters — 31 October 2026
 
 The follow-up image pass extends compact previews to About chapters/founders, Bespoke supporting panels, the Hospitality timeline, Process chronology and small delivery thumbnails, and Sustainability press photography. The existing model-selector, Signature photo and homepage backdrop delivery now uses prepared static WebP files instead of cold conversions. Full article/gallery originals and film bytes remain intact. Signature and Sustainability video poster attributes use prepared 1280 px stills; Sustainability's CSS fallback shares the same URL instead of requesting the original PNG separately.
