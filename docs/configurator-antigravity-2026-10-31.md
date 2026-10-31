@@ -62,3 +62,9 @@ The owner requested the updated models from the same source. Both GitHub branche
 Forza, Tengo and Kray now begin with their original architectural roof. Extended thatch slabs and outward straws are hidden until Rustic Canopy / a thatch material is selected; changing roof finish or resetting hides those additions again. Straw strands retain their original material. The updated source's model-specific original-roof labels are used. Existing admin defaults still apply after initial load; previously published custom finishes remain intentional. Website loading, accessibility, responsive camera, CMS mapping and material-specification adaptations are preserved.
 
 Validation: JavaScript syntax and diff checks pass. The actual scene helpers pass original/thatch/metal/reset behavior checks while leaving the architectural roof visible. Local Forza visually shows the original roof, selected thatch, and successful Reset Configuration.
+
+## Demo-priority colour update
+
+During the roof release build, the owner requested newly supplied colour adjustments on localhost first for an immediate demo. Production build `dpl_97D4suzquPzDnXAMLzckLiD28Gcs` was canceled before assignment. The updated source SHA-256 is `87e9f823cabdb7e80912f14c8b4b898cca0956750aaef4dd544d2ddea35e55c3`. All 13 changed source blocks were synced exactly: exposure 1.03, balanced fog/sky/environment and olive-meadow palettes, softer sun with adjusted hemisphere/fill lighting, and environment reflection intensity 1.0.
+
+Local syntax checks and HTTP verification pass. `http://127.0.0.1:3134/models/signature/forza/configure` loads successfully with the new palette; it was opened visibly for the user's demo and left running. Screenshot: workspace `outputs/okno-local-colour-demo.png`. Original GLB checksums still match, and original-roof/thatch-selection behavior remains.

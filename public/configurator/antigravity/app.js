@@ -16,13 +16,13 @@ const okno = await window.oknoSettings;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping || THREE.AgXToneMapping;
-    renderer.toneMappingExposure = 1.18;
+    renderer.toneMappingExposure = 1.03;
     container.appendChild(renderer.domElement);
     renderer.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); window.parent.postMessage({type:'OKNO_CONFIGURATOR_ERROR'}, location.origin); });
 
     const scene = new THREE.Scene();
-    // Soft natural outdoor botanical atmosphere mist (zero whiteout!)
-    scene.fog = new THREE.FogExp2(0xCBE2CE, 0.0022);
+    // Balanced natural outdoor atmosphere mist (neither dry/washed-out nor neon)
+    scene.fog = new THREE.FogExp2(0xDCE4DA, 0.0020);
 
     // =========================================================================
     // REAL-TIME OUTDOOR BOTANICAL & SUNLIGHT HDRI ENVIRONMENT MAP (PMREMGenerator)
@@ -38,9 +38,9 @@ const okno = await window.oknoSettings;
       const envSkyMat = new THREE.ShaderMaterial({
         side: THREE.BackSide,
         uniforms: {
-          zenithColor:  { value: new THREE.Color(0x4F8FD0) },
-          horizonColor: { value: new THREE.Color(0xE8F4EA) },
-          groundColor:  { value: new THREE.Color(0x4A6E35) }
+          zenithColor:  { value: new THREE.Color(0x5B86B0) },
+          horizonColor: { value: new THREE.Color(0xEAEFE8) },
+          groundColor:  { value: new THREE.Color(0x4E633D) }
         },
         vertexShader: `
           varying vec3 vPos;
@@ -79,10 +79,10 @@ const okno = await window.oknoSettings;
     const skyMat = new THREE.ShaderMaterial({
       side: THREE.BackSide,
       uniforms: {
-        topColor:     { value: new THREE.Color(0x2F6FB5) },
-        midColor:     { value: new THREE.Color(0x78B4E6) },
-        horizonColor: { value: new THREE.Color(0xD8EEDB) },
-        bottomColor:  { value: new THREE.Color(0x3E642C) }
+        topColor:     { value: new THREE.Color(0x4A78A6) },
+        midColor:     { value: new THREE.Color(0x8CB2D4) },
+        horizonColor: { value: new THREE.Color(0xE4ECE4) },
+        bottomColor:  { value: new THREE.Color(0x485E3A) }
       },
       vertexShader: `
         varying vec3 vWorldPos;
@@ -163,8 +163,8 @@ const okno = await window.oknoSettings;
       grassCanvas.height = 1024;
       const gctx = grassCanvas.getContext('2d');
 
-      // Rich organic meadow base gradient
-      gctx.fillStyle = '#3F6A29';
+      // Natural balanced meadow base gradient (organic olive-meadow, zero neon)
+      gctx.fillStyle = '#475F35';
       gctx.fillRect(0, 0, 1024, 1024);
 
       // Dappled organic turf & clover patches
@@ -173,7 +173,7 @@ const okno = await window.oknoSettings;
         seed = (seed * 16807) % 2147483647;
         return (seed - 1) / 2147483646;
       }
-      const patchColors = ['#355C22', '#47752F', '#528336', '#3A6325', '#5C8E3C', '#2E501C'];
+      const patchColors = ['#3E552E', '#4B6438', '#526D3E', '#425932', '#587344', '#384D29'];
       for (let i = 0; i < 420; i++) {
         const px = rand() * 1024;
         const py = rand() * 1024;
@@ -181,7 +181,7 @@ const okno = await window.oknoSettings;
         const grad = gctx.createRadialGradient(px, py, 2, px, py, pr);
         const col = patchColors[i % patchColors.length];
         grad.addColorStop(0, col);
-        grad.addColorStop(1, 'rgba(63, 106, 41, 0)');
+        grad.addColorStop(1, 'rgba(71, 95, 53, 0)');
         gctx.fillStyle = grad;
         gctx.beginPath();
         gctx.arc(px, py, pr, 0, Math.PI * 2);
@@ -189,7 +189,7 @@ const okno = await window.oknoSettings;
       }
 
       // 38,000 individual directional grass blades painted into texture
-      const bladePalette = ['#2B4C1B', '#386223', '#4A7B31', '#5B8F3D', '#6EA34B', '#7EB257', '#32561F'];
+      const bladePalette = ['#354B27', '#415A30', '#4E693B', '#5A7645', '#65824F', '#6F8C58', '#3B522C'];
       gctx.lineCap = 'round';
       for (let i = 0; i < 38000; i++) {
         const bx = rand() * 1024;
@@ -308,7 +308,7 @@ const okno = await window.oknoSettings;
       }
       hillGeo.computeVertexNormals();
       const hillMat = new THREE.MeshStandardMaterial({
-        color: 0x3A642B,
+        color: 0x4B623E,
         roughness: 0.95,
         metalness: 0.0,
         side: THREE.DoubleSide
@@ -325,12 +325,12 @@ const okno = await window.oknoSettings;
     orbit.maxPolarAngle = Math.PI * 0.495; // Prevent camera from going below ground!
     orbit.enabled = false;
 
-    // Warm Natural Architectural Lighting
-    const hemiLight = new THREE.HemisphereLight(0xFFFBF4, 0xC8B8A2, 1.25);
+    // Balanced Natural Architectural Lighting (soft shadows, comfortable highlights)
+    const hemiLight = new THREE.HemisphereLight(0xFFFBF4, 0xC8BCA8, 1.42);
     hemiLight.position.set(0, 30, 0);
     scene.add(hemiLight);
 
-    const sunLight = new THREE.DirectionalLight(0xFFF1DC, 3.2);
+    const sunLight = new THREE.DirectionalLight(0xFFF3E2, 2.45);
     sunLight.position.set(12.5, 11.2, 14.0);
     const isMobileDevice = window.innerWidth <= 860 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     sunLight.castShadow = true;
@@ -347,7 +347,7 @@ const okno = await window.oknoSettings;
     sunLight.shadow.bias = -0.00035;
     scene.add(sunLight);
 
-    const fillLight = new THREE.DirectionalLight(0xF5EADE, 1.35);
+    const fillLight = new THREE.DirectionalLight(0xF5ECE0, 1.45);
     fillLight.position.set(-12, 8.5, 11);
     scene.add(fillLight);
 
@@ -1480,7 +1480,7 @@ const okno = await window.oknoSettings;
           if (child.material) {
             child.material = child.material.clone();
             const mat = child.material;
-            mat.envMapIntensity = 1.2;
+            mat.envMapIntensity = 1.0;
 
             // Soften overly dark/black default GLB materials into warm architectural bronze/slate
             if (mat.color) {

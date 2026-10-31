@@ -1,6 +1,6 @@
 {
   "source": "C:\\Users\\Aryan\\Downloads\\antigravity3D",
-  "applicationSha256": "36c5c365d06cc0ebcc498f471ba5f7dbf25c225917985ae4cd7b87a178a2aab9",
+  "applicationSha256": "87e9f823cabdb7e80912f14c8b4b898cca0956750aaef4dd544d2ddea35e55c3",
   "catalogSha256": "05e6a164646c94a7849482464b5dfa6058d97f21ccdd1d4e088c6c339761951c",
   "assets": {
     "forza": {
@@ -22,5 +22,6 @@
       "source": "kray_optimized.glb"
     }
   },
-  "latestSceneUpdate": "Original architectural roofs by default; procedural thatch and original straw material only when a thatch finish is selected."
+  "latestSceneUpdate": "Original architectural roofs by default; procedural thatch and original straw material only when a thatch finish is selected.",
+  "latestColorUpdate": "Source exposure, fog, sky, meadow palettes, architectural lighting and environment reflections synced for local demo."
 }
