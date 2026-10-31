@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { thumbnailImageLoader } from "@/lib/thumbnailImageLoader";
 import { motion, useTransform, type MotionValue } from "motion/react";
 import type { CSSProperties } from "react";
 import { useSiteContent } from "@/lib/useSiteContent";
@@ -44,7 +45,7 @@ function TimelineItems({
             key={item.id}
           >
             <span className={styles.thumbnail} aria-hidden="true">
-              <Image src={item.poster} alt="" fill sizes="72px" />
+              <Image loader={thumbnailImageLoader} src={item.poster} alt="" fill sizes="72px" />
             </span>
             <span className={styles.milestoneCopy}>
               <em>{item.label}</em>

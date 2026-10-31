@@ -90,7 +90,7 @@ function BespokePreview() {
   return (
     <section id="bespoke-preview" data-type-section="home.bespoke-preview" ref={sectionRef} className={styles.bespoke} aria-labelledby="bespoke-preview-title" data-component="4775">
       <motion.div className={styles.bespokeBackdrop} style={{ y: imageY }}>
-        <Image src={value('home.bespoke.image', '/assets/projects/real-v1/lakewood-01.webp')} alt={value('home.bespoke.image-alt', 'Lakewood Villa and its pool at dusk')} fill sizes="100vw" />
+        <Image loader={pageImageLoader} src={value('home.bespoke.image', '/assets/projects/real-v1/lakewood-01.webp')} alt={value('home.bespoke.image-alt', 'Lakewood Villa and its pool at dusk')} fill sizes="100vw" />
       </motion.div>
       <div className={styles.bespokeShade} />
       <motion.p className={styles.bespokeWord} style={{ x: wordX }} aria-hidden="true" data-type-field={"home.bespoke.word"}>{value('home.bespoke.word', 'Bespoke')}</motion.p>
@@ -110,7 +110,7 @@ function HospitalityPreview() {
   const content = useSiteContentMap();
   const value = (id: string, fallback: string) => content[`home.hospitality.${id}`] ?? fallback;
   return <section className={styles.bespoke} data-type-section="home.hospitality-preview" aria-labelledby="hospitality-preview-title" data-component="4775">
-    <div className={styles.bespokeBackdrop}><Image src={value('image', '/assets/projects/real-v1/octapod-layana-01.webp')} alt="Octapod residences gathered around a shared pool" fill sizes="100vw" /></div>
+    <div className={styles.bespokeBackdrop}><Image loader={pageImageLoader} src={value('image', '/assets/projects/real-v1/octapod-layana-01.webp')} alt="Octapod residences gathered around a shared pool" fill sizes="100vw" /></div>
     <div className={styles.bespokeShade} />
     <p className={styles.bespokeWord} aria-hidden="true">{value('label', 'Hospitality')}</p>
     <div className={styles.bespokeCopy}>
@@ -146,7 +146,7 @@ function SustainabilityPreview() {
   return (
     <section id="sustainability-preview" data-type-section="home.sustainability-preview" ref={sectionRef} className={styles.sustainability} aria-labelledby="sustainability-preview-title" data-component="25482">
       <motion.div className={styles.sustainabilityMedia} style={{ clipPath: mediaClip }}>
-        <Image src={value('home.sustainability.poster', '/sustainability/shared-poster.png')} alt={value('home.sustainability.poster-alt', 'OKNO home held within a dense green landscape')} fill sizes="100vw" />
+        <Image loader={pageImageLoader} src={value('home.sustainability.poster', '/sustainability/shared-poster.png')} alt={value('home.sustainability.poster-alt', 'OKNO home held within a dense green landscape')} fill sizes="100vw" />
         {near && !reduced && <video ref={videoRef} src={value('home.sustainability.video', '/sustainability/hero-idle.mp4')} poster={value('home.sustainability.poster', '/sustainability/shared-poster.png')} muted loop playsInline preload="metadata" aria-hidden="true" />}
         <div className={styles.sustainabilityGrade} />
       </motion.div>

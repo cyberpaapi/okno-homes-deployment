@@ -1,17 +1,19 @@
-import { readdir, readFile, writeFile, mkdir, stat, unlink } from 'node:fs/promises';
+import { readdir, readFile, writeFile, mkdir, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 import sharp from 'sharp';
 
 // Precompute only the accepted photographs used by this performance pass.
 // Uploaded CMS images deliberately retain the authenticated media pipeline.
-const roots = ['src/components/journal', 'src/components/hospitality', 'src/components/ui/about-section.tsx', 'src/components/models/BespokeExperience.tsx', 'src/components/landing/LandingPathways.tsx', 'src/components/landing-options/ForestEntryOption.tsx'];
+const roots = ['src/components/journal', 'src/components/hospitality', 'src/components/ui/about-section.tsx', 'src/components/models/BespokeExperience.tsx', 'src/components/landing/LandingPathways.tsx', 'src/components/landing-options/ForestEntryOption.tsx', 'src/components/sustainability', 'src/components/models/ModelPathPanels.tsx', 'src/components/models/ForzaExperience.tsx', 'src/components/process/ProcessJourney.tsx', 'src/data/processDetailPhases.ts'];
 async function sources(entry) {
   if ((await stat(entry)).isFile()) return [entry];
   return (await Promise.all((await readdir(entry)).map(name => sources(path.join(entry, name))))).flat();
 }
 const files = (await Promise.all(roots.map(sources))).flat().filter(file => /\.(tsx|ts)$/.test(file) && !file.includes('.test.'));
-const paths = new Set();
+// Retain published derivatives that older CMS selections may still reference.
+const previous = JSON.parse(await readFile("config/page-images.json", "utf8"));
+const paths = new Set(Object.keys(previous));
 for (const file of files) {
   for (const match of (await readFile(file, 'utf8')).matchAll(/["'](\/[^"']+\.(?:png|jpe?g|webp))["']/g)) paths.add(match[1]);
 }
@@ -36,10 +38,7 @@ for (const src of [...paths].sort()) {
   }
 }
 await writeFile('config/page-images.json', `${JSON.stringify(manifest, null, 2)}\n`);
-const retained = new Set(Object.values(manifest).flat().map(image => path.basename(image.src)));
-for (const name of await readdir(output)) if (/^[a-f0-9]{16}-\d+\.webp$/.test(name) && !retained.has(name)) await unlink(path.join(output, name));
 const publicAssets = JSON.parse(await readFile('config/public-assets.json', 'utf8'));
-for (const url of Object.keys(publicAssets)) if (url.startsWith('/page-images/')) delete publicAssets[url];
 for (const variants of Object.values(manifest)) for (const variant of variants) publicAssets[variant.src] = (await stat(`public${variant.src}`)).size;
 await writeFile('config/public-assets.json', `${JSON.stringify(publicAssets, null, 2)}\n`);
 console.log(`Prepared ${Object.keys(manifest).length} photographs for static CDN delivery.`);

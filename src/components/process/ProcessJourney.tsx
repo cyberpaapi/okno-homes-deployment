@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { pageImageLoader } from "@/lib/pageImageLoader";
 import {
   useMotionValue,
   useMotionValueEvent,
@@ -167,7 +168,7 @@ function StaticProcessHero() {
         <p className={styles.heroSummary}>{opening.summary}</p>
       </div>
       <div className={styles.staticHeroFilm} aria-hidden="true">
-        <Image src={poster} alt="" fill priority sizes="100vw" />
+        <Image loader={pageImageLoader} src={poster} alt="" fill priority sizes="100vw" />
         <span />
       </div>
     </section>
@@ -185,7 +186,7 @@ function ReducedProcess() {
       <div className={styles.reducedStages}>
         {currentStages.map((stage) => (
           <section className={styles.reducedScene} data-type-section={`process.stage-${stage.id}`} key={stage.id} aria-labelledby={`process-${stage.id}`}>
-            <div className={styles.reducedMedia} style={{ backgroundImage: `url(${stage.poster})` }} aria-hidden="true" />
+            <div className={styles.reducedMedia} style={{ backgroundImage: `url("${pageImageLoader({ src: stage.poster, width: 1200 })}")` }} aria-hidden="true" />
             <div className={styles.reducedShade} aria-hidden="true" />
             <div className={styles.reducedCopy}>
               <p>{stage.days} · {stage.label}</p>
@@ -270,7 +271,7 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
           />
 
           <div className={styles.coverLayer} data-revealed={masterFilmReady} aria-hidden="true">
-            <Image src={cover} alt="" fill priority sizes="(max-aspect-ratio: 16/9) 178vh, 100vw" quality={90} />
+            <Image loader={pageImageLoader} src={cover} alt="" fill priority sizes="(max-aspect-ratio: 16/9) 178vh, 100vw" quality={75} />
           </div>
           <div className={styles.mediaTreatment} aria-hidden="true" />
 

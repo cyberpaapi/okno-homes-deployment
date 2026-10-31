@@ -4,6 +4,7 @@
 // Reveal Text by isaiahBjork (2491), and the route handoff combines the
 // Preloader (13967) with Morph Loading by jatin-yadav05 (4588).
 import Image from "next/image";
+import { pageImageLoader } from "@/lib/pageImageLoader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -120,7 +121,7 @@ export default function ModelPathPanels({ onReady }: { onReady?: () => void }) {
             onKeyDown={(event) => handleKeyDown(event, index)}
             onClick={(event) => beginTransition(event, path.id)}
           >
-            <Image src={path.image} alt={path.alt} fill sizes="(max-width: 700px) 100vw, 58vw" priority quality={90} className={styles.image} onLoad={() => markLoaded(path.id)} onError={() => markLoaded(path.id)} />
+            <Image loader={pageImageLoader} src={path.image} alt={path.alt} fill sizes="(max-width: 700px) 100vw, 58vw" priority quality={75} className={styles.image} onLoad={() => markLoaded(path.id)} onError={() => markLoaded(path.id)} />
             <div className={styles.shade} aria-hidden="true" />
             <p className={styles.mode}>{path.mode}</p>
             <div className={styles.content}>
@@ -147,7 +148,7 @@ export default function ModelPathPanels({ onReady }: { onReady?: () => void }) {
             transition={{ duration: .68, ease: [.65, 0, .35, 1] }}
           >
             <motion.div className={styles.transitionImage} initial={{ scale: 1.06 }} animate={{ scale: 1 }} transition={{ duration: 1.1, ease: [.22, 1, .36, 1] }}>
-              <Image src={transitionPath.image} alt="" fill priority sizes="100vw" />
+              <Image loader={pageImageLoader} src={transitionPath.image} alt="" fill priority sizes="100vw" />
             </motion.div>
             <div className={styles.transitionShade} />
             <motion.div className={styles.transitionCopy} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .38, delay: .22 }}>

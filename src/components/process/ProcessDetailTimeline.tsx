@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { previewImageLoader } from '@/lib/thumbnailImageLoader';
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import styles from './ProcessDetailTimeline.module.css';
@@ -64,7 +65,7 @@ export default function ProcessDetailTimeline() {
                     viewport={{ once: true, amount: 0.45 }}
                     transition={{ type: 'spring', stiffness: 160, damping: 20, mass: 0.9 }}
                   >
-                    <Image
+                    <Image loader={previewImageLoader}
                       src={phase.image}
                       alt={phase.alt}
                       fill

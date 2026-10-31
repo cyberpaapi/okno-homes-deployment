@@ -5,7 +5,7 @@
 // alternating milestones, drawing stems, SplitText reveals and mobile track are retained.
 import { useLayoutEffect, useRef, useSyncExternalStore, type CSSProperties } from "react";
 import Image from "next/image";
-import { pageImageLoader } from "@/lib/pageImageLoader";
+import { previewImageLoader } from "@/lib/thumbnailImageLoader";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -32,7 +32,7 @@ const stepPhotos = [
 function StepPhoto({ index, image, alt, className, sizes }: { index: number; image: string; alt: string; className: string; sizes: string }) {
   return (
     <figure className={className} data-stage-photo aria-hidden={alt ? undefined : true}>
-      <Image loader={pageImageLoader} src={image || stepPhotos[index % stepPhotos.length]} alt={alt} fill sizes={sizes} loading="lazy" />
+      <Image loader={previewImageLoader} src={image || stepPhotos[index % stepPhotos.length]} alt={alt} fill sizes={sizes} loading="lazy" />
     </figure>
   );
 }
@@ -165,7 +165,7 @@ export function HospitalityTimeline({ steps }: { steps: readonly TimelineStep[] 
     return (
       <section id="delivery" data-type-section="hospitality.timeline" ref={sectionRef} className={overrides.mobileStage} aria-labelledby="delivery-title" data-header-tone="dark">
         <figure className={overrides.mobileCover}>
-          <Image loader={pageImageLoader} src={get("cover", "/assets/projects/real-v1/octapod-layana-08.webp")} alt={get("cover-alt", "Aerial view of a hospitality estate arranged around a central pool")} fill sizes="(max-width: 1023px) 100vw, 30vw" draggable={false} />
+          <Image loader={previewImageLoader} src={get("cover", "/assets/projects/real-v1/octapod-layana-08.webp")} alt={get("cover-alt", "Aerial view of a hospitality estate arranged around a central pool")} fill sizes="(max-width: 1023px) 100vw, 30vw" draggable={false} />
         </figure>
         <header className={overrides.mobileHeader}>
           <small data-type-field={"hospitality.timeline.label"}>{get("label", "Delivery path")}</small>
@@ -189,7 +189,7 @@ export function HospitalityTimeline({ steps }: { steps: readonly TimelineStep[] 
       <div className={`${styles.sticky} ${overrides.stickyCentered}`}>
         <div ref={sliderRef} className={styles.slider}>
           <figure className={styles.cover}>
-            <Image loader={pageImageLoader} src={get("cover", "/assets/projects/real-v1/octapod-layana-08.webp")} alt={get("cover-alt", "Aerial view of a hospitality estate arranged around a central pool")} fill sizes="(max-width: 1023px) 100vw, 30vw" draggable={false} />
+            <Image loader={previewImageLoader} src={get("cover", "/assets/projects/real-v1/octapod-layana-08.webp")} alt={get("cover-alt", "Aerial view of a hospitality estate arranged around a central pool")} fill sizes="(max-width: 1023px) 100vw, 30vw" draggable={false} />
           </figure>
           <div className={styles.timeline}>
             <div className={styles.axis} aria-hidden="true"><i /><span ref={activeLineRef} /><i /></div>

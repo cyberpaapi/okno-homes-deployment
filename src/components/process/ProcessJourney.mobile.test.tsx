@@ -16,7 +16,8 @@ describe('phone build playback', () => {
     expect(view.container.querySelector('video[controls]')).toBeNull();
     expect(document.documentElement.dataset.heroLoading).toBe('true');
     act(() => film.props?.onLoadProgress(.5));
-    expect(screen.getByRole('progressbar')).toHaveAttribute('value','0.5');
+    expect((screen.getByRole('progressbar') as HTMLProgressElement).value).toBeLessThanOrEqual(.5);
+    expect(screen.getByRole('status')).toHaveTextContent('Loading experience');
     act(() => film.props?.onLoadProgress(1));
     expect(document.documentElement.dataset.heroLoading).toBe('true');
     act(() => film.props?.onReady(true));

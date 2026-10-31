@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { pageImageLoader } from "@/lib/pageImageLoader";
 import {
   AnimatePresence,
   motion,
@@ -895,7 +896,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
               transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
             >
                 {prefersReducedMotion ? (
-                  <Image
+                  <Image loader={pageImageLoader}
                     src={experience.posterSrc}
                     alt={activeRecord?.fields.posterAlt || get(`${activeModel.slug}.poster-alt`, `${presentationModel.name} modular home in the Signature collection`)}
                     fill
@@ -912,7 +913,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
                     disablePictureInPicture
                     controls={false}
                     preload="auto"
-                    poster={experience.posterSrc}
+                    poster={pageImageLoader({ src: experience.posterSrc, width: 1200 })}
                     aria-label={get(`${activeModel.slug}.orbit-description`, `${presentationModel.name} rotating in response to page scroll`)}
                   >
                     <source src={experience.videoSrc} type="video/mp4" />
@@ -928,7 +929,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
                     disablePictureInPicture
                     controls={false}
                     preload="none"
-                    poster={experience.posterSrc}
+                    poster={pageImageLoader({ src: experience.posterSrc, width: 1200 })}
                     aria-hidden="true"
                   >
                     <source src={experience.detailVideoSrc} type="video/mp4" />
@@ -1451,7 +1452,7 @@ function DetailsLayer({
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <Image
+              <Image loader={pageImageLoader}
                 src={galleryImage.src}
                 alt={galleryImage.alt}
                 fill

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { previewImageLoader } from "@/lib/thumbnailImageLoader";
 import { useEffect, useRef } from "react";
 import {
   motion,
@@ -81,7 +82,7 @@ function PressImage({ item, progress }: { item: PressItem; progress: MotionValue
 
   return (
     <motion.div className={styles.imageLayer} style={{ opacity }}>
-      <Image src={item.image} alt={item.alt} fill sizes="(max-width: 820px) 100vw, 62vw" quality={90} />
+      <Image loader={previewImageLoader} src={item.image} alt={item.alt} fill sizes="(max-width: 820px) 100vw, 62vw" quality={60} />
     </motion.div>
   );
 }
@@ -220,12 +221,12 @@ export default function SustainabilityProof() {
                 className={`${styles.imageLayer} ${styles.finalImage}`}
                 style={{ opacity: finalImageOpacity }}
               >
-                <Image
+                <Image loader={previewImageLoader}
                   src={get("final-image", "/sustainability/reflections-forest-bath.jpg")}
                   alt={get("final-alt", "Forest-facing deck and outdoor bath at the Reflections cabin")}
                   fill
                   sizes="(max-width: 820px) 100vw, 62vw"
-                  quality={90}
+                  quality={60}
                 />
               </motion.div>
               <span className={styles.photoCredit} data-type-field={"sustainability.proof.final-credit"}>{get("final-credit", "Photography · Inclined Studio")}</span>

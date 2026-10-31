@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
+import { previewImageLoader } from "@/lib/thumbnailImageLoader";
 import { pageImageLoader } from "@/lib/pageImageLoader";
 import { BadgeCheck, CalendarClock, House, Lightbulb, ShieldCheck, type LucideIcon } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
@@ -72,7 +73,7 @@ export default function AboutSection() {
       <section id="vision" data-type-section="about.vision" className={`${styles.chapter} ${styles.vision}`} data-about-viewport-section>
         <div className={`${styles.inner} ${styles.split} ${styles.visionSplit}`}>
           <motion.figure className={`${styles.media} ${styles.visionMedia}`} {...mediaEntrance}>
-            <Image loader={pageImageLoader} src={value("about.vision.image", "/models/forza/interiors/forza-living.webp")}
+            <Image loader={previewImageLoader} src={value("about.vision.image", "/models/forza/interiors/forza-living.webp")}
               alt={value("about.vision.image-alt", "An OKNO living space opening toward a natural landscape")}
               fill sizes="(max-width: 840px) 100vw, 46vw" />
           </motion.figure>
@@ -90,7 +91,7 @@ export default function AboutSection() {
             <p className={styles.body} data-type-field={"about.future.copy"}>{value("about.future.copy", "Every OKNO home is drawn by architects and made by craftspeople working side by side. Structure, services and finishes are resolved together, so what arrives on your land is complete, considered and built to last.")}</p>
           </div>
           <motion.figure className={`${styles.media} ${styles.landscapeMedia}`} {...mediaEntrance}>
-            <Image loader={pageImageLoader} src={value("about.future.image", "/about/storyboard/about-film-frame-02.png")}
+            <Image loader={previewImageLoader} src={value("about.future.image", "/about/storyboard/about-film-frame-02.png")}
               alt={value("about.future.image-alt", "A precision-fabricated OKNO home")}
               fill sizes="(max-width: 840px) 100vw, 54vw" />
           </motion.figure>
@@ -101,7 +102,7 @@ export default function AboutSection() {
       <section id="founders" data-type-section="about.founders" className={`${styles.chapter} ${styles.founders}`} data-about-viewport-section>
         <div className={`${styles.inner} ${styles.split} ${styles.foundersSplit}`}>
           <div><motion.figure className={`${styles.media} ${styles.foundersMedia}`} {...mediaEntrance}>
-            <Image loader={pageImageLoader} src={value("about.founders.image", "/about/okno-founders.jpeg")}
+            <Image loader={previewImageLoader} src={value("about.founders.image", "/about/okno-founders.jpeg")}
               alt={value("about.founders.image-alt", "OKNO Modhomes founders")}
               fill sizes="(max-width: 840px) 100vw, 46vw" />
           </motion.figure><div className={styles.founderCaptions}><p>{value("about.founders.left-caption", "Harshit Puram · Co-founder")}</p><p>{value("about.founders.right-caption", "Parikshit Linga · Co-founder")}</p></div></div>
@@ -141,7 +142,7 @@ export default function AboutSection() {
             <p className={styles.body} data-type-field={"about.fit.copy"}>{value("about.fit.copy", "Walls, ceilings and floors are designed and made to fit one another exactly. The result is clean lines, quiet junctions and nothing left to chance.")}</p>
           </div>
           <motion.figure className={`${styles.media} ${styles.landscapeMedia}`} {...mediaEntrance}>
-            <Image loader={pageImageLoader} src={value("about.fit.image", "/about/storyboard/about-film-frame-03.png")}
+            <Image loader={previewImageLoader} src={value("about.fit.image", "/about/storyboard/about-film-frame-03.png")}
               alt={value("about.fit.image-alt", "The timber facade and entrance of an OKNO home")}
               fill sizes="(max-width: 840px) 100vw, 54vw" />
           </motion.figure>

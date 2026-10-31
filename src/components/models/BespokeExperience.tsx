@@ -19,6 +19,7 @@ import { localDestination } from "@/lib/localDestination";
 import OknoLogo from "@/components/Brand/OknoLogo";
 import styles from "./BespokeExperience.module.css";
 import { useSiteContentMap } from "@/lib/useSiteContent";
+import { previewImageLoader } from "@/lib/thumbnailImageLoader";
 import { pageImageLoader } from "@/lib/pageImageLoader";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
@@ -117,7 +118,7 @@ export default function BespokeExperience() {
             <p className={styles.bodyCopy} data-type-field={"models.bespoke.manifesto.copy"}>{get("manifesto.copy", "Bespoke begins where a catalogue ends. Every home is calibrated: designed back from your land, your life and your investment.")}</p>
           </div>
           <motion.figure className={styles.manifestoMedia} initial={reduced ? false : { clipPath: "inset(18% 10% 18% 10% round 32px)" }} whileInView={{ clipPath: "inset(0% 0% 0% 0% round 32px)" }} viewport={{ once: true, amount: .28 }} transition={{ duration: 1.2, ease: [.22, 1, .36, 1] }}>
-            <Image loader={pageImageLoader} src={get("manifesto.image", "/assets/projects/real-v1/lakewood-02.webp")} alt={get("manifesto.alt", "Lakewood Villa framed by its landscape and swimming pool")} fill sizes="(max-width: 800px) 100vw, 58vw" className={styles.image} />
+            <Image loader={previewImageLoader} src={get("manifesto.image", "/assets/projects/real-v1/lakewood-02.webp")} alt={get("manifesto.alt", "Lakewood Villa framed by its landscape and swimming pool")} fill sizes="(max-width: 800px) 100vw, 58vw" className={styles.image} />
           </motion.figure>
         </section>
 
@@ -127,7 +128,7 @@ export default function BespokeExperience() {
           <div className={styles.horizontalSticky}><motion.div className={styles.horizontalTrack} style={{ x: horizontalX }}>
             {currentStages.map((stage, index) => <article id={`decision-${index}`} key={index} className={styles.horizontalPanel} data-type-section={`bespoke.decision-${index + 1}`} data-tone={stage.tone}>
               <div className={styles.panelHeading}><h2 id={index === 0 ? "decisions-title" : undefined}>{stage.label}</h2></div>
-              <figure className={styles.panelMedia}><Image loader={pageImageLoader} src={stage.image} alt={stage.alt} fill sizes="(max-width: 800px) 100vw, 62vw" className={styles.image} /></figure>
+              <figure className={styles.panelMedia}><Image loader={previewImageLoader} src={stage.image} alt={stage.alt} fill sizes="(max-width: 800px) 100vw, 62vw" className={styles.image} /></figure>
               <div className={styles.panelCaption}><div><p>{stage.detail}</p><strong>{stage.copy}</strong></div><button type="button" onClick={() => moveToDecision(index + 1)} aria-label={`${get("stages.next-action", "Next step")}: ${index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}`}><span data-type-field={"models.bespoke.stages.next-action"}>{get("stages.next-action", "Next step")}</span><b data-type-field={"models.bespoke.result.eyebrow"}>{index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}</b><i aria-hidden="true">→</i></button></div>
             </article>)}
           </motion.div></div>
@@ -137,7 +138,7 @@ export default function BespokeExperience() {
           <div className={styles.parallaxSticky}>
             <motion.div className={styles.parallaxImage} style={{ y: parallaxImageY, scale: parallaxImageScale, clipPath: parallaxImageClip }}><Image loader={pageImageLoader} src={get("result.image", "/assets/projects/real-v1/lakewood-02.webp")} alt={get("result.alt", "Lakewood Villa and its pool")} fill sizes="100vw" className={styles.image} /></motion.div>
             <motion.div className={styles.parallaxWords} style={{ y: parallaxWordY }} aria-hidden="true"><span data-type-field={"models.bespoke.result.word-1"}>{get("result.word-1", "ONE PLACE")}</span><span data-type-field={"models.bespoke.result.word-2"}>{get("result.word-2", "ONE HOME")}</span></motion.div>
-            <motion.figure className={styles.parallaxCard} style={{ y: parallaxCardY }}><Image loader={pageImageLoader} src={get("result.card-image", "/assets/projects/real-v1/lakewood-01.webp")} alt={get("result.card-alt", "Lakewood Villa in its landscape")} fill sizes="(max-width: 700px) 70vw, 34vw" className={styles.image} /></motion.figure>
+            <motion.figure className={styles.parallaxCard} style={{ y: parallaxCardY }}><Image loader={previewImageLoader} src={get("result.card-image", "/assets/projects/real-v1/lakewood-01.webp")} alt={get("result.card-alt", "Lakewood Villa in its landscape")} fill sizes="(max-width: 700px) 70vw, 34vw" className={styles.image} /></motion.figure>
             <div className={styles.parallaxCopy}><p className={styles.kicker} data-type-field={"models.bespoke.result.eyebrow"}>{get("result.eyebrow", "The result")}</p><h2 id="parallax-title" data-type-field={"models.bespoke.result.heading"}>{get("result.heading", "Architecture that could belong nowhere else.")}</h2></div>
           </div>
         </section>

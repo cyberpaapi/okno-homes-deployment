@@ -1,5 +1,6 @@
 "use client";
 
+import { pageImageLoader } from "@/lib/pageImageLoader";
 import Header from "@/components/Header/Header";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
@@ -246,12 +247,12 @@ export default function SustainabilityJourney() {
       <section ref={trackRef} className={styles.scrollTrack} aria-label={get("accessible-label", "OKNO sustainability journey")}>
         <div ref={viewportRef} className={styles.stickyViewport} data-scene={scene}>
           <div className={styles.mediaStage} aria-hidden="true">
-            <div className={styles.sharedPoster} style={{ backgroundImage: `url("${get("shared-poster", "/sustainability/shared-poster.png")}")` }} />
+            <div className={styles.sharedPoster} style={{ backgroundImage: `url("${pageImageLoader({ src: get("shared-poster", "/sustainability/shared-poster.png"), width: 1200 })}")` }} />
             <video
               ref={idleVideoRef}
               className={`${styles.mediaVideo} ${styles.idleVideo}`}
               src={get("idle-video", "/sustainability/hero-idle.mp4")}
-              poster={get("shared-poster", "/sustainability/shared-poster.png")}
+              poster={pageImageLoader({ src: get("shared-poster", "/sustainability/shared-poster.png"), width: 1200 })}
               autoPlay
               loop
               muted
@@ -262,7 +263,7 @@ export default function SustainabilityJourney() {
               ref={journeyVideoRef}
               className={`${styles.mediaVideo} ${styles.journeyVideo}`}
               src={get("scroll-video", "/sustainability/scroll-journey.mp4")}
-              poster={get("shared-poster", "/sustainability/shared-poster.png")}
+              poster={pageImageLoader({ src: get("shared-poster", "/sustainability/shared-poster.png"), width: 1200 })}
               muted
               playsInline
               preload="auto"
@@ -271,7 +272,7 @@ export default function SustainabilityJourney() {
               ref={fogVideoRef}
               className={`${styles.mediaVideo} ${styles.fogVideo}`}
               src={get("fog-video", "/sustainability/fog-loop.mp4")}
-              poster={get("fog-poster", "/sustainability/fog-poster.png")}
+              poster={pageImageLoader({ src: get("fog-poster", "/sustainability/fog-poster.png"), width: 1200 })}
               loop
               muted
               playsInline

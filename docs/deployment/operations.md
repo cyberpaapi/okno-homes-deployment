@@ -1,5 +1,14 @@
 # Deployment and operation
 
+## Remaining editorial images and posters — 31 October 2026
+
+The follow-up image pass extends compact previews to About chapters/founders, Bespoke supporting panels, the Hospitality timeline, Process chronology and small delivery thumbnails, and Sustainability press photography. The existing model-selector, Signature photo and homepage backdrop delivery now uses prepared static WebP files instead of cold conversions. Full article/gallery originals and film bytes remain intact. Signature and Sustainability video poster attributes use prepared 1280 px stills; Sustainability's CSS fallback shares the same URL instead of requesting the original PNG separately.
+
+Measured still-file reductions: Sustainability shared poster 1,905,135 → 78,374 bytes (96%); fog poster 2,480,194 → 119,630 bytes (95%); Forza poster 2,002,388 → 29,426 bytes (99%). These are byte reductions for those images, not total page-load speed claims. The expanded image catalog covers 101 page-image sources and 105 thumbnail sources; all 1,187 referenced variants were checked against dimensions and inventory sizes. The preparation script now retains published derivatives and previously referenced source entries so older CMS selections remain valid.
+
+Validation: 36 initial focused tests passed; one old mobile test still expected an instant progress jump from before the requested loading animation. Its assertion now checks bounded progress and the actual scroll lock, and the four-test mobile/loader rerun passes (40 unique targeted tests covered). Scoped lint and TypeScript pass. Local About preview images load at 960 px; Sustainability's optimized poster feeds a playing video. Local development was restarted to clear mixed server/client manifests after asset generation.
+
+
 ## Compact thumbnail delivery — 31 October 2026
 
 The owner requested lower-resolution delivery for images that are used as thumbnails and never enlarged in place. A separate quality-60 WebP derivative set now serves Journal marquee/blog cards (480 px cap), its larger featured card (960 px prepared cap), Hospitality bento cards, project index previews, the Projects orbit/cursor thumbnails, gallery thumbnail strips, and the smaller homepage editorial/timeline/Bespoke cards. Source photographs, article images, lightbox images and full carousel slides are retained independently. Existing lazy loading remains; built-in thumbnail files are served directly with immutable CDN caching. CMS replacements use Next image optimization at quality 60 with 480/1080 px request caps. The Next allowlist includes quality 60 and width 480.

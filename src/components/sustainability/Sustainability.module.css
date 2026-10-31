@@ -65,7 +65,9 @@
 .mediaStage { z-index: -2; background: #09110b; }
 
 .sharedPoster {
-  background: url("/sustainability/shared-poster.png") center / cover no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   filter: saturate(.78) contrast(1.04) brightness(.78);
   transform: scale(1.004);
 }
