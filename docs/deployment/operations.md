@@ -1,5 +1,11 @@
 # Deployment and operation
 
+## Updated roofs and source colours — 31 October 2026
+
+The latest supplied viewer keeps architectural roofs by default, adds thatch only when selected, and syncs the source exposure, sky/fog/meadow palette and lighting. GLB files were verified unchanged. The requested localhost demo was completed and opened before the hosted rollout.
+
+Hosted completion: source `89c04c337905f58d8c33227f4eab3b93692c1322`, READY production `dpl_6aRie1xkvXHzvdsVXWAx7AfrG6s9`, canonical alias `https://okno-homes-aryan.vercel.app`. The served 108,612-byte viewer exactly matches the committed source and matches the verified local demo after Windows newline normalization. Signature and all three configure routes return 200; the scoped runtime error/fatal scan is empty. The local demo process/tab were left running and untouched during cloud verification. The asset inventory entry is corrected to the committed LF byte count (Windows working-file CRLF length differs); the viewer itself is unchanged by that metadata correction.
+
 ## Configure availability — 31 October 2026
 
 Both Signature configuration entries now require a published editable house, using the viewer settings resolver. Supplied Forza/Tengo/Kray qualify; other models require a valid published GLB. 31 focused tests, TypeScript and scoped lint pass.
