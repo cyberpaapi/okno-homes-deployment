@@ -1,5 +1,11 @@
 # Deployment and operation
 
+## Configure availability — 31 October 2026
+
+Both Signature configuration entries now require a published editable house, using the viewer settings resolver. Supplied Forza/Tengo/Kray qualify; other models require a valid published GLB. 31 focused tests, TypeScript and scoped lint pass.
+
+Live availability release: source `b85998625de16465224c1d88913c2519eea05551`, READY production `dpl_EVGeAPBqP3Ps9YVkQeqqAzGGVX5f`, canonical alias `https://okno-homes-aryan.vercel.app`. Live Forza retains Configure yours. Selecting Gaze removes it from the public presentation and Explore dialog (zero Configure links); its specifications and gallery remain. Browser console and scoped error/fatal runtime scans are clean. Screenshot: workspace `outputs/okno-gaze-no-configurator.png`.
+
 ## Public Configure yours action — 31 October 2026
 
 The Signature page now exposes a persistent glass Configure yours link for the active model, with a gentle looping glow and reduced-motion support; Explore details shares the same editable label. Existing Subtle Button 3373 is reused. The supplied PDFs retain current Indicative prices and contain no replacement rate schedule.
