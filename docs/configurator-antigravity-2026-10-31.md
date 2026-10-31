@@ -54,3 +54,11 @@ The owner clarified that models without their own editable 3D house must not off
 31 focused tests pass, covering all three unavailable houses in the presentation and Explore dialog, an added model with a GLB, and publication-driven appearance/removal. TypeScript and scoped lint pass.
 
 Live availability release: source `b85998625de16465224c1d88913c2519eea05551`, READY production `dpl_EVGeAPBqP3Ps9YVkQeqqAzGGVX5f`, canonical alias `https://okno-homes-aryan.vercel.app`. Live Forza retains Configure yours. Selecting Gaze removes it from the public presentation and Explore dialog (zero Configure links); its specifications and gallery remain. Browser console and scoped error/fatal runtime scans are clean. Screenshot: workspace `outputs/okno-gaze-no-configurator.png`.
+
+## Supplied scene update — 31 October 2026
+
+The owner requested the updated models from the same source. Both GitHub branches were checked: main remains at 075b2dd (18 October) and the release branch has no new external model commit. In the supplied `Downloads/antigravity3D` folder, all three GLB SHA-256 values still match the deployed assets. `walkthrough.html` changed to SHA-256 `36c5c365d06cc0ebcc498f471ba5f7dbf25c225917985ae4cd7b87a178a2aab9`; its material/scene changes were integrated rather than duplicating identical binaries.
+
+Forza, Tengo and Kray now begin with their original architectural roof. Extended thatch slabs and outward straws are hidden until Rustic Canopy / a thatch material is selected; changing roof finish or resetting hides those additions again. Straw strands retain their original material. The updated source's model-specific original-roof labels are used. Existing admin defaults still apply after initial load; previously published custom finishes remain intentional. Website loading, accessibility, responsive camera, CMS mapping and material-specification adaptations are preserved.
+
+Validation: JavaScript syntax and diff checks pass. The actual scene helpers pass original/thatch/metal/reset behavior checks while leaving the architectural roof visible. Local Forza visually shows the original roof, selected thatch, and successful Reset Configuration.

@@ -688,7 +688,7 @@ const okno = await window.oknoSettings;
         shadowSpan: 12,
         areas: { ext_roof: 42, ext_wall: 54, flooring: 36, int_ceiling: 38, int_wall: 48 },
         defaults: {
-          ext_roof: 'Default Natural Thatch & Outward Straws',
+          ext_roof: 'Default Architectural Standing-Seam Roof',
           ext_wall: 'Default Warm Timber & Bronze Trim',
           flooring: 'Default Wide-Plank European Oak',
           int_ceiling: 'Default Bamboo Slats & Rafters',
@@ -712,7 +712,7 @@ const okno = await window.oknoSettings;
         shadowSpan: 15,
         areas: { ext_roof: 118, ext_wall: 110, flooring: 96, int_ceiling: 98, int_wall: 105 },
         defaults: {
-          ext_roof: 'Default Natural Thatch & Outward Straws',
+          ext_roof: 'Default Tengo Architectural Roof',
           ext_wall: 'Default Tengo Exterior Cladding',
           flooring: 'Default Tengo Hardwood & Terrace Deck',
           int_ceiling: 'Default Tengo Timber Soffit & Ceiling',
@@ -736,7 +736,7 @@ const okno = await window.oknoSettings;
         shadowSpan: 13,
         areas: { ext_roof: 82, ext_wall: 76, flooring: 68, int_ceiling: 72, int_wall: 84 },
         defaults: {
-          ext_roof: 'Default Natural Thatch & Outward Straws',
+          ext_roof: 'Default Kray Architectural Canopy',
           ext_wall: 'Default Kray Exterior Facade',
           flooring: 'Default Kray Stone & Timber Flooring',
           int_ceiling: 'Default Kray Slatted Ceiling',
@@ -762,7 +762,7 @@ const okno = await window.oknoSettings;
     // CLADDING MATERIALS — SPECIFICATION, PRICING & PDF QUOTE CONTROLLER
     // =========================================================================
     const PART_META = {
-      ext_roof:    { name: 'EXTERNAL ROOF',    short: 'Ext. Roof',    count: 10, areaSqm: 42, defaultLabel: 'Default Natural Thatch & Outward Straws', bestView: 'aerial' },
+      ext_roof:    { name: 'EXTERNAL ROOF',    short: 'Ext. Roof',    count: 10, areaSqm: 42, defaultLabel: 'Default Architectural Standing-Seam Roof', bestView: 'aerial' },
       ext_wall:    { name: 'EXTERNAL WALL',    short: 'Ext. Wall',    count: 10, areaSqm: 54, defaultLabel: 'Default Warm Timber & Bronze Trim', bestView: 'front' },
       flooring:    { name: 'FLOORING',         short: 'Flooring',     count: 8,  areaSqm: 36, defaultLabel: 'Default Wide-Plank European Oak', bestView: 'inside_bed' },
       int_ceiling: { name: 'INTERNAL CEILING', short: 'Int. Ceiling', count: 17, areaSqm: 38, defaultLabel: 'Default Bamboo Slats & Rafters', bestView: 'inside_door' },
@@ -1030,6 +1030,22 @@ const okno = await window.oknoSettings;
       toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
     }
 
+    function isThatchMaterial(item) {
+      if (!item) return false;
+      if (item.id === '08') return true;
+      const s = ((item.name || '') + ' ' + (item.category || '')).toLowerCase();
+      return s.includes('thatch') || s.includes('rustic canopy') || s.includes('straw') || s.includes('reed');
+    }
+
+    function updateThatchCanopyVisibility() {
+      const showThatch = isThatchMaterial(activePartSelection.ext_roof);
+      (partMeshes.ext_roof || []).forEach(mesh => {
+        if (mesh.name && mesh.name.startsWith('Extended_Thatch_')) {
+          mesh.visible = showThatch;
+        }
+      });
+    }
+
     function applyMaterialToPart(partKey, itemId) {
       const catalog = window.CLADDING_CATALOG || [];
       const item = catalog.find(m => m.id === itemId);
@@ -1043,11 +1059,16 @@ const okno = await window.oknoSettings;
       if (!targets.length) { showMaterialToast('This surface is not mapped in this model yet.'); return; }
       const newMat = getCatalogMaterial(item, partKey);
       targets.forEach(mesh => {
+        if (mesh.name === 'Extended_Thatch_Outward_Straws' && mesh.userData.origMaterial) {
+          mesh.material = mesh.userData.origMaterial;
+          return;
+        }
         ensureWorldSpaceUVs(mesh, partKey);
         mesh.material = newMat;
       });
 
       activePartSelection[partKey] = item;
+      if (partKey === 'ext_roof') updateThatchCanopyVisibility();
       updateSidebarUI();
       const addedCost = getMaterialPartCost(item.id, partKey);
       showMaterialToast(`Applied ${item.name} to ${PART_META[partKey].name}`);
@@ -1064,6 +1085,7 @@ const okno = await window.oknoSettings;
         }
       });
       activePartSelection[partKey] = null;
+      if (partKey === 'ext_roof') updateThatchCanopyVisibility();
       updateSidebarUI();
       showMaterialToast(`Restored ${PART_META[partKey].name} to default finish`);
     }
@@ -1077,6 +1099,7 @@ const okno = await window.oknoSettings;
         });
         activePartSelection[pk] = null;
       });
+      updateThatchCanopyVisibility();
       updateSidebarUI();
       showMaterialToast('Restored all zones to default architectural finishes');
     }
@@ -1744,6 +1767,7 @@ const okno = await window.oknoSettings;
 
           const mesh = new THREE.Mesh(geo, mat.clone());
           mesh.name = name;
+          mesh.visible = false; // Hidden unless Thatched Roof (#08) is selected
           mesh.castShadow = true;
           mesh.receiveShadow = true;
           mesh.userData.origMaterial = mesh.material;
@@ -2075,6 +2099,7 @@ const okno = await window.oknoSettings;
 
         const strawMesh = new THREE.Mesh(strawGeo, defaultThatchMat.clone());
         strawMesh.name = 'Extended_Thatch_Outward_Straws';
+        strawMesh.visible = false; // Hidden unless Thatched Roof (#08) is selected
         strawMesh.castShadow = true;
         strawMesh.receiveShadow = true;
         strawMesh.userData.origMaterial = strawMesh.material;
@@ -2082,6 +2107,7 @@ const okno = await window.oknoSettings;
         strawMesh.userData.housePartKey = 'ext_roof';
         partMeshes.ext_roof.push(strawMesh);
         root.add(strawMesh);
+        updateThatchCanopyVisibility();
       })(currentModelKey);
 
       // Upgrade key architectural materials (Oak Floor, Wood Doors, Glass, Stone) with higher normal depth & specular polish
