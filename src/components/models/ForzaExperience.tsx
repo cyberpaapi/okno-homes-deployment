@@ -24,6 +24,7 @@ import { getVideoSeekRequest, mapProgressToTime } from "./forzaMotion";
 import { useSiteCollection, useSiteCollectionsMap, useSiteContentMap } from "@/lib/useSiteContent";
 import { exploreVariantId } from "@/data/configurator/studio/variantIds";
 import { configurationHref } from "@/lib/configuratorHref";
+import { resolveConfigurator } from "@/lib/configuratorSettings";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 import { parseSignatureFeatures, parseSignatureGallery, signatureModelDefaults, signaturePlanDefaults } from "@/lib/signatureCollections";
 
@@ -499,6 +500,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
   });
   const activeModel = orderedModels.find(model => model.slug === activeSlug) ?? orderedModels[0] ?? models[0]!;
   const activeRecord = modelRecords.find(record => record.id === activeModel.slug);
+  const canConfigure = Boolean(activeRecord && resolveConfigurator(activeRecord));
   const filteredModels = orderedModels.filter(
     (model) => getPlanVariantIndex(model, planFilter) >= 0,
   );
@@ -1035,7 +1037,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             <p data-type-field={"models.signature.scroll-cue"}>{get("scroll-cue", "Scroll to rotate")}</p>
           </motion.div>
 
-          <div className={styles.configureEntrance}>
+          {canConfigure && <div className={styles.configureEntrance}>
             <SubtleLink
               href={configurationHref(activeModel.slug, exploreVariantId(activeModel.slug, activeVariantIndex))}
               className={styles.configureButton}
@@ -1045,7 +1047,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             >
               {get("detail.configure-action", "Configure yours")}
             </SubtleLink>
-          </div>
+          </div>}
 
           <motion.div className={styles.bottomDock} style={{ opacity: actionOpacity }}>
             <motion.div
@@ -1101,6 +1103,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
         {detailsOpen && (
           <DetailsLayer
             model={presentationModel}
+            canConfigure={canConfigure}
             initialVariantIndex={linkedVariantId ? Math.max(0, activeModel.variants.findIndex((_, index) => exploreVariantId(activeModel.slug, index) === linkedVariantId)) : activeVariantIndex}
             gallery={experience.gallery}
             origin={detailsOrigin}
@@ -1174,6 +1177,7 @@ function AccessibleVariantStack({ children, slug, index, direction, reducedMotio
 
 function DetailsLayer({
   model,
+  canConfigure,
   initialVariantIndex,
   gallery,
   origin,
@@ -1181,6 +1185,7 @@ function DetailsLayer({
   returnFocusRef,
 }: {
   model: OknoModel;
+  canConfigure: boolean;
   initialVariantIndex: number;
   gallery: GalleryImage[];
   origin: DetailsOrigin;
@@ -1409,7 +1414,7 @@ function DetailsLayer({
                   ))}
                 </div>
 
-                <motion.div
+                {canConfigure && <motion.div
                   className={styles.configureSlot}
                   initial={
                     prefersReducedMotion
@@ -1431,7 +1436,7 @@ function DetailsLayer({
                   <SubtleLink href={configurationHref(model.slug, configurationVariantId)} className={styles.configureButton} distance={0} aria-label={`${get("detail.configure-action", "Configure yours")} — ${model.name}`} data-type-field="models.signature.detail.configure-action">
                     {get("detail.configure-action", "Configure yours")}
                   </SubtleLink>
-                </motion.div>
+                </motion.div>}
               </AccessibleVariantStack>
             </AnimatePresence>
           </div>

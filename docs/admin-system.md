@@ -1,5 +1,9 @@
 # Admin system — active implementation record
 
+## Configurator availability — 31 October 2026
+
+Public Configure actions only appear for a published model with a valid editable house: the supplied Forza/Tengo/Kray assets or a custom GLB. Upload and publish a GLB to enable another model; a reference/legacy viewer does not qualify. This applies to both the Signature page and Explore details.
+
 ## Public configurator button — 31 October 2026
 
 The existing Signature Configure button field now has label “Configure button label” and default “Configure yours”; it controls both the directly visible public model action and the Explore-details action. Both follow the selected model. The copy deck pricing audit found no replacement amounts: documented figures already match defaults and remain Indicative. See [the configurator ledger](configurator-antigravity-2026-10-31.md).

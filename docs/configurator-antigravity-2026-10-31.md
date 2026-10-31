@@ -46,3 +46,9 @@ Pricing audit: `OKNO Website Copy Deck v1.pdf`, pages 1 and 6–8, says to retai
 Local validation: 16 Signature tests pass, including public entry for the initial model, an admin-added model and selected-plan links; TypeScript and scoped ESLint pass. Desktop and 390 × 844 phone checks show the button unobstructed; selecting Kray changes its destination to the Kray configurator with studio context.
 
 Live acceptance: source `91c9391ac0d633a36b7de40e5e43fb748560f946`, READY production `dpl_4fGgpLmkxVXWyLC12hQmEL7Ve1Tm`, canonical alias `https://okno-homes-aryan.vercel.app`. The live public button shows Configure yours, uses Manrope, 14 px backdrop blur and an infinite 5.6-second animation. Clicking it reaches Forza's configurator and its loaded state is true. Signature and the configure route return 200; published content remains revision 1. All 30 production function traces pass (largest 177.4 MiB); the scoped error/fatal runtime-log scan is empty. Screenshot: workspace `outputs/okno-configure-yours-live.png`.
+
+## Only offer configuration for an available editable house
+
+The owner clarified that models without their own editable 3D house must not offer configuration. Both public Signature entries now use the same published-settings resolver as the supplied viewer. Forza, Tengo and Kray qualify through their supplied assets; Gaze, Trib and Octapod do not qualify without an uploaded GLB. An admin-added or existing model gains the action when a valid editable GLB is published and loses it when that custom asset is removed (unless it has a supplied asset). Legacy/reference mode does not advertise configuration. Direct historical routes remain intact. No media or prices changed.
+
+31 focused tests pass, covering all three unavailable houses in the presentation and Explore dialog, an added model with a GLB, and publication-driven appearance/removal. TypeScript and scoped lint pass.

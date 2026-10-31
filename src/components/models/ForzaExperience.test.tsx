@@ -62,6 +62,23 @@ describe("ForzaExperience", () => {
     expect(within(screen.getByRole("group", { name: "Signature models" })).getByRole("button", { name: "Kray" })).toHaveAttribute("aria-pressed", "true");
   });
 
+  it.each(["gaze", "trib", "octapod"])("hides both configure entries for %s without an editable house", slug => {
+    render(<ForzaExperience models={signatureModels} initialModelSlug={slug} />);
+    expect(screen.queryByRole("link", { name: /Configure yours/ })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Explore details" }));
+    expect(within(screen.getByRole("dialog")).queryByRole("link", { name: /Configure yours/ })).not.toBeInTheDocument();
+  });
+
+  it("shows and removes both entries as a model receives or loses its published GLB", () => {
+    cms.collections["signature.models"] = signatureModelDefaults.map(record => record.id === "gaze"
+      ? { ...record, fields: { ...record.fields, configuratorModel: "/api/site-media/gaze.glb" } } : record);
+    const view = render(<ForzaExperience models={signatureModels} initialModelSlug="gaze" initialDetailsOpen />);
+    expect(screen.getAllByRole("link", { name: "Configure yours — Gaze" })).toHaveLength(2);
+    cms.collections["signature.models"] = signatureModelDefaults;
+    view.rerender(<ForzaExperience models={signatureModels} initialModelSlug="gaze" initialDetailsOpen />);
+    expect(screen.queryByRole("link", { name: /Configure yours/ })).not.toBeInTheDocument();
+  });
+
   it("falls back safely for a removed or unknown model link", () => {
     render(<ForzaExperience models={signatureModels} initialModelSlug="removed-model" initialDetailsOpen initialVariantId="unknown" />);
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
@@ -69,7 +86,7 @@ describe("ForzaExperience", () => {
   });
   it("renders an added model and its added plan with independent media and Explore copy", async () => {
     cms.collections["signature.models"] = [...signatureModelDefaults, { id: "aurora", fields: {
-      name: "Aurora", orbitFilm: "/qa/aurora-a.mp4", detailFilm: "/qa/aurora-b.mp4", poster: "/qa/aurora.webp",
+      name: "Aurora", configuratorModel: "/api/site-media/aurora.glb", orbitFilm: "/qa/aurora-a.mp4", detailFilm: "/qa/aurora-b.mp4", poster: "/qa/aurora.webp",
       exploreAction: "Explore Aurora", features: JSON.stringify([{title:"Shelter",copy:"Quiet shelter"},{title:"Light",copy:"Soft light"},{title:"Space",copy:"Room to pause"}]),
       gallery: JSON.stringify([{id:"aurora-view",label:"Garden",image:"/qa/aurora.webp",alt:"Aurora in a garden"}]),
     } }];
