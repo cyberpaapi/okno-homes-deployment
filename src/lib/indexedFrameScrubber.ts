@@ -81,8 +81,10 @@ export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTML
   decoder.configure(config);
 
   async function pump() {
-    if (disposed || busy || document.hidden) return;
+    if (disposed || document.hidden) return;
+    // Cached frames remain usable while a speculative hardware decode waits.
     queueDraw();
+    if (busy) return;
     const ahead = Math.min(last,Math.max(0,target + direction*LOOK_AHEAD));
     if (frames.has(target) && frames.has(ahead)) return;
     const needsTarget = !frames.has(target);
@@ -97,14 +99,18 @@ export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTML
     busy = true;
     jobTarget = target;
     const jobGeneration = generation;
+    let deadline: ReturnType<typeof setTimeout> | undefined;
     try {
       for (let index = start; index <= end; index++) {
         const [offset,size,timestamp,key] = film.packets[index];
         decoder.decode(new EncodedVideoChunk({ type: key ? 'key' : 'delta', timestamp, data: source.subarray(offset,offset+size) }));
       }
-      await decoder.flush();
+      await Promise.race([
+        decoder.flush(),
+        new Promise<never>((_resolve, reject) => { deadline = setTimeout(() => reject(new Error('Decoder stalled')), 2000); }),
+      ]);
     } catch { if (!disposed && generation === jobGeneration) fail(); }
-    finally { if (generation === jobGeneration) busy = false; }
+    finally { clearTimeout(deadline); if (generation === jobGeneration) busy = false; }
     if (generation !== jobGeneration) return;
     // A scroll gesture can change direction while these packets are decoding.
     if (!disposed) void pump();

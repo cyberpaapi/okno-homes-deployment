@@ -50,6 +50,10 @@ describe('original-packet Process frame rendering', () => {
     const ready = vi.fn(); const fail = vi.fn();
     const scrubber = await createIndexedFrameScrubber(film,canvas,abort.signal,ready,fail,vi.fn(),new Uint8Array(bytes));
     await vi.advanceTimersByTimeAsync(30);
+    // Even when flush is still pending, a cached requested frame must paint.
+    scrubber!.setTime(1/30);
+    await vi.advanceTimersByTimeAsync(30);
+    expect(canvas.dataset.scrubPresentedTime).toBe('0.0333');
     for (const time of [12,13,14,15,16]) { scrubber!.setTime(time); await vi.advanceTimersByTimeAsync(30); }
     expect(fetch).not.toHaveBeenCalled();
     expect(canvas.dataset.scrubPresentedTime).toBe('16.0000');
@@ -68,6 +72,24 @@ describe('original-packet Process frame rendering', () => {
     expect(decode.mock.calls.some(([packet]) => packet.timestamp === film.packets[342][2])).toBe(true);
     expect(ready).toHaveBeenCalledOnce(); expect(fail).not.toHaveBeenCalled();
     abort.abort(); expect(closed).toHaveBeenCalled(); expect(closeFrame).toHaveBeenCalled();
+  });
+  it('reports a hung hardware decode so the complete native fallback can take over', async () => {
+    vi.useFakeTimers();
+    class Decoder {
+      state = 'configured';
+      static async isConfigSupported() { return { supported: true }; }
+      configure() {} decode() {}
+      flush() { return new Promise<void>(() => {}); }
+      close() { this.state = 'closed'; }
+    }
+    vi.stubGlobal('VideoDecoder', Decoder);
+    vi.stubGlobal('EncodedVideoChunk', class {});
+    vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockImplementation((() => ({drawImage: vi.fn()})) as unknown as typeof HTMLCanvasElement.prototype.getContext);
+    const fail = vi.fn(), abort = new AbortController();
+    await createIndexedFrameScrubber(film, document.createElement('canvas'), abort.signal, vi.fn(), fail, vi.fn(), new Uint8Array(bytes));
+    await vi.advanceTimersByTimeAsync(2100);
+    expect(fail).toHaveBeenCalledOnce();
+    abort.abort();
   });
   it('offers the native fallback when the AVC configuration is unsupported', async () => {
     vi.stubGlobal('VideoDecoder',{isConfigSupported:async()=>({supported:false})});
