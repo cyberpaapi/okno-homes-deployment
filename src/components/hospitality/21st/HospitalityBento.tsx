@@ -3,7 +3,7 @@
 // Content adaptation of kinfe123's bookmarked 21st.dev Bento, component 6541.
 // The original two-large / three-small six-column geometry is retained.
 import Image from "next/image";
-import { pageImageLoader } from "@/lib/pageImageLoader";
+import { previewImageLoader } from "@/lib/thumbnailImageLoader";
 import { useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import { useSiteContentMap } from "@/lib/useSiteContent";
@@ -39,7 +39,7 @@ function BentoCard({ card, index }: { card: BentoCardContent; index: number }) {
       }}
     >
       <div className={styles.media}>
-        <Image loader={pageImageLoader}
+        <Image loader={previewImageLoader}
           src={card.image}
           alt={card.alt}
           fill

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { previewImageLoader } from "@/lib/thumbnailImageLoader";
 import { SubtleLink } from "@/components/ui/SubtleAction";
 import { motion, type MotionValue, useReducedMotion, useScroll, useTransform, useMotionValue, useMotionValueEvent } from "motion/react";
 import { useEffect, useRef, useState } from "react";
@@ -138,7 +139,7 @@ export default function ProductTimeline() {
           <div className={styles.heading}><h2 id="landing-process-title" className={styles.title} data-landing-heading data-type-field={"home.timeline.heading-start"}>{value("home.timeline.heading-start", "Your land,")} <em data-type-field={"home.timeline.heading-emphasis"}>{value("home.timeline.heading-emphasis", "our ninety days.")}</em></h2><SubtleLink href={localDestination(value("home.timeline.action-href", "/process"), "/process")} className={styles.processLink} data-type-field={"home.timeline.action"}>{value("home.timeline.action", "See the process")}</SubtleLink></div>
           <motion.div className={styles.track} ref={trackRef} style={{ x: animated ? x : 0 }}>
             <motion.div className={styles.image} style={{ scale: animated ? mediaScale : 1, y: animated ? mediaY : 0 }}>
-              <Image
+              <Image loader={previewImageLoader}
                 src={value("home.timeline.image", "/assets/projects/real-v1/kioo-03.webp")}
                 alt={value("home.timeline.image-alt", "A completed OKNO Kioo home surrounded by mature forest")}
                 fill

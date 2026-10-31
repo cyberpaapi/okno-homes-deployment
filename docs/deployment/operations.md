@@ -1,5 +1,14 @@
 # Deployment and operation
 
+## Compact thumbnail delivery — 31 October 2026
+
+The owner requested lower-resolution delivery for images that are used as thumbnails and never enlarged in place. A separate quality-60 WebP derivative set now serves Journal marquee/blog cards (480 px cap), its larger featured card (960 px prepared cap), Hospitality bento cards, project index previews, the Projects orbit/cursor thumbnails, gallery thumbnail strips, and the smaller homepage editorial/timeline/Bespoke cards. Source photographs, article images, lightbox images and full carousel slides are retained independently. Existing lazy loading remains; built-in thumbnail files are served directly with immutable CDN caching. CMS replacements use Next image optimization at quality 60 with 480/1080 px request caps. The Next allowlist includes quality 60 and width 480.
+
+Generate derivatives with `node scripts/prepare-thumbnail-images.mjs` after updating the page/project-cover source manifests. Commit `config/thumbnail-images.json`, the generated `public/thumbnail-images` files and the refreshed public-asset inventory. The source bytes and encoding profile are included in each URL hash. Generation preserves originals and other image profiles.
+
+Verification: 290 WebP files for 51 source photographs match their declared dimensions and inventory sizes. Fourteen unique Journal thumbnails total 301,804 bytes versus 631,424 bytes for the previous 640 px variants (52% smaller), or 2,209,416 bytes for previous 1280 px variants (86% smaller); these are file-byte comparisons, not measured total page-load time. All 40 targeted tests across Journal, Hospitality, homepage cards, Projects and the image loader pass; scoped lint and TypeScript pass. Local browser inspection confirms 480 px Journal cards and the 960 px feature load correctly at their display sizes; the linked article continues using its 1280 px image.
+
+
 ## Experience loading presentation — 31 October 2026
 
 At the owner's request, shared film loaders on Home V1, Home V2 and Process now say “Loading experience”. The homepage tagline and loading bar remain hidden and inert throughout the autoplay intro, then fade in over 750 ms when it finishes (or its media error recovery completes). Scrolling waits for both the intro completion and the fully downloaded, decoded journey. Reduced-motion presentation remains immediate.
@@ -48,7 +57,7 @@ The existing private Blob store is suspended for a usage limit until 10 November
 
 1. Read the plan, working version and admin ledger. Verify local Git state and current project with `vercel project inspect --non-interactive` from the repository root.
 2. Install from lockfile (`npm ci`). Run tests, lint, typecheck and production build. For an isolated local build use `OKNO_BUILD_DIR=.next-release npm run build`; keep this variable out of Vercel. Run `npm run release:check-bundles -- .next-release` after an isolated build. Production build also checks tracing for bundle size, private data exclusion and required model/media assets.
-   When changing priority-page built-in photographs, run `node scripts/prepare-page-images.mjs` and commit the generated responsive images, page-image manifest and public-asset inventory. New CMS uploads use the existing image fallback and do not require this build-time generation step.
+   When changing priority-page built-in photographs, run `node scripts/prepare-page-images.mjs`, then `node scripts/prepare-thumbnail-images.mjs`, and commit the generated responsive images, page-image manifest and public-asset inventory. New CMS uploads use the existing image fallback and do not require this build-time generation step.
 3. Ensure the private production Blob store is connected to Production only and `OKNO_CMS_ADMIN_TOKEN` is a sensitive Production secret. Read [key management](admin-keys.md).
 4. Initialize a newly created store once using `node scripts/seed-cloud-content.mjs <ignored-production-env-file>`. The seed includes current published content only and never overwrites an existing store. Its migrated uploaded photo is versioned at `public/content-media/`.
 5. Push the reviewed commit to `main`. Vercel's Git integration builds application commits; production follows `main`. Documentation-only follow-up commits are ignored by the build so recording release evidence does not replace the tested runtime. Initial commits always build. Use Git deployment for this media-rich source instead of a CLI source upload.

@@ -4,6 +4,7 @@
 import { useEffect, useRef } from 'react';
 import { animate, motion, useMotionValue, useReducedMotion } from 'motion/react';
 import Image from 'next/image';
+import { thumbnailImageLoader } from '@/lib/thumbnailImageLoader';
 import type { ProjectImage } from '@/data/projectAtlas';
 import styles from './Elements.module.css';
 
@@ -64,7 +65,7 @@ export function CarouselThumbnails({ items, index, setIndex, label }: { items: T
     {items.map((item, i) => <motion.button key={item.src} type="button" aria-label={item.label} aria-pressed={i === index} onClick={() => setIndex(i)} initial={false} animate={i === index ? 'active' : 'inactive'}
       variants={{ active: { width: FULL, marginLeft: MARGIN, marginRight: MARGIN, opacity: 1 }, inactive: { width: COLLAPSED, marginLeft: 0, marginRight: 0, opacity: .55 } }}
       transition={{ duration: reduced ? 0 : .35, ease: 'easeOut' }}>
-      <Image src={item.src} alt="" fill sizes="100px" draggable={false} />{item.film && <span aria-hidden="true">▷</span>}
+      <Image loader={thumbnailImageLoader} src={item.src} alt="" fill sizes="100px" draggable={false} />{item.film && <span aria-hidden="true">▷</span>}
     </motion.button>)}
   </div></div>;
 }

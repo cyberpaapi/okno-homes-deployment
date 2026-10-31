@@ -29,13 +29,14 @@ const nextConfig: NextConfig = {
     }));
   },
   async headers() {
-    return ["/configurator/models/v2/:path*", "/page-images/:path*", "/project-images/:path*", "/hero-v2/nighttime-frames-:part-:hash.bin", "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4", "/assets/landing-options/forest-entry-frames-:hash.bin", "/assets/landing-options/hero-:version-mobile-:hash.bin", "/assets/landing-options/forest-entry-intro-:hash.mp4"].map(source => ({
+    return ["/configurator/models/v2/:path*", "/page-images/:path*", "/thumbnail-images/:path*", "/project-images/:path*", "/hero-v2/nighttime-frames-:part-:hash.bin", "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4", "/assets/landing-options/forest-entry-frames-:hash.bin", "/assets/landing-options/hero-:version-mobile-:hash.bin", "/assets/landing-options/forest-entry-intro-:hash.mp4"].map(source => ({
       source,
       headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
     }));
   },
   images: {
-    qualities: [75, 90],
+    qualities: [60, 75, 90],
+    imageSizes: [32, 48, 64, 96, 128, 256, 384, 480],
   },
   experimental: {
     ...(process.env.OKNO_LOW_MEMORY_BUILD === "1" ? { cpus: 1 } : {}),

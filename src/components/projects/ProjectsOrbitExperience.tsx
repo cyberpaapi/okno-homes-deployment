@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import Image from 'next/image';
+import { thumbnailImageLoader } from '@/lib/thumbnailImageLoader';
 import { MagneticButton, MagneticLink } from './21st/Magnetic';
 import { TextReveal } from './21st/TextReveal';
 import { SilkBackground } from './21st/SilkBackground';
@@ -42,7 +43,7 @@ export default function ProjectsOrbitExperience({ initialId = 'forrest' }: { ini
       </div>
       <div className={styles.photoFrame}>
         <AnimatePresence mode="wait" initial={false}><motion.div key={active.id} initial={reduced ? false : { clipPath: 'inset(0 0 100% 0)' }} animate={{ clipPath: 'inset(0 0 0% 0)' }} exit={{ opacity: 0 }} transition={{ duration: reduced ? 0 : .5, ease }}>
-          <GalleryLink project={active} className={styles.photograph} ariaLabel={`View ${active.title} photography`}><Image src={active.image.src} alt={active.image.alt} fill sizes="(max-width:700px) 105px, 190px" priority /></GalleryLink>
+          <GalleryLink project={active} className={styles.photograph} ariaLabel={`View ${active.title} photography`}><Image loader={thumbnailImageLoader} src={active.image.src} alt={active.image.alt} fill sizes="(max-width:700px) 105px, 190px" priority /></GalleryLink>
         </motion.div></AnimatePresence>
         <span className={styles.photoCaption}>Selected place <span>Open photography ↗</span></span>
       </div>

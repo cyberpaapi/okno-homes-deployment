@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { pageImageLoader } from "@/lib/pageImageLoader";
+import { previewImageLoader } from "@/lib/thumbnailImageLoader";
 import { motion, useReducedMotion } from "motion/react";
 import { JournalArrowLink } from "./JournalArrowLink";
 import { JournalSourceMark } from "./JournalSourceMark";
@@ -34,7 +34,7 @@ export default function JournalHero() {
 
       {featured && <motion.article className={styles.heroFeature} data-photo={Boolean(featured.image)} initial={reduced ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.8, delay: reduced ? 0 : 0.25 }}>
         {featured.image && <div className={styles.heroImage}>
-          <Image loader={pageImageLoader} src={featured.image} alt={featured.imageAlt} fill priority sizes="(max-width: 760px) 92vw, 44vw" />
+          <Image loader={previewImageLoader} src={featured.image} alt={featured.imageAlt} fill priority sizes="(max-width: 760px) 92vw, 44vw" />
           <div className={styles.imageVeil} aria-hidden="true" />
         </div>}
         <div className={styles.heroFeatureCopy}>

@@ -4,7 +4,7 @@
 // Marquee 1198 supplies the duplicated continuous track; Marquee Along SVG
 // Path 19091 supplies pointer capture, grab state and inertial drag.
 import Image from "next/image";
-import { pageImageLoader } from "@/lib/pageImageLoader";
+import { thumbnailImageLoader } from "@/lib/thumbnailImageLoader";
 import { useAnimationFrame, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { JournalArrowLink } from "./JournalArrowLink";
@@ -16,7 +16,7 @@ function JournalCard({ entry, duplicate = false, actionVerb }: { entry: JournalE
   return (
     <article className={styles.storyCard} aria-hidden={duplicate || undefined} data-duplicate={duplicate || undefined} data-photo={Boolean(entry.image)}>
       {entry.image && <div className={styles.cardImage}>
-        <Image loader={pageImageLoader} draggable={false} src={entry.image} alt={duplicate ? "" : entry.imageAlt} fill sizes="(max-width: 640px) 82vw, 410px" />
+        <Image loader={thumbnailImageLoader} draggable={false} src={entry.image} alt={duplicate ? "" : entry.imageAlt} fill sizes="(max-width: 640px) 82vw, 410px" />
         <div className={styles.cardVeil} aria-hidden="true" />
       </div>}
       <div className={styles.cardCopy}>

@@ -17,6 +17,7 @@ import { SubtleLink } from '@/components/ui/SubtleAction';
 import { useSiteContentMap } from '@/lib/useSiteContent';
 import { localDestination } from '@/lib/localDestination';
 import { pageImageLoader } from '@/lib/pageImageLoader';
+import { previewImageLoader } from '@/lib/thumbnailImageLoader';
 import { useMediaQuery } from '@/lib/useMediaQuery';
 import TextBlock from './TextBlock';
 import styles from './LandingPathways.module.css';
@@ -94,7 +95,7 @@ function BespokePreview() {
       <div className={styles.bespokeShade} />
       <motion.p className={styles.bespokeWord} style={{ x: wordX }} aria-hidden="true" data-type-field={"home.bespoke.word"}>{value('home.bespoke.word', 'Bespoke')}</motion.p>
       <motion.figure className={styles.bespokeCard} style={{ y: cardY }}>
-        <Image src={value('home.bespoke.card-image', '/assets/projects/real-v1/lakewood-02.webp')} alt={value('home.bespoke.card-alt', 'Lakewood Villa beside its swimming pool')} fill sizes="(max-width: 700px) 70vw, 31vw" />
+        <Image loader={previewImageLoader} src={value('home.bespoke.card-image', '/assets/projects/real-v1/lakewood-02.webp')} alt={value('home.bespoke.card-alt', 'Lakewood Villa beside its swimming pool')} fill sizes="(max-width: 700px) 70vw, 31vw" />
       </motion.figure>
       <div className={styles.bespokeCopy}>
         <h2 id="bespoke-preview-title" data-type-field={"home.bespoke.heading-1"}><TextBlock lines={[value('home.bespoke.heading-1', 'One site.'), value('home.bespoke.heading-2', 'One original home.')]} /></h2>
@@ -194,7 +195,7 @@ function EditorialClose() {
           onMouseEnter={() => setActive(index)}
         >
           <Link href={localDestination(value(`home.editorial.${id}.href`, item.href), item.href)} onFocus={() => setActive(index)} data-cursor-media-action>
-            <Image src={value(`home.editorial.${id}.image`, item.image)} alt={value(`home.editorial.${id}.image-alt`, item.alt)} fill sizes="(max-width: 700px) 100vw, 58vw" />
+            <Image loader={previewImageLoader} src={value(`home.editorial.${id}.image`, item.image)} alt={value(`home.editorial.${id}.image-alt`, item.alt)} fill sizes="(max-width: 700px) 100vw, 58vw" />
             <div className={styles.editorialShade} />
             <div className={styles.editorialCopy}><h2 data-type-field={`home.editorial.${id}.title`}>{value(`home.editorial.${id}.title`, item.title)}</h2><p data-type-field={`home.editorial.${id}.copy`}>{value(`home.editorial.${id}.copy`, item.copy)}</p><span data-type-field={`home.editorial.${id}.action`}>{value(`home.editorial.${id}.action`, 'Open')}</span></div>
           </Link>
