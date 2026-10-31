@@ -257,7 +257,7 @@ const signatureCommonSections: readonly ContentSection[] = [
     { id: "models.signature.detail.delivery", label: "Delivery label", kind: "text", defaultValue: "Delivery" },
     { id: "models.signature.detail.delivery-value", label: "Delivery value", kind: "text", defaultValue: "90 days" },
     { id: "models.signature.detail.spaces", label: "Spaces label", kind: "text", defaultValue: "Spaces" },
-    { id: "models.signature.detail.configure-action", label: "Configure button prefix", kind: "text", defaultValue: "Configure" },
+    { id: "models.signature.detail.configure-action", label: "Configure button label", kind: "text", defaultValue: "Configure yours" },
     { id: "models.signature.detail.build-eyebrow", label: "Build box label", kind: "text", defaultValue: "Built indoors" },
     { id: "models.signature.detail.build-line-1", label: "Build box first line", kind: "text", defaultValue: "Factory precision." },
     { id: "models.signature.detail.build-line-2", label: "Build box second line", kind: "text", defaultValue: "Landscape presence." },

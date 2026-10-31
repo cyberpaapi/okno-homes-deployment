@@ -50,6 +50,7 @@ describe("ForzaExperience", () => {
       expect(view.container.querySelectorAll('video')).toHaveLength(1);
       expect(view.container.querySelector('source[src*="1080p"]')).toBeNull();
       expect(screen.getByRole('button', { name: 'Explore details' })).toBeInTheDocument();
+      expect(screen.getByRole("link", { name: "Configure yours — Forza" })).toHaveAttribute("href", "/models/signature/forza/configure");
       view.unmount();
     } finally { window.matchMedia = previous; }
   });
@@ -57,7 +58,7 @@ describe("ForzaExperience", () => {
     render(<ForzaExperience models={signatureModels} initialModelSlug="kray" initialDetailsOpen initialVariantId="1-bhk" />);
     const dialog = screen.getByRole("dialog", { name: "Kray" });
     expect(within(dialog).getByRole("tab", { name: "Kray 1 BHK" })).toHaveAttribute("aria-selected", "true");
-    expect(within(dialog).getByRole("link", { name: "Configure Kray" })).toHaveAttribute("href", "/models/signature/kray/configure?variant=1-bhk");
+    expect(within(dialog).getByRole("link", { name: "Configure yours — Kray" })).toHaveAttribute("href", "/models/signature/kray/configure?variant=1-bhk");
     expect(within(screen.getByRole("group", { name: "Signature models" })).getByRole("button", { name: "Kray" })).toHaveAttribute("aria-pressed", "true");
   });
 
@@ -78,6 +79,7 @@ describe("ForzaExperience", () => {
     fireEvent.click(within(screen.getByRole("group",{name:"Signature models"})).getByRole("button",{name:"Aurora"}));
     await waitFor(() => expect(screen.getByRole("heading",{name:"Aurora"})).toBeInTheDocument());
     expect(screen.getByText("410 sq ft")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Configure yours — Aurora" })).toHaveAttribute("href", "/models/signature/aurora/configure");
     expect(screen.getByText("Indicative ₹ 23 lakh")).toBeInTheDocument();
     expect(container.querySelector('source[src="/qa/aurora-a.mp4"]')).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button",{name:"Explore Aurora"}));
@@ -123,17 +125,17 @@ describe("ForzaExperience", () => {
     const dialog = screen.getByRole("dialog", { name: "Tengo" });
     expect(within(dialog).getByText("1,500 sq ft")).toBeInTheDocument();
     expect(within(dialog).getByText("Indicative ₹ 75 lakh")).toBeInTheDocument();
-    expect(within(dialog).getByRole("link", { name: /Configure Tengo/ })).toHaveAttribute(
+    expect(within(dialog).getByRole("link", { name: /Configure yours — Tengo/ })).toHaveAttribute(
       "href", "/models/signature/tengo/configure?variant=2-bhk",
     );
     fireEvent.click(within(dialog).getByRole("tab", { name: "Three-bedroom" }));
-    expect(within(dialog).getAllByRole("link", { name: /Configure Tengo/ })).toHaveLength(1);
+    expect(within(dialog).getAllByRole("link", { name: /Configure yours — Tengo/ })).toHaveLength(1);
     const outgoing = dialog.querySelector('[data-variant-stack="0"]');
     if (outgoing) {
       expect(outgoing).toHaveAttribute("aria-hidden", "true");
       expect(outgoing).toHaveAttribute("inert");
     }
-    await waitFor(() => expect(within(dialog).getByRole("link", { name: /Configure Tengo/ })).toHaveAttribute(
+    await waitFor(() => expect(within(dialog).getByRole("link", { name: /Configure yours — Tengo/ })).toHaveAttribute(
       "href", "/models/signature/tengo/configure?variant=3-bhk",
     ));
     scrollTo.mockRestore();

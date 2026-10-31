@@ -17,6 +17,7 @@ import {
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import type { OknoModel } from "@/data/models";
 import ModelsHeader from "./ModelsHeader";
+import { SubtleLink } from "@/components/ui/SubtleAction";
 import { indicativePrice, planLabel } from "@/lib/signaturePresentation";
 import styles from "./ForzaExperience.module.css";
 import { getVideoSeekRequest, mapProgressToTime } from "./forzaMotion";
@@ -1034,6 +1035,18 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             <p data-type-field={"models.signature.scroll-cue"}>{get("scroll-cue", "Scroll to rotate")}</p>
           </motion.div>
 
+          <div className={styles.configureEntrance}>
+            <SubtleLink
+              href={configurationHref(activeModel.slug, exploreVariantId(activeModel.slug, activeVariantIndex))}
+              className={styles.configureButton}
+              distance={0}
+              aria-label={`${get("detail.configure-action", "Configure yours")} — ${presentationModel.name}`}
+              data-type-field="models.signature.detail.configure-action"
+            >
+              {get("detail.configure-action", "Configure yours")}
+            </SubtleLink>
+          </div>
+
           <motion.div className={styles.bottomDock} style={{ opacity: actionOpacity }}>
             <motion.div
               layout={!prefersReducedMotion}
@@ -1415,9 +1428,9 @@ function DetailsLayer({
                     ease: [0.22, 1, 0.36, 1],
                   }}
                 >
-                  <a href={configurationHref(model.slug, configurationVariantId)} className={styles.configureButton} data-type-field={"models.signature.detail.configure-action"}>
-                    {get("detail.configure-action", "Configure")} {model.name} <span aria-hidden="true">↗</span>
-                  </a>
+                  <SubtleLink href={configurationHref(model.slug, configurationVariantId)} className={styles.configureButton} distance={0} aria-label={`${get("detail.configure-action", "Configure yours")} — ${model.name}`} data-type-field="models.signature.detail.configure-action">
+                    {get("detail.configure-action", "Configure yours")}
+                  </SubtleLink>
                 </motion.div>
               </AccessibleVariantStack>
             </AnimatePresence>

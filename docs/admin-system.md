@@ -1,5 +1,9 @@
 # Admin system — active implementation record
 
+## Public configurator button — 31 October 2026
+
+The existing Signature Configure button field now has label “Configure button label” and default “Configure yours”; it controls both the directly visible public model action and the Explore-details action. Both follow the selected model. The copy deck pricing audit found no replacement amounts: documented figures already match defaults and remain Indicative. See [the configurator ledger](configurator-antigravity-2026-10-31.md).
+
 ## Antigravity model configurators — 31 October 2026
 
 The owner explicitly releases configurator editing and requests the supplied `antigravity3D` walkthrough on the matching models. In **Models → Signature models → [model] → 3D configurator and walkthrough**, editors can replace the house with a self-contained GLB, set metres per unit, select separate starting finishes for five surfaces, and map exact mesh names for custom geometry. The existing Add model, Save Signature models and plans, and Publish controls also govern these settings. No separate deferred Configurators navigation item is re-enabled: the working controls live with their owning model. Forza, Tengo and Kray default to their respective supplied assets. Other existing model routes preserve their current viewer; new models with a GLB receive the new walkthrough through the published roster.
