@@ -4,7 +4,7 @@ export type ContentCollections = Record<string, ContentItem[]>;
 export type CollectionField = {
   key: string;
   label: string;
-  kind: "text" | "image" | "video" | "url" | "json" | "choice";
+  kind: "text" | "image" | "video" | "url" | "json" | "choice" | "model";
   required?: boolean;
   help?: string;
   options?: readonly { label: string; value: string }[];
@@ -31,6 +31,20 @@ export const collectionDefinitions: readonly CollectionDefinition[] = [
     id: "signature.models", pageId: "signature", label: "Signature model roster", itemLabel: "model", maxItems: 24,
     fields: [
       { key: "name", label: "Model name", kind: "text", required: true },
+      { key: "configuratorMode", label: "3D experience", kind: "choice", options: [{label: "Walkthrough configurator", value: "auto"}, {label: "Previous viewer", value: "legacy"}] },
+      { key: "configuratorModel", label: "3D house GLB", kind: "model" },
+      { key: "configuratorScale", label: "Metres per model unit", kind: "text" },
+      { key: "finish_ext_roof", label: "External roof default finish", kind: "text" },
+      { key: "meshes_ext_roof", label: "External roof mesh names", kind: "text" },
+      { key: "finish_ext_wall", label: "External wall default finish", kind: "text" },
+      { key: "meshes_ext_wall", label: "External wall mesh names", kind: "text" },
+      { key: "finish_flooring", label: "Flooring default finish", kind: "text" },
+      { key: "meshes_flooring", label: "Flooring mesh names", kind: "text" },
+      { key: "finish_int_ceiling", label: "Internal ceiling default finish", kind: "text" },
+      { key: "meshes_int_ceiling", label: "Internal ceiling mesh names", kind: "text" },
+      { key: "finish_int_wall", label: "Internal wall default finish", kind: "text" },
+      { key: "meshes_int_wall", label: "Internal wall mesh names", kind: "text" },
+
       { key: "orbitFilm", label: "Scroll rotation film", kind: "video" },
       { key: "detailFilm", label: "Explore detail film", kind: "video" },
       { key: "poster", label: "Opening poster", kind: "image" },

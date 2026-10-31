@@ -1,5 +1,7 @@
 # Final Showcase documentation map
 
+Current supplied walkthrough and addable-model editing: [Antigravity integration](configurator-antigravity-2026-10-31.md).
+
 Current loading and reliability audit: [fresh visits, supervised local preview, delivery checks and recovery fixes](reliability-review-2026-10-18.md).
 
 Product and operating reference: [complete project specification](../PROJECT-SPECIFICATION.md).

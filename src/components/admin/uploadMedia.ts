@@ -26,8 +26,8 @@ export async function uploadMedia(file: File, token: string, signal: AbortSignal
   const headers: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
   const capability = await responseJson(await fetch("/api/admin/upload", { headers, signal, cache: "no-store" }));
   if (capability.mode === "blob") {
-    const extension = ({ "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/avif": "avif", "image/gif": "gif", "video/mp4": "mp4", "video/webm": "webm" } as Record<string, string>)[file.type];
-    if (!extension || file.size === 0 || file.size > 100 * 1024 * 1024) throw new Error("Choose a supported image or video of up to 100 MB.");
+    const extension = ({ "model/gltf-binary": "glb", "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/avif": "avif", "image/gif": "gif", "video/mp4": "mp4", "video/webm": "webm" } as Record<string, string>)[file.type];
+    if (!extension || file.size === 0 || file.size > 100 * 1024 * 1024) throw new Error("Choose a supported image, video or GLB model of up to 100 MB.");
     const { upload } = await import("@vercel/blob/client");
     onProgress({ name: file.name, stage: "Uploading original", percent: 0 });
     const original = await upload(`uploads/${crypto.randomUUID()}.${extension}`, file, {
@@ -35,7 +35,7 @@ export async function uploadMedia(file: File, token: string, signal: AbortSignal
       multipart: true, abortSignal: signal,
       onUploadProgress: progress => onProgress({ name: file.name, stage: "Uploading original", percent: Math.round(progress.percentage) }),
     });
-    onProgress({ name: file.name, stage: file.type.startsWith("video/") ? "Preparing film and poster" : "Checking image", percent: null });
+    onProgress({ name: file.name, stage: file.type.startsWith("video/") ? "Preparing film and poster" : file.type === "model/gltf-binary" ? "Checking 3D model" : "Checking image", percent: null });
     const result = await responseJson(await fetch("/api/admin/upload", { method: "POST", headers: { ...headers, "Content-Type": "application/json" }, body: JSON.stringify({ pathname: original.pathname, profile }), signal, cache: "no-store" }));
     onProgress({ name: file.name, stage: "Ready to stage as a draft", percent: 100 });
     return result as UploadedMedia;

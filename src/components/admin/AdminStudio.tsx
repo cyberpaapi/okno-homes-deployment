@@ -500,7 +500,7 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
           <div className={styles.modelBody}>
             {baseIds.has(record.id) && ownedSections.map((section,sectionIndex) => sectionPanel(section,sectionIndex))}
             <SignatureModelPanel
-              model={record} plans={ownedPlans} builtIn={baseIds.has(record.id)} disabled={busy || !snapshot}
+              model={record} siteOrigin={siteOrigin} plans={ownedPlans} builtIn={baseIds.has(record.id)} disabled={busy || !snapshot}
               canMoveUp={index > 0} canMoveDown={index < roster.length - 1}
               onMoveModel={direction => setLocalCollections(previous => {
                 const next = [...roster]; const target = index + direction;

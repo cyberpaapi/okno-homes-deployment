@@ -5,10 +5,12 @@ import Image from "next/image";
 import { ArrowDown, ArrowUp, Plus, Trash2, UploadCloud } from "lucide-react";
 import type { ContentItem } from "@/lib/contentCollections";
 import { parseSignatureFeatures, parseSignatureGallery } from "@/lib/signatureCollections";
+import { configuratorZones, configuratorFinishes } from "@/lib/configuratorSettings";
 import styles from "./SignatureModelPanel.module.css";
 
 type Props = {
   model: ContentItem;
+  siteOrigin?: string | null;
   plans: ContentItem[];
   builtIn: boolean;
   disabled: boolean;
@@ -24,7 +26,7 @@ type Props = {
 
 // Uses the documented 21st.dev accordion, field and button adaptations already
 // used throughout the Content Studio; the nesting follows the public model order.
-export default function SignatureModelPanel({ model, plans, builtIn, disabled, onModelChange, onModelIdChange, onRemoveModel, onMoveModel, canMoveUp, canMoveDown, onPlansChange, onUpload }: Props) {
+export default function SignatureModelPanel({ model, siteOrigin, plans, builtIn, disabled, onModelChange, onModelIdChange, onRemoveModel, onMoveModel, canMoveUp, canMoveDown, onPlansChange, onUpload }: Props) {
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState("");
   const [draftId, setDraftId] = useState(model.id);
@@ -42,8 +44,10 @@ export default function SignatureModelPanel({ model, plans, builtIn, disabled, o
   };
   const upload = async (key: string, file?: File, rotation = false, galleryIndex = -1) => {
     if (!file) return;
+    const isModel = key === "configuratorModel";
+    if (isModel && /\.glb$/i.test(file.name)) file = new File([file], file.name, { type: "model/gltf-binary" });
     const isVideo = rotation || key === "detailFilm";
-    if (!(isVideo ? ["video/mp4", "video/webm"].includes(file.type) : ["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"].includes(file.type))) { setError("Choose a supported image, MP4 or WebM file."); return; }
+    if (!(isModel ? file.type === "model/gltf-binary" : isVideo ? ["video/mp4", "video/webm"].includes(file.type) : ["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"].includes(file.type))) { setError("Choose a GLB model, supported image, MP4 or WebM file."); return; }
     setError(""); setUploading(galleryIndex < 0 ? key : `gallery-${galleryIndex}`);
     try {
       const result = await onUpload(file, rotation);
@@ -57,7 +61,7 @@ export default function SignatureModelPanel({ model, plans, builtIn, disabled, o
   };
   return <div className={styles.root}>
     {error && <p role="alert" className={styles.error}>{error}</p>}
-    <p className={styles.note}>{builtIn ? "This model keeps its existing story, rotation and preview editors below. Remove hides it from the published Signature roster without deleting its media." : "New model · use one rotation film and its prepared detail/poster outputs. Its Explore action leads to Enquiry until a configurator is built."}</p>
+    <p className={styles.note}>{builtIn ? "This model keeps its existing story, rotation and preview editors below. Remove hides it from the published Signature roster without deleting its media." : "New model · use one rotation film and its prepared detail/poster outputs. Upload a GLB below to give this model its own interactive walkthrough."}</p>
     <div className={styles.row}><button type="button" disabled={disabled || !canMoveUp} onClick={() => onMoveModel(-1)}><ArrowUp size={14}/> Move up</button><button type="button" disabled={disabled || !canMoveDown} onClick={() => onMoveModel(1)}><ArrowDown size={14}/> Move down</button><button type="button" disabled={disabled} className={styles.remove} onClick={onRemoveModel}><Trash2 size={14} /> Remove {model.fields.name || model.id} from Signature</button></div>
     {!builtIn && <>
       <details className={styles.inner}><summary>Opening, rotation and Explore</summary><div className={styles.body}>
@@ -77,6 +81,15 @@ export default function SignatureModelPanel({ model, plans, builtIn, disabled, o
         <button type="button" disabled={disabled || gallery.length >= 50} onClick={() => setGallery([...gallery,{ id:`${model.id}-image-${Date.now()}`,label:'New view',image:model.fields.poster || '',alt:`${model.fields.name} view` }])}><Plus size={14}/> Add preview image</button>
       </div></details>
     </>}
+    <details className={styles.inner}><summary>3D configurator and walkthrough</summary><div className={styles.body}>
+      <p className={styles.note}>Forza, Tengo and Kray use the supplied walkthrough by default. Upload a self-contained GLB to replace the geometry or configure a new model. Save models and plans, then Publish to make changes live.</p>
+      <label>3D experience<select value={model.fields.configuratorMode || "auto"} disabled={disabled} onChange={event => setField("configuratorMode",event.target.value)}><option value="auto">Walkthrough configurator</option><option value="legacy">Previous viewer</option></select></label>
+      <label>3D house GLB<input value={model.fields.configuratorModel || ""} placeholder="Use the supplied model" disabled={disabled} onChange={event => setField("configuratorModel",event.target.value)} /><small>GLB with embedded textures, up to 100 MB. Blank keeps the supplied house when available.</small><span className={styles.upload}><UploadCloud size={14}/>{uploading === 'configuratorModel' ? 'Uploading model…' : 'Upload 3D house'}<input type="file" accept=".glb,model/gltf-binary" disabled={disabled || Boolean(uploading)} onChange={event => { void upload('configuratorModel',event.target.files?.[0]); event.target.value=''; }}/></span></label>
+      <label>Metres per model unit<input type="number" min="0.0001" max="1000" step="any" value={model.fields.configuratorScale || ""} placeholder="1" disabled={disabled} onChange={event => setField("configuratorScale",event.target.value)}/><small>Use 1 for metres, 0.01 for centimetres, or 0.001 for millimetres.</small></label>
+      {configuratorZones.map(([zone,label]) => <label key={zone}>{label} · starting finish<select value={model.fields[`finish_${zone}`] || ""} disabled={disabled} onChange={event => setField(`finish_${zone}`,event.target.value)}><option value="">Original model finish</option>{configuratorFinishes.filter(finish => finish.apps.includes(zone)).map(finish => <option key={finish.id} value={finish.id}>{finish.name}</option>)}</select></label>)}
+      <details><summary>Map surfaces in an uploaded model</summary><p className={styles.note}>Tagged GLBs use housePartKey metadata (ext_roof, ext_wall, flooring, int_ceiling, int_wall). Descriptive mesh names are also detected. For other files, enter exact mesh names below, one per line. Unmapped furniture and glazing keep their original materials.</p>{configuratorZones.map(([zone,label]) => <label key={zone}>{label} mesh names<textarea rows={3} value={model.fields[`meshes_${zone}`] || ""} disabled={disabled} onChange={event => setField(`meshes_${zone}`,event.target.value)} /></label>)}</details>
+      <a href={`${siteOrigin || ""}/models/signature/${encodeURIComponent(model.id)}/configure`} target="_blank" rel="noopener noreferrer">Open published configurator ↗</a>
+    </div></details>
     <details className={styles.inner}><summary>Plans, areas and prices · {plans.length}</summary><div className={styles.body}>
       {plans.map((plan,index) => <details className={styles.plan} key={plan.id}><summary>{plan.fields.name || `Plan ${index+1}`}</summary><div className={styles.body}>
         {([['name','Plan name'],['area','Internal area'],['price','Starting price'],['spaces','Spaces and features']] as const).map(([key,label]) => <label key={key}>{label}<input value={plan.fields[key] || ""} disabled={disabled} onChange={event => updatePlan(plan.id,key,event.target.value)} /></label>)}

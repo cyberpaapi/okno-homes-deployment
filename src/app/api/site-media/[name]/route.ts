@@ -8,13 +8,13 @@ import { cloudStorageEnabled, getCloudMedia } from "@/lib/cloudStorage";
 export const runtime = "nodejs";
 
 const types: Record<string, string> = {
-  jpg: "image/jpeg", png: "image/png", webp: "image/webp", avif: "image/avif", gif: "image/gif",
+  glb: "model/gltf-binary", jpg: "image/jpeg", png: "image/png", webp: "image/webp", avif: "image/avif", gif: "image/gif",
   mp4: "video/mp4", webm: "video/webm",
 };
 
 export async function GET(request: Request, context: { params: Promise<{ name: string }> }) {
   const { name } = await context.params;
-  if (!/^[a-f0-9]{64}\.(jpg|png|webp|avif|gif|mp4|webm)$/.test(name)) return new Response(null, { status: 404 });
+  if (!/^[a-f0-9]{64}\.(jpg|png|webp|avif|gif|mp4|webm|glb)$/.test(name)) return new Response(null, { status: 404 });
   try {
     if (cloudStorageEnabled()) return await getCloudMedia(name, request);
     const file = path.join(process.cwd(), ".okno-content", "media", name);

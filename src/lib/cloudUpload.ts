@@ -1,3 +1,4 @@
+import { validateGlb } from "./validateGlb";
 import "server-only";
 
 import { createHash } from "node:crypto";
@@ -10,13 +11,13 @@ import { storeCloudMedia } from "./cloudStorage";
 import { prepareVideo } from "./mediaPreparation";
 
 export const uploadFormats = new Map([
-  ["image/jpeg", "jpg"], ["image/png", "png"], ["image/webp", "webp"],
+  ["model/gltf-binary", "glb"], ["image/jpeg", "jpg"], ["image/png", "png"], ["image/webp", "webp"],
   ["image/avif", "avif"], ["image/gif", "gif"], ["video/mp4", "mp4"], ["video/webm", "webm"],
 ]);
 export const cloudUploadLimit = 100 * 1024 * 1024;
 
 export function validUploadPath(value: unknown): value is string {
-  return typeof value === "string" && /^uploads\/[a-f0-9-]{36}\.(jpg|png|webp|avif|gif|mp4|webm)$/.test(value);
+  return typeof value === "string" && /^uploads\/[a-f0-9-]{36}\.(jpg|png|webp|avif|gif|mp4|webm|glb)$/.test(value);
 }
 
 export async function finishCloudUpload(request: Request) {
@@ -34,6 +35,12 @@ export async function finishCloudUpload(request: Request) {
     return Response.json({ error: "Media data does not match its declared format." }, { status: 415 });
   }
   const bytes = Buffer.from(await new Response(result.stream).arrayBuffer());
+  if (extension === "glb") {
+    validateGlb(bytes);
+    const name = `${createHash("sha256").update(bytes).digest("hex")}.glb`;
+    const url = await storeCloudMedia(name, bytes, "model/gltf-binary");
+    return Response.json({ url }, { headers: { "Cache-Control": "no-store" } });
+  }
   if (extension === "mp4" || extension === "webm") {
     await mkdir(path.join(tmpdir(), "okno-media"), { recursive: true });
     const prepared = await prepareVideo(bytes, extension, body.profile === "signature-orbit", { signal: request.signal });

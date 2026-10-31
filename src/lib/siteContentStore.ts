@@ -1,3 +1,4 @@
+import { configuratorSettingsError } from "./configuratorSettings";
 import { typographyValueError, validateTypographySizes } from "@/lib/typography";
 import "server-only";
 
@@ -215,7 +216,7 @@ export function validateContentValue(id: string, value: string): string | null {
 }
 
 async function mediaExists(value: string) {
-  const upload = value.match(/^\/api\/site-media\/([a-f0-9]{64}\.(?:png|jpg|webp|avif|gif|mp4|webm))$/);
+  const upload = value.match(/^\/api\/site-media\/([a-f0-9]{64}\.(?:png|jpg|webp|avif|gif|mp4|webm|glb))$/);
   if (value.startsWith("/api/") && !upload) return false;
   if (cloudStorageEnabled()) return upload ? cloudMediaExists(upload[1]) : publicAssetExists(value);
   const resolved = upload
@@ -270,12 +271,13 @@ function validateDraftItems(collectionId: string, value: unknown): ContentItem[]
       if (field.kind === "choice" && rawField && !field.options?.some(option => option.value === rawField)) throw new Error(`Choose a listed ${field.label.toLowerCase()} in ${id}.`);
       if (field.kind === "url" && rawField && !validDestination(rawField)) throw new Error(`Use a local path or HTTPS link for ${field.label.toLowerCase()} in ${id}.`);
       if (collectionId.startsWith("footer.links.") && key === "href" && rawField && (!rawField.startsWith("/") || localDestination(rawField, "") !== rawField || rawField.includes(".."))) throw new Error(`Use a same-site path for the Footer link in ${id}.`);
-      if ((field.kind === "image" || field.kind === "video") && rawField && !validMediaPath(rawField, field.kind) && !(collectionId === "journal.press" && key === "logo" && trustedJournalSvgLogos.has(rawField))) throw new Error(`Choose a local ${field.kind} path for ${field.label.toLowerCase()} in ${id}.`);
+      if ((field.kind === "image" || field.kind === "video" || field.kind === "model") && rawField && !validMediaPath(rawField, field.kind) && !(collectionId === "journal.press" && key === "logo" && trustedJournalSvgLogos.has(rawField))) throw new Error(`Choose a local ${field.kind} path for ${field.label.toLowerCase()} in ${id}.`);
       if (field.kind === "json" && rawField) {
         try { JSON.parse(rawField); } catch { throw new Error(`${field.label} in ${id} must contain valid structured content.`); }
       }
       validated[key] = rawField;
     }
+    if (collectionId === "signature.models") { const error = configuratorSettingsError(validated); if (error) throw new Error(`${id}: ${error}`); }
     ids.add(id);
     items.push({ id, fields: validated });
   }
@@ -283,8 +285,9 @@ function validateDraftItems(collectionId: string, value: unknown): ContentItem[]
   return items;
 }
 
-function validMediaPath(value: string, kind: "image" | "video") {
+function validMediaPath(value: string, kind: "image" | "video" | "model") {
   if (!value.startsWith("/") || value.startsWith("//") || value.includes("\\") || value.includes("..") || /[?#]/.test(value)) return false;
+  if (kind === "model") return /^\/(?:[a-zA-Z0-9_-]+\/)*[a-zA-Z0-9_.-]+\.glb$/.test(value);
   return kind === "image" ? /\.(png|jpe?g|webp|avif|gif)$/i.test(value) : /\.(mp4|webm)$/i.test(value);
 }
 
@@ -297,7 +300,7 @@ export async function saveCollectionDraft(collectionId: string, rawItems: unknow
   const items = validateDraftItems(collectionId, rawItems);
   for (const item of items) {
     for (const field of collectionDefinitionsById.get(collectionId)!.fields) {
-      if ((field.kind === "image" || field.kind === "video") && item.fields[field.key] && !(await mediaExists(item.fields[field.key]))) {
+      if ((field.kind === "image" || field.kind === "video" || field.kind === "model") && item.fields[field.key] && !(await mediaExists(item.fields[field.key]))) {
         throw new Error(`${field.label} in ${item.id} does not exist on the local website.`);
       }
     }

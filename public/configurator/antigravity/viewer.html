@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>OKNO · FORZA 01 — Architectural Atelier &amp; Bespoke Material Configurator</title>
+  <style>
+    :root {
+      --glass-bg: rgba(251, 249, 245, 0.84);
+      --glass-bg-strong: rgba(253, 251, 248, 0.92);
+      --glass-border: rgba(255, 255, 255, 0.78);
+      --stone-border: rgba(28, 25, 22, 0.09);
+      --ink-primary: #181614;
+      --ink-secondary: #5C554E;
+      --ink-muted: #8C847B;
+      --accent-bronze: #9A7248;
+      --accent-bronze-light: #F4ECE1;
+      --accent-espresso: #221E1B;
+      --surface-warm: #F6F3EE;
+      --shadow-ambient: 0 24px 60px rgba(24, 20, 16, 0.10), 0 4px 16px rgba(24, 20, 16, 0.05);
+      --shadow-card: 0 8px 24px rgba(24, 20, 16, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      overflow: hidden;
+      background: #EDE8E0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink-primary);
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #canvas-container {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      display: block;
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Ultra-Clean Frosted Alabaster Loading Screen */
+    #loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #FBF9F5 0%, #EAE3D9 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .loader-brand {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-primary);
+      margin-bottom: 8px;
+    }
+    .loader-sub {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 28px;
+    }
+    .loader-bar-track {
+      width: 180px;
+      height: 2px;
+      background: rgba(24, 22, 20, 0.10);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    .loader-bar-fill {
+      width: 60%;
+      height: 100%;
+      background: var(--accent-bronze);
+      animation: loaderSlide 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes loaderSlide {
+      0% { transform: translateX(-40%); }
+      100% { transform: translateX(110%); }
+    }
+
+    /* Top-Left Floating Atelier Header Pill */
+    .atelier-top-bar {
+      position: fixed;
+      top: 22px;
+      left: 24px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-ambient);
+      padding: 10px 18px;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding-right: 14px;
+      border-right: 1px solid var(--stone-border);
+    }
+    .brand-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      color: var(--ink-primary);
+    }
+    .brand-tag {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--accent-bronze);
+    }
+
+    /* Segmented Mode Pills */
+    .seg-group {
+      display: flex;
+      align-items: center;
+      background: rgba(24, 22, 20, 0.05);
+      padding: 3px;
+      border-radius: 999px;
+      gap: 2px;
+    }
+    .seg-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      background: transparent;
+      color: var(--ink-secondary);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .seg-btn:hover {
+      color: var(--ink-primary);
+    }
+    .seg-btn.active {
+      background: #FFFFFF;
+      color: var(--ink-primary);
+      box-shadow: 0 2px 8px rgba(24, 20, 16, 0.08);
+    }
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--stone-border);
+      background: rgba(255, 255, 255, 0.65);
+      color: var(--ink-primary);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .icon-btn:hover {
+      background: #FFFFFF;
+      border-color: rgba(154, 114, 72, 0.45);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(24, 20, 16, 0.06);
+    }
+    .icon-btn svg, .seg-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      fill: none;
+    }
+
+    /* Sun & Atmosphere Popover Pill */
+    .lighting-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-left: 10px;
+      border-left: 1px solid var(--stone-border);
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--ink-secondary);
+    }
+    .lighting-pill label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    input[type="range"].atelier-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 72px;
+      height: 4px;
+      background: rgba(24, 22, 20, 0.14);
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"].atelier-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--ink-primary);
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    input[type="range"].atelier-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    /* Bottom-Center Floating Camera Perspectives Dock (visionOS style) */
+    .camera-dock {
+      position: fixed;
+      bottom: 24px;
+      left: calc(50% - 190px);
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-ambient);
+      padding: 6px 8px;
+      border-radius: 999px;
+      transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.sidebar-collapsed .camera-dock {
+      left: 50%;
+    }
+    .cam-pill {
+      border: none;
+      background: transparent;
+      color: var(--ink-secondary);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+      white-space: nowrap;
+    }
+    .cam-pill:hover {
+      color: var(--ink-primary);
+      background: rgba(255, 255, 255, 0.55);
+    }
+    .cam-pill.active {
+      background: var(--ink-primary);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(24, 20, 16, 0.18);
+    }
+    .dock-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--stone-border);
+      margin: 0 4px;
+    }
+    .zoom-mini-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--ink-primary);
+      font-size: 15px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .zoom-mini-btn:hover {
+      background: #FFFFFF;
+      transform: scale(1.06);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    /* Right Bespoke Material Atelier Panel (Warm Alabaster & Stone) */
+    #cladding-sidebar {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      bottom: 18px;
+      width: 396px;
+      background: var(--glass-bg-strong);
+      backdrop-filter: blur(32px) saturate(190%);
+      -webkit-backdrop-filter: blur(32px) saturate(190%);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: var(--shadow-ambient);
+      display: flex;
+      flex-direction: column;
+      z-index: 30;
+      overflow: hidden;
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.sidebar-collapsed #cladding-sidebar {
+      transform: translateX(425px);
+    }
+
+    #sidebar-toggle-btn {
+      position: fixed;
+      top: 24px;
+      right: 426px;
+      z-index: 35;
+      background: var(--glass-bg-strong);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: var(--ink-primary);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-card);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: right 0.38s cubic-bezier(0.22, 1, 0.36, 1), transform 0.18s ease;
+    }
+    #sidebar-toggle-btn:hover {
+      transform: translateY(-1px);
+      background: #FFFFFF;
+    }
+    body.sidebar-collapsed #sidebar-toggle-btn {
+      right: 22px;
+      background: var(--ink-primary);
+      color: #FFFFFF;
+      border-color: var(--ink-primary);
+    }
+
+    /* Investment & Price Counter Header inside Atelier Panel */
+    .atelier-price-header {
+      padding: 20px 22px 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(246,242,235,0.55) 100%);
+      border-bottom: 1px solid var(--stone-border);
+    }
+    .aph-eyebrow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+    .aph-main-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .aph-total {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--ink-primary);
+      letter-spacing: -0.5px;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+    .aph-delta-badge {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--accent-bronze);
+      background: var(--accent-bronze-light);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-variant-numeric: tabular-nums;
+    }
+    .aph-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .btn-primary-dark {
+      flex: 1;
+      background: var(--ink-primary);
+      color: #FFFFFF;
+      border: 1px solid var(--ink-primary);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 18px rgba(24, 20, 16, 0.14);
+    }
+    .btn-primary-dark:hover {
+      background: #302B27;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(24, 20, 16, 0.20);
+    }
+    .btn-secondary-light {
+      background: #FFFFFF;
+      color: var(--ink-primary);
+      border: 1px solid var(--stone-border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .btn-secondary-light:hover {
+      border-color: var(--accent-bronze);
+      background: var(--surface-warm);
+    }
+
+    /* Itemized Breakdown Drawer (Light Editorial Table) */
+    #price-breakdown-drawer {
+      display: none;
+      padding: 14px 22px;
+      background: #F5F1EA;
+      border-bottom: 1px solid var(--stone-border);
+      font-size: 11.5px;
+      flex-direction: column;
+      gap: 7px;
+    }
+    #price-breakdown-drawer.open {
+      display: flex;
+    }
+    .bd-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--ink-secondary);
+      padding: 3px 0;
+    }
+    .bd-part {
+      font-weight: 600;
+      color: var(--ink-primary);
+    }
+    .bd-val {
+      font-weight: 600;
+      color: var(--ink-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* 5 Architectural Zone Selector Pills */
+    .zone-selector {
+      padding: 12px 18px 10px;
+      border-bottom: 1px solid var(--stone-border);
+      background: rgba(255, 255, 255, 0.45);
+    }
+    .zone-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .part-tab {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 9px 11px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--stone-border);
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+      text-align: left;
+      font-family: inherit;
+    }
+    .part-tab:hover {
+      background: #FFFFFF;
+      border-color: rgba(154, 114, 72, 0.4);
+    }
+    .part-tab.active {
+      background: var(--ink-primary);
+      border-color: var(--ink-primary);
+      color: #FFFFFF;
+      box-shadow: 0 6px 16px rgba(24, 20, 16, 0.14);
+    }
+    .part-tab .pt-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: inherit;
+    }
+    .part-tab .pt-sub {
+      font-size: 10px;
+      color: var(--ink-muted);
+      margin-top: 2px;
+    }
+    .part-tab.active .pt-sub {
+      color: rgba(255, 255, 255, 0.72);
+    }
+    .part-tab .pt-dot {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-bronze);
+      display: none;
+    }
+    .part-tab.active .pt-dot {
+      background: #E8C396;
+    }
+    .part-tab.customized .pt-dot {
+      display: block;
+    }
+
+    /* Active Zone Status Bar */
+    .active-zone-bar {
+      padding: 10px 20px;
+      background: rgba(246, 243, 238, 0.8);
+      border-bottom: 1px solid var(--stone-border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .az-row1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .az-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--ink-primary);
+    }
+    .az-current {
+      font-size: 11.5px;
+      color: var(--ink-secondary);
+      margin-top: 1px;
+    }
+    .az-actions {
+      display: flex;
+      gap: 6px;
+    }
+    .az-mini-btn {
+      background: #FFFFFF;
+      border: 1px solid var(--stone-border);
+      color: var(--ink-secondary);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .az-mini-btn:hover {
+      color: var(--ink-primary);
+      border-color: var(--ink-primary);
+    }
+    .az-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--ink-secondary);
+    }
+    .az-options label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .az-options input[type="checkbox"] {
+      accent-color: var(--ink-primary);
+      cursor: pointer;
+    }
+
+    /* Tactile Material Swatch List — Sample Directly Beside Complete Name */
+    #swatch-grid {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 16px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-content: start;
+    }
+    #swatch-grid::-webkit-scrollbar {
+      width: 5px;
+    }
+    #swatch-grid::-webkit-scrollbar-thumb {
+      background: rgba(24, 22, 20, 0.16);
+      border-radius: 999px;
+    }
+    .cat-section-header {
+      grid-column: 1 / -1;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      padding: 8px 2px 4px;
+      border-bottom: 1px solid var(--stone-border);
+      margin-top: 4px;
+    }
+    .swatch-card {
+      background: #FFFFFF;
+      border: 1px solid var(--stone-border);
+      border-radius: 16px;
+      padding: 9px;
+      cursor: pointer;
+      transition: all 0.20s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 13px;
+      box-shadow: 0 2px 8px rgba(24, 20, 16, 0.04);
+      position: relative;
+    }
+    .swatch-card:hover {
+      transform: translateX(-2px) translateY(-1px);
+      box-shadow: 0 10px 24px rgba(24, 20, 16, 0.10);
+      border-color: rgba(154, 114, 72, 0.55);
+      background: #FFFEFC;
+    }
+    .swatch-card.selected {
+      border: 2px solid var(--ink-primary);
+      background: #FAF7F2;
+      box-shadow: 0 10px 26px rgba(24, 20, 16, 0.13);
+    }
+    .swatch-thumb-wrap {
+      width: 86px;
+      height: 86px;
+      min-width: 86px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(24, 22, 20, 0.14);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25), 0 3px 10px rgba(24, 20, 16, 0.10);
+      background: #E8E2D8;
+    }
+    .swatch-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .swatch-card:hover .swatch-thumb-img {
+      transform: scale(1.08);
+    }
+    /* Subtle inner specular sheen on material swatches */
+    .swatch-thumb-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0) 48%, rgba(0,0,0,0.12) 100%);
+      pointer-events: none;
+    }
+    .swatch-num {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      color: var(--ink-primary);
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 999px;
+      letter-spacing: 0.4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+    .swatch-check {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      z-index: 2;
+      background: var(--ink-primary);
+      color: #FFFFFF;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+    .swatch-card.selected .swatch-check {
+      display: flex;
+    }
+    .swatch-body {
+      padding: 2px 4px 2px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      min-width: 0;
+    }
+    .swatch-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .swatch-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+    }
+    .swatch-inline-chip {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(24, 22, 20, 0.22);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+    .swatch-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink-primary);
+      line-height: 1.25;
+      white-space: normal;
+      word-break: break-word;
+    }
+    .swatch-price-tag {
+      background: var(--accent-bronze-light);
+      color: var(--accent-bronze);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      border: 1px solid rgba(154, 114, 72, 0.22);
+    }
+    .swatch-card.selected .swatch-price-tag {
+      background: var(--ink-primary);
+      color: #FFFFFF;
+      border-color: var(--ink-primary);
+    }
+    /* Floating Material Sample Magnifier Loupe on Hover */
+    #swatch-hover-loupe {
+      position: fixed;
+      right: 426px;
+      top: 50%;
+      transform: translateY(-50%) scale(0.95);
+      width: 236px;
+      background: var(--glass-bg-strong);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: 0 24px 60px rgba(24, 20, 16, 0.18), 0 4px 16px rgba(24, 20, 16, 0.08);
+      padding: 12px;
+      z-index: 45;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #swatch-hover-loupe.visible {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+    .loupe-img-box {
+      width: 100%;
+      height: 176px;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(24, 22, 20, 0.12);
+    }
+    .loupe-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .loupe-img-box::after {
+      content: 'LIVE MATERIAL SAMPLE';
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(24, 22, 20, 0.72);
+      backdrop-filter: blur(6px);
+      color: #FFFFFF;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+    .loupe-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+    .loupe-sub {
+      font-size: 11px;
+      color: var(--ink-secondary);
+      line-height: 1.35;
+    }
+    .swatch-cat {
+      font-size: 10px;
+      color: var(--ink-muted);
+      letter-spacing: 0.2px;
+    }
+    .swatch-rate-sub {
+      font-size: 10px;
+      color: var(--accent-bronze);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .swatch-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+    .swatch-pill {
+      font-size: 9.5px;
+      font-weight: 600;
+      padding: 2.5px 7px;
+      border-radius: 999px;
+      background: var(--surface-warm);
+      color: var(--ink-secondary);
+      border: 1px solid var(--stone-border);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .swatch-pill:hover, .swatch-pill.active-pill {
+      background: var(--ink-primary);
+      color: #FFFFFF;
+      border-color: var(--ink-primary);
+    }
+
+    /* Toast Notification (Sleek Frosted Pill) */
+    #material-toast {
+      position: fixed;
+      bottom: 84px;
+      left: calc(50% - 190px);
+      transform: translateX(-50%) translateY(10px);
+      background: var(--glass-bg-strong);
+      backdrop-filter: blur(20px);
+      color: var(--ink-primary);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-ambient);
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    #material-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Live Blender Cycles GPU Path-Tracing Modal */
+    #cycles-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      background: rgba(24, 20, 16, 0.55);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+    #cycles-modal.open {
+      display: flex;
+    }
+    .cycles-card {
+      background: var(--glass-bg-strong);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.28);
+      max-width: 1060px;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .cycles-header {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--stone-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #FFFFFF;
+    }
+    .cycles-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cycles-badge {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-bronze-light);
+      color: var(--accent-bronze);
+    }
+    .cycles-viewport {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #EAE3D9;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .cycles-viewport img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+    .cycles-status {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink-primary);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .btn-cycles {
+      background: linear-gradient(135deg, #221E1B 0%, #3D332B 100%);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(24, 20, 16, 0.16);
+      transition: all 0.2s ease;
+    }
+    .btn-cycles:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(24, 20, 16, 0.24);
+    }
+
+    #crosshair {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      transform: translate(-50%, -50%);
+      border: 1.5px solid rgba(24, 22, 20, 0.6);
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      display: none;
+      z-index: 20;
+    }
+
+    /* Mobile Bottom-Sheet Grab Handle (hidden on desktop) */
+    .mobile-sheet-grabber {
+      display: none;
+      width: 100%;
+      padding: 8px 0 4px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 3px;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(28, 25, 22, 0.06);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .mobile-sheet-pill {
+      width: 42px;
+      height: 4.5px;
+      border-radius: 999px;
+      background: rgba(24, 22, 20, 0.22);
+    }
+
+    /* On-Screen Mobile Touch D-Pad for First-Person Walk Mode on Phones */
+    #mobile-walk-pad {
+      position: fixed;
+      left: 14px;
+      bottom: calc(52dvh + 58px);
+      z-index: 26;
+      display: none;
+      grid-template-columns: repeat(3, 44px);
+      grid-template-rows: repeat(2, 44px);
+      gap: 5px;
+      padding: 7px;
+      border-radius: 20px;
+      background: rgba(251, 249, 245, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow: 0 12px 32px rgba(24, 20, 16, 0.15);
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: bottom 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.sidebar-collapsed #mobile-walk-pad {
+      bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+    }
+    .m-pad-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      border: 1px solid var(--stone-border);
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--ink-primary);
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 2px 6px rgba(24, 20, 16, 0.06);
+      transition: transform 0.1s ease, background 0.1s ease;
+    }
+    .m-pad-btn:active, .m-pad-btn.pressed {
+      background: var(--ink-primary);
+      color: #FFFFFF;
+      transform: scale(0.93);
+    }
+
+    /* =======================================================================
+       PHONE & MOBILE RESPONSIVE ARCHITECTURE (@media max-width: 860px)
+       ======================================================================= */
+    @media (hover: none), (max-width: 860px) {
+      #swatch-hover-loupe {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 860px) {
+      /* 1. Compact Mobile Top Header Bar */
+      .atelier-top-bar {
+        top: calc(8px + env(safe-area-inset-top, 0px));
+        left: 8px;
+        right: 8px;
+        padding: 7px 11px;
+        gap: 8px;
+        border-radius: 18px;
+        overflow-x: auto;
+        max-width: calc(100vw - 16px);
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .atelier-top-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .brand-lockup {
+        padding-right: 8px;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+      .brand-title {
+        font-size: 16px;
+        letter-spacing: 1.2px;
+      }
+      .brand-tag {
+        display: none;
+      }
+      .seg-group {
+        flex-shrink: 0;
+      }
+      .seg-btn {
+        padding: 5px 10px;
+        font-size: 11px;
+      }
+      .icon-btn, .btn-cycles {
+        padding: 5px 10px;
+        font-size: 11px;
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+      .lighting-pill {
+        padding-left: 8px;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      input[type="range"].atelier-slider {
+        width: 52px;
+      }
+
+      /* 2. Floating Camera Dock automatically sits above the Bottom Sheet */
+      .camera-dock {
+        left: 50% !important;
+        transform: translateX(-50%);
+        bottom: calc(50dvh + 8px);
+        max-width: calc(100vw - 16px);
+        overflow-x: auto;
+        padding: 5px 7px;
+        gap: 4px;
+        scrollbar-width: none;
+        transition: bottom 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .camera-dock::-webkit-scrollbar {
+        display: none;
+      }
+      body.sidebar-collapsed .camera-dock {
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      }
+      .cam-pill {
+        padding: 6px 11px;
+        font-size: 11px;
+      }
+      .zoom-mini-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+
+      /* 3. Bottom-Sheet Material Atelier Drawer on Phones */
+      .mobile-sheet-grabber {
+        display: flex;
+      }
+      #cladding-sidebar {
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 50dvh;
+        max-height: 54dvh;
+        border-radius: 22px 22px 0 0;
+        padding-bottom: env(safe-area-inset-bottom, 8px);
+        box-shadow: 0 -14px 40px rgba(24, 20, 16, 0.16);
+        transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      body.sidebar-collapsed #cladding-sidebar {
+        transform: translateY(calc(100% + 24px));
+      }
+
+      /* 4. Floating Drawer Toggle Pill on Mobile */
+      #sidebar-toggle-btn {
+        top: auto;
+        bottom: calc(50dvh + 52px);
+        right: 10px;
+        padding: 8px 13px;
+        font-size: 11.5px;
+        z-index: 36;
+        box-shadow: 0 8px 24px rgba(24, 20, 16, 0.16);
+        transition: bottom 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease;
+      }
+      body.sidebar-collapsed #sidebar-toggle-btn {
+        bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+        right: 12px;
+      }
+
+      /* 5. Compact Price Header & Horizontal Zone Strip inside Mobile Bottom Sheet */
+      .atelier-price-header {
+        padding: 8px 14px 8px;
+      }
+      .aph-eyebrow {
+        font-size: 9.5px;
+        margin-bottom: 2px;
+      }
+      .aph-main-row {
+        margin-bottom: 6px;
+      }
+      .aph-total {
+        font-size: 24px;
+      }
+      .aph-delta-badge {
+        font-size: 10px;
+        padding: 3px 8px;
+      }
+      .btn-primary-dark, .btn-secondary-light {
+        padding: 7px 10px;
+        font-size: 11px;
+        border-radius: 10px;
+      }
+
+      /* Horizontal Touch-Scrollable Zone Selector Strip */
+      .zone-selector {
+        padding: 6px 10px;
+      }
+      .zone-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 6px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .zone-grid::-webkit-scrollbar {
+        display: none;
+      }
+      .part-tab {
+        flex: 0 0 auto;
+        min-width: 96px;
+        padding: 6px 10px;
+        border-radius: 10px;
+      }
+      .part-tab .pt-title {
+        font-size: 11px;
+      }
+      .part-tab .pt-sub {
+        font-size: 9px;
+      }
+
+      .active-zone-bar {
+        padding: 6px 14px;
+        gap: 4px;
+      }
+      .az-title {
+        font-size: 10px;
+      }
+      .az-current {
+        font-size: 10.5px;
+      }
+      .az-options {
+        font-size: 10px;
+      }
+
+      /* Compact Material Swatch Cards on Mobile with 68x68 Sample Thumbnail */
+      #swatch-grid {
+        padding: 8px 12px 18px;
+        gap: 8px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .swatch-card {
+        padding: 8px;
+        gap: 10px;
+        border-radius: 14px;
+      }
+      .swatch-thumb-wrap {
+        width: 68px;
+        height: 68px;
+        min-width: 68px;
+        border-radius: 10px;
+      }
+      .swatch-name {
+        font-size: 12.5px;
+      }
+      .swatch-price-tag {
+        font-size: 10px;
+        padding: 2px 7px;
+      }
+
+      /* Toast & Cycles Modal on Mobile */
+      #material-toast {
+        left: 50% !important;
+        bottom: calc(50dvh + 54px);
+        font-size: 11px;
+        padding: 7px 14px;
+        white-space: nowrap;
+        max-width: 92vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      body.sidebar-collapsed #material-toast {
+        bottom: 64px;
+      }
+      #cycles-modal {
+        padding: 12px;
+      }
+      .cycles-header {
+        padding: 12px 14px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .cycles-title {
+        font-size: 17px;
+      }
+    }
+
+  </style>
+<link rel="stylesheet" href="okno.css"></head>
+<body>
+  <div id="loading-overlay">
+    <div class="loader-brand">Forza 01</div>
+    <div class="loader-sub">Architectural Atelier &amp; Material Studio</div>
+    <div class="loader-bar-track"><div class="loader-bar-fill"></div></div>
+    <div id="loading-text" style="display:none;"></div>
+  </div>
+
+  <div id="crosshair"></div>
+
+  <!-- Top-Left Minimalist Atelier Control Pill -->
+  <header class="atelier-top-bar">
+    <div class="brand-lockup"><a class="okno-back" href="/models/signature" target="_top">← Models</a>
+      <span class="brand-title" id="ui-brand-title">FORZA 01</span>
+      <span class="brand-tag">Atelier</span>
+    </div>
+
+    <!-- 3-Residence Architectural Model Switcher (Forza 01 · Tengo 26 · Kray QN) -->
+    <div class="seg-group" id="model-switcher-group" title="Switch Architectural Residence Model">
+      <button class="seg-btn model-pill active" data-model="forza" title="Forza 01 Villa &amp; Luxury Suite">
+        <span>Forza 01</span>
+      </button>
+      <button class="seg-btn model-pill" data-model="tengo" title="Tengo 26-08-21 Residence (Optimized)">
+        <span>Tengo 26</span>
+      </button>
+      <button class="seg-btn model-pill" data-model="kray" title="Kray QN Architectural Pavilion (Optimized)">
+        <span>Kray QN</span>
+      </button>
+    </div>
+
+    <div class="seg-group">
+      <button id="btn-walk" class="seg-btn active" title="First-Person Walk Mode (WASD + Mouse)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M10 22v-6l-2-3v-4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4l-2 3v6"/></svg>
+        <span>Walk</span>
+      </button>
+      <button id="btn-orbit" class="seg-btn" title="3D Orbit Inspection Mode">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.5"/><path d="M12 3a15 15 0 0 1 0 18"/></svg>
+        <span>Orbit</span>
+      </button>
+    </div>
+
+    <button id="btn-door" class="icon-btn" title="Open or Close Entrance Door (F)">
+      <svg viewBox="0 0 24 24"><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/><path d="M3 21h18"/><circle cx="15" cy="12" r="1"/></svg>
+      <span>Entrance Door</span>
+    </button>
+
+    <button id="btn-cycles-render" class="btn-cycles" title="Path-Trace Current View with Blender 5.2 Cycles OptiX GPU Engine">
+      <span>✨ Raytrace View (Cycles GPU)</span>
+    </button>
+
+    <div class="lighting-pill">
+      <label title="Golden Hour Sun Elevation">
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <span>Sun</span>
+        <input id="sun-slider" class="atelier-slider" type="range" min="12" max="75" value="34" />
+      </label>
+      <label title="Interior Architectural Cove Lighting">
+        <span>Glow</span>
+        <input id="led-slider" class="atelier-slider" type="range" min="0" max="200" value="125" />
+      </label>
+    </div>
+  </header>
+
+  <!-- Bottom-Center Floating Camera Perspectives Dock -->
+  <nav class="camera-dock">
+    <button class="cam-pill active" data-cam="front">Exterior</button>
+    <button class="cam-pill" data-cam="porch">Veranda</button>
+    <button class="cam-pill" data-cam="inside_door">Foyer</button>
+    <button class="cam-pill" data-cam="inside_bed">Bedroom Suite</button>
+    <button class="cam-pill" data-cam="aerial">Aerial</button>
+    <div class="dock-divider"></div>
+    <button id="btn-zoom-in" class="zoom-mini-btn" title="Zoom In (+ / Scroll Up)">+</button>
+    <button id="btn-zoom-reset" class="zoom-mini-btn" title="Reset Focal Length (0)" style="font-size:12px;">1×</button>
+    <button id="btn-zoom-out" class="zoom-mini-btn" title="Zoom Out (- / Scroll Down)">−</button>
+  </nav>
+
+  <!-- Toggle Button for Right Material Atelier Panel -->
+  <button id="sidebar-toggle-btn" title="Toggle Material Atelier Panel">
+    <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+    <span>Material Atelier</span>
+  </button>
+
+  <!-- On-Screen Touch Walk D-Pad for Mobile Walk Mode -->
+  <div id="mobile-walk-pad" aria-label="Touch Walk Controls">
+    <button class="m-pad-btn" data-mkey="KeyQ" title="Move Down">↓</button>
+    <button class="m-pad-btn" data-mkey="KeyW" title="Walk Forward">▲</button>
+    <button class="m-pad-btn" data-mkey="KeyE" title="Move Up">↑</button>
+    <button class="m-pad-btn" data-mkey="KeyA" title="Step Left">◀</button>
+    <button class="m-pad-btn" data-mkey="KeyS" title="Walk Backward">▼</button>
+    <button class="m-pad-btn" data-mkey="KeyD" title="Step Right">▶</button>
+  </div>
+
+  <!-- Right Bespoke Material Atelier Panel (Bottom Sheet on Mobile) -->
+  <aside id="cladding-sidebar">
+    <div class="mobile-sheet-grabber" id="mobile-sheet-grabber" title="Tap or swipe to minimize/expand Material Atelier">
+      <div class="mobile-sheet-pill"></div>
+    </div>
+    <div class="atelier-price-header">
+      <div class="aph-eyebrow">
+        <span>Your finishes</span>
+        <button id="btn-reset-all-mats" style="background:none;border:none;color:var(--accent-bronze);font-size:11px;font-weight:600;cursor:pointer;">Reset Configuration</button>
+      </div>
+      <div class="aph-main-row">
+        <div class="aph-total" id="ui-total-price">Material studio</div>
+        <div class="aph-delta-badge" id="ui-upgrade-price">Explore and customise</div>
+      </div>
+      <div class="aph-actions">
+        <button id="btn-download-pdf" class="btn-primary-dark" title="Download Architectural Specification &amp; Materials PDF">
+          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download Specification PDF</span>
+        </button>
+        <button id="btn-toggle-breakdown" class="btn-secondary-light" title="View Itemized Cost Breakdown">
+          Summary
+        </button>
+      </div>
+    </div>
+
+    <div id="price-breakdown-drawer"></div>
+
+    <!-- 5 Architectural Zones + Full Register -->
+    <div class="zone-selector">
+      <div class="zone-grid" id="part-tabs">
+        <button class="part-tab active" data-part="ext_roof">
+          <span class="pt-dot"></span>
+          <span class="pt-title">Ext. Roof</span>
+          <span class="pt-sub">10 Finishes · 42m²</span>
+        </button>
+        <button class="part-tab" data-part="ext_wall">
+          <span class="pt-dot"></span>
+          <span class="pt-title">Ext. Wall</span>
+          <span class="pt-sub">10 Finishes · 54m²</span>
+        </button>
+        <button class="part-tab" data-part="flooring">
+          <span class="pt-dot"></span>
+          <span class="pt-title">Flooring</span>
+          <span class="pt-sub">8 Finishes · 36m²</span>
+        </button>
+        <button class="part-tab" data-part="int_ceiling">
+          <span class="pt-dot"></span>
+          <span class="pt-title">Int. Ceiling</span>
+          <span class="pt-sub">17 Finishes · 38m²</span>
+        </button>
+        <button class="part-tab" data-part="int_wall">
+          <span class="pt-dot"></span>
+          <span class="pt-title">Int. Wall</span>
+          <span class="pt-sub">12 Finishes · 48m²</span>
+        </button>
+        <button class="part-tab" data-part="all">
+          <span class="pt-title">All 26</span>
+          <span class="pt-sub">Full Register</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="active-zone-bar">
+      <div class="az-row1">
+        <div>
+          <div class="az-title" id="ap-part-title">EXTERNAL ROOF</div>
+          <div class="az-current" id="ap-current-mat">Default Architectural Standing Seam</div>
+        </div>
+        <div class="az-actions">
+          <button id="btn-view-part" class="az-mini-btn" title="Glide camera to frame this element">Frame View</button>
+          <button id="btn-reset-part" class="az-mini-btn" title="Restore default material for this element">Default</button>
+        </div>
+      </div>
+      <div class="az-options">
+        <label>
+          <input type="checkbox" id="chk-auto-view" checked />
+          <span>Auto-glide camera when switching zone</span>
+        </label>
+        <label id="lbl-include-feature" style="display:none;">
+          <input type="checkbox" id="chk-include-feature" />
+          <span>Include Headboard Wall</span>
+        </label>
+      </div>
+    </div>
+
+    <div id="swatch-grid"></div>
+  </aside>
+
+  <div id="swatch-hover-loupe">
+    <div class="loupe-img-box"><img id="loupe-sample-img" src="" alt="Material Sample" /></div>
+    <div class="loupe-title" id="loupe-sample-title"></div>
+    <div class="loupe-sub" id="loupe-sample-sub"></div>
+  </div>
+  <div id="cycles-modal">
+    <div class="cycles-card">
+      <div class="cycles-header">
+        <div class="cycles-title">
+          <span>Forza 01 · Photoreal Path-Tracer</span>
+          <span class="cycles-badge" id="cycles-time-badge">Blender 5.2 Cycles OptiX GPU</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <a id="btn-cycles-download" class="icon-btn" style="text-decoration:none;display:none;" download="Forza01_Cycles_Photoreal.png">Download PNG</a>
+          <button id="btn-cycles-close" class="icon-btn">Close ✕</button>
+        </div>
+      </div>
+      <div class="cycles-viewport">
+        <div class="cycles-status" id="cycles-loading">
+          <div class="loader-bar-track" style="width:240px;"><div class="loader-bar-fill"></div></div>
+          <span id="cycles-status-text">Path-tracing current camera &amp; materials in Blender 5.2 Cycles GPU...</span>
+        </div>
+        <img id="cycles-result-img" alt="Cycles Path-Traced Render" />
+      </div>
+    </div>
+  </div>
+  <div id="material-toast"></div>
+  <div id="canvas-container"></div>
+
+  <script src="bridge.js"></script>
+<script src="engine.js"></script>
+<script src="catalog.js"></script>
+<script src="app.js"></script>
+</body></html>

@@ -1,5 +1,14 @@
 # Admin system — active implementation record
 
+## Antigravity model configurators — 31 October 2026
+
+The owner explicitly releases configurator editing and requests the supplied `antigravity3D` walkthrough on the matching models. In **Models → Signature models → [model] → 3D configurator and walkthrough**, editors can replace the house with a self-contained GLB, set metres per unit, select separate starting finishes for five surfaces, and map exact mesh names for custom geometry. The existing Add model, Save Signature models and plans, and Publish controls also govern these settings. No separate deferred Configurators navigation item is re-enabled: the working controls live with their owning model. Forza, Tengo and Kray default to their respective supplied assets. Other existing model routes preserve their current viewer; new models with a GLB receive the new walkthrough through the published roster.
+
+GLB uploads use the existing 100 MB upload flow: direct private Blob upload in production, signature/resource validation, content-addressed storage, same-domain media streaming and byte ranges. Required unsupported decoders and external asset references are rejected; export an uncompressed glTF 2 GLB with embedded images and buffers. Mesh tags use `housePartKey` values `ext_roof`, `ext_wall`, `flooring`, `int_ceiling`, `int_wall`; optional exact-name overrides are line separated. Descriptive names are a fallback, not a promise that arbitrary untagged geometry can be automatically segmented. Existing content, credentials and Blob settings remain intact.
+
+Local verification: upload of the 9,283,532-byte Tengo GLB, private draft isolation, publication of a temporary additional model, its successful 3D route/render, and the saved Titanium Veil roof default passed. Range delivery returned 206 and `model/gltf-binary`. The editor displays the new controls and matching saved values. Original local content was restored exactly. The admin gateway now accepts the existing password-free mode's successful 200 response during its health check. The local QA server temporarily used that owner-authorized mode; production configuration was not changed. See [integration and verification](configurator-antigravity-2026-10-31.md).
+
+
 ## Password-free Aryan deployment — 31 October 2026
 
 The owner explicitly requested removing the admin password completely. The `okno-homes-aryan` production project now opts into public editing with server-only `OKNO_ADMIN_PASSWORDLESS=true`: `/admin` opens automatically, has no password field or Disconnect action, and save/publish/upload requests need no owner key. Anyone with the URL can edit and publish; this consequence was explained before implementation. Browser cross-site writes remain rejected, while same-origin writes and validation/revision checks are retained. Other deployments keep key authentication unless they explicitly enable this setting.

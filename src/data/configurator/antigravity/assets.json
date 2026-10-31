@@ -1,0 +1,20 @@
+{
+  "forza": {
+    "url": "/configurator/antigravity/assets/forza-5588ea4660093a06.glb",
+    "sha256": "5588ea4660093a067c65e7f5cf5877da085b3c9c2a67ebed695fb5cff8a0187e",
+    "bytes": 27405592,
+    "source": "tropical_house.glb"
+  },
+  "tengo": {
+    "url": "/configurator/antigravity/assets/tengo-61b7fbcaaf1b1e1f.glb",
+    "sha256": "61b7fbcaaf1b1e1f7b064ca6cac712d8a69bde71a538c6e7c4de54f27bb316a8",
+    "bytes": 9283532,
+    "source": "tengo_optimized.glb"
+  },
+  "kray": {
+    "url": "/configurator/antigravity/assets/kray-d8a918b74f0ec008.glb",
+    "sha256": "d8a918b74f0ec0083febf157d5b763a896f155406be4062a141442be05df24d6",
+    "bytes": 18293076,
+    "source": "kray_optimized.glb"
+  }
+}

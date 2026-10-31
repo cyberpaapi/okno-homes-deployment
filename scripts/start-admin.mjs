@@ -46,7 +46,7 @@ async function verify() {
   ]);
   if (!admin.ok) throw new Error(`Admin route returned HTTP ${admin.status}.`);
   if (publicPage.status !== 404) throw new Error(`Public page isolation failed: /about returned HTTP ${publicPage.status}.`);
-  if (contentApi.status !== 401 && contentApi.status !== 503) throw new Error(`Admin API returned unexpected HTTP ${contentApi.status}.`);
+  if (![200, 401, 503].includes(contentApi.status)) throw new Error(`Admin API returned unexpected HTTP ${contentApi.status}.`);
   console.log(`OKNO admin: ${adminOrigin}/admin`);
   console.log(`Fixed admin port ${localPorts.admin}; website dependency stays on ${localPorts.website}.`);
   if (contentApi.status === 503) console.warn("Editing is disabled: the website process on 3134 has no OKNO_CMS_ADMIN_TOKEN. Restart that process with the configured shared key (at least 8 characters) to enable edits.");

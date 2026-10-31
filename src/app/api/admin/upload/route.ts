@@ -1,3 +1,4 @@
+import { validateGlb } from "@/lib/validateGlb";
 import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -18,7 +19,7 @@ export async function GET(request: Request) {
 }
 
 const formats = new Map([
-  ["image/jpeg", "jpg"], ["image/png", "png"], ["image/webp", "webp"],
+  ["model/gltf-binary", "glb"], ["image/jpeg", "jpg"], ["image/png", "png"], ["image/webp", "webp"],
   ["image/avif", "avif"], ["image/gif", "gif"],
   ["video/mp4", "mp4"], ["video/webm", "webm"],
 ]);
@@ -39,11 +40,19 @@ export async function POST(request: Request) {
     const file = data.get("file");
     if (!(file instanceof File)) return Response.json({ error: "Choose a media file." }, { status: 400 });
     const extension = formats.get(file.type);
-    if (!extension) return Response.json({ error: "Only JPEG, PNG, WebP, AVIF, GIF, MP4 and WebM are supported." }, { status: 415 });
+    if (!extension) return Response.json({ error: "Only GLB, JPEG, PNG, WebP, AVIF, GIF, MP4 and WebM are supported." }, { status: 415 });
     if (file.size === 0 || file.size > limit) return Response.json({ error: "Media must be between 1 byte and 100 MB." }, { status: 413 });
     const bytes = Buffer.from(await file.arrayBuffer());
     const directory = path.join(process.cwd(), ".okno-content", "media");
     await mkdir(directory, { recursive: true });
+    if (extension === "glb") {
+      validateGlb(bytes);
+      const name = `${createHash("sha256").update(bytes).digest("hex")}.glb`;
+      await writeFile(path.join(directory, name), bytes, { flag: "wx", mode: 0o600 }).catch(error => {
+        if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
+      });
+      return Response.json({ url: `/api/site-media/${name}`, name: file.name });
+    }
     if (extension === "mp4" || extension === "webm") {
       const signatureOrbit = data.get("profile") === "signature-orbit";
       // Persist before enqueuing: a queued cancellation or server restart must

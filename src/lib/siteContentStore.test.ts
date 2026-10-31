@@ -28,6 +28,18 @@ afterEach(async () => {
 });
 
 describe("collection content store", () => {
+  it("keeps new GLB model settings private until publication and rejects missing geometry", async () => {
+    const store = await import("./siteContentStore");
+    const { signatureModelDefaults } = await import("./signatureCollections");
+    await writeFile(path.join(testRoot,"public","house.glb"),"test geometry");
+    const models = signatureModelDefaults.map(model => model.id === "forza" ? {...model,fields:{...model.fields,configuratorModel:"/house.glb",finish_ext_roof:"02",configuratorScale:"1"}} : model);
+    const draft = await store.saveCollectionDraft("signature.models",models,0,0);
+    expect(draft.publishedCollections["signature.models"]).toBeUndefined();
+    const published = await store.publishDraft(0,draft.draftRevision);
+    expect(published.publishedCollections["signature.models"][0].fields).toMatchObject({configuratorModel:"/house.glb",finish_ext_roof:"02"});
+    await expect(store.saveCollectionDraft("signature.models",[{id:"forza",fields:{name:"Forza",configuratorModel:"/missing.glb"}}],published.revision,published.draftRevision)).rejects.toThrow(/does not exist/);
+  });
+
   it("publishes addable Signature models and plans with nested media, and variable Footer links", async () => {
     const store = await import("./siteContentStore");
     const { signatureModelDefaults, signaturePlanDefaults } = await import("./signatureCollections");
