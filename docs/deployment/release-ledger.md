@@ -1,5 +1,11 @@
 # Release decision and evidence ledger
 
+## Aryan password-free admin — 31 October 2026
+
+Live verification: production `dpl_5oyupnkoUQnme5kkT4SmakLRHvQu` is READY at source `f62d84f7c1d5e6a634b26a8b8af6835a9f9a36e4`, with the canonical alias `https://okno-homes-aryan.vercel.app`. The browser opens `/admin` automatically and shows “Editor connected.” with zero password inputs. A password-free same-origin PATCH saved the existing tagline without changing its text; PUT published revision 1, and separate admin/public GETs read revision 1 back with no remaining drafts. Homepage and admin return 200. The production build passed all 30 function traces (largest 177.3 MiB); no error/fatal runtime logs appeared in the post-deploy scan. This verifies content saving/publication; it does not claim a new end-to-end media-upload test.
+
+The user explicitly requested removal of the admin password. Public editing is enabled only on the Aryan production project; other deployments retain their existing authentication. The new private Blob store and its server credential are scoped to Production. The implementation passed 84 admin/authentication/storage/upload tests, scoped ESLint and TypeScript before release.
+
 ## Extensive review and repair — 16 October 2026
 
 Previous loading repair `49d1eced8439ce1b8f2763d5ef2da596779e5742` completed as READY `dpl_47SQWx9a6v4pHpyf4Rjjj6yeWZxS` on the canonical alias while work was paused. On resumption the live intro completes at 1.75× and a sampled first frame prepares in 2.274 seconds (warm reload 59ms); these observations do not promise all-device/network smoothness.
