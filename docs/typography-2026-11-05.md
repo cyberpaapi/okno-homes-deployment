@@ -17,3 +17,7 @@ Validation is recorded in deployment operations after release. PDF editing and m
 85 focused tests across typography, shared navigation, Home V1/timeline, Signature, Bespoke, Hospitality, Journal and Enquiry pass. TypeScript, scoped zero-warning ESLint, CSS parsing and diff checks pass. The wider suite was stopped after stalling; it is not claimed complete. Its reported Bespoke image failure was a stale pre-thumbnail assertion and was corrected, then the relevant suite passed.
 
 Browser checks covered the homepage desktop/phone headline, phone menu, model selector, Signature/detail prices, Journal desktop/phone, Enquiry fields, About and Hospitality. All six inspected form fields compute to 16px Govandi. The page checks are visual/computed-style verification, not physical-iPhone testing. Existing 21st structures and hook lifecycles remain intact; the two TSX edits only widen the shared menu and distinguish numeric Hospitality figures.
+
+## Production acceptance
+
+Deployed source `c7b4c12e07c49c3d6a989191b3d7e5ce2dfde648` is READY at https://okno-homes-aryan.vercel.app. All four font files match local bytes; the live homepage uses 96px Kento at 1280px and Govandi body text. Six route checks return 200, browser console and scoped runtime error/fatal scans are empty, and all 30 build function traces pass. See deployment operations for exact deployment identity and test limitations.

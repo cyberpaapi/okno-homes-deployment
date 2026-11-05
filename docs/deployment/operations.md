@@ -1,5 +1,11 @@
 # Deployment and operation
 
+## Supplied typography scale — 5 November 2026
+
+The supplied Kento/Govandi scale is live at source `c7b4c12e07c49c3d6a989191b3d7e5ce2dfde648`, READY production `dpl_BmFyFeHE6UGEsct335y1QXzoEzKB`, canonical alias `https://okno-homes-aryan.vercel.app`. See [the typography ledger](../typography-2026-11-05.md) for the PDF rules, font provenance and override behavior.
+
+85 focused tests, TypeScript, scoped lint and CSS parsing pass. The wider suite was stopped after stalling and is not claimed complete. Production compilation/page generation and all 30 function traces pass (largest 177.4 MiB). Home, Journal, Signature, Enquiry, admin and Forza configure return 200; all four deployed Kento/Govandi files exactly match local bytes. Live homepage at 1280px computes to 96px Kento, body to Govandi, with no horizontal overflow. Browser console and scoped runtime error/fatal scans are empty. Local responsive checks cover 375/390, 768, 1440 and 1920px; no physical-device claim is made. Screenshot: workspace `outputs/okno-typography-live.png`. No CMS publication data was changed.
+
 ## Updated roofs and source colours — 31 October 2026
 
 The latest supplied viewer keeps architectural roofs by default, adds thatch only when selected, and syncs the source exposure, sky/fog/meadow palette and lighting. GLB files were verified unchanged. The requested localhost demo was completed and opened before the hosted rollout.
