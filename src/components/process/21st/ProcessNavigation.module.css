@@ -41,13 +41,12 @@
 .desktopNav a {
   position: relative;
   color: rgba(242, 247, 244, .72);
-  font-size: var(--type-size-caption, 10px);
+  font-size: var(--type-size-caption, var(--okno-nav));
   font-weight: 500;
-  letter-spacing: .13em;
   text-decoration: none;
   text-transform: uppercase;
   transition: color 180ms ease;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .desktopNav a::after {
   position: absolute;
@@ -121,13 +120,11 @@
 .panelNav a {
   display: inline-block;
   color: rgba(244, 247, 243, .82);
-  font-family: "OKNO Bodoni", Georgia, serif !important;
-  font-size: var(--type-size-display, clamp(45px, 11vw, 82px));
+  font-size: var(--type-size-display, var(--okno-menu));
   font-weight: 400;
   line-height: .98;
-  letter-spacing: -.045em;
   text-decoration: none;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .panelNav a[aria-current="page"] { color: #a7bbb0; }
 
@@ -154,12 +151,11 @@
   justify-content: space-between;
   border-top: 1px solid rgba(228, 244, 238, .22);
   color: #f4f7f3;
-  font-size: var(--type-size-caption, 11px);
+  font-size: var(--type-size-caption, var(--okno-label));
   font-weight: 500;
-  letter-spacing: .13em;
   text-decoration: none;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .srOnly {
   position: absolute;

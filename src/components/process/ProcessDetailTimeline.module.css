@@ -14,22 +14,18 @@
 .intro > p {
   margin: 0 0 24px;
   color: #a7bbb0;
-  font-size: var(--type-size-caption, 10px);
-  font-weight: 500;
+  font-size: var(--type-size-caption, var(--okno-intro));
   letter-spacing: .16em;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .intro h2 {
   max-width: 10ch;
   margin: 0;
-  font-family: "OKNO Bodoni", Georgia, serif;
-  font-size: var(--type-size-display, clamp(56px, 7vw, 96px));
+  font-size: var(--type-size-display, var(--okno-section));
   font-weight: 400;
-  line-height: .96;
-  letter-spacing: -.04em;
   text-wrap: balance;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .timeline {
   position: relative;
@@ -72,23 +68,20 @@
 .phaseCopy h3 {
   max-width: 12ch;
   margin: 0;
-  font-family: "OKNO Bodoni", Georgia, serif;
-  font-size: var(--type-size-display, clamp(42px, 4.4vw, 72px));
+  font-size: var(--type-size-display, var(--okno-step));
   font-weight: 700;
-  line-height: .98;
-  letter-spacing: -.04em;
   text-wrap: balance;
   overflow-wrap: anywhere;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .phaseSummary {
   max-width: 38ch;
   margin: 25px 0 0;
   color: rgb(233 240 234 / 74%);
-  font-size: var(--type-size-body, clamp(14px, 1.1vw, 17px));
+  font-size: var(--type-size-body, var(--okno-body));
   line-height: 1.6;
   text-wrap: pretty;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .phaseVisual { min-width: 0; }
 
@@ -115,31 +108,28 @@
 
 .daysPrefix {
   color: #a7bbb0;
-  font-size: var(--type-size-body, clamp(12px, 1vw, 16px));
+  font-size: var(--type-size-body, var(--okno-label));
   font-weight: 600;
-  letter-spacing: .08em;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .daysRange {
-  font-family: "Geist OKNO", Arial, sans-serif;
-  font-size: var(--type-size-display, clamp(48px, 5.4vw, 78px));
+  font-size: var(--type-size-display, var(--okno-figure));
   font-weight: 600;
   line-height: .88;
-  letter-spacing: -.04em;
   font-variant-numeric: lining-nums tabular-nums;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 @media (max-width: 900px) {
   .phase { grid-template-columns: minmax(0, .78fr) minmax(0, 1.25fr); gap: 28px; }
-  .phaseCopy h3 { font-size: var(--type-size-display, clamp(38px, 4.7vw, 56px)); }
-  .daysRange { font-size: var(--type-size-display, clamp(42px, 6vw, 62px)); }
+  .phaseCopy h3 { font-size: var(--type-size-display, var(--okno-step));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .daysRange { font-size: var(--type-size-display, var(--okno-figure));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 }
 
 @media (max-width: 700px) {
   .section { padding-right: 0; padding-left: 0; }
   .intro { margin-bottom: 24px; }
-  .intro h2 { font-size: var(--type-size-display, clamp(62px, 18vw, 88px)); }
+  .intro h2 { font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .phase {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
@@ -151,17 +141,17 @@
   .phaseCopy { grid-row: 2; padding-bottom: 0; }
   .imageWrap { border-radius: 10px; }
   .days { flex-wrap: wrap; gap: 6px 12px; margin: 0 0 18px; }
-  .daysPrefix { font-size: var(--type-size-body, 13px); }
-  .daysRange { font-size: var(--type-size-display, clamp(40px, 11vw, 56px)); }
-  .phaseCopy h3 { font-size: var(--type-size-display, clamp(34px, 9vw, 48px)); }
-  .phaseSummary { margin-top: 14px; font-size: var(--type-size-body, 14px); line-height: 1.55; }
+  .daysPrefix { font-size: var(--type-size-body, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+  .daysRange { font-size: var(--type-size-display, var(--okno-figure));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+  .phaseCopy h3 { font-size: var(--type-size-display, var(--okno-step));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .phaseSummary { margin-top: 14px; font-size: var(--type-size-body, var(--okno-body)); line-height: 1.55;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 }
 
 @media (max-width: 700px) and (max-height: 700px) {
   .phase { gap: 20px; padding-top: 58px; }
   .days { margin-bottom: 14px; }
-  .daysRange { font-size: var(--type-size-display, 40px); }
-  .phaseCopy h3 { font-size: var(--type-size-display, 34px); }
+  .daysRange { font-size: var(--type-size-display, var(--okno-figure));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+  .phaseCopy h3 { font-size: var(--type-size-display, var(--okno-step));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .phaseSummary { margin-top: 10px; }
 }
 
@@ -175,10 +165,10 @@
 
 @media (min-width: 701px) and (max-height: 620px) {
   .phase { padding-top: 76px; padding-bottom: 56px; }
-  .phaseCopy h3 { font-size: var(--type-size-display, 36px); }
-  .phaseSummary { margin-top: 16px; font-size: var(--type-size-body, 13px); line-height: 1.45; }
+  .phaseCopy h3 { font-size: var(--type-size-display, var(--okno-step));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .phaseSummary { margin-top: 16px; font-size: var(--type-size-body, var(--okno-body)); line-height: 1.45;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .days { margin-bottom: 20px; }
-  .daysRange { font-size: var(--type-size-display, 40px); }
+  .daysRange { font-size: var(--type-size-display, var(--okno-figure));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
   .imageWrap { max-height: 60svh; }
 }
 

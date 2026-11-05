@@ -7,19 +7,15 @@
 
 .sectionLabel {
   color: var(--gold);
-  font-size: var(--type-size-caption, 11px);
-  letter-spacing: 5px;
+  font-size: var(--type-size-caption, var(--okno-label));
   text-transform: uppercase;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .end h2 {
   margin-top: 20px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: var(--type-size-display, clamp(52px, 7vw, 105px));
-  line-height: 0.9;
-  letter-spacing: -4px;
+  font-size: var(--type-size-display, var(--okno-section));
   font-weight: 500;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .end p {
   margin-top: 28px;

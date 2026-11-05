@@ -35,20 +35,17 @@
 
 .statement > p {
   color: var(--route-accent);
-  font-size: var(--type-size-caption, 9px);
+  font-size: var(--type-size-caption, var(--okno-label));
   font-weight: 600;
-  letter-spacing: .18em;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .statement h2 {
   margin-top: 24px;
-  font-size: var(--type-size-display, clamp(68px, 9vw, 144px));
+  font-size: var(--type-size-display, var(--okno-section));
   font-weight: 500;
-  letter-spacing: -.065em;
-  line-height: .86;
   text-wrap: balance;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .statement h2 span { color: var(--route-accent); }
 
@@ -66,11 +63,10 @@
   background: rgba(215, 243, 151, .07);
   color: inherit;
   text-decoration: none;
-  font-size: var(--type-size-caption, 10px);
+  font-size: var(--type-size-caption, var(--okno-label));
   font-weight: 600;
-  letter-spacing: .08em;
   transition: background-color 220ms ease, color 220ms ease, transform 220ms ease;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .statement > a:hover,
 .statement > a:focus-visible {
@@ -90,8 +86,8 @@
 
   .statement h2 {
     margin-top: 18px;
-    font-size: var(--type-size-display, clamp(56px, 17vw, 82px));
-  }
+    font-size: var(--type-size-display, var(--okno-section));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
   .statement > a {
     width: 100%;

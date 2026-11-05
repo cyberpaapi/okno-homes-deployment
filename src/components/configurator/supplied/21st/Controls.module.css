@@ -1,5 +1,5 @@
 .expandable { display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 12px; background: #e8e6dd; }
-.expandButton { display: flex; align-items: center; flex: 0 0 auto; justify-content: center; min-width: 44px; min-height: 44px; border: 0; border-radius: 9px; color: #465447; background: transparent; font: 500 var(--type-size-caption, 11px)/1 "Geist OKNO", Arial, sans-serif; cursor: pointer; transition: background .18s, color .18s; }
+.expandButton { display: flex; align-items: center; flex: 0 0 auto; justify-content: center; min-width: 44px; min-height: 44px; border: 0; border-radius: 9px; color: #465447; background: transparent; font: 500 var(--type-size-caption, var(--okno-button))/1 "Geist OKNO", Arial, sans-serif; cursor: pointer; transition: background .18s, color .18s;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .expandButton:hover { background: #d8ded1; color: #203e2b; }
 .expandButton[data-selected="true"] { background: #1d3828; color: #f2efe4; }
 .expandLabel { overflow: hidden; white-space: nowrap; text-transform: capitalize; }
@@ -9,7 +9,7 @@
 .dockItem { position: relative; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; height: 44px; border: 0; border-radius: 9px; background: transparent; cursor: pointer; }
 .dockIcon { display: block; max-width: calc(100% - 8px); height: 32px; border-radius: 6px; background-position: center; background-size: cover; }
 .dockItem[data-selected="true"] { background: #1d3828; }
-.dockLabel { position: absolute; z-index: 30; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%); padding: 7px 10px; border-radius: 6px; color: #f2efe4; background: #1d3828; font-size: var(--type-size-caption, 11px); white-space: nowrap; pointer-events: none; }
+.dockLabel { position: absolute; z-index: 30; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%); padding: 7px 10px; border-radius: 6px; color: #f2efe4; background: #1d3828; font-size: var(--type-size-caption, var(--okno-label)); white-space: nowrap; pointer-events: none;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .dockCheck { position: absolute; right: 7px; bottom: 7px; color: white; background: #1d3828; border-radius: 50%; }
-@media (max-width: 760px) { .expandable { width: max-content; } .expandButton { min-width: 40px; min-height: 40px; } .dock { gap: 0; padding: 2px; } .dockItem { height: 40px; } .dockLabel { font-size: var(--type-size-caption, 10px); } }
+@media (max-width: 760px) { .expandable { width: max-content; } .expandButton { min-width: 40px; min-height: 40px; } .dock { gap: 0; padding: 2px; } .dockItem { height: 40px; } .dockLabel { font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;} }
 @media (prefers-reduced-motion: reduce) { .expandable *, .dock * { transition: none; } }

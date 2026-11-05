@@ -4,15 +4,18 @@ export const typeRoles = ['display', 'heading', 'subheading', 'body', 'caption']
 export type TypeRole = typeof typeRoles[number];
 export const typeRoleLabels: Record<TypeRole, string> = { display: 'Large titles', heading: 'Headings', subheading: 'Subheadings', body: 'Body text', caption: 'Small text' };
 export const typographyFonts = [
+  { value: 'okno', label: 'OKNO · Kento headings / Govandi body', family: 'var(--okno-font-body)' },
+  { value: 'kento', label: 'Kento', family: '"Kento OKNO", "OKNO Rupee", Arial, sans-serif' },
+  { value: 'govandi', label: 'Govandi Adhiwan', family: '"Govandi OKNO", "OKNO Rupee", Arial, sans-serif' },
   { value: 'geist', label: 'Geist OKNO · Sustainability', family: '"Geist OKNO", Arial, sans-serif' },
   { value: 'manrope', label: 'Manrope', family: '"Manrope OKNO", Arial, sans-serif' },
   { value: 'bodoni', label: 'Bodoni Moda', family: '"Bodoni OKNO", Georgia, serif' },
   { value: 'system', label: 'System sans serif', family: 'Arial, Helvetica, sans-serif' },
   { value: 'serif', label: 'System serif', family: 'Georgia, "Times New Roman", serif' },
 ] as const;
-export const defaultTypographyFont = typographyFonts[1];
+export const defaultTypographyFont = typographyFonts[0];
 const fontChoices = typographyFonts.map(({ value, label }) => ({ value, label }));
-const sectionFontChoices = [{ value: 'inherit', label: 'Use master font' }, ...fontChoices];
+const sectionFontChoices = [{ value: 'inherit', label: 'Use master font' }, ...fontChoices.filter(font => font.value !== 'okno')];
 
 export function visibleTextField(field: ContentField) {
   return field.kind === 'text' && !/\.(?:[^.]*alt|href|url|[^.]*accessible[^.]*|[^.]*aria[^.]*|[^.]*navigation-label|model-id|slug|logo|icon|latitude|longitude)$/.test(field.id) && !/destination|description.*image|image.*description|accessib|local path|coordinate|browser icon/i.test(field.label) && !field.id.startsWith('brand.') && field.id !== 'home.publishing.hero' && !/^footer\.social\./.test(field.id);
@@ -33,7 +36,7 @@ export function sectionTypographyFields(scope: string): ContentField[] {
   ];
 }
 export const masterTypographySection: ContentSection = {
-  id: 'typography', label: 'Master font', note: 'The master font applies across the website, including Signature and Bespoke. Logo artwork stays unchanged. Each page keeps its original responsive text sizes. Optional numeric size overrides live inside each section.',
+  id: 'typography', label: 'Master font', note: 'OKNO uses Kento for headings and controls, and Govandi Adhiwan Regular for body text. The November typography scale applies across screen sizes. Optional font and numeric overrides remain inside each section. Logo artwork stays unchanged.',
   fields: [
     { id: 'typography.master-font', label: 'Master font', kind: 'choice', defaultValue: defaultTypographyFont.value, options: fontChoices },
   ],
@@ -68,7 +71,9 @@ function numericSize(value: string | undefined) {
   return value && typographyValueError('typography.section.any.body-size', value) === null ? `${Number(value)}px` : 'initial';
 }
 export function typographyCss(values: Record<string, string>, bindings: TypographyBinding[]) {
-  const root = [`--type-font-master:${fontFamily(values['typography.master-font']) ?? defaultTypographyFont.family}`];
+  const master = fontFamily(values['typography.master-font']);
+  const paired = !master || values['typography.master-font'] === 'okno';
+  const root = [`--type-font-master:${master ?? defaultTypographyFont.family}`, `--type-font-body:${paired ? 'var(--okno-font-body)' : 'var(--type-font-master)'}`, `--type-font-heading:${paired ? 'var(--okno-font-heading)' : 'var(--type-font-master)'}`];
   const rules = [`html[data-site-typography]{${root.join(';')}}`];
   const phoneRules: string[] = [];
   for (const binding of bindings) {
@@ -77,7 +82,7 @@ export function typographyCss(values: Record<string, string>, bindings: Typograp
     for (const role of ['body', 'heading', 'highlight']) {
       const family = fontFamily(values[`${prefix}.${role}-font`]);
       // Reset at every section boundary so a nested section never inherits its parent's override.
-      declarations.push(`--type-font-${role}:${family ?? (role === 'highlight' ? 'var(--type-font-heading, var(--type-font-master))' : 'var(--type-font-master)')}`);
+      declarations.push(`--type-font-${role}:${family ?? (role === 'highlight' ? 'var(--type-font-heading)' : paired ? `var(--okno-font-${role})` : 'var(--type-font-master)')}`);
     }
     for (const role of typeRoles) {
       // An invalid custom property makes var() use each declaration's authored

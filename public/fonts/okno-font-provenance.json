@@ -1,0 +1,31 @@
+{
+  "retrieved": "2026-11-05",
+  "referenceSite": "https://www.oknomodhomes.com/",
+  "scope": "Reuse of the existing OKNO brand typefaces for the same client website; original files retained without modification.",
+  "files": [
+    {
+      "path": "/fonts/kento-bold.woff",
+      "source": "https://cdn.prod.website-files.com/65018a6f4c32024cb04eddc1/65018c20adcf1054f637d0d5_Kento-Bold.woff",
+      "bytes": 13060,
+      "sha256": "ef65d650c5f2a94cff5da85453a3b2e276e2450f7984103432beb4063826d2b4"
+    },
+    {
+      "path": "/fonts/kento-light.woff",
+      "source": "https://cdn.prod.website-files.com/65018a6f4c32024cb04eddc1/65018c204943ec5b5623f5eb_Kento-Light.woff",
+      "bytes": 13400,
+      "sha256": "cd347de2ca5f3bb486b3a32ed16a7e59b63cc89ac59b24ddee8714586c67b496"
+    },
+    {
+      "path": "/fonts/kento-regular.woff",
+      "source": "https://cdn.prod.website-files.com/65018a6f4c32024cb04eddc1/65018c2007fc7597ab94af37_Kento-Regular.woff",
+      "bytes": 12496,
+      "sha256": "99901266a916880f74576c4150be0d4f2c8acbe02dff771c45c7609b482a22a7"
+    },
+    {
+      "path": "/fonts/govandi-adhiwan-regular.ttf",
+      "source": "https://cdn.prod.website-files.com/65018a6f4c32024cb04eddc1/65018d49b3d8c30ce117151c_GovandiAdhiwan-Regular.ttf",
+      "bytes": 42496,
+      "sha256": "2b7306b1d847e886aff7838a994962547bc207fa5ac95cf5d7b7469be99aae38"
+    }
+  ]
+}

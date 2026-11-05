@@ -55,7 +55,7 @@
   text-wrap: balance;
 }
 
-.opening h2 { font-size: var(--type-size-display, clamp(58px, 6.2vw, 98px)); }
+.opening h2 { font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 .opening h2 span { color: var(--lime); }
 
 .proofLayout {
@@ -98,10 +98,10 @@
   bottom: 13px;
   z-index: 5;
   color: rgba(255, 255, 255, .82);
-  font-size: var(--type-size-caption, 10px);
+  font-size: var(--type-size-caption, var(--okno-spec));
   letter-spacing: .04em;
   text-shadow: 0 1px 6px rgba(0, 0, 0, .65);
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .proofSidebar {
   position: relative;
@@ -126,16 +126,16 @@
 .sideCopy h3 {
   max-width: 420px;
   margin-bottom: 15px;
-  font-size: var(--type-size-heading, clamp(32px, 3vw, 50px));
-}
+  font-size: var(--type-size-heading, var(--okno-card));
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .sideCopy p {
   max-width: 350px;
   margin: 0;
   color: rgba(242, 244, 237, .7);
-  font-size: var(--type-size-body, clamp(13px, 1vw, 16px));
+  font-size: var(--type-size-body, var(--okno-body));
   line-height: 1.3;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .pressRail {
   display: grid;
@@ -161,25 +161,23 @@
 }
 
 .citationMeta strong {
-  font-size: var(--type-size-caption, clamp(10px, .82vw, 13px));
+  font-size: var(--type-size-caption, var(--okno-label));
   font-weight: 750;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .citationMeta time {
   color: rgba(242, 244, 237, .5);
-  font-size: var(--type-size-caption, 8px);
+  font-size: var(--type-size-caption, var(--okno-label));
   font-variant-numeric: tabular-nums;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .pressCitation h4 {
   max-width: 36ch;
   margin: 0;
   color: rgba(242, 244, 237, .86);
-  font-size: var(--type-size-body, clamp(13px, .98vw, 16px));
+  font-size: var(--type-size-body, var(--okno-card));
   font-weight: 400;
-  letter-spacing: -.02em;
-  line-height: 1.18;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .detailsSheet {
   position: absolute;
@@ -217,8 +215,8 @@
 .detailsInner h3 {
   align-self: center;
   max-width: 12ch;
-  font-size: var(--type-size-display, clamp(58px, 6.1vw, 96px));
-}
+  font-size: var(--type-size-display, var(--okno-card));
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .factGrid {
   align-self: center;
@@ -256,18 +254,18 @@
 }
 
 .factGrid li span { display: grid; gap: 3px; }
-.factGrid strong { font-size: var(--type-size-subheading, clamp(17px, 1.3vw, 21px)); font-weight: 500; letter-spacing: -.025em; }
-.factGrid small { font-size: var(--type-size-body, clamp(12px, .9vw, 15px)); line-height: 1.25; }
+.factGrid strong { font-size: var(--type-size-subheading, var(--okno-card)); font-weight: 500;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+.factGrid small { font-size: var(--type-size-body, var(--okno-body)); line-height: 1.25;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .closingLine {
   grid-column: 1 / -1;
   align-self: end;
   max-width: 580px;
   margin: 0;
-  font-size: var(--type-size-subheading, clamp(22px, 2vw, 32px));
+  font-size: var(--type-size-subheading, var(--okno-intro));
   letter-spacing: -.035em;
   line-height: 1.08;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 @media (max-width: 1080px) {
   .proofLayout { grid-template-columns: minmax(0, 1.5fr) minmax(310px, .85fr); gap: 30px; }
@@ -279,7 +277,7 @@
   .track { height: 760svh; }
   .stickyScene { min-height: 590px; }
   .opening { width: calc(100vw - 44px); }
-  .opening h2 { font-size: var(--type-size-display, clamp(50px, 11.5vw, 74px)); }
+  .opening h2 { font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .proofLayout {
     inset: 84px 0 18px;
     grid-template-columns: 1fr;
@@ -289,26 +287,26 @@
   .imageLayer img { object-position: 52% center; }
   .proofSidebar { background: var(--black); }
   .pressStage { padding: 18px 22px 0; }
-  .sideCopy h3 { max-width: 15ch; margin-bottom: 8px; font-size: var(--type-size-heading, clamp(26px, 6.5vw, 38px)); }
+  .sideCopy h3 { max-width: 15ch; margin-bottom: 8px; font-size: var(--type-size-heading, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .sideCopy p { display: none; }
   .pressRail { grid-template-columns: 1fr 1fr; column-gap: 18px; }
   .pressCitation { padding: 8px 0 9px; }
   .citationMeta { margin-bottom: 4px; }
-  .citationMeta strong { font-size: var(--type-size-caption, 8px); }
-  .citationMeta time { font-size: var(--type-size-caption, 7px); }
-  .pressCitation h4 { font-size: var(--type-size-body, 11px); line-height: 1.14; }
+  .citationMeta strong { font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+  .citationMeta time { font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+  .pressCitation h4 { font-size: var(--type-size-body, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .detailsInner {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     gap: 22px;
     padding: 84px 22px 28px;
   }
-  .detailsInner h3 { align-self: end; max-width: 16ch; font-size: var(--type-size-display, clamp(48px, 10vw, 72px)); }
+  .detailsInner h3 { align-self: end; max-width: 16ch; font-size: var(--type-size-display, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .factGrid { align-self: center; gap: 7px; }
   .factGrid li { min-height: 50px; padding: 8px 11px 8px 9px; }
-  .factGrid strong { font-size: var(--type-size-subheading, 16px); }
-  .factGrid small { font-size: var(--type-size-body, 12px); }
-  .closingLine { grid-column: 1; font-size: var(--type-size-subheading, 20px); }
+  .factGrid strong { font-size: var(--type-size-subheading, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .factGrid small { font-size: var(--type-size-body, var(--okno-body));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
+  .closingLine { grid-column: 1; font-size: var(--type-size-subheading, var(--okno-intro));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 }
 
 @media (max-width: 520px) {
@@ -316,8 +314,8 @@
   .proofLayout { grid-template-rows: minmax(260px, 47%) minmax(0, 53%); }
   .pressRail { column-gap: 14px; }
   .citationMeta time { display: none; }
-  .pressCitation h4 { font-size: var(--type-size-body, 10px); }
-  .detailsInner h3 { font-size: var(--type-size-display, clamp(45px, 11vw, 62px)); }
+  .pressCitation h4 { font-size: var(--type-size-body, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .detailsInner h3 { font-size: var(--type-size-display, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 }
 
 @media (max-height: 620px) {

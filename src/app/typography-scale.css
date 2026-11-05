@@ -1,0 +1,37 @@
+/* OKNO Typography Font Sizes_new.pdf, 5 November 2026.
+   The document's 13px minimum takes precedence over its 11/12px label rows.
+   Plateau sizes match each specified viewport band; gaps use the smaller band. */
+@font-face { font-family: "Kento OKNO"; src: url('/fonts/kento-light.woff') format('woff'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Kento OKNO"; src: url('/fonts/kento-regular.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Kento OKNO"; src: url('/fonts/kento-bold.woff') format('woff'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Govandi OKNO"; src: url('/fonts/govandi-adhiwan-regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+/* Explicit currency fallback; never substitute an unrelated missing-glyph box. */
+@font-face { font-family: "OKNO Rupee"; src: url('/fonts/manrope.ttf') format('truetype'); font-weight: 200 800; font-display: swap; unicode-range: U+20B9; }
+:root {
+  --okno-font-heading: "Kento OKNO", "OKNO Rupee", Arial, sans-serif;
+  --okno-font-body: "Govandi OKNO", "OKNO Rupee", Arial, sans-serif;
+  --okno-hero: 36px;
+  --okno-model: 40px;
+  --okno-figure: 44px;
+  --okno-section: 28px;
+  --okno-card: 18px;
+  --okno-step: 16px;
+  --okno-nav: 13px;
+  --okno-menu: 28px;
+  --okno-button: 13px;
+  --okno-label: 13px;
+  --okno-intro: 17px;
+  --okno-body: 16px;
+  --okno-spec: 14px;
+  --okno-field: 16px;
+  --okno-footer: 13px;
+}
+@media (min-width: 768px) {
+  :root { --okno-hero: 60px; --okno-model: 56px; --okno-figure: 56px; --okno-section: 40px; --okno-card: 20px; --okno-step: 18px; --okno-menu: 32px; --okno-intro: 18px; }
+}
+@media (min-width: 1280px) {
+  :root { --okno-hero: 96px; --okno-model: 80px; --okno-figure: 72px; --okno-section: 60px; --okno-card: 24px; --okno-step: 20px; --okno-intro: 21px; --okno-body: 17px; --okno-spec: 15px; }
+}
+@media (min-width: 1920px) {
+  :root { --okno-hero: 112px; --okno-model: 96px; --okno-figure: 80px; --okno-section: 68px; --okno-card: 26px; --okno-step: 22px; --okno-nav: 14px; --okno-button: 14px; --okno-intro: 22px; --okno-body: 18px; }
+}

@@ -76,23 +76,19 @@
 .markerCity,
 .markerCoordinates {
   color: rgba(242, 241, 233, .6);
-  font-family: "Geist OKNO", Arial, sans-serif;
-  font-size: var(--type-size-caption, 8px);
+  font-size: var(--type-size-caption, var(--okno-spec));
   font-style: normal;
-  font-weight: 600;
   letter-spacing: .14em;
   line-height: 1.35;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .markerPreview strong {
   color: #f2f1e9;
-  font-family: "Geist OKNO", Arial, sans-serif;
-  font-size: var(--type-size-body, clamp(15px, 1.6vw, 20px));
-  font-weight: 500;
+  font-size: var(--type-size-body, var(--okno-body));
   letter-spacing: -.025em;
   line-height: 1.08;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .markerCoordinates {
   display: flex;
@@ -113,11 +109,9 @@
   bottom: 12%;
   translate: 50% 0;
   color: rgba(242, 244, 237, .62);
-  font-family: "Geist OKNO", Arial, sans-serif;
-  font-size: var(--type-size-caption, 10px);
-  letter-spacing: .08em;
+  font-size: var(--type-size-caption, var(--okno-label));
   white-space: nowrap;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 @media (max-width: 700px) {
   .markerPreview {
@@ -128,11 +122,11 @@
   }
 
   .markerPreview strong {
-    font-size: var(--type-size-body, 15px);
-  }
+    font-size: var(--type-size-body, var(--okno-body));
+   font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
   .mapError {
     bottom: 8%;
-    font-size: var(--type-size-caption, 9px);
-  }
+    font-size: var(--type-size-caption, var(--okno-label));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 }

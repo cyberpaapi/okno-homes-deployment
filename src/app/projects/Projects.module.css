@@ -12,11 +12,10 @@
 .archiveHeading p,
 .filters button,
 .projectMeta {
-  font-size: var(--type-size-caption, 9px);
+  font-size: var(--type-size-caption, var(--okno-button));
   font-weight: 600;
-  letter-spacing: .18em;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .eyebrow,
 .sectionHeading p,
@@ -27,20 +26,18 @@
 .page > h1 {
   max-width: 920px;
   margin-top: 16px;
-  font-size: var(--type-size-display, clamp(52px, 7.2vw, 106px));
+  font-size: var(--type-size-display, var(--okno-hero));
   font-weight: 400;
-  letter-spacing: -.065em;
-  line-height: .92;
   text-wrap: balance;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .intro {
   max-width: 670px;
   margin-top: 26px;
   color: var(--muted);
-  font-size: var(--type-size-body, clamp(15px, 1.25vw, 18px));
+  font-size: var(--type-size-body, var(--okno-body));
   line-height: 1.65;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .globeSection {
   margin-top: clamp(80px, 10vw, 142px);
@@ -57,11 +54,9 @@
 .sectionHeading h2,
 .archiveHeading h2 {
   margin-top: 10px;
-  font-size: var(--type-size-display, clamp(38px, 4.8vw, 68px));
+  font-size: var(--type-size-display, var(--okno-section));
   font-weight: 400;
-  letter-spacing: -.055em;
-  line-height: .98;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .archive {
   padding-top: clamp(80px, 10vw, 136px);
@@ -150,19 +145,17 @@
 
 .projectCopy h3 {
   margin-top: 14px;
-  font-size: var(--type-size-heading, clamp(31px, 3vw, 46px));
+  font-size: var(--type-size-heading, var(--okno-card));
   font-weight: 400;
-  letter-spacing: -.045em;
-  line-height: 1;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .projectCopy > p {
   max-width: 560px;
   margin-top: 13px;
   color: var(--muted);
-  font-size: var(--type-size-caption, 14px);
+  font-size: var(--type-size-caption, var(--okno-body));
   line-height: 1.6;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .projectCopy > a {
   min-height: 44px;
@@ -173,16 +166,15 @@
   margin-top: 12px;
   color: var(--ink);
   text-decoration: none;
-  font-size: var(--type-size-caption, 9px);
+  font-size: var(--type-size-caption, var(--okno-label));
   font-weight: 600;
-  letter-spacing: .14em;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .projectCopy > a span {
   color: var(--route-accent);
-  font-size: var(--type-size-body, 16px);
-}
+  font-size: var(--type-size-body, var(--okno-body));
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .archiveCta {
   display: flex;
@@ -197,10 +189,8 @@
 
 .archiveCta p {
   max-width: 580px;
-  font-size: var(--type-size-heading, clamp(26px, 3vw, 42px));
-  letter-spacing: -.04em;
-  line-height: 1.05;
-}
+  font-size: var(--type-size-heading, var(--okno-section));
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .archiveCta a {
   min-height: 52px;
@@ -214,13 +204,12 @@
   border-radius: 999px;
   color: inherit;
   text-decoration: none;
-  font-size: var(--type-size-caption, 9px);
+  font-size: var(--type-size-caption, var(--okno-label));
   font-weight: 600;
-  letter-spacing: .14em;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
-.archiveCta a span { color: #e18772; font-size: var(--type-size-body, 15px); }
+.archiveCta a span { color: #e18772; font-size: var(--type-size-body, var(--okno-body));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 @media (max-width: 760px) {
   .page {
@@ -230,15 +219,14 @@
 
   .page > h1 {
     max-width: 440px;
-    font-size: var(--type-size-display, clamp(46px, 14vw, 66px));
-    line-height: .94;
-  }
+    font-size: var(--type-size-display, var(--okno-hero));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
   .intro {
     max-width: 400px;
     margin-top: 21px;
-    font-size: var(--type-size-body, 15px);
-  }
+    font-size: var(--type-size-body, var(--okno-body));
+   font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
   .globeSection { margin-top: 76px; }
 
@@ -249,8 +237,8 @@
 
   .sectionHeading h2,
   .archiveHeading h2 {
-    font-size: var(--type-size-heading, clamp(38px, 12vw, 52px));
-  }
+    font-size: var(--type-size-heading, var(--okno-section));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
   .archive { padding-top: 76px; }
 
@@ -280,15 +268,15 @@
 
   .projectMeta {
     align-items: flex-start;
-    font-size: var(--type-size-caption, 8px);
-  }
+    font-size: var(--type-size-caption, var(--okno-label));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
   .projectCopy h3 {
     margin-top: 12px;
-    font-size: var(--type-size-heading, clamp(34px, 10.5vw, 44px));
-  }
+    font-size: var(--type-size-heading, var(--okno-card));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
-  .projectCopy > p { font-size: var(--type-size-caption, 14px); }
+  .projectCopy > p { font-size: var(--type-size-caption, var(--okno-body));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
   .archiveCta {
     display: block;
@@ -297,7 +285,7 @@
     border-radius: 20px;
   }
 
-  .archiveCta p { font-size: var(--type-size-heading, 29px); }
+  .archiveCta p { font-size: var(--type-size-heading, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
   .archiveCta a {
     width: 100%;

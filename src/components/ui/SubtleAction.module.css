@@ -17,13 +17,12 @@
   background: var(--action-field);
   box-shadow: 0 14px 40px rgb(5 9 6 / 16%);
   color: var(--action-ink);
-  font: 500 var(--type-size-caption, 13px)/1 "Geist OKNO", Arial, sans-serif;
-  letter-spacing: .005em;
+  font: 500 var(--type-size-caption, var(--okno-button))/1 "Geist OKNO", Arial, sans-serif;
   text-decoration: none;
   cursor: pointer;
   backdrop-filter: blur(14px);
   transition: border-color .22s ease, background-color .22s ease, box-shadow .22s ease, transform .22s cubic-bezier(.22, 1, .36, 1);
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .action::before {
   content: '';
   position: absolute;

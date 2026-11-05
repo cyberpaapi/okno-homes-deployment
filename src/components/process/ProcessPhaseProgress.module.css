@@ -54,13 +54,13 @@
 .milestones li:last-child .point { left: 100%; }
 .milestones li[data-complete='true'] .point { background: #c8dac7; }
 .milestones li[aria-current] { color: #eef3ed; }
-.dayLabel { margin-right: 7px; font-size: var(--type-size-caption, 10px); }
-.dayRange { font-size: var(--type-size-caption, 14px); font-weight: 600; font-variant-numeric: tabular-nums; }
+.dayLabel { margin-right: 7px; font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+.dayRange { font-size: var(--type-size-caption, var(--okno-spec)); font-variant-numeric: tabular-nums;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 @media (max-width: 700px) {
   .progress { height: 44px; bottom: 18px; }
   .milestones li { padding-top: 13px; }
-  .dayLabel { display: block; margin: 0 0 3px; font-size: var(--type-size-caption, 9px); }
-  .dayRange { font-size: var(--type-size-caption, 11px); }
+  .dayLabel { display: block; margin: 0 0 3px; font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+  .dayRange { font-size: var(--type-size-caption, var(--okno-spec));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .point { width: 5px; height: 5px; }
 }
 @media (max-height: 620px), (prefers-reduced-motion: reduce) {

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./typography-scale.css";
 
 @font-face {
   font-family: "Geist OKNO";
@@ -107,17 +108,25 @@ canvas {
   max-width: 100%;
 }
 
-/* Public typography is driven by the published master and section tokens.
-   The admin keeps its stable editor scale; SVG/image logos retain their artwork. */
-body:not(:has([data-admin-studio])) :where(*) {
-  font-family: var(--type-font-body, var(--type-font-master, "Manrope OKNO", Arial, sans-serif)) !important;
+/* Section font overrides are resolved by SiteTypography. Descendants inherit
+   their semantic owner's family, including animated split-headline spans. */
+body:not(:has([data-admin-studio])) {
+  font-family: var(--type-font-body, var(--okno-font-body));
+  font-size: var(--okno-body);
+  font-weight: 400;
 }
-body:not(:has([data-admin-studio])) :where(h1, h2, h3, h4, h5, h6),
-body:not(:has([data-admin-studio])) :where(h1, h2, h3, h4, h5, h6) :where(*) {
-  font-family: var(--type-font-heading, var(--type-font-master, "Manrope OKNO", Arial, sans-serif)) !important;
+:where(body:not(:has([data-admin-studio])) *) {
+  font-family: inherit !important;
 }
-body:not(:has([data-admin-studio])) :where(em, strong, [data-type-highlight]) {
-  font-family: var(--type-font-highlight, var(--type-font-heading, var(--type-font-master, "Manrope OKNO", Arial, sans-serif))) !important;
+:where(body:not(:has([data-admin-studio])) h1, body:not(:has([data-admin-studio])) h2, body:not(:has([data-admin-studio])) h3, body:not(:has([data-admin-studio])) h4) {
+  font-family: var(--type-font-heading, var(--okno-font-heading)) !important;
+  letter-spacing: .01em;
+  line-height: 1.15;
+}
+:where(body:not(:has([data-admin-studio])) input, body:not(:has([data-admin-studio])) select, body:not(:has([data-admin-studio])) textarea) {
+  font-family: var(--type-font-body, var(--okno-font-body)) !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
 }
 @font-face { font-family: "Manrope OKNO"; src: url("/fonts/manrope.ttf") format("truetype"); font-display: swap; font-weight: 200 800; }
 @font-face { font-family: "Bodoni OKNO"; src: url("/fonts/bodoni-moda.ttf") format("truetype"); font-display: swap; font-weight: 400 900; }
@@ -157,4 +166,16 @@ body:not(:has([data-admin-studio])) :where(em, strong, [data-type-highlight]) {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #a98a5c;
+}
+
+/* Semantic fallbacks for controls without a component-specific text role. */
+:where(body:not(:has([data-admin-studio])) button) {
+  font-family: var(--type-font-heading, var(--okno-font-heading)) !important;
+  font-size: var(--okno-button);
+  letter-spacing: .01em;
+}
+:where(body:not(:has([data-admin-studio])) summary) {
+  font-family: var(--type-font-body, var(--okno-font-body)) !important;
+  font-size: var(--okno-intro);
+  font-weight: 400;
 }

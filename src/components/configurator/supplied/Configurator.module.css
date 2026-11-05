@@ -17,28 +17,28 @@
 .configurator:global(.okno-cabin)[data-finishes-open="false"] :global(.stage) { right: 0; }
 .siteHeader { position: absolute; z-index: 50; inset: 0 0 auto; height: 92px; background: #152c20; }
 .modelIntro { position: absolute; z-index: 5; top: 112px; left: 28px; width: 260px; padding: 16px 18px; background: var(--cabin-paper); border-radius: 12px; }
-.backLink { display: inline-flex; align-items: center; gap: 7px; min-height: 24px; color: var(--cabin-muted); font-size: var(--type-size-caption, 11px); text-decoration: none; }
+.backLink { display: inline-flex; align-items: center; gap: 7px; min-height: 24px; color: var(--cabin-muted); font-size: var(--type-size-caption, var(--okno-button)); text-decoration: none;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .backLink:hover { color: var(--cabin-ink); }
-.modelIntro h1 { margin: 12px 0 8px; font-size: var(--type-size-subheading, 27px); line-height: 1.1; font-weight: 500; letter-spacing: -.035em; }
-.modelIntro > p { margin: 0; max-width: 28ch; color: var(--cabin-muted); font-size: var(--type-size-caption, 11px); line-height: 1.55; }
-.modelDetails { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--cabin-line); font-size: var(--type-size-caption, 11px); }
+.modelIntro h1 { margin: 12px 0 8px; font-size: var(--type-size-subheading, var(--okno-hero)); font-weight: 500;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+.modelIntro > p { margin: 0; max-width: 28ch; color: var(--cabin-muted); font-size: var(--type-size-caption, var(--okno-label)); line-height: 1.55;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+.modelDetails { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--cabin-line); font-size: var(--type-size-caption, var(--okno-spec));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 .modelDetails summary, .interiorNote summary { display: flex; align-items: center; justify-content: space-between; cursor: pointer; list-style: none; min-height: 24px; }
 .modelDetails summary::-webkit-details-marker, .interiorNote summary::-webkit-details-marker { display: none; }
-.modelDetails p { color: var(--cabin-muted); font-size: var(--type-size-caption, 11px); line-height: 1.55; margin: 10px 0; }
+.modelDetails p { color: var(--cabin-muted); font-size: var(--type-size-caption, var(--okno-spec)); line-height: 1.55; margin: 10px 0;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 .modelDetails dl { display: flex; justify-content: space-between; gap: 10px; margin: 12px 0 0; }
-.modelDetails dt { color: var(--cabin-muted); font-size: var(--type-size-caption, 10px); }
-.modelDetails dd { margin: 4px 0 0; font-size: var(--type-size-caption, 11px); }
+.modelDetails dt { color: var(--cabin-muted); font-size: var(--type-size-caption, var(--okno-spec));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
+.modelDetails dd { margin: 4px 0 0; font-size: var(--type-size-caption, var(--okno-spec));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 .finishPanel { position: absolute; z-index: 10; top: 112px; right: 28px; bottom: 114px; display: flex; flex-direction: column; width: 328px; border-radius: 12px; background: var(--cabin-paper); overflow: hidden; }
 .panelTitle { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 6px 20px; }
-.panelTitle h2 { margin: 0; font-size: var(--type-size-subheading, 21px); font-weight: 500; letter-spacing: -.025em; }
+.panelTitle h2 { margin: 0; font-size: var(--type-size-subheading, var(--okno-card)); font-weight: 500;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 .applicationControls { flex: 0 0 auto; padding: 4px 12px 12px; border-bottom: 1px solid var(--cabin-line); }
 .applicationControls > div { justify-content: center; padding: 3px 0; gap: 0; }
 .applicationControls button { min-width: 40px; min-height: 40px; }
-.applicationControls button span { font-size: var(--type-size-caption, 10px); }
+.applicationControls button span { font-size: var(--type-size-caption, var(--okno-button));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .finishList { flex: 1; min-height: 0; overflow: auto; padding: 16px; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #68775e transparent; }
 .sectionTitle { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 0 0 14px; }
-.sectionTitle h3 { margin: 0; font-size: var(--type-size-caption, 14px); font-weight: 500; }
-.sectionTitle > span { color: var(--cabin-muted); font-size: var(--type-size-caption, 10px); }
+.sectionTitle h3 { margin: 0; font-size: var(--type-size-caption, var(--okno-card)); font-weight: 500;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+.sectionTitle > span { color: var(--cabin-muted); font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .swatches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
 .swatch { display: flex; flex-direction: column; min-width: 0; border: 0; padding: 0; text-align: left; color: var(--cabin-ink); background: transparent; cursor: pointer; }
 .swatchImage { position: relative; display: block; width: 100%; height: 68px; border-radius: 7px; background-position: center; background-size: cover; transition: box-shadow .18s; }
@@ -46,26 +46,26 @@
 .swatch[data-selected="true"] .swatchImage { box-shadow: inset 0 0 0 2px #264a30; }
 .swatchImage svg { position: absolute; right: 6px; bottom: 6px; width: 23px; height: 23px; padding: 5px; background: #264a30; color: #fff; border-radius: 50%; }
 .swatchCopy { display: flex; flex-direction: column; gap: 3px; padding: 7px 1px 2px; }
-.swatchCopy b { font-size: var(--type-size-caption, 11px); font-weight: 500; line-height: 1.3; }
-.swatchCopy small { color: var(--cabin-muted); font-size: var(--type-size-caption, 9px); line-height: 1.45; }
+.swatchCopy b { font-size: var(--type-size-caption, var(--okno-label)); font-weight: 500; line-height: 1.3;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+.swatchCopy small { color: var(--cabin-muted); font-size: var(--type-size-caption, var(--okno-label)); line-height: 1.45;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .swatch:disabled { opacity: .55; cursor: wait; }
-.interiorNote { margin: -4px 0 8px; padding: 0 0 6px; color: var(--cabin-muted); font-size: var(--type-size-caption, 10px); line-height: 1.5; }
+.interiorNote { margin: -4px 0 8px; padding: 0 0 6px; color: var(--cabin-muted); font-size: var(--type-size-caption, var(--okno-label)); line-height: 1.5;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .interiorNote p { margin: 6px 0; }
 .interiorNote span { display: block; margin: 4px 0; color: var(--cabin-ink); }
-.selectedFinish { flex: 0 0 auto; margin: 0; padding: 12px 16px; border-top: 1px solid var(--cabin-line); color: var(--cabin-muted); font-size: var(--type-size-caption, 10px); line-height: 1.5; }
+.selectedFinish { flex: 0 0 auto; margin: 0; padding: 12px 16px; border-top: 1px solid var(--cabin-line); color: var(--cabin-muted); font-size: var(--type-size-caption, var(--okno-label)); line-height: 1.5;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .viewerControls { position: absolute; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 18px; bottom: 30px; left: 28px; right: 28px; max-width: 1000px; margin: auto; padding: 8px; border-radius: 14px; background: var(--cabin-paper); box-shadow: 0 14px 38px #152c2024; }
 .cameraControls, .sceneControls { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .cameraControls { flex: 0 1 auto; }
 .sceneControls { flex: 0 0 auto; }
-.toggleButton { display: flex; align-items: center; justify-content: center; gap: 7px; height: 44px; border: 0; padding: 0 12px; border-radius: 9px; background: transparent; color: var(--cabin-muted); font-size: var(--type-size-caption, 11px); cursor: pointer; }
+.toggleButton { display: flex; align-items: center; justify-content: center; gap: 7px; height: 44px; border: 0; padding: 0 12px; border-radius: 9px; background: transparent; color: var(--cabin-muted); font-size: var(--type-size-caption, var(--okno-button)); cursor: pointer;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .toggleButton[aria-pressed="true"], .lighting button[aria-pressed="true"] { background: #1d3828; color: #f2efe4; }
 .toggleButton:hover, .iconButton:hover { background: #d8ded1; color: #203e2b; }
 .toggleButton[aria-pressed="true"]:hover, .lighting button[aria-pressed="true"]:hover { background: #264a30; color: #f2efe4; }
 .iconButton { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 9px; color: var(--cabin-muted); background: transparent; cursor: pointer; }
 .lighting { display: flex; align-items: center; padding: 4px; border-radius: 12px; background: #e8e6dd; }
 .lighting .iconButton { width: 40px; height: 44px; }
-.gestureHint { position: absolute; z-index: 5; bottom: 8px; left: 0; right: 0; margin: 0; text-align: center; color: #20352b; font-size: var(--type-size-caption, 10px); }
-.loader, .error { position: absolute; z-index: 25; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 16px 20px; border-radius: 12px; background: var(--cabin-paper); color: var(--cabin-ink); font-size: var(--type-size-caption, 12px); }
+.gestureHint { position: absolute; z-index: 5; bottom: 8px; left: 0; right: 0; margin: 0; text-align: center; color: #20352b; font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+.loader, .error { position: absolute; z-index: 25; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 16px 20px; border-radius: 12px; background: var(--cabin-paper); color: var(--cabin-ink); font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .error { max-width: min(440px, 80vw); line-height: 1.5; }
 .skipLink { position: absolute; z-index: 120; top: 6px; left: 16px; padding: 10px 14px; background: var(--cabin-paper); color: var(--cabin-ink); transform: translateY(-150%); }
 .skipLink:focus { transform: none; }
@@ -77,7 +77,7 @@
   .configurator:global(.okno-cabin) :global(.stage) { top: 82px; right: 342px; }
   .finishPanel { right: 18px; top: 100px; width: 312px; }
   .modelIntro { left: 18px; top: 100px; width: 220px; }
-  .modelIntro h1 { font-size: var(--type-size-subheading, 24px); }
+  .modelIntro h1 { font-size: var(--type-size-subheading, var(--okno-hero));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .viewerControls { left: 18px; right: 18px; gap: 8px; }
   .toggleButton span { display: none; }
   .toggleButton { width: 40px; padding: 0; }
@@ -88,28 +88,28 @@
   .configurator:global(.okno-cabin) :global(.stage) { top: 74px; right: 0; bottom: calc(136px + min(34dvh, 286px)); }
   .configurator:global(.okno-cabin)[data-finishes-open="false"] :global(.stage) { bottom: 136px; }
   .modelIntro { top: 86px; left: 14px; width: 188px; padding: 10px 12px; }
-  .modelIntro h1 { margin: 7px 0 5px; font-size: var(--type-size-subheading, 22px); }
-  .modelIntro > p { font-size: var(--type-size-caption, 9px); }
-  .modelDetails { margin-top: 8px; padding-top: 5px; font-size: var(--type-size-caption, 10px); }
+  .modelIntro h1 { margin: 7px 0 5px; font-size: var(--type-size-subheading, var(--okno-hero));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .modelIntro > p { font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+  .modelDetails { margin-top: 8px; padding-top: 5px; font-size: var(--type-size-caption, var(--okno-spec));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .modelDetails summary { min-height: 20px; }
   .finishPanel { top: auto; left: 12px; right: 12px; bottom: 136px; width: auto; height: min(34dvh, 286px); }
   .panelTitle { padding: 6px 10px 0 14px; }
-  .panelTitle h2 { font-size: var(--type-size-subheading, 17px); }
+  .panelTitle h2 { font-size: var(--type-size-subheading, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .panelTitle .iconButton { width: 34px; height: 30px; }
   .applicationControls { padding: 4px 10px 7px; }
   .applicationControls > div { width: 100%; }
   .finishList { padding: 10px 12px; }
   .sectionTitle { margin-bottom: 8px; }
-  .sectionTitle h3 { font-size: var(--type-size-caption, 12px); }
+  .sectionTitle h3 { font-size: var(--type-size-caption, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .swatchImage { height: 58px; }
-  .selectedFinish { padding: 7px 12px; font-size: var(--type-size-caption, 9px); }
+  .selectedFinish { padding: 7px 12px; font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
   .viewerControls { left: 12px; right: 12px; bottom: 16px; flex-direction: column; gap: 5px; padding: 6px; }
   .cameraControls { width: 100%; justify-content: space-between; overflow-x: auto; scrollbar-width: none; }
   .sceneControls { width: 100%; justify-content: space-between; }
   .lighting { padding: 2px; }
   .lighting .iconButton { width: 36px; height: 40px; }
-  .gestureHint { bottom: 2px; font-size: var(--type-size-caption, 8px); }
+  .gestureHint { bottom: 2px; font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 }
 @media (max-height: 600px) and (min-width: 761px) {
   .configurator { min-height: 390px; }
@@ -127,13 +127,13 @@
 }
 @media (max-width: 760px) and (max-height: 650px) {
   .modelIntro { top: 82px; left: 10px; width: auto; min-width: 180px; padding: 7px 10px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .modelIntro h1 { margin: 0; font-size: 18px; }
+  .modelIntro h1 { margin: 0; font-size: var(--okno-hero);  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .modelIntro > p, .modelDetails { display: none; }
 }
 @media (max-height: 600px) {
   .configurator { min-height: 0; }
   .panelTitle { padding: 4px 8px 0 12px; }
-  .panelTitle h2 { font-size: 17px; }
+  .panelTitle h2 { font-size: var(--okno-card);  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .panelTitle .iconButton { height: 28px; }
   .applicationControls { padding: 2px 8px 4px; }
   .applicationControls button { min-height: 32px; }

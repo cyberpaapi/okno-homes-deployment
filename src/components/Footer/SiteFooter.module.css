@@ -90,10 +90,10 @@
 .brandLine {
   margin: 23px 0 27px;
   color: #bfc5b8;
-  font-size: var(--type-size-caption, 14px);
+  font-size: var(--type-size-caption, var(--okno-footer));
   line-height: 1.55;
   overflow-wrap: anywhere;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .socialLinks {
   display: flex;
@@ -127,16 +127,16 @@
 .linkGroup h2 {
   margin: 0 0 9px;
   color: #aeb8aa;
-  font-size: var(--type-size-caption, 12px);
+  font-size: var(--type-size-caption, var(--okno-label));
   font-weight: 400;
   line-height: 1.4;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .linkGroup a {
-  font-size: var(--type-size-body, 15px);
+  font-size: var(--type-size-body, var(--okno-footer));
   line-height: 1.4;
   transition: color 180ms ease;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .footerBottom {
   border-top: 1px solid rgb(230 233 222 / 15%);
@@ -151,10 +151,10 @@
   margin: 0 auto;
   padding: 18px var(--site-gutter) 20px;
   color: #b6bdb0;
-  font-size: var(--type-size-caption, 11px);
+  font-size: var(--type-size-caption, var(--okno-footer));
   line-height: 1.5;
   overflow-wrap: anywhere;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 @media (hover: hover) and (pointer: fine) {
   .linkGroup a:hover { color: #c4d3c5; }
@@ -203,7 +203,7 @@
   .footerLogo { width: 146px; }
   .brandLine { margin: 19px 0 22px; }
   .linkGroup { gap: 12px; }
-  .linkGroup a { font-size: var(--type-size-body, 13px); }
+  .linkGroup a { font-size: var(--type-size-body, var(--okno-footer));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .footerBottomInner { flex-wrap: wrap; gap: 6px 20px; }
 }
 

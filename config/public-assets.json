@@ -1743,7 +1743,7 @@
   "/configurator/antigravity/bridge.js": 1245,
   "/configurator/antigravity/catalog.js": 8107,
   "/configurator/antigravity/engine.js": 854151,
-  "/configurator/antigravity/okno.css": 1219,
+  "/configurator/antigravity/okno.css": 2233,
   "/configurator/antigravity/viewer.html": 47171,
   "/configurator/antigravity/assets/00f57efddfcfb6b0.jpg": 110373,
   "/configurator/antigravity/assets/08c83e2695b92ced.jpg": 136858,
@@ -1799,5 +1799,11 @@
   "/configurator/antigravity/assets/fc793857efb46dd3.jpg": 39983,
   "/configurator/antigravity/assets/forza-5588ea4660093a06.glb": 27405592,
   "/configurator/antigravity/assets/kray-d8a918b74f0ec008.glb": 18293076,
-  "/configurator/antigravity/assets/tengo-61b7fbcaaf1b1e1f.glb": 9283532
+  "/configurator/antigravity/assets/tengo-61b7fbcaaf1b1e1f.glb": 9283532,
+  "/fonts/kento-bold.woff": 13060,
+  "/fonts/kento-light.woff": 13400,
+  "/fonts/kento-regular.woff": 12496,
+  "/fonts/govandi-adhiwan-regular.ttf": 42496,
+  "/fonts/okno-viewer-fonts.css": 784,
+  "/fonts/okno-font-provenance.json": 1376
 }

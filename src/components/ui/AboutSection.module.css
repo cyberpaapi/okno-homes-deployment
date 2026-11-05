@@ -62,12 +62,10 @@
 .heroTitle {
   margin: 0;
   color: #fff;
-  font-size: var(--type-size-display, clamp(3.9rem, 8vw, 6rem));
+  font-size: var(--type-size-display, var(--okno-hero));
   font-weight: 650;
-  line-height: 0.98;
-  letter-spacing: -0.035em;
   text-shadow: 0 3px 28px rgba(0, 0, 0, 0.58);
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .media {
   position: relative;
@@ -99,13 +97,12 @@
 .manifesto p {
   max-width: 29ch;
   margin: 0 auto;
-  font-size: var(--type-size-display, clamp(2.35rem, 4.25vw, 4.7rem));
-  font-weight: 640;
+  font-size: var(--type-size-display, var(--okno-intro));
   line-height: 1.18;
   letter-spacing: -0.032em;
   text-align: center;
   text-wrap: balance;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .manifesto span { color: var(--about-copper); }
 
@@ -167,22 +164,19 @@
   max-width: 13ch;
   margin: 0;
   color: var(--about-ink);
-  font-size: var(--type-size-display, clamp(3.1rem, 5.1vw, 5.5rem));
+  font-size: var(--type-size-display, var(--okno-section));
   font-weight: 620;
-  line-height: 1.06;
-  letter-spacing: -0.035em;
   text-wrap: balance;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .body {
   max-width: 60ch;
   margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
   color: var(--about-muted);
-  font-size: var(--type-size-body, clamp(1.04rem, 1.18vw, 1.24rem));
-  font-weight: 400;
+  font-size: var(--type-size-body, var(--okno-body));
   line-height: 1.7;
   text-wrap: pretty;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .visionMedia { width: 100%; aspect-ratio: 1444 / 1800; }
 .landscapeMedia { width: 100%; aspect-ratio: 1672 / 941; }
@@ -219,11 +213,10 @@
 }
 .assurance p {
   margin: 0;
-  font-size: var(--type-size-body, clamp(1rem, 1.25vw, 1.22rem));
-  font-weight: 650;
+  font-size: var(--type-size-body, var(--okno-body));
   line-height: 1.42;
   letter-spacing: -0.012em;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 .assurance p span { display: block; }
 .assurance p span:last-child { color: var(--about-muted); font-weight: 450; }
 
@@ -246,14 +239,14 @@
     max-width: none;
     padding: 0 1.25rem 1.75rem;
   }
-  .heroTitle { font-size: var(--type-size-display, clamp(2.65rem, 10.5vw, 3.8rem)); text-shadow: none; }
+  .heroTitle { font-size: var(--type-size-display, var(--okno-hero)); text-shadow: none;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .heroMedia { width: 100%; }
   .manifesto { padding: 4rem 1.25rem 2rem; }
-  .manifesto p { font-size: var(--type-size-display, clamp(1.7rem, 7vw, 2.5rem)); text-align: left; }
+  .manifesto p { font-size: var(--type-size-display, var(--okno-intro)); text-align: left;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .chapter { padding: 3.25rem 1.25rem; }
   .fit { padding-bottom: 2rem; }
-  .heading { font-size: var(--type-size-display, clamp(2.2rem, 9vw, 3.4rem)); }
-  .body { margin-top: 1.25rem; font-size: var(--type-size-body, 1.04rem); line-height: 1.65; }
+  .heading { font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .body { margin-top: 1.25rem; font-size: var(--type-size-body, var(--okno-body)); line-height: 1.65;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .visionMedia { width: 100%; max-width: 29rem; }
   .future .copy, .fit .copy { order: 1; }
   .future .media, .fit .media { order: 2; }
@@ -263,7 +256,7 @@
     margin-top: 2.5rem;
   }
   .assurance svg { width: 2.5rem; height: 2.5rem; margin-bottom: 0.9rem; }
-  .assurance p { font-size: var(--type-size-body, 1rem); }
+  .assurance p { font-size: var(--type-size-body, var(--okno-body));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .why { padding-block: 3rem; }
 }
 
@@ -272,5 +265,5 @@
   .media { transition: none; }
 }
 
-.founderCaptions { display:flex; justify-content:space-between; gap:20px; font-size:12px; line-height:1.5; color:inherit; }
+.founderCaptions { display:flex; justify-content:space-between; gap:20px; font-size:var(--okno-spec); line-height:1.5; color:inherit;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 .founderCaptions p:last-child { text-align:right; }

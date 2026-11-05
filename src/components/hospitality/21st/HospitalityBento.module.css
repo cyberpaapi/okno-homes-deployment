@@ -58,30 +58,26 @@
 .copy p {
   margin: 0;
   color: rgba(255, 255, 255, .6);
-  font-size: var(--type-size-caption, 10px);
-  font-weight: 500;
+  font-size: var(--type-size-caption, var(--okno-body));
   letter-spacing: .18em;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .copy strong {
   min-width: 0;
-  font-size: var(--type-size-heading, clamp(44px, 5vw, 76px));
+  font-size: var(--type-size-heading, var(--okno-figure));
   font-weight: 500;
-  letter-spacing: -.075em;
   line-height: 1;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .copy h3 {
   min-width: 0;
   min-height: 3.15em;
   max-width: 32ch;
   margin: 0;
-  font-size: var(--type-size-subheading, clamp(17px, 1.5vw, 24px));
+  font-size: var(--type-size-subheading, var(--okno-card));
   font-weight: 450;
-  letter-spacing: -.035em;
-  line-height: 1.05;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 @media (max-width: 1000px) {
   .grid {
@@ -115,7 +111,7 @@
   }
 
   .copy h3 { min-height: 0; }
-  .copy h3 { font-size: var(--type-size-subheading, 23px); line-height: 1.05; }
+  .copy h3 { font-size: var(--type-size-subheading, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -127,3 +123,6 @@
   .card,
   .media img { opacity: 1 !important; transform: none !important; }
 }
+
+.copy strong[data-figure="false"] { font-size: var(--type-size-subheading, var(--okno-card)); }
+.copy h3 { font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400; font-size: var(--type-size-body, var(--okno-body)); line-height: 1.5; }

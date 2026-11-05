@@ -16,7 +16,7 @@ Current Models entrance correction: [compositor-friendly loader reveal and local
 
 Current responsive correction: [Hospitality alignment, mobile controls, landscape text and site-wide route coverage](responsive-audit-2026-10-14.md).
 
-Current typography system: [original responsive sizes, optional numeric section controls and retained Geist master](numeric-typography-2026-10-15.md).
+Current typography system: [supplied Kento/Govandi scale and responsive roles](typography-2026-11-05.md). Previous numeric editing architecture: [optional section controls](numeric-typography-2026-10-15.md).
 
 Current local showcase acceptance: [running services, admin text/photo/collection publication, restart persistence, route checks and configurator verification](local-showcase-verification-2026-10-13.md).
 

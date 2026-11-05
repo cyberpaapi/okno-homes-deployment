@@ -107,9 +107,9 @@ canvas.journeyVideo:not([data-scrub-presented-frames]) { opacity: 0; }
   text-align: center;
 }
 .brand .wordmark { width: clamp(220px, 32vw, 460px); height: auto; }
-.brand p { max-width: 40ch; margin: 0; font-weight: 400; font-size: calc(var(--type-size-subheading, clamp(16px, 1.8vw, 25px)) * 1.35); line-height: 1.4; text-transform: uppercase; color: #f4f0e9; text-shadow: 0 2px 18px #000; }
+.brand p { max-width: 40ch; margin: 0; font-weight: 400; font-size: var(--type-size-subheading, var(--okno-hero)); text-transform: uppercase; color: #f4f0e9; text-shadow: 0 2px 18px #000;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 .journeyLoading { display: grid; justify-items: center; gap: 12px; }
-.journeyLoading span { color: #f4f0e9; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; text-shadow: 0 2px 12px #000; }
+.journeyLoading span { color: #f4f0e9; font-size: var(--okno-label); text-transform: uppercase; text-shadow: 0 2px 12px #000;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .loadingBar { display: block; width: min(180px, 45vw); height: 2px; border: 0; appearance: none; background: rgb(244 240 233 / .25); color: #f4f0e9; }
 .loadingBar::-webkit-progress-bar { background: rgb(244 240 233 / .25); }
 .loadingBar::-webkit-progress-value { background: #f4f0e9; }

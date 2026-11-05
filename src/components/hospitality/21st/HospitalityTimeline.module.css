@@ -18,9 +18,9 @@
 .axis i { display: block; flex: 0 0 .8vw; width: .8vw; height: .8vw; border-radius: 50%; background: var(--timeline-sage); }
 .axis i:last-child { background: var(--timeline-water); }
 .timelineTitle { position: absolute; left: 0; top: 5%; width: 29vw; }
-.timelineTitle small { display: block; margin-bottom: 1vw; color: rgba(244,241,233,.62); font-size: var(--type-size-caption, .72vw); font-weight: 650; letter-spacing: .2em; text-transform: uppercase; }
-.timelineTitle h2 { max-width: 9ch;  overflow-wrap: anywhere; margin: 0; font-size: var(--type-size-heading, 3.2vw); font-weight: 540; letter-spacing: -.07em; line-height: .92; }
-.period { position: absolute; left: 0; top: 55%; margin: 0; color: rgba(244,241,233,.62); font-size: var(--type-size-body, 1.25vw); }
+.timelineTitle small { display: block; margin-bottom: 1vw; color: rgba(244,241,233,.62); font-size: var(--type-size-caption, var(--okno-label)); font-weight: 650; text-transform: uppercase;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+.timelineTitle h2 { max-width: 9ch;  overflow-wrap: anywhere; margin: 0; font-size: var(--type-size-heading, var(--okno-section)); font-weight: 540;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+.period { position: absolute; left: 0; top: 55%; margin: 0; color: rgba(244,241,233,.62); font-size: var(--type-size-body, var(--okno-spec));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 .step { --left: calc(29vw + var(--step-index) * 23vw); --milestone-accent: var(--timeline-sage); --photo-height: clamp(59px, 5.3vw, 92px); --photo-offset: clamp(8px, .8vw, 14px); position: absolute; left: var(--left); top: 0; width: 20vw; height: 50%; perspective: 650px; }
 .step[data-phase="make"] { --milestone-accent: var(--timeline-stone); }
 .step[data-phase="open"] { --milestone-accent: var(--timeline-water); }
@@ -54,6 +54,6 @@
 .stepCopy { position: absolute; left: 2.4vw; width: 18vw;  overflow-wrap: anywhere; }
 .step[data-side="top"] .stepCopy { top: 0; }
 .step[data-side="bottom"] .stepCopy { bottom: 0; }
-.stepCopy b { display: block; margin-bottom: .8vw; color: var(--milestone-accent); font-size: var(--type-size-caption, .82vw); letter-spacing: .18em; }
-.stepCopy h3 { margin: 0; color: var(--milestone-accent); font-size: var(--type-size-subheading, clamp(20px, 2vw, 32px)); font-weight: 520; letter-spacing: -.06em; line-height: .92; }
-.stepCopy p { max-width: 18vw; margin: 1vw 0 0; color: rgba(244,241,233,.62); font-size: var(--type-size-body, clamp(11px, .95vw, 16px)); line-height: 1.28; }
+.stepCopy b { display: block; margin-bottom: .8vw; color: var(--milestone-accent); font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+.stepCopy h3 { margin: 0; color: var(--milestone-accent); font-size: var(--type-size-subheading, var(--okno-step)); font-weight: 520;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+.stepCopy p { max-width: 18vw; margin: 1vw 0 0; color: rgba(244,241,233,.62); font-size: var(--type-size-body, var(--okno-body)); line-height: 1.28;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}

@@ -30,7 +30,7 @@ describe("BespokeExperience", () => {
       expect(screen.getByRole("heading", { name: stage })).toBeInTheDocument();
     }
     expect(screen.queryByRole("heading", { name: "One place. One home." })).not.toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /Lakewood Villa entrance and planted garden/i })).toHaveAttribute("src", expect.stringContaining("/page-images/"));
+    expect(screen.getByRole("img", { name: /Lakewood Villa entrance and planted garden/i })).toHaveAttribute("src", expect.stringContaining("/thumbnail-images/"));
     expect(screen.getByRole("button", { name: "Next step: BRIEF" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next step: FORM" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next step: ATMOSPHERE" })).toBeInTheDocument();

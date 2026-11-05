@@ -86,8 +86,8 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
 
   const duration = reduced ? 0 : 0.68;
   const expandedWidth = viewport.width <= 520
-    ? Math.max(220, viewport.width - 32)
-    : 340;
+    ? Math.max(220, viewport.width - 16)
+    : 440;
   const expandedHeight = Math.max(280, Math.min(560, viewport.height - 32));
   const collapsedWidth = Math.max(100, Math.min(220, Math.max(menuLabel.length, closeLabel.length) * 9 + 52));
   return (

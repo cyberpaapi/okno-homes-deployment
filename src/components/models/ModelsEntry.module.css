@@ -46,23 +46,19 @@
 
 .introduction h1 {
   margin: 0;
-  font-family: "Models Geist", "Geist OKNO", Arial, sans-serif;
-  font-size: var(--type-size-subheading, clamp(19px, 2.1vw, 34px));
+  font-size: var(--type-size-subheading, var(--okno-hero));
   font-weight: 500;
-  line-height: 1;
-  letter-spacing: -.055em;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .introduction h1 span { color: #c6d3bd; }
 
 .introCopy {
   margin: 0;
   color: #d9e2d6;
-  font-size: var(--type-size-caption, 10px);
-  font-weight: 500;
+  font-size: var(--type-size-caption, var(--okno-intro));
   letter-spacing: .13em;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .page::before {
   content: "";
@@ -92,8 +88,8 @@
     overflow: hidden visible;
   }
   .introduction { padding: 0 8px 2px; }
-  .introduction h1 { font-size: var(--type-size-subheading, 21px); }
-  .introCopy { font-size: var(--type-size-caption, 8px); }
+  .introduction h1 { font-size: var(--type-size-subheading, var(--okno-hero));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .introCopy { font-size: var(--type-size-caption, var(--okno-intro));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .introCopy { color:#d9e2d6; }
 }
 
@@ -105,3 +101,7 @@
   .page *, .page *::before, .page *::after { transition-duration: 0s !important; }
   .page::before { animation: none; will-change: auto; }
 }
+
+.introduction { align-items: flex-start; flex-direction: column; gap: 12px; }
+.introduction h1 { font-size: var(--type-size-heading, var(--okno-section)); }
+.introCopy { font-size: var(--type-size-caption, var(--okno-label)); font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: .01em; }

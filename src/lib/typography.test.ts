@@ -8,6 +8,16 @@ const bindings = typographyBindings(adminPages);
 function files(directory: string): string[] { return readdirSync(directory, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? files(path.join(directory, entry.name)) : [path.join(directory, entry.name)]); }
 
 describe('published typography contract', () => {
+  it('pairs the supplied fonts by default while preserving explicit editor choices', () => {
+    const css = typographyCss({}, [{ scope: 'home.timeline', fields: [] }]);
+    expect(css).toContain('--type-font-body:var(--okno-font-body)');
+    expect(css).toContain('--type-font-heading:var(--okno-font-heading)');
+    expect(css).toContain('--type-font-highlight:var(--type-font-heading)');
+    const custom = typographyCss({ 'typography.master-font': 'manrope', 'typography.section.home.timeline.heading-font': 'kento' }, [{ scope: 'home.timeline', fields: [] }]);
+    expect(custom).toContain('--type-font-body:var(--type-font-master)');
+    expect(custom).toContain('--type-font-heading:"Kento OKNO"');
+    expect(typographyCss({ 'typography.section.home.timeline.body-font': 'bad-font' }, [{ scope: 'home.timeline', fields: [] }])).toBe(css);
+  });
   it('registers optional numeric sizes and font choices for every editable section', () => {
     const fields = allContentFields().filter(field => field.id.startsWith('typography.'));
     expect(new Set(fields.map(field => field.id)).size).toBe(fields.length);
@@ -49,7 +59,7 @@ describe('published typography contract', () => {
     expect(css).toContain('@media(max-width:700px)');
     expect(css).toContain('--type-size-body:15px');
   });
-  it('keeps original CSS fallbacks and binds every editing section to real public source', () => {
+  it('keeps responsive role fallbacks and binds every editing section to real public source', () => {
     const sourceFiles = files('src').filter(file => file.endsWith('.tsx') && !/\.test\.|\/admin\//.test(file));
     const source = sourceFiles.map(file => readFileSync(file, 'utf8')).join('\n');
     const missing = bindings.filter(binding => !source.includes(`data-type-section="${binding.scope}"`) && !binding.fields.some(id => source.includes(`data-type-field={"${id}"}`)) && ![
@@ -64,7 +74,7 @@ describe('published typography contract', () => {
     const styles = files('src').filter(file => file.endsWith('.css') && !/\/admin\//.test(file)).map(file => readFileSync(file, 'utf8')).join('\n');
     for (const role of typeRoles) expect(styles).toContain(`var(--type-size-${role},`);
     expect(styles).not.toMatch(/var\(--type-(?:display|heading|subheading|body|caption)\)/);
-    expect(styles).toContain('var(--type-size-heading, clamp(44px, 5vw, 76px))');
-    expect(styles).toContain('var(--type-size-caption, 10px)');
+    expect(styles).toContain('var(--type-size-heading, var(--okno-figure))');
+    expect(styles).toContain('var(--type-size-caption, var(--okno-label))');
   });
 });

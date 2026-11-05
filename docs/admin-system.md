@@ -1,5 +1,9 @@
 # Admin system — active implementation record
 
+## Supplied typography — 5 November 2026
+
+The master font defaults to **OKNO · Kento headings / Govandi body**. Individual Kento and Govandi choices are also available. Section font and numeric overrides retain the existing draft/preview/publish workflow; blank sizes now use the supplied November scale. Body text uses Govandi Regular, fields remain 16px, and a separate Manrope face supplies the rupee glyph. This supersedes the 31 October all-Manrope default and homepage percentage multiplier. No CMS data or credentials were changed. See [the specification mapping](typography-2026-11-05.md).
+
 ## Configurator availability — 31 October 2026
 
 Public Configure actions only appear for a published model with a valid editable house: the supplied Forza/Tengo/Kray assets or a custom GLB. Upload and publish a GLB to enable another model; a reference/legacy viewer does not qualify. This applies to both the Signature page and Explore details.

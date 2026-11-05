@@ -35,10 +35,9 @@
   background: transparent;
   color: #6d6960;
   cursor: pointer;
-  font: 500 var(--type-size-caption, 12px)/1.2 "Enquiry Geist", "Geist OKNO", Arial, sans-serif;
-  letter-spacing: -0.01em;
+  font: 500 var(--type-size-caption, var(--okno-label))/1.2 "Enquiry Geist", "Geist OKNO", Arial, sans-serif;
   transition: color 180ms ease;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .tab[aria-selected="true"] {
   color: #f4f0e8;
@@ -57,8 +56,8 @@
   .tab {
     min-height: 46px;
     padding: 0 8px;
-    font-size: var(--type-size-caption, 10px);
-  }
+    font-size: var(--type-size-caption, var(--okno-label));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -51,7 +51,7 @@ function BentoCard({ card, index }: { card: BentoCardContent; index: number }) {
       <div className={styles.fade} aria-hidden="true" />
       <div className={styles.copy}>
         <p>{card.eyebrow}</p>
-        <strong>{card.value}</strong>
+        <strong data-figure={/^\d/.test(card.value.trim())}>{card.value}</strong>
         <h3>{card.title}</h3>
       </div>
     </motion.article>

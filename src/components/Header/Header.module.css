@@ -4,7 +4,7 @@
 .header[data-tone="light"] .shell { border-bottom-color: #2729211f; }
 .logo { display: block; width: 126px; line-height: 0; }
 .logo img { display: block; width: 100%; height: auto; }
-.navigation { position: absolute; left: 50%; display: flex; align-items: center; gap: clamp(16px, 1.8vw, 28px); transform: translateX(-50%); font-size: var(--type-size-caption, 11px); }
+.navigation { position: absolute; left: 50%; display: flex; align-items: center; gap: clamp(16px, 1.8vw, 28px); transform: translateX(-50%); font-size: var(--type-size-caption, var(--okno-nav));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .rolling { display: inline-flex; align-items: center; min-height: 24px; color: #eee8d3bc; text-decoration: none; white-space: nowrap; }
 .rolling[aria-current="page"], .rolling:hover, .rolling:focus-visible { color: #f4f0e7; }
 .header[data-tone="light"] .rolling { color: #53564a; }
@@ -15,14 +15,14 @@
 .character > span > span { display: block; height: 1.15em; line-height: 1.15em; }
 .rolling:hover .character > span, .rolling:focus-visible .character > span { transform: translateY(-50%); }
 .actions { display: flex; align-items: center; gap: 20px; margin-left: auto; }
-.enquire { min-height: 44px; padding: 11px 15px 11px 18px; font-size: var(--type-size-caption, 11px); }
+.enquire { min-height: 44px; padding: 11px 15px 11px 18px; font-size: var(--type-size-caption, var(--okno-button));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .menuPosition { display: none; position: relative; width: 100px; height: 42px; z-index: 2; }
 .menuShell { position: absolute; top: 0; right: 0; overflow: hidden; isolation: isolate; background: #171e19f7; border: 1px solid #d7c69547; box-shadow: 0 20px 60px #080c0985; backdrop-filter: blur(18px); transform-origin: 100% 0; }
 .menuCircle { position: absolute; left: 50%; width: 200%; height: 200%; border-radius: 50%; transform: translateX(-50%); background: #354333; z-index: -1; pointer-events: none; }
-.menuToggle { position: absolute; top: 0; right: 0; width: 100px; height: 41px; border: 0; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; background: transparent; color: #f1e7da; font: var(--type-size-caption, 10px) "Geist OKNO", Arial, sans-serif; cursor: pointer; }
+.menuToggle { position: absolute; top: 0; right: 0; width: 100px; height: 41px; border: 0; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; background: transparent; color: #f1e7da; font: var(--type-size-caption, var(--okno-button)) "Geist OKNO", Arial, sans-serif; cursor: pointer;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .menuIcon { position: relative; width: 18px; height: 20px; display: grid; place-items: center; }
 .menuIcon i { position: absolute; display: block; width: 15px; height: 1px; background: currentColor; }
-.menuLinks { position: absolute; inset: 72px 24px 24px; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: clamp(13px, 2.2svh, 22px); overflow-y: auto; overscroll-behavior: contain; color: #f1e7da; font-size: var(--type-size-subheading, clamp(18px, 2.5svh, 24px)); scrollbar-width: none; }
+.menuLinks { position: absolute; inset: 72px 24px 24px; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: clamp(13px, 2.2svh, 22px); overflow-y: auto; overscroll-behavior: contain; color: #f1e7da; font-size: var(--type-size-subheading, var(--okno-menu)); scrollbar-width: none;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .menuLinks::-webkit-scrollbar { display: none; }
 .menuLinks > div { flex: 0 0 auto; }
 .menuLinks .rolling { display: flex; min-height: 44px; width: 100%; padding-block: 2px; line-height: 1.15; }
@@ -40,3 +40,7 @@
 /* The menu keeps the same warm, high-contrast treatment on light page backgrounds. */
 .header[data-tone="light"] .menuLinks .rolling { color: #eee8d3bc; }
 .header[data-tone="light"] .menuLinks .rolling:is(:hover, :focus-visible, [aria-current="page"]) { color: #f4f0e7; }
+
+/* Leave room for the wide Kento navigation at the specified 28/32px sizes. */
+.menuLinks { inset-inline: 16px; letter-spacing: 0; }
+.menuLinks .letters { letter-spacing: 0; }

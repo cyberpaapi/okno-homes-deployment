@@ -16,10 +16,10 @@
   display: block;
   margin-bottom: 8px;
   color: #625e56;
-  font: 500 var(--type-size-caption, 10px)/1.2 "Enquiry Geist", "Geist OKNO", Arial, sans-serif;
+  font: 500 var(--type-size-caption, var(--okno-spec))/1.2 "Enquiry Geist", "Geist OKNO", Arial, sans-serif;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .control {
   width: 100%;
@@ -31,9 +31,9 @@
   outline: 0;
   background: transparent;
   color: #24231f;
-  font: 400 var(--type-size-body, 15px)/1 "Enquiry Geist", "Geist OKNO", Arial, sans-serif;
+  font: 400 var(--type-size-body, var(--okno-field))/1 "Enquiry Geist", "Geist OKNO", Arial, sans-serif;
   transition: border-color 180ms ease;
-}
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .control::placeholder {
   color: #6d685f;
@@ -92,5 +92,5 @@
 
 /* Keep phone focus from triggering browser zoom while preserving owner sizes. */
 @media (max-width: 700px), (pointer: coarse) {
-  .control { font-size: max(16px, var(--type-size-body, 15px)); }
+  .control { font-size: max(16px, var(--type-size-body, var(--okno-field)));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 }

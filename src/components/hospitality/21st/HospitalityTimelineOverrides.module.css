@@ -12,16 +12,16 @@
 
 @media (min-width: 1024px) and (max-width: 1300px) {
   .stage :global([data-copy]) h3 {
-    font-size: var(--type-size-subheading, 24px);
-  }
+    font-size: var(--type-size-subheading, var(--okno-step));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
   .stage :global([data-copy]) p {
-    font-size: var(--type-size-caption, 12px);
-  }
+    font-size: var(--type-size-caption, var(--okno-label));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
   .stage :global([data-copy]) b {
-    font-size: var(--type-size-caption, 10px);
-  }
+    font-size: var(--type-size-caption, var(--okno-label));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 }
 
 .mobileStage {
@@ -52,20 +52,17 @@
 .mobileHeader small,
 .mobileHeader span {
   color: rgba(244, 241, 233, .62);
-  font-size: var(--type-size-caption, 10px);
+  font-size: var(--type-size-caption, var(--okno-label));
   font-weight: 650;
-  letter-spacing: .18em;
   text-transform: uppercase;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .mobileHeader h2 {
   max-width: 8ch;
   margin: 12px 0 24px;
-  font-size: var(--type-size-display, clamp(50px, 15vw, 70px));
+  font-size: var(--type-size-display, var(--okno-section));
   font-weight: 540;
-  letter-spacing: -.075em;
-  line-height: .88;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .mobileList {
   position: relative;
@@ -120,26 +117,23 @@
 .mobileList b {
   padding-left: 20px;
   color: var(--milestone-accent);
-  font-size: var(--type-size-caption, 10px);
-  letter-spacing: .12em;
-}
+  font-size: var(--type-size-caption, var(--okno-label));
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .mobileList h3 {
   margin: 0;
   color: var(--milestone-accent);
-  font-size: var(--type-size-subheading, 28px);
+  font-size: var(--type-size-subheading, var(--okno-step));
   font-weight: 520;
-  letter-spacing: -.055em;
-  line-height: .95;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
 .mobileList p {
   max-width: 28ch;
   margin: 10px 0 0;
   color: rgba(244, 241, 233, .62);
-  font-size: var(--type-size-caption, 14px);
+  font-size: var(--type-size-caption, var(--okno-label));
   line-height: 1.35;
-}
+ font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .mobilePhoto {
   position: relative;
@@ -166,8 +160,8 @@
   }
 
   .mobileHeader h2 {
-    font-size: var(--type-size-display, clamp(62px, 10vw, 92px));
-  }
+    font-size: var(--type-size-display, var(--okno-section));
+   font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
   .mobileList {
     width: min(720px, 100%);
