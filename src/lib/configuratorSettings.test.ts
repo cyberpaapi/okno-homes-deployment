@@ -21,5 +21,19 @@ describe('model-specific walkthrough configuration', () => {
     expect(configuratorSettingsError({configuratorScale:'NaN'})).not.toBeNull();
     expect(configuratorSettingsError({configuratorScale:'0'})).not.toBeNull();
     expect(configuratorSettingsError({finish_flooring:'02'})).not.toBeNull();
+    expect(configuratorSettingsError({meshes_ext_wall:'Facade', meshes_int_wall:'Facade'})).toMatch(/more than one surface/);
+  });
+  it('links new houses to supplied or uploaded models with independent finishes', () => {
+    const source = { id: 'custom', fields: { name: 'Custom', configuratorModel: '/api/site-media/custom.glb', configuratorScale: '.001', finish_ext_roof: '02', meshes_ext_wall: 'Facade' } };
+    const linked = { id: 'retreat', fields: { name: 'Retreat', configuratorSource: 'custom', finish_ext_roof: '09' } };
+    expect(resolveConfigurator(linked, [source, linked])).toMatchObject({ slug: 'retreat', name: 'Retreat', url: '/api/site-media/custom.glb', scale: .001, defaults: { ext_roof: '09' }, mapping: { ext_wall: ['Facade'] } });
+    expect(resolveConfigurator({ id: 'new-house', fields: { configuratorSource: 'tengo' } })?.url).toContain('/tengo-');
+  });
+  it('rejects broken, circular and ambiguous model links', () => {
+    const a = { id: 'a', fields: { configuratorSource: 'b' } };
+    const b = { id: 'b', fields: { configuratorSource: 'a' } };
+    expect(resolveConfigurator(a, [a, b])).toBeNull();
+    expect(resolveConfigurator(a, [a])).toBeNull();
+    expect(configuratorSettingsError({ configuratorSource: 'forza', configuratorModel: '/house.glb' })).not.toBeNull();
   });
 });

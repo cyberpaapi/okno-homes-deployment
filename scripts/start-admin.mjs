@@ -80,9 +80,9 @@ if (existing) {
   }
 
   // Admin port is only a local gateway; a second Next.js server would compete for .next.
-  const mediaPath = /\.(?:avif|gif|ico|jpe?g|mp4|png|svg|webm|webp|woff2?|ttf)$/i;
+  const mediaPath = /\.(?:avif|gif|glb|ico|jpe?g|mp4|png|svg|webm|webp|woff2?|ttf)$/i;
   function allowed(pathname) {
-    return pathname === "/admin" || pathname.startsWith("/admin/") ||
+    return pathname === "/admin" || pathname.startsWith("/admin/") || pathname === "/configurator/model-preparation.txt" ||
       pathname.startsWith("/_next/") || pathname.startsWith("/api/admin/") ||
       pathname.startsWith("/api/site-media/") || mediaPath.test(pathname);
   }

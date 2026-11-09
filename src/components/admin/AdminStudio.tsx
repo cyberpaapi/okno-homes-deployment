@@ -109,7 +109,7 @@ function mergeLegacyProjectValues(items: ContentItem[], values: Record<string, s
   });
 }
 function siteOriginSnapshot() {
-  const onAdminPort = window.location.hostname === "127.0.0.1" && window.location.port === String(localPorts.admin);
+  const onAdminPort = ['localhost', '127.0.0.1'].includes(window.location.hostname) && window.location.port === String(localPorts.admin);
   return onAdminPort ? `http://127.0.0.1:${localPorts.website}` : window.location.origin;
 }
 
@@ -254,7 +254,7 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
   }, []);
   useEffect(() => {
     if (passwordless) { queueMicrotask(() => { void connect(""); }); return; }
-    if (window.location.hostname !== "127.0.0.1" || window.location.port !== String(localPorts.admin)) return;
+    if (!['localhost', '127.0.0.1'].includes(window.location.hostname) || window.location.port !== String(localPorts.admin)) return;
     const params = new URLSearchParams(window.location.hash.slice(1));
     const demoToken = params.get("demo-token");
     if (!demoToken) return;
@@ -500,7 +500,7 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
           <div className={styles.modelBody}>
             {baseIds.has(record.id) && ownedSections.map((section,sectionIndex) => sectionPanel(section,sectionIndex))}
             <SignatureModelPanel
-              model={record} siteOrigin={siteOrigin} plans={ownedPlans} builtIn={baseIds.has(record.id)} disabled={busy || !snapshot}
+              model={record} roster={roster} siteOrigin={siteOrigin} plans={ownedPlans} builtIn={baseIds.has(record.id)} disabled={busy || !snapshot}
               canMoveUp={index > 0} canMoveDown={index < roster.length - 1}
               onMoveModel={direction => setLocalCollections(previous => {
                 const next = [...roster]; const target = index + direction;
@@ -512,7 +512,7 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
                 if (!nextId || roster.some(item => item.id === nextId && item.id !== record.id)) return false;
                 if (nextId === record.id) return true;
                 setLocalCollections(previous => ({ ...previous,
-                  "signature.models": roster.map(item => item.id === record.id ? { ...item, id: nextId } : item),
+                  "signature.models": roster.map(item => ({ ...item, id: item.id === record.id ? nextId : item.id, fields: item.fields.configuratorSource === record.id ? { ...item.fields, configuratorSource: nextId } : item.fields })),
                   "signature.plans": plans.map(plan => plan.fields.modelId === record.id ? { ...plan, fields: { ...plan.fields, modelId: nextId } } : plan),
                 }));
                 return true;

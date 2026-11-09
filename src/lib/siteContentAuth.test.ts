@@ -92,4 +92,14 @@ describe('explicit password-free admin mode', () => {
     }
     expect(isAdminAuthorized(new Request('https://okno-homes-aryan.vercel.app/api/admin/content', { method: 'PATCH', headers: { origin: 'https://okno-homes-aryan.vercel.app' } }))).toBe(true);
   });
+  it('accepts only the fixed local gateway origins and never extends this exception to Vercel', async () => {
+    vi.stubEnv('OKNO_ADMIN_PASSWORDLESS', 'true');
+    const { isAdminAuthorized } = await import('./siteContentStore');
+    const write = (origin: string, extra: Record<string, string> = {}) => new Request('http://localhost:3134/api/admin/content', { method: 'PATCH', headers: { origin, ...extra } });
+    for (const origin of ['http://localhost:3140', 'http://127.0.0.1:3140', 'http://127.0.0.1:3134']) expect(isAdminAuthorized(write(origin))).toBe(true);
+    for (const origin of ['http://localhost:9999', 'http://attacker.example:3140', 'null']) expect(isAdminAuthorized(write(origin))).toBe(false);
+    expect(isAdminAuthorized(write('http://localhost:3140', { 'sec-fetch-site': 'cross-site' }))).toBe(false);
+    vi.stubEnv('VERCEL', '1');
+    expect(isAdminAuthorized(write('http://localhost:3140'))).toBe(false);
+  });
 });

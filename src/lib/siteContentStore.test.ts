@@ -28,6 +28,19 @@ afterEach(async () => {
 });
 
 describe("collection content store", () => {
+  it('publishes linked model settings only after saving and rejects a circular source graph', async () => {
+    const store = await import('./siteContentStore');
+    const { signatureModelDefaults } = await import('./signatureCollections');
+    const models = signatureModelDefaults.map(model => model.id === 'forza' ? { ...model, fields: { ...model.fields, configuratorSource: 'tengo', finish_ext_wall: '10' } } : model);
+    const draft = await store.saveCollectionDraft('signature.models', models, 0, 0);
+    expect((await store.readContent()).publishedCollections['signature.models']).toBeUndefined();
+    const published = await store.publishDraft(0, draft.draftRevision);
+    expect(published.publishedCollections['signature.models'].find(model => model.id === 'forza')?.fields.configuratorSource).toBe('tengo');
+    const circular = models.map(model => model.id === 'tengo' ? { ...model, fields: { ...model.fields, configuratorSource: 'forza' } } : model);
+    const brokenDraft = await store.saveCollectionDraft('signature.models', circular, published.revision, published.draftRevision);
+    await expect(store.publishDraft(published.revision, brokenDraft.draftRevision)).rejects.toThrow(/linked 3D model/);
+    expect((await store.readContent()).revision).toBe(published.revision);
+  });
   it("keeps new GLB model settings private until publication and rejects missing geometry", async () => {
     const store = await import("./siteContentStore");
     const { signatureModelDefaults } = await import("./signatureCollections");

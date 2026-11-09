@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { signatureAsset } from "@/data/configurator/signatureAssets";
 import SuppliedConfigurator from "./SuppliedConfigurator";
 
-const scene = vi.hoisted(() => ({ finish: vi.fn(), dispose: vi.fn(), turn: vi.fn(), view: vi.fn(), light: vi.fn(), background: vi.fn(), moveCamera: vi.fn(), glb: vi.fn().mockResolvedValue({}), surface: vi.fn() }));
+const scene = vi.hoisted(() => ({ finish: vi.fn(), dispose: vi.fn(), turn: vi.fn(), view: vi.fn(), light: vi.fn(), background: vi.fn(), moveCamera: vi.fn(), glb: vi.fn().mockResolvedValue({}), surface: vi.fn().mockReturnValue(1), mapSurfaces: vi.fn().mockReturnValue({ counts: { 'external-roof': 1, 'external-wall': 1, flooring: 1, 'internal-ceiling': 1, 'internal-wall': 1 }, meshes: [] }) }));
 vi.mock("./cabinScene", () => ({ createScene: (_mount: HTMLElement, ready: () => void) => { ready(); return scene; } }));
 vi.mock("next/navigation", () => ({ usePathname: () => "/models/signature/forza/configure" }));
 

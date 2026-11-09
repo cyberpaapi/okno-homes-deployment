@@ -500,7 +500,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
   });
   const activeModel = orderedModels.find(model => model.slug === activeSlug) ?? orderedModels[0] ?? models[0]!;
   const activeRecord = modelRecords.find(record => record.id === activeModel.slug);
-  const canConfigure = Boolean(activeRecord && resolveConfigurator(activeRecord));
+  const canConfigure = Boolean(activeRecord && resolveConfigurator(activeRecord, modelRecords));
   const filteredModels = orderedModels.filter(
     (model) => getPlanVariantIndex(model, planFilter) >= 0,
   );

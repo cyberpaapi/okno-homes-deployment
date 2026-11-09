@@ -1,6 +1,6 @@
 # OKNO release repository
 
-Read `WORKING-VERSION.md`, `docs/README.md` and `docs/deployment/README.md` before edits. Admin work also reads and updates `docs/admin-system.md`. This private repository contains one website and same-domain `/admin`; never add a public admin navigation link. Local website/admin ports are 3134/3140, with `npm run admin` reusing the website process. Production requires private durable Blob storage and, by default, a server-only owner key. The owner explicitly requested password-free access for the Aryan deployment on 31 October 2026; only that deployment enables `OKNO_ADMIN_PASSWORDLESS=true` (see `docs/admin-system.md`); do not enable local demo auth or filesystem persistence on Vercel. Preserve current public designs and third-party provenance. Only operate on the Vercel project identified in `docs/deployment/operations.md`; other projects remain separate.
+Read `WORKING-VERSION.md`, `docs/README.md` and `docs/deployment/README.md` before edits. Admin work also reads and updates `docs/admin-system.md`. This private repository contains one website and same-domain `/admin`; never add a public admin navigation link. Local website/admin ports are 3134/3140, with `npm run admin` reusing the website process. Production requires private durable Blob storage and, by default, a server-only owner key. The owner explicitly requested password-free access for the Aryan deployment on 31 October 2026; that deployment and the owner-authorized Windows local checkout enable `OKNO_ADMIN_PASSWORDLESS=true` (see `docs/admin-system.md`); do not enable local demo auth or filesystem persistence on Vercel. Preserve current public designs and third-party provenance. Only operate on the Vercel project identified in `docs/deployment/operations.md`; other projects remain separate.
 
 ## Required OKNO design preferences
 
@@ -19,5 +19,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 <!-- END:nextjs-agent-rules -->
 
 ## Shared admin credential policy
+
+On 9 November 2026 the owner explicitly requested no key for this Windows local checkout. Its ignored `.env.local` enables `OKNO_ADMIN_PASSWORDLESS=true`; keep the website/admin bound to loopback on 3134/3140. Do not ask for or regenerate a local key. This supersedes the local credential requirement below; other deployments retain their existing configuration.
 
 The owner chose a fixed, non-expiring shared owner credential for live and local admin. Reuse the configured key; do not regenerate or rotate it unless the owner explicitly requests a change. Staff sign-in instructions must not require generation or renewal. Keep the configured value server-only and out of public client code.

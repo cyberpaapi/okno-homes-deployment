@@ -1,4 +1,4 @@
-import { configuratorSettingsError } from "./configuratorSettings";
+import { configuratorSettingsError, resolveConfigurator } from "./configuratorSettings";
 import { typographyValueError, validateTypographySizes } from "@/lib/typography";
 import "server-only";
 
@@ -20,6 +20,7 @@ import { signatureModelDefaults, signaturePlanDefaults } from "@/lib/signatureCo
 import { parseProcessDayRange } from "@/lib/processDayRange";
 import { cloudStorageEnabled, readCloudContent, writeCloudContent, cloudMediaExists, publicAssetExists } from "@/lib/cloudStorage";
 import contentSeed from "../../config/content-seed.json";
+import localPorts from "../../config/local-ports.json";
 
 export type ContentSnapshot = {
   revision: number;
@@ -176,7 +177,16 @@ export function isAdminAuthorized(request: Request) {
     if (["GET", "HEAD", "OPTIONS"].includes(request.method)) return true;
     if (request.headers.get("sec-fetch-site") === "cross-site") return false;
     const origin = request.headers.get("origin");
-    return !origin || origin === new URL(request.url).origin;
+    if (!origin || origin === new URL(request.url).origin) return true;
+    // The fixed local admin gateway forwards to the website. Next may normalize
+    // 127.0.0.1 to localhost; allow only these two loopback services locally.
+    if (process.env.VERCEL !== '1') {
+      try {
+        const local = (url: URL) => url.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(url.hostname) && [String(localPorts.website), String(localPorts.admin)].includes(url.port);
+        return local(new URL(request.url)) && local(new URL(origin));
+      } catch { return false; }
+    }
+    return false;
   }
   const supplied = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
   if (matchesToken(process.env.OKNO_CMS_ADMIN_TOKEN, supplied)) return true;
@@ -421,6 +431,7 @@ function validatePublishCollections(collections: ContentCollections, previousCol
   if (collections["signature.plans"]) for (const plan of signaturePlans) if (!signatureIds.has(plan.fields.modelId)) throw new Error(`Signature plans / ${plan.id}: owning model is missing.`);
   const baseSignatureIds = new Set(signatureModelDefaults.map(item => item.id));
   for (const model of signatureModels) {
+    if (model.fields.configuratorSource && !resolveConfigurator(model, signatureModels)) throw new Error(`Signature models / ${model.id}: linked 3D model is missing, disabled or links back to this house. Choose a valid model before publishing.`);
     if (!signaturePlans.some(plan => plan.fields.modelId === model.id)) throw new Error(`Signature models / ${model.id}: add at least one plan.`);
     if (baseSignatureIds.has(model.id)) continue;
     for (const key of ["orbitFilm", "detailFilm", "poster", "posterAlt", "exploreAction"]) if (!model.fields[key]?.trim()) throw new Error(`Signature models / ${model.id}: ${key} is required.`);

@@ -4,7 +4,8 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
-import { housePlacement, houseViews, houseOrbitLimits } from "./modelFraming";
+import { houseBounds, housePlacement, houseViews, houseOrbitLimits } from "./modelFraming";
+import { meshApplications, zoneApplications } from "./surfaceMapping";
 import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { projectGeometryInModelSpace } from "./materialProjection.mjs";
@@ -32,9 +33,23 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     const scene = new THREE.Scene();
     scene.fog = new THREE.Fog("#cbd1c2", 18, 52);
     const camera = new THREE.PerspectiveCamera(innerWidth < 700 ? 48 : 40, mount.clientWidth / mount.clientHeight, .08, 100);
+    const layoutRoot = mount.closest('[data-configurator]');
     const cameraOffset = () => {
-        if (customerModel && innerWidth < 700) camera.setViewOffset(mount.clientWidth, mount.clientHeight, 0, -mount.clientHeight * .13, mount.clientWidth, mount.clientHeight);
-        else camera.clearViewOffset();
+        camera.clearViewOffset();
+        if (!layoutRoot) return;
+        // Render across the whole scene, but fit the house into the space between
+        // the controls. Cropping the canvas itself leaves rectangular terrain seams.
+        const rect = mount.getBoundingClientRect();
+        const intro = layoutRoot.querySelector('[data-viewer-intro]')?.getBoundingClientRect();
+        const panel = layoutRoot.querySelector('#finishes')?.getBoundingClientRect();
+        const dock = layoutRoot.querySelector('#viewer-controls')?.getBoundingClientRect();
+        const mobile = innerWidth <= 760, compact = innerWidth <= 1120;
+        const sidePanel = panel && (!mobile || innerHeight <= 500);
+        const left = !compact && intro ? intro.right - rect.left + 16 : 0;
+        const right = sidePanel ? panel.left - rect.left - 16 : rect.width;
+        const top = compact && intro ? intro.bottom - rect.top + 12 : 12;
+        const bottom = mobile && panel && !sidePanel ? panel.top - rect.top - 12 : dock ? dock.top - rect.top - 16 : rect.height;
+        camera.setViewOffset(Math.max(120, right - left), Math.max(100, bottom - top), -left, -top, rect.width, rect.height);
     };
     cameraOffset();
     camera.position.set(9.6, 5.3, 10.8);
@@ -122,6 +137,13 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     chair(.05, D / 2 + 1.25, .24);
     scene.add(cabin);
     const groundTex = tex("/textures/meadow-grass.jpg", 18, 18), groundMaterial = new THREE.MeshStandardMaterial({ map: groundTex, bumpMap: groundTex, bumpScale: .085, color: "#82936d", roughness: 1 }), ground = new THREE.Mesh(new THREE.CircleGeometry(32, 96), groundMaterial);
+    // Blend the distant terrain into the photographic environment instead of
+    // exposing the hard edge of a circular mesh. Nearby contact shadows stay solid.
+    groundMaterial.transparent = true;
+    groundMaterial.onBeforeCompile = shader => {
+        shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nvarying vec2 vTerrainPosition;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvTerrainPosition = position.xy;');
+        shader.fragmentShader = shader.fragmentShader.replace('#include <common>', '#include <common>\nvarying vec2 vTerrainPosition;').replace('#include <opaque_fragment>', 'diffuseColor.a *= 1.0 - smoothstep(20.0, 32.0, length(vTerrainPosition));\n#include <opaque_fragment>');
+    };
     ground.rotation.x = -Math.PI / 2;
     ground.receiveShadow = true;
     scene.add(ground);
@@ -160,11 +182,8 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     sun.shadow.normalBias = .025;
     fill.position.set(8, 5, -8);
     scene.add(hemi, sun, fill);
-    const inside = new THREE.PointLight("#ffb86e", 15, 7, 1.9);
-    inside.position.set(-.4, 2.3, -1.2);
-    scene.add(inside);
     let presets = { hero: [new THREE.Vector3(9.6, 5.25, 10.8), new THREE.Vector3(0, 1.62, .35)], front: [new THREE.Vector3(.1, 2.55, 12.4), new THREE.Vector3(0, 1.95, 1.1)], side: [new THREE.Vector3(11.8, 3.25, 1.2), new THREE.Vector3(0, 1.62, 0)], rear: [new THREE.Vector3(-8.9, 3.7, -10.2), new THREE.Vector3(0, 1.55, -.4)], plan: [new THREE.Vector3(.01, 15.5, .01), new THREE.Vector3()], inside: [new THREE.Vector3(1.85, 1.72, 4.55), new THREE.Vector3(-.45, 1.35, -.6)] };
-    let cp = null, ct = null, imported = null, raf = 0, physicalScale = 1, importedPixelRatio = displayPixelRatio, activeBackground = "meadow", activeHouseView = "hero";
+    let cp = null, ct = null, imported = null, framedSize = null, raf = 0, physicalScale = 1, importedPixelRatio = displayPixelRatio, activeBackground = "meadow", activeHouseView = "hero";
     const stopCameraFlight = () => { cp = ct = null; };
     controls.addEventListener("start", stopCameraFlight);
     const importStage = new THREE.Group();
@@ -474,18 +493,19 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
         importStage.rotation.set(0, 0, 0);
         importStage.scale.setScalar(1);
         importStage.updateMatrixWorld(true);
-        const bounds = customerModel ? new THREE.Box3().setFromObject(imported) : robustBounds();
+        const bounds = customerModel ? houseBounds(imported) : robustBounds();
         if (!bounds)
             return;
         const size = bounds.getSize(new THREE.Vector3()), center = bounds.getCenter(new THREE.Vector3());
         const placement = housePlacement(bounds, physicalScale);
+        framedSize = placement.size;
         const scale = customerModel ? placement.scale : 8 / (Math.max(size.x, size.y, size.z) || 1);
         importStage.scale.setScalar(scale);
         importStage.position.copy(customerModel ? placement.position : new THREE.Vector3(-center.x * scale, -bounds.min.y * scale + .03, -center.z * scale));
         importStage.updateMatrixWorld(true);
         controls.minDistance = 2.2;
         controls.maxDistance = Math.max(35, size.length() * scale * 4);
-        camera.far = 250;
+        camera.far = Math.max(250, size.length() * scale * 10);
         camera.updateProjectionMatrix();
         cp = new THREE.Vector3(10.4, 6.2, 11.8);
         ct = new THREE.Vector3(0, Math.min(3.2, size.y * scale * .42), 0);
@@ -657,13 +677,13 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     renderer.domElement.addEventListener("webglcontextrestored", restored);
     invalidate();
     onReady();
-    const observer = new ResizeObserver(() => {
+    const resizeScene = () => {
         applyViewLimits();
         camera.fov = customerModel && activeHouseView === "inside" ? 70 : innerWidth < 700 ? 48 : 40;
         camera.aspect = mount.clientWidth / Math.max(1, mount.clientHeight); cameraOffset(); camera.updateProjectionMatrix();
         renderer.setSize(mount.clientWidth, mount.clientHeight);
         if (customerModel && imported) {
-            const size = new THREE.Box3().setFromObject(imported).getSize(new THREE.Vector3()).multiplyScalar(physicalScale);
+            const size = framedSize;
             presets = houseViews(size, innerWidth < 700 ? 48 : 40, camera.aspect);
             applyInteriorView();
             if (controls.autoRotate) {
@@ -674,8 +694,12 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             } else [cp, ct] = presets[activeHouseView].map(v => v.clone());
         }
         invalidate();
-    });
+    };
+    const observer = new ResizeObserver(resizeScene);
     observer.observe(mount);
+    layoutRoot?.querySelectorAll('[data-viewer-intro], #viewer-controls').forEach(element => observer.observe(element));
+    const layoutObserver = new MutationObserver(resizeScene);
+    if (layoutRoot) layoutObserver.observe(layoutRoot, { attributes: true, attributeFilter: ['data-finishes-open'] });
     const api = {
         finish: (g, f) => { const m = M[g], rep = { cladding: [2.6, 1.5], timber: [2.2, 2.2], roof: [2.2, 1.2], frames: [1, 1], deck: [3.2, 2.4], foundation: [2.4, 2.4] }; if (f.texture) {
             m.map = tex(f.texture, ...rep[g]);
@@ -683,10 +707,27 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
         } m.color.set(f.color); if (f.roughness != null)
             m.roughness = f.roughness; if (f.metalness != null)
             m.metalness = f.metalness; m.needsUpdate = true; },
+        mapSurfaces: (mapping = {}) => {
+            const counts = Object.fromEntries(Object.values(zoneApplications).map(app => [app, 0]));
+            const meshes = importedMeshes().filter(mesh => !mesh.userData.oknoBackFace);
+            for (const mesh of meshes) {
+                const current = mesh.material;
+                mesh.material = originalMaterials.get(mesh) || current;
+                mesh.userData.oknoApplications = meshApplications(mesh, mapping);
+                mesh.material = current;
+                if (!Array.isArray(current)) for (const app of mesh.userData.oknoApplications) counts[app]++;
+            }
+            return { counts, meshes: meshes.map(mesh => ({ name: mesh.name, applications: mesh.userData.oknoApplications, supported: !Array.isArray(mesh.material) })) };
+        },
+        resetSurfaces: () => {
+            importedMeshes().forEach(mesh => { mesh.material = originalMaterials.get(mesh) || mesh.material; if (mesh.userData.oknoBackFace) mesh.visible = false; });
+            renderer.shadowMap.needsUpdate = true; invalidate();
+        },
+        snapshot: () => { renderer.render(scene, camera); return renderer.domElement.toDataURL('image/png'); },
         surface: (application, finish, name) => {
             const meshes = importedMeshes().filter(mesh => {
                 const material = originalMaterials.get(mesh) || mesh.material;
-                return !mesh.userData.oknoBackFace && !Array.isArray(material) && material.userData.oknoSurfaces?.includes(application);
+                return !mesh.userData.oknoBackFace && !Array.isArray(material) && (mesh.userData.oknoApplications || material.userData.oknoSurfaces)?.includes(application);
             });
             // Projection is cached on each mesh and re-used on subsequent finish choices.
             for (const mesh of meshes) {
@@ -701,6 +742,7 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
                         mesh.userData.oknoCeiling = back;
                     }
                     if (application === "internal-ceiling") {
+                        back.visible = true;
                         if (!back.userData.oknoProjected) {
                             back.geometry = projectGeometryInModelSpace(originalGeometries.get(back), modelMatrixFor(back), 1);
                             back.userData.oknoProjected = true;
@@ -723,9 +765,10 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
                 mesh.material = material;
             }
             renderer.shadowMap.needsUpdate = true;
+            invalidate();
             return meshes.length;
         },
-        light: m => { const g = m === "golden"; sun.color.set(g ? "#ffbf78" : "#fff2d2"); sun.intensity = g ? 4.9 : 4.4; sun.position.set(g ? -10 : -8, g ? 6.5 : 13, g ? 12 : 7); hemi.intensity = g ? .92 : 1.25; inside.intensity = g ? 22 : 15; renderer.toneMappingExposure = g ? .96 : 1.02; waterMaterial.uniforms.uWarm.value = g ? 1 : 0; renderer.shadowMap.needsUpdate = true; },
+        light: m => { const g = m === "golden"; sun.color.set(g ? "#ffbf78" : "#fff2d2"); sun.intensity = g ? 4.9 : 4.4; sun.position.set(g ? -10 : -8, g ? 6.5 : 13, g ? 12 : 7); hemi.intensity = g ? .92 : 1.25; renderer.toneMappingExposure = g ? .96 : 1.02; waterMaterial.uniforms.uWarm.value = g ? 1 : 0; renderer.shadowMap.needsUpdate = true; },
         background: v => { const wasFull = activeBackground === "full-island"; activeBackground = v; const full = v === "full-island"; ground.visible = landscapeProps.visible = !full; islandWorld.visible = full; scene.fog?.color.set(full ? "#afc6c8" : "#cbd1c2"); if (full) {
             rebuildIsland();
             if (!wasFull) {
@@ -791,6 +834,7 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             importedPixelRatio = Math.min(displayPixelRatio, triangles > 1500000 ? 1 : triangles > 750000 ? 1.15 : triangles > 300000 ? 1.15 : displayPixelRatio);
             renderer.setPixelRatio(importedPixelRatio);
             importStage.add(imported);
+            api.mapSurfaces();
             importStage.visible = true;
             cabin.visible = false;
             frameImported();
@@ -850,6 +894,7 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             controls.removeEventListener("change", invalidate);
             renderer.domElement.removeEventListener("webglcontextrestored", restored);
             observer.disconnect();
+            layoutObserver.disconnect();
             controls.dispose();
             controls.removeEventListener("start", stopCameraFlight);
             renderer.domElement.removeEventListener("pointerdown", onPointerDown);

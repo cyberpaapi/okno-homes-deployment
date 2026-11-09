@@ -1,11 +1,16 @@
-import { Box3, MathUtils, Vector3 } from "three";
+import { Box3, MathUtils, Vector3, type Object3D } from "three";
+
+/** Rotated local bounding boxes include empty space below the actual house. */
+export function houseBounds(model: Object3D) {
+  return new Box3().setFromObject(model, true);
+}
 
 /** glTF house derivatives use metres. Camera fitting never rescales geometry. */
 export function housePlacement(bounds: Box3, metersPerUnit = 1) {
-  if (!Number.isFinite(metersPerUnit) || metersPerUnit <= 0 || bounds.isEmpty()) throw new Error("Invalid house scale or bounds.");
+  if (!Number.isFinite(metersPerUnit) || metersPerUnit <= 0 || bounds.isEmpty() || ![...bounds.min.toArray(), ...bounds.max.toArray()].every(Number.isFinite)) throw new Error("Invalid house scale or bounds.");
   const size = bounds.getSize(new Vector3()).multiplyScalar(metersPerUnit);
   const center = bounds.getCenter(new Vector3()).multiplyScalar(metersPerUnit);
-  return { scale: metersPerUnit, position: new Vector3(-center.x, -bounds.min.y * metersPerUnit + .005, -center.z), size };
+  return { scale: metersPerUnit, position: new Vector3(-center.x, -bounds.min.y * metersPerUnit, -center.z), size };
 }
 
 export function houseViews(size: Vector3, fov: number, aspect: number) {

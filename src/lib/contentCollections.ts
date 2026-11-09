@@ -33,6 +33,7 @@ export const collectionDefinitions: readonly CollectionDefinition[] = [
       { key: "name", label: "Model name", kind: "text", required: true },
       { key: "configuratorMode", label: "3D experience", kind: "choice", options: [{label: "Walkthrough configurator", value: "auto"}, {label: "Previous viewer", value: "legacy"}] },
       { key: "configuratorModel", label: "3D house GLB", kind: "model" },
+      { key: "configuratorSource", label: "Linked 3D model", kind: "text" },
       { key: "configuratorScale", label: "Metres per model unit", kind: "text" },
       { key: "finish_ext_roof", label: "External roof default finish", kind: "text" },
       { key: "meshes_ext_roof", label: "External roof mesh names", kind: "text" },

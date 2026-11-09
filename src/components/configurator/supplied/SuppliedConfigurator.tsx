@@ -6,8 +6,10 @@ import { SubtleButton } from "@/components/ui/SubtleAction";
 import Header from "@/components/Header/Header";
 import type { SignatureAsset } from "@/data/configurator/signatureAssets";
 import type { MaterialApplicationId } from "@/data/configurator";
+import type { ConfiguratorSettings } from '@/lib/configuratorSettings';
+import { zoneApplications } from './surfaceMapping';
 import { createScene, type Background, type SceneApi } from "./cabinScene";
-import { applicationGroups, familyLabels, optionsForApplication } from "./registerOptions";
+import { applicationGroups, familyLabels, optionsForApplication, registerOptions } from "./registerOptions";
 import ExpandableControls from "./21st/ExpandableControls";
 import SceneDock from "./21st/SceneDock";
 import styles from "./Configurator.module.css";
@@ -29,7 +31,7 @@ const backgrounds: { id: Background; label: string; image: string }[] = [
   { id: "full-island", label: "Full island", image: "/textures/background-island.jpg" },
 ];
 
-export default function SuppliedConfigurator({ asset, requestedName }: { asset?: SignatureAsset; requestedName?: string } = {}) {
+export default function SuppliedConfigurator({ asset, requestedName, settings }: { asset?: SignatureAsset; requestedName?: string; settings?: ConfiguratorSettings } = {}) {
   const mount = useRef<HTMLDivElement>(null);
   const api = useRef<SceneApi | null>(null);
   const [ready, setReady] = useState(false);
@@ -43,6 +45,9 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
   const [camera, setCamera] = useState("hero");
   const [turn, setTurn] = useState(true);
   const [finishesOpen, setFinishesOpen] = useState(true);
+  const [counts, setCounts] = useState<Record<string, number>>({});
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const [pdfError, setPdfError] = useState('');
   const current = applicationGroups.find(group => group.id === active)!;
   const options = optionsForApplication(active);
 
@@ -67,6 +72,16 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
           const blob = await response.blob();
           if (cancelled) return;
           await scene.glb(blob, asset.metersPerUnit);
+          if (cancelled) return;
+          const report = scene.mapSurfaces(settings?.mapping);
+          setCounts(report.counts);
+          const initial: Partial<Record<MaterialApplicationId, string>> = {};
+          for (const [zone, id] of Object.entries(settings?.defaults ?? {})) {
+            const application = zoneApplications[zone];
+            const option = registerOptions.find(item => item.registerNumber === id && item.approvedApplications.includes(application));
+            if (option && report.counts[application]) { scene.surface(application, option.preview, option.name); initial[application] = option.id; }
+          }
+          setSelected(initial);
         }
         if (cancelled) return;
         scene.turn(!reducedMotion);
@@ -81,7 +96,7 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
     };
     void start();
     return () => { cancelled = true; window.clearTimeout(timeout); controller.abort(); scene?.dispose(); api.current = null; };
-  }, [asset, attempt]);
+  }, [asset, attempt, settings]);
 
   useEffect(() => {
     const directions = { ArrowUp: "forward", ArrowDown: "backward", ArrowLeft: "left", ArrowRight: "right" } as const;
@@ -98,10 +113,19 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
   }, []);
 
   function choose(option: (typeof options)[number]) {
+    if (asset && !api.current?.surface(active, option.preview, option.name)) return;
     setSelected(previous => ({ ...previous, [active]: option.id }));
-    if (asset) api.current?.surface(active, option.preview, option.name);
-    else api.current?.finish(current.sceneGroup, option.preview);
+    if (!asset) api.current?.finish(current.sceneGroup, option.preview);
     if (!asset && current.sharedInterior) setInteriorPreview(`${current.label}: ${option.name}`);
+  }
+
+  async function downloadPdf() {
+    setPdfBusy(true); setPdfError('');
+    try {
+      const { downloadSelectionPdf } = await import('./selectionPdf');
+      downloadSelectionPdf({ name: asset?.name || 'Studio Cabin', selected, counts, preview: api.current?.snapshot(), variant: new URLSearchParams(window.location.search).get('variant') || undefined });
+    } catch { setPdfError('The PDF could not be created. Please try again.'); }
+    finally { setPdfBusy(false); }
   }
 
   return <main className={`okno-cabin ${styles.configurator} scene-${light} scene-env-${background}`} data-configurator={asset ? "signature-house" : "supplied-studio-cabin"} data-model={asset?.slug ?? "studio-cabin"} data-finishes-open={finishesOpen}>
@@ -112,7 +136,7 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
 
     <div className={styles.siteHeader}><Header tone="dark" currentHref="/models" /></div>
 
-    <aside className={styles.modelIntro}>
+    <aside className={styles.modelIntro} data-viewer-intro>
       <a className={styles.backLink} href="/models/signature"><ArrowLeft size={14} aria-hidden="true" />Back to models</a>
       <h1>{asset?.name ?? "Studio Cabin"}</h1>
       <p>{asset?.identity ?? (requestedName ? `${requestedName} has no supplied 3D asset. Studio Cabin is shown as a reference preview.` : "Studio Cabin reference preview.")}</p>
@@ -120,6 +144,8 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
         {asset ? <p>Original house proportions, aligned to a shared metre scale. Materials can be selected independently for walls, roof, floor and ceiling.</p> : <><p>A compact retreat drawn in timber, glass and changing light.</p>
         <dl><div><dt>Footprint</dt><dd>5.2 × 6.4 m</dd></div><div><dt>Interior</dt><dd>24 m²</dd></div><div><dt>Ridge</dt><dd>4.15 m</dd></div></dl></>}
       </details>
+      {asset && <SubtleButton className={styles.pdfAction} tone="paper" aria-label="Download selections PDF" disabled={!ready || pdfBusy} onClick={() => void downloadPdf()}>{pdfBusy ? 'Preparing PDF…' : 'Download PDF'}</SubtleButton>}
+      {pdfError && <p role="alert">{pdfError}</p>}
     </aside>
 
     {finishesOpen && <aside className={styles.finishPanel} id="finishes" aria-label="Cladding material options" tabIndex={-1}>
@@ -129,10 +155,10 @@ export default function SuppliedConfigurator({ asset, requestedName }: { asset?:
         <header className={styles.sectionTitle}><h3>{current.label}</h3><span>Approved finishes</span></header>
         {!asset && current.sharedInterior && <div className={styles.interiorNote}><details><summary>About the interior preview<ChevronDown size={12} aria-hidden="true" /></summary><p>Wall, ceiling and flooring choices are saved separately here. This cabin previews them on its shared interior timber.</p></details><span role="status">{interiorPreview ? `Current interior preview — ${interiorPreview}` : "Original interior shown."}</span></div>}
         <div className={styles.swatches}>
-          {options.map(option => <button key={option.id} type="button" className={styles.swatch} data-selected={selected[active] === option.id} aria-pressed={selected[active] === option.id} disabled={!ready} onClick={() => choose(option)}><span className={styles.swatchImage} style={{ backgroundImage: `url(${option.image})` }}>{selected[active] === option.id && <Check size={13} aria-hidden="true" />}</span><span className={styles.swatchCopy}><b>{option.name}</b><small>{familyLabels[option.family]}</small></span></button>)}
+          {options.map(option => <button key={option.id} type="button" className={styles.swatch} data-selected={selected[active] === option.id} aria-pressed={selected[active] === option.id} disabled={!ready || Boolean(asset && !counts[active])} onClick={() => choose(option)}><span className={styles.swatchImage} style={{ backgroundImage: `url(${option.image})` }}>{selected[active] === option.id && <Check size={13} aria-hidden="true" />}</span><span className={styles.swatchCopy}><b>{option.name}</b><small>{familyLabels[option.family]}</small></span></button>)}
         </div>
       </section>
-      <p className={styles.selectedFinish}>{selected[active] ? `Selected: ${options.find(option => option.id === selected[active])?.name}` : "Select a finish to preview it on the house."}</p>
+      <p className={styles.selectedFinish} aria-live="polite">{asset && ready && !counts[active] ? 'This surface is not available in this model.' : selected[active] ? `Selected: ${options.find(option => option.id === selected[active])?.name}` : "Choose a finish to preview."}</p>
     </aside>}
 
     <div className={styles.viewerControls} id="viewer-controls" tabIndex={-1}>

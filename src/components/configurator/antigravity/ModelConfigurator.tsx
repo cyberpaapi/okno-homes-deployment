@@ -1,42 +1,25 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import type { ContentItem } from '@/lib/contentCollections';
 import { useSiteCollection } from '@/lib/useSiteContent';
-import { resolveConfigurator } from '@/lib/configuratorSettings';
-import { oknoModels, gazePrototype } from "@/data/models";
+import { resolveConfigurator, type ConfiguratorSettings } from '@/lib/configuratorSettings';
 import { signatureAsset } from '@/data/configurator/signatureAssets';
-import dynamic from 'next/dynamic';
-const SuppliedConfigurator = dynamic(() => import('../supplied/SuppliedConfigurator')); 
 import styles from './ModelConfigurator.module.css';
+
+const SuppliedConfigurator = dynamic(() => import('../supplied/SuppliedConfigurator'), { ssr: false });
 
 export default function ModelConfigurator({ slug, roster }: { slug: string; roster: ContentItem[] }) {
   const models = useSiteCollection('signature.models', roster);
-  const legacy = [...oknoModels, gazePrototype].find(item => item.slug === slug);
-  const model = models.find(item => item.id === slug) ?? (legacy ? {id: slug, fields: {name: legacy.name}} : undefined);
-  const settings = model ? resolveConfigurator(model) : null;
-  const payload = JSON.stringify(settings);
-  const frame = useRef<HTMLIFrameElement>(null);
-  const [error, setError] = useState('');
-  const [attempt, setAttempt] = useState(0);
-  useEffect(() => {
-    if (payload === "null") return;
-    const send = () => frame.current?.contentWindow?.postMessage({ type: 'OKNO_CONFIGURATOR_INIT', settings: JSON.parse(payload) }, window.location.origin);
-    const receive = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin || event.source !== frame.current?.contentWindow) return;
-      if (event.data?.type === 'OKNO_CONFIGURATOR_READY') send();
-      if (event.data?.type === 'OKNO_CONFIGURATOR_ERROR') setError('The 3D experience could not load. Please try again.');
-      if (event.data?.type === 'OKNO_CONFIGURATOR_LOADED') setError('');
-    };
-    window.addEventListener('message', receive);
-    send();
-    return () => window.removeEventListener('message', receive);
-  // The serialized settings prevent CMS polling from restarting the viewer.
-  }, [payload, attempt]);
-  if (!model) return <main className={styles.unavailable}><h1>Model unavailable</h1><a href="/models/signature">Back to models</a></main>;
-  if (!settings) return <SuppliedConfigurator asset={signatureAsset(slug)} requestedName={model.fields.name} />;
-  return <main className={styles.root} data-configurator="antigravity" data-model={slug}>
-    <iframe key={attempt} ref={frame} className={styles.frame} src="/configurator/antigravity/viewer.html" title={`${model.fields.name} interactive house configurator`} allow="fullscreen" />
-    {error && <div className={styles.error} role="alert"><p>{error}</p><button onClick={() => { setError(''); setAttempt(v => v + 1); }}>Try again</button><a href="/models/signature">Back to models</a></div>}
-  </main>;
+  const model = models.find(item => item.id === slug);
+  const payload = JSON.stringify(model ? resolveConfigurator(model, models) : null);
+  // CMS polls must not reload geometry or discard a customer's selections.
+  const settings = useMemo<ConfiguratorSettings | null>(() => JSON.parse(payload), [payload]);
+  const asset = useMemo(() => settings ? {
+    slug, name: settings.name, url: settings.url, metersPerUnit: settings.scale,
+    identity: 'House preview. Individual plan layouts may differ.',
+  } : model?.fields.configuratorMode === 'legacy' ? signatureAsset(slug) : undefined, [settings, slug, model?.fields.configuratorMode]);
+  if (!asset) return <main className={styles.unavailable}><h1>{model?.fields.name || 'House'} configurator</h1><p>The 3D model is not available yet.</p><a href="/models/signature">Back to models</a></main>;
+  return <SuppliedConfigurator asset={asset} settings={settings ?? undefined} />;
 }

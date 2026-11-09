@@ -1,5 +1,13 @@
 # Admin system — active implementation record
 
+## Password-free local admin — 9 November 2026
+
+The owner explicitly said there is no key and requested removing it. This Windows checkout now opts into the existing password-free mode through ignored `.env.local` (`OKNO_ADMIN_PASSWORDLESS=true`). Open `http://127.0.0.1:3140/admin`; it connects automatically. The website and admin gateway remain bound to loopback on 3134/3140. No production environment was changed.
+
+The local origin check accepts only these fixed loopback services, accommodating the gateway and Next’s localhost normalization; cross-site writes remain blocked, and this local exception is disabled on Vercel. The gateway serves GLB assets and the model-preparation guide for the draft viewer. Both localhost aliases resolve previews to the website port.
+
+Acceptance: real GLB upload, new linked house, independent finish, draft isolation, publish, customer rendering and byte-range delivery passed. Saving/publishing through port 3140 passed. Original content was restored exactly. The prior missing-local-key blocker is resolved. Auth, password-free UI and content-store tests passed (35 cases).
+
 ## Supplied typography — 5 November 2026
 
 The master font defaults to **OKNO · Kento headings / Govandi body**. Individual Kento and Govandi choices are also available. Section font and numeric overrides retain the existing draft/preview/publish workflow; blank sizes now use the supplied November scale. Body text uses Govandi Regular, fields remain 16px, and a separate Manrope face supplies the rupee glyph. This supersedes the 31 October all-Manrope default and homepage percentage multiplier. No CMS data or credentials were changed. See [the specification mapping](typography-2026-11-05.md).
@@ -507,3 +515,20 @@ Current source includes the supplied configurator and reviewed asset manifest; i
 Final phone refinement: Signature avoids the second 1080p refinement decoder, shortens its rotation track and retains a labelled Explore details action. Home Signature has an editable phone-specific second heading line that describes native rotation rather than asking the visitor to scroll. Projects typewriter headings retain whole-word wrapping on phones.
 
 Release acceptance: private GitHub source `8ef834abdcad356b8f664d4e20b8bfd0b32a0594`; READY `dpl_AGWoF3QPbNmsVghwCpgDnWdAoPbB` with canonical alias assigned. Local owner content read 200 and unauthorized read 401; live owner read remains 503 from the confirmed Blob block. Studio/configurator source is included and GitHub blob-matched. Phone/desktop studio shells fit, and the live Forza material interaction passes after cold asset delivery. No publish acceptance, credential rotation or stored content change is claimed. Detailed release checks are in `docs/deployment/release-ledger.md`.
+
+## Recovered configurator and linked house models — 9 November 2026
+
+The public configure route now uses the recovered cabin scene and reviewed v2 Forza/Kray/Tengo assets. Customer controls have no GLB upload or geometry editor; they offer approved surface finishes and an actual downloadable material-selection PDF. Missing assets no longer silently show a reference cabin. All 26 finish/application rows were cross-checked against page 9 of Cladding_Materials_Register.pdf.
+
+The existing Signature model panel now links a house to any available model in its house library (`configuratorSource`) or uploads its own GLB. Links inherit geometry, units and mapping; starting finishes may be overridden. Draft-only 3D preview fits the model, reports unmapped surfaces and lets an editor assign exact meshes. Broken/circular links fail publish validation; changing a house ID updates its dependants. Existing save/publish/upload/authentication/storage mechanisms are retained. See [artist and admin instructions](configurator-models/README.md); the same guide is downloadable from the panel. This supersedes the October Antigravity viewer choice, not the credential or production-storage policy.
+
+UI additions reuse the documented Content Studio accordion, field and button adaptations; customer controls reuse the existing recovered page, 21st Expandable Tabs/Dock and SubtleButton. Source provenance remains in configurator-21st-ui-2026-10-12.md and the existing admin design record.
+
+## Preview grounding and lighting — 9 November 2026
+
+The shared admin/customer scene now fits precise world-space mesh vertices, avoiding the empty corners of rotated local bounds that lifted Forza approximately 1.5 metres above the terrain. The lowest geometry sits at ground level with no extra lift. Removed the legacy cabin point light that produced a warm hotspot through imported houses; daylight and golden-hour controls remain available.
+
+
+## Customer configurator scene QA — 9 November 2026
+
+Customer rendering now fills the viewport behind the controls instead of clipping the canvas beside the material panel and above the toolbar. Camera view offsets preserve a clear area for the house; distant terrain blends into the existing background. This also corrects resize framing to reuse physical model dimensions instead of scaling world bounds again. Material controls fit all five zones, and the compact mobile header/material browser leave the scene usable on narrow displays. The admin scene keeps its container framing.
