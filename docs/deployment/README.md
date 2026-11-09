@@ -10,12 +10,12 @@ The deployment is complete only after private repository, source SHA, READY stat
 
 ## Verified release
 
-Current package: source `e01c6a5cdd1a62772e830e4b50c650a1b59005f3`, READY `dpl_9tCdrYWojKfDW9MxYHak4kGAmrNX`, canonical alias assigned on 18 October 2026. [The release ledger](release-ledger.md) records responsive/performance corrections, the included studio/configurator and live verification. [The complete project specification](../../PROJECT-SPECIFICATION.md) describes the product and operating boundaries. Cloud CMS writes remain blocked by the existing Blob feature block.
+Current package: source `7c0b0bbbae847c22c2191c086d7d0480da1fb0c1`, READY production `dpl_7cLd4JXPruKfnsyB3onTDjRVkEFv`, canonical alias assigned on 9 November 2026. The active project is `okno-homes-aryan` in the owner's Aryan team, from the private `cyberpaapi/okno-homes-deployment` repository. This release adds managed house models, the supplied customer configurator, PDF selections and corrected scene grounding/layout. [The release ledger](release-ledger.md) records checks and limitations. The existing password-free admin connection and private production store remain configured; published content is unchanged at revision 1.
 
 Earlier Hero V1 baseline:
 
 The current Hero V1 release is recorded in [its scroll-control repair ledger](../hero-v1-scroll-repair-2026-10-12.md): runtime `a58d3640ee8dac793dc63f765e07522f6606e472`, READY deployment `dpl_CfkkNk552GBmH2mqDj7CKkq9SYoS`. It uses position-driven independent frames with Hero-only wheel/trackpad gain 0.45, prepared window anchors, static reversal, a constant faster intro, completed-window handoff and section-aware reloads. Cold preparation and physical-device acceptance limits remain documented.
 
-Production website: https://okno-homes-deployment.vercel.app. Editor: https://okno-homes-deployment.vercel.app/admin. All plan subtasks are complete. Read the release ledger for source/deployment identity, exact checks and remaining acceptance boundaries.
+Production website: https://okno-homes-aryan.vercel.app. Editor: https://okno-homes-aryan.vercel.app/admin. Read the release ledger for source/deployment identity, exact checks and remaining acceptance boundaries. The older CodeAcc deployment and its historical storage limitations are separate from this target.
 
-Machine-readable reports: [CMS/API](live-api-verification.json), [public routes/models](live-public-verification.json), [media](live-media-verification.json), [final smoke](live-final-smoke.json).
+Historical machine-readable reports: [CMS/API](live-api-verification.json), [public routes/models](live-public-verification.json), [media](live-media-verification.json), [final smoke](live-final-smoke.json).

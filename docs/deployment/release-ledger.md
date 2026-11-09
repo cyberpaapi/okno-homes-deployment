@@ -1,5 +1,17 @@
 # Release decision and evidence ledger
 
+## Managed house configurators and customer QA — 9 November 2026
+
+Owner authorized pushing the verified local work to the existing OKNO live project. Application source `7c0b0bbbae847c22c2191c086d7d0480da1fb0c1` is verified on the private `cyberpaapi/okno-homes-deployment` release branch. Production `dpl_7cLd4JXPruKfnsyB3onTDjRVkEFv` is READY and the canonical https://okno-homes-aryan.vercel.app alias resolves to that exact source. The automatic duplicate Preview build was canceled in favor of the explicit Production build. Previous production `dpl_BmFyFeHE6UGEsct335y1QXzoEzKB` remains available as a rollback baseline.
+
+Customers load Forza, Tengo or Kray directly and select approved independent finishes, with PDF download. Admin can link a house to an existing model, upload a GLB, preview/match meshes, and set initial materials. Preparation instructions are delivered at `/configurator/model-preparation.txt`. Precise mesh bounds remove the floating Forza placement, the legacy warm hotspot is removed, and the customer canvas fills the scene without rectangular clipping seams. Mobile material controls and the tablet toolbar fit the tested layouts.
+
+Validation: 99 affected tests across 18 files, source lint and TypeScript pass. A broader Windows suite stalled and was stopped, so no full-suite pass is claimed. Cloud `npm ci`, Next production compilation/typechecking/page generation and all 30 function traces pass (largest 177.4 MiB; private data excluded and required media/model assets retained). The build completed in about five minutes including deployment output processing.
+
+Live acceptance: homepage, Signature, three configure routes, admin, model instructions and all three GLBs return 200. GLB lengths match the manifest. All three houses render in the browser; Forza changes to Golden Oak and exports a one-page PDF containing register item 10. Admin opens without a key and loads the Forza draft preview with all five mapped zones. Published content matches the pre-release snapshot exactly at revision 1; no cloud upload, save or publish was used for these read-only admin checks. Browser warning/error captures and the new deployment's error/fatal runtime scan are empty. Local viewport QA covers 1280×720, 768×1024, 390×844 and 320×640; this does not establish physical-device or Safari acceptance.
+
+Evidence outside Git: this chat's `outputs/OKNO-configurator-live.png`, `outputs/OKNO-customer-QA.md`, and `work/live-release-smoke.json`. Documentation-only follow-up preserves the verified runtime.
+
 ## Aryan password-free admin — 31 October 2026
 
 Live verification: production `dpl_5oyupnkoUQnme5kkT4SmakLRHvQu` is READY at source `f62d84f7c1d5e6a634b26a8b8af6835a9f9a36e4`, with the canonical alias `https://okno-homes-aryan.vercel.app`. The browser opens `/admin` automatically and shows “Editor connected.” with zero password inputs. A password-free same-origin PATCH saved the existing tagline without changing its text; PUT published revision 1, and separate admin/public GETs read revision 1 back with no remaining drafts. Homepage and admin return 200. The production build passed all 30 function traces (largest 177.3 MiB); no error/fatal runtime logs appeared in the post-deploy scan. This verifies content saving/publication; it does not claim a new end-to-end media-upload test.

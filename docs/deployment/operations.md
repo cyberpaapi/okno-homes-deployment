@@ -1,5 +1,11 @@
 # Deployment and operation
 
+## Managed house configurators — 9 November 2026
+
+Source `7c0b0bbbae847c22c2191c086d7d0480da1fb0c1` is deployed as READY production `dpl_7cLd4JXPruKfnsyB3onTDjRVkEFv` at https://okno-homes-aryan.vercel.app. The private repository branch is `release/aryan-vercel-2026-10-31`; the active project/team remain `prj_C6QGXCbhIGWw7P5NQadSz7eAAm1k` / `team_hk3H7bGO5KFS2WnCV30fHHJj`. The older main-branch/CodeAcc instructions below are historical, not this deployment's target.
+
+All 99 affected tests, source lint and TypeScript pass. The broad Windows test invocation stalled and was stopped; it is not claimed complete. The clean Vercel Linux build and all 30 function traces passed (largest 177.4 MiB). Live Forza/Tengo/Kray render, the Forza material change and downloaded PDF work, and admin connects and loads its mapped draft model preview. Ten route/asset checks return 200, and the deployed preparation guide matches the committed text. Published fields/collections remain exactly unchanged at revision 1. Browser warning/error checks and the scoped production error/fatal scan were empty. No production upload or publish was performed during these release checks. See the current ledger and [model instructions](../configurator-models/README.md).
+
 ## Supplied typography scale — 5 November 2026
 
 The supplied Kento/Govandi scale is live at source `c7b4c12e07c49c3d6a989191b3d7e5ce2dfde648`, READY production `dpl_BmFyFeHE6UGEsct335y1QXzoEzKB`, canonical alias `https://okno-homes-aryan.vercel.app`. See [the typography ledger](../typography-2026-11-05.md) for the PDF rules, font provenance and override behavior.
