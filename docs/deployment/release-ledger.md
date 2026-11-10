@@ -1,5 +1,13 @@
 # Release decision and evidence ledger
 
+## Phone usability pass — 10 November 2026
+
+Owner asked for the phone layouts to be optimised after the font release and approved the production deploy. Source `498c43be0054558871fa4835cd80559abaa6c7a7` is READY as production `dpl_DuAExDNHBsy4NBPFkFtnmV5TKTPR` on the canonical alias; `dpl_AaKxz1Nxd88j6r2KLp8woujpNggK` (font corrections) is the rollback baseline. Changes and reasons: the phone section of [typography QA](../typography-qa-2026-11-10.md).
+
+Validation: 60 focused test files / 252 tests, TypeScript, local production build and all 30 function traces pass (largest 177.4 MiB).
+
+Live acceptance at 390px on ten routes: no page-level horizontal overflow, no visible text under 13px, no interactive target under 24px (previously 9–14 per page, mainly footer and text links); footer links measure 32px tall and social buttons 44px on touch. Sustainability press headlines fit their columns in Govandi; the 820px Process rail is stacked. `/fonts/*` returns `public, max-age=604800, stale-while-revalidate=86400`. Twelve public routes plus `/admin` return 200, a six-route font crawl still finds zero system-fallback glyphs, and the post-deploy runtime error scan is empty. Headless Chrome only; no physical-device claim.
+
 ## Font QA corrections — 10 November 2026
 
 Owner requested a QA pass on font problems and fixes, then approved the production deploy. Source `193d9aac32d7eb0b6d9f302eaefe5285bb69b072` on `release/aryan-vercel-2026-10-31` is READY as production `dpl_AaKxz1Nxd88j6r2KLp8woujpNggK` with the canonical https://okno-homes-aryan.vercel.app alias. The automatic branch Preview build was left to finish (its cancellation was not performed). Previous production `dpl_7cLd4JXPruKfnsyB3onTDjRVkEFv` remains the rollback baseline. Findings, fixes and file provenance: [typography QA](../typography-qa-2026-11-10.md).
