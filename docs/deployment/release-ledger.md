@@ -1,5 +1,11 @@
 # Release decision and evidence ledger
 
+## Owner feedback: alignment, glass menu, phone fixes — 10 November 2026
+
+Owner reported layout, menu, Journal, Models and configurator issues, then approved the production deploy. Source `dbe0e62207dc12350675df8fb0139fdcb61d0032` is READY as production `dpl_FRt1soBwt6NcJBahPJT5JkU3CPqb` on the canonical alias; `dpl_4FrsxEFB6tBosUZx79mtZ96RosKw` (touch targets) is the rollback baseline. Changes: the owner feedback section of [typography QA](../typography-qa-2026-11-10.md).
+
+Validation: 43 focused test files / 178 tests, TypeScript, scoped ESLint and a local production build pass. Live: 14 routes and `/admin` return 200; six phone routes at 390×844 show no overflow, no text under 13px and no control under 44px; the Models page clips instead of scrolling internally, and the configurator header is hidden on phones. No runtime errors after deploy. Headless Chrome only.
+
 ## Phone touch targets — 10 November 2026
 
 Owner approved design changes so that every phone control reaches 44px, then approved the production deploy. Source `816b2cfad2f654bbbad76f2ce4c5c3b3526d9a05` is READY as production `dpl_4FrsxEFB6tBosUZx79mtZ96RosKw` on the canonical alias; `dpl_DuAExDNHBsy4NBPFkFtnmV5TKTPR` (phone usability pass) is the rollback baseline. Changes and reasons: the touch-target section of [typography QA](../typography-qa-2026-11-10.md).
