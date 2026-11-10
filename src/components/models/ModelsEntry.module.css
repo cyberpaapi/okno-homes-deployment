@@ -85,8 +85,11 @@
     min-height: 100svh;
     gap: 14px;
     padding: 92px 12px 12px;
-    overflow: hidden visible;
+    /* `hidden visible` made this an inner scroller (overflow-y computes to auto) whose
+       drifting glow overflowed by ~11px, drawing a beige scrollbar down the right edge. */
+    overflow: hidden;
   }
+  @supports (overflow: clip) { .page { overflow: clip; } }
   .introduction { padding: 0 8px 2px; }
   .introduction h1 { font-size: var(--type-size-subheading, var(--okno-hero));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .introCopy { font-size: var(--type-size-caption, var(--okno-intro));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}

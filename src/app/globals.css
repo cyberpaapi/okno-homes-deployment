@@ -150,21 +150,24 @@ body:not(:has([data-admin-studio])) {
   }
 }
 
-/* Global Custom Minimal Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
+/* Global Custom Minimal Scrollbar (mouse only; touch screens keep native overlay
+   scrollbars instead of a permanent 8px beige bar). */
+@media (hover: hover) and (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #c3b4a2;
-}
+  ::-webkit-scrollbar-thumb {
+    background: #c3b4a2;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #a98a5c;
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a98a5c;
+  }
 }
 
 /* Semantic fallbacks for controls without a component-specific text role. */

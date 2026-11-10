@@ -175,3 +175,62 @@
 @media (pointer: coarse) {
   .closing a { display: inline-block; padding-block: 13px; margin-block: -13px; }
 }
+
+/* Alignment and spacing pass (owner request, 10 November 2026): one left gutter, no
+   staggered or mid-word-broken headings, less empty space, and decision panels whose
+   heading, image and caption share the same edges. */
+.page { --gutter: clamp(20px, 5vw, 78px); --panel-w: min(84vw, 1240px); --panel-edge: calc((100vw - var(--panel-w)) / 2); }
+.heroLayers span:nth-child(2), .heroLayers span:nth-child(3) { transform: none; }
+.parallaxWords { display: none; }
+
+.manifesto { min-height: auto; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 96px); padding: clamp(80px, 13vh, 150px) var(--gutter); }
+.layeredHeading { font-size: clamp(28px, 3.4vw, 60px); overflow-wrap: normal; word-break: keep-all; }
+.layeredHeading span:nth-child(2), .layeredHeading span:nth-child(3) { margin-left: 0; }
+.bodyCopy { margin-top: 28px; }
+.manifestoMedia { height: min(64svh, 680px); border-radius: 32px; }
+
+.panelHeading { top: clamp(84px, 11vh, 112px); right: var(--panel-edge); left: var(--panel-edge); justify-content: flex-start; }
+.panelHeading h2 { line-height: 1.1; }
+.panelMedia { width: var(--panel-w); }
+.panelCaption { right: var(--panel-edge); left: var(--panel-edge); align-items: center; }
+
+.parallaxCopy { left: var(--gutter); }
+.closing { padding: clamp(40px, 6vw, 72px) var(--gutter) 8px; }
+.closing a { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 14px 26px; border: 1px solid #23382c33; border-radius: 999px; background: #fffffff0; color: var(--ink); font-size: var(--okno-button); text-decoration: none; text-transform: uppercase; font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: .01em; }
+.closing a:hover, .closing a:focus-visible { background: #36543d; color: #fff; }
+.gallery { padding: clamp(40px, 6vw, 72px) var(--gutter) clamp(64px, 8vw, 110px); }
+
+@media (max-width: 1000px) {
+  .manifesto { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .manifesto { gap: 40px; padding: 72px 20px; }
+  .layeredHeading { font-size: var(--okno-section); }
+  .manifestoMedia { height: 52svh; border-radius: 24px; }
+  .closing { padding: 40px 20px 0; }
+  .gallery { padding: 40px 20px 72px; }
+}
+@media (max-width: 700px), (prefers-reduced-motion: reduce) {
+  .panelHeading, .panelCaption { right: auto; left: auto; }
+  .panelMedia { width: 100%; }
+}
+@media (pointer: coarse) {
+  .closing a { padding-block: 14px; margin-block: 0; }
+}
+/* The hero title sizes to its frame, so it no longer spills out of the small opening
+   frame (only "…D FROM PLACE." showed). */
+.heroWords { padding: clamp(18px, 4.5cqi, 70px); }
+.heroWords h1 { font-size: clamp(22px, 7cqi, var(--okno-hero)); }
+@media (max-width: 700px), (prefers-reduced-motion: reduce) {
+  .panelHeading { top: auto; }
+}
+/* Phones: the inset second photo ran across the result heading; the full-bleed photo and
+   heading carry the section alone. */
+@media (max-width: 700px) {
+  .parallaxCard { display: none; }
+}
+/* Phones: each decision stage was a full screen tall around shorter content. */
+@media (max-width: 700px) {
+  .horizontalPanel { min-height: 0; gap: 20px; padding: 56px 20px 40px; }
+  .panelMedia { height: 44svh; }
+}

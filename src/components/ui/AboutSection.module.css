@@ -267,3 +267,7 @@
 
 .founderCaptions { display:flex; justify-content:space-between; gap:20px; font-size:var(--okno-spec); line-height:1.5; color:inherit;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 .founderCaptions p:last-child { text-align:right; }
+/* Alignment pass (10 November 2026): the purpose statement was 21px in an empty band;
+   it now reads as the statement it is. */
+.manifesto p { max-width: 24ch; font-size: clamp(28px, 3.2vw, 48px); line-height: 1.2; letter-spacing: -0.02em; }
+@media (max-width: 700px) { .manifesto p { font-size: 24px; } }

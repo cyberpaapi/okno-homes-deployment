@@ -174,3 +174,12 @@
   .signatureClosing p { max-width: 32ch; }
   .signature::before, .signature::after { display: none; }
 }
+
+/* Alignment pass (10 November 2026): the oversized background word started off-screen
+   (left -3vw, drifting ±8%), so it read as clipped ("OSPITALITY"). It now sits still on
+   the same left edge as the copy below it. */
+.bespokeWord { left: 6vw; right: 6vw; overflow: hidden; text-overflow: clip; transform: none !important; }
+/* The Journal/About cards sat 12px from the screen edge while every section above uses
+   a 6vw edge; they now share it, with less empty space below. */
+.editorial { min-height: 72svh; padding: 24px 6vw clamp(56px, 8vw, 96px); gap: 16px; }
+@media (max-width: 700px) { .editorial { padding: 8px 16px 56px; } }

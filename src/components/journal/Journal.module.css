@@ -297,3 +297,27 @@
 }
 .featureSource strong, .cardSource strong { font-weight: 400; }
 .eyebrow, .pressIntro > p, .marqueeCaption { font-family: var(--type-font-heading, var(--okno-font-heading)) !important; font-size: var(--okno-label); letter-spacing: .01em; }
+
+/* Phones (owner request, 10 November 2026): journal items were 380–540px tall. */
+@media (max-width: 760px) {
+  .heroFeature { min-height: min(48vh, 420px); }
+  .heroFeatureCopy { padding-top: 96px; }
+  .heroFeatureCopy h2 { font-size: 16px; line-height: 1.35; }
+  .storyCard { width: 72vw; min-height: min(300px, 64vw); }
+  .cardCopy { padding: 84px 64px 18px 18px; }
+  .cardSource { margin-bottom: 8px; font-size: 14px; }
+  .cardCopy h3 { font-size: 16px; line-height: 1.35; }
+  .cardMeta { margin-top: 10px; }
+  .blogGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 12px; margin-top: 26px; }
+  .blogCopy { padding-top: 10px; }
+  .blogCopy > p:first-child { margin-bottom: 6px; }
+  .blogCopy h3 { font-size: 16px; line-height: 1.35; }
+  .blogCopy h3 + p { display: -webkit-box; margin: 8px 0 0; overflow: hidden; font-size: 14px; line-height: 1.45; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+  .blogRead { margin-top: 12px; }
+}
+@media (max-width: 520px) {
+  .blogCopy h3 + p { display: none; }
+}
+@media (max-width: 339px) {
+  .blogGrid { grid-template-columns: 1fr; }
+}

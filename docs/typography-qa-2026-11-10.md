@@ -63,4 +63,15 @@ Two landscape layout defects that predate this pass were fixed while checking it
 
 Checked on a local production build with touch emulation across the 14 routes at 320×568, 360×780, 390×844, 430×932, 740×360, 844×390, 932×430 and 768×1024 (112 page checks): no page overflow, no visible text under 13px, and no control under 44×44 apart from the 360–389px background thumbnails above and the configurator below 360px, which keeps its compact 26–40px controls because its rows cannot hold 44px buttons at that width. Screenshots were reviewed for the header, menu, footer, gallery, Journal, configurator (phone, landscape, 768px tablet) and Signature (phone, landscape, tablet).
 
+
+## Owner feedback pass (fourth release, same day)
+
+- Models (phones): the page's `overflow: hidden visible` computed to an inner vertical scroller whose drifting background overflowed by up to 11px, so phones drew the site's 8px beige scrollbar down the right edge. The page now clips, and the custom scrollbar applies to mouse pointers only.
+- Menu button: frosted glass pill (dark glass on dark pages, white glass with dark ink on light pages) with a three-line icon that still folds into the close cross; the open menu keeps its solid panel. Page-level `button { font: inherit }` (Sustainability) no longer enlarges the label into the icon.
+- Journal (phones): feature 540 → ~405px, press cards 72vw with 16px titles, and articles two-up (excerpt hidden below 520px). The page is 38% shorter at 390px.
+- Configurator: no site header up to 1120px wide (“Back to models” is the exit), so the stage, model panel and finishes use the full height; phone text is smaller (20px title, one-line back link, “PDF”, 14px section heads, Govandi finish names, no family labels or mouse/keyboard hint on touch); the load error is a Govandi sentence.
+- Alignment and spacing: Bespoke headings no longer stagger or break mid-word (“AUTHORE/D”), the manifesto and closing lose their empty full-screen bands, decision panels share one edge for heading, image and caption, the hero title sizes to its frame, and the clipped background words are gone. Hospitality selected work is a lead image plus an even two-column grid (was a 76%/65% zig-zag), and its closing heading is a section heading instead of 13px. The home background word sits on the copy edge instead of off-screen; the Journal/About cards share the 6vw edge. About's purpose statement is set as a statement.
+
+Checked on a local production build: 14 routes at 390×844 with touch emulation have no overflow, no text under 13px and no control under 44px; desktop 1600×820 scroll captures reviewed for Bespoke, Hospitality, Home and About.
+
 Release identity and live checks are recorded in the deployment ledger.

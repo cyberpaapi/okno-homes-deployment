@@ -144,7 +144,7 @@ export default function SuppliedConfigurator({ asset, requestedName, settings }:
         {asset ? <p>Original house proportions, aligned to a shared metre scale. Materials can be selected independently for walls, roof, floor and ceiling.</p> : <><p>A compact retreat drawn in timber, glass and changing light.</p>
         <dl><div><dt>Footprint</dt><dd>5.2 × 6.4 m</dd></div><div><dt>Interior</dt><dd>24 m²</dd></div><div><dt>Ridge</dt><dd>4.15 m</dd></div></dl></>}
       </details>
-      {asset && <SubtleButton className={styles.pdfAction} tone="paper" aria-label="Download selections PDF" disabled={!ready || pdfBusy} onClick={() => void downloadPdf()}>{pdfBusy ? 'Preparing PDF…' : 'Download PDF'}</SubtleButton>}
+      {asset && <SubtleButton className={styles.pdfAction} tone="paper" aria-label="Download selections PDF" disabled={!ready || pdfBusy} onClick={() => void downloadPdf()}>{pdfBusy ? 'Preparing PDF…' : <><span className={styles.pdfVerb}>Download </span>PDF</>}</SubtleButton>}
       {pdfError && <p role="alert">{pdfError}</p>}
     </aside>
 

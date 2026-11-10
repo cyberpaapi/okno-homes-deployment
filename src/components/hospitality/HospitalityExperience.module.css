@@ -170,3 +170,9 @@
 }
 
 .closingCopy { max-width:40ch; margin:24px auto 32px; font-size:var(--okno-intro); line-height:1.6;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
+
+/* Alignment pass (10 November 2026): the closing heading was 13px in a full-screen empty
+   band. It now reads as a section heading in a section sized to its content. */
+.enquire { min-height: auto; padding: clamp(96px, 14vh, 160px) var(--site-gutter); }
+.enquire h2 { font-size: var(--okno-section); line-height: 1.15; }
+.enquire > a { margin-top: clamp(28px, 4vw, 48px); }

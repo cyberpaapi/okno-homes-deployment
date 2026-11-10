@@ -117,8 +117,9 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
         >
           <span data-type-field={"header.menu.close"}>{open ? closeLabel : menuLabel}</span>
           <span className={styles.menuIcon} aria-hidden="true">
-            <motion.i animate={{ rotate: open ? 45 : 0, y: open ? 0 : -3 }} transition={{ duration: reduced ? 0 : 0.3 }} />
-            <motion.i animate={{ rotate: open ? -45 : 0, y: open ? 0 : 3 }} transition={{ duration: reduced ? 0 : 0.3 }} />
+            <motion.i animate={{ rotate: open ? 45 : 0, y: open ? 0 : -5 }} transition={{ duration: reduced ? 0 : 0.3 }} />
+            <motion.i animate={{ opacity: open ? 0 : 1, scaleX: open ? 0.3 : 1 }} transition={{ duration: reduced ? 0 : 0.2 }} />
+            <motion.i animate={{ rotate: open ? -45 : 0, y: open ? 0 : 5 }} transition={{ duration: reduced ? 0 : 0.3 }} />
           </span>
         </button>
         <nav id={menuId} className={styles.menuLinks} aria-label={mobileNavigationLabel} inert={!open} aria-hidden={!open}>

@@ -234,3 +234,13 @@
   .editorialCaption { padding-block: 12px; font-size: var(--type-size-subheading, var(--okno-spec));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 }
 @media (prefers-reduced-motion: reduce) { .editorialImage img { transition: none; } }
+
+/* Alignment pass (10 November 2026): the zig-zag of 76%/65% cards left wide empty bands.
+   The lead project spans the row; the rest pair up in two equal columns. */
+@media (min-width: 701px) {
+  .editorialGallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px) clamp(20px, 2.4vw, 36px); }
+  .editorialProject, .editorialProject:nth-child(2n) { width: 100%; justify-self: stretch; }
+  .editorialProject:first-child, .editorialProject:last-child:nth-child(2n) { grid-column: 1 / -1; }
+  .editorialProject:not(:first-child) .editorialImage { aspect-ratio: 4 / 3; }
+  .editorialProject:last-child:nth-child(2n) .editorialImage { aspect-ratio: 21 / 9; }
+}

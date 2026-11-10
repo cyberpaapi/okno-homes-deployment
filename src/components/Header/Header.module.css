@@ -50,3 +50,26 @@
 @media (pointer: coarse) {
   .logo { padding-block: 5px; margin-block: -5px; }
 }
+
+/* Glass menu button (owner request, 10 November 2026): the collapsed pill is frosted
+   glass with a light edge and a three-line icon. Once open, the existing solid panel and
+   green fill return, so the menu links keep their contrast. */
+.menuIcon i { width: 16px; height: 1.5px; border-radius: 1px; }
+.menuShell:not([role="dialog"]) {
+  background: linear-gradient(180deg, rgb(255 255 255 / 14%), rgb(255 255 255 / 4%)), rgb(14 20 16 / 30%);
+  border-color: rgb(255 255 255 / 28%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 24%), 0 10px 30px rgb(4 8 6 / 22%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+}
+.menuToggle { text-shadow: 0 1px 10px rgb(0 0 0 / 28%); transition: color .25s ease; }
+/* Light pages: frosted white glass with dark ink. */
+.header[data-tone="light"] .menuShell:not([role="dialog"]) {
+  background: linear-gradient(180deg, rgb(255 255 255 / 62%), rgb(255 255 255 / 34%));
+  border-color: rgb(255 255 255 / 70%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 80%), 0 10px 28px rgb(32 36 31 / 12%);
+}
+.header[data-tone="light"] .menuShell:not([role="dialog"]) .menuToggle { color: #1f2a22; text-shadow: none; }
+/* Page-level `button { font: inherit; color: inherit }` rules (Sustainability) made the
+   label 16px, colliding with the icon; the header keeps its own label size and ink. */
+.header .menuToggle { font: var(--type-size-caption, var(--okno-button)) "Geist OKNO", Arial, sans-serif; color: #f1e7da; }
