@@ -81,4 +81,8 @@ Checked on a local production build: 14 routes at 390×844 with touch emulation 
 - Bespoke: the faint BESPOKE layers sat half behind the opening frame and are removed; the frame's “Bespoke by OKNO” label carries the name. The result section's pop-up photograph shows on phones again, above the heading.
 - Hospitality: new result section with the same pop-up image as Bespoke (full-bleed photograph opening on entry, framed photograph rising over it), after the delivery timeline. Text and both photographs are editable under Hospitality → Result pop-up image in `/admin`.
 
+## Open menu (sixth release, same day)
+
+The open menu is frosted glass as well (dark glass, darker on light pages for contrast), and each destination fits on one line: link size is min(menu size, 8.2% of the panel width), so “Sustainability” no longer wraps its Y (28px at 390px, 25px at 360px). The panel can grow to 640px tall, so all nine destinations show without scrolling on a 390×844 phone.
+
 Release identity and live checks are recorded in the deployment ledger.
