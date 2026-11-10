@@ -1,5 +1,11 @@
 # Release decision and evidence ledger
 
+## Glass open menu; phone viewport bands; pinned configurator — 10 November 2026
+
+Two owner-approved production deploys. `ccd4efce5d4f0ffd316b0773d7cd0853cb3253f6` (`dpl_4YWfgWi1FF3HhT4fLq3KvhUbSebs`): frosted open menu with one-line destinations. `abe2e6205bbe1f2bb76458ad13fd95a524c279eb` (`dpl_4Qn7ah84vpxyq4y17jYJRibVEBfp`, now on the canonical alias): sticky stages sized to 100lvh with bottom controls lifted by 100dvh − 100lvh, and the configurator pinned with no page scroll on touch screens. Rollback baseline: `dpl_4YWfgWi1FF3HhT4fLq3KvhUbSebs`. Changes: sections six and seven of [typography QA](../typography-qa-2026-11-10.md).
+
+Validation: Header, models, process, configurator and hospitality tests, TypeScript and local production builds pass; the touch audit is clean on eight routes at 390×844 and 844×390. Live: routes and `/admin` return 200, all nine menu rows are single 44px lines, the Signature stage fills the viewport, the configurator is fixed with `html` overflow hidden, and no runtime errors follow the deploy. Headless Chrome cannot emulate Android's collapsing address bar, so the band fix is verified by computed styles, not on a device.
+
 ## Client feedback: globe, Forrest captions, Bespoke title, Hospitality pop-up — 10 November 2026
 
 Client feedback relayed by the owner, who approved the production deploy. Source `fb57e4590d0b70bc47d0d8c382bf6eb0c2cfd015` is READY as production `dpl_SXFjdvxyCMRp8Tgmt72ytdMNXeSp` on the canonical alias; `dpl_FRt1soBwt6NcJBahPJT5JkU3CPqb` is the rollback baseline. Changes: the client feedback section of [typography QA](../typography-qa-2026-11-10.md).
