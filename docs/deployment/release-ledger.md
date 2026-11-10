@@ -1,5 +1,11 @@
 # Release decision and evidence ledger
 
+## Client feedback: globe, Forrest captions, Bespoke title, Hospitality pop-up — 10 November 2026
+
+Client feedback relayed by the owner, who approved the production deploy. Source `fb57e4590d0b70bc47d0d8c382bf6eb0c2cfd015` is READY as production `dpl_SXFjdvxyCMRp8Tgmt72ytdMNXeSp` on the canonical alias; `dpl_FRt1soBwt6NcJBahPJT5JkU3CPqb` is the rollback baseline. Changes: the client feedback section of [typography QA](../typography-qa-2026-11-10.md).
+
+Validation: 29 focused test files / 112 tests, TypeScript, scoped ESLint and a local production build pass; Projects, Hospitality and Bespoke pass the touch audit at 390×844 and 360×640. Live at 390×664: the globe starts 29px below “Enter the collection”, portrait screens play `forrest-stream-v4-portrait.mp4`, the Hospitality result section renders, and the Bespoke ghost layers are hidden. Routes, `/admin` and the new clip return 200; no runtime errors after deploy. Headless Chrome only.
+
 ## Owner feedback: alignment, glass menu, phone fixes — 10 November 2026
 
 Owner reported layout, menu, Journal, Models and configurator issues, then approved the production deploy. Source `dbe0e62207dc12350675df8fb0139fdcb61d0032` is READY as production `dpl_FRt1soBwt6NcJBahPJT5JkU3CPqb` on the canonical alias; `dpl_4FrsxEFB6tBosUZx79mtZ96RosKw` (touch targets) is the rollback baseline. Changes: the owner feedback section of [typography QA](../typography-qa-2026-11-10.md).
