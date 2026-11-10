@@ -130,7 +130,7 @@
   .section[data-pinned] .viewport {
     position: sticky;
     top: 0;
-    height: 100svh;
+    height: 100svh; height: 100lvh;
     display: flex;
     align-items: center;
     padding: 36px 0 0;

@@ -1,7 +1,7 @@
 /* Mirrors the Bespoke result section (BespokeExperience.module.css .parallax*) in the
    Hospitality palette. */
 .result { position: relative; z-index: 1; height: 190svh; background: #0b120e; }
-.sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.sticky { position: sticky; top: 0; height: 100svh; height: 100lvh; overflow: hidden; }
 .image { position: absolute; inset: -12%; }
 .image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #07100cb0, transparent 65%), linear-gradient(180deg, transparent 46%, #07100c80); }
 .cover { object-fit: cover; }
@@ -18,3 +18,5 @@
   .result { height: auto; }
   .sticky { position: relative; height: 100svh; }
 }
+
+.copy { translate: 0 var(--vv-lift); }

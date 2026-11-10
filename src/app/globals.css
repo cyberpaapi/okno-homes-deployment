@@ -181,3 +181,12 @@ body:not(:has([data-admin-studio])) {
   font-size: var(--okno-intro);
   font-weight: 400;
 }
+
+/* Phones (owner request, 10 November 2026): full-screen sticky stages are sized to the
+   large viewport (browser bar hidden) so no empty band shows under them. --vv-lift is the
+   height the browser bar currently covers (0 or negative); bottom-anchored controls inside
+   those stages are translated by it so they stay visible while the bar is showing. */
+:root { --vv-lift: 0px; }
+@supports (height: 1dvh) and (height: 1lvh) {
+  :root { --vv-lift: calc(100dvh - 100lvh); }
+}

@@ -289,3 +289,13 @@
 }
 /* Full sentences use Govandi: the load error was set in Kento capitals. */
 .error p { font-family: var(--type-font-body, var(--okno-font-body)) !important; font-size: 14px; letter-spacing: 0; line-height: 1.5; }
+
+/* Touch screens (owner request, 10 November 2026): the configurator is pinned to the screen.
+   It was a 100dvh, 620px-minimum block in a scrolling document, so dragging could scroll the
+   page, hide the browser bar and resize the 3D view mid-gesture. Pinned, nothing scrolls. */
+@media (pointer: coarse) {
+  .configurator { position: fixed; inset: 0; height: auto; min-height: 0; overscroll-behavior: none; }
+}
+@media (pointer: coarse) {
+  :global(html):has(.configurator), :global(body):has(.configurator) { overflow: hidden; overscroll-behavior: none; }
+}

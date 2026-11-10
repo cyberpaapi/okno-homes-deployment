@@ -2,7 +2,7 @@
 .section::before,.section::after{content:"";position:absolute;z-index:0;right:0;left:0;height:22svh;pointer-events:none}
 .section::before{top:0;background:linear-gradient(180deg,#151814,transparent)}
 .section::after{bottom:0;background:linear-gradient(180deg,transparent,#151814)}
-.sticky{position:sticky;z-index:1;top:0;height:100svh;min-height:640px;overflow:hidden;isolation:isolate}
+.sticky{position:sticky;z-index:1;top:0;height:100svh; height: 100lvh;min-height:640px;overflow:hidden;isolation:isolate}
 .stage{position:absolute;inset:0;outline-offset:-5px;touch-action:pan-y}
 .stage:focus-visible{outline:1px solid #a7bbb0}
 .wheel{position:absolute;left:50%;top:50%;transform-style:preserve-3d;pointer-events:none}

@@ -24,7 +24,7 @@
 .kicker,.heroWords p { margin: 0 0 18px; color: #456149; font: 550 var(--type-size-caption, var(--okno-label))/1.2 "Bespoke Geist", sans-serif; text-transform: uppercase;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .hero { height: 260svh; background: #ffffff24; }
-.heroSticky { position: sticky; top: 0; display: grid; width: 100%; height: 100svh; place-items: center; overflow: hidden; }
+.heroSticky { position: sticky; top: 0; display: grid; width: 100%; height: 100svh; height: 100lvh; place-items: center; overflow: hidden; }
 .heroBackdrop { position: absolute; inset: 0; overflow: hidden; }
 .heroBackdrop::after { content: ""; position: absolute; inset: 0; background: #e9e5d78c; backdrop-filter: blur(18px) saturate(.72); }
 .heroBackdrop .image { filter: saturate(.65) brightness(1.12); transform: scale(1.08); }
@@ -49,7 +49,7 @@
 .manifestoMedia { position: relative; height: min(78svh, 860px); margin: 0; overflow: hidden; box-shadow: 0 35px 90px #22474e20; }
 
 .portal { height: 240svh; background: #ffffffb8; }
-.portalSticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.portalSticky { position: sticky; top: 0; height: 100svh; height: 100lvh; overflow: hidden; }
 .portalScene { position: absolute; inset: 0; }
 .portalScene .image { object-position:50% 50%; }
 .portalScene::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,#091b3212,#091b3245); }
@@ -58,7 +58,7 @@
 .parallaxCopy h2 { margin: 0; font-family: "Bespoke Geist", sans-serif; font-weight: 550; letter-spacing: -.075em; }
 
 .horizontal { height: 520svh; background: #f4f1e9; }
-.horizontalSticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.horizontalSticky { position: sticky; top: 0; height: 100svh; height: 100lvh; overflow: hidden; }
 .horizontalTrack { display: flex; width: 400vw; height: 100%; }
 .horizontalPanel { position:relative; width:100vw; height:100%; flex:0 0 100vw; overflow:hidden; background:#f4f1e9; }
 .horizontalPanel[data-tone="pearl"] { background:#f4f1e9; }
@@ -82,7 +82,7 @@
 .panelCaption button:focus-visible { outline:2px solid #36543d; outline-offset:4px; }
 
 .parallax { height: 190svh; margin-top:-1px; background: #e5e7dc; }
-.parallaxSticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.parallaxSticky { position: sticky; top: 0; height: 100svh; height: 100lvh; overflow: hidden; }
 .parallaxImage { position: absolute; inset: -12%; }
 .parallaxImage::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,#09212b94,transparent 65%),linear-gradient(180deg,transparent 46%,#09212b63); }
 .parallaxWords { position: absolute; z-index: 2; inset: 13% 0 auto; display: grid; color: #f5faf58c; font: 550 var(--type-size-display, var(--okno-section))/.65 "Bespoke Geist",sans-serif; text-align: center; white-space: nowrap;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
@@ -241,3 +241,6 @@
 @media (max-width: 700px) {
   .parallaxCard { display: block; top: 9svh; right: 18px; bottom: auto; width: 40vw; border-width: 6px; }
 }
+
+/* Bottom-anchored copy follows the visible bottom edge (see --vv-lift in globals.css). */
+.panelCaption, .parallaxCopy { translate: 0 var(--vv-lift); }

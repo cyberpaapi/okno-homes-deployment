@@ -85,4 +85,9 @@ Checked on a local production build: 14 routes at 390×844 with touch emulation 
 
 The open menu is frosted glass as well (dark glass, darker on light pages for contrast), and each destination fits on one line: link size is min(menu size, 8.2% of the panel width), so “Sustainability” no longer wraps its Y (28px at 390px, 25px at 360px). The panel can grow to 640px tall, so all nine destinations show without scrolling on a 390×844 phone.
 
+## Phone viewport bands and configurator stability (seventh release, same day)
+
+- Full-screen sticky stages (Signature, Process, Bespoke, Hospitality, Sustainability, Projects, home) were 100svh, the height with the browser bar showing. Once Android Chrome hid its bar, a band of empty page about the bar's height showed under them. They are now 100lvh (svh fallback), and their bottom controls — Signature dock, plan filters, detail card and configure button, Process build-sequence bar, Bespoke captions and result copy, Hospitality result copy — are translated by `--vv-lift` (100dvh − 100lvh) so they stay above the bar while it shows.
+- Configurator on touch screens: pinned (`position: fixed; inset: 0`) with the page itself not scrolling, so dragging can no longer scroll the page, toggle the browser bar and resize the 3D view mid-gesture.
+
 Release identity and live checks are recorded in the deployment ledger.
