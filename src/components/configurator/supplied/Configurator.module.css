@@ -214,5 +214,34 @@
 
 /* Touch screens: the back link was a 24px-tall target inside the compact header. */
 @media (pointer: coarse) {
-  .modelIntro .backLink { padding-block: 10px; margin-block: -10px; }
+  .modelIntro .backLink { padding-block: 12px; margin-block: -12px; }
+}
+
+/* Touch screens from 360px: every view, scene, lighting, finish and panel control is at
+   least 44×44 (several were 30–40px), including the short landscape layouts above. */
+@media (min-width: 360px) and (pointer: coarse) {
+  .iconButton, .lighting .iconButton, .panelTitle .iconButton { width: 44px; height: 44px; }
+  .toggleButton { min-width: 44px; height: 44px; }
+  .cameraControls :global([role="group"]) > button { min-width: 44px; }
+  .applicationControls button { min-width: 44px; min-height: 44px; }
+}
+/* 761–1120px touch screens (tablets, phones held sideways) keep the single control row:
+   narrower outer margins and tighter groups make room for the wider buttons. */
+@media (min-width: 761px) and (max-width: 1120px) and (pointer: coarse) {
+  .viewerControls { left: 12px; right: 12px; }
+  .cameraControls :global([role="group"]) { gap: 0; }
+  .sceneControls :global([aria-label="Scene background"]) { gap: 2px; }
+}
+/* Touch phones from 360px: both control rows keep 44px buttons. Fifteen controls do not
+   fit two 44px rows below 390px, so there the five background thumbnails share what is
+   left of their row (38–43px wide, still 44px tall). The finish panel sits 4px higher
+   to clear the taller row. Below 360px the compact rules above still apply. */
+@media (max-width: 760px) and (min-width: 360px) and (pointer: coarse) {
+  .viewerControls { left: 8px; right: 8px; padding: 6px 4px; }
+  .finishPanel { bottom: 140px; }
+  .cameraControls :global([role="group"]) { padding: 2px; gap: 0; }
+  .cameraControls :global([role="group"]) > button { max-width: 44px; }
+  .sceneControls { gap: 2px; }
+  .sceneControls :global([aria-label="Scene background"]) { flex: 0 1 auto; min-width: 0; }
+  .sceneControls :global([aria-label="Scene background"]) > button { height: 44px; max-width: clamp(36px, calc((100vw - 170px) / 5), 44px); }
 }

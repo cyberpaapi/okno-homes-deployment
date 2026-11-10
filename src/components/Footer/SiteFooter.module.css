@@ -157,9 +157,12 @@
  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 /* Touch screens: 13px links were 18px-tall targets 15px apart, and the social
-   buttons 38px. Hit areas grow; the visual rhythm does not. */
+   buttons 38px. Links get 44px rows (so they sit 26px apart); the heading keeps its
+   spacing to the first link. */
 @media (pointer: coarse) {
-  .linkGroup a { padding-block: 7px; margin-block: -7px; }
+  .linkGroup { gap: 26px; }
+  .linkGroup h2 { margin-bottom: -2px; }
+  .linkGroup a { padding: 13px 8px; margin: -13px -8px; }
   .socialLinks a { width: 44px; height: 44px; }
 }
 

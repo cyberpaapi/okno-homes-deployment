@@ -57,7 +57,10 @@ export function CarouselThumbnails({ items, index, setIndex, label }: { items: T
   useEffect(() => {
     const root = ref.current;
     if (!root) return;
-    const center = () => root.scrollTo?.({ left: index * (COLLAPSED + GAP) + MARGIN - (root.clientWidth / 2 - FULL / 2), behavior: reduced ? 'instant' : 'smooth' });
+    // Touch screens widen collapsed thumbnails with a CSS min-width; centre with the real width.
+    const first = root.firstElementChild?.firstElementChild;
+    const collapsed = Math.max(COLLAPSED, parseFloat(first ? getComputedStyle(first).minWidth : '') || 0);
+    const center = () => root.scrollTo?.({ left: index * (collapsed + GAP) + MARGIN - (root.clientWidth / 2 - FULL / 2), behavior: reduced ? 'instant' : 'smooth' });
     center();const observer = new ResizeObserver(center);observer.observe(root);
     return () => observer.disconnect();
   }, [index, reduced]);

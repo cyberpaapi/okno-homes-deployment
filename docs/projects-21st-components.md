@@ -129,3 +129,7 @@ Reviewed the five items in the user's OKNO bookmark list. The pointer component 
 ## Remove photo trail and try bookmarked Typewriter — 20 September
 
 Removed the ProjectImageTrail mount from Projects; moving the pointer no longer spawns photo cards. Kept the approved Morphing Cursor. Retrieved the user's saved **Typewriter (1482)** by [danielpetho](https://21st.dev/@danielpetho/components/typewriter), archived in `21st-source/1482.tsx.txt`. Its single-string typing mode now reveals the existing “Homes, everywhere.” headline once at 65 ms per character after the entrance sheet exits. The original timer-driven character progression and Motion caret are adapted to reserved character space, shared state for both morphing text layers, reduced-motion static text and a stable accessible label. No cycling copy or persistent blinking caret was added.
+
+## Touch target sizes — 10 November 2026
+
+Owner-approved phone usability pass, touch screens only (`pointer: coarse`); structure and motion are unchanged. Animated Tabs (1962) Photographs/Films buttons and their clipped overlay copy are 44px tall. Framer Carousel Thumbnails (19082) collapsed thumbnails are at least 44px wide, and the centring offset reads that width instead of the fixed 34px. PrismaHero (12200) previous/pause/next controls and the play button are at least 44px, the title link is 44px tall, and the film dialog's close and film choices are 44px tall; their caption-size fallbacks use the 13px label size.

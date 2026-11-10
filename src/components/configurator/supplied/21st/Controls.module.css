@@ -13,3 +13,9 @@
 .dockCheck { position: absolute; right: 7px; bottom: 7px; color: white; background: #1d3828; border-radius: 50%; }
 @media (max-width: 760px) { .expandable { width: max-content; } .expandButton { min-width: 40px; min-height: 40px; } .dock { gap: 0; padding: 2px; } .dockItem { height: 40px; } .dockLabel { font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;} }
 @media (prefers-reduced-motion: reduce) { .expandable *, .dock * { transition: none; } }
+
+/* Touch phones from 360px: restore the source's 44px controls (see Configurator). */
+@media (max-width: 760px) and (min-width: 360px) and (pointer: coarse) {
+  .expandButton { min-width: 44px; min-height: 44px; }
+  .dockItem { height: 44px; }
+}

@@ -44,6 +44,23 @@ The owner then asked for the phone layouts to be optimised. Automated checks at 
 - Tablet (701–1100px) Process rail: BUILD SEQUENCE overflowed its 116px column and the stage names collided. The heading now sits above a full-width rail, as on phones, centred in the existing shell.
 - `/fonts/*` is cached for a week (`stale-while-revalidate` a day) instead of revalidating on every visit, so Kento (`font-display: block`) is ready without a round trip on repeat visits. Font files are renamed when they change.
 
-Remaining sub-44px targets are 40–41px (header menu pill, configurator dock buttons) and are left as designed.
+Remaining sub-44px targets were 40–41px (header menu pill, configurator dock buttons); the third release below addresses them.
+
+## Touch-target pass (third release, same day)
+
+The owner approved design changes so that every phone control reaches 44×44. On touch screens (`pointer: coarse`):
+
+- Header: the collapsed menu pill is 46px tall around a 44px button (was 42/41px); the logo link has a 44px hit area.
+- Footer and Journal: link rows are 44px, so footer links sit 26px apart (was 15px) and Journal contents links 28px apart (was 16px); the footer column heading keeps its spacing to the first link. The Journal back and closing links and configurator “Back to models” grow to 44px.
+- Projects: previous/pause/next and the play button are at least 44px (were 34–38px), the project title link is 44px tall, and the film dialog's close and film choices are 44px tall. Gallery Photographs/Films tabs are 44px tall (were 31px) and collapsed thumbnails 44px wide (were 34px); the carousel centres the active thumbnail using the wider size.
+- Configurator: camera views, turntable, lighting, finish toggle, application filters and the panel close button are 44×44 at every touch width, including the short landscape layouts where they were 28–32px. On phones the controls bar uses 8px outer margins and tighter group spacing, and the finish panel sits 4px higher. Fifteen controls cannot fit two 44px rows below 390px, so on 360–389px phones the five background thumbnails share the remaining width (38–43px wide, 44px tall).
+- Signature (Forza) on phones held sideways and tablets (701px and wider): plan filters and model choices are 44px tall (were 32px and 28px) and the details button 50px, matching phones.
+
+Two landscape layout defects that predate this pass were fixed while checking it:
+
+- 701–1000px: the centred model selector ran under “Explore details”, hiding Octapod. It now starts at the left edge and scrolls within the remaining space; all six models show from 740px.
+- Phones held sideways at 360px tall: “Configure yours” covered the detail card's copy; it now sits to the card's left.
+
+Checked on a local production build with touch emulation across the 14 routes at 320×568, 360×780, 390×844, 430×932, 740×360, 844×390, 932×430 and 768×1024 (112 page checks): no page overflow, no visible text under 13px, and no control under 44×44 apart from the 360–389px background thumbnails above and the configurator below 360px, which keeps its compact 26–40px controls because its rows cannot hold 44px buttons at that width. Screenshots were reviewed for the header, menu, footer, gallery, Journal, configurator (phone, landscape, 768px tablet) and Signature (phone, landscape, tablet).
 
 Release identity and live checks are recorded in the deployment ledger.

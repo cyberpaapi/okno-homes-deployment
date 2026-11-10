@@ -13,3 +13,11 @@
 @media(max-width:760px){.tabs.tabs button,.tabs .tabOverlay>span{font-size:var(--type-size-caption, var(--okno-button)); font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}}
 
 .segment[data-space=true]{min-width:.28em}
+
+/* Touch: Photographs/Films tabs were 31px tall and collapsed thumbnails 34px wide (the
+   carousel centres with the wider size). The clipped overlay copy gets the same height
+   so the two tab layers stay aligned. */
+@media (pointer: coarse) {
+  .tabs.tabs button, .tabs .tabOverlay > span { min-height: 44px; }
+  .thumbnailTrack button { min-width: 44px; }
+}

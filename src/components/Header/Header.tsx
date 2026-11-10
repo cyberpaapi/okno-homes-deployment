@@ -99,7 +99,7 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
         aria-modal={open || undefined}
         aria-label={open ? navigationLabel : undefined}
         initial={false}
-        animate={{ width: open ? expandedWidth : collapsedWidth, height: open ? expandedHeight : 42, borderRadius: open ? 24 : 30 }}
+        animate={{ width: open ? expandedWidth : collapsedWidth, height: open ? expandedHeight : 46, borderRadius: open ? 24 : 30 }}
         transition={{ duration, ease: [0.22, 1, 0.36, 1] }}
       >
         <motion.div className={styles.menuCircle} aria-hidden="true" initial={false} animate={{ bottom: open ? "-20%" : "-200%" }} transition={{ duration, ease: [0.22, 1, 0.36, 1] }} />
