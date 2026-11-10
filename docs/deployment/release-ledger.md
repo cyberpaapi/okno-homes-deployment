@@ -1,5 +1,9 @@
 # Release decision and evidence ledger
 
+## Menu enquiry label — 10 November 2026
+
+Owner-approved production deploy of `ba83849f00037d400639c2ace8e5e1e5bf8f064d` (`dpl_BEjaxio4hV3xVsvtiDuNsTcKyaLo`, canonical alias). On Signature the open menu's last item was "Enquire about Forza", which the one-line rule clipped; the menu now reads "Enquire" with the same model-specific link, and the desktop button keeps the longer label. Header and models tests pass; live at 390×844 the item fits on one 44px line. Rollback baseline: `dpl_4Qn7ah84vpxyq4y17jYJRibVEBfp`.
+
 ## Glass open menu; phone viewport bands; pinned configurator — 10 November 2026
 
 Two owner-approved production deploys. `ccd4efce5d4f0ffd316b0773d7cd0853cb3253f6` (`dpl_4YWfgWi1FF3HhT4fLq3KvhUbSebs`): frosted open menu with one-line destinations. `abe2e6205bbe1f2bb76458ad13fd95a524c279eb` (`dpl_4Qn7ah84vpxyq4y17jYJRibVEBfp`, now on the canonical alias): sticky stages sized to 100lvh with bottom controls lifted by 100dvh − 100lvh, and the configurator pinned with no page scroll on touch screens. Rollback baseline: `dpl_4YWfgWi1FF3HhT4fLq3KvhUbSebs`. Changes: sections six and seven of [typography QA](../typography-qa-2026-11-10.md).
