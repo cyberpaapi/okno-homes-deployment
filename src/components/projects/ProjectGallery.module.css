@@ -10,3 +10,8 @@
 
 /* A full-sentence description: Govandi body, per the supplied typography rule. */
 .projectDescription { max-width:54ch; margin:20px 0 30px; font-size:var(--type-size-body, var(--okno-intro)); line-height:1.6;  font-family: var(--type-font-body, var(--okno-font-body)) !important; letter-spacing: 0;}
+
+/* Touch screens: "← All places" was a 20px-tall target. */
+@media (pointer: coarse) {
+  .return { padding-block: 12px; margin-block: -12px; }
+}

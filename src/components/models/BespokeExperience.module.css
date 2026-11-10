@@ -170,3 +170,8 @@
 
 .manifestoCopy { min-width: 0; }
 .layeredHeading { overflow-wrap: anywhere; }
+
+/* Touch screens: "Begin crafting" was an 18px-tall target. */
+@media (pointer: coarse) {
+  .closing a { display: inline-block; padding-block: 13px; margin-block: -13px; }
+}

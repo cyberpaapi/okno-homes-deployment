@@ -211,3 +211,8 @@
   .modelIntro { right: calc(min(44vw, 280px) + 20px); }
   .modelIntro .pdfAction { width: 140px; }
 }
+
+/* Touch screens: the back link was a 24px-tall target inside the compact header. */
+@media (pointer: coarse) {
+  .modelIntro .backLink { padding-block: 10px; margin-block: -10px; }
+}

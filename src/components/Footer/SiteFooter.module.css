@@ -156,6 +156,13 @@
   overflow-wrap: anywhere;
  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
+/* Touch screens: 13px links were 18px-tall targets 15px apart, and the social
+   buttons 38px. Hit areas grow; the visual rhythm does not. */
+@media (pointer: coarse) {
+  .linkGroup a { padding-block: 7px; margin-block: -7px; }
+  .socialLinks a { width: 44px; height: 44px; }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .linkGroup a:hover { color: #c4d3c5; }
   .socialLinks a:hover {

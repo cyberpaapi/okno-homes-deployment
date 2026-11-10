@@ -1,5 +1,13 @@
 # Release decision and evidence ledger
 
+## Font QA corrections — 10 November 2026
+
+Owner requested a QA pass on font problems and fixes, then approved the production deploy. Source `193d9aac32d7eb0b6d9f302eaefe5285bb69b072` on `release/aryan-vercel-2026-10-31` is READY as production `dpl_AaKxz1Nxd88j6r2KLp8woujpNggK` with the canonical https://okno-homes-aryan.vercel.app alias. The automatic branch Preview build was left to finish (its cancellation was not performed). Previous production `dpl_7cLd4JXPruKfnsyB3onTDjRVkEFv` remains the rollback baseline. Findings, fixes and file provenance: [typography QA](../typography-qa-2026-11-10.md).
+
+Validation: 44 focused test files / 196 tests (including the new `typography-fonts` checks), TypeScript, scoped ESLint, local `next build --webpack` and all 30 function traces pass (largest 177.4 MiB). The wider suite was not run.
+
+Live acceptance: 14 routes × 1440/390px crawled after release — zero glyphs painted by a system fallback, no font request errors or console font messages, only WOFF2 font requests (once per page), display headings Kento Regular on every route with Bold only where 700+ is explicit. On a throttled phone profile (1.6 Mbps, 150 ms) About's fonts finish at 1.80 s before first contentful paint at 1.86 s (previously Arial painted first and fonts landed at 2.8 s), CLS 0 (was 0.0066). Font files, preload links and Home/About/Process/Enquiry/Signature return 200. Runtime error scan after the deploy is empty. Headless Chrome only; no physical-device claim.
+
 ## Managed house configurators and customer QA — 9 November 2026
 
 Owner authorized pushing the verified local work to the existing OKNO live project. Application source `7c0b0bbbae847c22c2191c086d7d0480da1fb0c1` is verified on the private `cyberpaapi/okno-homes-deployment` release branch. Production `dpl_7cLd4JXPruKfnsyB3onTDjRVkEFv` is READY and the canonical https://okno-homes-aryan.vercel.app alias resolves to that exact source. The automatic duplicate Preview build was canceled in favor of the explicit Production build. Previous production `dpl_BmFyFeHE6UGEsct335y1QXzoEzKB` remains available as a rollback baseline.

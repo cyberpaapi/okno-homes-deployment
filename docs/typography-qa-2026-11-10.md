@@ -32,4 +32,18 @@ New serving files are listed with hashes in `public/fonts/okno-font-provenance.j
 - Phone layout pass: no remaining word-wider-than-container or past-viewport text apart from intentional bleeding background words and the horizontal Process timeline.
 - Focused tests, TypeScript, scoped ESLint, `next build --webpack` and `release:check-bundles` (30 traces) pass.
 
+## Phone pass (second release, same day)
+
+The owner then asked for the phone layouts to be optimised. Automated checks at 390px (page overflow, visible text under 13px, tap targets) plus screenshot review of every route found no page-level horizontal overflow or sub-13px text after the first release; the remaining issues were touch and readability:
+
+- Footer links were 18px-tall targets 15px apart and the social buttons 38px. On touch screens (`pointer: coarse`) the links gain a 32px hit area via padding with matching negative margin (no visual change) and the social buttons become 44px.
+- Text links that were 18–24px tall — Journal back link, contents and closing links, “← All places”, Bespoke “Begin crafting”, configurator “Back to models” — gain 34–44px hit areas the same way.
+- Sustainability press headlines are full sentences; in caps-only Kento they broke every 9–10 characters in the half-width phone columns and ran off the stage. They now use Govandi (16px, 14px at ≤520px), so all four fit.
+- The homepage Hospitality eyebrow was mixed-case Govandi while Signature and Sustainability eyebrows are Kento capitals; it now shares their rule.
+- Hospitality bento eyebrows (ESTATE SCALE, SITE…) sat on bright water and sky; the card gradient's middle stop and the eyebrow opacity are raised.
+- Tablet (701–1100px) Process rail: BUILD SEQUENCE overflowed its 116px column and the stage names collided. The heading now sits above a full-width rail, as on phones, centred in the existing shell.
+- `/fonts/*` is cached for a week (`stale-while-revalidate` a day) instead of revalidating on every visit, so Kento (`font-display: block`) is ready without a round trip on repeat visits. Font files are renamed when they change.
+
+Remaining sub-44px targets are 40–41px (header menu pill, configurator dock buttons) and are left as designed.
+
 Release identity and live checks are recorded in the deployment ledger.

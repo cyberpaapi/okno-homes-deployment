@@ -40,7 +40,8 @@
 
 .fade {
   z-index: 1;
-  background: linear-gradient(180deg, transparent 30%, rgba(3, 6, 5, .18) 54%, rgba(3, 6, 5, .96) 100%);
+  /* Stronger mid stop: eyebrows such as ESTATE SCALE sat on bright water and sky. */
+  background: linear-gradient(180deg, transparent 28%, rgba(3, 6, 5, .42) 52%, rgba(3, 6, 5, .96) 100%);
 }
 
 .copy {
@@ -57,7 +58,7 @@
 
 .copy p {
   margin: 0;
-  color: rgba(255, 255, 255, .6);
+  color: rgba(255, 255, 255, .78);
   font-size: var(--type-size-caption, var(--okno-body));
   letter-spacing: .18em;
   text-transform: uppercase;

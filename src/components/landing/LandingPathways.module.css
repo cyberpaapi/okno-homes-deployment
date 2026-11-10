@@ -49,7 +49,8 @@
 .signatureClosing { position: absolute; z-index: 3; color: #f4f0e9; }
 .signatureHeading { top: 9svh; right: 6vw; left: 6vw; }
 .signatureHeading > span,
-.sustainabilityCopy > span {
+.sustainabilityCopy > span,
+.bespokeCopy > span {
   display: block;
   margin-bottom: 20px;
   color: rgba(230, 237, 229, .72);

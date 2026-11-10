@@ -29,10 +29,13 @@ const nextConfig: NextConfig = {
     }));
   },
   async headers() {
-    return ["/configurator/antigravity/assets/:path*", "/configurator/models/v2/:path*", "/page-images/:path*", "/thumbnail-images/:path*", "/project-images/:path*", "/hero-v2/nighttime-frames-:part-:hash.bin", "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4", "/assets/landing-options/forest-entry-frames-:hash.bin", "/assets/landing-options/hero-:version-mobile-:hash.bin", "/assets/landing-options/forest-entry-intro-:hash.mp4"].map(source => ({
+    // Fonts are renamed when they change, so a week-long cache is safe and spares phones a
+    // revalidation round trip before Kento (font-display: block) can paint.
+    const fontCache = { source: "/fonts/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=86400" }] };
+    return [fontCache, ...["/configurator/antigravity/assets/:path*", "/configurator/models/v2/:path*", "/page-images/:path*", "/thumbnail-images/:path*", "/project-images/:path*", "/hero-v2/nighttime-frames-:part-:hash.bin", "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4", "/assets/landing-options/forest-entry-frames-:hash.bin", "/assets/landing-options/hero-:version-mobile-:hash.bin", "/assets/landing-options/forest-entry-intro-:hash.mp4"].map(source => ({
       source,
       headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-    }));
+    }))];
   },
   images: {
     qualities: [60, 75, 90],

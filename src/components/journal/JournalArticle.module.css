@@ -71,3 +71,9 @@
 @media (prefers-reduced-motion: reduce) {
   .sideBlock nav a, .relatedLink svg { transition: none; }
 }
+
+/* Touch screens: these text links were 18–20px-tall targets. */
+@media (pointer: coarse) {
+  .back, .closing a { padding-block: 12px; margin-block: -12px; }
+  .sideBlock nav a { padding-block: 8px; margin-block: -8px; }
+}

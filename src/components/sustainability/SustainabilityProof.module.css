@@ -297,7 +297,9 @@
   /* Publication names are captions; Govandi capitals keep them inside a half-width column. */
   .citationMeta strong { font-size: var(--type-size-caption, var(--okno-label)); font-weight: 400; overflow-wrap: break-word;  font-family: var(--type-font-body, var(--okno-font-body)) !important; letter-spacing: 0.02em;}
   .citationMeta time { font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
-  .pressCitation h4 { font-size: var(--type-size-body, var(--okno-card)); overflow-wrap: break-word;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  /* Press headlines are full sentences; in caps-only Kento they broke every 9–10
+     characters in half-width columns. Govandi body copy per the sentence rule. */
+  .pressCitation h4 { font-size: var(--type-size-body, var(--okno-body)); overflow-wrap: break-word;  font-family: var(--type-font-body, var(--okno-font-body)) !important; letter-spacing: 0; line-height: 1.35; font-style: normal;}
   .detailsInner {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
@@ -317,7 +319,7 @@
   .proofLayout { grid-template-rows: minmax(260px, 47%) minmax(0, 53%); }
   .pressRail { column-gap: 14px; }
   .citationMeta time { display: none; }
-  .pressCitation h4 { font-size: var(--type-size-body, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .pressCitation h4 { font-size: var(--type-size-body, var(--okno-spec)); overflow-wrap: break-word;  font-family: var(--type-font-body, var(--okno-font-body)) !important; letter-spacing: 0; line-height: 1.35; font-style: normal;}
   .detailsInner h3 { font-size: var(--type-size-display, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 }
 
