@@ -1,0 +1,20 @@
+/* Mirrors the Bespoke result section (BespokeExperience.module.css .parallax*) in the
+   Hospitality palette. */
+.result { position: relative; z-index: 1; height: 190svh; background: #0b120e; }
+.sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.image { position: absolute; inset: -12%; }
+.image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #07100cb0, transparent 65%), linear-gradient(180deg, transparent 46%, #07100c80); }
+.cover { object-fit: cover; }
+.card { position: absolute; z-index: 3; right: 7vw; bottom: -4vh; width: min(34vw, 530px); aspect-ratio: 4 / 5; margin: 0; overflow: hidden; border: 10px solid #eef1e9; box-shadow: 0 28px 80px #02080566; }
+.copy { position: absolute; z-index: 4; bottom: 9vh; left: var(--site-gutter, clamp(24px, 6vw, 96px)); width: min(54vw, 820px); color: #f4f2ea; }
+.copy p { margin: 0 0 14px; color: #b9cbb8; font-size: var(--okno-label); letter-spacing: .08em; text-transform: uppercase; font-family: var(--type-font-heading, var(--okno-font-heading)) !important; }
+.copy h2 { margin: 0; font-size: var(--okno-section); line-height: 1.15; letter-spacing: .01em; font-family: var(--type-font-heading, var(--okno-font-heading)) !important; }
+@media (max-width: 700px) {
+  .result { height: 150svh; }
+  .card { top: 9svh; right: 18px; bottom: auto; width: 40vw; border-width: 6px; }
+  .copy { bottom: 12vh; left: 20px; width: calc(100vw - 40px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .result { height: auto; }
+  .sticky { position: relative; height: 100svh; }
+}

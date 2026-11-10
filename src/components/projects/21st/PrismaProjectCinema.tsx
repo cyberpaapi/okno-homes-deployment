@@ -1,6 +1,6 @@
 'use client';
 // rahil1202 / PrismaHero, 21st.dev demo 12200: full-bleed footage and low-set kinetic typography.
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import { pageImageLoader } from '@/lib/pageImageLoader';
 import { AnimatePresence, motion, useInView, useIsPresent, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
@@ -14,12 +14,21 @@ import { ProjectFilmDialog } from './ProjectFilmDialog';
 import styles from './ProjectCinema.module.css';
 import { PlaybackProgress } from './PlaybackProgress';
 import { useProjectAdvance } from './useProjectAdvance';
+import { portraitPreviewClips } from '@/data/projectPreviewClips';
+
+const portraitQuery = '(max-aspect-ratio: 4/5)';
+const portraitMedia = () => (typeof window.matchMedia === 'function' ? window.matchMedia(portraitQuery) : null);
+const subscribePortrait = (onChange: () => void) => { const media = portraitMedia(); media?.addEventListener('change', onChange); return () => media?.removeEventListener('change', onChange); };
+/** Portrait screens use a crop without the landscape film's burned-in captions. */
+function usePortraitScreen() { return useSyncExternalStore(subscribePortrait, () => portraitMedia()?.matches ?? false, () => false); }
 
 function ProjectFootage({ project, paused, reset, onEnded, onPlaying, onFailed, progress }: { progress: MotionValue<number>; project: AtlasProject; paused: boolean; reset: boolean; onEnded: () => void; onPlaying: () => void; onFailed: () => void }) {
   const root=useRef<HTMLDivElement>(null), video=useRef<HTMLVideoElement>(null);
   const inView=useInView(root,{amount:.15}), seen=useInView(root,{once:true,amount:.05});
   const reduced=useReducedMotion();const [ready,setReady]=useState(false);
-  const preview=useProjectPreview(project.id, project.previewSrc);
+  const landscapePreview=useProjectPreview(project.id, project.previewSrc);
+  const portrait=usePortraitScreen();
+  const preview=portrait&&landscapePreview?portraitPreviewClips[landscapePreview]??landscapePreview:landscapePreview;
   const present=useIsPresent();
   useEffect(()=>{ if(reset&&video.current){video.current.pause();video.current.currentTime=0;} },[reset]);
   useEffect(()=>{

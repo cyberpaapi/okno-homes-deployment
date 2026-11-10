@@ -544,6 +544,14 @@ const baseAdminPages: readonly ContentPage[] = [
         { id: `hospitality.timeline.stage-${index + 1}.alt`, label: `Stage ${index + 1} photograph description`, kind: "text" as const, defaultValue: "", help: "Optional when the photograph is decorative beside the stage description." },
       ]),
     ] },
+    { id: "result", label: "Result pop-up image", fields: [
+      { id: "hospitality.result.eyebrow", label: "Section label", kind: "text", defaultValue: "The result" },
+      { id: "hospitality.result.heading", label: "Heading", kind: "text", defaultValue: "Guest-ready, and of its place." },
+      { id: "hospitality.result.image", label: "Full-width photograph", kind: "image", defaultValue: "/assets/projects/real-v1/rasa-vikarabad-01.webp" },
+      { id: "hospitality.result.alt", label: "Full-width photograph description", kind: "text", defaultValue: "Rasa Vikarabad pool and pavilions at dusk" },
+      { id: "hospitality.result.card-image", label: "Pop-up photograph", kind: "image", defaultValue: "/assets/projects/real-v1/rasa-vikarabad-04.webp" },
+      { id: "hospitality.result.card-alt", label: "Pop-up photograph description", kind: "text", defaultValue: "Breakfast by the pool at Rasa Vikarabad" },
+    ] },
     { id: "enquiry", label: "Enquiry close", fields: [
       { id: "hospitality.closing.copy", label: "Consultation description", kind: "text", defaultValue: "Investment is shaped in private consultation." },
       { id: "hospitality.closing.heading", label: "Closing heading", kind: "text", defaultValue: "Begin a hospitality conversation." },

@@ -9,6 +9,7 @@ import { HospitalityGallery } from "./21st/HospitalityGallery";
 import { HospitalityTimeline, type TimelineStep } from "./21st/HospitalityTimeline";
 import { TextBlockAnimation } from "./21st/TextBlockAnimation";
 import { HospitalityIntro } from "./HospitalityIntro";
+import { HospitalityResult } from "./HospitalityResult";
 import { HospitalityTextLens } from "./HospitalityTextLens";
 import styles from "./HospitalityExperience.module.css";
 import { atlasProjects, type AtlasProject } from '@/data/projectAtlas';
@@ -64,6 +65,8 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
         </section>}
 
         <HospitalityTimeline steps={journey} />
+
+        <HospitalityResult />
 
         <section className={styles.enquire} data-type-section="hospitality.enquiry" aria-labelledby="enquire-title" data-header-tone="dark">
           <h2 id="enquire-title" className={styles.srOnly} data-type-field={"hospitality.closing.heading"}>{closingHeading}</h2>

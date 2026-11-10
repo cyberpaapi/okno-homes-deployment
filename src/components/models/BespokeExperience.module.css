@@ -234,3 +234,10 @@
   .horizontalPanel { min-height: 0; gap: 20px; padding: 56px 20px 40px; }
   .panelMedia { height: 44svh; }
 }
+/* Client feedback (10 November 2026): the faint BESPOKE layers sat half behind the
+   opening frame; the frame's own “Bespoke by OKNO” label carries the name. The result
+   section's pop-up photo returns on phones, set above the heading instead of across it. */
+.heroLayers { display: none; }
+@media (max-width: 700px) {
+  .parallaxCard { display: block; top: 9svh; right: 18px; bottom: auto; width: 40vw; border-width: 6px; }
+}

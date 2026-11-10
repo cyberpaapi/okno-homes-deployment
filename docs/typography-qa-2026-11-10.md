@@ -74,4 +74,11 @@ Checked on a local production build with touch emulation across the 14 routes at
 
 Checked on a local production build: 14 routes at 390×844 with touch emulation have no overflow, no text under 13px and no control under 44px; desktop 1600×820 scroll captures reviewed for Bespoke, Hospitality, Home and About.
 
+## Client feedback pass (fifth release, same day)
+
+- Projects (phones): the globe was centred at 66% of a sticky frame as short as 690px and rose behind “Enter the collection”. It now sizes to the space below the intro (min(340px, 84vw, frame − 400px)) with a 28px bottom margin; the film still opens from its centre.
+- Forrest film: the landscape preview has burned-in lower-left captions (“Party Lawns”, “Mystical Pathway”, “Forrest, Mahabalipuram”) that a portrait crop cut in half. Portrait screens (aspect ≤ 4/5) now play `forrest-stream-v4-portrait.mp4`, a 608×1080 crop from x=998, right of the captions (derived from `forrest-stream-v4.mp4`; ffmpeg `crop=608:1080:998:0`, libx264 CRF 21, 25 fps, no audio). Landscape screens keep the full frame with complete captions.
+- Bespoke: the faint BESPOKE layers sat half behind the opening frame and are removed; the frame's “Bespoke by OKNO” label carries the name. The result section's pop-up photograph shows on phones again, above the heading.
+- Hospitality: new result section with the same pop-up image as Bespoke (full-bleed photograph opening on entry, framed photograph rising over it), after the delivery timeline. Text and both photographs are editable under Hospitality → Result pop-up image in `/admin`.
+
 Release identity and live checks are recorded in the deployment ledger.
