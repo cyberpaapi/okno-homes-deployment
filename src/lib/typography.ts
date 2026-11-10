@@ -5,11 +5,11 @@ export type TypeRole = typeof typeRoles[number];
 export const typeRoleLabels: Record<TypeRole, string> = { display: 'Large titles', heading: 'Headings', subheading: 'Subheadings', body: 'Body text', caption: 'Small text' };
 export const typographyFonts = [
   { value: 'okno', label: 'OKNO · Kento headings / Govandi body', family: 'var(--okno-font-body)' },
-  { value: 'kento', label: 'Kento', family: '"Kento OKNO", "OKNO Rupee", Arial, sans-serif' },
-  { value: 'govandi', label: 'Govandi Adhiwan', family: '"Govandi OKNO", "OKNO Rupee", Arial, sans-serif' },
+  { value: 'kento', label: 'Kento', family: '"Kento OKNO", "OKNO Symbols", "OKNO Rupee", Arial, sans-serif' },
+  { value: 'govandi', label: 'Govandi Adhiwan', family: '"Govandi OKNO", "OKNO Symbols", "OKNO Rupee", "Govandi Fallback", Arial, sans-serif' },
   { value: 'geist', label: 'Geist OKNO · Sustainability', family: '"Geist OKNO", Arial, sans-serif' },
-  { value: 'manrope', label: 'Manrope', family: '"Manrope OKNO", Arial, sans-serif' },
-  { value: 'bodoni', label: 'Bodoni Moda', family: '"Bodoni OKNO", Georgia, serif' },
+  { value: 'manrope', label: 'Manrope', family: '"Manrope OKNO", "OKNO Symbols", Arial, sans-serif' },
+  { value: 'bodoni', label: 'Bodoni Moda', family: '"Bodoni OKNO", "OKNO Symbols", "OKNO Rupee", Georgia, serif' },
   { value: 'system', label: 'System sans serif', family: 'Arial, Helvetica, sans-serif' },
   { value: 'serif', label: 'System serif', family: 'Georgia, "Times New Roman", serif' },
 ] as const;

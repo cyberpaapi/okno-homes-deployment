@@ -18,10 +18,11 @@
 .heading { align-self: center; }
 .heading h3, .heading p { margin: 0; }
 .heading h3 { font-size: var(--type-size-body, var(--okno-card)); font-weight: 500;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
-.heading p { margin-top: 7px; color: rgb(225 236 228 / 52%); font-size: var(--type-size-caption, var(--okno-section)); text-transform: uppercase;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+.heading p { margin-top: 7px; color: rgb(225 236 228 / 52%); font-size: var(--type-size-caption, var(--okno-label)); text-transform: uppercase;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 .track { position: relative; min-width: 0; }
 .dayRanges { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); padding-bottom: 8px; color: #a7bbb0; font-size: var(--type-size-caption, var(--okno-spec)); letter-spacing: .08em; text-transform: uppercase;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 .dayRanges > span { min-width: 0; }
+.rangeShort { display: none; }
 
 .trackBase,
 .trackActive {
@@ -119,14 +120,18 @@
   .timeline { padding: 10px 16px 12px; grid-template-rows: auto 1fr; grid-template-columns: 1fr; gap: 7px; }
   .heading { display: flex; align-items: baseline; justify-content: space-between; }
   .heading h3 { font-size: var(--type-size-body, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
-  .heading p { margin-top: 0; font-size: var(--type-size-caption, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .heading p { margin-top: 0; font-size: var(--type-size-caption, var(--okno-label)); text-align: right;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .track { min-height: 55px; }
   .dayRanges { padding-top: 14px; padding-bottom: 5px; font-size: var(--type-size-caption, var(--okno-spec)); letter-spacing: 0;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .trackBase, .trackActive { top: 6px; right: 0; left: 0; }
   .thumbnail { display: none; }
-  .milestone { position: relative; display: block; min-height: 54px; opacity: .65; text-align: left; }
+  .milestone { position: relative; display: block; min-height: 0; opacity: .65; text-align: left; }
   .milestoneCopy > span { padding-top: 14px; font-size: var(--type-size-caption, var(--okno-label)); white-space: nowrap;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
-  .milestoneCopy em { display: block; padding-right: 4px; font-size: var(--type-size-caption, var(--okno-label)); line-height: 1.3; text-transform: none;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+  /* Six Kento stage names cannot fit six ~58px columns (ARCHITECTURE alone is 134px);
+     the active stage is already named in the rail summary above. */
+  .rangeFull { display: none; }
+  .rangeShort { display: inline; }
+  .milestoneCopy em { display: none; padding-right: 4px; font-size: var(--type-size-caption, var(--okno-label)); line-height: 1.3; text-transform: none;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
   .milestoneCopy strong { display: none; }
   .milestone[data-active="true"] { opacity: 1; }
   .milestone[data-active="true"] .milestoneCopy strong { display: none; }

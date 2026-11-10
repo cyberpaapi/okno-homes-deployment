@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import SiteFrame from '@/components/SiteFrame';
 import SiteTypography from '@/components/SiteTypography/SiteTypography';
+import FontPreloads from '@/components/SiteTypography/FontPreloads';
 import BrandBrowserIcon from '@/components/Brand/BrandBrowserIcon';
 
 export const metadata: Metadata = {
@@ -20,6 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-site-typography suppressHydrationWarning>
+      <head>
+        <FontPreloads />
+      </head>
       <body id="top">
         <Script id="hero-v1-reload-position" strategy="beforeInteractive">{heroReloadBootstrap}</Script>
         <BrandBrowserIcon />

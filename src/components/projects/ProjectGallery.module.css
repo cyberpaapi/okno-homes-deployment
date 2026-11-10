@@ -8,4 +8,5 @@
 .unavailable{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px}.unavailable p{margin:0;color:#c0c8b8;font-size:var(--type-size-caption, var(--okno-label));text-transform:uppercase; font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}.unavailable h1{max-width:12ch;margin:0;font-size:var(--type-size-display, var(--okno-hero));font-weight:400;overflow-wrap:anywhere; font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}.unavailable .return{margin:12px 0 0}
 .return{max-width:100%;overflow-wrap:anywhere}
 
-.projectDescription { max-width:54ch; margin:20px 0 30px; font-size:var(--okno-label); line-height:1.6;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+/* A full-sentence description: Govandi body, per the supplied typography rule. */
+.projectDescription { max-width:54ch; margin:20px 0 30px; font-size:var(--type-size-body, var(--okno-intro)); line-height:1.6;  font-family: var(--type-font-body, var(--okno-font-body)) !important; letter-spacing: 0;}

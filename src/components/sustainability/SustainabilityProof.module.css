@@ -289,12 +289,15 @@
   .pressStage { padding: 18px 22px 0; }
   .sideCopy h3 { max-width: 15ch; margin-bottom: 8px; font-size: var(--type-size-heading, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .sideCopy p { display: none; }
-  .pressRail { grid-template-columns: 1fr 1fr; column-gap: 18px; }
+  /* minmax(0, 1fr): long Kento tokens (ARCHITECTURE+DESIGN is 203px at 13px) were
+     widening the columns past the screen edge. */
+  .pressRail { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 18px; }
   .pressCitation { padding: 8px 0 9px; }
   .citationMeta { margin-bottom: 4px; }
-  .citationMeta strong { font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+  /* Publication names are captions; Govandi capitals keep them inside a half-width column. */
+  .citationMeta strong { font-size: var(--type-size-caption, var(--okno-label)); font-weight: 400; overflow-wrap: break-word;  font-family: var(--type-font-body, var(--okno-font-body)) !important; letter-spacing: 0.02em;}
   .citationMeta time { font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
-  .pressCitation h4 { font-size: var(--type-size-body, var(--okno-card));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .pressCitation h4 { font-size: var(--type-size-body, var(--okno-card)); overflow-wrap: break-word;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .detailsInner {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;

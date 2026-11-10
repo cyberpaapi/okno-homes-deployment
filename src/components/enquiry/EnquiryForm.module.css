@@ -210,4 +210,5 @@
   }
 }
 
-.helper { margin:12px 0 0; max-width:48ch; font-size:var(--okno-label); line-height:1.6; color:inherit; opacity:.78;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+/* Full sentence: Govandi body, per the supplied typography rule. */
+.helper { margin:12px 0 0; max-width:48ch; font-size:var(--type-size-body, var(--okno-spec)); line-height:1.6; color:inherit; opacity:.78;  font-family: var(--type-font-body, var(--okno-font-body)) !important; letter-spacing: 0;}

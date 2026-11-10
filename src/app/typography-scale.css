@@ -1,15 +1,33 @@
 /* OKNO Typography Font Sizes_new.pdf, 5 November 2026.
    The document's 13px minimum takes precedence over its 11/12px label rows.
    Plateau sizes match each specified viewport band; gaps use the smaller band. */
-@font-face { font-family: "Kento OKNO"; src: url('/fonts/kento-light.woff') format('woff'); font-weight: 300; font-style: normal; font-display: swap; }
-@font-face { font-family: "Kento OKNO"; src: url('/fonts/kento-regular.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Kento OKNO"; src: url('/fonts/kento-bold.woff') format('woff'); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "Govandi OKNO"; src: url('/fonts/govandi-adhiwan-regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
-/* Explicit currency fallback; never substitute an unrelated missing-glyph box. */
-@font-face { font-family: "OKNO Rupee"; src: url('/fonts/manrope.ttf') format('truetype'); font-weight: 200 800; font-display: swap; unicode-range: U+20B9; }
+/* Font QA, 10 November 2026 (docs/typography-qa-2026-11-10.md).
+   WOFF2 copies are served first; the retained originals stay as format fallbacks.
+   Kento ships Light/Regular/Bold only, and component CSS still asks for in-between
+   weights (430–650) from the earlier variable-font design. Browsers snapped those to
+   Regular below 501 and Bold from 501, so the same role rendered regular on one page
+   and bold on another. Regular now answers 350–699; only explicit 700+ is Bold.
+   Kento is caps-only and its Arial fallback is mixed-case and far narrower, so it is
+   preloaded (FontPreloads) and blocks briefly instead of swapping visibly. */
+@font-face { font-family: "Kento OKNO"; src: url('/fonts/kento-light.woff2') format('woff2'), url('/fonts/kento-light.woff') format('woff'); font-weight: 100 349; font-style: normal; font-display: block; }
+@font-face { font-family: "Kento OKNO"; src: url('/fonts/kento-regular.woff2') format('woff2'), url('/fonts/kento-regular.woff') format('woff'); font-weight: 350 699; font-style: normal; font-display: block; }
+@font-face { font-family: "Kento OKNO"; src: url('/fonts/kento-bold.woff2') format('woff2'), url('/fonts/kento-bold.woff') format('woff'); font-weight: 700 1000; font-style: normal; font-display: block; }
+/* Only Regular exists; 100–599 maps to it so 450-style requests never fake-bold.
+   The WOFF2 also centres the middle dot and en/em dashes, which sat near the baseline. */
+@font-face { font-family: "Govandi OKNO"; src: url('/fonts/govandi-adhiwan-regular.woff2') format('woff2'), url('/fonts/govandi-adhiwan-regular.ttf') format('truetype'); font-weight: 100 599; font-style: normal; font-display: swap; }
+/* Explicit currency fallback; never substitute an unrelated missing-glyph box.
+   Variable Manrope so the ₹ follows the surrounding weight instead of always SemiBold. */
+@font-face { font-family: "OKNO Rupee"; src: url('/fonts/manrope-variable-latin-ext.woff2') format('woff2'); font-weight: 200 800; font-display: swap; unicode-range: U+20B9; }
+/* Arrows, play/pause, grid, check, close, minus, ellipsis and superscripts that neither
+   brand face contains (from Geist, OFL). Without it each device drew its own fallback. */
+@font-face { font-family: "OKNO Symbols"; src: url('/fonts/okno-symbols-300.woff2') format('woff2'); font-weight: 100 349; font-display: swap; unicode-range: U+00B2-00B3, U+2026, U+2161, U+2190-2199, U+21A9-21AA, U+2212, U+229E, U+25B6-25B7, U+25C0-25C1, U+2713, U+2715; ascent-override: 75%; descent-override: 25%; line-gap-override: 0%; }
+@font-face { font-family: "OKNO Symbols"; src: url('/fonts/okno-symbols-400.woff2') format('woff2'); font-weight: 350 699; font-display: swap; unicode-range: U+00B2-00B3, U+2026, U+2161, U+2190-2199, U+21A9-21AA, U+2212, U+229E, U+25B6-25B7, U+25C0-25C1, U+2713, U+2715; ascent-override: 75%; descent-override: 25%; line-gap-override: 0%; }
+@font-face { font-family: "OKNO Symbols"; src: url('/fonts/okno-symbols-700.woff2') format('woff2'); font-weight: 700 1000; font-display: swap; unicode-range: U+00B2-00B3, U+2026, U+2161, U+2190-2199, U+21A9-21AA, U+2212, U+229E, U+25B6-25B7, U+25C0-25C1, U+2713, U+2715; ascent-override: 75%; descent-override: 25%; line-gap-override: 0%; }
+/* Arial sized to Govandi's widths and line box, so body copy barely moves on swap. */
+@font-face { font-family: "Govandi Fallback"; src: local("Arial"), local("ArialMT"), local("Helvetica"), local("Liberation Sans"); size-adjust: 89%; ascent-override: 101%; descent-override: 27%; line-gap-override: 0%; }
 :root {
-  --okno-font-heading: "Kento OKNO", "OKNO Rupee", Arial, sans-serif;
-  --okno-font-body: "Govandi OKNO", "OKNO Rupee", Arial, sans-serif;
+  --okno-font-heading: "Kento OKNO", "OKNO Symbols", "OKNO Rupee", Arial, sans-serif;
+  --okno-font-body: "Govandi OKNO", "OKNO Symbols", "OKNO Rupee", "Govandi Fallback", Arial, sans-serif;
   --okno-hero: 36px;
   --okno-model: 40px;
   --okno-figure: 44px;

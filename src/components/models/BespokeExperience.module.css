@@ -133,7 +133,8 @@
   .parallax { height:150svh; }
   .parallaxWords { top:18%; font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .parallaxCard { right:18px; bottom:8vh; width:57vw; border-width:6px; }
-  .parallaxCopy { bottom:12vh; left:20px; width:74vw; }
+  /* Full width so Kento's longest words (ARCHITECTURE is 299px at 28px) fit on phones. */
+  .parallaxCopy { bottom:12vh; left:20px; width:calc(100vw - 40px); }
   .parallaxCopy h2 { font-size:var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 }
 

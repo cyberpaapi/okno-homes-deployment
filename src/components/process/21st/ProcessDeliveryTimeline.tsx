@@ -15,6 +15,14 @@ export type ProcessTimelineItem = {
   poster: string;
 };
 
+// Phones show six ~58px columns, which only fit the numbers of "Days 01–10", so a
+// numbers-only copy replaces the full label there. Other wording renders unchanged.
+function DayRange({ days }: { days: string }) {
+  const short = /^\D+?\s+(\d.*)$/.exec(days)?.[1];
+  if (!short) return <>{days}</>;
+  return <><span className={styles.rangeFull}>{days}</span><span className={styles.rangeShort}>{short}</span></>;
+}
+
 function TimelineItems({
   items,
   activeIndex,
@@ -31,7 +39,7 @@ function TimelineItems({
   return (
     <>
     <div className={styles.dayRanges}>
-      {ranges.map((range, index) => <span key={index} style={{ gridColumn: `span ${range.count}` }}>{range.days}</span>)}
+      {ranges.map((range, index) => <span key={index} style={{ gridColumn: `span ${range.count}` }}><DayRange days={range.days} /></span>)}
     </div>
     <ol>
       {items.map((item, index) => {

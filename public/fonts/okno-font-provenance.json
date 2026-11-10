@@ -27,5 +27,112 @@
       "bytes": 42496,
       "sha256": "2b7306b1d847e886aff7838a994962547bc207fa5ac95cf5d7b7469be99aae38"
     }
-  ]
+  ],
+  "derivedServingCopies": {
+    "added": "2026-11-10",
+    "note": "Served first; the original client files above remain unmodified and are kept as @font-face format fallbacks. See docs/typography-qa-2026-11-10.md.",
+    "files": [
+      {
+        "path": "/fonts/kento-light.woff2",
+        "derivedFrom": "/fonts/kento-light.woff",
+        "bytes": 10280,
+        "sha256": "75fe19cf4f854c5d7b2674c4323b4001eabbbe842709877504189b3f4e4567b1",
+        "derivation": "Lossless WOFF to WOFF2 re-encoding (fontTools); outlines, metrics and cmap identical."
+      },
+      {
+        "path": "/fonts/kento-regular.woff2",
+        "derivedFrom": "/fonts/kento-regular.woff",
+        "bytes": 9372,
+        "sha256": "8d7aa4e5f5870d84b51fb70243aeb08a9d22dbc797818a87974899d4e3085af3",
+        "derivation": "Lossless WOFF to WOFF2 re-encoding (fontTools); outlines, metrics and cmap identical."
+      },
+      {
+        "path": "/fonts/kento-bold.woff2",
+        "derivedFrom": "/fonts/kento-bold.woff",
+        "bytes": 9976,
+        "sha256": "0dc5fae10e60237b96e61ae54009caf45f4af8b3b09e4af2debd1121d9d20aa3",
+        "derivation": "Lossless WOFF to WOFF2 re-encoding (fontTools); outlines, metrics and cmap identical."
+      },
+      {
+        "path": "/fonts/govandi-adhiwan-regular.woff2",
+        "derivedFrom": "/fonts/govandi-adhiwan-regular.ttf",
+        "bytes": 14160,
+        "sha256": "d2247040bc08f960eeafd90f6c2397ccfd30e94251e237a87c222034dd87b1a1",
+        "derivation": "WOFF2 re-encoding (fontTools). Three glyphs moved vertically only, to the hyphen centre: periodcentered +180 units (it sat near the baseline and read as a full stop), endash and emdash +102 units. No shapes, widths or other glyphs changed."
+      }
+    ]
+  },
+  "openSourceFallbacks": {
+    "added": "2026-11-10",
+    "note": "SIL Open Font License 1.1 faces for glyphs the brand fonts lack and for the admin Manrope/Bodoni/Geist typeface options.",
+    "files": [
+      {
+        "path": "/fonts/okno-symbols-300.woff2",
+        "family": "OKNO Symbols Light",
+        "source": "Geist Variable 1.9.2 (npm geist), instanced at wght 300",
+        "license": "/fonts/geist-OFL.txt",
+        "bytes": 1732,
+        "sha256": "fdf0c937153dd97c9ced84a064c5c74183f169a9dee3a42a89fadaf471c2c6ef",
+        "derivation": "Subset to arrows U+2190-2199, U+21A9-21AA, play/back triangles U+25B6-25B7/U+25C0-25C1, U+2026, U+2212, U+00B2-00B3 and U+00D7 (U+2715 mapped to it). Added geometric pause bars (U+2161), squared plus (U+229E) and check mark (U+2713) drawn at Geist stem weight. Renamed per OFL Reserved Font Name rules."
+      },
+      {
+        "path": "/fonts/okno-symbols-400.woff2",
+        "family": "OKNO Symbols Regular",
+        "source": "Geist Variable 1.9.2 (npm geist), instanced at wght 400",
+        "license": "/fonts/geist-OFL.txt",
+        "bytes": 1712,
+        "sha256": "b44ff0b4c68d276f6d66ac36c0d1e981660387fa2401d7488f5ca99b27487dce",
+        "derivation": "Subset to arrows U+2190-2199, U+21A9-21AA, play/back triangles U+25B6-25B7/U+25C0-25C1, U+2026, U+2212, U+00B2-00B3 and U+00D7 (U+2715 mapped to it). Added geometric pause bars (U+2161), squared plus (U+229E) and check mark (U+2713) drawn at Geist stem weight. Renamed per OFL Reserved Font Name rules."
+      },
+      {
+        "path": "/fonts/okno-symbols-700.woff2",
+        "family": "OKNO Symbols Bold",
+        "source": "Geist Variable 1.9.2 (npm geist), instanced at wght 700",
+        "license": "/fonts/geist-OFL.txt",
+        "bytes": 1696,
+        "sha256": "044472bb0f47ba9317cd22aa946cf2724d6bc2772045786c2990159d14c2c995",
+        "derivation": "Subset to arrows U+2190-2199, U+21A9-21AA, play/back triangles U+25B6-25B7/U+25C0-25C1, U+2026, U+2212, U+00B2-00B3 and U+00D7 (U+2715 mapped to it). Added geometric pause bars (U+2161), squared plus (U+229E) and check mark (U+2713) drawn at Geist stem weight. Renamed per OFL Reserved Font Name rules."
+      },
+      {
+        "path": "/fonts/geist-variable.woff2",
+        "family": "Geist Variable (wght 100-900)",
+        "source": "npm geist 1.9.2, dist/fonts/geist-sans/Geist-Variable.woff2, unmodified",
+        "license": "/fonts/geist-OFL.txt",
+        "bytes": 69488,
+        "sha256": "3626eba547294501c8a4d662c7d9ea3b49734409a4c5a1ccf12fa86429b1687e"
+      },
+      {
+        "path": "/fonts/manrope-variable-latin.woff2",
+        "family": "Manrope Variable Latin (wght 200-800)",
+        "source": "npm @fontsource-variable/manrope 5.3.0, files/manrope-latin-wght-normal.woff2, unmodified",
+        "license": "/fonts/manrope-OFL.txt",
+        "bytes": 24836,
+        "sha256": "a30ddcd349703aff7464c34bef3fffdff405ee50c113440d7c8693c02d210972"
+      },
+      {
+        "path": "/fonts/manrope-variable-latin-ext.woff2",
+        "family": "Manrope Variable Latin Extended (wght 200-800, includes U+20B9)",
+        "source": "npm @fontsource-variable/manrope 5.3.0, files/manrope-latin-ext-wght-normal.woff2, unmodified",
+        "license": "/fonts/manrope-OFL.txt",
+        "bytes": 15120,
+        "sha256": "3911b66d9f2e005a4b989223405d0e5032619c668597ba467cc76a23c8fffcfb"
+      },
+      {
+        "path": "/fonts/bodoni-moda-variable-latin.woff2",
+        "family": "Bodoni Moda Variable Latin (wght 400-900)",
+        "source": "npm @fontsource-variable/bodoni-moda 5.3.0, files/bodoni-moda-latin-wght-normal.woff2, unmodified",
+        "license": "/fonts/bodonimoda-OFL.txt",
+        "bytes": 25884,
+        "sha256": "192ae876c21d9258d096a526dad5bddf37f0daa69cfe943cae5f6be5a52adda2"
+      },
+      {
+        "path": "/fonts/bodoni-moda-variable-latin-italic.woff2",
+        "family": "Bodoni Moda Variable Latin Italic (wght 400-900)",
+        "source": "npm @fontsource-variable/bodoni-moda 5.3.0, files/bodoni-moda-latin-wght-italic.woff2, unmodified",
+        "license": "/fonts/bodonimoda-OFL.txt",
+        "bytes": 30328,
+        "sha256": "e50a00b8431381bd33c7676c50ffb98fc95f4a06c707ea44d04a423266e211cd"
+      }
+    ]
+  }
 }

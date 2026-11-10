@@ -1805,5 +1805,18 @@
   "/fonts/kento-regular.woff": 12496,
   "/fonts/govandi-adhiwan-regular.ttf": 42496,
   "/fonts/okno-viewer-fonts.css": 784,
-  "/fonts/okno-font-provenance.json": 1376
+  "/fonts/okno-font-provenance.json": 7351,
+  "/fonts/kento-light.woff2": 10280,
+  "/fonts/kento-regular.woff2": 9372,
+  "/fonts/kento-bold.woff2": 9976,
+  "/fonts/govandi-adhiwan-regular.woff2": 14160,
+  "/fonts/okno-symbols-300.woff2": 1732,
+  "/fonts/okno-symbols-400.woff2": 1712,
+  "/fonts/okno-symbols-700.woff2": 1696,
+  "/fonts/geist-variable.woff2": 69488,
+  "/fonts/manrope-variable-latin.woff2": 24836,
+  "/fonts/manrope-variable-latin-ext.woff2": 15120,
+  "/fonts/bodoni-moda-variable-latin.woff2": 25884,
+  "/fonts/bodoni-moda-variable-latin-italic.woff2": 30328,
+  "/fonts/geist-OFL.txt": 4368
 }

@@ -115,7 +115,7 @@
 }
 
 .mobileList b {
-  padding-left: 20px;
+  padding-left: 18px;
   color: var(--milestone-accent);
   font-size: var(--type-size-caption, var(--okno-label));
  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
@@ -127,13 +127,14 @@
   font-weight: 520;
  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
+/* Full sentences use Govandi (supplied typography rule), as on the desktop timeline. */
 .mobileList p {
-  max-width: 28ch;
+  max-width: 34ch;
   margin: 10px 0 0;
   color: rgba(244, 241, 233, .62);
-  font-size: var(--type-size-caption, var(--okno-label));
-  line-height: 1.35;
- font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+  font-size: var(--type-size-body, var(--okno-spec));
+  line-height: 1.5;
+ font-family: var(--type-font-body, var(--okno-font-body)) !important; letter-spacing: 0;}
 
 .mobilePhoto {
   position: relative;
