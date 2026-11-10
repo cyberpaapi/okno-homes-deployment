@@ -1,5 +1,13 @@
 # Release decision and evidence ledger
 
+## Phone touch targets — 10 November 2026
+
+Owner approved design changes so that every phone control reaches 44px, then approved the production deploy. Source `816b2cfad2f654bbbad76f2ce4c5c3b3526d9a05` is READY as production `dpl_4FrsxEFB6tBosUZx79mtZ96RosKw` on the canonical alias; `dpl_DuAExDNHBsy4NBPFkFtnmV5TKTPR` (phone usability pass) is the rollback baseline. Changes and reasons: the touch-target section of [typography QA](../typography-qa-2026-11-10.md).
+
+Validation: 40 focused test files / 157 tests, TypeScript, scoped ESLint and a local production build pass. The full suite's two failures are environmental and unrelated: `mediaPreparation.integration` (this container's ffmpeg lacks `libopenh264`) and `AdminStudio.preview` (15 s timeout, also failing on the unchanged release). Local touch-emulated audit: 14 routes at eight viewports (320–932px phones in portrait and landscape, 768px tablet).
+
+Live acceptance with touch emulation: 14 routes at 390×844 show no page overflow, no visible text under 13px and no control under 44×44. Signature and the configurator pass at 360×780, 740×360 and 844×390, except the five configurator background thumbnails at 360px (38×44, as documented). The 740×360 Signature dock shows all six models beside “Explore details”. The 14 audited routes and `/admin` return 200, and the post-deploy runtime error scan is empty. Headless Chrome only; no physical-device claim.
+
 ## Phone usability pass — 10 November 2026
 
 Owner asked for the phone layouts to be optimised after the font release and approved the production deploy. Source `498c43be0054558871fa4835cd80559abaa6c7a7` is READY as production `dpl_DuAExDNHBsy4NBPFkFtnmV5TKTPR` on the canonical alias; `dpl_AaKxz1Nxd88j6r2KLp8woujpNggK` (font corrections) is the rollback baseline. Changes and reasons: the phone section of [typography QA](../typography-qa-2026-11-10.md).
