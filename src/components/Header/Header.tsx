@@ -154,7 +154,9 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", enquir
   const resolvedTone = tone ?? (variant === "glass" ? "light" : "dark");
   const navigation = siteNavigationItems.map(item => ({ ...item, label: get(`nav.${item.href.slice(1)}`, item.label) }));
   const enquireLabel = enquiryLabel ?? get("action.enquire", "Enquire");
-  const items = [{ href: "/", label: get("nav.home", "Home") }, ...navigation, { href: enquiryHref, label: enquireLabel }];
+  // The phone menu keeps one-word destinations; a page-specific label such as
+  // "Enquire about Forza" stays on the desktop button, and both link to the same enquiry.
+  const items = [{ href: "/", label: get("nav.home", "Home") }, ...navigation, { href: enquiryHref, label: get("action.enquire", "Enquire") }];
   const menuLabel = get("menu.open", "Menu");
   const closeLabel = get("menu.close", "Close");
   const navigationLabel = get("menu.navigation-label", "Site navigation");
