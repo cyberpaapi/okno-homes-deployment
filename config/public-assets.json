@@ -438,7 +438,6 @@
   "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4": 47573337,
   "/process/process-final-house.webp": 1495402,
   "/process/process-final-house-mobile.webp": 650432,
-  "/assets/landing-options/hero-v1-mobile-83b621321aec.bin": 26704366,
   "/assets/landing-options/hero-v2-mobile-d63f5534f890.bin": 13908198,
   "/process/process-mobile-build.mp4": 3614789,
   "/hero-v2/nighttime-frames-00-6dec8ad6c87f.bin": 16777216,
@@ -506,7 +505,6 @@
   "/configurator/models/v2/tengo-07a4d45eda3d.glb": 8087804,
   "/configurator/models/v2/tish-d1b4a6c112a2.glb": 358392,
   "/configurator/models/v2/kray-32f31b2a0ca8.glb": 6364060,
-  "/assets/landing-options/forest-entry-frames-f01009d3a94f.bin": 46739190,
   "/favicon.ico": 25931,
   "/page-images/2b321590d671662e-384.webp": 7094,
   "/page-images/2b321590d671662e-640.webp": 14390,
@@ -1821,5 +1819,8 @@
   "/fonts/geist-OFL.txt": 4368,
   "/assets/projects/previews/forrest-stream-v4-portrait.mp4": 5027376,
   "/assets/projects/previews/forrest-stream-v4-clean.mp4": 7161042,
-  "/assets/landing-options/forest-entry-intro-first-frame.jpg": 177343
+  "/assets/landing-options/forest-entry-intro-first-frame.jpg": 177343,
+  "/assets/landing-options/forest-entry-frames-f9c5e3117644.bin": 52671056,
+  "/assets/landing-options/hero-v1-mobile-fc08f4e8ac2f.bin": 36890332,
+  "/assets/landing-options/forest-entry-journey-merged-cfcd487337e3.mp4": 67828357
 }

@@ -30,13 +30,15 @@ function setup(rangeSupport = true) {
   vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockImplementation((() => ({ drawImage })) as unknown as typeof HTMLCanvasElement.prototype.getContext);
   return { decode, closeFrame, close, fetchRange, drawImage, pause: () => { paused=true; }, emit: (index: number) => output?.({timestamp:film.packets[index][2],close:closeFrame}) };
 }
+// The merged opening film (11 November 2026): every expectation derives from its index.
+const FRAMES = film.packets.length, LAST = (FRAMES - 1) / 24;
 describe('range-indexed film rendering', () => {
   afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); vi.useRealTimers(); });
-  it('matches all 577 frames and exact indexed byte offsets of the delivery film', () => {
+  it('matches every frame and exact indexed byte offsets of the delivery film', () => {
     expect(createHash('sha256').update(bytes).digest('hex')).toBe(film.sha256);
-    expect([film.width, film.height, film.fps, film.packets.length]).toEqual([1920,1080,24,577]);
+    expect([film.width, film.height, film.fps, film.packets.length]).toEqual([1920,1080,24,FRAMES]);
     expect(film.packets.every(([position,size],index) => position+size <= bytes.length && (index===0 || film.packets[index-1][2] < film.packets[index][2]))).toBe(true);
-    expect(film.packets.filter(p=>p[3]).length).toBe(49);
+    expect(film.packets.filter(p=>p[3]).length).toBe(Math.ceil(FRAMES / 12));
   });
   it('fetches late frames directly, deduplicates ranges, bounds memory and supports reverse and exact ending', async () => {
     const mocks = setup(); const canvas = document.createElement('canvas');
@@ -57,7 +59,7 @@ describe('range-indexed film rendering', () => {
     scrubber!.setTime(12.125); await vi.advanceTimersByTimeAsync(30);
     expect(canvas.dataset.scrubPresentedTime).toBe('12.1250');
     scrubber!.setTime(100); await vi.advanceTimersByTimeAsync(30);
-    expect(canvas.dataset.scrubPresentedTime).toBe('24.0000');
+    expect(canvas.dataset.scrubPresentedTime).toBe(LAST.toFixed(4));
     for (const [packet] of mocks.decode.mock.calls) {
       const sample = film.packets.find(p=>p[2] === packet.timestamp)!;
       expect(Buffer.from(packet.data).equals(bytes.subarray(sample[0], sample[0]+sample[1]))).toBe(true);
@@ -137,26 +139,26 @@ describe('range-indexed film rendering', () => {
   it('presents all frames in order after a large request and reverses without skipping', async () => {
     const mocks=setup(); const abort=new AbortController(); const canvas=document.createElement('canvas'); const seen:number[]=[];
     const scrubber=await createH264FrameScrubber(canvas,abort.signal,vi.fn(),vi.fn(),{sequential:true,onPresented:t=>seen.push(Math.round(t*24))});
-    await vi.advanceTimersByTimeAsync(100); scrubber!.setTime(24);
-    await vi.advanceTimersByTimeAsync(32000);
-    expect(seen).toEqual(Array.from({length:577},(_,i)=>i));
+    await vi.advanceTimersByTimeAsync(100); scrubber!.setTime(LAST);
+    await vi.advanceTimersByTimeAsync(FRAMES/24*1000+2000);
+    expect(seen).toEqual(Array.from({length:FRAMES},(_,i)=>i));
     expect(mocks.decode.mock.calls.length).toBeLessThan(2000);
     expect(canvas.dataset.scrubSkippedFrames).toBe('0'); expect(canvas.dataset.scrubMaxStep).toBe('1');
-    scrubber!.setTime(23); await vi.advanceTimersByTimeAsync(1400);
-    expect(seen.slice(-24)).toEqual(Array.from({length:24},(_,i)=>575-i));
-    expect(canvas.dataset.scrubPresentedTime).toBe('23.0000'); abort.abort();
+    scrubber!.setTime(LAST-1); await vi.advanceTimersByTimeAsync(1400);
+    expect(seen.slice(-24)).toEqual(Array.from({length:24},(_,i)=>FRAMES-2-i));
+    expect(canvas.dataset.scrubPresentedTime).toBe((LAST-1).toFixed(4)); abort.abort();
   });
   it('responds faster to normal scrolling while retaining every adjacent frame and reversal', async () => {
     setup(); const abort=new AbortController(); const canvas=document.createElement('canvas'); const seen:number[]=[];
     const scrubber=await createH264FrameScrubber(canvas,abort.signal,vi.fn(),vi.fn(),{sequential:true,maxPresentationFps:60,onPresented:t=>seen.push(Math.round(t*24))});
-    await vi.advanceTimersByTimeAsync(100); scrubber!.setTime(24);
-    await vi.advanceTimersByTimeAsync(10500);
-    expect(seen).toEqual(Array.from({length:577},(_,i)=>i));
+    await vi.advanceTimersByTimeAsync(100); scrubber!.setTime(LAST);
+    await vi.advanceTimersByTimeAsync(FRAMES/60*1000+1000);
+    expect(seen).toEqual(Array.from({length:FRAMES},(_,i)=>i));
     expect(canvas.dataset.scrubSkippedFrames).toBe('0');
     expect(Number(canvas.dataset.scrubByteCache)).toBeLessThanOrEqual(16*1024*1024);
     expect(Number(canvas.dataset.scrubFetchedBytes)).toBeLessThanOrEqual(film.bytes);
-    scrubber!.setTime(20); await vi.advanceTimersByTimeAsync(1900);
-    expect(canvas.dataset.scrubPresentedTime).toBe('20.0000');
+    scrubber!.setTime(LAST-4); await vi.advanceTimersByTimeAsync(1900);
+    expect(canvas.dataset.scrubPresentedTime).toBe((LAST-4).toFixed(4));
     expect(canvas.dataset.scrubMaxStep).toBe('1');
     abort.abort();
   });
@@ -190,7 +192,7 @@ describe('range-indexed film rendering', () => {
     // Seed the runway, then stall a decoder refill. Presentation is independent
     // of that asynchronous job and must drain the ready frames.
     for(let index=1;index<=12;index++)mocks.emit(index);
-    mocks.pause(); scrubber!.setTime(24);
+    mocks.pause(); scrubber!.setTime(LAST);
     await vi.advanceTimersByTimeAsync(300);
     expect(Number(canvas.dataset.scrubPresentedTime)).toBeGreaterThanOrEqual(12/24);
     expect(canvas.dataset.scrubSkippedFrames).toBe('0');

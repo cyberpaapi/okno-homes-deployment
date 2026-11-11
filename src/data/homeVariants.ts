@@ -5,7 +5,7 @@ export const homeVariantDefaults: ContentItem[] = [
   { id: "hero-v1", fields: {
     name: "Hero V1 · forest", template: "v1",
     openingVideo: "/assets/landing-options/forest-entry-intro-15s.mp4",
-    scrollVideo: "/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4",
+    scrollVideo: "/assets/landing-options/forest-entry-journey-merged-cfcd487337e3.mp4",
     poster: "/assets/landing-options/forest-entry-start-v2.jpg",
     endImage: "/assets/landing-options/forest-entry-window-finish.jpg",
     introFirstFrame: "/assets/landing-options/forest-entry-intro-first-frame.jpg",

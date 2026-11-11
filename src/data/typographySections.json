@@ -2,6 +2,7 @@
   {
     "scope": "hero-v1.opening",
     "fields": [
+      "hero-v1.opening.scroll-cue",
       "hero-v1.opening.tagline"
     ]
   },

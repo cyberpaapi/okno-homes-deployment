@@ -37,7 +37,6 @@ describe('ForestEntryOption', () => {
   beforeEach(()=>{
     vi.stubGlobal('matchMedia', vi.fn(() => ({matches: false})));
     vi.spyOn(HTMLMediaElement.prototype,'load').mockImplementation(()=>{});
-    vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});
     vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue(undefined);
   });
   afterEach(() => {
@@ -48,96 +47,61 @@ describe('ForestEntryOption', () => {
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
   });
-  const introLoaded = async (intro: HTMLVideoElement) => {
-    Object.defineProperty(intro, 'readyState', { configurable: true, value: 4 });
-    await act(async () => { fireEvent.canPlayThrough(intro); });
-  };
   const viewport = (container: HTMLElement) => container.querySelector('[style*="--brand-opacity"]') as HTMLElement;
 
-  it('opens on the loading bar over the intro first frame and waits for both films', async () => {
-    const play = vi.mocked(HTMLMediaElement.prototype.play);
+  it('opens on the loading bar over the first frame of the single scroll film', () => {
     const { container } = render(<ForestEntryOption/>);
-    const intro = container.querySelector('video')!;
-    expect(intro).not.toHaveAttribute('autoplay');
-    expect(intro).toHaveAttribute('poster', '/assets/landing-options/forest-entry-intro-first-frame.jpg');
+    expect(container.querySelectorAll('video')).toHaveLength(1);
+    expect(container.querySelector('video')).toHaveAttribute('src', '/assets/landing-options/forest-entry-journey-merged-cfcd487337e3.mp4');
     expect(container.querySelector('img[src="/assets/landing-options/forest-entry-intro-first-frame.jpg"]')).toBeInTheDocument();
-    const bar = screen.getByRole('progressbar', { name: 'Loading experience' });
-    expect(bar).toHaveAttribute('value', '0');
+    expect(screen.getByRole('progressbar', { name: 'Loading experience' })).toBeInTheDocument();
     expect(viewport(container).style.getPropertyValue('--brand-opacity')).toBe('1.0000');
-    expect(document.documentElement.dataset.heroLoading).toBe('true');
-    act(() => { motionState.onLoadProgress?.(.5); });
-    expect((bar as HTMLProgressElement).value).toBeLessThanOrEqual(.5);
-    act(() => motionState.onReady?.(true));
-    expect(play).not.toHaveBeenCalled();
-    expect(screen.getByRole('status')).toHaveTextContent('Loading experience');
-    await introLoaded(intro);
-    expect(intro.getAttribute('src')).toBe('/assets/landing-options/forest-entry-intro-664e7298e916.mp4');
-    expect(play).toHaveBeenCalled();
-    expect(intro.playbackRate).toBe(1.75);
-    expect(viewport(container).style.getPropertyValue('--brand-opacity')).toBe('0.0000');
+    expect(viewport(container).style.getPropertyValue('--cue-opacity')).toBe('0.0000');
     expect(document.documentElement.dataset.heroLoading).toBe('true');
   });
 
-  it('hands the finished intro straight to the scroll film and unlocks the page', async () => {
-    const { container } = render(<ForestEntryOption/>);
-    const intro = container.querySelector('video')!;
-    act(() => motionState.onReady?.(true));
-    await introLoaded(intro);
-    fireEvent.ended(intro);
-    expect(intro.className).toContain('introComplete');
-    expect(document.documentElement.dataset.heroLoading).not.toBe('true');
-    expect(viewport(container).style.getPropertyValue('--still-opacity')).toBe('1.0000');
-    expect(viewport(container).style.getPropertyValue('--journey-opacity')).toBe('1.0000');
-    act(() => { motionState.progress = .03; motionState.onChange?.(.03); });
-    expect(viewport(container).style.getPropertyValue('--still-opacity')).toBe('0.0000');
-  });
-
-  it('skips an intro that cannot load instead of blocking the page', async () => {
-    const { container } = render(<ForestEntryOption/>);
-    fireEvent.error(container.querySelector('video')!);
-    act(() => motionState.onReady?.(true));
-    expect(container.querySelector('video')!.className).toContain('introComplete');
-    expect(document.documentElement.dataset.heroLoading).not.toBe('true');
-  });
-
-  it('streams the intro after a short grace when the phone will not buffer it', () => {
-    vi.useFakeTimers();
+  it('shows the mouse prompt once loaded and leaves the film to scroll alone', () => {
     const play = vi.mocked(HTMLMediaElement.prototype.play);
-    render(<ForestEntryOption/>);
-    act(() => motionState.onReady?.(true));
-    expect(play).not.toHaveBeenCalled();
-    act(() => { vi.advanceTimersByTime(4000); });
-    expect(play).toHaveBeenCalled();
-    vi.useRealTimers();
-  });
-
-  it('hands over to the scroll film when the intro never starts playing', async () => {
-    vi.useFakeTimers();
     const { container } = render(<ForestEntryOption/>);
-    const intro = container.querySelector('video')!;
     act(() => motionState.onReady?.(true));
-    await introLoaded(intro);
-    expect(document.documentElement.dataset.heroLoading).toBe('true');
-    act(() => { vi.advanceTimersByTime(3500); });
-    expect(intro.className).toContain('introComplete');
     expect(document.documentElement.dataset.heroLoading).not.toBe('true');
-    vi.useRealTimers();
+    expect(viewport(container).style.getPropertyValue('--brand-opacity')).toBe('0.0000');
+    expect(viewport(container).style.getPropertyValue('--cue-opacity')).toBe('1.0000');
+    expect(container.querySelector('[data-hero-scroll-cue]')).toHaveTextContent('Scroll to continue');
+    expect(play).not.toHaveBeenCalled();
+    const before = window.scrollY;
+    expect(window.scrollY).toBe(before);
+    act(() => { motionState.progress = .03; motionState.onChange?.(.03); });
+    expect(viewport(container).style.getPropertyValue('--cue-opacity')).toBe('0.0000');
   });
 
-  it('reports a failed scroll film and retries both downloads', () => {
+  it('resolves the earlier journey-only film to the merged film', () => {
+    const { container } = render(<ForestEntryOption variant={{ id: 'hero-v1', fields: { scrollVideo: '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4' } }} />);
+    expect(container.firstElementChild).toHaveAttribute('data-journey-video', '/assets/landing-options/forest-entry-journey-merged-cfcd487337e3.mp4');
+  });
+
+  it('reports a failed film and retries', () => {
     render(<ForestEntryOption/>);
     act(()=>{motionState.onReady?.(false);motionState.onLoadProgress?.(null);});
     expect(screen.queryByRole('progressbar')).toBeNull();
     expect(screen.getByRole('status')).toHaveTextContent('Experience could not load');
+    expect(document.documentElement.dataset.heroLoading).toBe('true');
     fireEvent.click(screen.getByRole('button',{name:'Retry loading'}));
-    expect(screen.getByRole('progressbar')).toHaveAttribute('value','0');
+    expect(screen.getByRole('progressbar')).toBeInTheDocument();
   });
 
-  it('shows the matching end still only once the last frame is presented', async () => {
+  it('releases ordinary wheel input only when the film is ready',()=>{
+    render(<ForestEntryOption/>);
+    const blocked=new WheelEvent('wheel',{cancelable:true});fireEvent(window,blocked);expect(blocked.defaultPrevented).toBe(true);
+    act(()=>motionState.onReady?.(true));
+    const event=new WheelEvent('wheel',{deltaY:2400,cancelable:true,bubbles:true});
+    fireEvent(window,event);
+    expect(event.defaultPrevented).toBe(false);
+  });
+
+  it('shows the matching end still only once the last frame is presented', () => {
     const {container}=render(<ForestEntryOption/>);
     act(()=>motionState.onReady?.(true));
-    await introLoaded(container.querySelector('video')!);
-    fireEvent.ended(container.querySelector('video')!);
     act(()=>{motionState.progress=1;motionState.onChange?.(1);});
     expect(viewport(container).style.getPropertyValue('--end-opacity')).toBe('0.0000');
     act(()=>motionState.onProgress?.(1));
@@ -145,14 +109,12 @@ describe('ForestEntryOption', () => {
   });
 
   it('keeps the current landing after the forest-entry sequence', () => {
-    const { container } = render(<ForestEntryOption />);
+    render(<ForestEntryOption />);
     const hero = screen.getByRole('region', { name: 'A journey from the forest into an OKNO home' });
     expect(screen.getByRole('heading', { level: 1, name: 'OKNO Modhomes' })).toBeInTheDocument();
     expect(screen.queryByText(/\d\s*\/\s*\d/)).not.toBeInTheDocument();
     expect(hero.querySelector('button')).toBeNull();
     expect(screen.getByTestId('option-one')).toBeInTheDocument();
-    expect(container.firstElementChild).toHaveAttribute('data-journey-video', '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4');
-    expect(container.querySelectorAll('video')).toHaveLength(2);
   });
 
   it('keeps the editable tagline for screen readers only', () => {

@@ -114,4 +114,9 @@ Checked on a local production build: hero autoplay (≈129px/s = 24s film), forw
 - Forza film on Home: the letterbox showed as grey bands. The film's edges are pure black, so its frame is now black on every device; phones (and phones held sideways, which now stack like phones) use the film's own 16:9 shape so nothing letterboxes.
 - Checked locally: emulated Android phone on a throttled 3 MB/s link (bar fills, intro plays ~8.6s, film autoplays), autoplay-blocked browser (intro hands over to the film), Home overlap audit at 390×844, 844×390, 820×1180, 1440×900 with no findings.
 
+## One opening film, scroll-driven (eleventh release, 11 November 2026)
+
+- Owner feedback (screen recording): on his phone the page opened on the journey's first frame and the woods traversal never showed. The intro and the journey are now one film: the woods traversal (sped 1.75x, as it played before) cut into the journey with a 3-frame blend, 779 frames / 32.4s (`forest-entry-journey-merged-cfcd487337e3.mp4`). Pose banks rebuilt from it with `scripts/prepare-merged-hero-v1.mjs` (desktop 1920×1080 WebP q80, phone 1280×720 q84, every second frame plus the last); `config/hero-v1-video.json` reindexed with `scripts/prepare-hero-video-index.mjs <source>`. The earlier journey-only path, still stored in published content, resolves to the merged film.
+- Behaviour: the loading bar sits on the film's first frame; once loaded, a small mouse icon with "Scroll to continue" (editable: Hero V1 → Scroll prompt) appears and fades on the first scroll. Nothing autoplays: scroll alone drives the film forwards and back (autoplay hook removed from both heroes). The hero track grew to 620svh (600svh on phones) to keep the same frames per scroll.
+
 Release identity and live checks are recorded in the deployment ledger.

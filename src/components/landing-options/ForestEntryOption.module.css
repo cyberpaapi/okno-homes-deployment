@@ -16,7 +16,9 @@
 
 .sequence {
   position: relative;
-  height: 460svh;
+  /* One merged film (woods traversal + journey, ~32s): more track keeps the
+     same frames-per-scroll as the 24s journey had at 460svh. */
+  height: 620svh;
   background: #0d120e;
 }
 
@@ -130,7 +132,7 @@ canvas.journeyVideo:not([data-scrub-presented-frames]) { opacity: 0; }
 }
 
 @media (max-width: 700px) {
-  .sequence { height: 440svh; }
+  .sequence { height: 600svh; }
   .video,
   .startFrame img,
   .endFrame img,
@@ -155,3 +157,25 @@ canvas.journeyVideo:not([data-scrub-presented-frames]) { opacity: 0; }
 .option[data-static="true"] .sequence { height: 100svh; }
 .option[data-static="true"] .sticky { position: relative; }
 .option[data-static="true"] .brand { opacity: 1; transition: none; }
+
+/* Owner feedback (11 November 2026): once the film has loaded, a small mouse
+   prompt asks for a scroll; it fades as soon as the film moves. */
+.scrollCue {
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  bottom: max(28px, calc(env(safe-area-inset-bottom) + 20px));
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  translate: -50% 0;
+  opacity: var(--cue-opacity, 0);
+  transition: opacity .6s ease-out;
+  pointer-events: none;
+}
+.scrollCue p { margin: 0; color: #f4f0e9; font-size: var(--type-size-caption, var(--okno-label)); text-transform: uppercase; text-shadow: 0 2px 12px #000; font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; }
+.mouse { position: relative; width: 22px; height: 34px; border: 1.5px solid rgb(244 240 233 / .85); border-radius: 12px; box-shadow: 0 2px 14px rgb(0 0 0 / .45); }
+.mouse > span { position: absolute; top: 6px; left: 50%; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: #f4f0e9; animation: heroCueWheel 1.6s ease-in-out infinite; }
+@keyframes heroCueWheel { 0% { opacity: 0; transform: translateY(0); } 25% { opacity: 1; } 70% { opacity: 0; transform: translateY(9px); } 100% { opacity: 0; transform: translateY(9px); } }
+@media (prefers-reduced-motion: reduce) { .mouse > span { animation: none; } }
+.option[data-static="true"] .scrollCue { display: none; }

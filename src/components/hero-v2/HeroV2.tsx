@@ -14,7 +14,6 @@ import { homeVariantAccessibleTitle } from "@/lib/homeVariantContent";
 import type { ContentItem } from "@/lib/contentCollections";
 import { downloadHeroMedia } from "@/lib/downloadHeroMedia";
 import { useHeroLoadingLock } from "@/lib/useHeroLoadingLock";
-import { useHeroAutoplay } from "@/lib/useHeroAutoplay";
 import FilmLoadingStatus from "@/components/landing-options/FilmLoadingStatus";
 import styles from "./HeroV2.module.css";
 
@@ -74,9 +73,6 @@ export default function HeroV2({ variant }: { variant?: ContentItem }) {
     if (endingRef.current !== atEnd) { endingRef.current = atEnd; setEnding(atEnd); }
   }, [camera]);
   useMotionValueEvent(camera, "change", sync);
-
-  const filmSeconds = useCallback(() => lastTime.current, []);
-  useHeroAutoplay(scrollTrack, ready && !still, filmSeconds);
 
   useEffect(() => {
     if (still) return;

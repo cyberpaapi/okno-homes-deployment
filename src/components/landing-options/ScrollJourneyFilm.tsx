@@ -6,8 +6,10 @@ import { createScrollVideoScrubber } from '@/lib/scrollVideoScrubber';
 import { downloadHeroMedia } from '@/lib/downloadHeroMedia';
 import { isEmbeddedSitePreview } from '@/lib/sitePreview';
 import { heroFilmLastTime, heroFilmProgress } from '@/lib/heroFilmScroll';
+import heroFilm from '../../../config/hero-v1-video.json';
 
-const indexedSource = '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4';
+// The pose banks index the merged opening film (woods traversal + journey).
+const indexedSource = heroFilm.source;
 type Controller = { setTime(time: number): void; seek(time: number): void; dispose(): void };
 export default function ScrollJourneyFilm({ src, poster, progress, className, onReady, onProgress, onLoadProgress }: {
   src: string; poster: string; progress: MotionValue<number>; className: string; onReady(ready: boolean): void; onProgress(progress: number): void; onLoadProgress?(progress: number | null): void;
@@ -15,7 +17,7 @@ export default function ScrollJourneyFilm({ src, poster, progress, className, on
   const canvas = useRef<HTMLCanvasElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const controller = useRef<Controller | null>(null);
-  const duration = useRef(577 / 24);
+  const duration = useRef(heroFilm.packets.length / heroFilm.fps);
   const [nativeUrl, setNativeUrl] = useState<string | null>(null);
   const sync = () => controller.current?.setTime(heroFilmProgress(progress.get()) * heroFilmLastTime(duration.current));
   useMotionValueEvent(progress, 'change', sync);

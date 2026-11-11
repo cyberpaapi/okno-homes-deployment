@@ -2,9 +2,12 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import film from '../../config/hero-v1-frames.json';
+import video from '../../config/hero-v1-video.json';
 import { createHeroImageScrubber } from './heroImageScrubber';
 
 const data = readFileSync('public'+film.source);
+// The merged opening film (11 November 2026): its final pose sets the ending time.
+const LAST = (video.packets.length - 1) / 24;
 function setup() {
   vi.useFakeTimers();
   const close = vi.fn(), draw = vi.fn();
@@ -46,14 +49,14 @@ describe('independent Hero scroll frames',()=>{
   });
   it('indexes the original opening and ending with bounded delivery bytes and valid WebP poses',()=>{
     expect(createHash('sha256').update(data).digest('hex')).toBe(film.sha256);
-    expect(data.length).toBeLessThan(47573337);
-    expect([film.width,film.height,film.fps,film.sourceFrames,film.frames.length]).toEqual([1920,1080,24,577,289]);
+    expect(data.length).toBeLessThan(video.bytes);
+    expect([film.width,film.height,film.fps,film.sourceFrames,film.frames.length]).toEqual([1920,1080,24,video.packets.length,(video.packets.length+1)/2]);
     film.frames.forEach(([offset,size,index],i)=>{
       expect(index).toBe(i*2);expect(offset+size).toBeLessThanOrEqual(data.length);
       expect(data.subarray(offset,offset+4).toString()).toBe('RIFF');
       expect(data.subarray(offset+8,offset+12).toString()).toBe('WEBP');
     });
-    expect(film.frames.at(-1)![2]/film.fps).toBe(24);
+    expect(film.frames.at(-1)![2]/film.fps).toBe(LAST);
   });
   it('replaces rapid input, reverses directly, stays still when idle and releases its cache',async()=>{
     const mocks=setup(),canvas=document.createElement('canvas'),abort=new AbortController();
@@ -64,8 +67,8 @@ describe('independent Hero scroll frames',()=>{
     expect(canvas.dataset.scrubPresentedTime).toBe('4.0000');
     const count=mocks.draw.mock.calls.length;
     await vi.advanceTimersByTimeAsync(2000);expect(mocks.draw).toHaveBeenCalledTimes(count);
-    scrubber.setTime(24);await vi.advanceTimersByTimeAsync(50);
-    expect(shown).toHaveBeenLastCalledWith(24);expect(ready).toHaveBeenCalledOnce();
+    scrubber.setTime(LAST);await vi.advanceTimersByTimeAsync(50);
+    expect(shown).toHaveBeenLastCalledWith(LAST);expect(ready).toHaveBeenCalledOnce();
     for(const time of [1,5,10,15,20,24,14,4]){scrubber.setTime(time);await vi.advanceTimersByTimeAsync(30);}
     expect(Number(canvas.dataset.scrubByteCache)).toBeLessThanOrEqual(16*1024*1024);
     expect(Number(canvas.dataset.scrubCacheFrames)).toBeLessThanOrEqual(18);
@@ -98,8 +101,8 @@ describe('independent Hero scroll frames',()=>{
     const mocks=setup(),canvas=document.createElement('canvas'),abort=new AbortController();
     const scrubber=createHeroImageScrubber(canvas,abort.signal,vi.fn(),vi.fn(),vi.fn())!;
     await vi.advanceTimersByTimeAsync(30);mocks.fetch.mockClear();
-    scrubber.setTime(24);await vi.advanceTimersByTimeAsync(50);
-    expect(canvas.dataset.scrubPresentedTime).toBe('24.0000');
+    scrubber.setTime(LAST);await vi.advanceTimersByTimeAsync(50);
+    expect(canvas.dataset.scrubPresentedTime).toBe(LAST.toFixed(4));
     expect(mocks.fetch.mock.calls.every(([,o])=>Number(o.headers.Range.match(/\d+/)![0])>data.length/2)).toBe(true);
     abort.abort();
   });
@@ -111,11 +114,11 @@ describe('independent Hero scroll frames',()=>{
     mocks.decode.mockClear();
     // Block new decodes: the window approach must already be in the cache.
     mocks.decode.mockImplementation(()=>new Promise<never>(()=>{}));
-    scrubber.setTime(572/24);await vi.advanceTimersByTimeAsync(20);
-    expect(canvas.dataset.scrubPresentedTime).toBe('23.8333');
+    scrubber.setTime(LAST-4/24);await vi.advanceTimersByTimeAsync(20);
+    expect(canvas.dataset.scrubPresentedTime).toBe((LAST-4/24).toFixed(4));
     mocks.decode.mockClear();
-    scrubber.setTime(24);await vi.advanceTimersByTimeAsync(20);
-    expect(canvas.dataset.scrubPresentedTime).toBe('24.0000');
+    scrubber.setTime(LAST);await vi.advanceTimersByTimeAsync(20);
+    expect(canvas.dataset.scrubPresentedTime).toBe(LAST.toFixed(4));
     expect(mocks.decode).not.toHaveBeenCalled();
     scrubber.setTime(0);await vi.advanceTimersByTimeAsync(20);
     expect(canvas.dataset.scrubPresentedTime).toBe('0.0000');
