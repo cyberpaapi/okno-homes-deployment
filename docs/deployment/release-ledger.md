@@ -1,5 +1,9 @@
 # Release decision and evidence ledger
 
+## Intro restored behind the loader and full-device audit — 11 November 2026
+
+Owner-approved production deploy of `d6197b82196803178e46257f1da93730d0fdc54f` (`dpl_5NCiJUsujazwMEkRjpbup6QRe6VX`, canonical alias). Owner correction: the intro film returns; the loading bar sits on its first frame, the intro plays once both films are loaded, then hands to the autoplaying scroll film. Plus the overlap fixes from the 11-size audit. Live checks: 11 routes and the new still return 200; at 1440×860 and 390×844 the loader and first-frame still show, the intro starts after loading (~1.5–2.2s on the test link), runs ~8.4s, then the film autoplays (≈350px in 3s); no runtime errors in the 20 minutes after release. Details: `docs/typography-qa-2026-11-10.md` (ninth release).
+
 ## Client round: autoplaying opening film and sticky glass navbar — 11 November 2026
 
 Owner-approved production deploy of `3c1d8ce0a7389db33a52fdfc3d249790e2701b83` (`dpl_H2XT4Yz8dmC67kh4x3ro5KxmJxBy`, canonical alias okno-homes-aryan.vercel.app). Home opens on the loader, then the film plays by itself and follows scroll forward and back with no intro clip or ending pause; tagline screen-reader only; navbar fixed with glass on scroll; tablet/phone overlap fixes; Tailwind scans `src` only. Live checks: 11 routes return 200; at 1440×860 and 390×844 the loader shows first, no intro video mounts, autoplay advances (24→408px and 10→371px over 3s), wheel reverse moves the film back, header is fixed with `data-scrolled=true` after scrolling; no runtime errors in the 30 minutes after release. Details: `docs/typography-qa-2026-11-10.md` (eighth release).
