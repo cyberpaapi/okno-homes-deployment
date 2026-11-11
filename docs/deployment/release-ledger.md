@@ -1,5 +1,9 @@
 # Release decision and evidence ledger
 
+## Phone intro fix, Forza film frame and loading bar — 11 November 2026
+
+Owner-approved production deploys of `92c13598b962891f42f271adb5b8d19a9e891e0e` (`dpl_61AcoB758i76sW4SeC2KhYo8k2nx`) and the follow-up `98b9db57f04cd3a769d55a10e38ed377b92fe608` (`dpl_Bm2fbp7TJHKTFC2qFVTt3vMf8tez`, canonical alias). The intro streams from its URL, and any refused, failed or stalled playback hands over to the scroll film. The Home Forza film has a black frame on every device (16:9 on phones). The loading bar no longer resets while loading. Live checks: routes 200; on an emulated Android phone at 3 MB/s the bar fills, the intro plays for its full length and the film then autoplays (≈310px per 2.6s); with autoplay blocked the intro hands over to the film; no runtime errors in the hour after release. Details: `docs/typography-qa-2026-11-10.md` (tenth release).
+
 ## Intro restored behind the loader and full-device audit — 11 November 2026
 
 Owner-approved production deploy of `d6197b82196803178e46257f1da93730d0fdc54f` (`dpl_5NCiJUsujazwMEkRjpbup6QRe6VX`, canonical alias). Owner correction: the intro film returns; the loading bar sits on its first frame, the intro plays once both films are loaded, then hands to the autoplaying scroll film. Plus the overlap fixes from the 11-size audit. Live checks: 11 routes and the new still return 200; at 1440×860 and 390×844 the loader and first-frame still show, the intro starts after loading (~1.5–2.2s on the test link), runs ~8.4s, then the film autoplays (≈350px in 3s); no runtime errors in the 20 minutes after release. Details: `docs/typography-qa-2026-11-10.md` (ninth release).
