@@ -10,8 +10,11 @@ export default function FilmLoadingStatus({ ready, progress, retry }: { ready: b
 
   useEffect(() => {
     const bar = barRef.current;
-    if (!bar || progress === null || progress < 0) return;
-    if (ready || progress === 0) {
+    if (!bar || progress === null) return;
+    // Unknown size: show the indeterminate bar until real progress arrives, but
+    // never wipe progress already shown.
+    if (progress < 0) { if (!(bar.value > 0)) bar.removeAttribute('value'); return; }
+    if (ready || (progress === 0 && !bar.hasAttribute('value'))) {
       bar.value = ready ? 1 : 0;
       rhythmStarted.current = null;
       return;
@@ -38,7 +41,7 @@ export default function FilmLoadingStatus({ ready, progress, retry }: { ready: b
   }, [ready, progress]);
 
   return <div className={styles.journeyLoading} data-journey-loading={ready ? 'ready' : progress === null ? 'unavailable' : 'loading'}>
-    {progress !== null && <progress ref={barRef} className={styles.loadingBar} max={1} value={ready ? 1 : progress < 0 ? undefined : 0} aria-label="Loading experience" />}
+    {progress !== null && <progress ref={barRef} className={styles.loadingBar} max={1} value={ready ? 1 : undefined} aria-label="Loading experience" />}
     <span role="status">{ready ? 'Scroll to explore' : progress === null ? 'Experience could not load' : 'Loading experience'}</span>
     {progress === null && <button className={styles.retryLoading} onClick={retry}>Retry loading</button>}
   </div>;
