@@ -49,6 +49,9 @@ export default function ProjectsExperience({initialId='forrest',initialProjects=
   const textY=useTransform(progress,[0,.3],[0,-70]);
   const radius=useTransform(progress,[.34,.76],[0,115]);
   const clipPath=useTransform(radius,value=>value>=114.99?'none':`circle(${value}% at var(--portal-x) var(--portal-y))`);
+  // Full-device audit (11 November 2026): the title sat half outside the opening circle
+  // on tablets; captions arrive once the portal has nearly filled the screen.
+  const captionOpacity=useTransform(progress,[.62,.74],[0,1]);
   useMotionValueEvent(progress,'change',v=>setFilmActive(prev=>(v>.76)===prev?prev:v>.76));
   return <div className={styles.page} data-route="projects">
     <div className={styles.silk} aria-hidden="true"><SilkBackground paused={(!reduced&&entered&&!introSettled)||(filmActive&&storyVisible)} maxPixels={180_000} fps={24} interactive={false}/></div>
@@ -67,7 +70,7 @@ export default function ProjectsExperience({initialId='forrest',initialProjects=
             </motion.div>
             <div className={styles.globe} data-type-section="projects.globe-pins"><motion.div className={styles.globeInner} style={{scale:reduced?1:scale,opacity:reduced?1:globeOpacity}}><AtlasGlobe locations={pins} onReady={onReady} paused={!entered||filmActive}/></motion.div></div>
           </section>
-          <motion.div className={styles.filmReveal} style={{clipPath:reduced?undefined:clipPath}} inert={!reduced&&!filmActive} aria-hidden={!reduced&&!filmActive}>
+          <motion.div className={styles.filmReveal} style={{clipPath:reduced?undefined:clipPath,['--cinema-caption' as string]:reduced?1:captionOpacity}} inert={!reduced&&!filmActive} aria-hidden={!reduced&&!filmActive}>
             <PrismaProjectCinema activeId={activeId} onSelect={setRequestedId} projectsFallback={initialProjects} embedded enabled={!!reduced||filmActive}/>
           </motion.div>
         </div>

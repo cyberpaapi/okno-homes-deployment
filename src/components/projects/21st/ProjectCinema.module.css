@@ -39,3 +39,6 @@
   .topline { top: 88px; }
   .content[data-playing=true] { top: 92px; }
 }
+
+/* Projects portal: captions wait for the opening circle (see ProjectsExperience). */
+.caption, .topline { opacity: var(--cinema-caption, 1); }

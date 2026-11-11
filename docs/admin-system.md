@@ -537,3 +537,4 @@ Customer rendering now fills the viewport behind the controls instead of clippin
 
 - Home → Hospitality adds **Card image** and **Card alt** (`home.hospitality.card-image`, `home.hospitality.card-alt`) for the pop-up photograph over the hospitality block; Hospitality → Result pop-up keeps its own fields.
 - Hero V1 now opens on the loader and plays the scroll film by itself (scroll speeds it up or reverses it). The **Intro video** and **Intro last frame** fields remain stored but are no longer shown on the site; **Tagline** stays editable and is read by screen readers only. Hero V2's ending text and actions now appear only for visitors who prefer reduced motion.
+- Correction (same day, ninth release): the intro film is restored. Hero V1 adds **Loading still** (`hero-v1.opening.intro-first-frame`, collection key `introFirstFrame`), shown under the loading bar; it should be the intro's first frame. Intro video and Intro last frame are live again.

@@ -193,3 +193,10 @@
   .signatureMedia { top: calc(max(9svh, 112px) + 220px); }
   .signatureMedia > img, .signatureMedia > video { object-fit: contain; }
 }
+
+/* Full-device audit (11 November 2026): phones held sideways clipped "See the approach";
+   the sustainability block now grows with its copy. */
+@media (min-width: 600px) and (max-height: 500px) {
+  .sustainability { min-height: 0; padding: 96px 0 72px; }
+  .sustainabilityCopy { position: relative; top: auto; transform: none; }
+}

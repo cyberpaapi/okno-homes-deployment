@@ -81,6 +81,7 @@ export const collectionDefinitions: readonly CollectionDefinition[] = [
       { key: "poster", label: "Opening poster", kind: "image", required: true },
       { key: "scrollVideo", label: "Scroll journey film", kind: "video", help: "V2: leave empty for the approved lossless frame film." },
       { key: "endImage", label: "Journey ending still", kind: "image" },
+      { key: "introFirstFrame", label: "Loading still (intro first frame) · V1", kind: "image" },
       { key: "introLastFrame", label: "Intro handoff still · V1", kind: "image" },
       { key: "tagline", label: "Still-frame tagline · V1", kind: "text", help: "V1 only. Shown over the frozen intro frame; leave empty to hide." },
       { key: "openingAlt", label: "Poster description", kind: "text", required: true },

@@ -164,3 +164,9 @@
 @media (prefers-reduced-transparency: reduce) {
   .timeline { background: #112019; backdrop-filter: none; }
 }
+
+/* Full-device audit (11 November 2026): on phones held sideways "Design lock" wrapped and
+   lost its second line under the bar's edge. */
+@media (min-width: 701px) and (max-height: 560px) {
+  .milestoneCopy em { white-space: nowrap; letter-spacing: 0; }
+}

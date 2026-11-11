@@ -214,7 +214,7 @@
 
 /* Touch screens: the back link was a 24px-tall target inside the compact header. */
 @media (pointer: coarse) {
-  .modelIntro .backLink { padding-block: 12px; margin-block: -12px; }
+  .modelIntro .backLink { padding-block: 12px; margin-block: -12px -6px; }
 }
 
 /* Touch screens from 360px: every view, scene, lighting, finish and panel control is at

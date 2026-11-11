@@ -13,5 +13,5 @@
 
 /* Touch screens: "← All places" was a 20px-tall target. */
 @media (pointer: coarse) {
-  .return { padding-block: 12px; margin-block: -12px; }
+  .return { padding-block: 12px; margin-block: -12px -4px; }
 }
