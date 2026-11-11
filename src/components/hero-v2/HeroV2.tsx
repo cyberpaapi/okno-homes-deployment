@@ -14,11 +14,12 @@ import { homeVariantAccessibleTitle } from "@/lib/homeVariantContent";
 import type { ContentItem } from "@/lib/contentCollections";
 import { downloadHeroMedia } from "@/lib/downloadHeroMedia";
 import { useHeroLoadingLock } from "@/lib/useHeroLoadingLock";
+import { useHeroAutoplay } from "@/lib/useHeroAutoplay";
 import FilmLoadingStatus from "@/components/landing-options/FilmLoadingStatus";
 import styles from "./HeroV2.module.css";
 
 type Controller = { setTime(time: number): void; dispose(): void };
-export const v2FilmProgress = (progress: number) => Math.max(0, Math.min(1, progress / .9));
+export const v2FilmProgress = (progress: number) => Math.max(0, Math.min(1, progress));
 
 export default function HeroV2({ variant }: { variant?: ContentItem }) {
   const savedVideo = useSiteContent("hero-v2.opening.scroll-video", "");
@@ -53,18 +54,14 @@ export default function HeroV2({ variant }: { variant?: ContentItem }) {
   const [ready, setReady] = useState(false);
   const [ending, setEnding] = useState(false);
   const endingRef = useRef(false);
-  const [filmFinished, setFilmFinished] = useState(false);
-  const finishedRef = useRef(false);
   const [loading, setLoading] = useState<number | null>(0);
   const [attempt, setAttempt] = useState(0);
   const reduced = useReducedMotion();
   const still = Boolean(reduced);
   useHeroLoadingLock(!still && !ready);
-  const showEnding = still || (ending && filmFinished);
-  const presented = useCallback((time: number) => {
-    const finished = time >= lastTime.current - 1 / 48;
-    if (finishedRef.current !== finished) { finishedRef.current = finished; setFilmFinished(finished); }
-  }, []);
+  // Client feedback (11 November 2026): the film hands straight to the next section, with no closing overlay or dwell.
+  const showEnding = still;
+  const presented = useCallback(() => {}, []);
   useHeroReloadPosition(section);
   const { scrollYProgress } = useScroll({ target: scrollTrack, offset: ["start start", "end end"] });
   // Native document input plus one overdamped camera spring: no scroll queue,
@@ -77,6 +74,9 @@ export default function HeroV2({ variant }: { variant?: ContentItem }) {
     if (endingRef.current !== atEnd) { endingRef.current = atEnd; setEnding(atEnd); }
   }, [camera]);
   useMotionValueEvent(camera, "change", sync);
+
+  const filmSeconds = useCallback(() => lastTime.current, []);
+  useHeroAutoplay(scrollTrack, ready && !still, filmSeconds);
 
   useEffect(() => {
     if (still) return;
@@ -147,7 +147,8 @@ export default function HeroV2({ variant }: { variant?: ContentItem }) {
           <h1 className={styles.visuallyHidden}>{title}</h1>
           <div className={`${styles.ending} ${showEnding ? styles.endingVisible : ""}`} data-type-section="hero-v2.ending" data-v2-ending aria-hidden={!showEnding} inert={!showEnding}>
             <div className={styles.endingContent}>
-              <h2 className={styles.headline}>{heading}</h2>
+              {/* Client feedback (11 November 2026): "Homes for rare places." no longer shows over the film; it stays for screen readers. */}
+              <h2 className={styles.visuallyHidden}>{heading}</h2>
               {description && <p className={styles.description}>{description}</p>}
               <div className={styles.actions}>
                 <SubtleLink href={primaryHref} className={styles.primaryAction}>{primaryLabel}</SubtleLink>

@@ -100,6 +100,8 @@ const sharedHomeSections: readonly ContentSection[] = [
       { id: "home.hospitality.action", label: "Hospitality \u00b7 action", kind: "text", defaultValue: "Explore hospitality" },
       { id: "home.hospitality.href", label: "Hospitality \u00b7 href", kind: "text", defaultValue: "/hospitality" },
       { id: "home.hospitality.image", label: "Hospitality \u00b7 image", kind: "image", defaultValue: "/assets/projects/real-v1/octapod-layana-01.webp" },
+      { id: "home.hospitality.card-image", label: "Hospitality \u00b7 pop-up image", kind: "image", defaultValue: "/assets/projects/real-v1/octapod-layana-03.webp" },
+      { id: "home.hospitality.card-alt", label: "Hospitality \u00b7 pop-up image description", kind: "text", defaultValue: "An Octapod residence opening onto the shared pool" },
   ] },
   { id: "sustainability-preview", label: "Sustainability preview", fields: [
     { id: "home.sustainability.poster", label: "Opening still", kind: "image", defaultValue: "/sustainability/shared-poster.png" },

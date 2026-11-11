@@ -494,6 +494,13 @@
     ]
   },
   {
+    "scope": "hospitality.result",
+    "fields": [
+      "hospitality.result.eyebrow",
+      "hospitality.result.heading"
+    ]
+  },
+  {
     "scope": "hospitality.enquiry",
     "fields": [
       "hospitality.closing.copy",

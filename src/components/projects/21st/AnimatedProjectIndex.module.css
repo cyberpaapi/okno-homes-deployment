@@ -11,3 +11,12 @@
 .image{border-radius:12px}.cardShade{position:absolute;inset:0;background:linear-gradient(#14201800,#14201866,#142018cc);mix-blend-mode:multiply;pointer-events:none}.overlay{background:none;inset:auto 0 0;padding:24px 32px}.card:hover img{transform:scale(1.05)}.overlay h2{font-weight:500}.overlay>span{font-size:var(--type-size-subheading, var(--okno-intro)); font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}.card:hover .overlay>span{transform:translateX(4px)}
 @media(max-width:760px){.overlay{padding:24px}}
 .overlay h2{font-size:var(--type-size-subheading, var(--okno-card));font-weight:400; font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}.index{padding-top:45px;padding-bottom:25px}
+
+/* Client feedback (11 November 2026): staggered columns and mixed image shapes put each
+   project's name (Forrest, Kioo …) at a different height. Every card now shares one shape
+   and every row one baseline. */
+.column, .column:nth-child(3) { padding-top: 0; transform: none !important; }
+.image, .column:nth-child(1) .card:nth-child(2) .image, .column:nth-child(3) .card:first-child .image { aspect-ratio: 4 / 5; }
+@media (max-width: 600px) { .image { aspect-ratio: 1.15 !important; } }
+/* Names stay legible over bright photographs on phones. */
+.label h3, .label > span { text-shadow: 0 1px 12px rgb(0 0 0 / 60%); }

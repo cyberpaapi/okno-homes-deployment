@@ -1,5 +1,5 @@
 .page { color: #f4f0e9; background: #000; font-family: "Geist OKNO", sans-serif; }
-.sequence { position: relative; height: 620svh; }
+.sequence { position: relative; height: 520svh; }
 /* This track preserves the accepted film's scroll distance. Only the held
    final frame gets an extra viewport for reading the closing hero. */
 .scrollTrack { position: absolute; inset: 0 0 auto; height: 520svh; pointer-events: none; }
@@ -22,7 +22,7 @@
 .secondaryAction:hover { text-decoration-color: currentColor; }
 .secondaryAction:focus-visible { outline: 2px solid #e4e7df; outline-offset: 6px; border-radius: 2px; }
 @media (max-width: 600px) {
-  .sequence { height: 578svh; }
+  .sequence { height: 478svh; }
   .scrollTrack { height: 478svh; }
   .film { object-position: 48% center; }
   .ending { padding: 28px 24px 64px; }
@@ -38,3 +38,5 @@
 }
 
 .loadingStatus { position: absolute; z-index: 2; inset: 0; display: grid; place-items: center; background: rgb(0 0 0 / .25); }
+
+.visuallyHidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

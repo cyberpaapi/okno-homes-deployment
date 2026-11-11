@@ -1,7 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import ForestEntryOption from './ForestEntryOption';
-import introDelivery from '../../../config/hero-v1-intro.json';
 
 const motionState = vi.hoisted(() => ({
   progress: 0,
@@ -35,30 +34,6 @@ vi.mock('motion/react', () => ({
 }));
 
 describe('ForestEntryOption', () => {
-  it('shows preparation below the tagline and offers a scroll cue when ready', () => {
-    const view=render(<ForestEntryOption/>);
-    fireEvent.ended(view.container.querySelector('video')!);
-    const bar=screen.getByRole('progressbar',{name:'Loading experience'});
-    expect(bar).toHaveAttribute('value','0');
-    act(()=>motionState.onLoadProgress?.(.5));
-    expect((bar as HTMLProgressElement).value).toBeLessThanOrEqual(.5);
-    expect(document.documentElement.dataset.heroLoading).toBe('true');
-    expect(screen.getByRole('status')).toHaveTextContent('Loading experience');
-    act(()=>motionState.onLoadProgress?.(1));
-    expect(document.documentElement.dataset.heroLoading).toBe('true');
-    fireEvent.ended(document.querySelector('video')!);
-    act(()=>motionState.onReady?.(true));
-    expect(bar).toHaveAttribute('value','1');
-    expect(screen.getByRole('status')).toHaveTextContent('Scroll to explore');
-    act(()=>{motionState.onReady?.(false);motionState.onLoadProgress?.(null);});
-    expect(screen.queryByRole('progressbar')).toBeNull();
-    expect(screen.getByRole('status')).toHaveTextContent('Experience could not load');
-    expect(document.documentElement.dataset.heroLoading).toBe('true');
-    fireEvent.click(screen.getByRole('button',{name:'Retry loading'}));
-    expect(screen.getByRole('progressbar')).toHaveAttribute('value','0');
-    expect(document.documentElement.dataset.heroLoading).toBe('true');
-    view.unmount();
-  });
   beforeEach(()=>{
     vi.stubGlobal('matchMedia', vi.fn(() => ({matches: false})));
     vi.spyOn(HTMLMediaElement.prototype,'load').mockImplementation(()=>{});
@@ -73,88 +48,49 @@ describe('ForestEntryOption', () => {
     vi.unstubAllGlobals();
   });
 
-  it('hides the headline and loader until the intro ends, even if the journey is already ready', () => {
-    const {container}=render(<ForestEntryOption/>);
-    const headline=container.querySelector('[data-hero-v1-tagline]')!;
-    const brand=headline.parentElement!;
-    expect(brand).toHaveAttribute('aria-hidden','true');
-    expect(screen.queryByRole('progressbar')).toBeNull();
-    expect(container.querySelector('[style*="--brand-opacity"]')).toHaveStyle('--brand-opacity: 0.0000');
-    act(()=>motionState.onReady?.(true));
+  it('opens on the loading bar and hands straight to the film when ready', () => {
+    const view=render(<ForestEntryOption/>);
+    const bar=screen.getByRole('progressbar',{name:'Loading experience'});
+    expect(bar).toHaveAttribute('value','0');
+    const viewport=view.container.querySelector('[style*="--brand-opacity"]') as HTMLElement;
+    expect(viewport.style.getPropertyValue('--brand-opacity')).toBe('1.0000');
+    expect(viewport.style.getPropertyValue('--journey-opacity')).toBe('0.0000');
+    act(()=>motionState.onLoadProgress?.(.5));
+    expect((bar as HTMLProgressElement).value).toBeLessThanOrEqual(.5);
     expect(document.documentElement.dataset.heroLoading).toBe('true');
-    expect(brand).toHaveAttribute('aria-hidden','true');
-    fireEvent.ended(container.querySelector('video')!);
-    expect(brand).toHaveAttribute('aria-hidden','false');
-    expect(screen.getByRole('status')).toHaveTextContent('Scroll to explore');
-    expect(container.querySelector('[style*="--brand-opacity"]')).toHaveStyle('--brand-opacity: 1.0000');
-    expect(document.documentElement.dataset.heroLoading).not.toBe('true');
-  });
-
-  it('keeps the automatic intro at a constant faster rate through the whole shot', () => {
-    const {container}=render(<ForestEntryOption/>);
-    const intro=container.querySelector('video')!;
-    expect(intro.playbackRate).toBe(1.75);
-    intro.currentTime=14;
-    fireEvent.playing(intro);
-    expect(intro.playbackRate).toBe(1.75);
-  });
-
-  it('explicitly starts buffered muted video and retries without replaying a completed intro', () => {
-    const {container}=render(<ForestEntryOption/>);
-    const intro=container.querySelector('video')!;
-    const play=vi.mocked(intro.play);
-    expect(play).toHaveBeenCalled();
-    play.mockClear();
-    fireEvent.loadedData(intro);
-    fireEvent.canPlay(intro);
-    expect(play).toHaveBeenCalledTimes(2);
-    expect(intro.muted).toBe(true);
-    fireEvent.ended(intro);
-    play.mockClear();
-    fireEvent.canPlay(intro);
-    fireEvent.pointerDown(window);
-    expect(play).not.toHaveBeenCalled();
-  });
-
-  it('recovers an unavailable intro to its static ending without blocking the page', () => {
-    vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});
-    const {container}=render(<ForestEntryOption/>);
-    const intro=container.querySelector('video')!;
-    fireEvent.error(intro);
-    expect(intro.className).toContain('introComplete');
-    expect(container.querySelector('[style*="--brand-opacity"]')).toHaveStyle('--brand-opacity: 1.0000');
-  });
-
-  it('releases the intro and keeps a static base when returning to the opening',()=>{
-    vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});
-    const play=vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue(undefined);
-    const {container}=render(<ForestEntryOption/>);
-    const intro=container.querySelector('video')!;
-    play.mockClear();
-    fireEvent.ended(document.querySelector('video')!);
+    expect(screen.getByRole('status')).toHaveTextContent('Loading experience');
     act(()=>motionState.onReady?.(true));
-    act(()=>{motionState.progress=.2;motionState.onChange?.(.2);});
-    expect(intro.hasAttribute('src')).toBe(false);
-    expect(intro.load).toHaveBeenCalledOnce();
-    act(()=>{motionState.progress=0;motionState.onChange?.(0);});
-    expect(intro.hasAttribute('src')).toBe(false);
-    expect(intro.load).toHaveBeenCalledOnce();
-    expect(play).not.toHaveBeenCalled();
-    expect(intro.currentTime).toBe(0);
+    expect(document.documentElement.dataset.heroLoading).not.toBe('true');
+    expect(viewport.style.getPropertyValue('--brand-opacity')).toBe('0.0000');
+    expect(viewport.style.getPropertyValue('--journey-opacity')).toBe('1.0000');
+    act(()=>{motionState.onReady?.(false);motionState.onLoadProgress?.(null);});
+    expect(screen.queryByRole('progressbar')).toBeNull();
+    expect(screen.getByRole('status')).toHaveTextContent('Experience could not load');
+    expect(document.documentElement.dataset.heroLoading).toBe('true');
+    fireEvent.click(screen.getByRole('button',{name:'Retry loading'}));
+    expect(screen.getByRole('progressbar')).toHaveAttribute('value','0');
+    view.unmount();
   });
+
+  it('plays a single film with no separate intro clip', () => {
+    const {container}=render(<ForestEntryOption/>);
+    expect([...container.querySelectorAll('video')].map(video => video.getAttribute('src'))).toEqual([
+      '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4',
+    ]);
+    expect(container.querySelector('img[src="/assets/landing-options/forest-entry-intro-last-frame.png"]')).toBeNull();
+  });
+
   it('releases ordinary wheel input only when the complete movie is ready',()=>{
     render(<ForestEntryOption/>);
     const blocked=new WheelEvent('wheel',{cancelable:true});fireEvent(window,blocked);expect(blocked.defaultPrevented).toBe(true);
-    fireEvent.ended(document.querySelector('video')!);
     act(()=>motionState.onReady?.(true));
     const event=new WheelEvent('wheel',{deltaY:2400,cancelable:true,bubbles:true});
     fireEvent(window,event);
     expect(event.defaultPrevented).toBe(false);
   });
-  it('waits for the presented last frame before showing the ending overlay',()=>{
-    vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
+
+  it('shows the matching end still only once the last frame is presented',()=>{
     const {container}=render(<ForestEntryOption/>);
-    fireEvent.ended(document.querySelector('video')!);
     act(()=>motionState.onReady?.(true));
     act(()=>{motionState.progress=1;motionState.onChange?.(1);});
     const viewport=container.querySelector('[style*="--end-opacity"]') as HTMLElement;
@@ -162,69 +98,24 @@ describe('ForestEntryOption', () => {
     act(()=>motionState.onProgress?.(1));
     expect(viewport.style.getPropertyValue('--end-opacity')).toBe('1.0000');
   });
-  it('keeps the current landing after the separate forest-entry sequence', () => {
+
+  it('keeps the current landing after the forest-entry sequence', () => {
     const { container } = render(<ForestEntryOption />);
     const hero = screen.getByRole('region', { name: 'A journey from the forest into an OKNO home' });
-    expect(hero).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 1, name: 'OKNO Modhomes' })).toBeInTheDocument();
-    expect(hero.querySelector('[data-component="9643"]')).not.toBeInTheDocument();
-    expect(hero.querySelector('img[src="/assets/landing-options/okno-wordmark-only.svg"]')).not.toBeInTheDocument();
-    expect(hero.querySelector('img[src="/assets/landing-options/forest-entry-foreground-v3.webp"]')).not.toBeInTheDocument();
     expect(hero.querySelectorAll('img[src="/assets/landing-options/forest-entry-start-v2.jpg"]')).toHaveLength(1);
-    expect(screen.queryByText('Architecture drawn around your land.')).not.toBeInTheDocument();
     expect(screen.queryByText(/\d\s*\/\s*\d/)).not.toBeInTheDocument();
     expect(hero.querySelector('button')).toBeNull();
     expect(screen.getByTestId('option-one')).toBeInTheDocument();
-    expect(container.firstElementChild).toHaveAttribute(
-      'data-journey-video',
-      '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4',
-    );
-    expect(container.firstElementChild).not.toHaveAttribute('data-ambient-video');
-    expect([...container.querySelectorAll('video')].map(video => video.getAttribute('src'))).toEqual([
-      introDelivery.source,
-      '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4',
-    ]);
+    expect(container.firstElementChild).toHaveAttribute('data-journey-video', '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4');
   });
 
-  it('holds the intro still and editable tagline without any idle playback', () => {
-    const play = vi.spyOn(HTMLMediaElement.prototype, 'play').mockResolvedValue(undefined);
+  it('keeps the editable tagline for screen readers only', () => {
     const { container, rerender } = render(<ForestEntryOption variant={{ id: 'hero-v1', fields: { tagline: 'A home in the forest.' } }} />);
-    fireEvent.ended(container.querySelector('video')!);
-    expect(container.querySelector('img[src="/assets/landing-options/forest-entry-intro-last-frame.png"]')).toBeInTheDocument();
-    expect(screen.getByText('A home in the forest.')).toBeInTheDocument();
-    expect(container.querySelectorAll('video')).toHaveLength(2);
-    play.mockClear();
-    fireEvent.focus(window);
-    expect(play).not.toHaveBeenCalled();
+    const tagline = container.querySelector('[data-hero-v1-tagline]')!;
+    expect(tagline).toHaveTextContent('A home in the forest.');
+    expect(tagline.className).toContain('srOnly');
     rerender(<ForestEntryOption variant={{ id: 'hero-v1', fields: { tagline: '' } }} />);
     expect(container.querySelector('[data-hero-v1-tagline]')).toBeNull();
-  });
-
-  it('does not replay the intro after scrolling away and returning to the top', () => {
-    vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
-    vi.spyOn(HTMLMediaElement.prototype, 'play').mockResolvedValue(undefined);
-    vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
-
-    const { container } = render(<ForestEntryOption />);
-    const [intro] = container.querySelectorAll('video');
-    const introPlay = vi.spyOn(intro, 'play').mockResolvedValue(undefined);
-    fireEvent.ended(document.querySelector('video')!);
-    act(()=>motionState.onReady?.(true));
-
-    act(() => {
-      motionState.progress = .2;
-      motionState.onChange?.(.2);
-    });
-    expect(intro.className).toContain('introComplete');
-
-    intro.currentTime = 3;
-    introPlay.mockClear();
-    act(() => {
-      motionState.progress = 0;
-      motionState.onChange?.(0);
-    });
-    expect(intro.currentTime).toBe(3);
-    expect(introPlay).not.toHaveBeenCalled();
-    expect(intro.className).toContain('introComplete');
   });
 });

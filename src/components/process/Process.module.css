@@ -349,3 +349,10 @@
 
 /* The build-sequence bar follows the visible bottom edge (see --vv-lift in globals.css). */
 .timelineShell { translate: 0 var(--vv-lift); }
+/* Phones (client feedback, 11 November 2026): a 16:9 film cropped to a portrait screen
+   showed a quarter of its width and cut the house in half. On phones the film fills the
+   upper 62% of the screen (about half its width visible, centred on the house) and fades
+   into the dark band that carries the step copy. */
+@media (max-width: 700px) {
+  .sceneVideo { inset: 0 0 auto; height: 62svh; object-position: 47% 50%; -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent); mask-image: linear-gradient(180deg, #000 72%, transparent); }
+}

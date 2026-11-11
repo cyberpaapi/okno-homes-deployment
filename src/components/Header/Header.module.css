@@ -92,3 +92,15 @@
 .header[data-tone="light"] .menuLinks .rolling { color: #f1e7da; }
 .menuLinks .letters { flex-wrap: nowrap; }
 .header .menuToggle { gap: 6px; padding-inline: 12px; }
+/* Always in view (owner request, 11 November 2026): the header is fixed on every page and,
+   once the page scrolls, sits on frosted glass — dark glass on dark pages, paper glass on
+   light ones — so its links stay readable over any section. */
+.header { position: fixed; inset: 0 0 auto; isolation: isolate; }
+.header::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: 0; pointer-events: none; background: linear-gradient(180deg, rgb(255 255 255 / 7%), rgb(255 255 255 / 2%)), rgb(12 18 14 / 46%); box-shadow: 0 10px 30px rgb(4 8 6 / 18%); -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%); transition: opacity .35s ease; }
+.header[data-tone="light"]::before { background: linear-gradient(180deg, rgb(255 255 255 / 70%), rgb(255 255 255 / 52%)); box-shadow: 0 10px 30px rgb(32 36 31 / 8%); }
+.header[data-scrolled="true"]::before { opacity: 1; }
+.header[data-scrolled="true"] .shell { border-bottom-color: transparent; }
+.header[data-scrolled="true"] { mix-blend-mode: normal !important; }
+@media (max-width: 520px) {
+  .menuLinks { inset: 64px 16px 18px; gap: 4px; }
+}

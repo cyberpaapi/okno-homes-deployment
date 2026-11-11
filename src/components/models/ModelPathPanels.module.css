@@ -46,3 +46,9 @@
 .content h2 { overflow-wrap: anywhere; }
 .meta { width: 100%; align-items: flex-start; text-align: left; }
 @media (min-width: 701px) and (max-width: 1100px) { .panels { min-height: 520px; } }
+/* Tablets (client feedback, 11 November 2026): the side-by-side copy and button squeezed
+   into each other in the two narrow panels; they stack instead. */
+@media (min-width: 701px) and (max-width: 1100px) {
+  .meta { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .meta p { max-width: none; margin: 0; }
+}

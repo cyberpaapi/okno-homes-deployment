@@ -109,10 +109,19 @@ function BespokePreview() {
 function HospitalityPreview() {
   const content = useSiteContentMap();
   const value = (id: string, fallback: string) => content[`home.hospitality.${id}`] ?? fallback;
-  return <section className={styles.bespoke} data-type-section="home.hospitality-preview" aria-labelledby="hospitality-preview-title" data-component="4775">
-    <div className={styles.bespokeBackdrop}><Image loader={pageImageLoader} src={value('image', '/assets/projects/real-v1/octapod-layana-01.webp')} alt="Octapod residences gathered around a shared pool" fill sizes="100vw" /></div>
+  // Client feedback (11 November 2026): the same pop-up image as the Bespoke preview above.
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] });
+  const imageY = useTransform(scrollYProgress, [0, 1], reduced ? ['0%', '0%'] : ['-5%', '5%']);
+  const cardY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [115, -115]);
+  return <section ref={sectionRef} className={styles.bespoke} data-type-section="home.hospitality-preview" aria-labelledby="hospitality-preview-title" data-component="4775">
+    <motion.div className={styles.bespokeBackdrop} style={{ y: imageY }}><Image loader={pageImageLoader} src={value('image', '/assets/projects/real-v1/octapod-layana-01.webp')} alt="Octapod residences gathered around a shared pool" fill sizes="100vw" /></motion.div>
     <div className={styles.bespokeShade} />
     <p className={styles.bespokeWord} aria-hidden="true">{value('label', 'Hospitality')}</p>
+    <motion.figure className={styles.bespokeCard} style={{ y: cardY }}>
+      <Image loader={previewImageLoader} src={value('card-image', '/assets/projects/real-v1/octapod-layana-03.webp')} alt={value('card-alt', 'An Octapod residence opening onto the shared pool')} fill sizes="(max-width: 700px) 70vw, 31vw" />
+    </motion.figure>
     <div className={styles.bespokeCopy}>
       <span>{value('label', 'Hospitality')}</span>
       <h2 id="hospitality-preview-title">{value('heading', 'Built to welcome.')}</h2>

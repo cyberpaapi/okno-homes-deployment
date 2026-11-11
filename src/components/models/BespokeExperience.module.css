@@ -244,3 +244,12 @@
 
 /* Bottom-anchored copy follows the visible bottom edge (see --vv-lift in globals.css). */
 .panelCaption, .parallaxCopy { translate: 0 var(--vv-lift); }
+/* Client feedback (11 November 2026): the pop-up photograph has no border, matching the
+   home page cards. */
+.parallaxCard { border: 0 !important; border-radius: 28px; box-shadow: 0 36px 100px rgb(0 0 0 / 30%); }
+@media (max-width: 700px) { .parallaxCard { border-radius: 18px; } }
+/* Tablets (client feedback, 11 November 2026): the result heading ran under the pop-up
+   photograph. The heading's column now ends before the photograph begins. */
+@media (min-width: 701px) {
+  .parallaxCopy { width: calc(100vw - var(--gutter) - 7vw - min(34vw, 530px) - 48px); }
+}

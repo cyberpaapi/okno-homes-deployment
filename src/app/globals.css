@@ -1,4 +1,5 @@
-@import "tailwindcss";
+/* Scan only source files: the default whole-project scan reads the multi-GB public media and exhausts build memory. */
+@import "tailwindcss" source("../");
 @import "./typography-scale.css";
 
 /* Variable Geist (100–900). The previous static Regular + Medium pair rendered

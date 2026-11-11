@@ -35,7 +35,7 @@
 .sticky {
   --intro-opacity: 1;
   --still-opacity: 0;
-  --brand-opacity: 0;
+  --brand-opacity: 1;
   --journey-opacity: 0;
   --end-opacity: 0;
   --treatment-lift: 0;

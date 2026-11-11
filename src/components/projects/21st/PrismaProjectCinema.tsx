@@ -14,7 +14,7 @@ import { ProjectFilmDialog } from './ProjectFilmDialog';
 import styles from './ProjectCinema.module.css';
 import { PlaybackProgress } from './PlaybackProgress';
 import { useProjectAdvance } from './useProjectAdvance';
-import { portraitPreviewClips } from '@/data/projectPreviewClips';
+import { portraitPreviewClips, widePreviewClips } from '@/data/projectPreviewClips';
 
 const portraitQuery = '(max-aspect-ratio: 4/5)';
 const portraitMedia = () => (typeof window.matchMedia === 'function' ? window.matchMedia(portraitQuery) : null);
@@ -28,7 +28,7 @@ function ProjectFootage({ project, paused, reset, onEnded, onPlaying, onFailed, 
   const reduced=useReducedMotion();const [ready,setReady]=useState(false);
   const landscapePreview=useProjectPreview(project.id, project.previewSrc);
   const portrait=usePortraitScreen();
-  const preview=portrait&&landscapePreview?portraitPreviewClips[landscapePreview]??landscapePreview:landscapePreview;
+  const preview=landscapePreview?(portrait?portraitPreviewClips:widePreviewClips)[landscapePreview]??landscapePreview:landscapePreview;
   const present=useIsPresent();
   useEffect(()=>{ if(reset&&video.current){video.current.pause();video.current.currentTime=0;} },[reset]);
   useEffect(()=>{

@@ -183,3 +183,13 @@
    a 6vw edge; they now share it, with less empty space below. */
 .editorial { min-height: 72svh; padding: 24px 6vw clamp(56px, 8vw, 96px); gap: 16px; }
 @media (max-width: 700px) { .editorial { padding: 8px 16px 56px; } }
+
+/* Client feedback (11 November 2026): on wider screens the Signature heading sat over the
+   house. The heading keeps the top band (clear of the fixed header) and the film plays
+   whole below it. */
+@media (min-width: 701px) {
+  .signatureHeading { top: max(9svh, 112px); }
+  .signatureHeading h2 { font-size: clamp(28px, 3vw, 48px); }
+  .signatureMedia { top: calc(max(9svh, 112px) + 220px); }
+  .signatureMedia > img, .signatureMedia > video { object-fit: contain; }
+}

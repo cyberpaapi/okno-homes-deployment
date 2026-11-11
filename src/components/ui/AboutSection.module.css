@@ -271,3 +271,6 @@
    it now reads as the statement it is. */
 .manifesto p { max-width: 24ch; font-size: clamp(28px, 3.2vw, 48px); line-height: 1.2; letter-spacing: -0.02em; }
 @media (max-width: 700px) { .manifesto p { font-size: 24px; } }
+
+/* Phones (11 November 2026): the fixed glass header now overlays the page, so the title clears it. */
+@media (max-width: 600px) { .hero { padding-top: 7.5rem; } }

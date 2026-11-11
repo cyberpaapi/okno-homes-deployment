@@ -456,3 +456,7 @@
   .scanMarker { opacity: .52; transform: none; }
   .journeyVideo { display: none; }
 }
+
+/* Client feedback (11 November 2026): the opening title was set larger than the chapter
+   titles that replace it while scrolling, so the type jumped size. One size throughout. */
+.heroTitle h1, .storyPanel h2 { font-size: var(--type-size-display, var(--okno-section)); }

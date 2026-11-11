@@ -532,3 +532,8 @@ The shared admin/customer scene now fits precise world-space mesh vertices, avoi
 ## Customer configurator scene QA — 9 November 2026
 
 Customer rendering now fills the viewport behind the controls instead of clipping the canvas beside the material panel and above the toolbar. Camera view offsets preserve a clear area for the house; distant terrain blends into the existing background. This also corrects resize framing to reuse physical model dimensions instead of scaling world bounds again. Material controls fit all five zones, and the compact mobile header/material browser leave the scene usable on narrow displays. The admin scene keeps its container framing.
+
+## Opening film and home hospitality photograph — 11 November 2026
+
+- Home → Hospitality adds **Card image** and **Card alt** (`home.hospitality.card-image`, `home.hospitality.card-alt`) for the pop-up photograph over the hospitality block; Hospitality → Result pop-up keeps its own fields.
+- Hero V1 now opens on the loader and plays the scroll film by itself (scroll speeds it up or reverses it). The **Intro video** and **Intro last frame** fields remain stored but are no longer shown on the site; **Tagline** stays editable and is read by screen readers only. Hero V2's ending text and actions now appear only for visitors who prefer reduced motion.

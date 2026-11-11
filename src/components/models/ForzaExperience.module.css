@@ -1474,3 +1474,12 @@
 @media (max-width: 700px) {
   .productStage { bottom: calc(92px - var(--vv-lift)); }
 }
+/* Tablets (client feedback, 11 November 2026): the model name, spec and price sat level
+   with "Configure yours"; the intro now clears it, and the mouse-scroll hint is hidden on
+   touch screens where it overlapped the model selector. */
+@media (min-width: 701px) and (max-width: 1100px) {
+  .intro { bottom: 200px; }
+}
+@media (pointer: coarse) {
+  .scrollCue { display: none; }
+}

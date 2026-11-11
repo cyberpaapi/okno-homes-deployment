@@ -90,4 +90,16 @@ The open menu is frosted glass as well (dark glass, darker on light pages for co
 - Full-screen sticky stages (Signature, Process, Bespoke, Hospitality, Sustainability, Projects, home) were 100svh, the height with the browser bar showing. Once Android Chrome hid its bar, a band of empty page about the bar's height showed under them. They are now 100lvh (svh fallback), and their bottom controls — Signature dock, plan filters, detail card and configure button, Process build-sequence bar, Bespoke captions and result copy, Hospitality result copy — are translated by `--vv-lift` (100dvh − 100lvh) so they stay above the bar while it shows.
 - Configurator on touch screens: pinned (`position: fixed; inset: 0`) with the page itself not scrolling, so dragging can no longer scroll the page, toggle the browser bar and resize the 3D view mid-gesture.
 
+## Client feedback round (eighth release, 11 November 2026)
+
+- Home opening: opens on the loading bar over the first frame, then plays one film by itself at 1x (the page advances through the hero range); scrolling forward overtakes it, scrolling back reverses it, and it resumes 1.1s after the visitor stops. The separate 15s intro clip, the start/end still dwells (film now spans 0–100% of the range) and the closing overlay are gone, so the film hands straight to the next section. “Homes for rare places.” is screen-reader only (still editable). Shared hook: `src/lib/useHeroAutoplay.ts` (also used by Hero V2).
+- Navbar: fixed on every page and device; frosted glass once the page scrolls past 24px. Phone menu opens as a compact panel (≤300px wide, sized to its links) instead of covering the screen.
+- Signature collection heading sits above its film with room to spare; the home hospitality block gains the pop-up photograph (editable: Home → Hospitality card image/alt).
+- Projects: titles share one position on films and stills (cards no longer stagger; cinema title at a fixed top offset under the navbar, legible with a shadow), the Forrest landscape film uses a caption-free crop so its burned-in text no longer shows, and the phone globe sits closer to “Enter the collection”.
+- Tablet overlaps: Models card name/price stack, Forza intro clears the controls, Process scene and Bespoke/Hospitality result copy clear their images. Pop-up photographs are borderless; Bespoke's last gallery row now matches heights (even grid). Sustainability hero/story titles keep one size. The Bespoke opening title fades on the main thread (the accelerated timeline returned it as a ghost over the image).
+- Phones: Process scene film anchored so the house is whole; Journal press cards and feature at half size (13px minimum text kept); About title clears the fixed header.
+- Build: Tailwind now scans `src` only. The default whole-project scan read the multi-GB public media and exceeded build memory (peak ~6.2 GB → postcss ~100 MB).
+
+Checked on a local production build: hero autoplay (≈129px/s = 24s film), forward wheel, reverse and resume at 1440×860 and 390×844; tablet 820×1180 and desktop 1440×860 captures for Models, Signature, Bespoke, Hospitality, Process, Sustainability, Projects, About; phone audit (6 routes) with no overflow, no control under 44px and no text under 13px.
+
 Release identity and live checks are recorded in the deployment ledger.

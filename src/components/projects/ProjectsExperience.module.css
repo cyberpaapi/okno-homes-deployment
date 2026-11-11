@@ -24,6 +24,6 @@
    collection”. It now sizes to the space under the intro and keeps a bottom margin; the
    film still opens from the globe's centre. */
 @media (max-width: 760px) {
-  .page { --globe-w: min(340px, 84vw, calc(max(100svh, 690px) - 400px)); --portal-y: calc(100% - 28px - var(--globe-w) / 2); }
+  .page { --globe-w: min(350px, 88vw, calc(max(100svh, 690px) - 400px)); --portal-y: calc(372px + var(--globe-w) / 2); }
   .globe { width: var(--globe-w); }
 }

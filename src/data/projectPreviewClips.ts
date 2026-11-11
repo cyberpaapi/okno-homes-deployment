@@ -13,3 +13,10 @@ export const projectPreviewClips: Record<string, string> = {
 export const portraitPreviewClips: Record<string, string> = {
   '/assets/projects/previews/forrest-stream-v4.mp4': '/assets/projects/previews/forrest-stream-v4-portrait.mp4',
 };
+
+// Landscape screens (client feedback, 11 November 2026): the same captions collided with the
+// project title, so wide screens play a 1920×720 crop of the top two-thirds, above the
+// captions (ffmpeg crop=1920:720:0:0, libx264 CRF 24, 25 fps, no audio).
+export const widePreviewClips: Record<string, string> = {
+  '/assets/projects/previews/forrest-stream-v4.mp4': '/assets/projects/previews/forrest-stream-v4-clean.mp4',
+};

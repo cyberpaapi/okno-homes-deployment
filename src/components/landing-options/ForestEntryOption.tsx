@@ -19,39 +19,34 @@ import { useSiteContent } from '@/lib/useSiteContent';
 import { homeVariantAccessibleTitle } from '@/lib/homeVariantContent';
 import { useLenisDocumentLock } from '@/lib/useLenisDocumentLock';
 import { useHeroLoadingLock } from '@/lib/useHeroLoadingLock';
+import { useHeroAutoplay } from '@/lib/useHeroAutoplay';
 import { heroWheelDelta } from '@/lib/heroWheelSensitivity';
 import { pageImageLoader } from '@/lib/pageImageLoader';
 import type { ContentItem } from '@/lib/contentCollections';
 import styles from './ForestEntryOption.module.css';
-import introDelivery from '../../../config/hero-v1-intro.json';
 
-const INTRO_VIDEO = '/assets/landing-options/forest-entry-intro-15s.mp4';
-const INTRO_LAST_FRAME = '/assets/landing-options/forest-entry-intro-last-frame.png';
 const JOURNEY_VIDEO = '/assets/landing-options/forest-entry-scroll-window-smooth-b6de05527e75.mp4';
 const START = '/assets/landing-options/forest-entry-start-v2.jpg';
 const END = '/assets/landing-options/forest-entry-window-finish.jpg';
+/** Native length of the approved journey film; autoplay advances it at 1x. */
+const JOURNEY_SECONDS = 24;
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const range = (value: number, start: number, end: number) =>
   clamp((value - start) / (end - start));
 
 export default function ForestEntryOption({ variant }: { variant?: ContentItem }) {
-  const savedIntroVideo = useSiteContent('hero-v1.opening.intro-video', INTRO_VIDEO);
   const savedJourneyVideo = useSiteContent('hero-v1.opening.scroll-video', JOURNEY_VIDEO);
   const savedStartImage = useSiteContent('hero-v1.opening.start-image', START);
   const savedEndImage = useSiteContent('hero-v1.opening.end-image', END);
-  const savedIntroLastFrame = useSiteContent('hero-v1.opening.intro-last-frame', INTRO_LAST_FRAME);
   const savedTagline = useSiteContent('hero-v1.opening.tagline', 'Homes for rare places.');
   const tagline = variant?.fields.tagline ?? savedTagline;
   const savedAccessibleTitle = useSiteContent('hero-v1.opening.accessible-title', 'OKNO Modhomes');
   const savedStartAlt = useSiteContent('hero-v1.opening.start-alt', 'A single illuminated Kioo home within dense forest at blue hour');
   const savedEndAlt = useSiteContent('hero-v1.opening.end-alt', 'The timber-lined interior of the Kioo home opening to the forest');
-  const selectedIntro = variant?.fields.openingVideo || savedIntroVideo;
-  const introVideo = selectedIntro === INTRO_VIDEO ? introDelivery.source : selectedIntro;
   const journeyVideo = variant?.fields.scrollVideo || savedJourneyVideo;
   const startImage = variant?.fields.poster || savedStartImage;
   const endImage = variant?.fields.endImage || savedEndImage;
-  const introLastFrame = variant?.fields.introLastFrame || savedIntroLastFrame;
   const accessibleTitle = homeVariantAccessibleTitle(variant, savedAccessibleTitle);
   const startAlt = variant?.fields.openingAlt || savedStartAlt;
   const endAlt = variant?.fields.endAlt || savedEndAlt;
@@ -68,15 +63,12 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   useHeroReloadPosition(sectionRef);
   useLenisDocumentLock();
   const viewportRef = useRef<HTMLDivElement>(null);
-  const introVideoRef = useRef<HTMLVideoElement>(null);
-  const introFinished = useRef(false);
-  const [introComplete, setIntroComplete] = useState(false);
   const [journeyReady, setJourneyReady] = useState(false);
   const [journeyLoading, setJourneyLoading] = useState<number | null>(0);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const reducedMotion = useReducedMotion();
   const animated = !reducedMotion;
-  const loadingLocked = animated && (!journeyReady || !introComplete);
+  const loadingLocked = animated && !journeyReady;
   useHeroLoadingLock(loadingLocked);
   const presentedFilmProgress = useMotionValue(0);
   const presentFilm = useCallback((value: number) => presentedFilmProgress.set(value), [presentedFilmProgress]);
@@ -88,34 +80,18 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   // playback queue make the camera continue after the visitor stops scrolling.
   const mediaProgress = scrollYProgress;
   useHeroFilmExit(sectionRef, presentedFilmProgress, animated);
-
-  const finishIntro = () => {
-    if (introFinished.current) return;
-    introFinished.current = true;
-    setIntroComplete(true);
-    syncMedia(mediaProgress.get());
-  };
+  // Client feedback (11 November 2026): open on the loader, then one film that
+  // plays by itself and follows scroll both ways, with no separate intro clip.
+  const filmSeconds = useCallback(() => JOURNEY_SECONDS, []);
+  useHeroAutoplay(sectionRef, animated && journeyReady, filmSeconds);
 
   const syncMedia = (rawProgress: number) => {
     const progress = loadingLocked ? 0 : clamp(rawProgress);
     const viewport = viewportRef.current;
-    const intro = introVideoRef.current;
-    if (intro && animated && progress > .005) {
-      if (!introFinished.current) { intro.pause(); finishIntro(); }
-      // The hidden intro must not keep downloading its 22 MB body while the
-      // visitor scrubs the film. Ordinary reversal keeps the static base;
-      // only a fresh page load mounts the autoplay intro again.
-      if (intro.hasAttribute('src')) { intro.removeAttribute('src'); intro.load(); }
-    }
-
     if (viewport) {
-      const introOpacity = 1 - range(progress, .005, .06);
-      const stillOpacity = introFinished.current ? 1 - range(progress, .04, .08) : 0;
-      const brandOpacity = !animated ? 1 : introFinished.current ? 1 - range(progress, .005, .06) : 0;
-      const journeyOpacity = range(progress, .04, .08);
-      const endOpacity = !animated || presentedFilmProgress.get() >= 1 ? range(progress, .9, .94) : 0;
-      viewport.style.setProperty('--intro-opacity', introOpacity.toFixed(4));
-      viewport.style.setProperty('--still-opacity', stillOpacity.toFixed(4));
+      const brandOpacity = animated && !journeyReady ? 1 : 0;
+      const journeyOpacity = animated && journeyReady ? 1 : 0;
+      const endOpacity = !animated || presentedFilmProgress.get() >= 1 ? range(progress, .985, 1) : 0;
       viewport.style.setProperty('--brand-opacity', brandOpacity.toFixed(4));
       viewport.style.setProperty('--journey-opacity', journeyOpacity.toFixed(4));
       viewport.style.setProperty('--end-opacity', endOpacity.toFixed(4));
@@ -128,45 +104,10 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   useMotionValueEvent(presentedFilmProgress, 'change', () => syncMedia(mediaProgress.get()));
 
   useEffect(() => {
-    const video = introVideoRef.current;
-    if (!animated || !video) return;
-
-    const tunePlayback = () => { video.playbackRate = 1.75; };
-    video.addEventListener('loadedmetadata', tunePlayback);
-    video.addEventListener('playing', tunePlayback);
-    tunePlayback();
-    // Autoplay alone can wait for a can-play-through estimate on slow links.
-    // Explicit muted playback starts as soon as the first frames are buffered.
-    const start = () => {
-      if (introFinished.current || mediaProgress.get() > .005 || document.hidden || !video.hasAttribute('src')) return;
-      video.muted = true;
-      void video.play().catch(() => { /* A later canplay or user gesture retries. */ });
-    };
-    const recover = () => { video.pause(); finishIntro(); };
-    video.addEventListener('loadeddata', start);
-    video.addEventListener('canplay', start);
-    video.addEventListener('error', recover);
-    window.addEventListener('pointerdown', start, { passive: true });
-    window.addEventListener('keydown', start);
-    start();
-    return () => {
-      video.removeEventListener('loadeddata', start);
-      video.removeEventListener('canplay', start);
-      video.removeEventListener('error', recover);
-      window.removeEventListener('pointerdown', start);
-      window.removeEventListener('keydown', start);
-      video.removeEventListener('loadedmetadata', tunePlayback);
-      video.removeEventListener('playing', tunePlayback);
-    };
-    // Reads the current Motion position and mounted intro, never an old target.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animated]);
-
-  useEffect(() => {
     syncMedia(mediaProgress.get());
     // Motion owns the changing progress value; this only primes restored scroll positions.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animated, journeyReady, introComplete]);
+  }, [animated, journeyReady]);
 
   const page = (
     <div
@@ -205,30 +146,14 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
             />
           </div>
 
-          <div className={styles.introStill}>
-            <Image src={introLastFrame} loader={pageImageLoader} alt="" fill sizes="100vw" />
-          </div>
-          <div className={styles.brand} aria-hidden={animated && !introComplete} inert={animated && !introComplete} aria-label="OKNO Modhomes" data-type-field={"hero-v1.opening.tagline"}>
-            {tagline && <p data-hero-v1-tagline data-type-field={"hero-v1.opening.tagline"}>{tagline}</p>}
+          <div className={styles.brand} aria-label="OKNO Modhomes" data-type-field={"hero-v1.opening.tagline"}>
+            {/* Client feedback (11 November 2026): the tagline no longer shows over the film; it stays for screen readers. */}
+            {tagline && <p className={styles.srOnly} data-hero-v1-tagline data-type-field={"hero-v1.opening.tagline"}>{tagline}</p>}
             {animated && <FilmLoadingStatus ready={journeyReady} progress={journeyLoading} retry={() => { setJourneyLoading(0); setJourneyReady(false); setLoadAttempt(value => value + 1); }} />}
           </div>
 
           {animated && (
             <>
-              <video
-                ref={introVideoRef}
-                className={`${styles.video} ${styles.introVideo} ${introComplete ? styles.introComplete : ''}`}
-                src={introVideo}
-                poster={startImage}
-                autoPlay
-                muted
-                playsInline
-                preload="auto"
-                aria-hidden="true"
-                onEnded={() => {
-                  finishIntro();
-                }}
-              />
               <ScrollJourneyFilm
                 key={`${journeyVideo}-${loadAttempt}`}
                 src={journeyVideo}

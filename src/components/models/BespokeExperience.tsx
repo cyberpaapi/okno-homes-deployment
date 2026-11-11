@@ -66,7 +66,10 @@ export default function BespokeExperience() {
   const heroRadius = useTransform(heroProgress, [0, .82], reduced ? [0, 0] : [34, 0]);
   const heroScale = useTransform(heroProgress, [0, 1], reduced ? [1, 1] : [1.08, 1]);
   const heroBackdropOpacity = useTransform(heroProgress, [0, .75], [.5, 0]);
-  const heroTextOpacity = useTransform(heroProgress, [0, .42, .76], [1, 1, 0]);
+  // Client feedback (11 November 2026): the title must not linger as a ghost over the expanding image.
+  // A function transform keeps this on the main thread: the accelerated scroll timeline did not hold
+  // the final 0 and brought the title back over the image.
+  const heroTextOpacity = useTransform(heroProgress, value => 1 - Math.min(1, Math.max(0, (value - .22) / .2)));
   const heroTextY = useTransform(heroProgress, [0, .76], reduced ? [0, 0] : [0, -54]);
 
   const { scrollYProgress: horizontalProgress } = useScroll({ target: horizontalRef, offset: ["start start", "end end"] });
@@ -149,7 +152,7 @@ export default function BespokeExperience() {
           <p className={styles.kicker}>{get("gallery.label", "Bespoke projects")}</p>
           <h2 id="bespoke-gallery-title">{lakewood.title}</h2>
           <p className={styles.bodyCopy}>{lakewood.description}</p>
-          <MasonryLightbox images={lakewood.gallery} title={lakewood.title} />
+          <MasonryLightbox images={lakewood.gallery} title={lakewood.title} even />
         </section>}
       </main>
     </MotionConfig>

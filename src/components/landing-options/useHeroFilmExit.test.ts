@@ -35,7 +35,7 @@ describe('Hero movie handoff', () => {
   it('holds before lower content, preserves overshoot and releases after the actual end frame', async () => {
     const view = setup();
     act(() => { y = 1200; window.dispatchEvent(new Event('scroll')); });
-    expect(y).toBe(950); expect(view.hero.dataset.filmExitPending).toBe('true');
+    expect(y).toBe(1000); expect(view.hero.dataset.filmExitPending).toBe('true');
     const wheel = new WheelEvent('wheel', { deltaY: 300, cancelable: true });
     act(() => { window.dispatchEvent(wheel); });
     expect(wheel.defaultPrevented).toBe(true);
@@ -47,7 +47,7 @@ describe('Hero movie handoff', () => {
     const view=setup();
     act(()=>{y=1300;window.dispatchEvent(new Event('scroll'));});
     await act(async()=>{document.body.style.overflow='hidden';await vi.advanceTimersByTimeAsync(2250);});
-    expect(y).toBe(950);
+    expect(y).toBe(1000);
     const wheel=new WheelEvent('wheel',{deltaY:500,cancelable:true});
     act(()=>window.dispatchEvent(wheel)); expect(wheel.defaultPrevented).toBe(false);
     await act(async()=>{view.shown.set(1); document.body.style.overflow='';});
@@ -70,7 +70,7 @@ describe('Hero movie handoff', () => {
     const view = setup();
     act(() => { y = 1300; window.dispatchEvent(new Event('scroll')); });
     await act(async () => { await vi.advanceTimersByTimeAsync(2250); });
-    expect(y).toBe(950);
+    expect(y).toBe(1000);
     expect(view.hero.dataset.filmExitPending).toBe('true');
     await act(async () => { view.shown.set(1); await vi.advanceTimersByTimeAsync(200); });
     expect(y).toBe(1300);

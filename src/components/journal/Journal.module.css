@@ -321,3 +321,19 @@
 @media (max-width: 339px) {
   .blogGrid { grid-template-columns: 1fr; }
 }
+
+/* Phones (owner request, 11 November 2026): journal image cards at half their previous size. */
+@media (max-width: 760px) {
+  .heroFeature { min-height: min(24vh, 210px); }
+  .heroFeatureCopy { padding: 22px 64px 16px 16px; }
+  .heroFeatureCopy h2 { font-size: 14px; }
+  .heroAction { right: 12px; bottom: 12px; }
+  .storyCard { width: 50vw; min-height: min(210px, 54vw); }
+  .cardCopy { padding: 34px 14px 60px 14px; }
+  .cardSource { margin-bottom: 6px; font-size: 13px; }
+  .cardCopy h3 { display: -webkit-box; overflow: hidden; font-size: 13px; line-height: 1.35; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+  .cardMeta { margin-top: 6px; font-size: 13px; }
+  .cardCredit { display: none; }
+  .cardAction { right: 10px; bottom: 10px; }
+  .cardAction .arrowLink, .heroAction .arrowLink { width: 44px !important; height: 44px; }
+}

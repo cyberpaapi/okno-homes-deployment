@@ -28,3 +28,14 @@
   .title { padding-block: 6px; margin-block: -6px; }
   .dialogHeader button, .filmChoices button { min-height: 44px; }
 }
+
+/* The header is fixed now (11 November 2026): the playing-state title and the top line
+   start below it instead of behind it, and titles carry a soft shadow so they stay legible
+   over bright footage. */
+.topline { top: 108px; }
+.content[data-playing=true] { top: 112px; }
+.title h2, .caption p { text-shadow: 0 1px 14px rgb(0 0 0 / 55%); }
+@media (max-width: 760px) {
+  .topline { top: 88px; }
+  .content[data-playing=true] { top: 92px; }
+}

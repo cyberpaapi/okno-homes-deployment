@@ -85,10 +85,13 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
   }, [open]);
 
   const duration = reduced ? 0 : 0.68;
-  const expandedWidth = viewport.width <= 520
-    ? Math.max(220, viewport.width - 16)
-    : 440;
-  const expandedHeight = Math.max(280, Math.min(640, viewport.height - 32));
+  // Phones (client feedback, 11 November 2026): the open menu covered the whole screen. It is
+  // now a compact panel sized to its links (44px rows, 4px apart) under the button.
+  const phone = viewport.width <= 520;
+  const expandedWidth = phone ? Math.max(220, Math.min(300, viewport.width - 32)) : 440;
+  const expandedHeight = phone
+    ? Math.max(280, Math.min(viewport.height - 32, 64 + items.length * 44 + (items.length - 1) * 4 + 18))
+    : Math.max(280, Math.min(640, viewport.height - 32));
   const collapsedWidth = Math.max(100, Math.min(220, Math.max(menuLabel.length, closeLabel.length) * 9 + 52));
   return (
     <div className={styles.menuPosition} ref={root} style={{ width: collapsedWidth }}>
@@ -160,9 +163,18 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", enquir
   const menuLabel = get("menu.open", "Menu");
   const closeLabel = get("menu.close", "Close");
   const navigationLabel = get("menu.navigation-label", "Site navigation");
+  // Owner request (11 November 2026): the header stays in view on every page and turns to
+  // frosted glass once the page has scrolled.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 24);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
   const compactForCopy = navigation.some(item => item.label.length > 20) || navigation.reduce((length, item) => length + item.label.length, 0) > 90;
   return (
-    <header className={styles.header} data-type-section="shared.header" data-tone={resolvedTone} data-copy-compact={compactForCopy} data-site-header>
+    <header className={styles.header} data-type-section="shared.header" data-tone={resolvedTone} data-copy-compact={compactForCopy} data-scrolled={scrolled} data-site-header>
       <div className={styles.shell}>
         <MagneticLink href="/" className={styles.logo} aria-label={`${brandName} home`} data-models-magnetic>
           <OknoLogo tone={resolvedTone === "light" ? "dark" : "light"} priority />

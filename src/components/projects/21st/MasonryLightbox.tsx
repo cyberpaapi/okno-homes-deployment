@@ -11,7 +11,8 @@ import { MagneticButton } from './Magnetic';
 import { CarouselThumbnails } from './PhotoCarousel';
 import styles from './MasonryLightbox.module.css';
 
-export function MasonryLightbox({ images, title }: { images: ProjectImage[]; title: string }) {
+/** `even` lays the photographs out in equal rows instead of staggered columns. */
+export function MasonryLightbox({ images, title, even = false }: { images: ProjectImage[]; title: string; even?: boolean }) {
   const [selected, setSelected] = useState<number | null>(null);
   const visibleIndex = selected === null || !images.length ? null : Math.min(selected, images.length - 1);
   const reduced = useReducedMotion();
@@ -40,7 +41,7 @@ export function MasonryLightbox({ images, title }: { images: ProjectImage[]; tit
     return () => { cancelAnimationFrame(frame);document.body.style.overflow = overflow;document.body.style.paddingRight = padding;window.removeEventListener('keydown', key);returnFocus?.focus({ preventScroll: true }); };
   }, [open, images.length, step]);
   const image = visibleIndex === null ? null : images[visibleIndex];
-  return <LayoutGroup id={`masonry-${title}`}><div className={styles.grid} data-single={images.length === 1}>
+  return <LayoutGroup id={`masonry-${title}`}><div className={styles.grid} data-single={images.length === 1} data-even={even}>
     {images.map((item, i) => <motion.button key={item.src} type="button" layoutId={reduced ? undefined : `photo-${i}`} className={styles.tile} aria-label={`View photograph ${i + 1}`}
       onClick={event => { opener.current = event.currentTarget;setSelected(i); }}
       initial={reduced ? false : { opacity: 0, y: 16, filter: 'blur(6px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: '-40px' }}

@@ -27,11 +27,11 @@ describe('scroll-only V2 behavior', () => {
     expect(page.container.querySelector('video')).toBeNull();
     expect(page.getByTestId('shared-page')).toBeInTheDocument();
     act(() => { mock.progress = .45; mock.change?.(); });
-    expect(mock.setTime.mock.lastCall?.[0]).toBeCloseTo(395 / 24);
+    expect(mock.setTime.mock.lastCall?.[0]).toBeCloseTo(.45 * 790 / 24);
     act(() => { mock.progress = 1; mock.change?.(); });
     expect(mock.setTime.mock.lastCall?.[0]).toBeCloseTo(790 / 24);
     act(() => { mock.progress = .09; mock.change?.(); });
-    expect(mock.setTime.mock.lastCall?.[0]).toBeCloseTo(79 / 24);
+    expect(mock.setTime.mock.lastCall?.[0]).toBeCloseTo(.09 * 790 / 24);
     page.unmount(); expect(mock.dispose).toHaveBeenCalled();
   });
   it('uses a single still and loads no film for reduced motion', () => {
@@ -42,19 +42,12 @@ describe('scroll-only V2 behavior', () => {
     expect(mock.setTime).not.toHaveBeenCalled();
     expect(page.getByTestId('shared-page')).toBeInTheDocument();
   });
-  it('reveals the hero only after the actual final frame, then hides it on reverse scroll', async () => {
+  it('hands the final frame straight to the page without a closing overlay', async () => {
     const page = render(<HeroV2 />);
     await waitFor(() => expect(mock.present).toBeDefined());
     const ending = page.container.querySelector('[data-v2-ending]')!;
-    expect(ending).toHaveAttribute('aria-hidden', 'true');
-    act(() => { mock.progress = .9; mock.change?.(); });
-    expect(ending).toHaveAttribute('aria-hidden', 'true');
+    act(() => { mock.progress = 1; mock.change?.(); });
     act(() => mock.present?.(790 / 24));
-    expect(ending).toHaveAttribute('aria-hidden', 'false');
-    expect(ending).not.toHaveAttribute('inert');
-    expect(page.getByRole('link', { name: 'Explore our homes' })).toHaveAttribute('href', '/models');
-    expect(page.getByRole('link', { name: 'Start your project' })).toHaveAttribute('href', '/enquiry?intent=home');
-    act(() => { mock.progress = .7; mock.change?.(); });
     expect(ending).toHaveAttribute('aria-hidden', 'true');
     expect(ending).toHaveAttribute('inert');
   });
