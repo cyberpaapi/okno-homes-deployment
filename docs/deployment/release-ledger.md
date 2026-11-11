@@ -1,5 +1,9 @@
 # Release decision and evidence ledger
 
+## One scroll-driven opening film — 11 November 2026
+
+Owner-approved production deploy of `4176031b3be1ebb4682cabdefa89bf9e837db2c6` (`dpl_PiCLLmbn7XzcdxWRYWd2dWjMcZLq`, canonical alias). The woods traversal and the journey are one 779-frame film with rebuilt pose banks. The loader sits on its first frame, then a "Scroll to continue" mouse prompt appears. Nothing autoplays. Live checks: routes and both pose banks served (200/206). At 393×852 (Android UA) and 1440×860: loader shown, film ready, prompt visible, no movement without scroll, and at 15% of the track the woods-to-house section is on screen. No runtime errors in the 30 minutes after release. Details: `docs/typography-qa-2026-11-10.md` (eleventh release).
+
 ## Phone intro fix, Forza film frame and loading bar — 11 November 2026
 
 Owner-approved production deploys of `92c13598b962891f42f271adb5b8d19a9e891e0e` (`dpl_61AcoB758i76sW4SeC2KhYo8k2nx`) and the follow-up `98b9db57f04cd3a769d55a10e38ed377b92fe608` (`dpl_Bm2fbp7TJHKTFC2qFVTt3vMf8tez`, canonical alias). The intro streams from its URL, and any refused, failed or stalled playback hands over to the scroll film. The Home Forza film has a black frame on every device (16:9 on phones). The loading bar no longer resets while loading. Live checks: routes 200; on an emulated Android phone at 3 MB/s the bar fills, the intro plays for its full length and the film then autoplays (≈310px per 2.6s); with autoplay blocked the intro hands over to the film; no runtime errors in the hour after release. Details: `docs/typography-qa-2026-11-10.md` (tenth release).
