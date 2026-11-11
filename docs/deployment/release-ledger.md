@@ -1,5 +1,9 @@
 # Release decision and evidence ledger
 
+## Client round: autoplaying opening film and sticky glass navbar — 11 November 2026
+
+Owner-approved production deploy of `3c1d8ce0a7389db33a52fdfc3d249790e2701b83` (`dpl_H2XT4Yz8dmC67kh4x3ro5KxmJxBy`, canonical alias okno-homes-aryan.vercel.app). Home opens on the loader, then the film plays by itself and follows scroll forward and back with no intro clip or ending pause; tagline screen-reader only; navbar fixed with glass on scroll; tablet/phone overlap fixes; Tailwind scans `src` only. Live checks: 11 routes return 200; at 1440×860 and 390×844 the loader shows first, no intro video mounts, autoplay advances (24→408px and 10→371px over 3s), wheel reverse moves the film back, header is fixed with `data-scrolled=true` after scrolling; no runtime errors in the 30 minutes after release. Details: `docs/typography-qa-2026-11-10.md` (eighth release).
+
 ## Menu enquiry label — 10 November 2026
 
 Owner-approved production deploy of `ba83849f00037d400639c2ace8e5e1e5bf8f064d` (`dpl_BEjaxio4hV3xVsvtiDuNsTcKyaLo`, canonical alias). On Signature the open menu's last item was "Enquire about Forza", which the one-line rule clipped; the menu now reads "Enquire" with the same model-specific link, and the desktop button keeps the longer label. Header and models tests pass; live at 390×844 the item fits on one 44px line. Rollback baseline: `dpl_4Qn7ah84vpxyq4y17jYJRibVEBfp`.
