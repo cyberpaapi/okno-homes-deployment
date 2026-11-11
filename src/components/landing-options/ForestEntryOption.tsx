@@ -22,7 +22,6 @@ import { useHeroLoadingLock } from '@/lib/useHeroLoadingLock';
 import { useHeroAutoplay } from '@/lib/useHeroAutoplay';
 import { heroWheelDelta } from '@/lib/heroWheelSensitivity';
 import { pageImageLoader } from '@/lib/pageImageLoader';
-import { downloadHeroMedia } from '@/lib/downloadHeroMedia';
 import type { ContentItem } from '@/lib/contentCollections';
 import styles from './ForestEntryOption.module.css';
 import introDelivery from '../../../config/hero-v1-intro.json';
@@ -36,6 +35,8 @@ const END = '/assets/landing-options/forest-entry-window-finish.jpg';
 /** Native length of the approved journey film; autoplay advances it at 1x. */
 const JOURNEY_SECONDS = 24;
 const JOURNEY_BYTES = 47573337;
+const INTRO_BUFFER_GRACE_MS = 4000;
+const INTRO_STALL_MS = 3000;
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const range = (value: number, start: number, end: number) =>
@@ -103,6 +104,8 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   const mediaProgress = scrollYProgress;
   useHeroFilmExit(sectionRef, presentedFilmProgress, animated);
   const filmSeconds = useCallback(() => JOURNEY_SECONDS, []);
+  // The bar only ever moves forward, even when a stream reports a fresh phase.
+  const trackJourneyLoading = useCallback((value: number | null) => setJourneyLoading(previous => value === null || previous === null ? value : value < 0 ? (previous > 0 ? previous : value) : Math.max(previous, value)), []);
   useHeroAutoplay(sectionRef, animated && journeyReady && introComplete, filmSeconds);
 
   const finishIntro = () => {
@@ -143,43 +146,60 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   useMotionValueEvent(mediaProgress, 'change', syncMedia);
   useMotionValueEvent(presentedFilmProgress, 'change', () => syncMedia(mediaProgress.get()));
 
-  // The intro is read completely before the loader clears, so it can never
-  // stall mid-shot; the scroll film loads in parallel and shares the bar.
+  // The intro streams from its own URL (as it did when it played on phones) and is
+  // buffered while the loader shows; the scroll film loads in parallel and shares
+  // the bar. Every failure path ends the intro, so the page can never stay locked.
   useEffect(() => {
     const video = introVideoRef.current;
     if (!animated || !video || introFinished.current) return;
-    const abort = new AbortController();
-    let objectUrl: string | null = null;
-    const ready = () => { if (!abort.signal.aborted && video.readyState >= 2) setIntroReady(true); };
-    const skip = () => { if (abort.signal.aborted) return; setIntroLoad(1); setIntroReady(true); finishIntro(); };
-    video.addEventListener('loadeddata', ready);
-    video.addEventListener('error', skip);
-    void downloadHeroMedia(introVideo, abort.signal, value => { if (!abort.signal.aborted) setIntroLoad(Math.max(0, value)); }).then(data => {
-      if (abort.signal.aborted) return;
-      objectUrl = URL.createObjectURL(new Blob([data as BlobPart], { type: 'video/mp4' }));
-      video.src = objectUrl;
-      video.load();
-    }).catch(skip);
-    return () => {
-      abort.abort();
-      video.removeEventListener('loadeddata', ready);
-      video.removeEventListener('error', skip);
-      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    const measure = () => {
+      if (video.readyState >= 4) { setIntroLoad(1); setIntroReady(true); return; }
+      const duration = video.duration;
+      if (Number.isFinite(duration) && duration > 0 && video.buffered.length) {
+        const buffered = Math.min(.99, video.buffered.end(video.buffered.length - 1) / duration);
+        setIntroLoad(previous => Math.max(previous, buffered));
+      }
     };
-    // finishIntro only flips refs/state; restarting the download would replay the intro.
+    const fail = () => { setIntroLoad(1); setIntroReady(true); finishIntro(); };
+    const events = ['progress', 'loadeddata', 'canplay', 'canplaythrough', 'durationchange'] as const;
+    events.forEach(name => video.addEventListener(name, measure));
+    video.addEventListener('error', fail);
+    video.load();
+    measure();
+    return () => {
+      events.forEach(name => video.removeEventListener(name, measure));
+      video.removeEventListener('error', fail);
+    };
+    // finishIntro only flips refs/state; restarting would reload the intro.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animated, introVideo, loadAttempt]);
+
+  // Phones that keep media to metadata (data saver) never report a full buffer:
+  // once the scroll film is ready, give the intro a short grace and then stream it.
+  useEffect(() => {
+    if (!animated || !journeyReady || introReady || introFinished.current) return;
+    const timer = window.setTimeout(() => setIntroReady(true), INTRO_BUFFER_GRACE_MS);
+    return () => window.clearTimeout(timer);
+  }, [animated, journeyReady, introReady]);
 
   useEffect(() => {
     const video = introVideoRef.current;
     if (!animated || !video || !loaded || introFinished.current) return;
     const tunePlayback = () => { video.playbackRate = 1.75; };
+    let lastTime = -1;
+    let stalledSince = performance.now();
+    // Watchdog: autoplay refusals, power-saving suspends and stalled streams all
+    // hand over to the scroll film instead of leaving the visitor on a frozen frame.
+    const watchdog = window.setInterval(() => {
+      if (introFinished.current) return;
+      if (video.currentTime > lastTime + .01) { lastTime = video.currentTime; stalledSince = performance.now(); return; }
+      if (performance.now() - stalledSince > INTRO_STALL_MS) { video.pause(); finishIntro(); }
+    }, 250);
     video.addEventListener('playing', tunePlayback);
     tunePlayback();
     video.muted = true;
-    video.currentTime = 0;
     void video.play().catch(() => { video.pause(); finishIntro(); });
-    return () => video.removeEventListener('playing', tunePlayback);
+    return () => { window.clearInterval(watchdog); video.removeEventListener('playing', tunePlayback); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animated, loaded]);
 
@@ -244,6 +264,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
               <video
                 ref={introVideoRef}
                 className={`${styles.video} ${styles.introVideo} ${introComplete ? styles.introComplete : ''}`}
+                src={introVideo}
                 poster={introFirstFrame}
                 muted
                 playsInline
@@ -261,7 +282,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
                 className={`${styles.video} ${styles.journeyVideo}`}
                 onReady={setJourneyReady}
                 onProgress={presentFilm}
-                onLoadProgress={setJourneyLoading}
+                onLoadProgress={trackJourneyLoading}
               />
             </>
           )}

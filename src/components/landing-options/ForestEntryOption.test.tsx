@@ -18,8 +18,6 @@ vi.mock('next/image', () => ({ default: (props: React.ImgHTMLAttributes<HTMLImag
   // eslint-disable-next-line @next/next/no-img-element
   return <img {...imageProps} alt={props.alt} />;
 } }));
-const download = vi.hoisted(() => ({ resolve: null as ((data: Uint8Array) => void) | null, reject: null as ((error: Error) => void) | null, progress: null as ((value: number) => void) | null }));
-vi.mock('@/lib/downloadHeroMedia', () => ({ downloadHeroMedia: (_src: string, _signal: AbortSignal, progress: (value: number) => void) => new Promise<Uint8Array>((resolve, reject) => { download.resolve = resolve; download.reject = reject; download.progress = progress; }) }));
 vi.mock('./ScrollJourneyFilm', () => ({ default: ({ src, className,onProgress,onReady,onLoadProgress }: { src: string; className: string;onProgress:(value:number)=>void;onReady:(value:boolean)=>void;onLoadProgress:(value:number|null)=>void }) => {motionState.onProgress=onProgress;motionState.onReady=onReady;motionState.onLoadProgress=onLoadProgress;return <video src={src} className={className} />;} }));
 vi.mock('@/components/landing/LandingExperience', () => ({ default: () => <div data-testid="option-one">Current landing page</div> }));
 vi.mock('lenis/react', () => ({ useLenis: () => undefined, ReactLenis: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
@@ -38,7 +36,6 @@ vi.mock('motion/react', () => ({
 describe('ForestEntryOption', () => {
   beforeEach(()=>{
     vi.stubGlobal('matchMedia', vi.fn(() => ({matches: false})));
-    vi.stubGlobal('URL', Object.assign(URL, { createObjectURL: vi.fn(() => 'blob:intro'), revokeObjectURL: vi.fn() }));
     vi.spyOn(HTMLMediaElement.prototype,'load').mockImplementation(()=>{});
     vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});
     vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue(undefined);
@@ -48,14 +45,12 @@ describe('ForestEntryOption', () => {
     motionState.onChange = null;
     motionState.onReady = null; motionState.onLoadProgress = null;
     motionState.shown=0;motionState.onShown=null;motionState.onProgress=null;
-    download.resolve = null; download.reject = null; download.progress = null;
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
   });
   const introLoaded = async (intro: HTMLVideoElement) => {
-    await act(async () => { download.resolve?.(new Uint8Array([1, 2, 3])); });
     Object.defineProperty(intro, 'readyState', { configurable: true, value: 4 });
-    fireEvent.loadedData(intro);
+    await act(async () => { fireEvent.canPlayThrough(intro); });
   };
   const viewport = (container: HTMLElement) => container.querySelector('[style*="--brand-opacity"]') as HTMLElement;
 
@@ -70,13 +65,13 @@ describe('ForestEntryOption', () => {
     expect(bar).toHaveAttribute('value', '0');
     expect(viewport(container).style.getPropertyValue('--brand-opacity')).toBe('1.0000');
     expect(document.documentElement.dataset.heroLoading).toBe('true');
-    act(() => { motionState.onLoadProgress?.(.5); download.progress?.(.5); });
+    act(() => { motionState.onLoadProgress?.(.5); });
     expect((bar as HTMLProgressElement).value).toBeLessThanOrEqual(.5);
     act(() => motionState.onReady?.(true));
     expect(play).not.toHaveBeenCalled();
     expect(screen.getByRole('status')).toHaveTextContent('Loading experience');
     await introLoaded(intro);
-    expect(intro.getAttribute('src')).toBe('blob:intro');
+    expect(intro.getAttribute('src')).toBe('/assets/landing-options/forest-entry-intro-664e7298e916.mp4');
     expect(play).toHaveBeenCalled();
     expect(intro.playbackRate).toBe(1.75);
     expect(viewport(container).style.getPropertyValue('--brand-opacity')).toBe('0.0000');
@@ -99,10 +94,34 @@ describe('ForestEntryOption', () => {
 
   it('skips an intro that cannot load instead of blocking the page', async () => {
     const { container } = render(<ForestEntryOption/>);
-    await act(async () => { download.reject?.(new Error('offline')); });
+    fireEvent.error(container.querySelector('video')!);
     act(() => motionState.onReady?.(true));
     expect(container.querySelector('video')!.className).toContain('introComplete');
     expect(document.documentElement.dataset.heroLoading).not.toBe('true');
+  });
+
+  it('streams the intro after a short grace when the phone will not buffer it', () => {
+    vi.useFakeTimers();
+    const play = vi.mocked(HTMLMediaElement.prototype.play);
+    render(<ForestEntryOption/>);
+    act(() => motionState.onReady?.(true));
+    expect(play).not.toHaveBeenCalled();
+    act(() => { vi.advanceTimersByTime(4000); });
+    expect(play).toHaveBeenCalled();
+    vi.useRealTimers();
+  });
+
+  it('hands over to the scroll film when the intro never starts playing', async () => {
+    vi.useFakeTimers();
+    const { container } = render(<ForestEntryOption/>);
+    const intro = container.querySelector('video')!;
+    act(() => motionState.onReady?.(true));
+    await introLoaded(intro);
+    expect(document.documentElement.dataset.heroLoading).toBe('true');
+    act(() => { vi.advanceTimersByTime(3500); });
+    expect(intro.className).toContain('introComplete');
+    expect(document.documentElement.dataset.heroLoading).not.toBe('true');
+    vi.useRealTimers();
   });
 
   it('reports a failed scroll film and retries both downloads', () => {

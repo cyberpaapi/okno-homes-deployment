@@ -17,7 +17,8 @@ export default function FilmLoadingStatus({ ready, progress, retry }: { ready: b
       return;
     }
     // Reserve completion for decoded readiness, not merely downloaded bytes.
-    const target = Math.min(.995, Math.max(0, progress));
+    // Never move backwards: a re-render or a new download phase must not empty the bar.
+    const target = Math.max(bar.value, Math.min(.995, Math.max(0, progress)));
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (reduced.matches) { bar.value = target; return; }
     rhythmStarted.current ??= performance.now();

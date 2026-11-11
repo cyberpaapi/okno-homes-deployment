@@ -30,7 +30,8 @@ function SignaturePreview() {
   const finishedSource = useRef<string | null>(null);
   const videoSource = value('home.signature.video', '/models/forza/video/forza-360-scroll-648p-24fps-fluid.mp4');
   const reduced = useReducedMotion();
-  const compact = useMediaQuery('(max-width: 800px)');
+  // Phones held sideways stack like phones: the scroll stage has no room at 390px tall.
+  const compact = useMediaQuery('(max-width: 800px), (max-height: 560px) and (orientation: landscape)');
   const visible = useInView(sectionRef, { amount: .25 });
   const near = useInView(sectionRef, { margin: '100% 0px', once: true });
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] });

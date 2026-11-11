@@ -200,3 +200,28 @@
   .sustainability { min-height: 0; padding: 96px 0 72px; }
   .sustainabilityCopy { position: relative; top: auto; transform: none; }
 }
+
+/* Owner feedback (11 November 2026): the letterbox around the Forza film showed as grey
+   bands. The film's own edges are pure black, so the frame is black on every device, and
+   phones use the film's 16:9 shape so nothing letterboxes at all. */
+.signatureMedia { background: #000; }
+@media (max-width: 800px) {
+  .signatureMedia { aspect-ratio: 16 / 9; }
+}
+
+/* Phones held sideways (owner feedback, 11 November 2026): the Forza stage stacks as on
+   phones, with the 16:9 film kept within the screen height. */
+@media (max-height: 560px) and (orientation: landscape) {
+  .signature { height: auto; padding: 88px 24px 36px; }
+  .signatureSticky { position: relative; height: auto; min-height: 0; display: flex; flex-direction: column; gap: 22px; overflow: visible; }
+  .signatureHeading, .signatureClosing { position: relative; inset: auto; opacity: 1; transform: none; }
+  .signatureHeading { order: -1; }
+  .signatureHeading > span { margin-bottom: 12px; }
+  .signatureHeading h2 { font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+  .signatureMedia { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 16/9; width: min(100%, calc(64svh * 16 / 9)); align-self: center; clip-path: none !important; border-radius: 16px; overflow: hidden; will-change: auto; }
+  .signatureMedia > img, .signatureMedia > video { object-fit: contain; filter: none; }
+  .signatureGrade { display: none; }
+  .signatureClosing { gap: 16px; align-items: flex-start; text-align: left; }
+  .signatureClosing p { max-width: 32ch; }
+  .signature::before, .signature::after { display: none; }
+}
