@@ -1,5 +1,9 @@
 # Deployment and operation
 
+## Signature phone cards below the film — 12 November 2026
+
+Source `ac139e65f92b8b2ef5f0611901cfb909cfa95c44`, READY production `dpl_8QHsYJEi8bQZpz5dVhiWNGYznyCF`, serves https://okno-homes-aryan.vercel.app. Phone identity and changing detail cards share a reserved row beneath the complete film; desktop remains unchanged. 22 focused tests, CSS parsing, clean production build and all 30 function traces pass. Live 390x844 checks show all three cards below the stable video bounds with 20.7px clearance and working scroll playback. See [layout evidence](../forza-layout-2026-11-12.md).
+
 ## Forza framing and separate model names — 12 November 2026
 
 Source `93d2a518b525b1e857de4c670157ebc29b90ef1b`, READY production `dpl_3mFiiwAQpWVdCirgHtaVuohakSdL`, serves https://okno-homes-aryan.vercel.app. The homepage film uses a complete contained frame with space above/below; Signature model identities occupy a separate area. All six live names clear the video, and the phone layout separates title and film. 22 focused tests, TypeScript, scoped lint, CSS parsing, production build and 30 function traces pass. Four route smokes pass; scoped error/fatal logs are empty. See [layout evidence](../forza-layout-2026-11-12.md).
