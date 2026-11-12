@@ -1501,4 +1501,58 @@
 /* Scrolling chip rows fade at their cut edge instead of stopping mid-word. */
 @media (max-width: 700px) {
   .modelSelector, .planFilter { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); }
+
+}
+
+/* Reserve real layout space for the model identity instead of drawing it on
+   the house. The media frame stays intact throughout rotation and model changes. */
+.stage {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 24px;
+  padding: 104px clamp(26px, 3vw, 54px) calc(80px - var(--vv-lift));
+}
+.productStage {
+  position: relative;
+  inset: auto;
+  grid-row: 1;
+  min-height: 0;
+}
+.productMedia { object-fit: contain; transform: none; }
+.intro {
+  position: relative;
+  inset: auto;
+  grid-row: 2;
+  width: 100%;
+  transform: none;
+}
+.intro > p:first-child { margin: 0; }
+.intro h1 { margin: 7px 0 0; }
+.introFacts { flex-wrap: wrap; }
+.intro .investmentNote { max-width: none; }
+@media (min-width: 1001px) {
+  .intro {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: 28px;
+    width: calc(100% - 240px);
+    text-align: left;
+  }
+  .intro > p:first-child { grid-column: 1; grid-row: 1; }
+  .intro h1 { grid-column: 1; grid-row: 2; }
+  .introFacts { grid-column: 2; grid-row: 1; align-self: end; justify-content: flex-start; margin-top: 0; gap: 8px; }
+  .intro .investmentNote { grid-column: 2; grid-row: 2; margin: 12px 0 0; padding: 0; }
+}
+@media (min-width: 701px) and (max-width: 1000px) {
+  .stage { padding-bottom: calc(136px - var(--vv-lift)); }
+}
+@media (max-width: 700px) {
+  .stage { padding: 88px 14px calc(180px - var(--vv-lift)); gap: 20px; }
+  .intro { grid-row: 1; }
+  .productStage { grid-row: 2; }
+  .stage { grid-template-rows: auto minmax(0, 1fr); }
+}
+/* Short laptop/landscape windows scroll the stage rather than clipping it. */
+@media (max-height: 620px) {
+  .stage { min-height: 620px; }
 }

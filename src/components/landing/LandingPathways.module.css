@@ -1,6 +1,6 @@
 .signature {
   position: relative;
-  height: 340svh;
+  padding: 104px 6vw 48px;
   background: #121612;
 }
 .signature::before,
@@ -17,27 +17,28 @@
   height: 18svh;
   pointer-events: none;
 }
-.signature::before { top: 0; background: linear-gradient(180deg, #121612, transparent); }
-.signature::after { bottom: 0; background: linear-gradient(180deg, transparent, rgba(10, 15, 12, .78)); }
+.signature::before { display: none; }
+.signature::after { display: none; }
 .bespoke::before { top: 0; background: linear-gradient(180deg, rgba(10, 15, 12, .78), transparent); }
 .bespoke::after { bottom: 0; background: linear-gradient(180deg, transparent, rgba(5, 12, 7, .72)); }
 .sustainability::before { top: 0; background: linear-gradient(180deg, rgba(5, 12, 7, .72), transparent); }
 .sustainability::after { bottom: 0; background: linear-gradient(180deg, transparent, #141713); }
+/* Keep the heading, complete film frame and action in document flow. */
 .signatureSticky {
-  position: sticky;
-  top: 0;
-  height: 100svh; height: 100lvh;
-  min-height: 620px;
-  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1200px;
+  margin-inline: auto;
   isolation: isolate;
 }
-.signatureMedia,
 .signatureMedia > img,
 .signatureMedia > video,
 .signatureGrade { position: absolute; inset: 0; width: 100%; height: 100%; }
-.signatureMedia { background: #101510; will-change: clip-path; }
+.signatureMedia { position: relative; width: min(100%, calc(max(240px, 100svh - 380px) * 16 / 9)); aspect-ratio: 16 / 9; margin-inline: auto; overflow: hidden; border-radius: 24px; background: #101510; }
 .signatureMedia > img,
-.signatureMedia > video { object-fit: cover; object-position: center; }
+.signatureMedia > video { object-fit: contain; object-position: center; }
 .signatureMedia > img { filter: saturate(.94) contrast(1.05) brightness(.8); }
 .signatureMedia > video { z-index: 1; filter: saturate(.94) contrast(1.05) brightness(.8); }
 .signatureGrade {
@@ -46,8 +47,9 @@
   pointer-events: none;
 }
 .signatureHeading,
-.signatureClosing { position: absolute; z-index: 3; color: #f4f0e9; }
-.signatureHeading { top: 9svh; right: 6vw; left: 6vw; }
+.signatureClosing { position: relative; z-index: 3; color: #f4f0e9; }
+.signatureHeading { order: -1; }
+
 .signatureHeading > span,
 .sustainabilityCopy > span,
 .bespokeCopy > span {
@@ -58,8 +60,9 @@
   font-weight: 500;
   text-transform: uppercase;
  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
-.signatureHeading h2 { max-width: 1020px; margin: 0; font-size: var(--type-size-display, var(--okno-section)); font-weight: 400;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
-.signatureClosing { right: 6vw; bottom: 8svh; display: flex; align-items: flex-end; gap: 28px; flex-direction: column; text-align: right; }
+.signatureHeading > span { margin-bottom: 12px; }
+.signatureHeading h2 { max-width: 100%; margin: 0; font-size: var(--type-size-display, var(--okno-section)); font-weight: 400;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
+.signatureClosing { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: 8px; }
 .signatureClosing p { max-width: 28ch; margin: 0; font-size: var(--type-size-subheading, var(--okno-intro)); line-height: 1.35; text-shadow: 0 2px 24px #000;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 
 .bespoke {
@@ -129,12 +132,7 @@
 .editorialCopy > span { position: absolute; right: 0; bottom: 0; color: rgba(244, 240, 233, .78); font-size: var(--type-size-caption, var(--okno-label)); text-transform: uppercase;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 @media (max-width: 800px) {
-  .signature { height: 290svh; }
-  .signatureSticky { min-height: 580px; }
-  .signatureMedia { clip-path: inset(8% 5% 8% 5% round 24px); }
-  .signatureHeading { top: 10svh; right: 7vw; left: 7vw; }
   .signatureHeading h2 { font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
-  .signatureClosing { right: 7vw; bottom: 10svh; left: 7vw; align-items: flex-start; text-align: left; }
   .signatureClosing p { max-width: 22ch; font-size: var(--type-size-subheading, var(--okno-intro));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .bespoke { min-height: 118svh; }
   .bespokeWord { top: 12svh; font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
@@ -154,7 +152,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .signature { height: 100svh; }
   .signatureMedia > video,
   .sustainabilityMedia > video { display: none; }
   .editorialPanel img { transition: none; }
@@ -170,7 +167,7 @@
   .signatureMedia { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 4/3; clip-path: none !important; border-radius: 16px; overflow: hidden; will-change: auto; }
   .signatureMedia > img, .signatureMedia > video { object-fit: contain; filter: none; }
   .signatureGrade { display: none; }
-  .signatureClosing { gap: 16px; align-items: flex-start; text-align: left; }
+  .signatureClosing { gap: 16px; flex-direction: column; align-items: flex-start; text-align: left; margin-top: 0; }
   .signatureClosing p { max-width: 32ch; }
   .signature::before, .signature::after { display: none; }
 }
@@ -184,13 +181,9 @@
 .editorial { min-height: 72svh; padding: 24px 6vw clamp(56px, 8vw, 96px); gap: 16px; }
 @media (max-width: 700px) { .editorial { padding: 8px 16px 56px; } }
 
-/* Client feedback (11 November 2026): on wider screens the Signature heading sat over the
-   house. The heading keeps the top band (clear of the fixed header) and the film plays
-   whole below it. */
+/* Retain the approved laptop heading scale; spacing is now handled by flow. */
 @media (min-width: 701px) {
-  .signatureHeading { top: max(9svh, 112px); }
   .signatureHeading h2 { font-size: clamp(28px, 3vw, 48px); }
-  .signatureMedia { top: calc(max(9svh, 112px) + 220px); }
   .signatureMedia > img, .signatureMedia > video { object-fit: contain; }
 }
 
@@ -221,7 +214,7 @@
   .signatureMedia { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 16/9; width: min(100%, calc(64svh * 16 / 9)); align-self: center; clip-path: none !important; border-radius: 16px; overflow: hidden; will-change: auto; }
   .signatureMedia > img, .signatureMedia > video { object-fit: contain; filter: none; }
   .signatureGrade { display: none; }
-  .signatureClosing { gap: 16px; align-items: flex-start; text-align: left; }
+  .signatureClosing { gap: 16px; flex-direction: column; align-items: flex-start; text-align: left; }
   .signatureClosing p { max-width: 32ch; }
   .signature::before, .signature::after { display: none; }
 }

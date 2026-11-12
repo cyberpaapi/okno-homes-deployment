@@ -34,16 +34,6 @@ function SignaturePreview() {
   const compact = useMediaQuery('(max-width: 800px), (max-height: 560px) and (orientation: landscape)');
   const visible = useInView(sectionRef, { amount: .25 });
   const near = useInView(sectionRef, { margin: '100% 0px', once: true });
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] });
-  // The landing's Lenis scroll already has momentum; an extra spring delays
-  // the rotation film and its reveal behind the visitor's actual position.
-  const progress = scrollYProgress;
-  const clipPath = useTransform(progress, [0, .16, .74, 1], reduced
-    ? ['inset(0% 0% 0% 0% round 0px)', 'inset(0% 0% 0% 0% round 0px)', 'inset(0% 0% 0% 0% round 0px)', 'inset(0% 0% 0% 0% round 0px)']
-    : ['inset(18% 27% 18% 27% round 34px)', 'inset(7% 10% 7% 10% round 28px)', 'inset(0% 0% 0% 0% round 0px)', 'inset(0% 0% 0% 0% round 0px)']);
-  const headingOpacity = useTransform(progress, [0, .14, .28], [1, 1, 0]);
-  const closingOpacity = useTransform(progress, [.58, .72, .96], [0, 1, 1]);
-  const closingY = useTransform(progress, [.58, .76], [42, 0]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -61,19 +51,19 @@ function SignaturePreview() {
   return (
     <section id="models-preview" data-type-section="home.signature-preview" ref={sectionRef} className={styles.signature} aria-labelledby="signature-preview-title" data-component="25482">
       <div className={styles.signatureSticky}>
-        <motion.div className={styles.signatureMedia} style={{ clipPath: compact ? 'none' : clipPath }}>
+        <div className={styles.signatureMedia}>
           <Image loader={pageImageLoader} src={value('home.signature.image', '/models/forza/orbit-keyframes-invisible-glow-1080p/forza-invisible-a00.png')} alt={value('home.signature.image-alt', 'Forza Signature home exterior')} fill sizes="100vw" />
           {near && !reduced && <video ref={videoRef} src={videoSource} muted playsInline controls={false} loop={false} disablePictureInPicture preload="auto" aria-label="Forza exterior rotation" onEnded={() => { finishedSource.current = videoSource; }} />}
           <div className={styles.signatureGrade} />
-        </motion.div>
-        <motion.div className={styles.signatureHeading} style={{ opacity: compact || reduced ? 1 : headingOpacity }}>
+        </div>
+        <div className={styles.signatureHeading}>
           <span data-type-field={"home.signature.label"}>{value('home.signature.label', 'Signature collection')}</span>
           <h2 id="signature-preview-title" data-type-field={"home.signature.heading-1"}><TextBlock lines={[value('home.signature.heading-1', 'Meet Forza.'), compact ? value('home.signature.mobile-heading-2', 'Every angle, considered.') : value('home.signature.heading-2', 'Every angle, considered.')]} /></h2>
-        </motion.div>
-        <motion.div className={styles.signatureClosing} style={{ opacity: compact || reduced ? 1 : closingOpacity, y: compact || reduced ? 0 : closingY }}>
+        </div>
+        <div className={styles.signatureClosing}>
           <p data-type-field={"home.signature.copy"}>{value('home.signature.copy', 'Six homes, each resolved to the last detail.')}</p>
           <SubtleLink href={localDestination(value('home.signature.action-href', '/models/signature'), '/models/signature')} data-cursor-media-action data-type-field={"home.signature.action"}>{value('home.signature.action', 'View the collection')}</SubtleLink>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
