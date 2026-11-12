@@ -1570,3 +1570,17 @@
 @media (max-height: 620px) {
   .stage { min-height: 620px; }
 }
+
+/* The phone document is only a rotation track. Keep its presentation anchored
+   even at the end, and size controls from the visible viewport just once. */
+@media (max-width: 700px) {
+  .scrollTrack:not(.reducedTrack) .stage {
+    --vv-lift: 0px;
+    position: fixed;
+    inset: 0;
+    height: 100svh;
+    height: 100dvh;
+    min-height: 0;
+    padding-bottom: 180px;
+  }
+}

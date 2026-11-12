@@ -570,8 +570,8 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
     restSpeed: 0.01,
   });
 
-  const introOpacity = useTransform(progress, [0, 0.055, 0.13], [1, 1, 0]);
-  const introY = useTransform(progress, [0, 0.13], [0, -14]);
+  const introOpacity = useTransform(progress, [0, 0.055, 0.13, 0.85, 0.93, 1], [1, 1, 0, 0, 1, 1]);
+  const introY = useTransform(progress, [0, 0.13, 0.85, 0.93], [0, -14, -14, 0]);
   const cueOpacity = useTransform(progress, [0, 0.045, 0.1], [1, 1, 0]);
   const actionOpacity = useTransform(progress, [0, 0.1, 0.84, 1], [0.66, 0.42, 0.42, 1]);
 
@@ -862,7 +862,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
   }, [activeModel.slug, experience.gallery]);
 
   return (
-    <main className={styles.page}>
+    <main className={styles.page} data-signature-experience>
       <section
         ref={trackRef}
         className={`${styles.scrollTrack} ${

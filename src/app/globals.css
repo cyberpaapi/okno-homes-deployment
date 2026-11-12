@@ -78,6 +78,13 @@ html {
   text-size-adjust: 100%;
 }
 
+@media (max-width: 700px) {
+  html:has([data-signature-experience]),
+  body:has([data-signature-experience]) {
+    overscroll-behavior-y: none;
+  }
+}
+
 html[data-hero-loading="true"], html[data-hero-loading="true"] body {
   overflow: hidden !important;
   overscroll-behavior: none;
