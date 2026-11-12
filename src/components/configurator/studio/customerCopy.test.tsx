@@ -34,7 +34,8 @@ describe("customer configurator copy", () => {
       "configurator.selection.heading": "Your choices, together.",
     };
     const { rerender } = render(<CustomerStudio catalogue={catalogue} />);
-    const brand = screen.getByRole("link", { name: "New OKNO identity Signature configurator" });
+    const brand = screen.getByRole("link", { name: "New OKNO identity home" });
+    expect(brand).toHaveAttribute("href", "/");
     expect(brand.querySelector("img")?.getAttribute("src")).toContain("brand-wordmark.png");
     expect(screen.getByRole("heading", { name: "Choose the surfaces." })).toBeInTheDocument();
     mockContent.values = { ...mockContent.values, "configurator.finish.heading": "Choose each finish." };
@@ -55,7 +56,8 @@ describe("customer configurator copy", () => {
       "configurator.library.heading": "Our surface library.",
     };
     render(<CustomerUnavailable slug="kray" availableVariant="1-bhk" requestedVariant="studio" />);
-    const brand = screen.getByRole("link", { name: "New OKNO identity Signature configurator" });
+    const brand = screen.getByRole("link", { name: "New OKNO identity home" });
+    expect(brand).toHaveAttribute("href", "/");
     expect(brand.querySelector("img")?.getAttribute("src")).toContain("brand-wordmark.png");
     expect(screen.getByText("Explore the 1 BHK layout now.")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Open 1 BHK ↗" })).toHaveAttribute("href", "/models/signature/kray/configure?variant=1-bhk");

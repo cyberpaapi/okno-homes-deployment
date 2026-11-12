@@ -112,9 +112,9 @@ export default function CustomerStudio({
     <main className={`${styles.app} ${styles.customer}`}>
       <header className={styles.header}>
         <Link
-          href={`/models/signature?model=${catalogue.slug}&details=1&variant=${catalogue.variant}`}
+          href="/"
           className={styles.brand}
-          aria-label={`${brandName} ${copy("configurator.brand.subtitle")}`}
+          aria-label={`${brandName} home`}
         >
           <OknoLogo priority /><span>{copy("configurator.brand.subtitle")}</span>
         </Link>

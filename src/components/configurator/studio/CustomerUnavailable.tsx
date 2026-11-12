@@ -16,7 +16,7 @@ export default function CustomerUnavailable({ slug, availableVariant, requestedV
   return (
     <main className={`${styles.app} ${styles.customer} ${styles.customerUnavailable}`}>
       <header className={styles.header}>
-        <Link href="/models/signature" className={styles.brand} aria-label={`${brandName} ${copy("configurator.brand.subtitle")}`}><OknoLogo priority /><span>{copy("configurator.brand.subtitle")}</span></Link>
+        <Link href="/" className={styles.brand} aria-label={`${brandName} home`}><OknoLogo priority /><span>{copy("configurator.brand.subtitle")}</span></Link>
         <div className={styles.headerActions}><Link href={`/models/signature?model=${slug}&details=1${requestedVariant ? `&variant=${encodeURIComponent(requestedVariant)}` : ""}`}>← {copy("configurator.action.back")}</Link></div>
       </header>
       <div className={styles.unavailableLayout}>
