@@ -1,5 +1,9 @@
 # Deployment and operation
 
+## Forza framing and separate model names — 12 November 2026
+
+Source `93d2a518b525b1e857de4c670157ebc29b90ef1b`, READY production `dpl_3mFiiwAQpWVdCirgHtaVuohakSdL`, serves https://okno-homes-aryan.vercel.app. The homepage film uses a complete contained frame with space above/below; Signature model identities occupy a separate area. All six live names clear the video, and the phone layout separates title and film. 22 focused tests, TypeScript, scoped lint, CSS parsing, production build and 30 function traces pass. Four route smokes pass; scoped error/fatal logs are empty. See [layout evidence](../forza-layout-2026-11-12.md).
+
 ## Managed house configurators — 9 November 2026
 
 Source `7c0b0bbbae847c22c2191c086d7d0480da1fb0c1` is deployed as READY production `dpl_7cLd4JXPruKfnsyB3onTDjRVkEFv` at https://okno-homes-aryan.vercel.app. The private repository branch is `release/aryan-vercel-2026-10-31`; the active project/team remain `prj_C6QGXCbhIGWw7P5NQadSz7eAAm1k` / `team_hk3H7bGO5KFS2WnCV30fHHJj`. The older main-branch/CodeAcc instructions below are historical, not this deployment's target.
