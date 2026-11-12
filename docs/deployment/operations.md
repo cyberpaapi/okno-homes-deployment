@@ -1,5 +1,9 @@
 # Deployment and operation
 
+## Fixed Signature phone viewport and home links — 12 November 2026
+
+Source `672f0a917bc1b9d6a99a04d371d006d7095282de`, READY production `dpl_2keUtPyrGQFgQS8MhLaSTrkT4Bha`, serves the canonical Aryan domain. Signature's name/price returns after the last feature card. The phone stage stays fixed to the visible viewport, with safe-area-aware clearance and route-scoped overscroll containment. All retained customer configurator logo links now point home, matching the shared header. 20 model tests and 19 header/configurator tests, scoped lint, CSS parsing, production build and 30 function traces pass. Live 390x844 start/middle/end/extra-scroll checks retain video top 88.7px and selector bottom 834px; final identity opacity is 1 at video time 8 seconds. Clicking the live phone logo returns to `/`. Screenshot: workspace `outputs/signature-fixed-endpoint-live.png`. Physical-device testing was not performed. Earlier in-flight releases were superseded before completion; no CMS content was changed.
+
 ## Signature phone cards below the film — 12 November 2026
 
 Source `ac139e65f92b8b2ef5f0611901cfb909cfa95c44`, READY production `dpl_8QHsYJEi8bQZpz5dVhiWNGYznyCF`, serves https://okno-homes-aryan.vercel.app. Phone identity and changing detail cards share a reserved row beneath the complete film; desktop remains unchanged. 22 focused tests, CSS parsing, clean production build and all 30 function traces pass. Live 390x844 checks show all three cards below the stable video bounds with 20.7px clearance and working scroll playback. See [layout evidence](../forza-layout-2026-11-12.md).
