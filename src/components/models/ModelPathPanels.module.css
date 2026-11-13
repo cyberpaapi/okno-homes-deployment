@@ -52,3 +52,16 @@
   .meta { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
   .meta p { max-width: none; margin: 0; }
 }
+
+/* Owner feedback (13 November 2026): the Collection render was cropped whenever its card
+   is narrower than the wide render (phones, tablets). In those cards the whole house is
+   shown on the render's own black backdrop, so nothing is cut and no edge shows. */
+.panel[data-path="signature"] { container: pathcard / size; }
+@container pathcard (max-aspect-ratio: 16 / 10) {
+  .image { object-fit: contain; object-position: center 42%; }
+}
+.panel[data-path="signature"] { background: #000; }
+/* Card titles size to their card, so "Collection" never breaks mid-word on tablets. */
+.panel { container-type: size; }
+.panel[data-path="signature"] { container: pathcard / size; }
+.content h2 { font-size: min(var(--type-size-display, var(--okno-section)), 9cqi); overflow-wrap: normal; word-break: keep-all; }
