@@ -1584,3 +1584,14 @@
     padding-bottom: calc(170px + max(10px, env(safe-area-inset-bottom)));
   }
 }
+/* Owner feedback (13 November 2026): only bottom-anchored controls follow the visible
+   bottom edge. Top-anchored detail cards (tablet/desktop upper cards, every card on
+   short screens) stay put so they never ride up under the header; the vertically
+   centred plan filter moves half as far. */
+@media (min-width: 701px) {
+  .upperLeft, .upperRight { translate: none; }
+  .planFilter { translate: 0 calc(var(--vv-lift) / 2); }
+}
+@media (min-width: 701px) and (max-height: 620px) {
+  .featureCard, .upperLeft, .upperRight, .lowerRight { translate: none; }
+}

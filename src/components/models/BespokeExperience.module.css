@@ -253,3 +253,9 @@
 @media (min-width: 701px) {
   .parallaxCopy { width: calc(100vw - var(--gutter) - 7vw - min(34vw, 530px) - 48px); }
 }
+/* Owner feedback (13 November 2026): on phones the decision captions are stacked under
+   their photograph, so they must not follow the visible bottom edge; with the browser
+   bar showing, the lift pulled the copy up over the photograph's bottom edge. */
+@media (max-width: 700px), (prefers-reduced-motion: reduce) {
+  .panelCaption { translate: none; }
+}
