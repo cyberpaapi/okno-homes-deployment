@@ -341,5 +341,5 @@
 /* Owner feedback (13 November 2026): the publication band was too tall; it is now half
    the height (about 62px on desktop, 36px on phones). Admin type sizes can still go
    smaller than this cap. */
-.publicationItem { padding-block: clamp(8px, 1vw, 14px); font-size: min(var(--type-size-heading, var(--okno-section)), clamp(16px, 2.1vw, 30px)); }
+.publicationItem { padding-block: clamp(8px, 1vw, 14px); font-size: min(var(--type-size-heading, var(--okno-section)), clamp(14px, 2.1vw, 30px)); }
 .publicationItem .sourceMarkMonochrome { width: clamp(18px, 2vw, 30px); height: clamp(18px, 2vw, 30px); }
