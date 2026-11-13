@@ -264,3 +264,24 @@
 @media (max-width: 700px), (prefers-reduced-motion: reduce) {
   .panelCaption > div { backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
+/* Meeting 11 November 2026: phones get the desktop's breathing room around each decision
+   stage: more space between stages, and between heading, photograph and caption. */
+@media (max-width: 700px) {
+  .horizontalPanel { gap: 28px; padding: 96px 24px 88px; }
+  .panelCaption { gap: 28px; }
+  .panelCaption strong { margin-top: 4px; }
+}
+/* Full-device audit (13 November 2026): on phones held sideways the sideways-scrolling
+   stages had no room (the photograph covered its heading and the caption covered the
+   photograph). Short landscape screens stack the stages exactly as phones do. */
+@media (max-height: 560px) and (orientation: landscape) {
+  .horizontal { height: auto; }
+  .horizontalSticky { position: relative; height: auto; overflow: visible; }
+  .horizontalTrack { width: 100%; height: auto; flex-direction: column; transform: none !important; }
+  .horizontalPanel { display: flex; flex-direction: column; gap: 24px; width: 100%; height: auto; min-height: 0; flex-basis: auto; padding: 88px max(24px, 6vw) 64px; overflow: visible; }
+  .panelHeading, .panelMedia, .panelCaption { position: relative; inset: auto; transform: none; translate: none; right: auto; left: auto; top: auto; }
+  .panelMedia { width: 100%; height: 70svh; flex: none; }
+  .panelCaption { display: grid; gap: 20px; }
+  .panelCaption > div { max-width: 640px; padding: 0; background: transparent; border: 0; box-shadow: none; backdrop-filter: none; }
+  .panelCaption button { justify-self: start; }
+}

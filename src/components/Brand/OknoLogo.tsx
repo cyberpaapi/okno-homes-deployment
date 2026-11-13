@@ -11,7 +11,8 @@ type Props = {
   variant?: "wordmark" | "compact";
 };
 
-const originalWordmark = "/assets/projects/brand/okno-modhomes-white.svg";
+// Meeting 11 November 2026: the standalone OKNO wordmark replaces the OKNO Modhomes lockup.
+const originalWordmark = "/assets/projects/brand/okno-white.svg";
 
 /** One published brand source for the header, footer and page entrances. */
 export default function OknoLogo({ className, priority = false, tone = "light", variant = "wordmark" }: Props) {
@@ -26,7 +27,7 @@ export default function OknoLogo({ className, priority = false, tone = "light", 
       src={src}
       alt=""
       width={467}
-      height={156}
+      height={91}
       priority={priority}
       className={`${styles.logo}${className ? ` ${className}` : ""}`}
       data-tone={needsDarkFilter ? "dark" : "light"}

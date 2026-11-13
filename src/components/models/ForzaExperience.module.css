@@ -397,7 +397,7 @@
 .featureTopline {
   display: flex;
   justify-content: space-between;
-  color: rgba(244, 241, 233, 0.44);
+  color: rgba(244, 241, 233, 0.72);
   font-size: var(--type-size-caption, var(--okno-label));
   font-weight: 700;
  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
@@ -598,7 +598,7 @@
   border: 0;
   border-radius: 5px;
   background: transparent;
-  color: rgba(244, 241, 233, 0.62);
+  color: rgba(244, 241, 233, 0.86);
   font-size: var(--type-size-caption, var(--okno-button));
   font-weight: 550;
   white-space: nowrap;

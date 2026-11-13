@@ -274,3 +274,6 @@
 
 /* Phones (11 November 2026): the fixed glass header now overlays the page, so the title clears it. */
 @media (max-width: 600px) { .hero { padding-top: 7.5rem; } }
+/* Full-device audit (13 November 2026): the founders photo's entrance scale ran over its
+   captions on tablets; the captions sit clear below it. */
+.founderCaptions { position: relative; z-index: 1; margin-top: 18px; }

@@ -26,3 +26,8 @@
 @media (min-width: 701px) {
   .copy { width: calc(100vw - var(--site-gutter, clamp(24px, 6vw, 96px)) - 7vw - min(34vw, 530px) - 48px); }
 }
+/* Meeting 11 November 2026: the photograph sat partly below the frame and slid further
+   down while scrolling; it now rests inside the frame on every screen. */
+@media (min-width: 701px) {
+  .card { top: 50%; bottom: auto; height: min(70lvh, calc(min(34vw, 530px) * 1.25)); aspect-ratio: auto; translate: 0 -50%; }
+}

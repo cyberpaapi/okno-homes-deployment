@@ -5,7 +5,7 @@
 import Image from "next/image";
 import styles from "./GlobalBrandPreview.module.css";
 
-const original = "/assets/projects/brand/okno-modhomes-white.svg";
+const original = "/assets/projects/brand/okno-white.svg";
 
 export default function GlobalBrandPreview({ values }: { values: Record<string, string> }) {
   const light = values["brand.logo.light"] || original;

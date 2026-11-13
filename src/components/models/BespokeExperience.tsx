@@ -207,7 +207,7 @@ function GlyphPortal() {
   const content = useSiteContentMap();
   const portalImage = content["models.bespoke.portal.image"] ?? "/assets/projects/real-v1/lakewood-02.webp";
   const portalAlt = content["models.bespoke.portal.image-alt"] ?? "";
-  const brandMask = content["brand.logo.light"] || "/assets/projects/brand/okno-modhomes-white.svg";
+  const brandMask = content["brand.logo.light"] || "/assets/projects/brand/okno-white.svg";
   const ref = useRef<HTMLElement>(null);
   const maskId = `glyph-${useId().replace(/:/g, "")}`;
   const inkId = `${maskId}-ink`;

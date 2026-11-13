@@ -834,9 +834,9 @@ const baseAdminPages: readonly ContentPage[] = [
       { id: "header.nav.accessible-label", label: "Primary navigation name", kind: "text", defaultValue: "Primary navigation" },
     ], note: "Links retain their fixed routes. The logo is edited in Global Brand below." },
     { id: "global-brand", label: "Global Brand", fields: [
-      { id: "brand.logo.light", label: "Logo on dark backgrounds", kind: "image", defaultValue: "/assets/projects/brand/okno-modhomes-white.svg", help: "Use a transparent, high-resolution image. Preview the logo on all site backgrounds before publishing." },
-      { id: "brand.logo.dark", label: "Logo on light backgrounds", kind: "image", defaultValue: "/assets/projects/brand/okno-modhomes-white.svg", help: "Provide a dedicated dark treatment when the new brand needs one." },
-      { id: "brand.logo.compact", label: "Compact brand mark", kind: "image", defaultValue: "/assets/projects/brand/okno-modhomes-white.svg" },
+      { id: "brand.logo.light", label: "Logo on dark backgrounds", kind: "image", defaultValue: "/assets/projects/brand/okno-white.svg", help: "Use a transparent, high-resolution image. Preview the logo on all site backgrounds before publishing." },
+      { id: "brand.logo.dark", label: "Logo on light backgrounds", kind: "image", defaultValue: "/assets/projects/brand/okno-white.svg", help: "Provide a dedicated dark treatment when the new brand needs one." },
+      { id: "brand.logo.compact", label: "Compact brand mark", kind: "image", defaultValue: "/assets/projects/brand/okno-white.svg" },
       { id: "brand.logo.icon", label: "Browser icon", kind: "image", defaultValue: "/favicon.ico" },
       { id: "brand.logo.alt", label: "Brand accessible name", kind: "text", defaultValue: "OKNO Modhomes" },
     ], note: "This one asset set updates standalone logos across active pages, including the Footer logo. Artwork embedded in a film or photograph requires replacement media." },

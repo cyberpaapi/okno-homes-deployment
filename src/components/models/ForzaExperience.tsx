@@ -1005,7 +1005,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
               <FeatureCard
                 typographyScope={`signature.${activeModel.slug}-story`}
                 progress={progress}
-                range={[0.12, 0.18, 0.3, 0.38]}
+                range={[0.12, 0.18, 0.3, 0.345]}
                 placement="upperLeft"
                 eyebrow={get("feature-eyebrow", "Signature detail")}
                 title={experience.features[0].title}
@@ -1014,7 +1014,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
               <FeatureCard
                 typographyScope={`signature.${activeModel.slug}-story`}
                 progress={progress}
-                range={[0.32, 0.39, 0.51, 0.59]}
+                range={[0.355, 0.4, 0.51, 0.555]}
                 placement="upperRight"
                 eyebrow={get("feature-eyebrow", "Signature detail")}
                 title={experience.features[1].title}
@@ -1023,7 +1023,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
               <FeatureCard
                 typographyScope={`signature.${activeModel.slug}-story`}
                 progress={progress}
-                range={[0.54, 0.61, 0.77, 0.85]}
+                range={[0.565, 0.61, 0.77, 0.85]}
                 placement="lowerRight"
                 eyebrow={get("feature-eyebrow", "Signature detail")}
                 title={experience.features[2].title}
@@ -1133,6 +1133,8 @@ function FeatureCard({
   title: string;
   copy: string;
 }) {
+  // Owner feedback (13 November 2026): cards never share the screen; one finishes fading
+  // out before the next fades in, so phones (one card slot) show no ghosted overlap.
   const opacity = useTransform(progress, range, [0, 1, 1, 0]);
   const y = useTransform(progress, range, [14, 0, 0, -10]);
   const scale = useTransform(progress, [range[0], range[1]], [0.98, 1]);

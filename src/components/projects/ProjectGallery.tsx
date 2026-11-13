@@ -50,7 +50,7 @@ function ProjectGalleryContent({ project, returnLabel, returnHref, photosLabel, 
         {(project.category || (project.location && project.location !== 'Project collection')) && <p className={styles.projectMeta}>{[project.category, project.location === 'Project collection' ? '' : project.location].filter(Boolean).join(' · ')}</p>}
         {project.films.length > 0 && <AnimatedTabs value={activeMode} onChange={id => setMode(id as 'photos' | 'films')} tabs={[{ id: 'photos', label: photosLabel }, { id: 'films', label: filmsLabel }]} />}
       </motion.div>
-      {activeMode === 'photos' ? <section aria-label={`${project.title} ${photosLabel}`}><MasonryLightbox images={images} title={project.title} /></section> : film && <section className={styles.cinema} aria-label={`${project.title} ${filmsLabel}`}>
+      {activeMode === 'photos' ? <section aria-label={`${project.title} ${photosLabel}`}><MasonryLightbox images={images} title={project.title} even /></section> : film && <section className={styles.cinema} aria-label={`${project.title} ${filmsLabel}`}>
         <motion.div key={film.src} className={styles.filmStage} initial={reduced ? false : { opacity: 0, scale: .98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: reduced ? 0 : .5, ease: [.22, 1, .36, 1] }}>
           <video src={film.src} poster={film.poster} controls playsInline autoPlay={landscapeFilm} muted={landscapeFilm} preload={landscapeFilm ? "metadata" : "none"} aria-label={film.title} />
         </motion.div>

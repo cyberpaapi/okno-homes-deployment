@@ -23,7 +23,9 @@ export function HospitalityResult() {
   const imageY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [90, -90]);
   const imageScale = useTransform(scrollYProgress, [0, .42], reduced ? [1, 1] : [1.08, 1]);
   const imageClip = useTransform(scrollYProgress, [0, .32], reduced ? ["inset(0% 0% 0% 0% round 0px)", "inset(0% 0% 0% 0% round 0px)"] : ["inset(42% 7% 0% 7% round 36px 36px 0 0)", "inset(0% 0% 0% 0% round 0px)"]);
-  const cardY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [180, -140]);
+  // Meeting 11 November 2026: the pop-up photograph drifted down out of the frame; it now
+  // moves gently and stays fully inside it.
+  const cardY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [70, -70]);
   return (
     <section ref={section} className={styles.result} data-type-section="hospitality.result" aria-labelledby="hospitality-result-title" data-header-tone="dark">
       <div className={styles.sticky}>
