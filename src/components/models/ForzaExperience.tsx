@@ -18,6 +18,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNo
 import type { OknoModel } from "@/data/models";
 import ModelsHeader from "./ModelsHeader";
 import { SubtleLink } from "@/components/ui/SubtleAction";
+import { Layers } from "lucide-react";
 import { indicativePrice, planLabel } from "@/lib/signaturePresentation";
 import styles from "./ForzaExperience.module.css";
 import { getVideoSeekRequest, mapProgressToTime } from "./forzaMotion";
@@ -573,7 +574,6 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
   const introOpacity = useTransform(progress, [0, 0.055, 0.13, 0.85, 0.93, 1], [1, 1, 0, 0, 1, 1]);
   const introY = useTransform(progress, [0, 0.13, 0.85, 0.93], [0, -14, -14, 0]);
   const cueOpacity = useTransform(progress, [0, 0.045, 0.1], [1, 1, 0]);
-  const actionOpacity = useTransform(progress, [0, 0.1, 0.84, 1], [0.66, 0.42, 0.42, 1]);
 
   useMotionValueEvent(rotationProgress, "change", (latest) => {
     const video = videoRef.current;
@@ -1037,8 +1037,19 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             <p data-type-field={"models.signature.scroll-cue"}>{get("scroll-cue", "Scroll to rotate")}</p>
           </motion.div>
 
-          {canConfigure && <div className={styles.configureEntrance}>
-            <SubtleLink
+          {/* Owner feedback (13 November 2026): Explore details sits beside Configure yours
+              as one action row, detached from the model chips. */}
+          <div className={styles.configureEntrance}>
+            <button
+              ref={detailsTriggerRef}
+              type="button"
+              className={styles.detailsButton}
+              onClick={openDetails}
+             data-type-field={`models.signature.${activeModel.slug}.explore-action`}>
+              <Layers aria-hidden="true" strokeWidth={1.8} />
+              {activeRecord?.fields.exploreAction || get(`${activeModel.slug}.explore-action`, get("details-action", "Explore details"))}
+            </button>
+            {canConfigure && <SubtleLink
               href={configurationHref(activeModel.slug, exploreVariantId(activeModel.slug, activeVariantIndex))}
               className={styles.configureButton}
               distance={0}
@@ -1046,10 +1057,10 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
               data-type-field="models.signature.detail.configure-action"
             >
               {get("detail.configure-action", "Configure yours")}
-            </SubtleLink>
-          </div>}
+            </SubtleLink>}
+          </div>
 
-          <motion.div className={styles.bottomDock} style={{ opacity: actionOpacity }}>
+          <div className={styles.bottomDock}>
             <motion.div
               layout={!prefersReducedMotion}
               className={styles.modelSelector}
@@ -1082,16 +1093,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             <p className={styles.filterStatus} aria-live="polite" data-type-field={"models.signature.home-singular"}>
               {filteredModels.length === 6 && planFilter === "all" ? get("collection-count", "Six precision engineered homes") : `${filteredModels.length} ${get("count-qualifier", "precision engineered")} ${filteredModels.length === 1 ? get("home-singular", "home") : get("home-plural", "homes")}`}
             </p>
-            <button
-              ref={detailsTriggerRef}
-              type="button"
-              className={styles.detailsButton}
-              onClick={openDetails}
-             data-type-field={`models.signature.${activeModel.slug}.explore-action`}>
-              <span aria-hidden="true">⊞</span>
-              {activeRecord?.fields.exploreAction || get(`${activeModel.slug}.explore-action`, get("details-action", "Explore details"))}
-            </button>
-          </motion.div>
+          </div>
 
         </div>
       </section>
