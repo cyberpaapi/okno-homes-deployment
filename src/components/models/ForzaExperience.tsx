@@ -18,7 +18,6 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNo
 import type { OknoModel } from "@/data/models";
 import ModelsHeader from "./ModelsHeader";
 import { SubtleLink } from "@/components/ui/SubtleAction";
-import { Layers } from "lucide-react";
 import { indicativePrice, planLabel } from "@/lib/signaturePresentation";
 import styles from "./ForzaExperience.module.css";
 import { getVideoSeekRequest, mapProgressToTime } from "./forzaMotion";
@@ -1046,7 +1045,6 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
               className={styles.detailsButton}
               onClick={openDetails}
              data-type-field={`models.signature.${activeModel.slug}.explore-action`}>
-              <Layers aria-hidden="true" strokeWidth={1.8} />
               {activeRecord?.fields.exploreAction || get(`${activeModel.slug}.explore-action`, get("details-action", "Explore details"))}
             </button>
             {canConfigure && <SubtleLink
