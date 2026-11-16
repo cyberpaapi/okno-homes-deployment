@@ -502,7 +502,6 @@
   "/configurator/models/v2/tengo-826844d8c52d.glb": 8086368,
   "/configurator/models/v2/kray-f8ba20d13828.glb": 15084640,
   "/configurator/models/v2/tish-a703fafb59d6.glb": 355028,
-  "/configurator/models/v2/forza-ec129c111fc6.glb": 1696916,
   "/configurator/models/v2/tengo-07a4d45eda3d.glb": 8087804,
   "/configurator/models/v2/tish-d1b4a6c112a2.glb": 358392,
   "/configurator/models/v2/kray-32f31b2a0ca8.glb": 6364060,
@@ -1823,5 +1822,10 @@
   "/assets/landing-options/forest-entry-intro-first-frame.jpg": 177343,
   "/assets/landing-options/forest-entry-frames-f9c5e3117644.bin": 52671056,
   "/assets/landing-options/hero-v1-mobile-fc08f4e8ac2f.bin": 36890332,
-  "/assets/landing-options/forest-entry-journey-merged-cfcd487337e3.mp4": 67828357
+  "/assets/landing-options/forest-entry-journey-merged-cfcd487337e3.mp4": 67828357,
+  "/configurator/finish-textures/v1/golden-oak.jpg": 658996,
+  "/configurator/finish-textures/v1/barcelona-blaze.jpg": 315599,
+  "/configurator/finish-textures/v1/ebony-timber.jpg": 431246,
+  "/configurator/models/v2/forza-d02b0cab22bb.glb": 1706864,
+  "/configurator/finish-textures/v1/README.md": 1266
 }

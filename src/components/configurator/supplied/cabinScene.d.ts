@@ -10,6 +10,7 @@ export type SceneApi = {
   surface:(application:string,f:Finish,name:string)=>number;
   mapSurfaces:(mapping?:Record<string,string[]>)=>SurfaceReport;
   resetSurfaces:()=>void;
+  roofBands?:(visible:boolean)=>void;
   snapshot:()=>string;
   light:(m:"day"|"golden")=>void;
   background:(v:Background)=>void;

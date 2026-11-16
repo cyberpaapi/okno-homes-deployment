@@ -1,8 +1,9 @@
+import renderTextures from "@/data/configurator/finishRenderTextures.json";
 import { describe, expect, it } from "vitest";
 import { MATERIAL_APPLICATION_IDS } from "@/data/configurator";
 import { configurationHref } from "@/lib/configuratorHref";
 import { gazePrototype, oknoModels } from "@/data/models";
-import { optionsForApplication, registerOptions } from "./registerOptions";
+import { coversRoofBands, optionsForApplication, registerOptions } from "./registerOptions";
 
 // Independent transcription of the supplied PDF application matrix.
 const expected = {
@@ -21,9 +22,22 @@ describe("supplied configurator register and routes", () => {
     expect(registerOptions).toHaveLength(26);
     for (const option of registerOptions) {
       expect(option.image).toMatch(/^\/configurator\/material-details\/v1\//);
-      expect(option.preview.texture).toBe(option.image);
+      expect(option.preview.texture).toBe(renderTextures[option.id as keyof typeof renderTextures]?.src ?? option.image);
       expect(option).not.toHaveProperty("price");
     }
+  });
+  it("renders client-supplied tileable textures at their real size and keeps the original swatch to pick from", () => {
+    for (const id of ["ebony-timber", "golden-oak", "barcelona-blaze"]) {
+      const option = registerOptions.find(item => item.id === id)!;
+      expect(option.image).toMatch(/^\/configurator\/material-details\/v1\//);
+      expect(option.preview.texture).toBe(`/configurator/finish-textures/v1/${id}.jpg`);
+      expect(option.preview.scale).toBeGreaterThan(1);
+    }
+    const thatch = registerOptions.find(item => item.id === "rustic-canopy")!;
+    expect(thatch.preview.texture).toBe(thatch.image);
+    expect(coversRoofBands("thatched-roof")).toBe(true);
+    expect(coversRoofBands("shingles")).toBe(true);
+    expect(coversRoofBands("metal-cladding")).toBe(false);
   });
   it("maps every current model and optional plan to the configure route", () => {
     for (const model of [...oknoModels, gazePrototype]) {

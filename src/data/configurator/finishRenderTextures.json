@@ -1,0 +1,35 @@
+{
+  "ebony-timber": {
+    "src": "/configurator/finish-textures/v1/ebony-timber.jpg",
+    "width": 2048,
+    "height": 2048,
+    "metersPerTile": 9.146,
+    "bytes": 431246,
+    "sha256": "9b2b239d4c4ceadc93ff53510681c5c03301bb4abc21fd0945893190388c56d8",
+    "sourceFile": "Forza_05.glb",
+    "sourceMaterial": "Lunawood_Luna Pro Coated Pure 20P142 Hidden Nailing Brushed Black",
+    "sourceTile": "1.829 m x 3.049 m"
+  },
+  "golden-oak": {
+    "src": "/configurator/finish-textures/v1/golden-oak.jpg",
+    "width": 2048,
+    "height": 2048,
+    "metersPerTile": 10.0,
+    "bytes": 658996,
+    "sha256": "0aeefee729660057983402efb109d47729bcaba9149f7697fd1de45b082dee0c",
+    "sourceFile": "Forza_04.glb",
+    "sourceMaterial": "Oak Stack (VCM2U4)",
+    "sourceTile": "1.11 m x 2.5 m"
+  },
+  "barcelona-blaze": {
+    "src": "/configurator/finish-textures/v1/barcelona-blaze.jpg",
+    "width": 1024,
+    "height": 1024,
+    "metersPerTile": 2.75,
+    "bytes": 315599,
+    "sha256": "94fbe6fca25a44e2836e7cdd38d33ffeadce734fc186ac3db01bb2cde3b0daa4",
+    "sourceFile": "Forza_02.glb",
+    "sourceMaterial": "[Roofing Shingles Asphalt]",
+    "sourceTile": "0.914 m square"
+  }
+}

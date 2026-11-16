@@ -9,7 +9,7 @@ import type { MaterialApplicationId } from "@/data/configurator";
 import type { ConfiguratorSettings } from '@/lib/configuratorSettings';
 import { zoneApplications } from './surfaceMapping';
 import { createScene, type Background, type SceneApi } from "./cabinScene";
-import { applicationGroups, familyLabels, optionsForApplication, registerOptions } from "./registerOptions";
+import { applicationGroups, familyLabels, optionsForApplication, registerOptions, coversRoofBands } from "./registerOptions";
 import ExpandableControls from "./21st/ExpandableControls";
 import SceneDock from "./21st/SceneDock";
 import styles from "./Configurator.module.css";
@@ -79,7 +79,7 @@ export default function SuppliedConfigurator({ asset, requestedName, settings }:
           for (const [zone, id] of Object.entries(settings?.defaults ?? {})) {
             const application = zoneApplications[zone];
             const option = registerOptions.find(item => item.registerNumber === id && item.approvedApplications.includes(application));
-            if (option && report.counts[application]) { scene.surface(application, option.preview, option.name); initial[application] = option.id; }
+            if (option && report.counts[application]) { scene.surface(application, option.preview, option.name); initial[application] = option.id; if (application === "external-roof") scene.roofBands?.(!coversRoofBands(option.family)); }
           }
           setSelected(initial);
         }
@@ -114,6 +114,7 @@ export default function SuppliedConfigurator({ asset, requestedName, settings }:
 
   function choose(option: (typeof options)[number]) {
     if (asset && !api.current?.surface(active, option.preview, option.name)) return;
+    if (asset && active === "external-roof") api.current?.roofBands?.(!coversRoofBands(option.family));
     setSelected(previous => ({ ...previous, [active]: option.id }));
     if (!asset) api.current?.finish(current.sceneGroup, option.preview);
     if (!asset && current.sharedInterior) setInteriorPreview(`${current.label}: ${option.name}`);

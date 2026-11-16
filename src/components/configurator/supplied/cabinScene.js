@@ -723,6 +723,12 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             importedMeshes().forEach(mesh => { mesh.material = originalMaterials.get(mesh) || mesh.material; if (mesh.userData.oknoBackFace) mesh.visible = false; });
             renderer.shadowMap.needsUpdate = true; invalidate();
         },
+        // Timber bands that cross the roof (tagged oknoRoofBand in the prepared GLB) are hidden
+        // under shingle and thatch roofs; the roof surface continues beneath them.
+        roofBands: (visible) => {
+            importedMeshes().forEach(mesh => { const material = originalMaterials.get(mesh) || mesh.material; if (!Array.isArray(material) && material.userData?.oknoRoofBand) mesh.visible = visible; });
+            renderer.shadowMap.needsUpdate = true; invalidate();
+        },
         snapshot: () => { renderer.render(scene, camera); return renderer.domElement.toDataURL('image/png'); },
         surface: (application, finish, name) => {
             const meshes = importedMeshes().filter(mesh => {

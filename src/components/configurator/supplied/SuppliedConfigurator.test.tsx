@@ -22,7 +22,7 @@ describe("supplied cabin customer controls", () => {
     expect(screen.queryByRole("button", { name: /Alpine White/ })).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /External wall/ }));
     fireEvent.click(screen.getByRole("button", { name: /Golden Oak/ }));
-    expect(scene.finish).toHaveBeenLastCalledWith("cladding", expect.objectContaining({ texture: "/configurator/material-details/v1/golden-oak.jpg" }));
+    expect(scene.finish).toHaveBeenLastCalledWith("cladding", expect.objectContaining({ texture: "/configurator/finish-textures/v1/golden-oak.jpg", scale: 10 }));
   });
   it("keeps internal choices separate while disclosing the shared preview", () => {
     render(<SuppliedConfigurator />);

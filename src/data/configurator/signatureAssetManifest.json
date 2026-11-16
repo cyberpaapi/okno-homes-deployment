@@ -1,7 +1,7 @@
 {
   "forza": {
-    "bytes": 1696916,
-    "sha256": "ec129c111fc62b9ff7c68712b0a7d8ae93140933341ed9abe6e262415d1bf8d0",
+    "bytes": 1706864,
+    "sha256": "d02b0cab22bbd4848d0a7130afe50cb90837e45dc0a7d509a00380d27032389d",
     "dimensions": [
       6.1971715092659,
       4.986333072185518,
@@ -9,7 +9,7 @@
     ],
     "metersPerUnit": 1,
     "triangles": 18019,
-    "url": "/configurator/models/v2/forza-ec129c111fc6.glb"
+    "url": "/configurator/models/v2/forza-d02b0cab22bb.glb"
   },
   "tengo": {
     "bytes": 8087804,
