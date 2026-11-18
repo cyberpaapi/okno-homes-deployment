@@ -82,3 +82,11 @@ Start the website from the repository with Node 22 and `npm run website`. The re
 Browser checks loaded Forza, Kray and Tengo with no warning/error console entries. Tengo's five surface choices were exercised independently; an actual PDF download was parsed and visually reviewed with Ivory Armor roof, Golden Oak external wall, Tuscan Elegance flooring, Ontario Hemlock ceiling and Alpine White internal wall. Kray was checked at 390 × 844 with no horizontal overflow. The live local admin preview displayed Forza with mapped counts for all five surfaces.
 
 Local key-free upload/save/publish acceptance passed after the owner requested removing the key. A real GLB upload, an added linked house with an independent starting finish, private draft isolation, publication, browser rendering and GLB range delivery were verified. The fixed admin gateway also saved/published without a key. Original site content was restored exactly after QA; cross-site writes remain rejected. The separate Windows function-trace packaging check fails (largest observed upload trace about 2,071 MiB, including public assets); this is not a deployment-ready release. Next's installed trace exclusion matcher joins Windows paths without normalizing separators, so a Linux release build/trace check or a separate portable tracing fix is needed before deployment. Nothing has been pushed or deployed.
+
+## Local Signature house visualization
+
+The versioned models in the Signature asset manifest derive from the four supplied house meshes. They include baked ambient occlusion, texture coordinates in metres, interior staging and roof folds on the exposed metal pitches. The room layouts and entrance paths are specific to each model. Furniture, decor, finish interpretations and landscaping are illustrative.
+
+The supplied viewer uses local daylight and sunrise environments, angle-dependent glass reflections and a depth-based contact-shadow pass. On devices without floating-point render targets it retains baked shading and standard shadow maps. The five catalogue application groups remain independently selectable. Embedded scene extras preserve the interior camera pose, entrance orientation and furnishing attribution.
+
+New third-party asset credits and source links are in [house-credits.txt](../../public/configurator/house-credits.txt).

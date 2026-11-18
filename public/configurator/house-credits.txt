@@ -1,0 +1,21 @@
+OKNO Signature house visualizations
+
+The original Forza, Tengo, Kray and Tish architecture is supplied by OKNO. Furniture placement, planting and decor are visualization choices. The house derivatives add baked local shading, material detail and interior staging.
+
+Glam Velvet Sofa. Eric Chadwick, Wayfair LLC, 2021. CC BY 4.0. Fabric color adapted, geometry resized, staged and compressed.
+https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/GlamVelvetSofa
+https://creativecommons.org/licenses/by/4.0/
+
+Diffuse Transmission Plant. Original plant by Rico Cilliers, 2021, CC0. Materials and animation by Eric Chadwick, Darmstadt Graphics Group GmbH, 2024, CC BY 4.0. Static plant resized, staged and compressed.
+https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/DiffuseTransmissionPlant
+https://creativecommons.org/licenses/by/4.0/
+
+Sheen Chair. Eric Chadwick, Wayfair LLC, 2020. CC0. Fabric color adapted, geometry resized, staged and compressed.
+https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/SheenChair
+
+Daylight and woodland environments. Kloofendal 48d Partly Cloudy and Meadow, Poly Haven, CC0. Resampled for interactive viewing. Vegetation, rocks and golden-hour illumination use the existing OKNO landscape collection.
+https://polyhaven.com/a/kloofendal_48d_partly_cloudy
+https://polyhaven.com/a/meadow
+
+Reproductions of paintings by Claude Monet. National Gallery of Art, Washington. Public domain, National Gallery of Art Open Access. Image references from the collection database are 52186, 46655 and 66425.
+https://www.nga.gov/open-access

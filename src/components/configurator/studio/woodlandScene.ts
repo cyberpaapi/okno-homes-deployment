@@ -3,13 +3,13 @@ import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { terrainHeight, woodlandLayout, type LandscapePlacement } from "./woodlandLayout";
 
-export function createWoodland(renderer: WebGLRenderer, changed: () => void) {
+export function createWoodland(renderer: WebGLRenderer, changed: () => void, layout = woodlandLayout(), includeGround = true) {
   const root = new Group();
   root.name = "OKNO shared woodland setting";
   let disposed = false;
   const geometries = new Set<BufferGeometry>(), materials = new Set<Material>(), textures = new Set<Texture>();
   const sharedMaterials = new Map<string, Material>();
-  const layout = woodlandLayout();
+  const heightAt = includeGround ? terrainHeight : () => 0;
   const terrain = new PlaneGeometry(180, 180, 128, 128);
   terrain.rotateX(-Math.PI / 2);
   const positions = terrain.getAttribute("position");
@@ -30,15 +30,16 @@ export function createWoodland(renderer: WebGLRenderer, changed: () => void) {
       float path = (1.0-smoothstep(1.05,1.6,abs(landscapePosition.x-pathCenter))) * smoothstep(-1.0,3.0,landscapePosition.z);
       diffuseColor.rgb = mix(diffuseColor.rgb, pow(texture2D(pathTexture,landscapePosition.xz*.65).rgb,vec3(2.2))*.65,path);`);
   };
-  const ground = new Mesh(terrain,groundMaterial);ground.receiveShadow=true;root.add(ground);
+  const ground = new Mesh(terrain,groundMaterial);ground.receiveShadow=true;if(includeGround) root.add(ground);
   geometries.add(terrain);materials.add(groundMaterial);
-  const groundReady = new TextureLoader().loadAsync("/configurator/original/textures/meadow-grass.jpg").then(texture=>{
+  const groundReady = !includeGround ? Promise.resolve() : new TextureLoader().loadAsync("/configurator/original/textures/meadow-grass.jpg").then(texture=>{
     if(disposed){texture.dispose();return;}
     texture.colorSpace=SRGBColorSpace;texture.wrapS=texture.wrapT=RepeatWrapping;texture.repeat.setScalar(80);
     texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());textures.add(texture);
     groundMaterial.map=groundMaterial.bumpMap=texture;groundMaterial.needsUpdate=true;changed();
   });
   const addAsset = async (name:string, placements:LandscapePlacement[], whole:boolean) => {
+    if (!placements.length) return;
     const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(`/configurator/landscape/v1/${name}.gltf`);
     const sourceMeshes: Mesh[]=[];
     const discardMaterials = new Set<Material>(), discardTextures = new Set<Texture>();
@@ -87,12 +88,19 @@ export function createWoodland(renderer: WebGLRenderer, changed: () => void) {
       instance.name=`Woodland ${name} ${index}`;
       instance.castShadow=name!=='grass_medium_01' && name!=='fir_tree_01';instance.receiveShadow=true;
       for(const material of Array.isArray(mesh.material)?mesh.material:[mesh.material]){
-        if(material instanceof MeshStandardMaterial){material.envMapIntensity=.6;material.side=DoubleSide;}
+        if(material instanceof MeshStandardMaterial){
+          material.envMapIntensity=.6;material.side=DoubleSide;
+          if (!includeGround && material.name === "fir_tree_01_twig") {
+            // Cutout needles write depth and avoid transparency sorting across instanced crowns.
+            material.transparent=false;material.depthWrite=true;material.alphaTest=.12;
+            material.color.set("#85916c");material.needsUpdate=true;
+          }
+        }
       }
       const matrix=new Matrix4(),orientation=new Quaternion(),up=new Vector3(0,1,0);
       instances.forEach((p,i)=>{
         orientation.setFromAxisAngle(up,p.rotation);
-        matrix.compose(new Vector3(p.x,terrainHeight(p.x,p.z)-.025,p.z),orientation,new Vector3(p.height,p.height,p.height));
+        matrix.compose(new Vector3(p.x,heightAt(p.x,p.z)-.025,p.z),orientation,new Vector3(p.height,p.height,p.height));
         instance.setMatrixAt(i,matrix);
         instance.setColorAt(i,new Color().setScalar(.88+(i%5)*.03));
       });

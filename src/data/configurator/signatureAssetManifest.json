@@ -1,50 +1,50 @@
 {
   "forza": {
-    "bytes": 1706864,
-    "sha256": "d02b0cab22bbd4848d0a7130afe50cb90837e45dc0a7d509a00380d27032389d",
+    "bytes": 4839112,
+    "sha256": "5f25ac5b9a32e9f7cdad39061b7f95f134a1947359db9d0023d2d932604b4934",
     "dimensions": [
-      6.1971715092659,
-      4.986333072185518,
-      9.305924747409911
+      6.197149190956677,
+      4.98625306694109,
+      9.305924654006958
     ],
     "metersPerUnit": 1,
-    "triangles": 18019,
-    "url": "/configurator/models/v2/forza-d02b0cab22bb.glb"
+    "triangles": 300144,
+    "url": "/configurator/models/v2/forza-5f25ac5b9a32.glb"
   },
   "tengo": {
-    "bytes": 8087804,
-    "sha256": "07a4d45eda3d9f3afc5102d9e29f9e675a9e65f1ebc65e51ed34ba8b365c877f",
+    "bytes": 9439868,
+    "sha256": "49880463ff14f1dda780a290a0d3c07753ed1514ed8abf2a16dabbccc1a137d1",
     "dimensions": [
       16.34969139099121,
-      4.571999967098236,
-      12.232892990112305
+      4.600848716518522,
+      12.236700879464081
     ],
     "metersPerUnit": 1,
-    "triangles": 267837,
-    "url": "/configurator/models/v2/tengo-07a4d45eda3d.glb"
+    "triangles": 536807,
+    "url": "/configurator/models/v2/tengo-49880463ff14.glb"
   },
   "kray": {
-    "bytes": 6364060,
-    "sha256": "32f31b2a0ca874ace3e20f7b3a07d4efce223aa4f9ab498206bb2450d604b26e",
+    "bytes": 12746032,
+    "sha256": "83bccc7a50c5c2430cf1429c17e8b378ad88b87f621ce2afd493b46302dfcc57",
     "dimensions": [
       9.239994049072266,
-      5.204902112483978,
-      9.064878463745117
+      5.233306858452231,
+      9.06496205697924
     ],
     "metersPerUnit": 1,
-    "triangles": 389008,
-    "url": "/configurator/models/v2/kray-32f31b2a0ca8.glb"
+    "triangles": 890961,
+    "url": "/configurator/models/v2/kray-83bccc7a50c5.glb"
   },
   "tish": {
-    "bytes": 358392,
-    "sha256": "d1b4a6c112a2b41855fea6865d6f29f1df385423e1a8d5639e60324ff5b3d872",
+    "bytes": 3551576,
+    "sha256": "b33e499eba7759b7675efbce57b712b3a4d955e986c596aeb419470dbcaf1250",
     "dimensions": [
       12.047948837280273,
-      4.851399838924408,
-      9.296399772167206
+      4.851389441935803,
+      9.296456849407328
     ],
     "metersPerUnit": 1,
-    "triangles": 17391,
-    "url": "/configurator/models/v2/tish-d1b4a6c112a2.glb"
+    "triangles": 222320,
+    "url": "/configurator/models/v2/tish-b33e499eba77.glb"
   }
 }

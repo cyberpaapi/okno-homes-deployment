@@ -1,6 +1,6 @@
 export type Group = "cladding"|"timber"|"roof"|"frames"|"deck"|"foundation";
 export type Background = "meadow"|"forest"|"hill"|"island"|"full-island";
-export type Finish = {color:string;texture?:string;roughness?:number;metalness?:number;scale?:number;kind?:"surface"|"glass";transmission?:number;opacity?:number;ior?:number;thickness?:number;clearcoat?:number};
+export type Finish = {color:string;texture?:string;roughness?:number;metalness?:number;scale?:number;detailAsset?:string;normal?:number;relief?:"none"|"slats"|"seams";kind?:"surface"|"glass";transmission?:number;opacity?:number;ior?:number;thickness?:number;clearcoat?:number};
 export type EditGroup = {id:string;name:string;count:number;category?:Group};
 export type SelectedPart = {id:string;name:string;category?:Group;material:string;groupId?:string;groupName?:string};
 export type ImportSummary = {parts:number;triangles:number;labeled:number;categories:Record<Group,number>};
@@ -10,7 +10,7 @@ export type SceneApi = {
   surface:(application:string,f:Finish,name:string)=>number;
   mapSurfaces:(mapping?:Record<string,string[]>)=>SurfaceReport;
   resetSurfaces:()=>void;
-  roofBands?:(visible:boolean)=>void;
+  roofBands?:(visible:boolean,standingSeams?:boolean)=>void;
   snapshot:()=>string;
   light:(m:"day"|"golden")=>void;
   background:(v:Background)=>void;

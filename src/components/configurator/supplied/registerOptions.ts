@@ -33,6 +33,7 @@ export const registerOptions = MATERIAL_FINISHES.map(material => {
       color: "#ffffff",
       texture: renderTexture[material.id]?.src ?? finishDetailImage(material.id).src,
       ...(renderTexture[material.id] ? { scale: renderTexture[material.id].metersPerTile } : {}),
+      detailAsset: profile.asset, normal: profile.normal, relief: profile.relief,
       roughness: profile.roughness, metalness: profile.metalness,
     } satisfies Finish,
   };
