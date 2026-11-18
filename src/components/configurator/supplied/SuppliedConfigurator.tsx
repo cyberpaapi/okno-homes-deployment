@@ -27,8 +27,8 @@ const backgrounds: { id: Background; label: string; image: string }[] = [
   { id: "meadow", label: "Meadow", image: "/textures/meadow-day.jpg" },
   { id: "forest", label: "Forest", image: "/textures/background-forest.jpg" },
   { id: "hill", label: "Hill", image: "/textures/background-hill.jpg" },
-  { id: "island", label: "Island", image: "/textures/background-island.jpg" },
-  { id: "full-island", label: "Full island", image: "/textures/background-island.jpg" },
+  { id: "island", label: "Island", image: "/configurator/coast/v1/island-preview.webp" },
+  { id: "full-island", label: "Full island", image: "/configurator/coast/v1/overview-preview.webp" },
 ];
 
 export default function SuppliedConfigurator({ asset, requestedName, settings }: { asset?: SignatureAsset; requestedName?: string; settings?: ConfiguratorSettings } = {}) {
@@ -167,7 +167,10 @@ export default function SuppliedConfigurator({ asset, requestedName, settings }:
         <ExpandableControls label="Camera views" items={views} value={turn ? null : camera} disabled={!ready} onChange={preset => { setCamera(preset); setTurn(false); api.current?.view(preset); }} />
         <button type="button" className={styles.toggleButton} aria-label="Turntable" title="Turntable" aria-pressed={turn} disabled={!ready} onClick={() => { setTurn(!turn); api.current?.turn(!turn); }}><RotateCw size={18} aria-hidden="true" /><span>Turntable</span></button>
       </div>
-      <div className={styles.sceneControls}><SceneDock options={backgrounds} value={background} disabled={!ready} onChange={value => { setBackground(value as Background); api.current?.background(value as Background); }} />
+      <div className={styles.sceneControls}><SceneDock options={backgrounds} value={background} disabled={!ready} onChange={value => { setBackground(value as Background);
+          if (value === "full-island") { setTurn(false); setCamera(""); }
+          else if (background === "full-island") setCamera("hero");
+          api.current?.background(value as Background); }} />
         <div className={styles.lighting} role="group" aria-label="Lighting">{(["day", "golden"] as const).map(mode => {
           const Icon = mode === "day" ? Sun : Moon;
           return <button type="button" key={mode} aria-label={mode === "day" ? "Daylight" : "Golden hour"} title={mode === "day" ? "Daylight" : "Golden hour"} className={styles.iconButton} aria-pressed={light === mode} disabled={!ready} onClick={() => { setLight(mode); api.current?.light(mode); }}><Icon size={18} aria-hidden="true" /></button>;

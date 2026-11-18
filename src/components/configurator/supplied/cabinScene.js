@@ -7,6 +7,7 @@ import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.j
 import { houseBounds, housePlacement, houseViews, houseOrbitLimits } from "./modelFraming";
 import { meshApplications, zoneApplications } from "./surfaceMapping";
 import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
+import { createCoast } from "./coastalScene";
 import { createContactPass } from "./contactPass";
 import { createHouseDaylight, setWindowReflections } from "./houseDaylight";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
@@ -162,22 +163,11 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     }
     scene.add(landscapeProps);
     if (customerModel) landscapeProps.visible=false;
-    const waterMaterial = new THREE.ShaderMaterial({
-        uniforms: { uTime: { value: 0 }, uWarm: { value: 0 } }, transparent: true, depthWrite: true,
-        vertexShader: `uniform float uTime;varying vec3 vWorld;void main(){vec3 p=position;p.z+=sin(p.x*.18+uTime*.85)*.055+sin(p.y*.24-uTime*.62)*.04;vec4 world=modelMatrix*vec4(p,1.);vWorld=world.xyz;gl_Position=projectionMatrix*viewMatrix*world;}`,
-        fragmentShader: `uniform float uTime;uniform float uWarm;varying vec3 vWorld;void main(){float rx=sin(vWorld.x*.34+uTime*.9)+sin(vWorld.z*.23-uTime*.7);float rz=cos(vWorld.z*.31-uTime*.8)+cos(vWorld.x*.2+uTime*.55);vec3 normal=normalize(vec3(rx*.045,1.,rz*.045));vec3 viewDir=normalize(cameraPosition-vWorld);float fresnel=pow(1.-max(dot(normal,viewDir),0.),2.4);float glitter=pow(max(dot(reflect(normalize(vec3(.42,-.82,.38)),normal),viewDir),0.),90.);vec3 deep=mix(vec3(.025,.19,.24),vec3(.16,.18,.18),uWarm);vec3 sky=mix(vec3(.37,.67,.73),vec3(.72,.48,.25),uWarm);vec3 color=mix(deep,sky,.22+fresnel*.68)+glitter*vec3(1.,.86,.62)*.75;gl_FragColor=vec4(color,.94);}`
-    });
-    const water = new THREE.Mesh(new THREE.PlaneGeometry(180, 180, 96, 96), waterMaterial);
-    water.rotation.x = -Math.PI / 2;
-    water.position.y = -.18;
-    water.receiveShadow = true;
-    const islandWorld = new THREE.Group(), islandLand = new THREE.Group();
-    islandWorld.name = "Procedural full island";
+    const islandWorld = new THREE.Group();
     islandWorld.visible = false;
-    islandWorld.add(water, islandLand);
     scene.add(islandWorld);
-    const islandGrassMaterial = mat("/textures/meadow-grass.jpg", "#71845a", .96, 0, 7, 7), islandRockMaterial = mat("/textures/stone.jpg", "#77776c", .98, 0, 4, 3), islandShoreMaterial = mat("/textures/sandstone.jpg", "#c3ad82", .96, 0, 5, 4);
-    const trunkMaterial = new THREE.MeshStandardMaterial({ color: "#563a25", roughness: .98 }), palmMaterial = new THREE.MeshStandardMaterial({ color: "#3f7028", roughness: .94, side: THREE.DoubleSide }), coconutMaterial = new THREE.MeshStandardMaterial({ color: "#5b3820", roughness: .94 });
+    let coast=null, coastKey="", goldenCoast=false;
+    const isCoastal = setting => setting==="island" || setting==="full-island";
     const hemi = new THREE.HemisphereLight("#eaf3ff", "#77725e", 1.25), sun = new THREE.DirectionalLight("#fff2d2", 4.4), fill = new THREE.DirectionalLight("#bfd8ff", .82);
     sun.position.set(-8, 13, 7);
     sun.castShadow = true;
@@ -389,27 +379,6 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             core.union(row.bounds); });
         return core.isEmpty() ? new THREE.Box3().setFromObject(imported) : core;
     };
-    const disposeIslandLand = () => {
-        const geometries = new Set();
-        islandLand.traverse(o => { if (o instanceof THREE.Mesh)
-            geometries.add(o.geometry); });
-        geometries.forEach(geometry => geometry.dispose());
-        islandLand.clear();
-    };
-    const islandShape = (radiusX, radiusZ, offset = 0, seed = 1) => {
-        const shape = new THREE.Shape();
-        for (let i = 0; i < 64; i++) {
-            const angle = i / 64 * Math.PI * 2;
-            const wobble = 1 + Math.sin(angle * 3 + seed) * .045 + Math.sin(angle * 7 - seed * .7) * .025 + (rand(i + seed * 71) - .5) * .035;
-            const x = Math.cos(angle) * (radiusX + offset) * wobble, z = Math.sin(angle) * (radiusZ + offset) * wobble;
-            if (i === 0)
-                shape.moveTo(x, z);
-            else
-                shape.lineTo(x, z);
-        }
-        shape.closePath();
-        return shape;
-    };
     const islandFootprint = () => {
         if (imported && importStage.visible) {
             imported.updateMatrixWorld(true);
@@ -432,62 +401,18 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
         return { center: new THREE.Vector3(), size: new THREE.Vector3(5.62, .32, 6.82) };
     };
     const rebuildIsland = () => {
-        if (activeBackground !== "full-island")
-            return;
-        disposeIslandLand();
-        const { center, size } = islandFootprint(), radiusX = Math.max(size.x * .75 + 7, 13), radiusZ = Math.max(size.z * .75 + 7, 13);
-        islandLand.position.set(center.x, 0, center.z);
-        const shore = new THREE.Mesh(new THREE.ExtrudeGeometry(islandShape(radiusX, radiusZ, .52, 3), { depth: .34, bevelEnabled: true, bevelSegments: 2, bevelSize: .18, bevelThickness: .12, curveSegments: 4 }), [islandShoreMaterial, islandRockMaterial]);
-        shore.rotation.x = Math.PI / 2;
-        shore.position.y = -.02;
-        shore.receiveShadow = true;
-        shore.castShadow = true;
-        shore.name = "Natural island shoreline";
-        islandLand.add(shore);
-        const land = new THREE.Mesh(new THREE.ExtrudeGeometry(islandShape(radiusX, radiusZ, 0, 7), { depth: .62, bevelEnabled: true, bevelSegments: 3, bevelSize: .24, bevelThickness: .16, curveSegments: 4 }), [islandGrassMaterial, islandRockMaterial]);
-        land.rotation.x = Math.PI / 2;
-        land.position.y = .12;
-        land.receiveShadow = true;
-        land.castShadow = true;
-        land.name = "Foundation-scaled island terrain";
-        islandLand.add(land);
-        const treeCount = Math.max(10, Math.min(14, Math.round((radiusX + radiusZ) * .45))), frondsPerTree = 12, trunkGeometry = new THREE.CylinderGeometry(.12, .2, 2.1, 10, 2).translate(0, 1.05, 0), frondGeometry = new THREE.BufferGeometry(), frondPositions = [], frondIndices = [];
-        for (let i = 0; i <= 6; i++) {
-            const t = i / 6, x = t * 2.85, y = -.58 * t * t, width = .035 + Math.sin(Math.PI * t) * .3;
-            frondPositions.push(x, y, -width, x, y, width);
-            if (i < 6) {
-                const a = i * 2, b = a + 1, c = a + 2, d = a + 3;
-                frondIndices.push(a, c, b, b, c, d);
-            }
+        if (!isCoastal(activeBackground)) return;
+        const {center,size} = customerModel && framedSize ? {center:new THREE.Vector3(),size:framedSize} : islandFootprint();
+        const key=[size.x,size.z].map(n=>n.toFixed(2)).join("/");
+        if (coastKey !== key) {
+            coast?.dispose();
+            coast=createCoast(size,tex,()=>{if(!disposed){renderer.shadowMap.needsUpdate=true;invalidate();}});
+            coastKey=key;coast.warm.value=goldenCoast?1:0;
+            islandWorld.add(coast.root);
         }
-        frondGeometry.setAttribute("position", new THREE.Float32BufferAttribute(frondPositions, 3));
-        frondGeometry.setIndex(frondIndices);
-        frondGeometry.computeVertexNormals();
-        const trunks = new THREE.InstancedMesh(trunkGeometry, trunkMaterial, treeCount), fronds = new THREE.InstancedMesh(frondGeometry, palmMaterial, treeCount * frondsPerTree), coconutGeometry = new THREE.SphereGeometry(.12, 8, 6), coconuts = new THREE.InstancedMesh(coconutGeometry, coconutMaterial, treeCount * 3), matrix = new THREE.Matrix4();
-        trunks.name = "Distant coconut palm trunks";
-        fronds.name = "Light green coconut palm fronds";
-        coconuts.name = "Coconut clusters";
-        trunks.castShadow = fronds.castShadow = coconuts.castShadow = true;
-        trunks.receiveShadow = fronds.receiveShadow = true;
-        for (let i = 0; i < treeCount; i++) {
-            const angle = Math.PI * 1.03 + i / Math.max(1, treeCount - 1) * Math.PI * .44 + (rand(i + 111) - .5) * .07, edge = .91 + rand(i + 211) * .055, x = Math.cos(angle) * radiusX * edge, z = Math.sin(angle) * radiusZ * edge, height = 3.7 + rand(i + 311) * 1.7, rotation = rand(i + 511) * Math.PI;
-            matrix.compose(new THREE.Vector3(x, .09, z), new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rotation, 0)), new THREE.Vector3(.72, height / 2.1, .72));
-            trunks.setMatrixAt(i, matrix);
-            for (let j = 0; j < frondsPerTree; j++) {
-                const index = i * frondsPerTree + j, azimuth = rotation + j / frondsPerTree * Math.PI * 2 + (rand(index + 711) - .5) * .22, length = .82 + rand(index + 811) * .3;
-                matrix.compose(new THREE.Vector3(x, .08 + height, z), new THREE.Quaternion().setFromEuler(new THREE.Euler(0, azimuth, (rand(index + 911) - .5) * .14)), new THREE.Vector3(length, .8 + rand(index + 1011) * .32, .92));
-                fronds.setMatrixAt(index, matrix);
-            }
-            for (let j = 0; j < 3; j++) {
-                const index = i * 3 + j, azimuth = rotation + j / 3 * Math.PI * 2;
-                matrix.compose(new THREE.Vector3(x + Math.cos(azimuth) * .17, .08 + height - .16, z + Math.sin(azimuth) * .17), new THREE.Quaternion(), new THREE.Vector3(1, 1, 1));
-                coconuts.setMatrixAt(index, matrix);
-            }
-        }
-        trunks.instanceMatrix.needsUpdate = fronds.instanceMatrix.needsUpdate = coconuts.instanceMatrix.needsUpdate = true;
-        islandLand.add(trunks, fronds, coconuts);
-        controls.maxDistance = Math.max(35, Math.max(radiusX, radiusZ) * 2.2);
-        renderer.shadowMap.needsUpdate = true;
+        islandWorld.position.set(center.x,0,center.z);
+        controls.maxDistance=Math.max(45,coast.extent*4.3);
+        renderer.shadowMap.needsUpdate=true;
     };
     const applyViewLimits = () => {
         if (!customerModel) return;
@@ -683,7 +608,7 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
                 camera.position.copy(cp); controls.target.copy(ct); cp = ct = null;
             }
         }
-        if (animateWater && islandWorld.visible) waterMaterial.uniforms.uTime.value += .012;
+        if (animateWater && islandWorld.visible) coast.time.value += delta;
         const changed = controls.update(delta);
         const frameStats=drawScene();
         mount.dataset.renderFrames = String(++frames);
@@ -801,19 +726,27 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             sun.position.set(...(g?[-12.35,4.82,15.44]:[-8.32,14.90,10.40]));
             sun.intensity=g?2.05:2.45; hemi.intensity=g?.40:.50; fill.intensity=g?.16:.22;
             renderer.toneMappingExposure=g?.92:.98;
-        } waterMaterial.uniforms.uWarm.value = g ? 1 : 0; renderer.shadowMap.needsUpdate = true; },
-        background: v => { daylight?.setting(v); const wasFull = activeBackground === "full-island"; activeBackground = v; const full = v === "full-island"; ground.visible = !full; landscapeProps.visible=!full && (!customerModel || (v!=="meadow" && v!=="forest")); islandWorld.visible = full; scene.fog?.color.set(full ? "#afc6c8" : "#cbd1c2"); if (full) {
-            rebuildIsland();
-            if (!wasFull) {
-                const { center } = islandFootprint();
-                cp = new THREE.Vector3(center.x + 17, 9.8, center.z + 21);
-                ct = new THREE.Vector3(center.x, 1.35, center.z);
-                controls.autoRotate = false;
-            }
-        }
-        else {
-            disposeIslandLand();
-            controls.maxDistance = importStage.visible ? 35 : 22;
+        } goldenCoast=g; if(coast)coast.warm.value=g?1:0; renderer.shadowMap.needsUpdate = true; },
+        background: v => {
+            daylight?.setting(v);
+            const previous=activeBackground;
+            if(previous==="full-island" && v!==previous) [cp,ct]=presets.hero.map(p=>p.clone());
+            activeBackground=v;
+            const coastal=isCoastal(v);
+            ground.visible=!coastal;
+            landscapeProps.visible=!coastal && !customerModel;
+            islandWorld.visible=coastal;
+            scene.fog?.color.set(coastal ? "#a5bbc5" : "#cbd1c2");
+            if (coastal) {
+                rebuildIsland();
+                if (v==="full-island" && previous!==v) {
+                    const distance=coast.extent*(camera.aspect<1?2.8:2.15);
+                    ct=islandWorld.position.clone().add(new THREE.Vector3(0,.35,0));
+                    cp=ct.clone().add(new THREE.Vector3(.75,.66,1).multiplyScalar(distance));
+                    controls.autoRotate=false;
+                }
+            } else {
+            controls.maxDistance = importStage.visible ? Math.max(35,(framedSize?.length()||0)*4) : 22;
             const settings = { meadow: { texture: "/textures/meadow-grass.jpg", color: "#82936d", repeat: 18, bump: .085 }, forest: { texture: "/textures/grass.jpg", color: "#667357", repeat: 20, bump: .1 }, hill: { texture: "/textures/meadow-grass.jpg", color: "#8c986d", repeat: 18, bump: .075 }, island: { texture: "/textures/stone.jpg", color: "#aaa99d", repeat: 15, bump: .12 } }, choice = settings[v], map = tex(choice.texture, choice.repeat, choice.repeat);
             groundMaterial.map = map;
             groundMaterial.bumpMap = map;
@@ -932,7 +865,7 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             controls.removeEventListener("start", stopCameraFlight);
             renderer.domElement.removeEventListener("pointerdown", onPointerDown);
             renderer.domElement.removeEventListener("pointerup", onPointerUp);
-            contactPass?.dispose(); daylight?.dispose();
+            coast?.dispose(); contactPass?.dispose(); daylight?.dispose();
             disposeImported();
             appliedMaterials.forEach(material => material.dispose());
             appliedMaterials.clear();

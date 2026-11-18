@@ -9,10 +9,12 @@ const skies = {
     daylight: ["kloofendal-day-1k.hdr", true],
     golden: ["spruit-sunrise-2k.hdr", true],
     forest: ["woodland-clearing.webp", false],
+    coast: ["/configurator/coast/v1/beach-sky.webp", false],
+    coastLight: ["/configurator/coast/v1/beach-1k.hdr", true],
 };
 
 // Beds follow the building perimeter. The front approach stays open for every footprint.
-function plantingLayout(size) {
+function plantingLayout(size,approach) {
     const halfX = size.x / 2, halfZ = size.z / 2;
     const trees = [], grass = [], ferns = [], rocks = [];
     let seed = 833;
@@ -29,6 +31,21 @@ function plantingLayout(size) {
             if (i<5) ferns.push(plant(px,pz,.32+random()*.34));
             else if (i<7) rocks.push(plant(px,pz,.17+random()*.24));
             else grass.push(plant(px,pz,.20+random()*.34));
+        }
+    }
+    // Different sizes share a weathered outcrop; keep the approach and foundation clear.
+    const outcrops=[[-halfX-1.9,halfZ*.73,.88],[halfX+.75,-halfZ-1.15,1.20],
+        [-halfX*.53,halfZ+2.25,.77],[halfX+2.3,halfZ*.37,.62],[-halfX-3.7,-halfZ*.44,1.02]];
+    for (const [cx,cz,h] of outcrops) {
+        for(let k=0;k<7;k++) {
+            const a=random()*Math.PI*2, distance=k===0?0:.65+random()*1.35;
+            const x=cx+Math.cos(a)*distance,z=cz+Math.sin(a)*distance;
+            if(Math.abs(x)<halfX+.24 && Math.abs(z)<halfZ+.24)continue;
+            if(approach) {
+                const [px,pz,dx,dz]=approach, ahead=(x-px)*dx+(z-pz)*dz;
+                if(ahead>-.8 && ahead<6.2 && Math.abs((x-px)*dz-(z-pz)*dx)<1.65)continue;
+            }
+            rocks.push(plant(x,z,h*(k===0?1:k<3?.46+random()*.20:.16+random()*.18)));
         }
     }
     for (let i=0;i<15;i++) {
@@ -76,7 +93,7 @@ export function createHouseDaylight(scene,renderer,invalidate) {
         if (textures.has(key)||pending.has(key)) return;
         pending.add(key);
         const [file,hdr]=skies[key], loader=hdr?new RGBELoader():new THREE.TextureLoader();
-        loader.load(root+file,texture=>{
+        loader.load(file.startsWith("/")?file:root+file,texture=>{
             if (disposed) {texture.dispose();return;}
             if (!hdr) texture.colorSpace=THREE.SRGBColorSpace;
             texture.mapping=THREE.EquirectangularReflectionMapping;
@@ -84,19 +101,20 @@ export function createHouseDaylight(scene,renderer,invalidate) {
         },undefined,()=>{pending.delete(key);});
     }
     function refresh() {
-        const sky=setting==="forest"?"forest":golden?"golden":"day";
-        const env=golden?"golden":"daylight";
+        const coastal=setting==="island"||setting==="full-island";
+        const sky=coastal?"coast":setting==="forest"?"forest":golden?"golden":"day";
+        const env=golden?"golden":coastal?"coastLight":"daylight";
         request(env);
         const outdoor=setting==="meadow"||setting==="forest";
-        if (outdoor) request(sky);
-        scene.background=outdoor ? textures.get(sky)??null : null;
+        if (outdoor||coastal) request(sky);
+        scene.background=(outdoor||coastal) ? textures.get(sky)??null : null;
         scene.environment=textures.get(env)??fallback;
         scene.environmentIntensity=golden?.74:.84;
-        scene.backgroundRotation.y=-1.62;scene.environmentRotation.y=-1.62;
-        scene.backgroundIntensity=golden?.78:1.04;
+        scene.backgroundRotation.y=coastal?2.58:-1.62;scene.environmentRotation.y=coastal&&!golden?2.58:-1.62;
+        scene.backgroundIntensity=golden?.70:1.04;
         scene.backgroundBlurriness=.015;
-        if (garden) garden.root.visible=outdoor;
-        if (footpath) footpath.root.visible=outdoor;
+        if (garden) garden.root.visible=outdoor || setting==="hill";
+        if (footpath) footpath.root.visible=true;
         invalidate();
     }
     refresh();
@@ -109,7 +127,7 @@ export function createHouseDaylight(scene,renderer,invalidate) {
             footprint=key;garden?.dispose();footpath?.dispose();
             footpath=entrancePath(approach,()=>{if(!disposed)invalidate();});
             if(footpath)scene.add(footpath.root);
-            garden=createWoodland(renderer,()=>{if(!disposed){renderer.shadowMap.needsUpdate=true;invalidate();}},plantingLayout(size),false);
+            garden=createWoodland(renderer,()=>{if(!disposed){renderer.shadowMap.needsUpdate=true;invalidate();}},plantingLayout(size,approach),false);
             scene.add(garden.root);refresh();
         },
         dispose(){

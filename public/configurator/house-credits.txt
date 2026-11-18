@@ -19,3 +19,8 @@ https://polyhaven.com/a/meadow
 
 Reproductions of paintings by Claude Monet. National Gallery of Art, Washington. Public domain, National Gallery of Art Open Access. Image references from the collection database are 52186, 46655 and 66425.
 https://www.nga.gov/open-access
+
+Coastal scenes. Secluded Beach provides the panorama and reflected daylight. Coast Sand 02 supplies the beach color and normal maps. Namaqualand Rocks 01 supplies four individually scanned boulders. Sources by Poly Haven, CC0. Images resized and converted, rock mesh simplified and instanced.
+https://polyhaven.com/a/secluded_beach
+https://polyhaven.com/a/coast_sand_02
+https://polyhaven.com/a/namaqualand_rocks_01

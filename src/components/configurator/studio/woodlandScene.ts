@@ -100,7 +100,8 @@ export function createWoodland(renderer: WebGLRenderer, changed: () => void, lay
       const matrix=new Matrix4(),orientation=new Quaternion(),up=new Vector3(0,1,0);
       instances.forEach((p,i)=>{
         orientation.setFromAxisAngle(up,p.rotation);
-        matrix.compose(new Vector3(p.x,heightAt(p.x,p.z)-.025,p.z),orientation,new Vector3(p.height,p.height,p.height));
+        const burial=name==="rock_moss_set_01" ? p.height*.17 : .025;
+        matrix.compose(new Vector3(p.x,heightAt(p.x,p.z)-burial,p.z),orientation,new Vector3(p.height,p.height,p.height));
         instance.setMatrixAt(i,matrix);
         instance.setColorAt(i,new Color().setScalar(.88+(i%5)*.03));
       });

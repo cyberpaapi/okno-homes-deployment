@@ -1831,9 +1831,17 @@
   "/configurator/environments/kloofendal-day-1k.hdr": 1637206,
   "/configurator/environments/kloofendal-day.webp": 1230596,
   "/configurator/environments/woodland-clearing.webp": 1466956,
-  "/configurator/house-credits.txt": 1605,
+  "/configurator/house-credits.txt": 2021,
   "/configurator/models/v2/forza-5f25ac5b9a32.glb": 4839112,
   "/configurator/models/v2/kray-83bccc7a50c5.glb": 12746032,
   "/configurator/models/v2/tengo-49880463ff14.glb": 9439868,
-  "/configurator/models/v2/tish-b33e499eba77.glb": 3551576
+  "/configurator/models/v2/tish-b33e499eba77.glb": 3551576,
+  "/configurator/coast/v1/beach-1k.hdr": 1582472,
+  "/configurator/coast/v1/beach-sky.webp": 1898618,
+  "/configurator/coast/v1/sand-normal.webp": 392376,
+  "/configurator/coast/v1/sand.webp": 351910,
+  "/configurator/coast/v1/rock-cluster.glb": 1185900,
+  "/configurator/coast/v1/wind-ripples.webp": 183360,
+  "/configurator/coast/v1/island-preview.webp": 13632,
+  "/configurator/coast/v1/overview-preview.webp": 15218
 }
