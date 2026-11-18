@@ -28,6 +28,17 @@ afterEach(async () => {
 });
 
 describe("collection content store", () => {
+  it('publishes house-specific INR rates and rejects invalid amounts or finish assignments', async () => {
+    const store = await import('./siteContentStore');
+    const rows = [{ id: 'forza', fields: { base: '1850000', 'external-wall.golden-oak': '12500', 'external-wall.titanium-veil': '0' } }];
+    const draft = await store.saveCollectionDraft('signature.pricing', rows, 0, 0);
+    expect((await store.readContent()).publishedCollections['signature.pricing']).toBeUndefined();
+    const published = await store.publishDraft(0, draft.draftRevision);
+    expect(published.publishedCollections['signature.pricing']).toEqual(rows);
+    for (const fields of [{ base: '-3' }, { base: '1.5' }, { 'flooring.obsidian-shield': '50' }]) {
+      await expect(store.saveCollectionDraft('signature.pricing', [{ id: 'forza', fields }], published.revision, published.draftRevision)).rejects.toThrow();
+    }
+  });
   it('publishes linked model settings only after saving and rejects a circular source graph', async () => {
     const store = await import('./siteContentStore');
     const { signatureModelDefaults } = await import('./signatureCollections');

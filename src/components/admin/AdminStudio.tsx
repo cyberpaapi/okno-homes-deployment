@@ -26,6 +26,8 @@ import { signatureModelDefaults, signaturePlanDefaults } from "@/lib/signatureCo
 import { footerLinkDefaults } from "@/lib/footerLinkCollections";
 import { parseProcessDayRange } from "@/lib/processDayRange";
 import SignatureModelPanel from "./SignatureModelPanel";
+import ConfiguratorPrices from './ConfiguratorPrices';
+import { pricingCollection } from '@/lib/configuratorPricing';
 import { PREVIEW_READY, PREVIEW_UPDATE } from "@/lib/sitePreview";
 import { isTypographySizeField } from "@/lib/typography";
 
@@ -384,19 +386,15 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
     if (!snapshot) return;
     setBusy(true); setError("");
     try {
-      const modelsDefinition = collectionDefinitionsForPage("signature").find(item => item.id === "signature.models")!;
-      const plansDefinition = collectionDefinitionsForPage("signature").find(item => item.id === "signature.plans")!;
-      const modelResult = Object.hasOwn(localCollections, "signature.models")
-        ? await authenticated("/api/admin/content", "PATCH", JSON.stringify({ collectionId: "signature.models", items: collectionFor(modelsDefinition), revision: snapshot.revision, draftRevision: snapshot.draftRevision }), true) as Snapshot
-        : snapshot;
-      if (modelResult !== snapshot) {
-        setSnapshot(previous => preferNewerSnapshot(previous, modelResult));
-        setLocalCollections(previous => { const copy = { ...previous }; delete copy["signature.models"]; return copy; });
-      }
-      if (Object.hasOwn(localCollections, "signature.plans")) {
-        const planResult = await authenticated("/api/admin/content", "PATCH", JSON.stringify({ collectionId: "signature.plans", items: collectionFor(plansDefinition), revision: modelResult.revision, draftRevision: modelResult.draftRevision }), true) as Snapshot;
-        setSnapshot(previous => preferNewerSnapshot(previous, planResult));
-        setLocalCollections(previous => { const copy = { ...previous }; delete copy["signature.plans"]; return copy; });
+      let latest = snapshot;
+      for (const id of ["signature.models", "signature.plans", pricingCollection]) {
+        if (!Object.hasOwn(localCollections, id)) continue;
+        latest = await authenticated("/api/admin/content", "PATCH", JSON.stringify({
+          collectionId: id, items: localCollections[id], revision: latest.revision, draftRevision: latest.draftRevision,
+        }), true) as Snapshot;
+        const saved = latest;
+        setSnapshot(previous => preferNewerSnapshot(previous, saved));
+        setLocalCollections(previous => { const copy = { ...previous }; delete copy[id]; return copy; });
       }
       setMessage("Signature roster and plans saved as a draft. Publish to update the site.");
     } catch (cause) { setError((cause as Error).message); }
@@ -416,7 +414,9 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
       : fallbackCollections[definition.id] ?? [];
     const changed = JSON.stringify(items) !== JSON.stringify(persisted);
     return <div className={styles.collectionSection} key={definition.id}>
-      {definition.id === "journal.articles"
+      {definition.id === pricingCollection
+        ? <ConfiguratorPrices items={items} roster={collectionFor(collectionDefinitionsForPage("signature").find(d => d.id === "signature.models")!)} plans={collectionFor(collectionDefinitionsForPage("signature").find(d => d.id === "signature.plans")!)} disabled={busy || !snapshot} onChange={updated => setLocalCollections(previous => ({ ...previous, [pricingCollection]: updated }))} />
+        : definition.id === "journal.articles"
         ? <JournalArticleCollectionEditor items={items} onChange={updated => setLocalCollections(previous => ({ ...previous, [definition.id]: updated }))} disabled={busy || !snapshot} onUpload={uploadCollectionFile} />
         : definition.id === "projects.globePins"
         ? <GlobePinsEditor items={items} onChange={updated => setLocalCollections(previous => ({ ...previous, [definition.id]: updated }))} disabled={busy || !snapshot} onLookupLocation={async query => {
@@ -470,6 +470,7 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
   function signaturePanels() {
     const roster = collectionFor(collectionDefinitionsForPage("signature").find(definition => definition.id === "signature.models")!);
     const plans = collectionFor(collectionDefinitionsForPage("signature").find(definition => definition.id === "signature.plans")!);
+    const prices = collectionFor(collectionDefinitionsForPage("signature").find(d => d.id === pricingCollection)!);
     const baseIds = new Set(signatureModelDefaults.map(item => item.id));
     const customIds = new Set(roster.map(item => item.id));
     const previousModels = new Map<string, ContentItem>(signatureModelDefaults.map(item => [item.id,item]));
@@ -491,6 +492,9 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
     };
     return <>
       <div className={styles.signatureToolbar}><div><strong>Signature model library</strong><p>{roster.length} models · Open a model for its media, story, Explore detail, preview images and plans.</p></div><ActionButton type="button" disabled={busy || !snapshot || roster.length >= 24} onClick={addModel}>Add model</ActionButton></div>
+      <details className={styles.modelTray}><summary><span className={styles.sectionName}>Configurator pricing</span><ChevronDown size={20} /></summary>
+        {collectionPanel(collectionDefinitionsForPage("signature").find(d => d.id === pricingCollection)!)}
+      </details>
       {visibleSections.filter(section => !/^(forza|kray|gaze|tengo|trib|octapod)-/.test(section.id)).map((section,index) => sectionPanel(section,index))}
       {roster.map((record,index) => {
         const ownedPlans = plans.filter(plan => plan.fields.modelId === record.id);
@@ -511,13 +515,16 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
               onModelIdChange={nextId => {
                 if (!nextId || roster.some(item => item.id === nextId && item.id !== record.id)) return false;
                 if (nextId === record.id) return true;
+                if (prices.some(price => price.id === nextId)) return false;
                 setLocalCollections(previous => ({ ...previous,
+                  ...(prices.some(p => p.id === record.id) ? { [pricingCollection]: prices.map(p => p.id === record.id ? { ...p, id: nextId } : p) } : {}),
                   "signature.models": roster.map(item => ({ ...item, id: item.id === record.id ? nextId : item.id, fields: item.fields.configuratorSource === record.id ? { ...item.fields, configuratorSource: nextId } : item.fields })),
                   "signature.plans": plans.map(plan => plan.fields.modelId === record.id ? { ...plan, fields: { ...plan.fields, modelId: nextId } } : plan),
                 }));
                 return true;
               }}
               onRemoveModel={() => setLocalCollections(previous => ({ ...previous,
+                ...(prices.some(p => p.id === record.id) ? { [pricingCollection]: prices.filter(p => p.id !== record.id) } : {}),
                 "signature.models": roster.filter(item => item.id !== record.id),
                 "signature.plans": plans.filter(plan => plan.fields.modelId !== record.id),
               }))}

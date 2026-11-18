@@ -14,6 +14,7 @@ import ExpandableControls from "./21st/ExpandableControls";
 import SceneDock from "./21st/SceneDock";
 import styles from "./Configurator.module.css";
 import "./environment.css";
+import { estimate, finishPrice, rupees, type PriceSchedule } from '@/lib/configuratorPricing';
 
 // Adapted from the owner's fullcode (1).zip / app/OknoExperience.tsx.
 // Preserve supplied UI and scene appearance while selecting reviewed house derivatives.
@@ -31,7 +32,9 @@ const backgrounds: { id: Background; label: string; image: string }[] = [
   { id: "full-island", label: "Full island", image: "/configurator/coast/v1/overview-preview.webp" },
 ];
 
-export default function SuppliedConfigurator({ asset, requestedName, settings }: { asset?: SignatureAsset; requestedName?: string; settings?: ConfiguratorSettings } = {}) {
+export default function SuppliedConfigurator({ asset, requestedName, settings, pricing = { base: null, rates: {} }, variant }: {
+  asset?: SignatureAsset; requestedName?: string; settings?: ConfiguratorSettings; pricing?: PriceSchedule; variant?: string;
+} = {}) {
   const mount = useRef<HTMLDivElement>(null);
   const api = useRef<SceneApi | null>(null);
   const [ready, setReady] = useState(false);
@@ -50,6 +53,7 @@ export default function SuppliedConfigurator({ asset, requestedName, settings }:
   const [pdfError, setPdfError] = useState('');
   const current = applicationGroups.find(group => group.id === active)!;
   const options = optionsForApplication(active);
+  const quote = estimate(pricing, selected, counts);
 
   useEffect(() => {
     if (!mount.current) return;
@@ -123,8 +127,9 @@ export default function SuppliedConfigurator({ asset, requestedName, settings }:
   async function downloadPdf() {
     setPdfBusy(true); setPdfError('');
     try {
+      const preview = api.current?.snapshot();
       const { downloadSelectionPdf } = await import('./selectionPdf');
-      downloadSelectionPdf({ name: asset?.name || 'Studio Cabin', selected, counts, preview: api.current?.snapshot(), variant: new URLSearchParams(window.location.search).get('variant') || undefined });
+      await downloadSelectionPdf({ name: asset?.name || 'Studio Cabin', quote, preview, variant, background, light });
     } catch { setPdfError('The PDF could not be created. Please try again.'); }
     finally { setPdfBusy(false); }
   }
@@ -140,6 +145,10 @@ export default function SuppliedConfigurator({ asset, requestedName, settings }:
     <aside className={styles.modelIntro} data-viewer-intro>
       <a className={styles.backLink} href="/models/signature"><ArrowLeft size={14} aria-hidden="true" />Back to models</a>
       <h1>{asset?.name ?? "Studio Cabin"}</h1>
+      {asset && <div className={styles.estimate} aria-live="polite">
+        <span>Estimated price</span><strong>{quote.total === null ? 'Price on request' : rupees(quote.total)}</strong>
+        {quote.total === null && quote.base !== null && <small>Base {rupees(quote.base)}{quote.extras > 0 && ` · priced finishes +${rupees(quote.extras)}`}</small>}
+      </div>}
       <p>{asset?.identity ?? (requestedName ? `${requestedName} has no supplied 3D asset. Studio Cabin is shown as a reference preview.` : "Studio Cabin reference preview.")}</p>
       <details className={styles.modelDetails}><summary>{asset ? "Model details" : "Cabin details"}<ChevronDown size={12} aria-hidden="true" /></summary>
         {asset ? <p>Original house proportions, aligned to a shared metre scale. Materials can be selected independently for walls, roof, floor and ceiling.</p> : <><p>A compact retreat drawn in timber, glass and changing light.</p>
@@ -156,7 +165,10 @@ export default function SuppliedConfigurator({ asset, requestedName, settings }:
         <header className={styles.sectionTitle}><h3>{current.label}</h3><span>Approved finishes</span></header>
         {!asset && current.sharedInterior && <div className={styles.interiorNote}><details><summary>About the interior preview<ChevronDown size={12} aria-hidden="true" /></summary><p>Wall, ceiling and flooring choices are saved separately here. This cabin previews them on its shared interior timber.</p></details><span role="status">{interiorPreview ? `Current interior preview — ${interiorPreview}` : "Original interior shown."}</span></div>}
         <div className={styles.swatches}>
-          {options.map(option => <button key={option.id} type="button" className={styles.swatch} data-selected={selected[active] === option.id} aria-pressed={selected[active] === option.id} disabled={!ready || Boolean(asset && !counts[active])} onClick={() => choose(option)}><span className={styles.swatchImage} style={{ backgroundImage: `url(${option.image})` }}>{selected[active] === option.id && <Check size={13} aria-hidden="true" />}</span><span className={styles.swatchCopy}><b>{option.name}</b><small>{familyLabels[option.family]}</small></span></button>)}
+          {options.map(option => {
+            const amount = finishPrice(pricing.rates, active, option.id);
+            return <button key={option.id} type="button" className={styles.swatch} data-selected={selected[active] === option.id} aria-pressed={selected[active] === option.id} disabled={!ready || Boolean(asset && !counts[active])} onClick={() => choose(option)}><span className={styles.swatchImage} style={{ backgroundImage: `url(${option.image})` }}>{selected[active] === option.id && <Check size={13} aria-hidden="true" />}</span><span className={styles.swatchCopy}><b>{option.name}</b><small>{familyLabels[option.family]}</small>{asset && <span className={styles.rate}>{amount === null ? "On request" : amount === 0 ? "Included" : "+" + rupees(amount)}</span>}</span></button>;
+          })}
         </div>
       </section>
       <p className={styles.selectedFinish} aria-live="polite">{asset && ready && !counts[active] ? 'This surface is not available in this model.' : selected[active] ? `Selected: ${options.find(option => option.id === selected[active])?.name}` : "Choose a finish to preview."}</p>

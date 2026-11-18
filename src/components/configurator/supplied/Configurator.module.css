@@ -289,6 +289,15 @@
 }
 /* Full sentences use Govandi: the load error was set in Kento capitals. */
 .error p { font-family: var(--type-font-body, var(--okno-font-body)) !important; font-size: 14px; letter-spacing: 0; line-height: 1.5; }
+.estimate { display: grid; gap: 2px; margin: 6px 0; color: #213b2d; font: 14px/1.25 var(--okno-font-body), sans-serif; }
+.estimate > span, .estimate small, .rate { color: #475c4c; font: 12px/1.25 var(--okno-font-body), sans-serif; }
+.estimate strong { font-size: 19px; font-variant-numeric: tabular-nums; }
+.rate { display: block; }
+.modelIntro p[role="alert"] { display: block; grid-column: 1 / -1; color: #86352a; }
+@media (max-width: 1120px) {
+  .estimate { grid-column: 1 / -1; grid-row: 3; display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px; margin: 4px 0 0; }
+  .estimate strong { font-size: 15px; }
+}
 
 /* Touch screens (owner request, 10 November 2026): the configurator is pinned to the screen.
    It was a 100dvh, 620px-minimum block in a scrolling document, so dragging could scroll the

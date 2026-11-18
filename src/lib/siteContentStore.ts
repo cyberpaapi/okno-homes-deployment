@@ -1,4 +1,5 @@
 import { configuratorSettingsError, resolveConfigurator } from "./configuratorSettings";
+import { pricingCollection, validRupees } from './configuratorPricing';
 import { typographyValueError, validateTypographySizes } from "@/lib/typography";
 import "server-only";
 
@@ -278,6 +279,7 @@ function validateDraftItems(collectionId: string, value: unknown): ContentItem[]
     for (const [key, rawField] of Object.entries(fields)) {
       const field = allowed.get(key);
       if (!field || typeof rawField !== "string" || rawField.length > (field.kind === "json" ? 200000 : 8000)) throw new Error(`Invalid ${key} field in ${id}.`);
+      if (collectionId === pricingCollection && rawField !== '' && !validRupees(rawField)) throw new Error(`${id} / ${field.label}: enter a whole INR amount between 0 and 9999999999.`);
       if (field.kind === "choice" && rawField && !field.options?.some(option => option.value === rawField)) throw new Error(`Choose a listed ${field.label.toLowerCase()} in ${id}.`);
       if (field.kind === "url" && rawField && !validDestination(rawField)) throw new Error(`Use a local path or HTTPS link for ${field.label.toLowerCase()} in ${id}.`);
       if (collectionId.startsWith("footer.links.") && key === "href" && rawField && (!rawField.startsWith("/") || localDestination(rawField, "") !== rawField || rawField.includes(".."))) throw new Error(`Use a same-site path for the Footer link in ${id}.`);

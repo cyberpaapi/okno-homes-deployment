@@ -677,7 +677,27 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             importedMeshes().forEach(mesh => { const material = originalMaterials.get(mesh) || mesh.material; if (material.userData?.oknoRoofBand) mesh.visible = visible; if (material.userData?.oknoStandingSeam) mesh.visible = standingSeams; });
             renderer.shadowMap.needsUpdate = true; invalidate();
         },
-        snapshot: () => { drawScene(); return renderer.domElement.toDataURL('image/png'); },
+        snapshot: () => {
+            const printCamera = camera.clone();
+            printCamera.clearViewOffset();
+            printCamera.aspect = 2.2;
+            printCamera.fov = 35;
+            if (framedSize) {
+                const [eye, target] = houseViews(framedSize, printCamera.fov, printCamera.aspect).hero;
+                printCamera.position.copy(eye).lerp(target, .18);
+                printCamera.lookAt(target);
+            }
+            printCamera.updateProjectionMatrix();
+            const size = renderer.getSize(new THREE.Vector2()), ratio = renderer.getPixelRatio();
+            try {
+                renderer.setDrawingBufferSize(1540, 700, 1);
+                renderer.render(scene, printCamera);
+                return renderer.domElement.toDataURL('image/png');
+            } finally {
+                renderer.setDrawingBufferSize(size.x, size.y, ratio);
+                invalidate();
+            }
+        },
         surface: (application, finish, name) => {
             const meshes = importedMeshes().filter(mesh => {
                 const material = originalMaterials.get(mesh) || mesh.material;

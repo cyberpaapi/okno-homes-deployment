@@ -1,3 +1,5 @@
+import { pricingCollection, pricingFields } from './configuratorPricing';
+
 export type ContentItem = { id: string; fields: Record<string, string> };
 export type ContentCollections = Record<string, ContentItem[]>;
 
@@ -27,6 +29,7 @@ const enquiryOptionGroups = [
 ] as const;
 
 export const collectionDefinitions: readonly CollectionDefinition[] = [
+  { id: pricingCollection, pageId: 'signature', label: 'Configurator prices', itemLabel: 'house price schedule', maxItems: 36, fields: pricingFields },
   {
     id: "signature.models", pageId: "signature", label: "Signature model roster", itemLabel: "model", maxItems: 24,
     fields: [
