@@ -1447,13 +1447,13 @@
 
 /* Touch screens wider than 700px (tablets, phones held sideways): plan filters, model
    choices and the details button get the 44px targets phones already have (they were
-   28â€“36px). */
+   28–36px). */
 @media (min-width: 701px) and (pointer: coarse) {
   .planFilter button, .modelSelector span, .modelSelector button { min-height: 44px; }
   .modelSelector, .detailsButton { min-height: 50px; }
 }
 
-/* 701â€“1000px (phones held sideways, small tablets): the centred model selector ran under
+/* 701–1000px (phones held sideways, small tablets): the centred model selector ran under
    the absolutely placed details button, hiding Octapod. It now starts at the left edge
    and scrolls within the space the button leaves. */
 @media (min-width: 701px) and (max-width: 1000px) {
@@ -1485,7 +1485,7 @@
 }
 
 /* Full-device audit (11 November 2026). */
-/* Short desktops and landscape tablets (1024Ã—768, 1280Ã—720): the left detail card sat on
+/* Short desktops and landscape tablets (1024×768, 1280×720): the left detail card sat on
    the plan filter; it now starts to the filter's right. */
 @media (min-width: 701px) {
   .upperLeft { left: max(6.5%, 220px); }
