@@ -972,6 +972,20 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             <p className={styles.investmentNote}>{get("investment-note", "Final investment depends on site, specification and finish.")}</p>
           </motion.div>
 
+          <div className={styles.phonePickers}>
+            <label>
+              <span>Floor plan</span>
+              <select value={planFilter} onChange={event => selectPlan(event.target.value as PlanFilter)}>
+                {planFilters.map(filter => <option key={filter.value} value={filter.value}>{get(`filter-${filter.value}`, filter.label)}</option>)}
+              </select>
+            </label>
+            <label>
+              <span>Model</span>
+              <select value={activeModel.slug} onChange={event => selectModel(event.target.value)}>
+                {filteredModels.map(model => <option key={model.slug} value={model.slug}>{model.name}</option>)}
+              </select>
+            </label>
+          </div>
           <div className={styles.planFilter} role="group" aria-label={get("plan-filter-label", "Filter by floor plan")}>
             {planFilters.map((filter) => {
               const selected = filter.value === planFilter;

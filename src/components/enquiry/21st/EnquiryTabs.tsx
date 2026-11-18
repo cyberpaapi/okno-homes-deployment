@@ -120,7 +120,12 @@ export default function EnquiryTabs({ items, value, onValueChange }: EnquiryTabs
               }
             }}
           >
-            <span>{item.label}</span>
+            {item.value === "home" && item.label === "A home of my own" ? (
+              <>
+                <span className={styles.fullLabel}>{item.label}</span>
+                <span className={styles.compactLabel}>Home</span>
+              </>
+            ) : <span>{item.label}</span>}
           </button>
         );
       })}

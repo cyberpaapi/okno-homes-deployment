@@ -46,7 +46,7 @@
 .menuLinks .letters { letter-spacing: 0; }
 
 /* Touch: the collapsed menu pill is 46px (a 44px button inside its border) and the
-   104×35 logo link gains a 44px hit area without moving. */
+   104Ã—35 logo link gains a 44px hit area without moving. */
 @media (pointer: coarse) {
   .logo { padding-block: 5px; margin-block: -5px; }
 }
@@ -93,8 +93,8 @@
 .menuLinks .letters { flex-wrap: nowrap; }
 .header .menuToggle { gap: 6px; padding-inline: 12px; }
 /* Always in view (owner request, 11 November 2026): the header is fixed on every page and,
-   once the page scrolls, sits on frosted glass — dark glass on dark pages, paper glass on
-   light ones — so its links stay readable over any section. */
+   once the page scrolls, sits on frosted glass â€” dark glass on dark pages, paper glass on
+   light ones â€” so its links stay readable over any section. */
 .header { position: fixed; inset: 0 0 auto; isolation: isolate; }
 .header::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: 0; pointer-events: none; background: linear-gradient(180deg, rgb(255 255 255 / 7%), rgb(255 255 255 / 2%)), rgb(12 18 14 / 46%); box-shadow: 0 10px 30px rgb(4 8 6 / 18%); -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%); transition: opacity .35s ease; }
 .header[data-tone="light"]::before { background: linear-gradient(180deg, rgb(255 255 255 / 70%), rgb(255 255 255 / 52%)); box-shadow: 0 10px 30px rgb(32 36 31 / 8%); }
@@ -103,4 +103,18 @@
 .header[data-scrolled="true"] { mix-blend-mode: normal !important; }
 @media (max-width: 520px) {
   .menuLinks { inset: 64px 16px 18px; gap: 4px; }
+}
+
+@media (orientation: landscape) and (min-width: 521px) and (max-height: 520px) {
+  .menuLinks {
+    inset: 48px 20px 8px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 2px 18px;
+  }
+  .menuLinks .rolling {
+    min-height: 44px;
+    font-size: min(var(--type-size-subheading, var(--okno-menu)), 3.8cqi);
+  }
 }

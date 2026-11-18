@@ -88,7 +88,9 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
   // Phones (client feedback, 11 November 2026): the open menu covered the whole screen. It is
   // now a compact panel sized to its links (44px rows, 4px apart) under the button.
   const phone = viewport.width <= 520;
-  const expandedWidth = phone ? Math.max(220, Math.min(300, viewport.width - 32)) : 440;
+  const shallow = viewport.width >= 521 && viewport.height <= 520 && viewport.width > viewport.height;
+  const expandedWidth = shallow ? Math.min(620, viewport.width - 48)
+    : phone ? Math.max(220, Math.min(300, viewport.width - 32)) : 440;
   const expandedHeight = phone
     ? Math.max(280, Math.min(viewport.height - 32, 64 + items.length * 44 + (items.length - 1) * 4 + 18))
     : Math.max(280, Math.min(640, viewport.height - 32));

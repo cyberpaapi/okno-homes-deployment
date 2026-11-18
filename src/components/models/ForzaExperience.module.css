@@ -1447,13 +1447,13 @@
 
 /* Touch screens wider than 700px (tablets, phones held sideways): plan filters, model
    choices and the details button get the 44px targets phones already have (they were
-   28–36px). */
+   28â€“36px). */
 @media (min-width: 701px) and (pointer: coarse) {
   .planFilter button, .modelSelector span, .modelSelector button { min-height: 44px; }
   .modelSelector, .detailsButton { min-height: 50px; }
 }
 
-/* 701–1000px (phones held sideways, small tablets): the centred model selector ran under
+/* 701â€“1000px (phones held sideways, small tablets): the centred model selector ran under
    the absolutely placed details button, hiding Octapod. It now starts at the left edge
    and scrolls within the space the button leaves. */
 @media (min-width: 701px) and (max-width: 1000px) {
@@ -1485,7 +1485,7 @@
 }
 
 /* Full-device audit (11 November 2026). */
-/* Short desktops and landscape tablets (1024×768, 1280×720): the left detail card sat on
+/* Short desktops and landscape tablets (1024Ã—768, 1280Ã—720): the left detail card sat on
    the plan filter; it now starts to the filter's right. */
 @media (min-width: 701px) {
   .upperLeft { left: max(6.5%, 220px); }
@@ -1630,31 +1630,48 @@
 }
 .configureEntrance .detailsButton svg { width: 18px; height: 18px; flex: none; }
 
-/* Phones: plan and model chips sit above the house in a smaller size; the action row
-   holds the bottom edge. */
+.phonePickers { display: none; }
 @media (max-width: 700px) {
   .scrollTrack.scrollTrack .stage {
-    padding-top: 184px;
+    padding-top: 146px;
     padding-bottom: calc(68px + max(10px, env(safe-area-inset-bottom)));
   }
-  .planFilter,
-  .bottomDock {
-    right: 14px;
-    left: 14px;
-    bottom: auto;
-    translate: none;
+  .planFilter, .bottomDock .modelSelector { display: none; }
+  .phonePickers {
+    position: absolute;
+    z-index: 16;
+    inset: 84px 14px auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 8px;
   }
-  .planFilter { top: 84px; min-height: 40px; }
-  .bottomDock { top: 132px; }
-  .planFilter button,
-  .modelSelector span,
-  .modelSelector button {
-    min-height: 32px;
+  .phonePickers label {
+    position: relative;
+    display: grid;
     min-width: 0;
-    padding-inline: 10px;
-    font-size: 11px;
+    border: 1px solid rgb(244 241 233 / 24%);
+    border-radius: 7px;
+    background: #101510;
+    color: var(--ivory);
+    color-scheme: dark;
   }
-  .modelSelector { max-width: 100%; min-height: 40px; }
+  .phonePickers label > span {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: var(--gold);
+    font: 12px/1.2 var(--okno-font-body);
+    pointer-events: none;
+  }
+  .phonePickers select {
+    width: 100%;
+    min-height: 48px;
+    padding: 15px 6px 0;
+    border: 0;
+    background-color: transparent;
+    color: inherit;
+    font: 16px/1.25 var(--okno-font-body);
+  }
   .configureEntrance {
     right: 14px;
     bottom: max(10px, env(safe-area-inset-bottom));
@@ -1668,11 +1685,14 @@
     flex: 0 1 auto;
     min-width: 0;
     min-height: 48px;
-    padding: 13px 14px;
+    padding: 7px 12px;
     font-size: 12px;
+    line-height: 1.2;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
   }
-  .configureEntrance .detailsButton { gap: 7px; }
-  .configureEntrance .detailsButton svg { width: 16px; height: 16px; }
+  .configureEntrance .configureButton > span { white-space: normal; }
 }
 /* The wider action row needs the intro to stop short of it on desktop. */
 @media (min-width: 1001px) {
