@@ -164,7 +164,7 @@ function addBeachGrass(root,rx,rz,size,materials,geometries) {
     grass.receiveShadow=true;root.add(grass);
 }
 
-export function createCoast(size,tex,draw) {
+export function createCoast(size,tex,draw,assets) {
     const rx=Math.max(10,size.x*.72+5.1),rz=Math.max(10.5,size.z*.72+5.5);
     const root=new THREE.Group(), time={value:0},warm={value:0},materials=[],geometries=[];
     const sand=tex(coastAssets+"sand.webp",1,1),normal=tex(coastAssets+"sand-normal.webp",1,1,true);
@@ -177,7 +177,7 @@ export function createCoast(size,tex,draw) {
     addPalms(root,rx,rz,materials,geometries);
     addBeachGrass(root,rx,rz,size,materials,geometries);
     let disposed=false, rockTextures=new Set();
-    new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).load(coastAssets+"rock-cluster.glb",gltf=>{
+    new GLTFLoader(assets).setMeshoptDecoder(MeshoptDecoder).load(coastAssets+"rock-cluster.glb",gltf=>{
         const source=gltf.scene,used=new Set();source.traverse(o=>{if(o.isMesh){geometries.push(o.geometry);for(const m of [].concat(o.material))used.add(m);}});
         const textures=new Set();used.forEach(m=>{for(const value of Object.values(m))if(value?.isTexture)textures.add(value);});
         if(disposed){source.traverse(o=>{if(o.isMesh)o.geometry.dispose()});used.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());return;}

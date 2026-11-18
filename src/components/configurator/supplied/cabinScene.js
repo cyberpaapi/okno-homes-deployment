@@ -14,8 +14,12 @@ import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment
 import { projectGeometryInModelSpace } from "./materialProjection.mjs";
 const W = 5.2, D = 6.4, F = .46, E = 3.06, R = 4.61, A = Math.atan2(R - E, W / 2), S = Math.hypot(W / 2, R - E);
 const box = (p, s, v, m, r = [0, 0, 0], name = "Part") => { const o = new THREE.Mesh(new THREE.BoxGeometry(...s), m); o.position.set(...v); o.rotation.set(...r); o.castShadow = o.receiveShadow = true; o.name = name; p.add(o); return o; };
-export function createScene(mount, onReady, onSelection, onHistory = () => { }, customerModel = false) {
+export function createScene(mount, onReady, onSelection, onHistory = () => { }, customerModel = false, onLoading = () => {}) {
     let disposed = false, invalidate = () => {};
+    // Track this scene independently so a print cannot capture half-loaded materials.
+    const assets = new THREE.LoadingManager();
+    assets.onStart = () => { if (!disposed) onLoading(true); };
+    assets.onLoad = () => { if (!disposed) onLoading(false); };
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
     const gl = renderer.getContext(), debug = gl.getExtension("WEBGL_debug_renderer_info");
     const softwareRendering = debug && /swiftshader|llvmpipe|software/i.test(String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)));
@@ -71,8 +75,8 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     const pmrem = new THREE.PMREMGenerator(renderer), room = new RoomEnvironment(), envTarget = pmrem.fromScene(room, .04), env = envTarget.texture;
     scene.environment = env;
     scene.environmentIntensity = .64;
-    const daylight = customerModel ? createHouseDaylight(scene,renderer,()=>invalidate()) : null;
-    const loader = new THREE.TextureLoader(), cache = new Map();
+    const daylight = customerModel ? createHouseDaylight(scene,renderer,()=>invalidate(),assets) : null;
+    const loader = new THREE.TextureLoader(assets), cache = new Map();
     const tex = (path, x = 2, y = 2, data = false) => { const k = [path,x,y,data].join("|"); if (cache.has(k))
         return cache.get(k); const t = loader.load(path, texture => { if (disposed) texture.dispose(); else invalidate(); }); t.colorSpace = data ? THREE.NoColorSpace : THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(x, y); t.anisotropy = renderer.capabilities.getMaxAnisotropy(); cache.set(k, t); return t; };
     const mat = (path, color, rough = .75, metal = 0, x = 2, y = 2) => new THREE.MeshStandardMaterial({ map: tex(path, x, y), bumpMap: tex(path, x, y), bumpScale: .025, color, roughness: rough, metalness: metal });
@@ -406,7 +410,7 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
         const key=[size.x,size.z].map(n=>n.toFixed(2)).join("/");
         if (coastKey !== key) {
             coast?.dispose();
-            coast=createCoast(size,tex,()=>{if(!disposed){renderer.shadowMap.needsUpdate=true;invalidate();}});
+            coast=createCoast(size,tex,()=>{if(!disposed){renderer.shadowMap.needsUpdate=true;invalidate();}},assets);
             coastKey=key;coast.warm.value=goldenCoast?1:0;
             islandWorld.add(coast.root);
         }
@@ -781,7 +785,7 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
         view: v => { activeHouseView = v; applyViewLimits(); camera.fov = customerModel && v === "inside" ? 70 : innerWidth < 700 ? 48 : 40; camera.updateProjectionMatrix(); [cp, ct] = presets[v].map(x => x.clone()); controls.autoRotate = false; },
         turn: v => { controls.autoRotate = v; },
         glb: async (f, metersPerUnit = 1) => {
-            const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(await f.arrayBuffer(), "");
+            const gltf = await new GLTFLoader(assets).setMeshoptDecoder(MeshoptDecoder).parseAsync(await f.arrayBuffer(), "");
             if (disposed) {
                 const geometries = new Set(), materials = new Set(), textures = new Set();
                 gltf.scene.traverse(o => { if(o.isMesh) { geometries.add(o.geometry); (Array.isArray(o.material)?o.material:[o.material]).forEach(m => materials.add(m)); } });

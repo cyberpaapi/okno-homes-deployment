@@ -1,9 +1,9 @@
-import { Box3, Color, DoubleSide, Float32BufferAttribute, Group, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, RepeatWrapping, SRGBColorSpace, Texture, TextureLoader, Vector3, type BufferGeometry, type Material, type WebGLRenderer } from "three";
+import { Box3, Color, DoubleSide, Float32BufferAttribute, Group, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, RepeatWrapping, SRGBColorSpace, Texture, TextureLoader, Vector3, type LoadingManager, type BufferGeometry, type Material, type WebGLRenderer } from "three";
 import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { terrainHeight, woodlandLayout, type LandscapePlacement } from "./woodlandLayout";
 
-export function createWoodland(renderer: WebGLRenderer, changed: () => void, layout = woodlandLayout(), includeGround = true) {
+export function createWoodland(renderer: WebGLRenderer, changed: () => void, layout = woodlandLayout(), includeGround = true, assets?: LoadingManager) {
   const root = new Group();
   root.name = "OKNO shared woodland setting";
   let disposed = false;
@@ -15,7 +15,7 @@ export function createWoodland(renderer: WebGLRenderer, changed: () => void, lay
   const positions = terrain.getAttribute("position");
   for (let i=0; i<positions.count; i++) positions.setY(i,terrainHeight(positions.getX(i),positions.getZ(i)));
   terrain.computeVertexNormals();
-  const pathTexture = new TextureLoader().load("/configurator/original/textures/stone.jpg",()=>changed());
+  const pathTexture = new TextureLoader(assets).load("/configurator/original/textures/stone.jpg",()=>changed());
   pathTexture.wrapS=pathTexture.wrapT=RepeatWrapping; textures.add(pathTexture);
   const groundMaterial = new MeshStandardMaterial({color:"#889174",roughness:1,bumpScale:.045});
   groundMaterial.onBeforeCompile = shader => {
@@ -32,7 +32,7 @@ export function createWoodland(renderer: WebGLRenderer, changed: () => void, lay
   };
   const ground = new Mesh(terrain,groundMaterial);ground.receiveShadow=true;if(includeGround) root.add(ground);
   geometries.add(terrain);materials.add(groundMaterial);
-  const groundReady = !includeGround ? Promise.resolve() : new TextureLoader().loadAsync("/configurator/original/textures/meadow-grass.jpg").then(texture=>{
+  const groundReady = !includeGround ? Promise.resolve() : new TextureLoader(assets).loadAsync("/configurator/original/textures/meadow-grass.jpg").then(texture=>{
     if(disposed){texture.dispose();return;}
     texture.colorSpace=SRGBColorSpace;texture.wrapS=texture.wrapT=RepeatWrapping;texture.repeat.setScalar(80);
     texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());textures.add(texture);
@@ -40,7 +40,7 @@ export function createWoodland(renderer: WebGLRenderer, changed: () => void, lay
   });
   const addAsset = async (name:string, placements:LandscapePlacement[], whole:boolean) => {
     if (!placements.length) return;
-    const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(`/configurator/landscape/v1/${name}.gltf`);
+    const gltf = await new GLTFLoader(assets).setMeshoptDecoder(MeshoptDecoder).loadAsync(`/configurator/landscape/v1/${name}.gltf`);
     const sourceMeshes: Mesh[]=[];
     const discardMaterials = new Set<Material>(), discardTextures = new Set<Texture>();
     gltf.scene.updateMatrixWorld(true);

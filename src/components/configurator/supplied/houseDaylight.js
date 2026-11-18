@@ -56,13 +56,13 @@ function plantingLayout(size,approach) {
 }
 
 // The starting point and direction are measured at the foot of each house's steps.
-function entrancePath(approach, invalidate) {
+function entrancePath(approach, invalidate, assets) {
     if (!Array.isArray(approach) || approach.length !== 4 || !approach.every(Number.isFinite)) return null;
     const [x, z, dx, dz] = approach;
     const root = new THREE.Group();
     root.position.set(x, 0, z);
     root.rotation.y = Math.atan2(dx, dz);
-    const texture = new THREE.TextureLoader().load("/textures/stone.jpg", invalidate);
+    const texture = new THREE.TextureLoader(assets).load("/textures/stone.jpg", invalidate);
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     const stone = new THREE.MeshStandardMaterial({
@@ -85,14 +85,14 @@ function entrancePath(approach, invalidate) {
     return { root, dispose() { root.removeFromParent(); shapes.forEach(g => g.dispose()); stone.dispose(); texture.dispose(); } };
 }
 
-export function createHouseDaylight(scene,renderer,invalidate) {
+export function createHouseDaylight(scene,renderer,invalidate,assets) {
     const fallback = scene.environment;
     const textures=new Map(), pending=new Set();
     let setting="meadow", golden=false, disposed=false, garden=null, footpath=null, footprint="";
     function request(key) {
         if (textures.has(key)||pending.has(key)) return;
         pending.add(key);
-        const [file,hdr]=skies[key], loader=hdr?new RGBELoader():new THREE.TextureLoader();
+        const [file,hdr]=skies[key], loader=hdr?new RGBELoader(assets):new THREE.TextureLoader(assets);
         loader.load(file.startsWith("/")?file:root+file,texture=>{
             if (disposed) {texture.dispose();return;}
             if (!hdr) texture.colorSpace=THREE.SRGBColorSpace;
@@ -125,9 +125,9 @@ export function createHouseDaylight(scene,renderer,invalidate) {
             const key=size.toArray().map(n=>n.toFixed(2)).join("/");
             if(key===footprint)return;
             footprint=key;garden?.dispose();footpath?.dispose();
-            footpath=entrancePath(approach,()=>{if(!disposed)invalidate();});
+            footpath=entrancePath(approach,()=>{if(!disposed)invalidate();},assets);
             if(footpath)scene.add(footpath.root);
-            garden=createWoodland(renderer,()=>{if(!disposed){renderer.shadowMap.needsUpdate=true;invalidate();}},plantingLayout(size,approach),false);
+            garden=createWoodland(renderer,()=>{if(!disposed){renderer.shadowMap.needsUpdate=true;invalidate();}},plantingLayout(size,approach),false,assets);
             scene.add(garden.root);refresh();
         },
         dispose(){

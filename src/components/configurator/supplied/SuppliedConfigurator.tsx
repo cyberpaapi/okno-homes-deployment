@@ -49,6 +49,7 @@ export default function SuppliedConfigurator({ asset, requestedName, settings, p
   const [turn, setTurn] = useState(true);
   const [finishesOpen, setFinishesOpen] = useState(true);
   const [counts, setCounts] = useState<Record<string, number>>({});
+  const [assetsLoading, setAssetsLoading] = useState(true);
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfError, setPdfError] = useState('');
   const current = applicationGroups.find(group => group.id === active)!;
@@ -67,7 +68,7 @@ export default function SuppliedConfigurator({ asset, requestedName, settings, p
       setLight("day"); setBackground("meadow"); setCamera("hero");
       setReady(false); setError(""); setSelected({}); setInteriorPreview("");
       try {
-        scene = createScene(mount.current!, () => {}, () => {}, undefined, Boolean(asset));
+        scene = createScene(mount.current!, () => {}, () => {}, undefined, Boolean(asset), setAssetsLoading);
         api.current = scene;
         scene.turn(false);
         if (asset) {
@@ -154,7 +155,7 @@ export default function SuppliedConfigurator({ asset, requestedName, settings, p
         {asset ? <p>Original house proportions, aligned to a shared metre scale. Materials can be selected independently for walls, roof, floor and ceiling.</p> : <><p>A compact retreat drawn in timber, glass and changing light.</p>
         <dl><div><dt>Footprint</dt><dd>5.2 × 6.4 m</dd></div><div><dt>Interior</dt><dd>24 m²</dd></div><div><dt>Ridge</dt><dd>4.15 m</dd></div></dl></>}
       </details>
-      {asset && <SubtleButton className={styles.pdfAction} tone="paper" aria-label="Download selections PDF" disabled={!ready || pdfBusy} onClick={() => void downloadPdf()}>{pdfBusy ? 'Preparing PDF…' : <><span className={styles.pdfVerb}>Download </span>PDF</>}</SubtleButton>}
+      {asset && <SubtleButton className={styles.pdfAction} tone="paper" aria-label="Download selections PDF" title={assetsLoading ? "Loading materials for your PDF" : undefined} disabled={!ready || assetsLoading || pdfBusy} onClick={() => void downloadPdf()}>{pdfBusy ? 'Preparing PDF…' : assetsLoading ? 'Loading…' : <><span className={styles.pdfVerb}>Download </span>PDF</>}</SubtleButton>}
       {pdfError && <p role="alert">{pdfError}</p>}
     </aside>
 

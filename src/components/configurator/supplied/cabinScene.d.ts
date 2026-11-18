@@ -44,4 +44,4 @@ export type SceneApi = {
 };
 
 
-export declare function createScene(mount: HTMLDivElement, onReady: () => void, onSelection: (parts: SelectedPart[]) => void, onHistory?: (count: number) => void, customerModel?: boolean): SceneApi;
+export declare function createScene(mount: HTMLDivElement, onReady: () => void, onSelection: (parts: SelectedPart[]) => void, onHistory?: (count: number) => void, customerModel?: boolean, onLoading?: (loading: boolean) => void): SceneApi;
