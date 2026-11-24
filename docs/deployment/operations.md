@@ -1,5 +1,14 @@
 # Deployment and operation
 
+## Current Render free review target —24November2026
+
+Owner changed hosting to Render and selected Free review deployment. The connected owner workspace is CodeAcc2007 My Workspace (`tea-dc2k59l9fdbs73fubqn0`). See `render.yaml` and [Render review configuration](render-review-2026-11-24.md). The website uses the supplied GitHub finishing branch only; no default/release branch update is intended. Private CMS/storage/access is unconfigured, with no publication or auth weakening. Exact source/service/deploy/URL and browser evidence are recorded in the external finishing harness. The earlier Vercel preparation below is superseded and its new project remains unused.
+
+## Superseded separate Vercel preparation —24November2026
+
+Owner authorized a separate deployment under CodeAcc2007. New project `okno-homes-finishing` (`prj_eHYPb5VwJ1kZ3QHgcdsbzEPawVg0`), team `team_WYCx00nKZCK9KiAyuA2gKpWK` / `codeacc2007-8289s-projects`. Live CLI account/owned team were checked before guarded creation and linking. Aryan’s project and storage are read-only references; do not use their linkage, keys, content or alias for this release. No GitHub push or cloud deployment has yet occurred. Next is patched from16.4.3 to16.4.5 following the official November security release; final build/runtime validation is pending. Private CMS content/access/storage is not included in Git and has not been imported or changed.
+
+
 ## Fixed Signature phone viewport and home links — 12 November 2026
 
 Source `672f0a917bc1b9d6a99a04d371d006d7095282de`, READY production `dpl_2keUtPyrGQFgQS8MhLaSTrkT4Bha`, serves the canonical Aryan domain. Signature's name/price returns after the last feature card. The phone stage stays fixed to the visible viewport, with safe-area-aware clearance and route-scoped overscroll containment. All retained customer configurator logo links now point home, matching the shared header. 20 model tests and 19 header/configurator tests, scoped lint, CSS parsing, production build and 30 function traces pass. Live 390x844 start/middle/end/extra-scroll checks retain video top 88.7px and selector bottom 834px; final identity opacity is 1 at video time 8 seconds. Clicking the live phone logo returns to `/`. Screenshot: workspace `outputs/signature-fixed-endpoint-live.png`. Physical-device testing was not performed. Earlier in-flight releases were superseded before completion; no CMS content was changed.

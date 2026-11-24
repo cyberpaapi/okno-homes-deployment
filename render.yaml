@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: okno-homes-finishing-review
+    runtime: node
+    plan: free
+    region: singapore
+    repo: https://github.com/cyberpaapi/okno-homes-deployment.git
+    branch: codex/finishing-2026-11-24
+    autoDeployTrigger: "off"
+    buildCommand: npm ci --include=dev && npm run build && npm run release:check-bundles
+    startCommand: npm run start:render
+    healthCheckPath: /api/site-status
+    envVars:
+      - key: NODE_VERSION
+        value: "22.22.2"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: OKNO_LOW_MEMORY_BUILD
+        value: "1"
+      - key: OKNO_CONTENT_BACKEND
+        value: blob

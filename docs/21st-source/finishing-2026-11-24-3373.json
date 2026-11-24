@@ -1,0 +1,29 @@
+{
+  "retrieved": "2026-11-24",
+  "component": {
+    "id": 3373,
+    "componentId": 3044,
+    "authorUserId": "user_2ra80vx0iKMyQWJ5AESmNfFbCHD",
+    "name": "Subtle Button",
+    "demoName": "default.tsx",
+    "description": "An animated, glowing \"Get Started\" button with interactive hover and press effects",
+    "previewUrl": "https://cdn.21st.dev/jatin-yadav05/subtle-button/default/preview.1751214526442.png",
+    "installCommand": "npx shadcn@latest add \"https://21st.dev/r/jatin-yadav05/subtle-button?api_key=$API_KEY_21ST\"",
+    "componentCode": "'use client'\nimport React, { useState } from 'react'\n\nexport default function BorderButton() {\n  const [isHovered, setIsHovered] = useState(false)\n  const [isPressed, setIsPressed] = useState(false)\n\n  return (\n    <div className='h-screen w-full flex justify-center items-center bg-gradient-to-br from-black/90 to-black'>\n      <button \n        className='group relative border-2 flex justify-center items-center gap-3 border-white/70 rounded-full w-[9.3rem] h-12 \n                   transition-all duration-500 ease-out hover:border-white hover:shadow-lg hover:shadow-white/20 \n                   hover:scale-105 active:scale-95 overflow-hidden backdrop-blur-sm\n                   before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent \n                   before:via-white/5 before:to-transparent before:translate-x-[-100%] \n                   hover:before:translate-x-[100%] before:transition-transform before:duration-700'\n        onMouseEnter={() => setIsHovered(true)}\n        onMouseLeave={() => {\n          setIsHovered(false)\n          setIsPressed(false)\n        }}\n        onMouseDown={() => setIsPressed(true)}\n        onMouseUp={() => setIsPressed(false)}\n      >\n        {/* Subtle glow effect */}\n        <div className='absolute inset-0 rounded-full bg-gradient-to-r from-amber-200/0 via-amber-200/10 to-amber-200/0 \n                        opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>\n        \n        {/* Text */}\n        <span className='text-white font-medium tracking-wide text-sm transition-all duration-300 \n                         group-hover:text-amber-50 relative z-10'>\n          Get Started\n        </span>\n        \n        {/* Animated dot */}\n        <span className={`relative z-10 w-4 h-4 bg-amber-200 rounded-full transition-all duration-500 ease-out\n                         ${isHovered ? 'bg-amber-300 shadow-lg shadow-amber-300/50 scale-110' : ''}\n                         ${isPressed ? 'scale-90' : ''}\n                         before:absolute before:inset-0 before:bg-amber-400 before:rounded-full \n                         before:animate-pulse before:opacity-0 group-hover:before:opacity-30`}>\n          {/* Ripple effect */}\n          <div className='absolute inset-0 rounded-full bg-amber-200 animate-ping opacity-0 group-hover:opacity-75'\n               style={{ animationDuration: '2s' }}></div>\n        </span>\n        \n        {/* Hover state border animation */}\n        <div className='absolute inset-0 rounded-full border-2 border-amber-200/0 \n                        group-hover:border-amber-200/30 transition-all duration-500 \n                        animate-pulse opacity-0 group-hover:opacity-100'></div>\n      </button>\n    </div>\n  )\n}",
+    "demoCode": "import Component from \"@/components/ui/subtle-button\";\n\nexport default function DemoOne() {\n  return <Component />;\n}\n",
+    "registryDependencies": {
+      "filesWithRegistry": {},
+      "npmDependencies": {}
+    },
+    "isPublic": true,
+    "registryTeamId": null,
+    "registryUserId": null
+  },
+  "quota": {
+    "tier": "paid",
+    "remaining": null,
+    "perDay": null,
+    "resetAt": null,
+    "upgradeUrl": null
+  }
+}

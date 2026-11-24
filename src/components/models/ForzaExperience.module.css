@@ -1630,6 +1630,21 @@
 }
 .configureEntrance .detailsButton svg { width: 18px; height: 18px; flex: none; }
 
+/* Repeated facts and detail copy use the existing reading face; model and feature
+   headings keep their company display face. Keep this local to Signature. */
+.configureEntrance .detailsButton,
+.introFacts span,
+.featureTopline > span:first-child,
+.featureCard > p,
+.staticFeatures article > p,
+.specRow span,
+.specRow strong,
+.noteCard > p,
+.noteCard strong {
+  font-family: "Manrope OKNO", Arial, sans-serif !important;
+  font-weight: 400 !important;
+}
+
 .phonePickers { display: none; }
 @media (max-width: 700px) {
   .scrollTrack.scrollTrack .stage {
@@ -1641,36 +1656,46 @@
     position: absolute;
     z-index: 16;
     inset: 84px 14px auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    display: flex;
+    justify-content: center;
     gap: 8px;
   }
   .phonePickers label {
     position: relative;
-    display: grid;
-    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 10px 17px;
     border: 1px solid rgb(244 241 233 / 24%);
-    border-radius: 7px;
+    border-radius: 999px;
     background: #101510;
     color: var(--ivory);
     color-scheme: dark;
   }
   .phonePickers label > span {
-    position: absolute;
-    top: 5px;
-    left: 10px;
-    color: var(--gold);
-    font: 12px/1.2 var(--okno-font-body);
+    font: 14px/1.2 "Manrope OKNO", Arial, sans-serif;
     pointer-events: none;
   }
+  .phonePickers label > svg {
+    width: 14px;
+    height: 14px;
+    color: var(--gold);
+    pointer-events: none;
+  }
+  .phonePickers label:focus-within {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
   .phonePickers select {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    min-height: 48px;
-    padding: 15px 6px 0;
-    border: 0;
-    background-color: transparent;
-    color: inherit;
-    font: 16px/1.25 var(--okno-font-body);
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    font: 16px/1.25 "Manrope OKNO", Arial, sans-serif;
   }
   .configureEntrance {
     right: 14px;
@@ -1698,3 +1723,6 @@
 @media (min-width: 1001px) {
   .intro { width: calc(100% - 470px); }
 }
+
+/* Keep the bento composition while showing every edge of portrait interiors. */
+.detailImage[data-portrait="true"] { object-fit: contain; }

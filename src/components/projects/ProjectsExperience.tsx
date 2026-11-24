@@ -1,5 +1,6 @@
 'use client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { motion, useInView, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import ProjectsHeader from './ProjectsHeader';
@@ -46,7 +47,6 @@ export default function ProjectsExperience({initialId='forrest',initialProjects=
   const scale=useTransform(progress,[0,.08,.34],[1,1,.012]);
   const globeOpacity=useTransform(progress,[.3,.36],[1,0]);
   const textOpacity=useTransform(progress,[0,.22],[1,0]);
-  const textY=useTransform(progress,[0,.3],[0,-70]);
   const radius=useTransform(progress,[.34,.76],[0,115]);
   const clipPath=useTransform(radius,value=>value>=114.99?'none':`circle(${value}% at var(--portal-x) var(--portal-y))`);
   // Full-device audit (11 November 2026): the title sat half outside the opening circle
@@ -54,18 +54,18 @@ export default function ProjectsExperience({initialId='forrest',initialProjects=
   const captionOpacity=useTransform(progress,[.62,.74],[0,1]);
   useMotionValueEvent(progress,'change',v=>setFilmActive(prev=>(v>.76)===prev?prev:v>.76));
   return <div className={styles.page} data-route="projects">
-    <div className={styles.silk} aria-hidden="true"><SilkBackground paused={(!reduced&&entered&&!introSettled)||(filmActive&&storyVisible)} maxPixels={180_000} fps={24} interactive={false}/></div>
+    <div className={styles.silk} aria-hidden="true"><SilkBackground paused={(!reduced&&entered&&!introSettled)||(filmActive&&storyVisible)} maxPixels={520_000} fps={24} interactive={false}/></div>
     <ProjectsSmoothScroll/><ProjectEntrance ready={ready} onComplete={onEntered}/><ProjectsHeader/>
     <main>
       <div ref={story} className={styles.story} data-reduced={!!reduced}>
         <div className={styles.collectionAnchor} id="collection"/>
         <div className={styles.sticky}>
           <section id="atlas" className={styles.hero} aria-labelledby="atlas-title" inert={!reduced&&filmActive}>
-            <motion.div className={styles.intro} data-type-section="projects.intro" data-project-intro style={{opacity:reduced?1:textOpacity,y:reduced?0:textY}}>
+            <motion.div className={styles.intro} data-type-section="projects.intro" data-project-intro style={{opacity:reduced?1:textOpacity}}>
               <motion.div initial={reduced?false:{opacity:0,y:12,filter:'blur(6px)'}} animate={{opacity:1,y:0,filter:'blur(0px)'}} transition={{duration:.5,ease:[.22,1,.36,1]}}>
                 <p data-type-field={"projects.intro.eyebrow"}>{eyebrow}</p><h1 id="atlas-title"><Typewriter text={title} start={entered} speed={38}>{content=><MorphingText>{content}</MorphingText>}</Typewriter></h1>
                 <p className={styles.subtitle} data-type-field={"projects.intro.subtitle"}>{subtitle}</p>
-                <MagneticLink href={projectContentHref(actionHref, '#collection')} className={styles.discover} aria-label={action}>{action} <span aria-hidden="true">↗</span></MagneticLink>
+                <MagneticLink href={projectContentHref(actionHref, '#collection')} className={styles.discover} aria-label={action}>{action} <span aria-hidden="true"><ArrowUpRight size={18} strokeWidth={1.7} /></span></MagneticLink>
               </motion.div>
             </motion.div>
             <div className={styles.globe} data-type-section="projects.globe-pins"><motion.div className={styles.globeInner} style={{scale:reduced?1:scale,opacity:reduced?1:globeOpacity}}><AtlasGlobe locations={pins} onReady={onReady} paused={!entered||filmActive}/></motion.div></div>

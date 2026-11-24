@@ -54,6 +54,45 @@ describe("ForzaExperience", () => {
       view.unmount();
     } finally { window.matchMedia = previous; }
   });
+  it("keeps the mobile Floor plan and Models pickers synchronized with details and configure links", async () => {
+    const previous = window.matchMedia;
+    window.matchMedia = vi.fn(query => ({ matches: query === "(max-width: 700px)", addEventListener: vi.fn(), removeEventListener: vi.fn() })) as unknown as typeof window.matchMedia;
+    const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => undefined);
+    try {
+      const view = render(<ForzaExperience models={signatureModels} />);
+      const plans = screen.getByRole("combobox", { name: "Floor plan" });
+      const models = screen.getByRole("combobox", { name: "Models" });
+      expect(plans).toBeEnabled();
+      expect(models).toBeEnabled();
+      expect(within(plans).getAllByRole("option").map(option => option.textContent)).toEqual([
+        "All", "Studio", "Two-bedroom", "Three-bedroom",
+      ]);
+
+      fireEvent.change(models, { target: { value: "kray" } });
+      expect(models).toHaveValue("kray");
+      await waitFor(() => expect(screen.getByRole("heading", { name: "Kray" })).toBeInTheDocument());
+
+      fireEvent.change(plans, { target: { value: "3-bhk" } });
+      expect(plans).toHaveValue("3-bhk");
+      expect(models).toHaveValue("tengo");
+      expect(within(models).getAllByRole("option")).toHaveLength(1);
+      await waitFor(() => expect(screen.getByRole("heading", { name: "Tengo" })).toBeInTheDocument());
+      expect(screen.getByRole("link", { name: "Configure yours — Tengo" })).toHaveAttribute(
+        "href", "/models/signature/tengo/configure?variant=3-bhk",
+      );
+
+      fireEvent.click(screen.getByRole("button", { name: "Explore details" }));
+      const dialog = screen.getByRole("dialog", { name: "Tengo" });
+      expect(within(dialog).getByRole("tab", { name: "Three-bedroom" })).toHaveAttribute("aria-selected", "true");
+      expect(within(dialog).getByRole("link", { name: "Configure yours — Tengo" })).toHaveAttribute(
+        "href", "/models/signature/tengo/configure?variant=3-bhk",
+      );
+      view.unmount();
+    } finally {
+      window.matchMedia = previous;
+      scrollTo.mockRestore();
+    }
+  });
   it("returns to the requested model and stable variant instead of reopening Forza", () => {
     render(<ForzaExperience models={signatureModels} initialModelSlug="kray" initialDetailsOpen initialVariantId="1-bhk" />);
     const dialog = screen.getByRole("dialog", { name: "Kray" });

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from 'react';
+import { ArrowUpRight } from "lucide-react";
 import Header from "../Header/Header";
 import { MagneticLink } from "../projects/21st/Magnetic";
 import { SilkBackground } from "../projects/21st/SilkBackground";
@@ -84,7 +85,7 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
               window.location.assign(event.currentTarget.href);
             }}
           >
-            {closingAction} <span aria-hidden="true">↗</span>
+            {closingAction} <span aria-hidden="true"><ArrowUpRight size={18} strokeWidth={1.7} /></span>
           </MagneticLink>
         </section>
       </div>

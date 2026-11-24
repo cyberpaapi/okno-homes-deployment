@@ -296,6 +296,10 @@
   text-transform: none;
 }
 .featureSource strong, .cardSource strong { font-weight: 400; }
+.blogImage[data-portrait="true"] { aspect-ratio: var(--photo-aspect); }
+.blogImage[data-portrait="true"] .blogImageDrift { inset: 0; }
+.blogImage[data-portrait="true"] img { object-fit: contain; }
+.blogArticle:hover .blogImage[data-portrait="true"] img { transform: none; }
 .eyebrow, .pressIntro > p, .marqueeCaption { font-family: var(--type-font-heading, var(--okno-font-heading)) !important; font-size: var(--okno-label); letter-spacing: .01em; }
 
 /* Phones (owner request, 10 November 2026): journal items were 380–540px tall. */
@@ -343,3 +347,26 @@
    smaller than this cap. */
 .publicationItem { padding-block: clamp(8px, 1vw, 14px); font-size: min(var(--type-size-heading, var(--okno-section)), clamp(14px, 2.1vw, 30px)); }
 .publicationItem .sourceMarkMonochrome { width: clamp(18px, 2vw, 30px); height: clamp(18px, 2vw, 30px); }
+
+/* Card dates share a stable lower-left baseline with the action on the right. */
+.cardCopy { padding-bottom: 60px; }
+.cardMeta {
+  position: absolute;
+  z-index: 2;
+  left: 22px;
+  right: 88px;
+  bottom: 21px;
+  flex-wrap: nowrap;
+  margin-top: 0;
+}
+.cardDate {
+  flex: none;
+  font: 400 12px/1.4 "Manrope OKNO", Arial, sans-serif !important;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.cardCredit { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.publicationMarquee { border-top: 0; border-bottom: 0; }
+.publicationItem { border-right: 0; }
+@media (max-width: 760px) { .cardMeta { left: 18px; bottom: 18px; right: 82px; } }
+@media (max-width: 430px) { .cardMeta { left: 14px; } }

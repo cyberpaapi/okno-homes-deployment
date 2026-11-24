@@ -1,5 +1,7 @@
 # Production deployment documentation
 
+Current owner-selected destination: [Render Free review](render-review-2026-11-24.md), configured in root `render.yaml`. This is a separate review deployment; historical Aryan production records below are references. Render idle wake-up, private CMS/storage and actual device acceptance remain explicit review boundaries.
+
 - [Implementation plan and subtask checklist](implementation-plan.md)
 - [Repository and runtime architecture](architecture.md)
 - [Deploy, storage and rollback operations](operations.md)

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import { pageImageLoader } from "@/lib/pageImageLoader";
 import {
   AnimatePresence,
@@ -27,6 +28,7 @@ import { configurationHref } from "@/lib/configuratorHref";
 import { resolveConfigurator } from "@/lib/configuratorSettings";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 import { parseSignatureFeatures, parseSignatureGallery, signatureModelDefaults, signaturePlanDefaults } from "@/lib/signatureCollections";
+import { useImageOrientation } from "@/lib/useImageOrientation";
 
 type PlanFilter = "all" | "studio" | "2-bhk" | "3-bhk";
 
@@ -972,16 +974,19 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             <p className={styles.investmentNote}>{get("investment-note", "Final investment depends on site, specification and finish.")}</p>
           </motion.div>
 
-          {/* compact becomes true after hydration, when the native pickers can update the house. */}
+          {/* Native selects retain platform options and keyboard access. The current
+              model and plan remain visible in the title and facts. */}
           <div className={styles.phonePickers}>
             <label>
               <span>Floor plan</span>
+              <ChevronDown aria-hidden="true" />
               <select disabled={!compact} value={planFilter} onChange={event => selectPlan(event.target.value as PlanFilter)}>
                 {planFilters.map(filter => <option key={filter.value} value={filter.value}>{get(`filter-${filter.value}`, filter.label)}</option>)}
               </select>
             </label>
             <label>
-              <span>Model</span>
+              <span>Models</span>
+              <ChevronDown aria-hidden="true" />
               <select disabled={!compact} value={activeModel.slug} onChange={event => selectModel(event.target.value)}>
                 {filteredModels.map(model => <option key={model.slug} value={model.slug}>{model.name}</option>)}
               </select>
@@ -1224,6 +1229,7 @@ function DetailsLayer({
   const configurationVariantId = exploreVariantId(model.slug, variantIndex);
   const galleryIndex = Math.max(0, gallery.findIndex(image => image.id === selectedGalleryId));
   const galleryImage = gallery[galleryIndex] ?? gallery[0]!;
+  const photograph = useImageOrientation(galleryImage.src);
   const variantDetails = [
     {
       label: get("detail.internal-area", "Internal area"),
@@ -1474,7 +1480,7 @@ function DetailsLayer({
               initial={
                 prefersReducedMotion
                   ? { opacity: 0 }
-                  : { opacity: 0, x: galleryDirection * 28, scale: 1.015 }
+                  : { opacity: 0, x: galleryDirection * 28, scale: photograph.portrait ? 1 : 1.015 }
               }
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={
@@ -1493,6 +1499,8 @@ function DetailsLayer({
                 fill
                 sizes="(max-width: 760px) 100vw, 58vw"
                 className={styles.detailImage}
+                data-portrait={photograph.portrait}
+                onLoad={photograph.onLoad}
               />
             </motion.div>
           </AnimatePresence>

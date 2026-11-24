@@ -13,10 +13,12 @@ import { type PublishedJournalArticle } from "@/lib/journalCollections";
 import { useJournalBlogPosts } from "@/lib/useJournalContent";
 import { useSiteContent } from "@/lib/useSiteContent";
 import styles from "./Journal.module.css";
+import { useImageOrientation } from "@/lib/useImageOrientation";
 
 function BlogCard({ post, index, actionLabel }: { post: PublishedJournalArticle; index: number; actionLabel: string }) {
   const card = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const photograph = useImageOrientation(post.image);
   const { scrollYProgress } = useScroll({ target: card, offset: ["start end", "end start"] });
   const imageY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
   return (
@@ -29,9 +31,9 @@ function BlogCard({ post, index, actionLabel }: { post: PublishedJournalArticle;
       transition={{ duration: reduced ? 0 : 0.85, delay: reduced ? 0 : (index % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
     >
       <Link className={styles.blogLink} href={`/journal/${post.id}`} aria-label={`${actionLabel} ${post.title}`}>
-        <div className={styles.blogImage}>
-          <motion.div className={styles.blogImageDrift} style={reduced ? undefined : { y: imageY }}>
-            {post.image ? <Image loader={thumbnailImageLoader} src={post.image} alt={post.imageAlt} fill sizes="(max-width: 760px) 92vw, (max-width: 1100px) 46vw, 30vw" /> : <span className={styles.missingImage}>Add a photograph before publishing</span>}
+        <div className={styles.blogImage} data-portrait={photograph.portrait} style={photograph.frameStyle}>
+          <motion.div className={styles.blogImageDrift} style={reduced || photograph.portrait ? undefined : { y: imageY }}>
+            {post.image ? <Image loader={thumbnailImageLoader} src={post.image} alt={post.imageAlt} fill sizes="(max-width: 760px) 92vw, (max-width: 1100px) 46vw, 30vw" onLoad={photograph.onLoad} /> : <span className={styles.missingImage}>Add a photograph before publishing</span>}
           </motion.div>
         </div>
         <div className={styles.blogCopy}>

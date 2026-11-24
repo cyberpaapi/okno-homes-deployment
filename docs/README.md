@@ -1,5 +1,7 @@
 # Final Showcase documentation map
 
+Current owner-reported responsive finishing: [24 November scope, causal corrections, retained source provenance and verification boundaries](responsive-finishing-2026-11-24.md). Work is in the supplied Work Drive release checkout; 3D configurator is frozen and any later deployment must use a separate owner-owned Vercel project.
+
 Current supplied walkthrough and addable-model editing: [Antigravity integration](configurator-antigravity-2026-10-31.md).
 
 Current loading and reliability audit: [fresh visits, supervised local preview, delivery checks and recovery fixes](reliability-review-2026-10-18.md).

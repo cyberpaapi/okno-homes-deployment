@@ -244,3 +244,12 @@
   .editorialProject:not(:first-child) .editorialImage { aspect-ratio: 4 / 3; }
   .editorialProject:last-child:nth-child(2n) .editorialImage { aspect-ratio: 21 / 9; }
 }
+
+/* CMS-selected portrait photographs are full frames, including wide-screen rows. */
+.editorialProject .editorialImage[data-portrait="true"] {
+  aspect-ratio: var(--photo-aspect) !important;
+  max-width: min(100%, calc(85svh * var(--photo-aspect)));
+  margin-inline: auto;
+}
+.editorialImage[data-portrait="true"] img { object-fit: contain; }
+.editorialProject:hover .editorialImage[data-portrait="true"] img { transform: none; }

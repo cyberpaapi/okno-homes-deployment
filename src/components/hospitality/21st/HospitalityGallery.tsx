@@ -6,6 +6,14 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./HospitalityGallery.module.css";
+import { useImageOrientation } from "@/lib/useImageOrientation";
+
+function EditorialPhotograph({ src, alt }: { src: string; alt: string }) {
+  const photograph = useImageOrientation(src);
+  return <span className={styles.editorialImage} data-portrait={photograph.portrait} style={photograph.frameStyle}>
+    <Image loader={pageImageLoader} src={src} alt={alt} fill sizes="(max-width: 700px) 100vw, 70vw" onLoad={photograph.onLoad} />
+  </span>;
+}
 import type { SelectedHospitalityProject } from '@/data/hospitalitySelectedWork';
 
 export type HospitalityProject = SelectedHospitalityProject;
@@ -141,7 +149,7 @@ export function HospitalityGallery({ projects }: { projects: HospitalityProject[
             aria-label={`View ${project.name} photography`}
             data-magnetic-ignore
           >
-            <span className={styles.editorialImage}><Image loader={pageImageLoader} src={project.image} alt={project.alt} fill sizes="(max-width: 700px) 100vw, 70vw" /></span>
+            <EditorialPhotograph src={project.image} alt={project.alt} />
             <span className={styles.editorialCaption}><span>{project.name}</span><span className={styles.editorialArrow} aria-hidden="true"><Arrow direction="open" /></span></span>
           </button>)}
         </div>

@@ -65,3 +65,6 @@
 .panel { container-type: size; }
 .panel[data-path="signature"] { container: pathcard / size; }
 .content h2 { font-size: min(var(--type-size-display, var(--okno-section)), 9cqi); overflow-wrap: normal; word-break: keep-all; }
+
+.arrow { flex: none; }
+.arrow svg { display: block; }

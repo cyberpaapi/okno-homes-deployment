@@ -10,6 +10,14 @@ import { useJournalBlogPosts } from "@/lib/useJournalContent";
 import { journalSectionAnchorId, type JournalContentItem } from "@/lib/journalCollections";
 import { useSiteContent } from "@/lib/useSiteContent";
 import styles from "./JournalArticle.module.css";
+import { useImageOrientation } from "@/lib/useImageOrientation";
+
+function ArticlePhotograph({ src, alt, hero = false }: { src: string; alt: string; hero?: boolean }) {
+  const photograph = useImageOrientation(src);
+  return <div className={hero ? styles.heroImage : styles.inlineImage} data-portrait={photograph.portrait} style={photograph.frameStyle}>
+    {src ? <Image loader={pageImageLoader} src={src} alt={alt} fill priority={hero} sizes={hero ? "100vw" : "(max-width: 780px) 100vw, 760px"} onLoad={photograph.onLoad} /> : <span className={styles.missingImage}>Add a photograph before publishing</span>}
+  </div>;
+}
 
 export default function JournalArticle({ slug, initialItems }: { slug: string; initialItems?: JournalContentItem[] }) {
   const posts = useJournalBlogPosts(initialItems);
@@ -43,7 +51,7 @@ export default function JournalArticle({ slug, initialItems }: { slug: string; i
       </header>
 
       <figure className={styles.heroFigure}>
-        <div className={styles.heroImage}>{post.image ? <Image loader={pageImageLoader} src={post.image} alt={post.imageAlt} fill priority sizes="100vw" /> : <span className={styles.missingImage}>Add a photograph before publishing</span>}</div>
+        <ArticlePhotograph src={post.image} alt={post.imageAlt} hero />
         {post.heroCaption && <figcaption>{post.heroCaption}</figcaption>}
       </figure>
 
@@ -57,7 +65,7 @@ export default function JournalArticle({ slug, initialItems }: { slug: string; i
               </section>
               {section.image && (
                 <figure className={styles.inlineFigure}>
-                  <div className={styles.inlineImage}><Image loader={pageImageLoader} src={section.image} alt={section.imageAlt ?? ""} fill sizes="(max-width: 780px) 100vw, 760px" /></div>
+                  <ArticlePhotograph src={section.image} alt={section.imageAlt ?? ""} />
                   {section.imageCaption && <figcaption>{section.imageCaption}</figcaption>}
                 </figure>
               )}

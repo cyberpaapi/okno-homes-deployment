@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { Play, X } from 'lucide-react';
 import type { AtlasProject } from '@/data/projectAtlas';
 import styles from './ProjectCinema.module.css';
 export function ProjectFilmDialog({ project, onOpenChange }: { project: AtlasProject; onOpenChange?: (open: boolean) => void }) {
@@ -35,12 +36,12 @@ export function ProjectFilmDialog({ project, onOpenChange }: { project: AtlasPro
   },[visibleOpen,onOpenChange]);
   if (!film) return null;
   const close = () => { setOpen(false);onOpenChange?.(false); };
-  return <><button ref={trigger} type="button" className={styles.watch} onClick={() => { setOpen(true);onOpenChange?.(true); }} aria-label={`Watch ${project.title} films`}><span className={styles.play} aria-hidden="true">▷</span></button>
+  return <><button ref={trigger} type="button" className={styles.watch} onClick={() => { setOpen(true);onOpenChange?.(true); }} aria-label={`Watch ${project.title} films`}><span className={styles.play} aria-hidden="true"><Play size={18} /></span></button>
     {typeof document !== 'undefined' && createPortal(<AnimatePresence>{visibleOpen && <motion.div className={styles.backdrop} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} onClick={close}>
       <motion.div ref={dialog} role="dialog" aria-modal="true" aria-label={`${project.title} film player`} tabIndex={-1} className={styles.dialog} onClick={event=>event.stopPropagation()} initial={reduced ? false : {scale:.5,opacity:0}} animate={{scale:1,opacity:1}} exit={{scale:reduced ? 1 : .9,opacity:0}} transition={{type:'spring',damping:30,stiffness:300}}>
-        <div className={styles.dialogHeader}><span>{project.title} </span><button type="button" onClick={close} aria-label="Close film">×</button></div>
+        <div className={styles.dialogHeader}><span>{project.title} </span><button type="button" onClick={close} aria-label="Close film"><X size={20} aria-hidden="true" /></button></div>
         <video key={film.src} src={film.src} poster={film.poster} controls playsInline autoPlay preload="metadata" aria-label={film.title} />
-        {project.films.length>1 && <div className={styles.filmChoices} aria-label="Project films">{project.films.map((item,i)=><button type="button" key={item.src} aria-pressed={visibleIndex===i} aria-label={`Play ${item.title}`} onClick={()=>setIndex(i)}><span aria-hidden="true">▷</span> {item.title}</button>)}</div>}
+        {project.films.length>1 && <div className={styles.filmChoices} aria-label="Project films">{project.films.map((item,i)=><button type="button" key={item.src} aria-pressed={visibleIndex===i} aria-label={`Play ${item.title}`} onClick={()=>setIndex(i)}><Play size={16} aria-hidden="true" style={{ display: 'inline', verticalAlign: 'middle' }} /> {item.title}</button>)}</div>}
       </motion.div>
     </motion.div>}</AnimatePresence>,document.body)}
   </>;

@@ -27,3 +27,6 @@
   .page { --globe-w: min(350px, 88vw, calc(max(100svh, 690px) - 400px)); --portal-y: calc(372px + var(--globe-w) / 2); }
   .globe { width: var(--globe-w); }
 }
+
+.discover > span { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.discover > span svg { display: block; }

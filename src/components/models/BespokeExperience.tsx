@@ -6,6 +6,7 @@
 // Aurora Background (18263), and Preloader (13967). The page uses the single
 // site-wide 21st.dev fluid cursor rather than mounting a second local cursor.
 import Image from "next/image";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import {
   AnimatePresence, MotionConfig, motion,
@@ -132,7 +133,7 @@ export default function BespokeExperience() {
             {currentStages.map((stage, index) => <article id={`decision-${index}`} key={index} className={styles.horizontalPanel} data-type-section={`bespoke.decision-${index + 1}`} data-tone={stage.tone}>
               <div className={styles.panelHeading}><h2 id={index === 0 ? "decisions-title" : undefined}>{stage.label}</h2></div>
               <figure className={styles.panelMedia}><Image loader={previewImageLoader} src={stage.image} alt={stage.alt} fill sizes="(max-width: 800px) 100vw, 62vw" className={styles.image} /></figure>
-              <div className={styles.panelCaption}><div><p>{stage.detail}</p><strong>{stage.copy}</strong></div><button type="button" onClick={() => moveToDecision(index + 1)} aria-label={`${get("stages.next-action", "Next step")}: ${index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}`}><span data-type-field={"models.bespoke.stages.next-action"}>{get("stages.next-action", "Next step")}</span><b data-type-field={"models.bespoke.result.eyebrow"}>{index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}</b><i aria-hidden="true">→</i></button></div>
+              <div className={styles.panelCaption}><div><p>{stage.detail}</p><strong>{stage.copy}</strong></div><button type="button" onClick={() => moveToDecision(index + 1)} aria-label={`${get("stages.next-action", "Next step")}: ${index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}`}><span data-type-field={"models.bespoke.stages.next-action"}>{get("stages.next-action", "Next step")}</span><b data-type-field={"models.bespoke.result.eyebrow"}>{index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}</b><i aria-hidden="true"><ArrowRight size={18} strokeWidth={1.7} /></i></button></div>
             </article>)}
           </motion.div></div>
         </section>
@@ -146,7 +147,7 @@ export default function BespokeExperience() {
           </div>
         </section>
         <section className={styles.closing} aria-label="Begin your Bespoke home" data-type-section="bespoke.result">
-          <MagneticLink href={localDestination(get("closing.href", "/enquiry?intent=home&model=bespoke"), "/enquiry?intent=home&model=bespoke")}>{get("closing.action", "Begin crafting")} <span aria-hidden="true">↗</span></MagneticLink>
+          <MagneticLink href={localDestination(get("closing.href", "/enquiry?intent=home&model=bespoke"), "/enquiry?intent=home&model=bespoke")}>{get("closing.action", "Begin crafting")} <span aria-hidden="true"><ArrowUpRight size={18} strokeWidth={1.7} /></span></MagneticLink>
         </section>
         {lakewood && lakewood.gallery.length > 0 && <section className={styles.gallery} aria-labelledby="bespoke-gallery-title">
           <p className={styles.kicker}>{get("gallery.label", "Bespoke projects")}</p>

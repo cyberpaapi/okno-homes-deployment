@@ -24,7 +24,9 @@
 }
 
 .label {
-  transform: translateX(7px);
+  display: block;
+  line-height: 1;
+  transform: translateX(0);
   transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), opacity 250ms ease;
 }
 
@@ -40,6 +42,7 @@
   transform: translateX(14px);
   transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
 }
+.reveal svg { display: block; flex: none; }
 
 .button:hover .dot,
 .button:focus-visible .dot {

@@ -296,6 +296,11 @@
   pointer-events: none;
 }
 
+/* Presence animations retain departing chapters. Keep the story and final
+   evidence heading in mutually exclusive visible phases, including reversal. */
+.stickyViewport[data-scene="fog"] .storyStage { visibility: hidden; }
+.evidenceStage[aria-hidden="true"] { visibility: hidden; }
+
 .evidenceHeading {
   grid-column: 2;
   grid-row: 1;
@@ -348,8 +353,8 @@
 }
 
 @media (max-width: 820px) {
-  .scrollTrack { height: 680svh; }
-  .stickyViewport { min-height: 560px; }
+  .scrollTrack { height: 480svh; }
+  .stickyViewport { height: 100svh; min-height: 0; }
   .header {
     display: none;
     grid-template-columns: 1fr auto auto;
@@ -432,12 +437,49 @@
 
   .evidenceStage {
     inset: 76px 22px 0;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-block: 36px 40px;
   }
-  .evidenceHeading { grid-column: 1; grid-row: 1; align-self: end; margin-bottom: 24px; }
+  .evidenceHeading { align-self: flex-start; margin-bottom: 0; }
   .evidenceHeading h2 { font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
-  .evidenceCopy { grid-column: 1; grid-row: 2; max-width: min(450px, 86vw); margin-bottom: 48px; }
+  .evidenceCopy { align-self: flex-start; max-width: min(450px, 86vw); margin: 0; }
+}
+
+/* The supplied film is landscape. Keep its whole frame on portrait screens and
+   reserve the surrounding forest surface for the narrative instead of cropping it. */
+@media (max-width: 820px) and (orientation: portrait) {
+  .mediaStage {
+    inset: auto 0;
+    top: 53%;
+    aspect-ratio: 16 / 9;
+    transform: translateY(-50%);
+  }
+  .sharedPoster { background-size: contain; transform: none; }
+  .mediaVideo { object-fit: contain; transform: none; }
+  .fogVideo { transform: none; }
+  .scanField { display: none; }
+}
+
+@media (max-height: 620px) {
+  .stickyViewport { height: 100svh; min-height: 0; }
+  .heroContent, .storyStage { top: 64px; }
+  .heroTitle { top: 20px; width: 58%; }
+  .heroIntro { right: 0; bottom: 24px; left: auto; max-width: 34%; }
+  .heroIntro > p { margin: 0; line-height: 1.25; }
+  .storyPanel { top: 24px; width: min(600px, 70vw); }
+  .evidenceStage {
+    inset: 64px 24px 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 0;
+  }
+  .evidenceHeading { align-self: flex-start; margin: 24px 0 0; }
+  .evidenceCopy { align-self: flex-end; max-width: 42%; margin: 0; line-height: 1.25; }
 }
 
 @media (max-width: 520px) {

@@ -78,3 +78,14 @@
   .sideBlock nav { gap: 28px; }
   .sideBlock nav a { padding-block: 14px; margin-block: -14px; }
 }
+
+/* Editorial portraits keep the full original composition at every breakpoint. */
+.heroImage[data-portrait="true"],
+.inlineImage[data-portrait="true"] {
+  aspect-ratio: var(--photo-aspect);
+  min-height: 0;
+  max-width: min(100%, calc(85svh * var(--photo-aspect)));
+  margin-inline: auto;
+}
+.heroImage[data-portrait="true"] img,
+.inlineImage[data-portrait="true"] img { object-fit: contain; }

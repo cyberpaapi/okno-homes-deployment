@@ -4,6 +4,7 @@
 // Reveal Text by isaiahBjork (2491), and the route handoff combines the
 // Preloader (13967) with Morph Loading by jatin-yadav05 (4588).
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { pageImageLoader } from "@/lib/pageImageLoader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -128,7 +129,7 @@ export default function ModelPathPanels({ onReady }: { onReady?: () => void }) {
               <h2><RevealTitle delay={.14 + index * .08}>{path.title}</RevealTitle></h2>
               <div className={styles.meta}>
                 <p>{path.description}</p>
-                <span className={styles.action} data-models-magnetic><span>{path.action}</span><span className={styles.arrow} aria-hidden="true">↗</span></span>
+                <span className={styles.action} data-models-magnetic><span>{path.action}</span><span className={styles.arrow} aria-hidden="true"><ArrowUpRight size={18} strokeWidth={1.7} /></span></span>
               </div>
             </div>
           </Link>

@@ -285,3 +285,8 @@
   .panelCaption > div { max-width: 640px; padding: 0; background: transparent; border: 0; box-shadow: none; backdrop-filter: none; }
   .panelCaption button { justify-self: start; }
 }
+
+/* Icon geometry is independent of the company font's arrow glyphs. */
+.panelCaption button i { flex: none; }
+.panelCaption button i svg,
+.closing a > span svg { display: block; flex: none; }

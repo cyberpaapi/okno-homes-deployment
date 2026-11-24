@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { previewImageLoader } from "@/lib/thumbnailImageLoader";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
@@ -20,8 +20,7 @@ type PressItem = {
   title: string;
   image: string;
   alt: string;
-  enter: number;
-  imageRange: [number, number, number, number];
+  imageRange: [number, number];
 };
 
 type ProjectFact = {
@@ -36,8 +35,7 @@ const pressItems: PressItem[] = [
     title: "A 300-square-foot holiday home that is one with nature.",
     image: "/sustainability/reflections-forest-exterior.jpg",
     alt: "Reflections cabin elevated among dense forest trees",
-    enter: 0.2,
-    imageRange: [0.1, 0.17, 0.25, 0.31],
+    imageRange: [0, 0.01],
   },
   {
     source: "New Atlas",
@@ -45,8 +43,7 @@ const pressItems: PressItem[] = [
     title: "A mirrored tiny house with a bed that slides under the stars.",
     image: "/sustainability/reflections-deck-bed-detail.jpg",
     alt: "Motorized bed extended onto the Reflections forest deck",
-    enter: 0.36,
-    imageRange: [0.27, 0.33, 0.41, 0.47],
+    imageRange: [0.27, 0.33],
   },
   {
     source: "HomeCrux",
@@ -54,8 +51,7 @@ const pressItems: PressItem[] = [
     title: "A modular holiday home blurring indoor and outdoor.",
     image: "/sustainability/reflections-bedroom.jpg",
     alt: "Wood-lined Reflections bedroom opening toward the forest",
-    enter: 0.52,
-    imageRange: [0.43, 0.49, 0.57, 0.63],
+    imageRange: [0.43, 0.49],
   },
   {
     source: "Architecture+Design",
@@ -63,8 +59,7 @@ const pressItems: PressItem[] = [
     title: "A home among the trees, where nature and the built meld as one.",
     image: "/sustainability/reflections-mirrored-deck.jpg",
     alt: "Mirrored glass facade and deck of the Reflections cabin among trees",
-    enter: 0.68,
-    imageRange: [0.59, 0.65, 0.74, 0.8],
+    imageRange: [0.59, 0.65],
   },
 ];
 
@@ -76,41 +71,44 @@ const projectFacts: ProjectFact[] = [
 ];
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
+const finalImageRange = [0.71, 0.77];
+// Complete the opening before the photograph and reading panel enter.
+const openingExit = 0.055;
+
+function activePressAt(progress: number) {
+  if (progress >= finalImageRange[1]) return -1;
+  // Switch the reading panel when the incoming photograph becomes dominant.
+  return pressItems.reduce((active, item, index) =>
+    progress >= (item.imageRange[0] + item.imageRange[1]) / 2 ? index : active, 0);
+}
 
 function PressImage({ item, progress }: { item: PressItem; progress: MotionValue<number> }) {
-  const opacity = useTransform(progress, item.imageRange, [0, 1, 1, 0]);
+  // Each photograph covers the previous one, which stays opaque underneath.
+  // Independent fade-outs exposed the black stage between photographs.
+  const opacity = useTransform(progress, item.imageRange, item.index === 0 ? [1, 1] : [0, 1]);
 
   return (
-    <motion.div className={styles.imageLayer} style={{ opacity }}>
-      <Image loader={previewImageLoader} src={item.image} alt={item.alt} fill sizes="(max-width: 820px) 100vw, 62vw" quality={60} />
+    <motion.div className={styles.imageLayer} data-press-image={(item.index ?? 0) + 1} style={{ opacity }}>
+      <Image loader={previewImageLoader} src={item.image} alt={item.alt} fill sizes="(max-width: 1100px) 100vw, 62vw" quality={60} />
     </motion.div>
   );
 }
 
 function PressCitation({
   item,
-  progress,
-  reducedMotion,
+  active,
 }: {
   item: PressItem;
-  progress: MotionValue<number>;
-  reducedMotion: boolean;
+  active: boolean;
 }) {
-  const opacity = useTransform(progress, [item.enter, item.enter + 0.045], [0, 1]);
-  const y = useTransform(
-    progress,
-    [item.enter, item.enter + 0.055],
-    reducedMotion ? [0, 0] : [14, 0],
-  );
-
   return (
-    <motion.article className={styles.pressCitation} data-type-section={`sustainability.press-${(item.index ?? 0) + 1}`} style={{ opacity, y }}>
+    <article className={styles.pressCitation} data-type-section={`sustainability.press-${(item.index ?? 0) + 1}`} data-active={active} hidden={!active}>
       <div className={styles.citationMeta}>
         <strong>{item.source}</strong>
         <time>{item.date}</time>
       </div>
       <h4>{item.title}</h4>
-    </motion.article>
+    </article>
   );
 }
 
@@ -132,6 +130,8 @@ export default function SustainabilityProof() {
     label: get(`fact-${index + 1}.label`, item.label),
   }));
   const trackRef = useRef<HTMLElement>(null);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const [activePress, setActivePress] = useState(0);
   const reducedMotion = Boolean(useReducedMotion());
   const scrollYProgress = useMotionValue(0);
 
@@ -142,8 +142,13 @@ export default function SustainabilityProof() {
     let frame = 0;
     const update = () => {
       const rect = track.getBoundingClientRect();
-      const distance = Math.max(track.offsetHeight - window.innerHeight, 1);
-      scrollYProgress.set(clamp(-rect.top / distance));
+      const distance = Math.max(track.offsetHeight - (sceneRef.current?.offsetHeight ?? window.innerHeight), 1);
+      const progress = clamp(-rect.top / distance);
+      scrollYProgress.set(progress);
+      setActivePress(current => {
+        const next = activePressAt(progress);
+        return current === next ? current : next;
+      });
       frame = 0;
     };
     const requestUpdate = () => {
@@ -162,46 +167,41 @@ export default function SustainabilityProof() {
 
   const openingOpacity = useTransform(
     scrollYProgress,
-    [0, 0.035, 0.11, 0.17],
-    [0, 1, 1, 0],
+    [0, 0.02, openingExit],
+    [1, 1, 0],
   );
   const openingY = useTransform(
     scrollYProgress,
-    [0, 0.17],
+    [0, openingExit],
     reducedMotion ? [0, 0] : [22, -28],
   );
-  const proofOpacity = useTransform(scrollYProgress, [0.15, 0.22], [0, 1]);
+  const proofOpacity = useTransform(scrollYProgress, [openingExit, 0.1], [0, 1]);
   const pressOpacity = useTransform(
     scrollYProgress,
-    [0.14, 0.2, 0.78, 0.84],
-    [0, 1, 1, 0],
-  );
-  const pressY = useTransform(
-    scrollYProgress,
-    [0.14, 0.21, 0.78, 0.84],
-    reducedMotion ? [0, 0, 0, 0] : [22, 0, 0, -18],
+    [0, ...finalImageRange],
+    [1, 1, 0],
   );
   const sheetY = useTransform(
     scrollYProgress,
-    [0.82, 0.9],
+    [0.8, 0.88],
     reducedMotion ? ["0%", "0%"] : ["100%", "0%"],
   );
   const sheetOpacity = useTransform(
     scrollYProgress,
-    reducedMotion ? [0.84, 0.85] : [0, 1],
+    reducedMotion ? [0.8, 0.81] : [0, 1],
     reducedMotion ? [0, 1] : [1, 1],
   );
-  const sheetContentOpacity = useTransform(scrollYProgress, [0.86, 0.93], [0, 1]);
+  const sheetContentOpacity = useTransform(scrollYProgress, [0.82, 0.9], [0, 1]);
   const sheetContentY = useTransform(
     scrollYProgress,
-    [0.86, 0.93],
+    [0.82, 0.9],
     reducedMotion ? [0, 0] : [28, 0],
   );
-  const finalImageOpacity = useTransform(scrollYProgress, [0.75, 0.82], [0, 1]);
+  const finalImageOpacity = useTransform(scrollYProgress, finalImageRange, [0, 1]);
 
   return (
-    <section ref={trackRef} className={styles.track} data-type-section="sustainability.proof" aria-labelledby="press-proof-heading">
-      <div className={styles.stickyScene}>
+    <section ref={trackRef} className={styles.track} data-type-section="sustainability.proof" data-active-press={activePress < 0 ? "closing" : activePress + 1} aria-labelledby="press-proof-heading">
+      <div ref={sceneRef} className={styles.stickyScene}>
         <div className={styles.blackField} aria-hidden="true" />
 
         <motion.div className={styles.opening} style={{ opacity: openingOpacity, y: openingY }}>
@@ -225,7 +225,7 @@ export default function SustainabilityProof() {
                   src={get("final-image", "/sustainability/reflections-forest-bath.jpg")}
                   alt={get("final-alt", "Forest-facing deck and outdoor bath at the Reflections cabin")}
                   fill
-                  sizes="(max-width: 820px) 100vw, 62vw"
+                  sizes="(max-width: 1100px) 100vw, 62vw"
                   quality={60}
                 />
               </motion.div>
@@ -234,7 +234,7 @@ export default function SustainabilityProof() {
           </figure>
 
           <aside className={styles.proofSidebar}>
-            <motion.div className={styles.pressStage} style={{ opacity: pressOpacity, y: pressY }}>
+            <motion.div className={styles.pressStage} style={{ opacity: pressOpacity }}>
               <div className={styles.sideCopy}>
                 <h3 data-type-field={"sustainability.proof.press-heading"}>{get("press-heading", "Reflections travelled beyond the forest.")}</h3>
                 <p>{get("model-note", "Reflections, built on our Kioo model.")}</p>
@@ -246,8 +246,7 @@ export default function SustainabilityProof() {
                   <PressCitation
                     key={index}
                     item={item}
-                    progress={scrollYProgress}
-                    reducedMotion={reducedMotion}
+                    active={index === activePress}
                   />
                 ))}
               </div>

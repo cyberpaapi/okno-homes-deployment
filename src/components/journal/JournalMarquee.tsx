@@ -25,11 +25,11 @@ function JournalCard({ entry, duplicate = false, actionVerb }: { entry: JournalE
           {entry.source && <strong>{entry.source}</strong>}
         </p>}
         <h3>{entry.title}</h3>
-        {(entry.date || entry.credit) && <div className={styles.cardMeta}>
-          {entry.date && <p className={styles.cardDate}>{entry.date}</p>}
-          {entry.credit && <p className={styles.cardCredit}>{entry.credit}</p>}
-        </div>}
       </div>
+      {(entry.date || entry.credit) && <div className={styles.cardMeta}>
+        {entry.date && <p className={styles.cardDate}>{entry.date}</p>}
+        {entry.credit && <p className={styles.cardCredit} title={entry.credit}>{entry.credit}</p>}
+      </div>}
       <div className={styles.cardAction}>
         <JournalArrowLink
           href={entry.href}

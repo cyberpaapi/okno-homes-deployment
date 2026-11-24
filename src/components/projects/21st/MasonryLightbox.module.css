@@ -12,3 +12,18 @@
 .grid[data-even=true] .tile:last-child:nth-child(odd){grid-column:1 / -1;aspect-ratio:21/9}
 @media(max-width:600px){.grid[data-even=true]{grid-template-columns:1fr;gap:16px}
 .grid[data-even=true] .tile:last-child:nth-child(odd){aspect-ratio:4/3}}
+
+/* Drawn arrows remain centred independently of font metrics and UA padding. */
+.navigation > button,
+.close { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; }
+.navigation > button svg,
+.close svg { display: block; flex: none; }
+
+/* Equal landscape rows must not turn a portrait photograph into a wide crop. */
+.grid[data-even="true"] .tile[data-portrait="true"],
+.grid[data-even="true"] .tile[data-portrait="true"]:last-child:nth-child(odd) {
+  aspect-ratio: var(--photo-aspect);
+  grid-column: auto;
+}
+.grid[data-even="true"] .tile[data-portrait="true"] img { height: 100%; object-fit: contain; }
+.tile[data-portrait="true"]:hover img { transform: none; }

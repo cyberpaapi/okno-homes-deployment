@@ -432,10 +432,10 @@ export function SilkBackground({ className, paused = false, maxPixels = 900_000,
       const rawHeight = Math.max(1, Math.round(bounds.height * dpr))
       const pixelScale = Math.min(
         1,
-        Math.sqrt((window.innerWidth <= 700 ? Math.min(maxPixels, 160_000) : maxPixels) / Math.max(1, rawWidth * rawHeight)),
+        Math.sqrt(maxPixels / Math.max(1, rawWidth * rawHeight)),
       )
-      const width = Math.max(1, Math.round(rawWidth * pixelScale))
-      const height = Math.max(1, Math.round(rawHeight * pixelScale))
+      const width = Math.max(1, Math.floor(rawWidth * pixelScale))
+      const height = Math.max(1, Math.floor(rawHeight * pixelScale))
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width
         canvas.height = height

@@ -100,7 +100,7 @@ export default function SustainabilityJourney() {
     let previousScrubTime = performance.now();
     const compactViewport = window.matchMedia("(max-width: 820px)");
     const journeyVideo = journeyVideoRef.current;
-    const journeyEnabled = Boolean(journeyVideo && !prefersReducedMotion && !compactViewport.matches);
+    const journeyEnabled = Boolean(journeyVideo && !prefersReducedMotion);
     const sourceFrameRate = 24;
     const sourceFrameDuration = 1 / sourceFrameRate;
 
@@ -112,7 +112,7 @@ export default function SustainabilityJourney() {
 
       const elapsed = Math.min((now - previousScrubTime) / 1000, 0.05);
       previousScrubTime = now;
-      const damping = 1 - Math.exp(-elapsed * 5.2);
+      const damping = 1 - Math.exp(-elapsed * (compactViewport.matches ? 10 : 5.2));
       smoothedJourneyProgress +=
         (targetJourneyProgress - smoothedJourneyProgress) * damping;
 
@@ -166,7 +166,7 @@ export default function SustainabilityJourney() {
 
     const update = () => {
       const rect = track.getBoundingClientRect();
-      const distance = Math.max(track.offsetHeight - window.innerHeight, 1);
+      const distance = Math.max(track.offsetHeight - viewport.offsetHeight, 1);
       const progress = clamp(-rect.top / distance);
       const nextScene = sceneFromProgress(progress);
 
@@ -178,7 +178,7 @@ export default function SustainabilityJourney() {
       );
       viewport.style.setProperty("--fog-treatment", range(progress, 0.785, 0.87).toFixed(4));
 
-      if (prefersReducedMotion || compactViewport.matches) {
+      if (prefersReducedMotion) {
         viewport.style.setProperty("--idle-opacity", progress < 0.75 ? "1" : "0");
         viewport.style.setProperty("--journey-opacity", "0");
         viewport.style.setProperty("--fog-opacity", progress >= 0.75 ? "1" : "0");

@@ -8,6 +8,7 @@ import { downloadHeroMedia } from '@/lib/downloadHeroMedia';
 import { isEmbeddedSitePreview } from '@/lib/sitePreview';
 import { ProcessPlayhead, processFilmProgress } from '@/lib/processScrub';
 import { PROCESS_END_TIME, PROCESS_FPS, processFinishOpacity, processPresentationPackets } from '@/lib/processChapters';
+import styles from './Process.module.css';
 
 type Controller = { setTime(time: number): void; dispose(): void };
 type Props = {
@@ -136,7 +137,7 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
     return () => { element.removeEventListener('loadeddata', ready); element.removeEventListener('seeked', presented); scrubber.dispose(); controller.current = null; };
   }, [nativeSource, onReady, present]);
 
-  return <div ref={surface} style={{ position: 'absolute', inset: 0 }}>{nativeSource
+  return <div ref={surface} className={styles.filmSurface} data-process-film-surface>{nativeSource
     ? <video ref={video} className={className} src={nativeSource} poster={poster} muted playsInline preload="auto" aria-label={label} data-process-master-video data-film-renderer="native" onError={() => { onReady(false); onLoadProgress?.(null); }} />
     : <canvas ref={canvas} className={className} width={1920} height={1080} role="img" aria-label={label} data-process-master-video data-film-renderer="frames" />}
     <picture style={{ position: 'absolute', inset: 0 }}>

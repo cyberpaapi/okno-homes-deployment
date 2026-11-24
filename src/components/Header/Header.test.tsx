@@ -5,7 +5,8 @@ import ModelsHeader from "../models/ModelsHeader";
 import ProjectsHeader from "../projects/ProjectsHeader";
 import ProcessNavigation from "../process/21st/ProcessNavigation";
 
-vi.mock("next/navigation", () => ({ usePathname: () => "/process" }));
+const navigation = vi.hoisted(() => ({ pathname: "/process" }));
+vi.mock("next/navigation", () => ({ usePathname: () => navigation.pathname }));
 
 function openMenu() {
   const trigger = screen.getByRole("button", { name: "Open navigation" });
@@ -14,6 +15,15 @@ function openMenu() {
 }
 
 describe("shared Models/Projects header", () => {
+  it("keeps configurator header presentation outside public menu changes", () => {
+    navigation.pathname = "/models/signature/forza/configure";
+    try {
+      const { container } = render(<Header currentHref="/models" />);
+      expect(container.querySelector("header")).toHaveAttribute("data-public-site", "false");
+      expect(screen.getByRole("button", { name: "Open navigation" })).toHaveStyle({ width: "100px" });
+    } finally { navigation.pathname = "/process"; }
+  });
+
   it("uses the same navigation and source magnetic enquiry action", () => {
     render(<Header />);
     expect(screen.getByRole("link", { name: "OKNO Modhomes home" })).toHaveAttribute("href", "/");

@@ -33,7 +33,7 @@ function RollingLink({ href, label, current, onClick }: Item & { current?: boole
   );
 }
 
-function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLabel, mobileNavigationLabel, openAccessible, closeAccessible, compactForCopy }: { items: Item[]; currentHref: string; menuLabel: string; closeLabel: string; navigationLabel: string; mobileNavigationLabel: string; openAccessible: string; closeAccessible: string; compactForCopy: boolean }) {
+function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLabel, mobileNavigationLabel, openAccessible, closeAccessible, compactForCopy, publicSite }: { items: Item[]; currentHref: string; menuLabel: string; closeLabel: string; navigationLabel: string; mobileNavigationLabel: string; openAccessible: string; closeAccessible: string; compactForCopy: boolean; publicSite: boolean }) {
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const [viewport, setViewport] = useState({ width: 1024, height: 768 });
@@ -94,7 +94,10 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
   const expandedHeight = phone
     ? Math.max(280, Math.min(viewport.height - 32, 64 + items.length * 44 + (items.length - 1) * 4 + 18))
     : Math.max(280, Math.min(640, viewport.height - 32));
-  const collapsedWidth = Math.max(100, Math.min(220, Math.max(menuLabel.length, closeLabel.length) * 9 + 52));
+  const labelLength = Math.max(menuLabel.length, closeLabel.length);
+  const collapsedWidth = publicSite
+    ? Math.max(92, Math.min(220, viewport.width - 32, labelLength * 8 + 48))
+    : Math.max(100, Math.min(220, labelLength * 9 + 52));
   return (
     <div className={styles.menuPosition} ref={root} style={{ width: collapsedWidth }}>
       <motion.div
@@ -104,7 +107,7 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
         aria-modal={open || undefined}
         aria-label={open ? navigationLabel : undefined}
         initial={false}
-        animate={{ width: open ? expandedWidth : collapsedWidth, height: open ? expandedHeight : 46, borderRadius: open ? 24 : 30 }}
+        animate={{ width: open ? expandedWidth : collapsedWidth, height: open ? expandedHeight : publicSite ? 44 : 46, borderRadius: open ? 24 : 30 }}
         transition={{ duration, ease: [0.22, 1, 0.36, 1] }}
       >
         <motion.div className={styles.menuCircle} aria-hidden="true" initial={false} animate={{ bottom: open ? "-20%" : "-200%" }} transition={{ duration, ease: [0.22, 1, 0.36, 1] }} />
@@ -155,6 +158,8 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", enquir
   const get = (key: string, fallback: string) => values[`header.${key}`] || fallback;
   const brandName = values["brand.logo.alt"] || "OKNO Modhomes";
   const pathname = usePathname();
+  // The shared header also serves the frozen customer configurator.
+  const publicSite = !/^\/models\/signature\/[^/]+\/configure(?:\/|$)/.test(pathname ?? "");
   const activePath = currentHref ?? pathname ?? "/";
   const resolvedTone = tone ?? (variant === "glass" ? "light" : "dark");
   const navigation = siteNavigationItems.map(item => ({ ...item, label: get(`nav.${item.href.slice(1)}`, item.label) }));
@@ -176,7 +181,7 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", enquir
   }, []);
   const compactForCopy = navigation.some(item => item.label.length > 20) || navigation.reduce((length, item) => length + item.label.length, 0) > 90;
   return (
-    <header className={styles.header} data-type-section="shared.header" data-tone={resolvedTone} data-copy-compact={compactForCopy} data-scrolled={scrolled} data-site-header>
+    <header className={styles.header} data-type-section="shared.header" data-tone={resolvedTone} data-copy-compact={compactForCopy} data-scrolled={scrolled} data-site-header data-public-site={publicSite}>
       <div className={styles.shell}>
         <MagneticLink href="/" className={styles.logo} aria-label={`${brandName} home`} data-models-magnetic>
           <OknoLogo tone={resolvedTone === "light" ? "dark" : "light"} priority />
@@ -190,7 +195,7 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", enquir
             mobileNavigationLabel={get("menu.mobile-navigation-label", "Mobile navigation")}
             openAccessible={get("menu.open-accessible", "Open navigation")}
             closeAccessible={get("menu.close-accessible", "Close navigation")}
-            compactForCopy={compactForCopy} />
+            compactForCopy={compactForCopy} publicSite={publicSite} />
         </div>
       </div>
     </header>

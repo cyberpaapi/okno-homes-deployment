@@ -20,3 +20,9 @@
 @media (max-width: 600px) { .image { aspect-ratio: 1.15 !important; } }
 /* Names stay legible over bright photographs on phones. */
 .label h3, .label > span { text-shadow: 0 1px 12px rgb(0 0 0 / 60%); }
+
+.overlay > span { display: grid; place-items: center; flex: none; }
+.overlay > span svg { display: block; }
+.image[data-portrait="true"] { aspect-ratio: var(--photo-aspect) !important; }
+.image[data-portrait="true"] img { object-fit: contain; }
+.card:hover .image[data-portrait="true"] img { transform: none; }

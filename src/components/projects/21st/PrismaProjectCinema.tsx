@@ -2,6 +2,7 @@
 // rahil1202 / PrismaHero, 21st.dev demo 12200: full-bleed footage and low-set kinetic typography.
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
+import { ArrowLeft, ArrowRight, Pause, Play } from 'lucide-react';
 import { pageImageLoader } from '@/lib/pageImageLoader';
 import { AnimatePresence, motion, useInView, useIsPresent, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
 import { atlasProjects as defaultProjects, type AtlasProject } from '@/data/projectAtlas';
@@ -69,7 +70,7 @@ export function PrismaProjectCinema({ activeId, onSelect, projectsFallback=defau
   const scale=useTransform(progress,[0,1],[1.18,1]);
   const select=(next:number)=>{if(atlasProjects.length)onSelect(atlasProjects[(next+atlasProjects.length)%atlasProjects.length].id);};
   if (!project) return <div ref={root} className={embedded?styles.embedded:styles.scrollStage} id={embedded?undefined:'collection'}><section data-type-section="projects.project-library" className={styles.cinema} aria-label="Selected project collections"><p className={styles.empty}>Projects will appear here when published.</p></section></div>;
-  return <div ref={root} className={embedded?styles.embedded:styles.scrollStage} id={embedded?undefined:"collection"}><motion.section style={{clipPath:reduced||embedded?undefined:clipPath}} className={styles.cinema} aria-label="Selected project collections">
+  return <div ref={root} className={embedded?styles.embedded:styles.scrollStage} id={embedded?undefined:"collection"}><motion.section data-type-section="projects.project-library" style={{clipPath:reduced||embedded?undefined:clipPath}} className={styles.cinema} aria-label="Selected project collections">
     <motion.div className={styles.mediaLayer} style={{scale:reduced||embedded?1:scale}}><AnimatePresence initial={false}><motion.div className={styles.scene} key={project.id} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:reduced?0:.7}}><ProjectFootage project={project} paused={!running} reset={!enabled} onEnded={ended} onPlaying={()=>setPlayingId(project.id)} onFailed={failed} progress={playbackProgress} /></motion.div></AnimatePresence></motion.div>
     <div className={styles.shade} aria-hidden="true" />
     <motion.div layout className={styles.content} data-playing={playingId===project.id} transition={{duration:reduced?0:.65,ease:[.22,1,.36,1]}}>
@@ -77,7 +78,7 @@ export function PrismaProjectCinema({ activeId, onSelect, projectsFallback=defau
       <div className={styles.actions}><ProjectFilmDialog key={project.id} project={project} onOpenChange={setFilmOpen} /></div>
     </motion.div>
     <div className={styles.bottom} onFocusCapture={event=>{if(event.target instanceof Element&&event.target.matches(':focus-visible'))setInteracting(true);}} onBlurCapture={event=>{if(!event.currentTarget.contains(event.relatedTarget))setInteracting(false);}}><div className={styles.thumbs}><CarouselThumbnails items={atlasProjects.map(p=>({src:p.image.src,label:`Select ${p.title}`}))} index={index} setIndex={select} label="Project collections" /></div>
-      <div className={styles.controls}>{!reduced&&<MagneticButton onClick={()=>setPaused(!paused)} aria-label={paused?'Play project showcase':'Pause project showcase'}>{paused?'▷':'Ⅱ'}</MagneticButton>}<MagneticButton aria-label="Previous project" onClick={()=>select(index-1)}>←</MagneticButton><MagneticButton aria-label="Next project" onClick={()=>select(index+1)}>→</MagneticButton></div>
+      <div className={styles.controls}>{!reduced&&<MagneticButton onClick={()=>setPaused(!paused)} aria-label={paused?'Play project showcase':'Pause project showcase'}>{paused?<Play size={18} aria-hidden="true" />:<Pause size={18} aria-hidden="true" />}</MagneticButton>}<MagneticButton aria-label="Previous project" onClick={()=>select(index-1)}><ArrowLeft size={18} aria-hidden="true" /></MagneticButton><MagneticButton aria-label="Next project" onClick={()=>select(index+1)}><ArrowRight size={18} aria-hidden="true" /></MagneticButton></div>
     </div>
     <PlaybackProgress progress={playbackProgress} id={project.id} title={project.title}/>
   </motion.section></div>;

@@ -19,6 +19,7 @@ import { localDestination } from '@/lib/localDestination';
 import { pageImageLoader } from '@/lib/pageImageLoader';
 import { previewImageLoader } from '@/lib/thumbnailImageLoader';
 import { useMediaQuery } from '@/lib/useMediaQuery';
+import { useImageOrientation } from '@/lib/useImageOrientation';
 import TextBlock from './TextBlock';
 import styles from './LandingPathways.module.css';
 
@@ -76,7 +77,6 @@ function BespokePreview() {
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] });
   const imageY = useTransform(scrollYProgress, [0, 1], reduced ? ['0%', '0%'] : ['-5%', '5%']);
-  const wordX = useTransform(scrollYProgress, [0, 1], reduced ? ['0%', '0%'] : ['8%', '-8%']);
   const cardY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [115, -115]);
   return (
     <section id="bespoke-preview" data-type-section="home.bespoke-preview" ref={sectionRef} className={styles.bespoke} aria-labelledby="bespoke-preview-title" data-component="4775">
@@ -84,7 +84,7 @@ function BespokePreview() {
         <Image loader={pageImageLoader} src={value('home.bespoke.image', '/assets/projects/real-v1/lakewood-01.webp')} alt={value('home.bespoke.image-alt', 'Lakewood Villa and its pool at dusk')} fill sizes="100vw" />
       </motion.div>
       <div className={styles.bespokeShade} />
-      <motion.p className={styles.bespokeWord} style={{ x: wordX }} aria-hidden="true" data-type-field={"home.bespoke.word"}>{value('home.bespoke.word', 'Bespoke')}</motion.p>
+      <p className={styles.bespokeWord} aria-hidden="true" data-type-field={"home.bespoke.word"}>{value('home.bespoke.word', 'Bespoke')}</p>
       <motion.figure className={styles.bespokeCard} style={{ y: cardY }}>
         <Image loader={previewImageLoader} src={value('home.bespoke.card-image', '/assets/projects/real-v1/lakewood-02.webp')} alt={value('home.bespoke.card-alt', 'Lakewood Villa beside its swimming pool')} fill sizes="(max-width: 700px) 70vw, 31vw" />
       </motion.figure>
@@ -100,6 +100,8 @@ function BespokePreview() {
 function HospitalityPreview() {
   const content = useSiteContentMap();
   const value = (id: string, fallback: string) => content[`home.hospitality.${id}`] ?? fallback;
+  const cardImage = value('card-image', '/assets/projects/real-v1/octapod-layana-03.webp');
+  const photograph = useImageOrientation(cardImage);
   // Client feedback (11 November 2026): the same pop-up image as the Bespoke preview above.
   const sectionRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
@@ -110,8 +112,8 @@ function HospitalityPreview() {
     <motion.div className={styles.bespokeBackdrop} style={{ y: imageY }}><Image loader={pageImageLoader} src={value('image', '/assets/projects/real-v1/octapod-layana-01.webp')} alt="Octapod residences gathered around a shared pool" fill sizes="100vw" /></motion.div>
     <div className={styles.bespokeShade} />
     <p className={styles.bespokeWord} aria-hidden="true">{value('label', 'Hospitality')}</p>
-    <motion.figure className={styles.bespokeCard} style={{ y: cardY }}>
-      <Image loader={previewImageLoader} src={value('card-image', '/assets/projects/real-v1/octapod-layana-03.webp')} alt={value('card-alt', 'An Octapod residence opening onto the shared pool')} fill sizes="(max-width: 700px) 70vw, 31vw" />
+    <motion.figure className={styles.bespokeCard} data-portrait={photograph.portrait} style={{ y: cardY, ...photograph.frameStyle }}>
+      <Image loader={previewImageLoader} src={cardImage} alt={value('card-alt', 'An Octapod residence opening onto the shared pool')} fill sizes="(max-width: 700px) 70vw, 31vw" onLoad={photograph.onLoad} />
     </motion.figure>
     <div className={styles.bespokeCopy}>
       <span>{value('label', 'Hospitality')}</span>
@@ -134,7 +136,6 @@ function SustainabilityPreview() {
   const mediaClip = useTransform(scrollYProgress, [.05, .36, .72, .95], reduced
     ? ['inset(0% 0% 0% 0% round 0px)', 'inset(0% 0% 0% 0% round 0px)', 'inset(0% 0% 0% 0% round 0px)', 'inset(0% 0% 0% 0% round 0px)']
     : ['inset(13% 20% 13% 20% round 34px)', 'inset(0% 0% 0% 0% round 0px)', 'inset(0% 0% 0% 0% round 0px)', 'inset(12% 8% 8% 8% round 32px)']);
-  const copyY = useTransform(scrollYProgress, [.18, .48, .82], [70, 0, -45]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -150,12 +151,12 @@ function SustainabilityPreview() {
         {near && !reduced && <video ref={videoRef} src={value('home.sustainability.video', '/sustainability/hero-idle.mp4')} poster={value('home.sustainability.poster', '/sustainability/shared-poster.png')} muted loop playsInline preload="metadata" aria-hidden="true" />}
         <div className={styles.sustainabilityGrade} />
       </motion.div>
-      <motion.div className={styles.sustainabilityCopy} style={{ y: copyY }}>
+      <div className={styles.sustainabilityCopy}>
         <span data-type-field={"home.sustainability.label"}>{value('home.sustainability.label', 'Sustainability')}</span>
         <h2 id="sustainability-preview-title" data-type-field={"home.sustainability.heading-1"}><TextBlock lines={[value('home.sustainability.heading-1', 'Build less'), value('home.sustainability.heading-2', 'against the land.')]} /></h2>
         <p data-type-field={"home.sustainability.copy"}>{value('home.sustainability.copy', 'We read the slope, the trees, the light and the water before we sketch.')}</p>
         <SubtleLink href={localDestination(value('home.sustainability.action-href', '/sustainability'), '/sustainability')} data-cursor-media-action data-type-field={"home.sustainability.action"}>{value('home.sustainability.action', 'See the approach')}</SubtleLink>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -1,2 +1,1 @@
-.transition { position:fixed;z-index:9000;overflow:hidden;background:#f4f3ee;pointer-events:auto; }
-.transition img { object-fit:cover; }
+.transition { position:fixed;inset:0;z-index:9000;background:rgb(16 24 16 / 18%);pointer-events:auto; }

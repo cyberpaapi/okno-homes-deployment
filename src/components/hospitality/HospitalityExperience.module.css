@@ -51,9 +51,13 @@
 
 .openingCanvas,
 .atmosphereCanvas {
-  position: absolute;
+  /* Spend the framebuffer budget on the visible surface, rather than stretching
+     it across the gallery, timeline and their offscreen scroll distance. */
+  position: sticky;
   z-index: -2;
-  inset: 0;
+  inset: 0 auto auto 0;
+  height: 100svh !important;
+  margin-bottom: -100svh;
   opacity: .96;
 }
 

@@ -1,5 +1,14 @@
 # OKNO release repository
 
+## Latest hosting decision —24November2026
+
+Owner selected a **free Render review deployment** in CodeAcc2007 My Workspace (`tea-dc2k59l9fdbs73fubqn0`). Use `render.yaml` and `docs/deployment/render-review-2026-11-24.md`. The supplied GitHub repo remains the only source; publish only the finishing branch for this review. Authenticate GitHub writes as verified `CodeAcc2007-dev`; do not alter default/release branches. Render is a full Node web service with API/admin routes. No paid resources, passwordless admin, private CMS migration or ephemeral admin writes are authorized for this free review. Preserve canonical local3134/3140. The separate Vercel project below was created before this change of direction and remains unused; do not deploy there under the superseded plan.
+
+## Finishing authority and earlier Vercel preparation —24November2026
+
+Owner supplied this checkout for scoped responsive finishing. Configurator implementation/catalogue/pricing/assets stay frozen. Workbranch `codex/finishing-2026-11-24` is based on supplied `release/aryan-vercel-2026-10-31`. The new, separate owner-authorized Vercel target is `okno-homes-finishing`, project `prj_eHYPb5VwJ1kZ3QHgcdsbzEPawVg0`, team `team_WYCx00nKZCK9KiAyuA2gKpWK` (`codeacc2007-8289s-projects`), authenticated owner `codeacc2007-8289`. Verify live identity/target before each remote write. Aryan’s deployment is reference-only; historical deployment/passwordless instructions below do not authorize modifying it or weakening new-project authentication. Current finishing scope/provenance is `docs/responsive-finishing-2026-11-24.md`; external finishing harness holds issue contracts and verification. Use browser viewport controls, no emulator/UA spoof; physical-device acceptance is separate.
+
+
 Read `WORKING-VERSION.md`, `docs/README.md` and `docs/deployment/README.md` before edits. Admin work also reads and updates `docs/admin-system.md`. This private repository contains one website and same-domain `/admin`; never add a public admin navigation link. Local website/admin ports are 3134/3140, with `npm run admin` reusing the website process. Production requires private durable Blob storage and, by default, a server-only owner key. The owner explicitly requested password-free access for the Aryan deployment on 31 October 2026; that deployment and the owner-authorized Windows local checkout enable `OKNO_ADMIN_PASSWORDLESS=true` (see `docs/admin-system.md`); do not enable local demo auth or filesystem persistence on Vercel. Preserve current public designs and third-party provenance. Only operate on the Vercel project identified in `docs/deployment/operations.md`; other projects remain separate.
 
 ## Required OKNO design preferences
