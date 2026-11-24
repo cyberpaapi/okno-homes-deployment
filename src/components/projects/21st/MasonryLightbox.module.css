@@ -27,3 +27,14 @@
 }
 .grid[data-even="true"] .tile[data-portrait="true"] img { height: 100%; object-fit: contain; }
 .tile[data-portrait="true"]:hover img { transform: none; }
+
+/* Phone navigation stays at the viewport bottom while the uncropped image
+   centres in the available row. Desktop keeps its original lightbox. */
+@media (max-width: 700px) {
+  .backdrop { padding: max(60px, env(safe-area-inset-top)) 3vw max(14px, env(safe-area-inset-bottom)); }
+  .dialog { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; justify-items: center; min-width: 0; gap: 14px; }
+  .frame { align-self: center; }
+  .frame, .frame img { max-height: calc(100svh - 170px - env(safe-area-inset-bottom)); }
+  .navigation { align-self: end; width: 100%; min-width: 0; max-width: 100%; gap: 10px; height: auto; min-height: 60px; margin-top: 0; }
+  .navigation > div { flex: 1 1 0; min-width: 0; overflow-x: auto; }
+}

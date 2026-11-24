@@ -49,6 +49,8 @@ describe('published project and Hospitality collections', () => {
     const project = projectsFromCollection([item])[0];
     expect(project.id).toBe('forrest');
     expect(project.href).toBe('/projects/forrest-estate');
+    const selected = resolveHospitalitySelections(initialHospitalitySelections.slice(0, 1), [project]);
+    expect(selected[0]).toMatchObject({ id: 'forrest', projectId: 'forrest', projectHref: '/projects/forrest-estate' });
     expect(project.category).toBe('Estate landscape');
     expect(project.location).toBe('Hyderabad');
     expect(project.previewPoster).toBe('/assets/projects/poster.webp');

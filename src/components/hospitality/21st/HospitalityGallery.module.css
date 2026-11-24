@@ -231,7 +231,7 @@
   .editorialGallery { gap: 40px; }
   .editorialProject, .editorialProject:nth-child(2n) { width: 100%; }
   .editorialImage, .editorialProject:first-child .editorialImage { aspect-ratio: 4/3; }
-  .editorialCaption { padding-block: 12px; font-size: var(--type-size-subheading, var(--okno-spec));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
+  .editorialCaption { padding-block: 12px; font-size: var(--type-size-subheading, var(--okno-spec)); font-family: "Geist OKNO", Arial, sans-serif !important; font-weight: 700 !important;}
 }
 @media (prefers-reduced-motion: reduce) { .editorialImage img { transition: none; } }
 
@@ -253,3 +253,23 @@
 }
 .editorialImage[data-portrait="true"] img { object-fit: contain; }
 .editorialProject:hover .editorialImage[data-portrait="true"] img { transform: none; }
+
+/* Review3: navigation should read clearly beside the photographs. */
+.editorialCaption {
+  font: 700 clamp(18px, 1.5vw, 22px)/1.25 "Manrope OKNO", Arial, sans-serif !important;
+}
+@media (min-width: 701px) {
+  .editorialProject:first-child {
+    width: min(90%, 1180px);
+    justify-self: center;
+  }
+  .editorialProject:first-child .editorialImage { max-height: 54svh; }
+  .editorialProject:not(:first-child) .editorialImage { max-height: 39svh; }
+  .editorialProject .editorialImage[data-portrait="true"] {
+    max-width: min(100%, calc(48svh * var(--photo-aspect)));
+    max-height: none;
+  }
+}
+@media (max-width: 700px) {
+  .editorialCaption { font-size: 19px !important; }
+}

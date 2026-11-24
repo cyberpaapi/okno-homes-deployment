@@ -1843,5 +1843,13 @@
   "/configurator/coast/v1/rock-cluster.glb": 1185900,
   "/configurator/coast/v1/wind-ripples.webp": 183360,
   "/configurator/coast/v1/island-preview.webp": 13632,
-  "/configurator/coast/v1/overview-preview.webp": 15218
+  "/configurator/coast/v1/overview-preview.webp": 15218,
+  "/fonts/kento-h108-light.woff2": 10316,
+  "/fonts/kento-h108-light.woff": 13444,
+  "/fonts/kento-h108-regular.woff2": 9436,
+  "/fonts/kento-h108-regular.woff": 12628,
+  "/fonts/kento-h108-bold.woff2": 10024,
+  "/fonts/kento-h108-bold.woff": 13108,
+  "/fonts/govandi-adhiwan-h108-regular.woff2": 14396,
+  "/fonts/govandi-adhiwan-h108-regular.ttf": 42224
 }

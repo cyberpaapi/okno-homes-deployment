@@ -81,14 +81,14 @@ export function HospitalityTimeline({ steps }: { steps: readonly TimelineStep[] 
 
     if (mobile) {
       const context = gsap.context(() => {
-        section.querySelectorAll<HTMLElement>("[data-mobile-step]").forEach((node) => {
+        section.querySelectorAll<HTMLElement>("[data-mobile-step]").forEach((node, index) => {
           const photo = node.querySelector("[data-stage-photo]");
           if (!photo) return;
           gsap.fromTo(photo,
-            { autoAlpha: 0, rotationY: -58, x: -16, transformPerspective: 600, transformOrigin: "left center" },
+            { autoAlpha: 0, rotationY: index % 2 === 0 ? 58 : -58, x: index % 2 === 0 ? 16 : -16, transformPerspective: 600, transformOrigin: index % 2 === 0 ? "right center" : "left center" },
             {
               autoAlpha: 1, rotationY: 0, x: 0, duration: .64, ease: "power3.out",
-              scrollTrigger: { trigger: node, start: "top 84%", once: true },
+              scrollTrigger: { trigger: node, start: "top 84%", end: "top 58%", scrub: .35 },
             },
           );
         });
@@ -174,7 +174,7 @@ export function HospitalityTimeline({ steps }: { steps: readonly TimelineStep[] 
         </header>
         <ol className={overrides.mobileList}>
           {currentSteps.map(([number, title, copy], index) => (
-            <li key={index} data-mobile-step data-phase={index < 2 ? "plan" : index < 4 ? "make" : "open"}>
+            <li key={index} data-mobile-step data-side={index % 2 === 0 ? "left" : "right"} data-phase={index < 2 ? "plan" : index < 4 ? "make" : "open"}>
               <b>{number}</b>
               <div><h3>{title}</h3><p>{copy}</p><StepPhoto index={index} image={stageImage(index)} alt={stageAlt(index)} className={overrides.mobilePhoto} sizes="(max-width: 599px) 128px, 160px" /></div>
             </li>

@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import ForestEntryOption from './ForestEntryOption';
 
 const motionState = vi.hoisted(() => ({
+  reduced: false,
   progress: 0,
   onChange: null as ((progress: number) => void) | null,
   shown: 0,
@@ -11,6 +12,7 @@ const motionState = vi.hoisted(() => ({
   onReady: null as ((ready: boolean) => void) | null,
   onLoadProgress: null as ((progress: number | null) => void) | null,
 }));
+const lenisState = vi.hoisted(() => ({ enabled: false, scrollTo: vi.fn(), resize: vi.fn(), on: vi.fn(), off: vi.fn(), start: vi.fn(), stop: vi.fn() }));
 const shownValue = { get:()=>motionState.shown, set:(value:number)=>{motionState.shown=value;motionState.onShown?.(value);}, on:()=>()=>{} };
 
 vi.mock('next/image', () => ({ default: (props: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean; priority?: boolean }) => {
@@ -20,7 +22,7 @@ vi.mock('next/image', () => ({ default: (props: React.ImgHTMLAttributes<HTMLImag
 } }));
 vi.mock('./ScrollJourneyFilm', () => ({ default: ({ src, className,onProgress,onReady,onLoadProgress }: { src: string; className: string;onProgress:(value:number)=>void;onReady:(value:boolean)=>void;onLoadProgress:(value:number|null)=>void }) => {motionState.onProgress=onProgress;motionState.onReady=onReady;motionState.onLoadProgress=onLoadProgress;return <video src={src} className={className} />;} }));
 vi.mock('@/components/landing/LandingExperience', () => ({ default: () => <div data-testid="option-one">Current landing page</div> }));
-vi.mock('lenis/react', () => ({ useLenis: () => undefined, ReactLenis: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
+vi.mock('lenis/react', () => ({ useLenis: () => lenisState.enabled ? lenisState : undefined, ReactLenis: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
 vi.mock('motion/react', () => ({
   motion: new Proxy({}, { get: (_, tag) => tag }),
   useScroll: () => ({ scrollYProgress: { get: () => motionState.progress } }),
@@ -30,16 +32,23 @@ vi.mock('motion/react', () => ({
   useMotionValueEvent: (value: unknown, _event: string, callback: (progress: number) => void) => {
     if(value===shownValue)motionState.onShown=callback;else motionState.onChange = callback;
   },
-  useReducedMotion: () => false,
+  useReducedMotion: () => motionState.reduced,
 }));
+
+let viewportWidth = 1440;
 
 describe('ForestEntryOption', () => {
   beforeEach(()=>{
-    vi.stubGlobal('matchMedia', vi.fn(() => ({matches: false})));
+    viewportWidth = 1440;
+    lenisState.enabled = false;
+    lenisState.scrollTo.mockClear();
+    vi.stubGlobal('matchMedia', vi.fn((query: string) => ({ matches: query === '(max-width: 700px)' && viewportWidth <= 700, addEventListener: vi.fn(), removeEventListener: vi.fn() })));
     vi.spyOn(HTMLMediaElement.prototype,'load').mockImplementation(()=>{});
     vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue(undefined);
   });
   afterEach(() => {
+    motionState.reduced = false;
+    document.body.style.overflow = '';
     motionState.progress = 0;
     motionState.onChange = null;
     motionState.onReady = null; motionState.onLoadProgress = null;
@@ -113,8 +122,69 @@ describe('ForestEntryOption', () => {
     const hero = screen.getByRole('region', { name: 'A journey from the forest into an OKNO home' });
     expect(screen.getByRole('heading', { level: 1, name: 'OKNO Modhomes' })).toBeInTheDocument();
     expect(screen.queryByText(/\d\s*\/\s*\d/)).not.toBeInTheDocument();
-    expect(hero.querySelector('button')).toBeNull();
+    expect(hero).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Skip to end of film' })).toBeDisabled();
     expect(screen.getByTestId('option-one')).toBeInTheDocument();
+  });
+
+  it.each([390, 430, 700, 768, 1440])('gates Skip on readiness and sweeps to the actual end at %ipx', width => {
+    viewportWidth = width;
+    lenisState.enabled = true;
+    const { container } = render(<ForestEntryOption />);
+    const hero = screen.getByRole('region', { name: 'A journey from the forest into an OKNO home' });
+    vi.spyOn(hero, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, -200, 390, 6000));
+    Object.defineProperty(hero, 'offsetHeight', { configurable: true, value: 6000 });
+    const skip = screen.getByRole('button', { name: 'Skip to end of film' });
+    expect(skip).toBeDisabled();
+    fireEvent.click(skip);
+    expect(lenisState.scrollTo).not.toHaveBeenCalled();
+    act(() => motionState.onReady?.(true));
+    expect(skip).toBeEnabled();
+    fireEvent.click(skip);
+    expect(lenisState.scrollTo).toHaveBeenLastCalledWith(-200 + window.scrollY + 6000 - window.innerHeight, expect.objectContaining({ duration: width <= 700 ? 4.4 : 2.2, lock: false }));
+    const options = lenisState.scrollTo.mock.calls.at(-1)![1];
+    expect(options.easing(.5)).toBeCloseTo(.5);
+    expect(options.easing(.1)).toBeLessThan(.1);
+    expect(options.easing(.9)).toBeGreaterThan(.9);
+    expect(options.easing(0)).toBe(0);
+    expect(options.easing(1)).toBe(1);
+    expect(options.force).toBeUndefined();
+    expect(motionState.shown).toBe(0);
+    expect(viewport(container).style.getPropertyValue('--end-opacity')).toBe('0.0000');
+  });
+
+  it('keeps modal locks authoritative and supports native phone scrolling before a Lenis instance is available', () => {
+    viewportWidth = 390;
+    const scroll = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    render(<ForestEntryOption />);
+    const hero = screen.getByRole('region', { name: 'A journey from the forest into an OKNO home' });
+    Object.defineProperty(hero, 'offsetHeight', { configurable: true, value: 6000 });
+    act(() => motionState.onReady?.(true));
+    scroll.mockClear();
+    document.body.style.overflow = 'hidden';
+    fireEvent.click(screen.getByRole('button', { name: 'Skip to end of film' }));
+    expect(scroll).not.toHaveBeenCalled();
+    document.body.style.overflow = '';
+    fireEvent.click(screen.getByRole('button', { name: 'Skip to end of film' }));
+    expect(scroll).toHaveBeenLastCalledWith({ top: 6000 - window.innerHeight, behavior: 'smooth' });
+    const wheel = new WheelEvent('wheel', { deltaY: -120, cancelable: true });
+    fireEvent(window, wheel);
+    expect(wheel.defaultPrevented).toBe(false);
+    const key = new KeyboardEvent('keydown', { key: 'ArrowUp', cancelable: true });
+    fireEvent(window, key);
+    expect(key.defaultPrevented).toBe(false);
+    expect(scroll).toHaveBeenCalledTimes(1);
+    expect(motionState.shown).toBe(0);
+  });
+
+  it('preserves the static one-viewport reduced-motion presentation without starting a scroll or film', () => {
+    viewportWidth = 390;
+    motionState.reduced = true;
+    const { container } = render(<ForestEntryOption />);
+    expect(container.firstElementChild).toHaveAttribute('data-static', 'true');
+    expect(container.querySelector('video')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Skip to end of film' })).toBeNull();
+    expect(document.documentElement.dataset.heroLoading).not.toBe('true');
   });
 
   it('keeps the editable tagline for screen readers only', () => {

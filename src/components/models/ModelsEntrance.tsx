@@ -4,6 +4,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import OknoLogo from "@/components/Brand/OknoLogo";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 import styles from "./ModelsEntrance.module.css";
 
 export default function ModelsEntrance({ ready }: { ready: boolean }) {
@@ -11,6 +12,7 @@ export default function ModelsEntrance({ ready }: { ready: boolean }) {
   const [minimumElapsed, setMinimumElapsed] = useState(false);
   const [skip, setSkip] = useState(false);
   const reduced = useReducedMotion();
+  const compact = useMediaQuery("(max-width: 700px)");
 
   useEffect(() => {
     let seen = false;
@@ -40,13 +42,11 @@ export default function ModelsEntrance({ ready }: { ready: boolean }) {
           role="status"
           aria-label="Loading OKNO models"
           className={styles.loader}
-          initial={{ transform: "translate3d(0, 0, 0)" }}
-          // A full transform lets Motion use a native compositor animation.
-          // Morphing the full-screen border radius repainted the gradient on exit.
-          exit={{ transform: reduced ? "translate3d(0, 0, 0)" : "translate3d(0, -105%, 0)", opacity: reduced ? 0 : 1 }}
-          transition={{ duration: reduced || skip ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
+          initial={compact ? { opacity: 1 } : { transform: "translate3d(0, 0, 0)" }}
+          exit={compact ? { opacity: 0 } : { transform: reduced ? "translate3d(0, 0, 0)" : "translate3d(0, -105%, 0)", opacity: reduced ? 0 : 1 }}
+          transition={{ duration: reduced || skip ? 0 : compact ? 0.3 : 0.65, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.div initial={{ transform: "scale(1)" }} exit={{ transform: reduced ? "scale(1)" : "scale(1.6)", opacity: 0 }} transition={{ duration: reduced || skip ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}>
+          <motion.div initial={compact ? { opacity: 1 } : { transform: "scale(1)" }} exit={compact ? { opacity: 0 } : { transform: reduced ? "scale(1)" : "scale(1.6)", opacity: 0 }} transition={{ duration: reduced || skip ? 0 : compact ? 0.3 : 0.45, ease: [0.22, 1, 0.36, 1] }}>
             <OknoLogo variant="compact" priority />
           </motion.div>
         </motion.div>

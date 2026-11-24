@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import styles from "./SustainabilityEnding.module.css";
 import { useSiteContentMap } from "@/lib/useSiteContent";
 import { localDestination } from "@/lib/localDestination";
@@ -17,7 +18,8 @@ export default function SustainabilityEnding() {
           {get("heading-line-2", "the land ")}<span data-type-highlight data-type-field={"sustainability.ending.heading-emphasis"}>{get("heading-emphasis", "gives.")}</span>
         </h2>
         <Link href={localDestination(get("action-href", "/enquiry"), "/enquiry")} data-type-field={"sustainability.ending.action"}>
-          {get("action", "Begin a conversation")} <span aria-hidden="true">↗</span>
+          <span className={styles.actionLabel}>{get("action", "Begin a conversation")}</span>
+          <ArrowUpRight className={styles.actionIcon} size={16} aria-hidden="true" />
         </Link>
       </div>
     </section>

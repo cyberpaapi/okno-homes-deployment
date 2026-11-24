@@ -37,10 +37,10 @@ function BlogCard({ post, index, actionLabel }: { post: PublishedJournalArticle;
           </motion.div>
         </div>
         <div className={styles.blogCopy}>
-          <p>{post.category}</p>
+          <p className={styles.blogCategory}>{post.category}</p>
           <h3>{post.title}</h3>
           <p>{post.excerpt}</p>
-          <span className={styles.blogRead} data-type-field={"journal.archive.action"}>{actionLabel} <ArrowUpRight size={16} strokeWidth={1.6} aria-hidden="true" /></span>
+          <span className={styles.blogRead} data-type-field={"journal.archive.action"}><span className={styles.blogReadLabel}>{actionLabel}</span> <ArrowUpRight size={14} strokeWidth={1.6} aria-hidden="true" /></span>
         </div>
       </Link>
     </motion.article>

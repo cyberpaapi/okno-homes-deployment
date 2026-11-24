@@ -30,3 +30,8 @@
 
 .discover > span { display: inline-flex; align-items: center; justify-content: center; flex: none; }
 .discover > span svg { display: block; }
+
+/* Review3: a quieter desktop opening preserves the globe's visual hierarchy. */
+@media (min-width: 701px) {
+  .intro h1 { font-size: min(var(--type-size-display, var(--okno-hero)), clamp(42px, 4.5vw, 70px)); }
+}

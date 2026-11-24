@@ -24,21 +24,23 @@ describe('experience loading feedback', () => {
   });
   afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
-  it('alternates quick and slow movement while remaining within real downloaded progress', () => {
-    render(<FilmLoadingStatus ready={false} progress={.8} retry={() => {}} />);
+  it('smooths real byte progress promptly without timed slow phases or fabricated completion', () => {
+    const { rerender } = render(<FilmLoadingStatus ready={false} progress={.8} retry={() => {}} />);
     const bar = screen.getByRole('progressbar') as HTMLProgressElement;
     tick(288);
-    const fast = bar.value;
-    tick(288);
-    const slow = bar.value - fast;
-    expect(fast).toBeGreaterThan(slow * 3);
-    tick(384);
-    const beforeBurst = bar.value;
-    tick(288);
-    expect(bar.value - beforeBurst).toBeGreaterThan(slow);
+    expect(bar.value).toBeGreaterThan(.75);
     expect(bar.value).toBeLessThanOrEqual(.8);
-    tick(10000);
-    expect(bar.value).toBe(.8);
+    const previous = bar.value;
+    rerender(<FilmLoadingStatus ready={false} progress={.4} retry={() => {}} />);
+    tick(288);
+    expect(bar.value).toBeGreaterThanOrEqual(previous);
+    expect(bar.value).toBeLessThanOrEqual(.8);
+    rerender(<FilmLoadingStatus ready={false} progress={.95} retry={() => {}} />);
+    tick(288);
+    expect(bar.value).toBeGreaterThan(.94);
+    expect(bar.value).toBeLessThanOrEqual(.95);
+    tick(1000);
+    expect(bar.value).toBe(.95);
     expect(screen.getByRole('status')).toHaveTextContent('Loading experience');
   });
 

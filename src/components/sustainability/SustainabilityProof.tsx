@@ -12,6 +12,7 @@ import {
 } from "motion/react";
 import styles from "./SustainabilityProof.module.css";
 import { useSiteContentMap } from "@/lib/useSiteContent";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 type PressItem = {
   index?: number;
@@ -75,8 +76,8 @@ const finalImageRange = [0.71, 0.77];
 // Complete the opening before the photograph and reading panel enter.
 const openingExit = 0.055;
 
-function activePressAt(progress: number) {
-  if (progress >= finalImageRange[1]) return -1;
+function activePressAt(progress: number, phone: boolean) {
+  if (progress >= (phone ? finalImageRange[1] : 0.85)) return -1;
   // Switch the reading panel when the incoming photograph becomes dominant.
   return pressItems.reduce((active, item, index) =>
     progress >= (item.imageRange[0] + item.imageRange[1]) / 2 ? index : active, 0);
@@ -97,23 +98,37 @@ function PressImage({ item, progress }: { item: PressItem; progress: MotionValue
 function PressCitation({
   item,
   active,
+  progress,
+  phone,
+  reducedMotion,
 }: {
   item: PressItem;
   active: boolean;
+  progress: MotionValue<number>;
+  phone: boolean;
+  reducedMotion: boolean;
 }) {
+  // Restore the supplied release's cumulative citation reveal. Cards remain
+  // readable on phones; their lift and tint follow the photograph's own phase.
+  const enter = item.index === 0 ? 0.08 : item.imageRange[0];
+  const opacity = useTransform(progress, [enter, enter + 0.055], phone ? [0.6, 1] : [0, 1]);
+  const y = useTransform(progress, [enter, enter + 0.055], reducedMotion ? [0, 0] : [phone ? 10 : 14, 0]);
+  const scale = useTransform(progress, [enter, enter + 0.055], phone && !reducedMotion ? [0.97, 1] : [1, 1]);
+
   return (
-    <article className={styles.pressCitation} data-type-section={`sustainability.press-${(item.index ?? 0) + 1}`} data-active={active} hidden={!active}>
+    <motion.article className={styles.pressCitation} data-type-section={`sustainability.press-${(item.index ?? 0) + 1}`} data-active={active} aria-current={active ? "true" : undefined} style={{ opacity, y, scale }}>
       <div className={styles.citationMeta}>
         <strong>{item.source}</strong>
         <time>{item.date}</time>
       </div>
       <h4>{item.title}</h4>
-    </article>
+    </motion.article>
   );
 }
 
 export default function SustainabilityProof() {
   const values = useSiteContentMap();
+  const phone = useMediaQuery("(max-width: 700px)");
   const get = (key: string, fallback: string) => values[`sustainability.proof.${key}`] ?? fallback;
   const currentPress = pressItems.map((item, index) => ({
     index,
@@ -143,10 +158,12 @@ export default function SustainabilityProof() {
     const update = () => {
       const rect = track.getBoundingClientRect();
       const distance = Math.max(track.offsetHeight - (sceneRef.current?.offsetHeight ?? window.innerHeight), 1);
-      const progress = clamp(-rect.top / distance);
+      // Phone facts follow in normal flow, so finish the photo sequence at
+      // the end of this track rather than reserving a pinned paper viewport.
+      const progress = clamp(-rect.top / distance) * (phone ? finalImageRange[1] : 1);
       scrollYProgress.set(progress);
       setActivePress(current => {
-        const next = activePressAt(progress);
+        const next = activePressAt(progress, phone);
         return current === next ? current : next;
       });
       frame = 0;
@@ -163,7 +180,7 @@ export default function SustainabilityProof() {
       window.removeEventListener("resize", requestUpdate);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, [scrollYProgress]);
+  }, [scrollYProgress, phone]);
 
   const openingOpacity = useTransform(
     scrollYProgress,
@@ -178,28 +195,48 @@ export default function SustainabilityProof() {
   const proofOpacity = useTransform(scrollYProgress, [openingExit, 0.1], [0, 1]);
   const pressOpacity = useTransform(
     scrollYProgress,
-    [0, ...finalImageRange],
-    [1, 1, 0],
+    // Keep the accumulated coverage visible until the white sheet replaces it.
+    // The final bath photograph must not become an isolated, uncaptioned hold.
+    [0, 0.75, 0.85],
+    [1, 1, phone ? 1 : 0],
   );
   const sheetY = useTransform(
     scrollYProgress,
-    [0.8, 0.88],
+    [0.75, 0.85],
     reducedMotion ? ["0%", "0%"] : ["100%", "0%"],
   );
   const sheetOpacity = useTransform(
     scrollYProgress,
-    reducedMotion ? [0.8, 0.81] : [0, 1],
+    reducedMotion ? [0.75, 0.76] : [0, 1],
     reducedMotion ? [0, 1] : [1, 1],
   );
-  const sheetContentOpacity = useTransform(scrollYProgress, [0.82, 0.9], [0, 1]);
+  const sheetContentOpacity = useTransform(scrollYProgress, [0.78, 0.86], [0, 1]);
   const sheetContentY = useTransform(
     scrollYProgress,
-    [0.82, 0.9],
+    [0.78, 0.86],
     reducedMotion ? [0, 0] : [28, 0],
   );
   const finalImageOpacity = useTransform(scrollYProgress, finalImageRange, [0, 1]);
 
+  const details = (
+    <motion.section className={styles.detailsSheet} data-type-section="sustainability.facts-intro" style={phone ? undefined : { y: sheetY, opacity: sheetOpacity }} aria-labelledby="reflections-details-title">
+          <motion.div className={styles.detailsInner} style={phone ? undefined : { opacity: sheetContentOpacity, y: sheetContentY }}>
+            <h3 id="reflections-details-title" data-type-field={"sustainability.proof.facts-heading"}>{get("facts-heading", "What the coverage points back to.")}</h3>
+            <ul className={styles.factGrid}>
+              {currentFacts.map((item, index) => (
+                <li key={index} data-type-section={`sustainability.fact-${index + 1}`}>
+                  <i aria-hidden="true" />
+                  <span><strong>{item.value}</strong><small>{item.label}</small></span>
+                </li>
+              ))}
+            </ul>
+            <p className={styles.closingLine} data-type-field={"sustainability.proof.facts-close"}>{get("facts-close", "A compact home can still make a large architectural argument.")}</p>
+          </motion.div>
+    </motion.section>
+  );
+
   return (
+    <>
     <section ref={trackRef} className={styles.track} data-type-section="sustainability.proof" data-active-press={activePress < 0 ? "closing" : activePress + 1} aria-labelledby="press-proof-heading">
       <div ref={sceneRef} className={styles.stickyScene}>
         <div className={styles.blackField} aria-hidden="true" />
@@ -247,6 +284,9 @@ export default function SustainabilityProof() {
                     key={index}
                     item={item}
                     active={index === activePress}
+                    progress={scrollYProgress}
+                    phone={phone}
+                    reducedMotion={reducedMotion}
                   />
                 ))}
               </div>
@@ -255,21 +295,11 @@ export default function SustainabilityProof() {
           </aside>
         </motion.div>
 
-        <motion.section className={styles.detailsSheet} data-type-section="sustainability.facts-intro" style={{ y: sheetY, opacity: sheetOpacity }} aria-labelledby="reflections-details-title">
-          <motion.div className={styles.detailsInner} style={{ opacity: sheetContentOpacity, y: sheetContentY }}>
-            <h3 id="reflections-details-title" data-type-field={"sustainability.proof.facts-heading"}>{get("facts-heading", "What the coverage points back to.")}</h3>
-            <ul className={styles.factGrid}>
-              {currentFacts.map((item, index) => (
-                <li key={index} data-type-section={`sustainability.fact-${index + 1}`}>
-                  <i aria-hidden="true" />
-                  <span><strong>{item.value}</strong><small>{item.label}</small></span>
-                </li>
-              ))}
-            </ul>
-            <p className={styles.closingLine} data-type-field={"sustainability.proof.facts-close"}>{get("facts-close", "A compact home can still make a large architectural argument.")}</p>
-          </motion.div>
-        </motion.section>
+        {!phone && details}
+
       </div>
     </section>
+    {phone && details}
+    </>
   );
 }

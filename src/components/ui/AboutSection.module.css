@@ -277,3 +277,8 @@
 /* Full-device audit (13 November 2026): the founders photo's entrance scale ran over its
    captions on tablets; the captions sit clear below it. */
 .founderCaptions { position: relative; z-index: 1; margin-top: 18px; }
+
+/* Review3 desktop opening only; the accepted mobile and later chapters stay. */
+@media (min-width: 701px) {
+  .heroTitle { font-size: min(var(--type-size-display, var(--okno-hero)), clamp(44px, 5vw, 72px)); }
+}

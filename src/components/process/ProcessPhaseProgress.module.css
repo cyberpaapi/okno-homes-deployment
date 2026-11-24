@@ -57,7 +57,7 @@
 .dayLabel { margin-right: 7px; font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .dayRange { font-size: var(--type-size-caption, var(--okno-spec)); font-variant-numeric: tabular-nums;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
 @media (max-width: 700px) {
-  .progress { height: 44px; bottom: 18px; }
+  .progress { position: absolute; left: 20px; right: 20px; bottom: max(20px, env(safe-area-inset-bottom)); width: auto; height: 44px; margin-top: 0; }
   .milestones li { padding-top: 13px; }
   .dayLabel { display: block; margin: 0 0 3px; font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
   .dayRange { font-size: var(--type-size-caption, var(--okno-spec));  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
@@ -68,4 +68,11 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .milestones li, .point { transition: none; }
+}
+
+@media (min-width: 701px) {
+  .dayLabel, .dayRange {
+    font: 600 clamp(13px, 1vw, 15px)/1.2 "Manrope OKNO", Arial, sans-serif !important;
+    letter-spacing: .01em;
+  }
 }

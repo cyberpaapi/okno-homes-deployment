@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 import styles from "./ModelPathPanels.module.css";
 import { useSiteContentMap } from "@/lib/useSiteContent";
 
@@ -62,6 +63,7 @@ export default function ModelPathPanels({ onReady }: { onReady?: () => void }) {
   }));
   const router = useRouter();
   const reduceMotion = useReducedMotion();
+  const compact = useMediaQuery("(max-width: 700px)");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [leavingFor, setLeavingFor] = useState<(typeof paths)[number]["id"] | null>(null);
   const panelRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -86,7 +88,7 @@ export default function ModelPathPanels({ onReady }: { onReady?: () => void }) {
       return;
     }
     setLeavingFor(id);
-    navigationTimer.current = setTimeout(() => router.push(destination), 680);
+    navigationTimer.current = setTimeout(() => router.push(destination), compact && id === "signature" ? 220 : 680);
   };
 
   function handleKeyDown(event: KeyboardEvent<HTMLAnchorElement>, index: number) {
@@ -144,13 +146,13 @@ export default function ModelPathPanels({ onReady }: { onReady?: () => void }) {
             aria-label={`Opening ${transitionPath.title}`}
             className={styles.transitionSheet}
             data-destination={transitionPath.id}
-            initial={{ clipPath: "inset(100% 0 0 0 round 50% 50% 0 0)" }}
-            animate={{ clipPath: "inset(0% 0 0 0 round 0% 0% 0 0)" }}
-            transition={{ duration: .68, ease: [.65, 0, .35, 1] }}
+            initial={compact && transitionPath.id === "signature" ? { opacity: 0 } : { clipPath: "inset(100% 0 0 0 round 50% 50% 0 0)" }}
+            animate={compact && transitionPath.id === "signature" ? { opacity: 1 } : { clipPath: "inset(0% 0 0 0 round 0% 0% 0 0)" }}
+            transition={{ duration: compact && transitionPath.id === "signature" ? .22 : .68, ease: [.65, 0, .35, 1] }}
           >
-            <motion.div className={styles.transitionImage} initial={{ scale: 1.06 }} animate={{ scale: 1 }} transition={{ duration: 1.1, ease: [.22, 1, .36, 1] }}>
+            {(!compact || transitionPath.id !== "signature") && <motion.div className={styles.transitionImage} initial={{ scale: 1.06 }} animate={{ scale: 1 }} transition={{ duration: 1.1, ease: [.22, 1, .36, 1] }}>
               <Image loader={pageImageLoader} src={transitionPath.image} alt="" fill priority sizes="100vw" />
-            </motion.div>
+            </motion.div>}
             <div className={styles.transitionShade} />
             <motion.div className={styles.transitionCopy} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .38, delay: .22 }}>
               <span>{transitionPath.mode}</span>

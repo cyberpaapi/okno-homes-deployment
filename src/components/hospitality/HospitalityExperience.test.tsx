@@ -1,7 +1,8 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import HospitalityExperience from "./HospitalityExperience";
 import { initialHospitalitySelections } from '@/data/hospitalitySelectedWork';
+import { HospitalityGallery } from './21st/HospitalityGallery';
 
 vi.mock("next/navigation", () => ({ usePathname: () => "/hospitality" }));
 
@@ -11,10 +12,13 @@ class MockResizeObserver {
   disconnect() {}
 }
 
+let viewportWidth = 390;
+beforeEach(() => { viewportWidth = 390; });
+
 beforeAll(() => {
   vi.stubGlobal("ResizeObserver", MockResizeObserver);
   vi.stubGlobal("matchMedia", vi.fn().mockImplementation((query: string) => ({
-    matches: false,
+    matches: query === "(max-width: 700px)" && viewportWidth <= 700,
     media: query,
     onchange: null,
     addEventListener: vi.fn(),
@@ -46,7 +50,7 @@ describe("HospitalityExperience", () => {
     render(<HospitalityExperience />);
 
     for (const estate of ["Forrest", "Kioo", "Lakewood Villa", "Octapod Layana", "Rasa Vikarabad"]) {
-      expect(screen.getByRole("button", { name: `View ${estate} photography` })).toBeInTheDocument();
+      expect(screen.getByRole("link", { name: `View ${estate} project gallery` })).toBeInTheDocument();
     }
     for (const stage of ["Private consultation", "Site study", "Design curation", "Craftsmanship", "Delivery", "Installation", "Opening"]) {
       expect(screen.getByRole("heading", { name: stage })).toBeInTheDocument();
@@ -68,11 +72,12 @@ describe("HospitalityExperience", () => {
     expect(screen.getByRole("heading", { name: "Begin a hospitality conversation." })).toBeInTheDocument();
   });
 
-  it("opens portfolio photography in the projects-style viewer", () => {
+  it.each([390, 430, 700])("links phone selected photography to the corresponding Projects gallery at %ipx", width => {
+    viewportWidth = width;
     render(<HospitalityExperience />);
-    fireEvent.click(screen.getByRole("button", { name: "View Forrest photography" }));
-    expect(screen.getByRole("dialog", { name: "Forrest photograph" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Close photograph" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "View Forrest project gallery" })).toHaveAttribute('href', '/projects/forrest');
+    expect(screen.getByRole("link", { name: "View Rasa Vikarabad project gallery" })).toHaveAttribute('href', '/projects/rasa-vikarabad');
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   it("hides Selected work at zero and fills the gallery at one, two and many selections", () => {
@@ -82,20 +87,55 @@ describe("HospitalityExperience", () => {
 
     const one = render(<HospitalityExperience initialSelections={initialHospitalitySelections.slice(0, 1)} />);
     expect(screen.getByRole("region", { name: "Hospitality project photography" }).querySelector('[data-count="1"]')).toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /^View .* photography$/ })).toHaveLength(1);
-    fireEvent.click(screen.getByRole("button", { name: "View Forrest photography" }));
-    expect(screen.queryByRole("button", { name: "Next project" })).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "Previous project" })).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /^View .* project gallery$/ })).toHaveLength(1);
+    expect(screen.getByRole("link", { name: "View Forrest project gallery" })).toHaveAttribute('href', '/projects/forrest');
     one.unmount();
 
     const two = render(<HospitalityExperience initialSelections={initialHospitalitySelections.slice(0, 2)} />);
     expect(screen.getByRole("region", { name: "Hospitality project photography" }).querySelector('[data-count="2"]')).toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /^View .* photography$/ })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: /^View .* project gallery$/ })).toHaveLength(2);
     two.unmount();
 
     render(<HospitalityExperience initialSelections={initialHospitalitySelections} />);
     expect(screen.getByRole("region", { name: "Hospitality project photography" }).querySelector('[data-count="3"]')).toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /^View .* photography$/ })).toHaveLength(5);
+    expect(screen.getAllByRole("link", { name: /^View .* project gallery$/ })).toHaveLength(5);
+  });
+
+  it("opens corresponding project galleries and retains the unlinked legacy photograph viewer", async () => {
+    render(<HospitalityGallery projects={[
+      { id: 'custom-selection', projectId: 'rasa-vikarabad', projectHref: '/projects/rasa-retreat', name: 'Pool retreat', image: '/pool.webp', alt: 'Pool', kind: '', description: '' },
+      { id: 'legacy-photo', name: 'Earlier estate', image: '/estate.webp', alt: 'Earlier estate', kind: '', description: '' },
+    ]} />);
+    expect(screen.getByRole('link', { name: 'View Pool retreat project gallery' })).toHaveAttribute('href', '/projects/rasa-retreat');
+    fireEvent.click(screen.getByRole('button', { name: 'View Earlier estate photography' }));
+    expect(screen.getByRole('dialog', { name: 'Earlier estate photograph' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Close photograph' }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  });
+
+  it("preserves the closing pool scene with a full-resolution phone source and a detailed inset", () => {
+    render(<HospitalityExperience />);
+    const background = screen.getByRole('img', { name: 'Rasa Vikarabad pool and pavilions at dusk' });
+    const source = background.closest('picture')?.querySelector('source');
+    expect(source).toHaveAttribute('media', '(max-width: 700px)');
+    expect(source).toHaveAttribute('srcset', '/assets/projects/real-v1/rasa-vikarabad-01.webp');
+    const inset = screen.getByRole('img', { name: 'Breakfast by the pool at Rasa Vikarabad' });
+    expect(inset.getAttribute('src')).toContain('/page-images/');
+    expect(inset.getAttribute('srcset')).not.toContain('/thumbnail-images/');
+    expect(inset).toHaveAttribute('sizes', '56vw');
+  });
+
+  it.each([701, 768, 1440])("links selected work to Projects while preserving the inset source at %ipx", async width => {
+    viewportWidth = width;
+    render(<HospitalityExperience />);
+    expect(screen.getByRole('link', { name: 'View Forrest project gallery' })).toHaveAttribute('href', '/projects/forrest');
+    expect(screen.getAllByRole('link', { name: /project gallery$/ })).toHaveLength(5);
+    const inset = screen.getByRole('img', { name: 'Breakfast by the pool at Rasa Vikarabad' });
+    expect(inset.getAttribute('src')).toContain('/thumbnail-images/');
+    expect(inset).toHaveAttribute('sizes', '(max-width: 700px) 40vw, 34vw');
+    const background = screen.getByRole('img', { name: 'Rasa Vikarabad pool and pavilions at dusk' });
+    expect(background).toHaveAttribute('sizes', '100vw');
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
   it("removes the rejected video-expansion and parallax opening", () => {

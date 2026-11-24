@@ -198,3 +198,13 @@ body:not(:has([data-admin-studio])) {
 @supports (height: 1dvh) and (height: 1lvh) {
   :root { --vv-lift: calc(100dvh - 100lvh); }
 }
+
+/* Public document chrome is hidden at every width; internal viewers/admin stay native. */
+html:has([data-site-header][data-public-site="true"]) { scrollbar-width: none; }
+html:has([data-site-header][data-public-site="true"])::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+/* Keep an open public menu's lock on the viewport. A body scroll container can
+   change the containing scrollport of the film's sticky stage on mobile engines.
+   The existing inline hidden marker still pauses Lenis and film handoff logic. */
+html:has([data-site-header][data-public-site="true"] [data-menu-shell][role="dialog"]) { overflow: hidden; }
+body:has([data-site-header][data-public-site="true"] [data-menu-shell][role="dialog"]) { overflow: clip !important; }

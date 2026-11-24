@@ -1,0 +1,9 @@
+.controls { position: fixed; z-index: 200; top: 76px; right: 16px; width: min(280px, calc(100vw - 32px)); padding: 12px 16px; border: 1px solid #a6b5a366; border-radius: 14px; background: #152019f5; color: #f2f4ed; font: 400 14px/1.4 "Manrope OKNO", Arial, sans-serif; box-shadow: 0 12px 40px #0005; }
+.controls summary { cursor: pointer; font-weight: 700; min-height: 28px; }
+.controls > div { display: grid; gap: 10px; padding-top: 12px; }
+.controls label { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.controls output { font-variant-numeric: tabular-nums; }
+.controls input[type="range"] { width: 100%; min-height: 32px; accent-color: #d7f397; }
+.colour input { width: 56px; height: 36px; padding: 2px; border: 1px solid #a6b5a366; border-radius: 6px; background: transparent; }
+.controls button { justify-self: start; min-height: 36px; padding: 6px 14px; border: 1px solid #a6b5a366; border-radius: 99px; background: transparent; color: inherit; font: 700 13px/1.2 "Manrope OKNO", Arial, sans-serif; cursor: pointer; }
+.controls :focus-visible { outline: 2px solid #d7f397; outline-offset: 4px; }

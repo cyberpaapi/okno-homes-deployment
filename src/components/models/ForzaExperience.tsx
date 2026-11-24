@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import { Bath, BedDouble, Check, ChevronDown, CookingPot, House, Image as ImageIcon, PanelsTopLeft, ScanLine, SlidersHorizontal, Sofa, Trees, X } from "lucide-react";
 import { pageImageLoader } from "@/lib/pageImageLoader";
 import {
   AnimatePresence,
@@ -15,7 +15,7 @@ import {
   type MotionValue,
   type Variants,
 } from "motion/react";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import type { OknoModel } from "@/data/models";
 import ModelsHeader from "./ModelsHeader";
 import { SubtleLink } from "@/components/ui/SubtleAction";
@@ -38,6 +38,72 @@ const planFilters: { value: PlanFilter; label: string }[] = [
   { value: "2-bhk", label: "Two-bedroom" },
   { value: "3-bhk", label: "Three-bedroom" },
 ];
+
+const configureLabel = (label: string) => label.trim().toLowerCase() === "configure yours" ? "Configure" : label;
+const galleryIcon = (label: string) => {
+  if (/kitchen|dining/i.test(label)) return CookingPot;
+  if (/living|interior/i.test(label)) return Sofa;
+  if (/bed/i.test(label)) return BedDouble;
+  if (/bath/i.test(label)) return Bath;
+  if (/plan|cutaway|axonometric/i.test(label)) return PanelsTopLeft;
+  if (/deck|setting|garden/i.test(label)) return Trees;
+  if (/exterior/i.test(label)) return House;
+  return ImageIcon;
+};
+
+// Trigger/listbox/check structure adapted from mayurrawte's Select Dropdown,
+// 21st.dev demo 45500. Options expand in the page instead of an OS sheet.
+function PillChoices({ label, value, options, onChange }: {
+  label: string; value: string; options: { value: string; label: string }[]; onChange: (value: string) => void;
+}) {
+  const id = useId();
+  const root = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const choices = useRef<(HTMLButtonElement | null)[]>([]);
+  const [open, setOpen] = useState(false);
+  const reduced = useReducedMotion();
+  const selected = Math.max(0, options.findIndex(option => option.value === value));
+  useEffect(() => {
+    if (!open) return;
+    choices.current[selected]?.focus({ preventScroll: true });
+    const outside = (event: PointerEvent) => { if (!root.current?.contains(event.target as Node)) setOpen(false); };
+    document.addEventListener("pointerdown", outside);
+    return () => document.removeEventListener("pointerdown", outside);
+  }, [open, selected]);
+  const close = () => { setOpen(false); trigger.current?.focus({ preventScroll: true }); };
+  return <div ref={root} className={styles.pillChoice} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
+    <button ref={trigger} type="button" className={styles.pillTrigger} aria-label={label} aria-haspopup="listbox" aria-expanded={open} aria-controls={id}
+      disabled={!options.length} onClick={() => setOpen(current => !current)} onKeyDown={event => {
+        if (["ArrowDown", "ArrowUp", "ArrowRight"].includes(event.key)) { event.preventDefault(); setOpen(true); }
+        if (event.key === "Escape") close();
+      }}>
+      <span>{label}</span><ChevronDown size={14} aria-hidden="true" />
+    </button>
+    <AnimatePresence initial={false}>
+      {open && <motion.div id={id} role="listbox" aria-label={label} aria-orientation="horizontal" className={styles.pillOptions}
+        initial={{ opacity: 0, y: reduced ? 0 : -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: reduced ? 0 : .18 }}
+        onKeyDown={event => {
+          const index = choices.current.indexOf(document.activeElement as HTMLButtonElement);
+          const step = ["ArrowRight", "ArrowDown"].includes(event.key) ? 1 : ["ArrowLeft", "ArrowUp"].includes(event.key) ? -1 : 0;
+          if (step || event.key === "Home" || event.key === "End") {
+            event.preventDefault();
+            const next = event.key === "Home" ? 0 : event.key === "End" ? options.length - 1 : (index + step + options.length) % options.length;
+            choices.current[next]?.focus();
+          }
+          if (event.key === "Escape") { event.preventDefault(); close(); }
+          if (/^[a-z0-9]$/i.test(event.key)) {
+            const next = options.map((_, offset) => (index + offset + 1) % options.length).find(option => options[option].label.toLowerCase().startsWith(event.key.toLowerCase()));
+            if (next !== undefined) choices.current[next]?.focus();
+          }
+        }}>
+        {options.map((option, index) => <button key={option.value} ref={element => { choices.current[index] = element; }} type="button" role="option" tabIndex={-1} aria-selected={option.value === value}
+          onClick={() => { onChange(option.value); close(); }}>
+          {option.label}{option.value === value && <Check size={14} aria-hidden="true" />}
+        </button>)}
+      </motion.div>}
+    </AnimatePresence>
+  </div>;
+}
 
 const MAX_SCRUB_FPS = 24;
 const SCRUB_SCHEDULER_FPS = 30;
@@ -472,6 +538,17 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
   const detailsTriggerRef = useRef<HTMLButtonElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const compact = useMediaQuery('(max-width: 700px)');
+  const tabletControls = useMediaQuery('(max-width: 1100px)');
+  const compactControls = compact || tabletControls;
+  const focusedPhonePicker = useRef<"plan" | "model" | null>(null);
+  useEffect(() => {
+    if (compactControls || !focusedPhonePicker.current) return;
+    if (document.activeElement === document.body) {
+      const group = focusedPhonePicker.current === "plan" ? styles.planFilter : styles.modelSelector;
+      trackRef.current?.querySelector<HTMLButtonElement>(`.${group} button[aria-pressed="true"]`)?.focus({ preventScroll: true });
+    }
+    focusedPhonePicker.current = null;
+  }, [compactControls]);
   const [videoReady, setVideoReady] = useState(false);
   const [detailVisible, setDetailVisible] = useState(false);
   const initialModelExists = modelRecords.some(record => record.id === initialModelSlug);
@@ -884,7 +961,7 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             }`}
           />
 
-          <ModelsHeader tone="dark" enquireHref={`/enquiry?intent=home&model=${activeModel.slug}`} enquiryLabel={`${get("enquire-prefix", "Enquire about")} ${activeModel.name}`} />
+          <ModelsHeader tone="dark" enquireHref={`/enquiry?intent=home&model=${activeModel.slug}`} />
 
           <motion.div
             className={styles.productStage}
@@ -974,24 +1051,15 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
             <p className={styles.investmentNote}>{get("investment-note", "Final investment depends on site, specification and finish.")}</p>
           </motion.div>
 
-          {/* Native selects retain platform options and keyboard access. The current
-              model and plan remain visible in the title and facts. */}
-          <div className={styles.phonePickers}>
-            <label>
-              <span>Floor plan</span>
-              <ChevronDown aria-hidden="true" />
-              <select disabled={!compact} value={planFilter} onChange={event => selectPlan(event.target.value as PlanFilter)}>
-                {planFilters.map(filter => <option key={filter.value} value={filter.value}>{get(`filter-${filter.value}`, filter.label)}</option>)}
-              </select>
-            </label>
-            <label>
-              <span>Models</span>
-              <ChevronDown aria-hidden="true" />
-              <select disabled={!compact} value={activeModel.slug} onChange={event => selectModel(event.target.value)}>
-                {filteredModels.map(model => <option key={model.slug} value={model.slug}>{model.name}</option>)}
-              </select>
-            </label>
-          </div>
+          {compactControls && <div className={styles.phonePickers}
+            onFocusCapture={event => { focusedPhonePicker.current = event.currentTarget.firstElementChild?.contains(event.target as Node) ? "plan" : "model"; }}
+            onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) focusedPhonePicker.current = null; }}>
+            <PillChoices label="Floor plan" value={planFilter}
+              options={planFilters.map(filter => ({ value: filter.value, label: get(`filter-${filter.value}`, filter.label) }))}
+              onChange={value => selectPlan(value as PlanFilter)} />
+            <PillChoices label="Models" value={activeModel.slug}
+              options={filteredModels.map(model => ({ value: model.slug, label: model.name }))} onChange={selectModel} />
+          </div>}
           <div className={styles.planFilter} role="group" aria-label={get("plan-filter-label", "Filter by floor plan")}>
             {planFilters.map((filter) => {
               const selected = filter.value === planFilter;
@@ -1066,15 +1134,16 @@ export default function ForzaExperience({ models, initialModelSlug = "forza", in
               onClick={openDetails}
              data-type-field={`models.signature.${activeModel.slug}.explore-action`}>
               {activeRecord?.fields.exploreAction || get(`${activeModel.slug}.explore-action`, get("details-action", "Explore details"))}
+              <ScanLine size={18} aria-hidden="true" />
             </button>
             {canConfigure && <SubtleLink
               href={configurationHref(activeModel.slug, exploreVariantId(activeModel.slug, activeVariantIndex))}
               className={styles.configureButton}
               distance={0}
-              aria-label={`${get("detail.configure-action", "Configure yours")} — ${presentationModel.name}`}
+              aria-label={`${configureLabel(get("detail.configure-action", "Configure"))} — ${presentationModel.name}`}
               data-type-field="models.signature.detail.configure-action"
             >
-              {get("detail.configure-action", "Configure yours")}
+              {configureLabel(get("detail.configure-action", "Configure"))}<SlidersHorizontal size={16} aria-hidden="true" />
             </SubtleLink>}
           </div>
 
@@ -1190,10 +1259,10 @@ function AccessibleVariantStack({ children, slug, index, direction, reducedMotio
     aria-hidden={!isPresent}
     inert={!isPresent}
     custom={direction}
-    initial={reducedMotion ? { opacity: 0 } : { opacity: 0, x: direction * 72 }}
+    initial={reducedMotion ? { opacity: 0 } : { opacity: 0, x: direction * 18 }}
     animate={{ opacity: 1, x: 0 }}
-    exit={reducedMotion ? { opacity: 0 } : { opacity: 0, x: direction * -72 }}
-    transition={{ duration: reducedMotion ? 0.01 : 0.48, ease: [0.22, 1, 0.36, 1] }}
+    exit={reducedMotion ? { opacity: 0 } : { opacity: 0, x: direction * -18 }}
+    transition={{ duration: reducedMotion ? 0.01 : 0.32, ease: [0.22, 1, 0.36, 1] }}
   >{children}</motion.div>;
 }
 
@@ -1216,6 +1285,7 @@ function DetailsLayer({
 }) {
   const content = useSiteContentMap();
   const get = (id: string, fallback: string) => content[`models.signature.${id}`] ?? fallback;
+  const compact = useMediaQuery("(max-width: 700px)");
   const panelRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -1316,7 +1386,7 @@ function DetailsLayer({
         panelRef.current.querySelectorAll<HTMLElement>(
           'button, a[href], [tabindex]:not([tabindex="-1"])',
         ),
-      ).filter((element) => !element.hasAttribute("disabled"));
+      ).filter((element) => !element.hasAttribute("disabled") && (!element.closest("[inert]") && element.tabIndex >= 0));
       if (!focusable.length) return;
 
       const first = focusable[0];
@@ -1336,7 +1406,7 @@ function DetailsLayer({
       window.removeEventListener("keydown", handleKeys);
       returnFocusElement?.focus();
     };
-  }, [onClose, returnFocusRef]);
+  }, [compact, onClose, returnFocusRef]);
 
   return (
     <motion.div
@@ -1370,7 +1440,7 @@ function DetailsLayer({
       >
           <span data-type-field={"models.signature.eyebrow"}>{get("eyebrow", "Signature collection")}</span>
         <button ref={closeRef} type="button" onClick={onClose} data-type-field={"models.signature.detail.close"}>
-          {get("detail.close", "Close")} <span aria-hidden="true">×</span>
+          {get("detail.close", "Close")} {compact ? <X size={16} aria-hidden="true" /> : <span aria-hidden="true">×</span>}
         </button>
       </motion.div>
 
@@ -1399,7 +1469,16 @@ function DetailsLayer({
                 type="button"
                 role="tab"
                 aria-selected={variantIndex === index}
+                tabIndex={variantIndex === index ? 0 : -1}
                 onClick={() => selectVariant(index)}
+                onKeyDown={event => {
+                  const step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+                  if (!step && event.key !== "Home" && event.key !== "End") return;
+                  event.preventDefault();
+                  const next = event.key === "Home" ? 0 : event.key === "End" ? model.variants.length - 1 : (index + step + model.variants.length) % model.variants.length;
+                  selectVariant(next);
+                  event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>("button")[next]?.focus();
+                }}
               >
                 {variantIndex === index && (
                   <motion.span
@@ -1414,8 +1493,8 @@ function DetailsLayer({
             ))}
           </div>
 
-          <div className={styles.variantViewport}>
-            <AnimatePresence initial={false} mode="popLayout" custom={variantDirection}>
+          <motion.div layout="size" className={styles.variantViewport} transition={{ layout: { duration: prefersReducedMotion ? 0 : .32 } }}>
+            <AnimatePresence initial={false} mode="sync" custom={variantDirection}>
               <AccessibleVariantStack
                 key={`${model.slug}-variant-${variantIndex}`}
                 slug={model.slug}
@@ -1424,45 +1503,29 @@ function DetailsLayer({
                 reducedMotion={Boolean(prefersReducedMotion)}
               >
                 <div className={styles.specRows}>
-                  {variantDetails.map((detail, index) => (
+                  {variantDetails.map((detail) => (
                     <DetailRow
                       key={detail.label}
                       label={detail.label}
                       value={detail.value}
                       emphasis={Boolean(detail.emphasis)}
-                      direction={variantDirection}
-                      index={index}
-                      reducedMotion={Boolean(prefersReducedMotion)}
                     />
                   ))}
                 </div>
 
-                {canConfigure && <motion.div
-                  className={styles.configureSlot}
-                  initial={
-                    prefersReducedMotion
-                      ? false
-                      : { opacity: 0, x: variantDirection * 24 }
-                  }
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={
-                    prefersReducedMotion
-                      ? { opacity: 0 }
-                      : { opacity: 0, x: variantDirection * -24 }
-                  }
-                  transition={{
-                    duration: prefersReducedMotion ? 0.01 : 0.38,
-                    delay: prefersReducedMotion ? 0 : 0.18,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                >
-                  <SubtleLink href={configurationHref(model.slug, configurationVariantId)} className={styles.configureButton} distance={0} aria-label={`${get("detail.configure-action", "Configure yours")} — ${model.name}`} data-type-field="models.signature.detail.configure-action">
-                    {get("detail.configure-action", "Configure yours")}
+                {compact && canConfigure && <div className={styles.configureSlot}>
+                  <SubtleLink href={configurationHref(model.slug, configurationVariantId)} className={styles.configureButton} distance={0} aria-label={`${configureLabel(get("detail.configure-action", "Configure"))} — ${model.name}`} data-type-field="models.signature.detail.configure-action">
+                    {configureLabel(get("detail.configure-action", "Configure"))}<SlidersHorizontal size={16} aria-hidden="true" />
                   </SubtleLink>
-                </motion.div>}
+                </div>}
               </AccessibleVariantStack>
             </AnimatePresence>
-          </div>
+          </motion.div>
+          {!compact && canConfigure && <div className={styles.configureSlot}>
+            <SubtleLink href={configurationHref(model.slug, configurationVariantId)} className={styles.configureButton} distance={0} aria-label={`${configureLabel(get("detail.configure-action", "Configure"))} — ${model.name}`} data-type-field="models.signature.detail.configure-action">
+                    {configureLabel(get("detail.configure-action", "Configure"))}<SlidersHorizontal size={16} aria-hidden="true" />
+                  </SubtleLink>
+          </div>}
         </motion.section>
 
         <motion.section
@@ -1509,18 +1572,37 @@ function DetailsLayer({
             <strong>{galleryImage.label}</strong>
           </div>
 
+          {/* victorwelander's Expandable Tabs, 21st.dev demo 1428: persistent
+              icons with only the selected category expanding into a label. */}
           {gallery.length > 1 && <div className={styles.galleryTabs} role="tablist" aria-label={`Choose a view of ${model.name}`}>
-            {gallery.map((image, index) => (
+            {gallery.map((image, index) => {
+              const Icon = galleryIcon(image.label);
+              return (
               <button
                 key={image.id}
                 type="button"
                 role="tab"
+                aria-label={compact ? image.label : undefined}
                 aria-selected={galleryIndex === index}
+                tabIndex={compact ? galleryIndex === index ? 0 : -1 : undefined}
                 onClick={() => selectGalleryImage(index)}
+                onKeyDown={compact ? event => {
+                  const direction = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+                  if (!direction && event.key !== "Home" && event.key !== "End") return;
+                  event.preventDefault();
+                  const next = event.key === "Home" ? 0 : event.key === "End" ? gallery.length - 1 : (index + direction + gallery.length) % gallery.length;
+                  selectGalleryImage(next);
+                  event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>("button")[next]?.focus();
+                } : undefined}
               >
-                {image.label}
+                {compact ? <><Icon size={18} strokeWidth={1.7} aria-hidden="true" />
+                <AnimatePresence initial={false}>
+                  {galleryIndex === index && <motion.span initial={{ width: 0, opacity: 0 }} animate={{ width: "auto", opacity: 1 }} exit={{ width: 0, opacity: 0 }} transition={{ duration: prefersReducedMotion ? 0 : .22 }}>
+                    {image.label}
+                  </motion.span>}
+                </AnimatePresence></> : image.label}
               </button>
-            ))}
+            ); })}
           </div>}
         </motion.section>
 
@@ -1548,39 +1630,14 @@ function DetailsLayer({
   );
 }
 
-function DetailRow({
-  label,
-  value,
-  emphasis,
-  direction,
-  index,
-  reducedMotion,
-}: {
+function DetailRow({ label, value, emphasis }: {
   label: string;
   value: string;
   emphasis?: boolean;
-  direction: number;
-  index: number;
-  reducedMotion: boolean;
 }) {
-  return (
-    <motion.div
-      className={`${styles.specRow} ${emphasis ? styles.specRowEmphasis : ""}`}
-      initial={reducedMotion ? false : { opacity: 0, x: direction * (22 + index * 4) }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={
-        reducedMotion
-          ? { opacity: 0 }
-          : { opacity: 0, x: direction * (-18 - index * 4) }
-      }
-      transition={{
-        duration: reducedMotion ? 0.01 : 0.42,
-        delay: reducedMotion ? 0 : index * 0.045,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
-      <span>{label}</span>
-      <strong>{value}</strong>
-    </motion.div>
-  );
+  // The complete specification moves as one layer; independent staggered rows
+  // fought its transition and made desktop plan changes appear to jump.
+  return <div className={`${styles.specRow} ${emphasis ? styles.specRowEmphasis : ""}`}>
+    <span>{label}</span><strong>{value}</strong>
+  </div>;
 }

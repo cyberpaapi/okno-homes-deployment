@@ -6,3 +6,7 @@
 @media (prefers-reduced-motion: reduce) {
   .loader { display: none; }
 }
+
+@media (max-width: 700px) {
+  .loader, .loader > div { will-change: opacity; }
+}

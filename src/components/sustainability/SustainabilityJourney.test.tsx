@@ -92,6 +92,74 @@ describe("Sustainability scroll movie", () => {
     expect(movie.currentTime).toBeCloseTo(16 - 1 / 24, 1);
   });
 
+  it("gathers separated text before revealing the final title and reverses continuously through the old scene boundary", () => {
+    const { viewport, scrollTo } = setupJourney();
+    const value = (key: string) => Number(viewport.style.getPropertyValue(key));
+    scrollTo(0.70);
+    expect(value("--final-gather")).toBe(0);
+    expect(value("--final-reveal")).toBe(0);
+    scrollTo(0.77);
+    const middle = value("--final-gather");
+    expect(middle).toBeCloseTo(0.5, 3);
+    expect(value("--final-copy-opacity")).toBe(1);
+    expect(value("--final-reveal")).toBe(0);
+    scrollTo(0.81999);
+    const beforeBoundary = value("--final-gather");
+    scrollTo(0.82001);
+    expect(Math.abs(value("--final-gather") - beforeBoundary)).toBeLessThan(0.001);
+    scrollTo(0.84);
+    expect(value("--final-gather")).toBe(1);
+    expect(value("--final-reveal")).toBe(0);
+    scrollTo(0.875);
+    expect(value("--final-gather")).toBe(1);
+    expect(value("--final-reveal")).toBeCloseTo(0.5, 3);
+    scrollTo(0.91);
+    expect(value("--final-reveal")).toBe(1);
+    scrollTo(0.77);
+    expect(value("--final-gather")).toBe(middle);
+    expect(value("--final-reveal")).toBe(0);
+  });
+
+  it("finishes the desktop title exchange after scrolling stops and reverses without a half-title hold", () => {
+    environment.compact = false;
+    const { viewport, scrollTo } = setupJourney();
+    const reveal = () => Number(viewport.style.getPropertyValue("--final-reveal"));
+    scrollTo(0.83);
+    expect(reveal()).toBe(0);
+    scrollTo(0.85);
+    expect(reveal()).toBe(1);
+    advanceFrames();
+    expect(reveal()).toBe(1);
+    // Tiny reversals within the handoff band do not restart an exchange.
+    scrollTo(0.83);
+    expect(reveal()).toBe(1);
+    scrollTo(0.81);
+    expect(reveal()).toBe(0);
+  });
+
+  it("keeps final text centered with no scroll displacement for reduced motion", () => {
+    environment.reduced = true;
+    const { viewport, scrollTo } = setupJourney();
+    scrollTo(0.71);
+    expect(viewport.style.getPropertyValue("--final-gather")).toBe("1.00000");
+  });
+
+  it("uses deterministic CSS colors without a canvas and retraces them on reverse scroll", () => {
+    const { container, viewport, scrollTo } = setupJourney();
+    expect(container.querySelector("canvas")).toBeNull();
+    expect(container.querySelector("[data-color-surround]")).not.toBeNull();
+    scrollTo(0);
+    expect(viewport.style.getPropertyValue("--surround-top")).toBe("rgb(0.00 0.00 0.00)");
+    scrollTo(0.46);
+    const top = viewport.style.getPropertyValue("--surround-top");
+    const bottom = viewport.style.getPropertyValue("--surround-bottom");
+    scrollTo(0.9);
+    expect(viewport.style.getPropertyValue("--surround-top")).not.toBe(top);
+    scrollTo(0.46);
+    expect(viewport.style.getPropertyValue("--surround-top")).toBe(top);
+    expect(viewport.style.getPropertyValue("--surround-bottom")).toBe(bottom);
+  });
+
   it("leaves the scroll movie still for reduced motion and releases pending work on unmount", () => {
     environment.reduced = true;
     const { movie, viewport, scrollTo, unmount } = setupJourney();

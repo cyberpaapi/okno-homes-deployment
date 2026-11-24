@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>OKNO — Font height comparison</title>
+  <style>
+    @font-face{font-family:Kento;src:url('/fonts/kento-regular.woff2') format('woff2');font-weight:400;font-display:swap}
+    @font-face{font-family:Manrope;src:url('/fonts/manrope-variable-latin.woff2') format('woff2');font-weight:200 800;font-display:swap}
+    *{box-sizing:border-box}body{margin:0;background:#101810;color:#eef3ed;font:16px/1.5 Manrope,Arial,sans-serif}main{max-width:1120px;margin:auto;padding:clamp(24px,5vw,72px)}h1{font-size:clamp(26px,4vw,42px);line-height:1.15;margin:0 0 18px}p{max-width:65ch;color:#bdcbbf;margin:0 0 28px}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin:28px 0 36px}.controls label{font-weight:700}.controls input{width:min(340px,100%);accent-color:#bbcfa4}.controls output{min-width:50px;font-variant-numeric:tabular-nums}button{background:#d2dfc2;color:#152019;border:0;border-radius:99px;padding:12px 20px;font:700 14px/1.2 Manrope,Arial,sans-serif;cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid white;outline-offset:5px}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}.sample{border-top:1px solid #52634e;padding:22px 0 30px;min-width:0}.sample small{display:block;margin-bottom:24px;color:#afc29f;font-size:13px}.type{font:400 clamp(24px,3.4vw,42px)/1.3 Kento,Arial,sans-serif;letter-spacing:.01em;overflow-wrap:normal}.type span{display:inline-block;transform-origin:left center}.adjusted .type{line-height:calc(1.3 * var(--height,1.06))}.adjusted .type span{transform:scaleY(var(--height,1.06))}.note{font-size:14px;margin-top:26px}@media(max-width:700px){.comparison{grid-template-columns:1fr;gap:0}.sample{padding:20px 0 28px}.sample small{margin-bottom:18px}.type{font-size:clamp(22px,6.3vw,34px)}}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>The company font, with a little more height.</h1>
+    <p>Compare the original with a modest vertical adjustment. The font, wording and letter widths stay the same. This page is a separate demonstration; the adjustment is not applied across the website.</p>
+    <div class="controls">
+      <label for="height">Letter height</label>
+      <input id="height" type="range" min="100" max="114" step="1" value="106">
+      <output id="value" for="height">106%</output>
+      <button type="button" data-height="100">Original</button>
+      <button type="button" data-height="106">+6%</button>
+      <button type="button" data-height="110">+10%</button>
+    </div>
+    <div class="comparison">
+      <section class="sample"><small>Original · 100%</small><div class="type"><span>Built in 90 days.</span></div></section>
+      <section class="sample adjusted"><small>Adjusted · <span class="percentage">106%</span></small><div class="type"><span>Built in 90 days.</span></div></section>
+    </div>
+    <div class="comparison">
+      <section class="sample"><small>Original · 100%</small><div class="type"><span>From brief</span> <span>to handover.</span></div></section>
+      <section class="sample adjusted"><small>Adjusted · <span class="percentage">106%</span></small><div class="type"><span>From brief</span> <span>to handover.</span></div></section>
+    </div>
+    <div class="comparison">
+      <section class="sample"><small>Original · 100%</small><div class="type"><span>Homes for</span> <span>rare places.</span></div></section>
+      <section class="sample adjusted"><small>Adjusted · <span class="percentage">106%</span></small><div class="type"><span>Homes for</span> <span>rare places.</span></div></section>
+    </div>
+    <p class="note">The reading copy and bold sans controls retain their normal proportions. The comparison changes the height of the company lettering only.</p>
+  </main>
+  <script>
+    const slider=document.getElementById('height');
+    function update(value){slider.value=String(value);document.getElementById('value').textContent=value+'%';document.documentElement.style.setProperty('--height',Number(value)/100);document.querySelectorAll('.percentage').forEach(label=>label.textContent=value+'%')}
+    slider.addEventListener('input',()=>update(slider.value));
+    document.querySelectorAll('button[data-height]').forEach(button=>button.addEventListener('click',()=>update(button.dataset.height)));
+  </script>
+</body>
+</html>

@@ -3,10 +3,9 @@
 import { useEffect, useRef } from 'react';
 import styles from './ForestEntryOption.module.css';
 
-/** Ease real download progress in quick/slow bursts; never invent downloaded bytes. */
+/** Smooth real byte progress at a steady response; decoded readiness owns completion. */
 export default function FilmLoadingStatus({ ready, progress, retry }: { ready: boolean; progress: number | null; retry(): void }) {
   const barRef = useRef<HTMLProgressElement>(null);
-  const rhythmStarted = useRef<number | null>(null);
 
   useEffect(() => {
     const bar = barRef.current;
@@ -16,7 +15,6 @@ export default function FilmLoadingStatus({ ready, progress, retry }: { ready: b
     if (progress < 0) { if (!(bar.value > 0)) bar.removeAttribute('value'); return; }
     if (ready || (progress === 0 && !bar.hasAttribute('value'))) {
       bar.value = ready ? 1 : 0;
-      rhythmStarted.current = null;
       return;
     }
     // Reserve completion for decoded readiness, not merely downloaded bytes.
@@ -24,16 +22,13 @@ export default function FilmLoadingStatus({ ready, progress, retry }: { ready: b
     const target = Math.max(bar.value, Math.min(.995, Math.max(0, progress)));
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (reduced.matches) { bar.value = target; return; }
-    rhythmStarted.current ??= performance.now();
     let previous = performance.now();
     let frame = 0;
     const advance = (now: number) => {
       const elapsed = Math.min(64, now - previous) / 1000;
       previous = now;
-      const phase = (now - rhythmStarted.current!) % 1800;
-      const gain = phase < 320 || (phase >= 1000 && phase < 1320) ? 7 : .45;
       const gap = target - bar.value;
-      bar.value = gap <= .001 ? target : Math.min(target, bar.value + (gap * gain + .006) * elapsed);
+      bar.value = gap <= .001 ? target : Math.min(target, bar.value + (gap * 12 + .015) * elapsed);
       if (bar.value < target) frame = requestAnimationFrame(advance);
     };
     frame = requestAnimationFrame(advance);

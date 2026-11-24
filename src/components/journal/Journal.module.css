@@ -370,3 +370,136 @@
 .publicationItem { border-right: 0; }
 @media (max-width: 760px) { .cardMeta { left: 18px; bottom: 18px; right: 82px; } }
 @media (max-width: 430px) { .cardMeta { left: 14px; } }
+
+/* Only phone archive cards use uniform crops and the compact arrow action. */
+@media (max-width: 700px) {
+  .blogImage[data-portrait="true"] { aspect-ratio: 4 / 3; }
+  .blogImage[data-portrait="true"] .blogImageDrift { inset: -8% 0; }
+  .blogImage[data-portrait="true"] img { object-fit: cover; }
+  .blogCopy { position: relative; padding-right: 40px; }
+  .blogRead { position: absolute; top: 6px; right: 0; display: grid; place-items: center; width: 32px; height: 32px; margin: 0; }
+  .blogReadLabel { display: none; }
+  .blogRead svg { display: block; width: 18px; height: 18px; transform: rotate(45deg); }
+  .blogLink:hover .blogRead svg, .blogLink:focus-visible .blogRead svg { transform: translateX(3px) rotate(45deg); }
+}
+
+
+/* Review3: display type recedes so the stories retain the hierarchy. */
+.heroCopy h1 {
+  font-size: min(var(--type-size-display, var(--okno-hero)), clamp(32px, 4.8vw, 68px));
+  max-width: 11ch;
+}
+.eyebrow, .pressIntro > p {
+  font: 700 13px/1.35 "Manrope OKNO", Arial, sans-serif !important;
+  letter-spacing: .035em;
+}
+/* The logo and the visible type share a centered line, independent of Kento's
+   generous descender metrics. The supplied logo artwork is unchanged. */
+.publicationItem { line-height: 1; }
+.publicationItem .sourceMark { align-self: center; }
+.journalContainer[data-motion-paused="true"] .publicationTrack { animation-play-state: paused; }
+.marqueeCaption .motionToggle {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 1px solid var(--journal-line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--journal-ink);
+}
+.motionToggle svg { display: block; }
+.marqueeCaption .motionToggle:hover { background: rgba(54,88,67,.08); }
+
+@media (max-width: 700px) {
+  .heroCopy h1 { font-size: clamp(29px, 7.5vw, 42px); max-width: 11ch; }
+  .heroFeature, .heroFeature[data-photo="false"] {
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 1.3;
+  }
+  .heroFeatureCopy { padding: 24px 58px 20px 18px; }
+  .heroFeatureCopy h2 { font-size: 15px; line-height: 1.4; text-wrap: pretty; }
+  .featureSource { font-size: 13px; margin-bottom: 10px; }
+  .featureMeta { font-size: 10px; line-height: 1.4; letter-spacing: .03em; margin-top: 12px; }
+  .heroAction { right: 10px; bottom: 12px; }
+  /* Explicit square geometry prevents copy length and viewport height from
+     changing a card's shape. Long copy has a stable reading area above its date. */
+  .storyCard {
+    width: min(296px, 72vw);
+    height: min(296px, 72vw);
+    min-height: 0;
+    aspect-ratio: 1;
+    border-radius: 6px;
+  }
+  .cardCopy, .storyCard[data-photo="false"] .cardCopy { padding: 18px 18px 62px; }
+  .cardSource { margin-bottom: 10px; font-size: 13px; line-height: 1.35; }
+  .cardCopy h3 { font-size: 16px; line-height: 1.4; -webkit-line-clamp: 4; text-wrap: pretty; }
+  .cardSource strong { font-weight: 700; }
+  .cardMeta { left: 18px; right: 66px; bottom: 23px; }
+  .cardDate { font-size: 11px !important; }
+  .cardAction { right: 10px; bottom: 10px; }
+  .cardAction .arrowLink, .heroAction .arrowLink {
+    width: 44px !important;
+    height: 44px;
+    background: transparent;
+    border: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .cardAction .arrowLink::before, .heroAction .arrowLink::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(255,255,255,.72);
+    border-radius: inherit;
+    background: rgba(16,14,11,.38);
+  }
+  .cardAction .arrowLink svg, .heroAction .arrowLink svg { position: relative; width: 17px; height: 17px; }
+  /* Archive photography stays square, and the headline uses the full card
+     width instead of competing with a large action gutter. */
+  .blogImage, .blogImage[data-portrait="true"] { aspect-ratio: 1 !important; }
+  .blogCopy { padding-right: 0; padding-bottom: 30px; }
+  .blogCopy h3 { font-size: 15px; line-height: 1.4; text-wrap: pretty; }
+  .blogCopy > p:first-child { font: 700 10px/1.4 "Manrope OKNO", Arial, sans-serif !important; letter-spacing: .035em; margin-bottom: 8px; }
+  .blogRead { top: auto; bottom: 0; width: 30px; height: 30px; }
+  .blogRead svg { width: 14px; height: 14px; }
+}
+
+/* Review4: the publisher marks align with the visible Kento capitals, whose
+   ink centre sits slightly above the font's line-box centre. The original
+   publisher artwork and the size of the ticker stay unchanged. */
+.publicationItem .sourceMarkMonochrome { translate: 0 -.08em; }
+
+@media (max-width: 700px) {
+  /* Match the control to the Journal's green ink and paper palette. A filled
+     Lucide glyph avoids white interiors inside the two tiny pause outlines. */
+  .marqueeCaption .motionToggle {
+    border: 0;
+    background: #dbe5d6;
+    color: #183c2a;
+  }
+  .marqueeCaption .motionToggle:hover { background: #cbdac4; }
+  .motionToggle svg { fill: currentColor; stroke-width: 1.6; }
+
+  /* A wider, equal gap on either side of the publication band. The archive caption
+     follows its own reel, rather than crowding the band above the photographs. */
+  .marqueeWrap { padding-block: 36px; }
+  .marqueeViewport { padding-bottom: 0; }
+  .marqueeWrap[data-direction="right"] { display: flex; flex-direction: column; }
+  .marqueeWrap[data-direction="right"] .marqueeViewport { padding-top: 0; }
+  .marqueeWrap[data-direction="right"] .marqueeCaption {
+    order: 1;
+    padding-top: 22px;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  .blogCopy > .blogCategory:first-child {
+    margin-bottom: 10px;
+    font: 800 16px/1.35 "Manrope OKNO", Arial, sans-serif !important;
+    letter-spacing: .025em;
+  }
+}

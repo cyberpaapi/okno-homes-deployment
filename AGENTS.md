@@ -1,3 +1,19 @@
+# Review5 authority —24November2026
+
+OwnerReview5 (`docs/review-5-2026-11-24.md`, externalissues036–041) supersedespriorlocal-onlydeploymentandfontdemoonlyrules. Applyreportedphonecontent/desktopModelsfixes andpublicKento/Govandiglyphheight108% withhorizontalmetricsunchanged; originalfonts/configurator/adminpreserved. Ownerauthorizesverifiedrelease toexistingCodeAccRenderfree service viaapprovedcodex/finishing-2026-11-24 remotebranch, authenticateGitwritesCodeAcc2007-dev. Currentlocalbranchcodex/review-5-2026-11-24. Nootherproviders/defaultbranches/resources/CMSwrites. MobileSustbackgrounddeferred.
+
+# Review4 authority —24November2026
+
+LatestownerReview4 and `docs/review-4-2026-11-24.md` supersedeprior Review3 for issues030–035. Only the reported desktop Sustainability titlehandoff/finalphoto behavior is releasedfromhero freeze; allotherhero/framing/media stays. Projects,Models,About,Enquiry accepted; configuratorfrozen. Activebranch `codex/review-4-2026-11-24`. Work only suppliedrepo, localreviewfirst, no deploymentnow.
+
+# Review3 authority —24November2026
+
+Owner Review3 supersedes the phone-only rule only for explicitly listed desktop corrections. Read `docs/review-3-2026-11-24.md` and external finishing-harness issues025–029. Preserve Sustainability hero hashes, Models/configurator and other accepted layouts. Active branch `codex/review-3-2026-11-24`; same supplied repo and worktree; local review first, no deployment now.
+
+# Active local mobile-only continuation —24November2026
+
+Owner latest: leave the reviewed Sustainability hero unchanged; continue other Review2 fixes for phones<=700px only, including lower Sustainability bento. Desktop/tablet>=701 retain af8c82a outside the frozen current hero. Active integration branch `codex/mobile-review-2-2026-11-24` is a worktree of the supplied repo; prior worktrees remain preserved. Read docs/review-2-2026-11-24.md and external finishing-harness/state/project.json. No deployment during local review. Frozen hero hashes/ownership are in the external mobile-only/INTAKE.json and CONTRACT.md. No hero edits, global glyph scaling or configurator changes.
+
 # OKNO release repository
 
 ## Latest hosting decision —24November2026

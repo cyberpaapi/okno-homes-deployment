@@ -13,9 +13,12 @@ beforeEach(() => {
 describe('Journal press and blog experience', () => {
   it('offers a persistent pause and touch dragging without hiding duplicate loop cards', () => {
     render(<JournalExperience />);
-    const pause = screen.getByRole('button', { name: 'Pause in the press motion' });
+    const pause = screen.getByRole('button', { name: 'Pause journal motion' });
     fireEvent.click(pause);
-    expect(screen.getByRole('button', { name: 'Resume in the press motion' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Play journal motion' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('region', { name: 'In the press' })).toHaveAttribute('data-paused', 'true');
+    expect(screen.getByRole('region', { name: 'From the archive' })).toHaveAttribute('data-paused', 'true');
+    expect(screen.getByLabelText('Publications covering OKNO').closest('[data-motion-paused]')).toHaveAttribute('data-motion-paused', 'true');
     const reel = screen.getByRole('region', { name: 'In the press' });
     const viewport = reel.querySelector<HTMLElement>('[data-dragging]')!;
     const track = reel.querySelector<HTMLElement>('[data-marquee-track]')!;
@@ -71,8 +74,9 @@ describe('Journal press and blog experience', () => {
 
   it('keeps photography inert and exposes only explicit, named arrow links', () => {
     render(<JournalExperience />);
-    expect(screen.getByRole('button', { name: 'Pause in the press motion' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Pause from the archive motion' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Pause journal motion' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Pause from the archive motion' })).not.toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: 'Pause journal motion' })).toHaveLength(1);
     const pressAction = screen.getByRole('link', { name: /Read AD Small Spaces.*Architectural Digest India/ });
     expect(pressAction).toHaveAttribute('data-journal-cursor-action');
     expect(pressAction).toHaveAttribute('target', '_blank');

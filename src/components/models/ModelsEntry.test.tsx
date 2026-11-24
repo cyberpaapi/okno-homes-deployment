@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import ModelsEntry from "./ModelsEntry";
 
 vi.mock("next/navigation", () => ({
@@ -14,6 +14,10 @@ beforeAll(() => {
     addListener: vi.fn(), removeListener: vi.fn(), dispatchEvent: vi.fn(),
   })));
 });
+beforeEach(() => vi.mocked(window.matchMedia).mockImplementation((query: string) => ({
+  matches: false, media: query, onchange: null, addEventListener: vi.fn(), removeEventListener: vi.fn(),
+  addListener: vi.fn(), removeListener: vi.fn(), dispatchEvent: vi.fn(),
+})));
 afterAll(() => vi.unstubAllGlobals());
 
 describe("ModelsEntry", () => {
@@ -51,6 +55,27 @@ describe("ModelsEntry", () => {
 
     expect(screen.getByRole("status", { name: "Opening Bespoke" })).toBeInTheDocument();
     expect(document.documentElement).toHaveAttribute("data-model-transition", "bespoke");
+    document.documentElement.removeAttribute("data-model-transition");
+    sessionStorage.removeItem("okno-model-destination");
+  });
+
+  it("opens the Signature collection without a full-screen Forza photograph on phones", () => {
+    vi.mocked(window.matchMedia).mockImplementation((query: string) => ({
+      matches: query === "(max-width: 700px)", media: query, onchange: null, addEventListener: vi.fn(), removeEventListener: vi.fn(),
+      addListener: vi.fn(), removeListener: vi.fn(), dispatchEvent: vi.fn(),
+    }));
+    render(<ModelsEntry />);
+    fireEvent.click(screen.getByRole("link", { name: /enter the signature collection/i }));
+    const transition = screen.getByRole("status", { name: "Opening Collection" });
+    expect(transition.querySelector("img")).toBeNull();
+    document.documentElement.removeAttribute("data-model-transition");
+    sessionStorage.removeItem("okno-model-destination");
+  });
+
+  it("retains the destination photograph on desktop and tablet", () => {
+    render(<ModelsEntry />);
+    fireEvent.click(screen.getByRole("link", { name: /enter the signature collection/i }));
+    expect(screen.getByRole("status", { name: "Opening Collection" }).querySelector("img")).not.toBeNull();
     document.documentElement.removeAttribute("data-model-transition");
     sessionStorage.removeItem("okno-model-destination");
   });

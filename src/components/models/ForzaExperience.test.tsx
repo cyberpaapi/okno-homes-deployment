@@ -1,4 +1,5 @@
 import {
+  act,
   fireEvent,
   render,
   screen,
@@ -6,7 +7,7 @@ import {
   waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { gazePrototype, oknoModels } from "@/data/models";
 import ForzaExperience from "./ForzaExperience";
 import { clampProgress, mapProgressToTime } from "./forzaMotion";
@@ -25,9 +26,12 @@ vi.mock("@/lib/useSiteContent", () => ({
 }));
 
 beforeEach(() => {
+  vi.stubGlobal("matchMedia", vi.fn(query => ({ matches: false, media: query, addEventListener: vi.fn(), removeEventListener: vi.fn() })));
   cms.values = {};
   cms.collections = {};
 });
+
+afterEach(() => vi.unstubAllGlobals());
 
 const forza = oknoModels.find((model) => model.slug === "forza");
 const kray = oknoModels.find((model) => model.slug === "kray");
@@ -50,7 +54,7 @@ describe("ForzaExperience", () => {
       expect(view.container.querySelectorAll('video')).toHaveLength(1);
       expect(view.container.querySelector('source[src*="1080p"]')).toBeNull();
       expect(screen.getByRole('button', { name: 'Explore details' })).toBeInTheDocument();
-      expect(screen.getByRole("link", { name: "Configure yours — Forza" })).toHaveAttribute("href", "/models/signature/forza/configure");
+      expect(screen.getByRole("link", { name: "Configure — Forza" })).toHaveAttribute("href", "/models/signature/forza/configure");
       view.unmount();
     } finally { window.matchMedia = previous; }
   });
@@ -60,31 +64,41 @@ describe("ForzaExperience", () => {
     const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => undefined);
     try {
       const view = render(<ForzaExperience models={signatureModels} />);
-      const plans = screen.getByRole("combobox", { name: "Floor plan" });
-      const models = screen.getByRole("combobox", { name: "Models" });
-      expect(plans).toBeEnabled();
-      expect(models).toBeEnabled();
-      expect(within(plans).getAllByRole("option").map(option => option.textContent)).toEqual([
-        "All", "Studio", "Two-bedroom", "Three-bedroom",
-      ]);
-
-      fireEvent.change(models, { target: { value: "kray" } });
-      expect(models).toHaveValue("kray");
+      const plans = screen.getByRole("button", { name: "Floor plan" });
+      const models = screen.getByRole("button", { name: "Models" });
+      expect(view.container.querySelector("select")).toBeNull();
+      fireEvent.click(models);
+      let options = screen.getByRole("listbox", { name: "Models" });
+      expect(within(options).getByRole("option", { name: "Forza" })).toHaveFocus();
+      fireEvent.keyDown(document.activeElement!, { key: "ArrowRight" });
+      expect(within(options).getByRole("option", { name: "Kray" })).toHaveFocus();
+      fireEvent.click(within(options).getByRole("option", { name: "Kray" }));
+      expect(models).toHaveFocus();
+      expect(models).toHaveAttribute("aria-expanded", "false");
       await waitFor(() => expect(screen.getByRole("heading", { name: "Kray" })).toBeInTheDocument());
 
-      fireEvent.change(plans, { target: { value: "3-bhk" } });
-      expect(plans).toHaveValue("3-bhk");
-      expect(models).toHaveValue("tengo");
-      expect(within(models).getAllByRole("option")).toHaveLength(1);
+      fireEvent.click(plans);
+      options = screen.getByRole("listbox", { name: "Floor plan" });
+      expect(within(options).getAllByRole("option").map(option => option.textContent?.replace(/\s+/g, " ").trim())).toEqual([
+        "All", "Studio", "Two-bedroom", "Three-bedroom",
+      ]);
+      fireEvent.click(within(options).getByRole("option", { name: "Three-bedroom" }));
+      expect(plans).toHaveFocus();
       await waitFor(() => expect(screen.getByRole("heading", { name: "Tengo" })).toBeInTheDocument());
-      expect(screen.getByRole("link", { name: "Configure yours — Tengo" })).toHaveAttribute(
+      expect(screen.getByRole("link", { name: "Configure — Tengo" })).toHaveAttribute(
         "href", "/models/signature/tengo/configure?variant=3-bhk",
       );
+      fireEvent.click(models);
+      options = screen.getByRole("listbox", { name: "Models" });
+      expect(within(options).getAllByRole("option")).toHaveLength(1);
+      fireEvent.keyDown(document.activeElement!, { key: "Escape" });
+      expect(models).toHaveFocus();
+      expect(models).toHaveAttribute("aria-expanded", "false");
 
       fireEvent.click(screen.getByRole("button", { name: "Explore details" }));
       const dialog = screen.getByRole("dialog", { name: "Tengo" });
       expect(within(dialog).getByRole("tab", { name: "Three-bedroom" })).toHaveAttribute("aria-selected", "true");
-      expect(within(dialog).getByRole("link", { name: "Configure yours — Tengo" })).toHaveAttribute(
+      expect(within(dialog).getByRole("link", { name: "Configure — Tengo" })).toHaveAttribute(
         "href", "/models/signature/tengo/configure?variant=3-bhk",
       );
       view.unmount();
@@ -93,29 +107,94 @@ describe("ForzaExperience", () => {
       scrollTo.mockRestore();
     }
   });
+  it("retains a custom Configure action and exposes only the selected gallery label on phones", () => {
+    vi.stubGlobal("matchMedia", vi.fn(query => ({ matches: query === "(max-width: 700px)", addEventListener: vi.fn(), removeEventListener: vi.fn() })));
+    cms.values = { "models.signature.detail.configure-action": "Tailor this home" };
+    render(<ForzaExperience models={signatureModels} />);
+    expect(screen.getByRole("link", { name: "Tailor this home — Forza" })).toHaveAttribute("href", "/models/signature/forza/configure");
+    fireEvent.click(screen.getByRole("button", { name: "Explore details" }));
+    const dialog = screen.getByRole("dialog", { name: "Forza" });
+    const dock = within(dialog).getByRole("tablist", { name: "Choose a view of Forza" });
+    expect(within(dock).getByRole("tab", { name: "Kitchen" })).toHaveAttribute("aria-selected", "true");
+    expect(within(dock).getByRole("tab", { name: "Bedroom" }).textContent).toBe("");
+    fireEvent.keyDown(within(dock).getByRole("tab", { name: "Kitchen" }), { key: "ArrowRight" });
+    expect(within(dock).getByRole("tab", { name: "Living" })).toHaveFocus();
+    expect(within(dock).getByRole("tab", { name: "Living" })).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("shows stable desktop Enquire and icon actions while retaining text gallery tabs", () => {
+    const view = render(<ForzaExperience models={signatureModels} />);
+    expect(screen.getByRole("link", { name: "Configure — Forza" }).querySelector("svg")).not.toBeNull();
+    expect(screen.getByRole("button", { name: "Explore details" }).querySelector("svg")).not.toBeNull();
+    expect(screen.getByRole("link", { name: "Enquire" })).toHaveAttribute("href", "/enquiry?intent=home&model=forza");
+    expect(view.container.querySelector("select")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Floor plan" })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Explore details" }));
+    const dock = within(screen.getByRole("dialog")).getByRole("tablist", { name: "Choose a view of Forza" });
+    within(dock).getAllByRole("tab").forEach(tab => {
+      expect(tab.textContent).not.toBe("");
+      expect(tab.querySelector("svg")).toBeNull();
+      expect(tab).not.toHaveAttribute("tabindex");
+    });
+  });
+
+  it("uses in-page pill choices on tablets without changing the desktop film decoders", async () => {
+    vi.stubGlobal("matchMedia", vi.fn(query => ({ matches: query === "(max-width: 1100px)", addEventListener: vi.fn(), removeEventListener: vi.fn() })));
+    const view = render(<ForzaExperience models={signatureModels} initialModelSlug="kray" />);
+    expect(view.container.querySelector("select")).toBeNull();
+    expect(view.container.querySelectorAll("video")).toHaveLength(2);
+    fireEvent.click(screen.getByRole("button", { name: "Models" }));
+    const choices = screen.getByRole("listbox", { name: "Models" });
+    fireEvent.click(within(choices).getByRole("option", { name: "Forza" }));
+    await waitFor(() => expect(screen.getByRole("heading", { name: "Forza" })).toBeInTheDocument());
+    expect(screen.getByRole("link", { name: "Enquire" })).toHaveAttribute("href", "/enquiry?intent=home&model=forza");
+    expect(screen.getByRole("link", { name: "Configure — Forza" })).toHaveAttribute("href", "/models/signature/forza/configure");
+  });
+
+  it("preserves the selected model and moves picker focus to its wider control on resize", async () => {
+    let phone = true;
+    const listeners = new Set<() => void>();
+    vi.stubGlobal("matchMedia", vi.fn(query => ({
+      get matches() { return query === "(max-width: 700px)" && phone; },
+      addEventListener: (_: string, listener: () => void) => listeners.add(listener),
+      removeEventListener: (_: string, listener: () => void) => listeners.delete(listener),
+    })));
+    const view = render(<ForzaExperience models={signatureModels} initialModelSlug="kray" />);
+    fireEvent.click(screen.getByRole("button", { name: "Models" }));
+    expect(within(screen.getByRole("listbox", { name: "Models" })).getByRole("option", { name: "Kray" })).toHaveFocus();
+    act(() => { phone = false; listeners.forEach(listener => listener()); });
+    expect(screen.getByRole("heading", { name: "Kray" })).toBeInTheDocument();
+    expect(within(screen.getByRole("group", { name: "Signature models" })).getByRole("button", { name: "Kray" })).toHaveFocus();
+    expect(screen.getByRole("link", { name: "Configure — Kray" })).toHaveAttribute("href", "/models/signature/kray/configure?variant=studio");
+    expect(view.container.querySelectorAll("video")).toHaveLength(2);
+    act(() => { phone = true; listeners.forEach(listener => listener()); });
+    expect(screen.getByRole("button", { name: "Models" })).toHaveAttribute("aria-expanded", "false");
+    expect(view.container.querySelectorAll("video")).toHaveLength(1);
+  });
+
   it("returns to the requested model and stable variant instead of reopening Forza", () => {
     render(<ForzaExperience models={signatureModels} initialModelSlug="kray" initialDetailsOpen initialVariantId="1-bhk" />);
     const dialog = screen.getByRole("dialog", { name: "Kray" });
     expect(within(dialog).getByRole("tab", { name: "Kray 1 BHK" })).toHaveAttribute("aria-selected", "true");
-    expect(within(dialog).getByRole("link", { name: "Configure yours — Kray" })).toHaveAttribute("href", "/models/signature/kray/configure?variant=1-bhk");
+    expect(within(dialog).getByRole("link", { name: "Configure — Kray" })).toHaveAttribute("href", "/models/signature/kray/configure?variant=1-bhk");
     expect(within(screen.getByRole("group", { name: "Signature models" })).getByRole("button", { name: "Kray" })).toHaveAttribute("aria-pressed", "true");
   });
 
   it.each(["gaze", "trib", "octapod"])("hides both configure entries for %s without an editable house", slug => {
     render(<ForzaExperience models={signatureModels} initialModelSlug={slug} />);
-    expect(screen.queryByRole("link", { name: /Configure yours/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /Configure/ })).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Explore details" }));
-    expect(within(screen.getByRole("dialog")).queryByRole("link", { name: /Configure yours/ })).not.toBeInTheDocument();
+    expect(within(screen.getByRole("dialog")).queryByRole("link", { name: /Configure/ })).not.toBeInTheDocument();
   });
 
   it("shows and removes both entries as a model receives or loses its published GLB", () => {
     cms.collections["signature.models"] = signatureModelDefaults.map(record => record.id === "gaze"
       ? { ...record, fields: { ...record.fields, configuratorModel: "/api/site-media/gaze.glb" } } : record);
     const view = render(<ForzaExperience models={signatureModels} initialModelSlug="gaze" initialDetailsOpen />);
-    expect(screen.getAllByRole("link", { name: "Configure yours — Gaze" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "Configure — Gaze" })).toHaveLength(2);
     cms.collections["signature.models"] = signatureModelDefaults;
     view.rerender(<ForzaExperience models={signatureModels} initialModelSlug="gaze" initialDetailsOpen />);
-    expect(screen.queryByRole("link", { name: /Configure yours/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /Configure/ })).not.toBeInTheDocument();
   });
 
   it("falls back safely for a removed or unknown model link", () => {
@@ -135,7 +214,7 @@ describe("ForzaExperience", () => {
     fireEvent.click(within(screen.getByRole("group",{name:"Signature models"})).getByRole("button",{name:"Aurora"}));
     await waitFor(() => expect(screen.getByRole("heading",{name:"Aurora"})).toBeInTheDocument());
     expect(screen.getByText("410 sq ft")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Configure yours — Aurora" })).toHaveAttribute("href", "/models/signature/aurora/configure");
+    expect(screen.getByRole("link", { name: "Configure — Aurora" })).toHaveAttribute("href", "/models/signature/aurora/configure");
     expect(screen.getByText("Indicative ₹ 23 lakh")).toBeInTheDocument();
     expect(container.querySelector('source[src="/qa/aurora-a.mp4"]')).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button",{name:"Explore Aurora"}));
@@ -181,17 +260,20 @@ describe("ForzaExperience", () => {
     const dialog = screen.getByRole("dialog", { name: "Tengo" });
     expect(within(dialog).getByText("1,500 sq ft")).toBeInTheDocument();
     expect(within(dialog).getByText("Indicative ₹ 75 lakh")).toBeInTheDocument();
-    expect(within(dialog).getByRole("link", { name: /Configure yours — Tengo/ })).toHaveAttribute(
+    expect(within(dialog).getByRole("link", { name: /Configure — Tengo/ })).toHaveAttribute(
       "href", "/models/signature/tengo/configure?variant=2-bhk",
     );
-    fireEvent.click(within(dialog).getByRole("tab", { name: "Three-bedroom" }));
-    expect(within(dialog).getAllByRole("link", { name: /Configure yours — Tengo/ })).toHaveLength(1);
+    const configure = within(dialog).getByRole("link", { name: /Configure — Tengo/ });
+    fireEvent.keyDown(within(dialog).getByRole("tab", { name: "Two-bedroom edition" }), { key: "ArrowRight" });
+    expect(within(dialog).getByRole("tab", { name: "Three-bedroom" })).toHaveFocus();
+    expect(within(dialog).getAllByRole("link", { name: /Configure — Tengo/ })).toHaveLength(1);
+    expect(within(dialog).getByRole("link", { name: /Configure — Tengo/ })).toBe(configure);
     const outgoing = dialog.querySelector('[data-variant-stack="0"]');
     if (outgoing) {
       expect(outgoing).toHaveAttribute("aria-hidden", "true");
       expect(outgoing).toHaveAttribute("inert");
     }
-    await waitFor(() => expect(within(dialog).getByRole("link", { name: /Configure yours — Tengo/ })).toHaveAttribute(
+    await waitFor(() => expect(within(dialog).getByRole("link", { name: /Configure — Tengo/ })).toHaveAttribute(
       "href", "/models/signature/tengo/configure?variant=3-bhk",
     ));
     scrollTo.mockRestore();
@@ -266,7 +348,7 @@ describe("ForzaExperience", () => {
         'source[src="/models/kray/video/kray-360-scroll-1080p-24fps-smooth.mp4"]',
       ),
     ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /enquire/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Enquire" })).toHaveAttribute(
       "href",
       "/enquiry?intent=home&model=kray",
     );
@@ -408,7 +490,7 @@ describe("ForzaExperience", () => {
         'source[src="/models/trib/video/trib-360-scroll-648p-24fps-fluid.mp4"]',
       ),
     ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /enquire/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Enquire" })).toHaveAttribute(
       "href",
       "/enquiry?intent=home&model=trib",
     );
@@ -451,7 +533,7 @@ describe("ForzaExperience", () => {
         'section[aria-label="Octapod scroll-controlled 360 degree experience"]',
       ),
     ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /enquire/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Enquire" })).toHaveAttribute(
       "href",
       "/enquiry?intent=home&model=octapod",
     );

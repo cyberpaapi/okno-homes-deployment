@@ -75,3 +75,23 @@
 @media (prefers-reduced-motion: reduce) {
   .action, .action::before, .dot { transition: none; }
 }
+
+/* Owner Review2: phone controls only. Desktop and configurator keep baseline. */
+@media (max-width: 700px) {
+  .action:not(:global([data-configurator] *)) {
+    font-family: "Manrope OKNO", Arial, sans-serif !important;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+  .action:not(:global([data-configurator] *)) .label { line-height: 1.2; }
+}
+
+/* Review4: the owner chose the phone action face for the Home page at all widths. */
+:global([data-route="landing-option-2"]) .action,
+:global([data-route="landing-option-2"]) .action .label {
+  font-family: "Manrope OKNO", Arial, sans-serif !important;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+}

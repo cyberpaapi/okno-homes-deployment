@@ -1726,3 +1726,132 @@
 
 /* Keep the bento composition while showing every edge of portrait interiors. */
 .detailImage[data-portrait="true"] { object-fit: contain; }
+
+/* The existing 21st.dev pill choices also serve compact tablet controls. */
+/* Review 2: in-page pill options adapt Select Dropdown 45500. */
+.pillChoice { position: static; }
+.pillTrigger {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  min-height: 44px; padding: 10px 17px; border: 1px solid rgb(244 241 233 / 24%);
+  border-radius: 999px; background: #101510; color: var(--ivory); cursor: pointer;
+  font: 700 13px/1.2 "Manrope OKNO", Arial, sans-serif !important;
+}
+.pillTrigger svg { display: block; flex: none; color: var(--gold); transition: rotate .18s; }
+.pillTrigger[aria-expanded="true"] svg { rotate: 180deg; }
+.pillTrigger:focus-visible, .pillOptions button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.pillOptions {
+  position: absolute; inset: 52px 0 auto; display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 6px; padding: 10px; border: 1px solid rgb(244 241 233 / 24%);
+  border-radius: 18px; background: #101510; box-shadow: 0 12px 24px #0005;
+  max-height: min(38dvh, 280px); overflow-y: auto; overscroll-behavior: contain;
+}
+.pillOptions button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 44px; padding: 10px 13px; border: 1px solid rgb(244 241 233 / 18%);
+  border-radius: 999px; background: transparent; color: var(--ivory); cursor: pointer;
+  font: 700 13px/1.2 "Manrope OKNO", Arial, sans-serif !important;
+}
+.pillOptions button[aria-selected="true"] { background: var(--gold); border-color: var(--gold); color: #11140f; }
+/* Remaining Review 2 gallery and phone presentation stays phone-only. */
+@media (max-width: 700px) {
+.configureButton.configureButton,
+.configureEntrance .detailsButton,
+.variantTabs button,
+.variantTabLabel,
+.specRow > span,
+.featureTopline > span:first-child,
+.noteCard > p {
+  font-family: "Manrope OKNO", Arial, sans-serif !important;
+  font-weight: 700 !important; letter-spacing: 0;
+}
+.configureButton.configureButton, .configureEntrance .detailsButton { font-size: 13px; }
+.configureButton.configureButton > span:first-child { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.configureButton svg { display: block; flex: none; }
+.variantTabs button { min-height: 44px; padding-block: 9px; line-height: 1.2; }
+.variantViewport { display: grid; }
+.variantStack { grid-area: 1 / 1; align-self: stretch; }
+.featureCard > p, .staticFeatures article > p:last-child, .intro .investmentNote, .noteCard strong { font-weight: 300 !important; }
+/* Expandable Tabs 1428 retains a single icon row; only its current label opens. */
+.galleryTabs { flex-wrap: nowrap; justify-content: flex-start; width: max-content; max-width: calc(100% - 30px); left: 50%; right: auto; translate: -50% 0; max-height: none; overflow-x: auto; overflow-y: hidden; gap: 2px; padding: 4px; border-radius: 999px; scrollbar-width: none; }
+.galleryTabs button { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 0; min-width: 44px; min-height: 44px; padding: 10px 12px; border-radius: 999px; font: 700 13px/1.2 "Manrope OKNO", Arial, sans-serif !important; }
+.galleryTabs button[aria-selected="true"] { gap: 7px; }
+.galleryTabs button svg { display: block; flex: none; }
+.galleryTabs button span { display: block; overflow: hidden; white-space: nowrap; max-width: 16ch; font: inherit !important; color: inherit !important; }
+.galleryMeta { width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); padding: 0; }
+  .configureEntrance .detailsButton, .configureEntrance .configureButton.configureButton { min-height: 44px; font-size: 13px; white-space: normal; overflow-wrap: anywhere; }
+  .configureEntrance .configureButton > span { min-width: 0; white-space: normal; }
+@media (prefers-reduced-motion: reduce) { .pillTrigger svg { transition: none; } }
+.planFilter button, .modelSelector button, .detailsHeader button, .introFacts span {
+  font-family: "Manrope OKNO", Arial, sans-serif !important;
+  font-weight: 700 !important;
+}
+.detailsHeader button { min-height: 44px; justify-content: center; font-size: 13px; }
+.detailsHeader button svg { display: block; flex: none; }
+
+}
+
+/* Review 5: shared desktop/phone controls use one centered reading-face label. */
+.configureButton.configureButton,
+.configureEntrance .detailsButton,
+.variantTabs button,
+.variantTabLabel {
+  font-family: "Manrope OKNO", Arial, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+.configureButton.configureButton > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  line-height: inherit;
+}
+.configureButton svg,
+.configureEntrance .detailsButton svg { display: block; flex: none; }
+.variantTabs button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding-block: 10px;
+  border-radius: 999px;
+}
+.variantTabFill { border-radius: inherit; }
+.variantTabLabel { display: block; }
+/* Overlap outgoing/incoming facts in one grid cell. The former popLayout and
+   independently staggered rows changed flow midway through desktop selection. */
+.variantViewport { display: grid; min-width: 0; }
+.variantStack { grid-area: 1 / 1; align-self: stretch; min-width: 0; }
+@media (min-width: 701px) {
+  .specCard > .configureSlot { flex: none; align-self: flex-start; }
+}
+/* Tablets use the same in-page choices as phones, with a single media column
+   once the side-by-side details can no longer retain readable specifications. */
+@media (min-width: 701px) and (max-width: 1100px) {
+  .phonePickers {
+    position: absolute;
+    z-index: 16;
+    inset: 84px 24px auto;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  .planFilter, .bottomDock .modelSelector { display: none; }
+  .stage { padding-top: 146px; }
+  .configureEntrance { right: 24px; bottom: 24px; }
+  .detailsGrid { grid-template-columns: minmax(0, .95fr) minmax(0, 1.2fr); }
+  .specCard { padding: 26px; }
+}
+@media (min-width: 701px) and (max-width: 900px) {
+  .detailsGrid {
+    height: auto;
+    min-height: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(380px, 52svh) auto auto;
+  }
+  .imageCard { grid-column: 1 / -1; grid-row: 1; }
+  .specCard { grid-column: 1 / -1; grid-row: 2; }
+  .noteCard { min-height: 150px; }
+  .variantViewport { flex: initial; }
+}

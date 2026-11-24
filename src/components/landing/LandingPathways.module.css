@@ -183,6 +183,15 @@
 .editorial { min-height: 72svh; padding: 24px 6vw clamp(56px, 8vw, 96px); gap: 16px; }
 @media (max-width: 700px) { .editorial { padding: 8px 16px 56px; } }
 
+/* Phone cards keep the photo, story and action close enough to read as one unit. */
+@media (max-width: 700px) {
+  .editorialPanel { height: min(108vw, 420px); min-height: 350px; }
+  .editorialCopy { display: grid; gap: 12px; inset: auto 22px 24px; }
+  .editorialCopy h2 { max-width: 14ch; margin: 0; font-size: 24px; }
+  .editorialCopy p { max-width: 32ch; padding-right: 0; font-size: 16px; line-height: 1.5; }
+  .editorialCopy > span { position: static; justify-self: start; margin-top: 6px; font: 700 13px/1.2 "Manrope OKNO", Arial, sans-serif !important; letter-spacing: 0; }
+}
+
 /* Retain the approved laptop heading scale; spacing is now handled by flow. */
 @media (min-width: 701px) {
   .signatureHeading h2 { font-size: clamp(28px, 3vw, 48px); }

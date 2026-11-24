@@ -15,7 +15,8 @@ describe('published typography contract', () => {
     expect(css).toContain('--type-font-highlight:var(--type-font-heading)');
     const custom = typographyCss({ 'typography.master-font': 'manrope', 'typography.section.home.timeline.heading-font': 'kento' }, [{ scope: 'home.timeline', fields: [] }]);
     expect(custom).toContain('--type-font-body:var(--type-font-master)');
-    expect(custom).toContain('--type-font-heading:"Kento OKNO"');
+    expect(custom).toContain('--type-font-heading:var(--okno-font-kento)');
+    expect(typographyCss({ 'typography.master-font': 'govandi' }, [])).toContain('--type-font-master:var(--okno-font-govandi)');
     expect(typographyCss({ 'typography.section.home.timeline.body-font': 'bad-font' }, [{ scope: 'home.timeline', fields: [] }])).toBe(css);
   });
   it('registers optional numeric sizes and font choices for every editable section', () => {

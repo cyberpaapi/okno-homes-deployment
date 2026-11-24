@@ -16,6 +16,12 @@
   opacity: 0;
 }
 
+/* The Enquiry form is a tall document on a phone. Fit its decorative field to
+   the opening viewport rather than stretching one noise pattern over the form. */
+@media (max-width: 700px) {
+  :global([data-route="enquiry"]) .field { bottom: auto; height: 100svh; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .canvas {
     display: none;

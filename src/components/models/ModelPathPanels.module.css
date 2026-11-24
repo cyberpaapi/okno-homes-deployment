@@ -68,3 +68,14 @@
 
 .arrow { flex: none; }
 .arrow svg { display: block; }
+
+/* The collection handoff is a quiet dark fade, without a full-screen house crop. */
+
+@media (max-width: 700px) {
+  .transitionSheet[data-destination="signature"] { background: #07110c; }
+  .meta { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .meta p { max-width: none; }
+  .action { min-height: 44px; gap: 10px; padding: 6px 7px 6px 14px; font: 700 12px/1.2 "Manrope OKNO", Arial, sans-serif !important; white-space: nowrap; }
+  .action > span:first-child { white-space: nowrap; }
+  .arrow { width: 30px; height: 30px; }
+}

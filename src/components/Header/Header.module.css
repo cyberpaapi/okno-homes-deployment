@@ -182,3 +182,38 @@
 @media (max-width: 700px) {
   .header[data-public-site="true"] .shell { height: 64px; }
 }
+
+/* Phone-only Review2: keep desktop and customer configurator unchanged. */
+@media (max-width: 700px) {
+  .header[data-public-site="true"] .menuToggle[aria-expanded="false"] { font-weight: 700 !important; }
+  .header[data-public-site="true"] .character > span { gap: .25em; }
+  .header[data-public-site="true"] .rolling:is(:hover, :focus-visible) .character > span { transform: translateY(-1.4em); }
+}
+@media (max-width: 700px) and (prefers-reduced-motion: reduce) {
+  .header[data-public-site="true"] .rolling:is(:hover, :focus-visible) .character > span { transform: none; }
+}
+
+/* Review3: isolate the rolling copies by more than their glyph overhang, so the
+   hidden second row cannot leave a baseline pixel under desktop navigation. */
+.header[data-public-site="true"] .character > span { gap: .25em; }
+.header[data-public-site="true"] .character { clip-path: inset(0); }
+.header[data-public-site="true"] .rolling:is(:hover, :focus-visible) .character > span { transform: translateY(-1.4em); }
+/* Kento's ascender/descender metrics place its visible ink slightly above the
+   flex line centre. Balance just the header label; keep the dot on its axis. */
+.header[data-public-site="true"] .enquire > span:first-child { translate: 0 .06em; }
+@media (prefers-reduced-motion: reduce) {
+  .header[data-public-site="true"] .rolling:is(:hover, :focus-visible) .character > span { transform: none; }
+}
+
+/* Review4: quiet current-destination marker follows the actual aria-current state. */
+.header[data-public-site="true"] .navigation .rolling[aria-current="page"] .letters { position: relative; }
+.header[data-public-site="true"] .navigation .rolling[aria-current="page"] .letters::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -.3em;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: .65;
+}

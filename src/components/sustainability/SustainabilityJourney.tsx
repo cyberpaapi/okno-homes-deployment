@@ -5,6 +5,8 @@ import Header from "@/components/Header/Header";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
 import styles from "./Sustainability.module.css";
+import SustainabilitySurround from "./SustainabilitySurround";
+import { sustainabilitySurround } from "./surroundPalette";
 import { useSiteContentMap } from "@/lib/useSiteContent";
 
 type SceneId = "hero" | "site" | "canopy" | "production" | "longevity" | "fog";
@@ -33,25 +35,25 @@ const storyScenes: Record<"site" | "canopy" | "production" | "longevity", StoryS
 };
 
 const narrativeVariants: Variants = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.58, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.05 },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.05 },
   },
   exit: {
     opacity: 0,
-    y: -8,
-    transition: { duration: 0.24, ease: [0.4, 0, 1, 1] },
+    y: -6,
+    transition: { duration: 0.35, ease: [0.4, 0, 1, 1] },
   },
 };
 
 const lineVariants: Variants = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.72, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.95, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -95,6 +97,10 @@ export default function SustainabilityJourney() {
 
     let frame = 0;
     let scrubFrame = 0;
+    let revealFrame = 0;
+    let desktopReveal = 0;
+    let desktopRevealTarget = 0;
+    let revealInitialized = false;
     let targetJourneyProgress = 0;
     let smoothedJourneyProgress = 0;
     let previousScrubTime = performance.now();
@@ -103,6 +109,33 @@ export default function SustainabilityJourney() {
     const journeyEnabled = Boolean(journeyVideo && !prefersReducedMotion);
     const sourceFrameRate = 24;
     const sourceFrameDuration = 1 / sourceFrameRate;
+
+    // Desktop exchanges complete after crossing the boundary even if scrolling
+    // stops. Phones keep their accepted continuously scrubbed text timeline.
+    const setDesktopReveal = (target: number, immediate: boolean) => {
+      if (immediate) {
+        if (revealFrame) window.cancelAnimationFrame(revealFrame);
+        revealFrame = 0;
+        desktopReveal = target;
+        desktopRevealTarget = target;
+        viewport.style.setProperty("--final-reveal", target.toFixed(5));
+        return;
+      }
+      if (target === desktopRevealTarget) return;
+      desktopRevealTarget = target;
+      if (revealFrame) window.cancelAnimationFrame(revealFrame);
+      const from = desktopReveal;
+      let started: number | null = null;
+      const advance = (now: number) => {
+        started ??= now;
+        const elapsed = range(now - started, 0, 1100);
+        const eased = elapsed * elapsed * (3 - 2 * elapsed);
+        desktopReveal = from + (target - from) * eased;
+        viewport.style.setProperty("--final-reveal", desktopReveal.toFixed(5));
+        revealFrame = elapsed < 1 ? window.requestAnimationFrame(advance) : 0;
+      };
+      revealFrame = window.requestAnimationFrame(advance);
+    };
 
     const syncJourneyFrame = (now: number) => {
       if (!journeyVideo || !journeyEnabled) {
@@ -169,6 +202,9 @@ export default function SustainabilityJourney() {
       const distance = Math.max(track.offsetHeight - viewport.offsetHeight, 1);
       const progress = clamp(-rect.top / distance);
       const nextScene = sceneFromProgress(progress);
+      const surround = sustainabilitySurround(progress);
+      viewport.style.setProperty("--surround-top", surround.top);
+      viewport.style.setProperty("--surround-bottom", surround.bottom);
 
       setScene((current) => (current === nextScene ? current : nextScene));
 
@@ -177,6 +213,22 @@ export default function SustainabilityJourney() {
         (1 - range(progress, 0.04, 0.115)).toFixed(4),
       );
       viewport.style.setProperty("--fog-treatment", range(progress, 0.785, 0.87).toFixed(4));
+      viewport.style.setProperty("--chapter-presence", range(progress, 0.10, 0.13).toFixed(5));
+      // One reversible scroll timeline: gather first, then exchange titles.
+      const gather = range(progress, 0.70, 0.84);
+      const easedGather = gather * gather * (3 - 2 * gather);
+      viewport.style.setProperty("--final-presence", range(progress, 0.67, 0.70).toFixed(5));
+      viewport.style.setProperty("--final-gather", (prefersReducedMotion ? 1 : easedGather).toFixed(5));
+      viewport.style.setProperty("--final-copy-opacity", range(progress, 0.68, 0.74).toFixed(5));
+      if (compactViewport.matches) {
+        // Cancel a desktop handoff when resizing into the accepted compact view.
+        setDesktopReveal(range(progress, 0.84, 0.91), true);
+      } else {
+        // A small reversal band prevents oscillation at the exchange boundary.
+        const revealTarget = progress >= 0.84 ? 1 : progress < 0.82 ? 0 : desktopRevealTarget;
+        setDesktopReveal(revealTarget, Boolean(prefersReducedMotion) || !revealInitialized);
+      }
+      revealInitialized = true;
 
       if (prefersReducedMotion) {
         viewport.style.setProperty("--idle-opacity", progress < 0.75 ? "1" : "0");
@@ -235,18 +287,49 @@ export default function SustainabilityJourney() {
       journeyVideo?.removeEventListener("loadedmetadata", handleJourneyMetadata);
       if (frame) window.cancelAnimationFrame(frame);
       if (scrubFrame) window.cancelAnimationFrame(scrubFrame);
+      if (revealFrame) window.cancelAnimationFrame(revealFrame);
     };
   }, [prefersReducedMotion]);
 
-  const story = scene in storyScenes ? storyScenes[scene as keyof typeof storyScenes] : null;
+  // Measure layout anchors only on layout changes, never during a scroll paint.
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const measure = () => {
+      const heading = viewport.querySelector<HTMLElement>("[data-final-heading]");
+      const copy = viewport.querySelector<HTMLElement>("[data-final-copy]");
+      const source = viewport.querySelector<HTMLElement>("[data-final-origin]");
+      if (!heading || !copy || !source) return;
+      const top = (element: HTMLElement) => {
+        let value = 0, node: HTMLElement | null = element;
+        while (node && node !== viewport) { value += node.offsetTop; node = node.offsetParent as HTMLElement | null; }
+        return value;
+      };
+      viewport.style.setProperty("--final-heading-travel", `${top(source) - top(heading)}px`);
+      const bottomInset = Math.max(32, Math.min(82, viewport.clientHeight * .055));
+      viewport.style.setProperty("--final-copy-travel", `${Math.max(0, viewport.clientHeight - bottomInset - top(copy) - copy.offsetHeight)}px`);
+    };
+    const resize = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(measure);
+    resize?.observe(viewport);
+    const content = viewport.querySelector("[data-final-content]");
+    if (content) resize?.observe(content);
+    window.addEventListener("resize", measure);
+    let disposed = false;
+    void document.fonts?.ready.then(() => { if (!disposed) measure(); });
+    measure();
+    return () => { disposed = true; resize?.disconnect(); window.removeEventListener("resize", measure); };
+  }, []);
+
+  const story = scene !== "longevity" && scene in storyScenes ? storyScenes[scene as keyof typeof storyScenes] : null;
   const storyTitle = story ? get(`${scene}.title`, story.title) : "";
-  const fogVisible = scene === "fog";
+  const finalVisible = scene === "longevity" || scene === "fog";
 
   return (
     <div className={styles.page}>
       <section ref={trackRef} className={styles.scrollTrack} aria-label={get("accessible-label", "OKNO sustainability journey")}>
         <div ref={viewportRef} className={styles.stickyViewport} data-scene={scene}>
-          <div className={styles.mediaStage} aria-hidden="true">
+          <SustainabilitySurround viewport={viewportRef} />
+          <div className={styles.mediaStage} aria-hidden="true" data-sustainability-film>
             <div className={styles.sharedPoster} style={{ backgroundImage: `url("${pageImageLoader({ src: get("shared-poster", "/sustainability/shared-poster.png"), width: 1200 })}")` }} />
             <video
               ref={idleVideoRef}
@@ -296,7 +379,7 @@ export default function SustainabilityJourney() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
               className={styles.heroTitle}
             >
-              <h1 data-type-field={"sustainability.journey.hero-line-1"}>{get("hero-line-1", "Build less")}<br />{get("hero-line-2", "against the ")}<span data-type-highlight data-type-field={"sustainability.journey.hero-emphasis"}>{get("hero-emphasis", "land.")}</span></h1>
+              <h1 data-type-field={"sustainability.journey.hero-line-1"} data-sustainability-opening-title>{get("hero-line-1", "Build less")}<br />{get("hero-line-2", "against the ")}<span data-type-highlight data-type-field={"sustainability.journey.hero-emphasis"}>{get("hero-emphasis", "land.")}</span></h1>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 18 }}
@@ -323,7 +406,8 @@ export default function SustainabilityJourney() {
           </div>
 
           <div id="journey" className={styles.storyStage}>
-            <AnimatePresence initial={false}>
+            <div className={styles.storyPanel} data-final-origin aria-hidden="true" />
+            <AnimatePresence initial={false} mode="wait">
               {story && (
                 <motion.article
                   key={scene}
@@ -342,24 +426,17 @@ export default function SustainabilityJourney() {
           <section
             className={styles.evidenceStage} data-type-section="sustainability.material-truth"
             aria-label={get("proof-label", "The material truth")}
-            aria-hidden={!fogVisible}
+            aria-hidden={!finalVisible}
           >
-            <motion.div
-              className={styles.evidenceHeading}
-              initial={false}
-              animate={{ opacity: fogVisible ? 1 : 0, y: fogVisible ? 0 : 20 }}
-              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <h2 data-type-field={"sustainability.journey.proof-line-1"}>{get("proof-line-1", "The material")}<br /><span data-type-highlight data-type-field={"sustainability.journey.proof-line-2"}>{get("proof-line-2", "truth.")}</span></h2>
-            </motion.div>
-            <motion.p
-              className={styles.evidenceCopy}
-              initial={false}
-              animate={{ opacity: fogVisible ? 1 : 0, y: fogVisible ? 0 : 16 }}
-              transition={{ duration: 0.65, delay: fogVisible ? 0.08 : 0, ease: [0.22, 1, 0.36, 1] }}
-             data-type-field={"sustainability.journey.proof-copy"}>
-              {get("proof-copy", "Site, structure and making are considered as one continuous decision—so the home can belong to the landscape instead of competing with it.")}
-            </motion.p>
+            <div className={styles.evidenceContent} data-final-content>
+              <div className={styles.evidenceHeading} data-final-heading>
+                <h2 className={styles.finalTitle} data-type-field={"sustainability.journey.proof-line-1"}>{get("proof-line-1", "The material")}<br /><span data-type-highlight data-type-field={"sustainability.journey.proof-line-2"}>{get("proof-line-2", "truth.")}</span></h2>
+                <h2 className={styles.gatherTitle} aria-hidden="true"><StoryTitle title={get("longevity.title", storyScenes.longevity.title)} /></h2>
+              </div>
+              <p className={styles.evidenceCopy} data-final-copy data-type-field={"sustainability.journey.proof-copy"}>
+                {get("proof-copy", "Site, structure and making are considered as one continuous decision—so the home can belong to the landscape instead of competing with it.")}
+              </p>
+            </div>
           </section>
         </div>
       </section>

@@ -113,43 +113,19 @@ function between(value: number, start: number, end: number) {
   return clamp((value - start) / (end - start));
 }
 
-function useViewportLayout() {
-  const [layout, setLayout] = useState<"desktop" | "tablet" | "mobile">("desktop");
-
-  useEffect(() => {
-    const update = () => setLayout(window.innerWidth <= 700 ? "mobile" : window.innerWidth <= 1023 ? "tablet" : "desktop");
-    update();
-    window.addEventListener("resize", update, { passive: true });
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  return layout;
-}
-
-type ViewportLayout = ReturnType<typeof useViewportLayout>;
-
 function applyScrollVisuals(
   track: HTMLElement | null,
   value: number,
-  layout: ViewportLayout,
 ) {
   if (!track) return;
   const frame = between(value, 0, .16);
   const hero = between(value, .035, .13);
   const story = between(value, .14, .2);
   const rail = between(value, .14, .2);
-  const bounds = layout === "mobile"
-    ? { top: 57, right: 5, bottom: 5, left: 5, radius: 10 }
-    : layout === "tablet"
-      ? { top: 19, right: 5, bottom: 16, left: 48, radius: 14 }
-      : { top: 13, right: 5, bottom: 13, left: 55, radius: 14 };
-  const remaining = 1 - frame;
-
-  track.style.setProperty(
-    "--frame-clip",
-    `inset(${bounds.top * remaining}% ${bounds.right * remaining}% ${bounds.bottom * remaining}% ${bounds.left * remaining}% round ${bounds.radius * remaining}px)`,
-  );
-  track.style.setProperty("--cover-inset", `${bounds.top * remaining}% ${bounds.right * remaining}% ${bounds.bottom * remaining}% ${bounds.left * remaining}%`);
+  // CSS owns the responsive opening geometry from the server paint onward.
+  // Scroll only changes its remaining fraction, so hydration cannot briefly
+  // replace the phone crop with desktop coordinates.
+  track.style.setProperty("--frame-remaining", String(1 - frame));
   track.style.setProperty("--cover-opacity", String(1 - between(value, .115, .16)));
   track.style.setProperty("--hero-opacity", String(1 - hero));
   track.style.setProperty("--hero-y", `${-34 * hero}px`);
@@ -227,7 +203,6 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
       setActiveStage(next);
     }
   }, [sequenceProgress]);
-  const layout = useViewportLayout();
   const { scrollYProgress } = useScroll({ target: trackRef, offset: ["start start", "end end"] });
   const visualProgress = useSpring(scrollYProgress, {
     stiffness: 160,
@@ -236,12 +211,12 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
     restDelta: .0002,
   });
   useMotionValueEvent(visualProgress, "change", (value) => {
-    applyScrollVisuals(trackRef.current, value, layout);
+    applyScrollVisuals(trackRef.current, value);
     onFilmCovering(value >= .16 && value < .98);
   });
   useEffect(() => {
-    applyScrollVisuals(trackRef.current, visualProgress.get(), layout);
-  }, [layout, visualProgress]);
+    applyScrollVisuals(trackRef.current, visualProgress.get());
+  }, [visualProgress]);
   useEffect(() => () => onFilmCovering(false), [onFilmCovering]);
 
   const active = currentStages[activeStage];

@@ -99,3 +99,28 @@
 @media (prefers-reduced-motion: reduce) {
   .statement > a { transition: none; }
 }
+
+/* Phone ending follows the compact facts block without reserving a screen. */
+@media (max-width: 700px) {
+  .ending { padding: 56px 20px max(36px, env(safe-area-inset-bottom)); }
+  .statement { align-items: center; text-align: center; }
+  .statement > p { margin: 0; font-family: "Manrope OKNO", Arial, sans-serif !important; font-weight: 700; }
+  .statement h2 { max-width: 100%; margin: 18px 0 0; font-size: min(var(--type-size-display, var(--okno-section)), clamp(28px, 6.8vw, 38px)); line-height: 1.18; }
+  .statement > a {
+    position: relative;
+    width: auto;
+    max-width: 100%;
+    min-height: 48px;
+    justify-content: center;
+    gap: 0;
+    margin: 28px auto 0;
+    padding: 12px 44px;
+    font-family: "Manrope OKNO", Arial, sans-serif !important;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+  }
+  .actionLabel { min-width: 0; }
+  .actionIcon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
+}

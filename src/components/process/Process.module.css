@@ -41,8 +41,14 @@
 }
 
 .storyTrack {
-  --frame-clip: inset(13% 5% 13% 55% round 14px);
-  --cover-inset: 13% 5% 13% 55%;
+  --frame-top: 13%;
+  --frame-right: 5%;
+  --frame-bottom: 13%;
+  --frame-left: 55%;
+  --frame-radius: 14px;
+  --frame-remaining: 1;
+  --cover-inset: calc(var(--frame-top) * var(--frame-remaining)) calc(var(--frame-right) * var(--frame-remaining)) calc(var(--frame-bottom) * var(--frame-remaining)) calc(var(--frame-left) * var(--frame-remaining));
+  --frame-clip: inset(var(--cover-inset) round calc(var(--frame-radius) * var(--frame-remaining)));
   --hero-opacity: 1;
   --cover-opacity: 1;
   --hero-y: 0px;
@@ -276,7 +282,7 @@
 }
 
 @media (max-width: 1023px) {
-  .storyTrack { --frame-clip: inset(19% 5% 16% 48% round 14px); --cover-inset: 19% 5% 16% 48%; height: 480svh; }
+  .storyTrack { --frame-top: 19%; --frame-bottom: 16%; --frame-left: 48%; height: 480svh; }
   .heroCopy { top: clamp(130px, 20vh, 190px); width: min(46vw, 540px); }
   .timelineShell { height: 154px; }
   .storyCopy { right: clamp(24px, 5vw, 66px); bottom: 184px; }
@@ -288,7 +294,7 @@
 }
 
 @media (max-width: 700px) {
-  .storyTrack { --frame-clip: inset(57% 5% 5% 5% round 10px); --cover-inset: 57% 5% 5% 5%; height: 480svh; }
+  .storyTrack { --frame-top: 57%; --frame-bottom: 5%; --frame-left: 5%; --frame-radius: 10px; height: 480svh; }
   .stickyViewport { min-height: 0; }
   .heroCopy { top: 106px; right: 20px; left: 20px; width: auto; }
   .heroLabel { margin-bottom: 16px; }
@@ -296,11 +302,11 @@
   .scrollCue { margin-top: 20px; }
   .sceneVideo { object-position: 56% center; }
   .mediaTreatment { background: linear-gradient(90deg, rgb(4 10 7 / 42%), rgb(4 10 7 / 4%) 82%), linear-gradient(180deg, rgb(3 8 5 / 18%), transparent 26%, transparent 50%, rgb(3 8 5 / 74%)); }
-  .storyCopy { right: 20px; bottom: 132px; left: 20px; }
+  .storyCopy { right: 20px; bottom: 70px; left: 20px; }
   .stageLabel { margin-bottom: 14px; }
   .copyInner h2 { max-width: 10ch; font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .stageCopy { max-width: 35ch; margin-top: 18px; font-size: var(--type-size-body, var(--okno-body)); line-height: 1.45;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
-  .timelineShell { height: 108px; }
+  .timelineShell { height: 46px; }
   .staticHero { display: flex; min-height: max(100svh, 680px); flex-direction: column; justify-content: flex-end; padding: 112px 20px 24px; gap: 34px; }
   .staticHeroCopy { width: 100%; }
   .staticHeroFilm { width: 100%; max-height: none; border-radius: 10px; aspect-ratio: 16 / 10; }
@@ -327,7 +333,7 @@
 .stageTitle { margin: 16px 0 0; font-size: var(--type-size-heading, var(--okno-step));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 .stageCopy { max-width: 46ch; margin-top: 16px; }
 @media (max-width: 700px) {
-  .storyCopy { bottom: 132px; }
+  .storyCopy { bottom: 70px; }
   .copyInner h2 { font-size: var(--type-size-display, var(--okno-section)); font-weight: 700;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .stageLabel { margin-bottom: 12px; font-size: var(--type-size-body, var(--okno-body));  font-family: "Manrope OKNO", Arial, sans-serif !important; font-weight: 400 !important;}
   .stageTitle { font-size: var(--type-size-heading, var(--okno-step)); margin-top: 12px;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
@@ -351,12 +357,12 @@
 
 /* The build-sequence bar follows the visible bottom edge (see --vv-lift in globals.css). */
 .timelineShell { translate: 0 var(--vv-lift); }
-/* Keep the live film and its completed-house overlay in one responsive box.
-   Contain preserves the whole landscape composition on phones; the shared mask
-   fades both renderers into the existing dark band behind the stage copy. */
+/* Restore the original phone film crop without letterboxing. Keep the completed
+   house in the same box as the live film so Next Image's fill sizing cannot
+   magnify the ending into a separate full-viewport crop. */
 @media (max-width: 700px) {
   .filmSurface { bottom: auto; height: 62svh; -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent); mask-image: linear-gradient(180deg, #000 72%, transparent); }
-  .sceneVideo { object-fit: contain; object-position: center; }
+  .sceneVideo { object-fit: cover; object-position: 47% 50%; }
 }
 
 /* Owner feedback (13 November 2026): the stage copy is bottom-anchored in the same frame

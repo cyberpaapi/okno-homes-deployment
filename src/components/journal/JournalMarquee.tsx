@@ -6,7 +6,7 @@
 import Image from "next/image";
 import { thumbnailImageLoader } from "@/lib/thumbnailImageLoader";
 import { useAnimationFrame, useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { useEffect, useRef, useState, type ReactNode, type PointerEvent as ReactPointerEvent } from "react";
 import { JournalArrowLink } from "./JournalArrowLink";
 import { JournalSourceMark } from "./JournalSourceMark";
 import type { JournalEntry } from "./journalData";
@@ -43,7 +43,7 @@ function JournalCard({ entry, duplicate = false, actionVerb }: { entry: JournalE
   );
 }
 
-export default function JournalMarquee({ caption, entries, direction = "left", actionVerb }: { caption: string; entries: JournalEntry[]; direction?: "left" | "right"; actionVerb?: string }) {
+export default function JournalMarquee({ id, caption, entries, direction = "left", actionVerb, paused = false, control }: { id?: string; caption: string; entries: JournalEntry[]; direction?: "left" | "right"; actionVerb?: string; paused?: boolean; control?: ReactNode }) {
   const root = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const firstGroup = useRef<HTMLDivElement>(null);
@@ -57,7 +57,6 @@ export default function JournalMarquee({ caption, entries, direction = "left", a
   const focused = useRef(false);
   const moved = useRef(false);
   const [dragActive, setDragActive] = useState(false);
-  const [paused, setPaused] = useState(false);
   const reduced = useReducedMotion();
 
   const paintPosition = () => {
@@ -135,8 +134,8 @@ export default function JournalMarquee({ caption, entries, direction = "left", a
   if (entries.length === 0) return null;
 
   return (
-    <section ref={root} className={styles.marqueeWrap} data-type-section={direction === "left" ? "journal.press-intro" : "journal.notes-intro"} aria-label={caption} data-direction={direction} data-single={entries.length === 1}>
-      <div className={styles.marqueeCaption}><p>{caption}</p>{entries.length > 1 && !reduced && <button type="button" onClick={() => setPaused(value => !value)} aria-label={`${paused ? 'Resume' : 'Pause'} ${caption.toLowerCase()} motion`}>{paused ? 'Resume motion' : 'Pause motion'}</button>}</div>
+    <section ref={root} id={id} data-paused={paused} className={styles.marqueeWrap} data-type-section={direction === "left" ? "journal.press-intro" : "journal.notes-intro"} aria-label={caption} data-direction={direction} data-single={entries.length === 1}>
+      <div className={styles.marqueeCaption}><p>{caption}</p>{control}</div>
       <div
         className={styles.marqueeViewport}
         data-dragging={dragActive}

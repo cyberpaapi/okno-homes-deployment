@@ -1,14 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type RefObject } from 'react';
 import {
   useMotionValueEvent,
   useMotionValue,
   useReducedMotion,
   useScroll,
 } from 'motion/react';
-import { ReactLenis } from 'lenis/react';
+import { ReactLenis, useLenis } from 'lenis/react';
 import type { VirtualScrollData } from 'lenis';
 import LandingExperience from '@/components/landing/LandingExperience';
 import ScrollJourneyFilm from './ScrollJourneyFilm';
@@ -37,6 +37,19 @@ const END = '/assets/landing-options/forest-entry-window-finish.jpg';
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const range = (value: number, start: number, end: number) =>
   clamp((value - start) / (end - start));
+
+function HeroSkip({ section, ready }: { section: RefObject<HTMLElement | null>; ready: boolean }) {
+  // This child lives inside ReactLenis; the film still follows document position.
+  const lenis = useLenis();
+  const skip = () => {
+    const hero = section.current;
+    if (!ready || !hero || document.hidden || document.body.style.overflow === 'hidden' || document.documentElement.dataset.heroLoading === 'true') return;
+    const end = hero.getBoundingClientRect().top + window.scrollY + Math.max(0, hero.offsetHeight - window.innerHeight);
+    if (lenis) lenis.scrollTo(end, { duration: window.matchMedia('(max-width: 700px)').matches ? 4.4 : 2.2, easing: time => (1 - Math.cos(Math.PI * time)) / 2, lock: false });
+    else window.scrollTo({ top: end, behavior: 'smooth' });
+  };
+  return <button type="button" className={styles.skip} data-hero-skip disabled={!ready} onClick={skip} aria-label="Skip to end of film">Skip</button>;
+}
 
 export default function ForestEntryOption({ variant }: { variant?: ContentItem }) {
   const savedJourneyVideo = useSiteContent('hero-v1.opening.scroll-video', JOURNEY_VIDEO);
@@ -170,6 +183,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
               <p data-type-field={"hero-v1.opening.scroll-cue"}>{savedScrollCue}</p>
             </div>
           )}
+          {animated && <HeroSkip section={sectionRef} ready={loaded} />}
 
           {animated && (
             <>

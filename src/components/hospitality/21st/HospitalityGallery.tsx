@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { pageImageLoader } from "@/lib/pageImageLoader";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -141,7 +142,17 @@ export function HospitalityGallery({ projects }: { projects: HospitalityProject[
     <>
       <section ref={root} className={styles.gallery} aria-label="Hospitality project photography">
         <div className={styles.editorialGallery} data-count={Math.min(projects.length, 3)}>
-          {projects.map(project => <button
+          {projects.map(project => project.projectId ? <Link
+            href={project.projectHref ?? `/projects/${encodeURIComponent(project.projectId)}`}
+            prefetch={false}
+            className={styles.editorialProject}
+            key={project.id}
+            aria-label={`View ${project.name} project gallery`}
+            data-magnetic-ignore
+          >
+            <EditorialPhotograph src={project.image} alt={project.alt} />
+            <span className={styles.editorialCaption}><span>{project.name}</span><span className={styles.editorialArrow} aria-hidden="true"><Arrow direction="open" /></span></span>
+          </Link> : <button
             type="button"
             className={styles.editorialProject}
             key={project.id}

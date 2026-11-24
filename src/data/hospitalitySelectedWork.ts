@@ -49,6 +49,7 @@ export const initialHospitalitySelections: ContentItem[] = [
 export type SelectedHospitalityProject = {
   id: string;
   projectId?: string;
+  projectHref?: string;
   name: string;
   image: string;
   alt: string;
@@ -70,7 +71,7 @@ export function resolveHospitalitySelections(items: ContentItem[], projects: Atl
     if (!name || !image || !alt) return [];
     return [{
       id: item.id,
-      ...(project ? { projectId: project.id } : {}),
+      ...(project ? { projectId: project.id, projectHref: project.href } : {}),
       name, image, alt,
       kind: item.fields.kindOverride?.trim() || project?.category || 'Project collection',
       description: item.fields.descriptionOverride?.trim() || project?.description || '',
