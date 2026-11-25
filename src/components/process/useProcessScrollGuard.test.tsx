@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
 import { motionValue } from 'motion/react';
 import { useRef } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -19,7 +19,7 @@ function BothSequences({ film, timeline }: { film: ReturnType<typeof motionValue
 }
 
 describe('gesture guard integration', () => {
-  afterEach(() => { vi.restoreAllMocks(); vi.useRealTimers(); });
+  afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); vi.useRealTimers(); });
   function setup(shown = motionValue(0)) {
     let y = 0;
     vi.spyOn(window, 'scrollY', 'get').mockImplementation(() => y);
@@ -108,5 +108,55 @@ describe('gesture guard integration', () => {
     sections[1].firstElementChild!.setAttribute('style', 'position: relative');
     y = 4800;
     expect(fireEvent.wheel(window, { deltaY: 10000, cancelable: true })).toBe(true); // Short-mobile vertical flow stays native.
+  });
+  it('keeps phone wheel, touch, keyboard and momentum native across both sequences while frames lag', () => {
+    vi.stubGlobal('matchMedia', () => ({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
+    let y = 0;
+    vi.spyOn(window, 'scrollY', 'get').mockImplementation(() => y);
+    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    const film = motionValue(0), timeline = motionValue(.5);
+    const view = render(<BothSequences film={film} timeline={timeline} />);
+    view.container.querySelectorAll('section').forEach((section, index) => {
+      Object.defineProperty(section, 'offsetHeight', { value: 3720 });
+      vi.spyOn(section, 'getBoundingClientRect').mockImplementation(() => ({ top: index * 4000 - y } as DOMRect));
+    });
+    for (let index = 0; index < 8; index++) {
+      expect(fireEvent.wheel(window, { deltaY: 375, cancelable: true })).toBe(true);
+      y += 375; fireEvent.scroll(window);
+    }
+    y = 8000; fireEvent.scroll(window);
+    fireEvent.touchStart(window, { touches: [{ clientY: 600 }] });
+    expect(fireEvent.touchMove(window, { touches: [{ clientY: 100 }], cancelable: true })).toBe(true);
+    y += 500; fireEvent.scroll(window);
+    expect(fireEvent.touchMove(window, { touches: [{ clientY: 700 }], cancelable: true })).toBe(true);
+    y -= 600; fireEvent.scroll(window);
+    expect(fireEvent.wheel(window, { deltaY: -6000, cancelable: true })).toBe(true);
+    expect(fireEvent.keyDown(window, { key: 'PageDown', cancelable: true })).toBe(true);
+    expect(fireEvent.keyDown(window, { key: 'Home', cancelable: true })).toBe(true);
+    expect(scrollTo).not.toHaveBeenCalled();
+    act(() => film.set(.75));
+    const section = view.container.querySelector('section')!;
+    expect(section).toHaveAttribute('data-presented-progress', '0.75');
+    view.unmount();
+    film.set(1);
+    expect(section).not.toHaveAttribute('data-presented-progress');
+  });
+  it('removes an armed guard at the phone breakpoint and restores it on tablet without stale momentum', () => {
+    const listeners = new Set<() => void>();
+    const media = { matches: false, addEventListener: (_type: string, notify: () => void) => listeners.add(notify), removeEventListener: (_type: string, notify: () => void) => listeners.delete(notify) };
+    vi.stubGlobal('matchMedia', () => media);
+    const view = setup();
+    expect(fireEvent.wheel(window, { deltaY: 6000, cancelable: true })).toBe(false);
+    act(() => { media.matches = true; listeners.forEach(notify => notify()); });
+    view.scrollTo.mockClear();
+    view.setY(8000); fireEvent.scroll(window);
+    expect(fireEvent.wheel(window, { deltaY: -6000, cancelable: true })).toBe(true);
+    expect(view.scrollTo).not.toHaveBeenCalled();
+    act(() => { media.matches = false; listeners.forEach(notify => notify()); });
+    view.setY(0); fireEvent.scroll(window);
+    expect(view.scrollTo).not.toHaveBeenCalled();
+    expect(fireEvent.wheel(window, { deltaY: 6000, cancelable: true })).toBe(false);
+    view.unmount();
+    expect(listeners.size).toBe(0);
   });
 });

@@ -133,12 +133,14 @@
 }
 
 @media (max-width: 700px) {
-  /* The film already names the active day and phase. Its phone rail is a
-     single-line caption; the separate lower detail timeline stays intact. */
-  .timeline { height: auto; min-height: 46px; padding: 12px 16px; grid-template-rows: auto; grid-template-columns: 1fr; align-content: center; gap: 0; }
+  /* Keep the film-linked progress line beneath the one-line caption. The film
+     already names the day and phase; the lower detail timeline stays intact. */
+  .timeline { height: auto; min-height: 46px; padding: 8px 16px; grid-template-rows: auto 1px; grid-template-columns: 1fr; align-content: center; gap: 6px; }
   .heading { display: flex; align-items: baseline; justify-content: space-between; }
   .heading h3 { white-space: nowrap; font-size: min(var(--type-size-body, var(--okno-card)), 18px);  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
-  .heading p, .track { display: none; }
+  .heading p, .dayRanges, .track ol { display: none; }
+  .track { min-height: 1px; }
+  .trackBase, .trackActive { top: 0; right: 0; left: 0; }
   .staticTimeline { height: auto; }
 }
 

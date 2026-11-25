@@ -4,6 +4,7 @@ import { useEffect, type RefObject } from 'react';
 import type { MotionValue } from 'motion/react';
 import { limitProcessScroll, wheelPixels } from '@/lib/processScrollGuard';
 import { processFilmProgress } from '@/lib/processScrub';
+import { useMediaQuery } from '@/lib/useMediaQuery';
 
 /** Local guard, not a document scroll lock. Explicit Home/End, links and
  * history restoration stay native; unsupported/stalled media fail open. */
@@ -11,6 +12,7 @@ export default function useProcessScrollGuard(
   track: RefObject<HTMLElement | null>, shown: MotionValue<number>,
   kind: 'film' | 'timeline' = 'film', enabled = true,
 ) {
+  const phone = useMediaQuery('(max-width: 700px)');
   useEffect(() => {
     if (!enabled || !track.current) return;
     const element = track.current;
@@ -24,6 +26,12 @@ export default function useProcessScrollGuard(
       stalledSince = 0;
       element.setAttribute('data-presented-progress', String(value));
     });
+    // Phone gestures own the document position, including lower-detail entry.
+    // A slow frame must never discard input or pull the page backwards.
+    if (phone) return () => {
+      unsubscribe();
+      element.removeAttribute('data-presented-progress');
+    };
     const nested = (target: EventTarget | null) => target instanceof Element && !!target.closest('a, button, input, textarea, select, [contenteditable="true"], [role="dialog"], nav');
     const constrain = (current: number, requested: number) => {
       // Escape a stalled source rather than trapping the visitor on a film.
@@ -127,5 +135,5 @@ export default function useProcessScrollGuard(
       window.removeEventListener('scroll', scroll);
       window.removeEventListener('pointerdown', pointer);
     };
-  }, [track, shown, kind, enabled]);
+  }, [track, shown, kind, enabled, phone]);
 }

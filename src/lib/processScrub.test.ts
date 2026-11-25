@@ -73,4 +73,33 @@ describe('smooth Process scroll playhead', () => {
     expect(head.step(23, 1 / 60)).toBeLessThan(25.6);
     expect(head.time).toBeGreaterThan(25.5);
   });
+  it('follows a large phone target promptly and settles in a bounded interval', () => {
+    const head = new ProcessPlayhead('position');
+    const first = head.step(PROCESS_END_TIME, 1 / 60);
+    expect(first).toBeGreaterThan(4);
+    expect(first).toBeLessThan(PROCESS_END_TIME);
+    for (let index = 0; index < 11; index++) {
+      const prior = head.time;
+      expect(head.step(PROCESS_END_TIME, 1 / 60)).toBeGreaterThanOrEqual(prior);
+      expect(head.time).toBeLessThanOrEqual(PROCESS_END_TIME);
+    }
+    expect(head.time).toBe(PROCESS_END_TIME);
+  });
+  it('coalesces rapid phone targets and reverses immediately without an old-target backlog', () => {
+    const head = new ProcessPlayhead('position');
+    for (const target of [4, 10, PROCESS_END_TIME, 16]) head.step(target, 1 / 60);
+    const prior = head.time;
+    expect(head.step(2, 1 / 60)).toBeLessThan(prior);
+    for (let index = 0; index < 11; index++) {
+      const before = head.time;
+      expect(head.step(2, 1 / 60)).toBeLessThanOrEqual(before);
+      expect(head.time).toBeGreaterThanOrEqual(2);
+    }
+    expect(head.time).toBe(2);
+    head.step(PROCESS_END_TIME, 1 / 60);
+    head.reset(6);
+    expect(head.step(0, 0)).toBe(6);
+    for (let index = 0; index < 12; index++) head.step(-10, 1 / 60);
+    expect(head.time).toBe(0);
+  });
 });

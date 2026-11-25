@@ -12,14 +12,36 @@ export function processStageAt(progress: number) {
 export class ProcessPlayhead {
   time = 0;
   private velocity = 0;
+  private positionTarget = 0;
+  private positionStart = 0;
+  private positionElapsed = 0;
+  constructor(private readonly mode: 'cinematic' | 'position' = 'cinematic') {}
   reset(time: number) {
     this.time = Math.max(0, time);
     this.velocity = 0;
+    this.positionTarget = this.time;
+    this.positionStart = this.time;
+    this.positionElapsed = 0;
   }
   step(target: number, elapsed: number) {
     const dt = Math.min(.05, Math.max(0, elapsed));
     if (!dt) return this.time;
     const original = Math.max(0, target);
+    if (this.mode === 'position') {
+      // Follow the newest phone position instead of playing a queued journey
+      // at a fixed movie speed. Reversal starts from the current picture and
+      // a stationary target settles in at most 180ms of animation time.
+      if (original !== this.positionTarget) {
+        this.positionStart = this.time;
+        this.positionTarget = original;
+        this.positionElapsed = 0;
+      }
+      this.positionElapsed = Math.min(.18, this.positionElapsed + dt);
+      const fraction = this.positionElapsed / .18;
+      this.time = fraction === 1 ? original : this.positionStart + (original - this.positionStart) * (1 - (1 - fraction) ** 3);
+      if (Math.abs(this.time - original) < .001) this.time = original;
+      return this.time;
+    }
     const omega = 2 / .24;
     const x = omega * dt;
     const decay = 1 / (1 + x + .48 * x * x + .235 * x * x * x);

@@ -6,6 +6,7 @@ import { useMotionValueEvent, type MotionValue } from 'motion/react';
 import { createVideoScrubber } from '@/lib/videoScrubber';
 import { downloadHeroMedia } from '@/lib/downloadHeroMedia';
 import { isEmbeddedSitePreview } from '@/lib/sitePreview';
+import { useMediaQuery } from '@/lib/useMediaQuery';
 import { ProcessPlayhead, processFilmProgress } from '@/lib/processScrub';
 import { PROCESS_END_TIME, PROCESS_FPS, processFinishOpacity, processPresentationPackets } from '@/lib/processChapters';
 import styles from './Process.module.css';
@@ -17,6 +18,7 @@ type Props = {
 };
 
 export default function ScrollProcessFilm({ hq, mobile, poster, label, className, progress, onReady, onProgress, onLoadProgress }: Props) {
+  const phone = useMediaQuery('(max-width: 700px)');
   const canvas = useRef<HTMLCanvasElement>(null);
   const surface = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
@@ -46,7 +48,7 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
     const loading = (amount: number) => { if (!disposed) onLoadProgress?.(amount); };
     const failed = () => { if (!disposed) { onReady(false); onLoadProgress?.(null); } };
     loading(0);
-    playhead.current = new ProcessPlayhead();
+    playhead.current.reset(0);
     onReady(false);
     const target = () => processFilmProgress(progress.get()) * endTime.current;
     const tick = (now: number) => {
@@ -118,6 +120,15 @@ export default function ScrollProcessFilm({ hq, mobile, poster, label, className
       abort.abort(); local?.dispose(); controller.current = null; wake.current = () => {};
     };
   }, [hq, mobile, progress, onReady, present, onLoadProgress]);
+
+  useEffect(() => {
+    // Change response at the CSS breakpoint without downloading the film or
+    // rebuilding its decoder. Tablet/desktop retain the existing spring.
+    const next = new ProcessPlayhead(phone ? 'position' : 'cinematic');
+    next.reset(playhead.current.time);
+    playhead.current = next;
+    wake.current();
+  }, [phone]);
 
   useEffect(() => {
     if (!nativeSource || !video.current) return;
