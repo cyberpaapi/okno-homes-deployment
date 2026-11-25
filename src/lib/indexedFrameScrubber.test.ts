@@ -96,4 +96,96 @@ describe('original-packet Process frame rendering', () => {
     const result = await createIndexedFrameScrubber(film,document.createElement('canvas'),new AbortController().signal,vi.fn(),vi.fn(),vi.fn());
     expect(result).toBeNull();
   });
+  it('bounds the optional phone cache, avoids future-frame overshoot, and preserves a painted canvas on restart', async () => {
+    vi.useFakeTimers();
+    let output: (frame: { timestamp: number; close(): void }) => void = () => {};
+    const closeFrame = vi.fn();
+    class Decoder {
+      state = 'configured';
+      static async isConfigSupported() { return { supported: true }; }
+      constructor(init: { output: typeof output }) { output = init.output; }
+      configure() {}
+      decode() {}
+      flush() { return new Promise<void>(() => {}); }
+      close() { this.state = 'closed'; }
+    }
+    vi.stubGlobal('VideoDecoder', Decoder);
+    vi.stubGlobal('EncodedVideoChunk', class {});
+    vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockImplementation((() => ({drawImage: vi.fn()})) as unknown as typeof HTMLCanvasElement.prototype.getContext);
+    const canvas = document.createElement('canvas');
+    canvas.width = film.width; canvas.height = film.height;
+    const width = vi.spyOn(canvas,'width','set');
+    const height = vi.spyOn(canvas,'height','set');
+    const abort = new AbortController();
+    const scrubber = await createIndexedFrameScrubber(film,canvas,abort.signal,vi.fn(),vi.fn(),vi.fn(),new Uint8Array(bytes),
+      { cacheLimit: 24, boundedPresentation: true, preserveFrame: true });
+    expect(width).not.toHaveBeenCalled(); expect(height).not.toHaveBeenCalled();
+    const emit = (index: number) => output({ timestamp: index / film.fps * 1e6, close: closeFrame });
+    emit(0); emit(2);
+    await vi.advanceTimersByTimeAsync(30);
+    scrubber!.setTime(1 / film.fps);
+    await vi.advanceTimersByTimeAsync(30);
+    // Frame 2 is cached, but the phone must hold frame 0 until frame 1 arrives.
+    expect(canvas.dataset.scrubPresentedTime).toBe('0.0000');
+    emit(1);
+    await vi.advanceTimersByTimeAsync(30);
+    expect(canvas.dataset.scrubPresentedTime).toBe('0.0333');
+    for (let index = 3; index < 60; index++) emit(index);
+    scrubber!.setTime(2 / film.fps);
+    await vi.advanceTimersByTimeAsync(30);
+    expect(Number(canvas.dataset.scrubCacheFrames)).toBe(24);
+    expect(closeFrame).toHaveBeenCalled();
+    abort.abort();
+  });
+  it.each([
+    { allKeyframes: true, reverseKeyframesFirst: true, expected: [10,9,8] },
+    { allKeyframes: false, reverseKeyframesFirst: true, expected: [1,2,3,4,5,6,7,8,9,10] },
+    { allKeyframes: true, reverseKeyframesFirst: undefined, expected: [1,2,3,4,5,6,7,8,9,10] },
+  ])('prefetches independent reverse keyframes nearest-first only when opted in: $allKeyframes/$reverseKeyframesFirst', async ({ allKeyframes, reverseKeyframesFirst, expected }) => {
+    vi.useFakeTimers();
+    const submitted: number[] = [];
+    const batches: number[][] = [];
+    const pendingBatch: number[] = [];
+    class Chunk { constructor(public value: { timestamp: number }) {} }
+    class Decoder {
+      state = 'configured';
+      static async isConfigSupported() { return { supported: true }; }
+      constructor(private init: { output(frame: unknown): void }) {}
+      configure() {}
+      decode(chunk: Chunk) {
+        submitted.push(Math.round(chunk.value.timestamp / 1e6 * 30));
+        pendingBatch.push(Math.round(chunk.value.timestamp / 1e6 * 30));
+        this.init.output({ timestamp: chunk.value.timestamp, close() {} });
+      }
+      async flush() { batches.push(pendingBatch.splice(0)); }
+      close() { this.state = 'closed'; }
+    }
+    vi.stubGlobal('VideoDecoder',Decoder); vi.stubGlobal('EncodedVideoChunk',Chunk);
+    vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockImplementation((() => ({ drawImage: vi.fn() })) as unknown as typeof HTMLCanvasElement.prototype.getContext);
+    const packets = Array.from({ length: 40 }, (_,index) => [index,1,index / 30 * 1e6,allKeyframes || index !== 5 ? 1 : 0]);
+    const sampleFilm = { ...film, bytes: 40, packets };
+    const abort = new AbortController();
+    const scrubber = await createIndexedFrameScrubber(sampleFilm,document.createElement('canvas'),abort.signal,vi.fn(),vi.fn(),vi.fn(),new Uint8Array(40),
+      { cacheLimit: 24, reverseKeyframesFirst });
+    await vi.advanceTimersByTimeAsync(30);
+    scrubber!.setTime(10 / 30);
+    await vi.advanceTimersByTimeAsync(30);
+    scrubber!.setTime(20 / 30);
+    await vi.advanceTimersByTimeAsync(30);
+    scrubber!.setTime(23 / 30);
+    await vi.advanceTimersByTimeAsync(30);
+    submitted.length = 0;
+    // Frame 10 is already cached; its reverse lookahead at frame 1 is not.
+    scrubber!.setTime(10 / 30);
+    await vi.advanceTimersByTimeAsync(30);
+    expect(submitted.slice(0,expected.length)).toEqual(expected);
+    if (allKeyframes && reverseKeyframesFirst) {
+      batches.length = 0;
+      scrubber!.setTime(1 / 30);
+      await vi.advanceTimersByTimeAsync(30);
+      expect(batches[0]).toEqual([1]);
+      expect(batches[1]).toEqual([1,0]);
+    }
+    abort.abort();
+  });
 });

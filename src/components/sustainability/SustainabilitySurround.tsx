@@ -10,8 +10,20 @@ export default function SustainabilitySurround({ viewport }: { viewport: RefObje
     if (!stage) return;
     let disposed = false;
     const portrait = window.matchMedia("(max-width: 820px) and (orientation: portrait)");
+    const phone = window.matchMedia("(max-width: 700px)");
+    const header = stage.querySelector<HTMLElement>("[data-site-header]");
     const measure = () => {
-      if (disposed || !portrait.matches) return;
+      if (disposed) return;
+      if (phone.matches && header) {
+        stage.style.setProperty("--sustainability-header-height", `${header.getBoundingClientRect().height}px`);
+      } else {
+        stage.style.removeProperty("--sustainability-header-height");
+      }
+      if (phone.matches || !portrait.matches) {
+        // Native portrait media needs no landscape-strip fitting or zoom.
+        stage.style.removeProperty("--sustainability-fitted-zoom");
+        return;
+      }
       const film = stage.querySelector<HTMLElement>("[data-sustainability-film]");
       const title = stage.querySelector<HTMLElement>("[data-sustainability-opening-title]");
       if (film && title && film.offsetHeight) {
@@ -31,9 +43,11 @@ export default function SustainabilitySurround({ viewport }: { viewport: RefObje
     };
     const resize = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(measure);
     resize?.observe(stage);
+    if (header) resize?.observe(header);
     const title = stage.querySelector("[data-sustainability-opening-title]");
     if (title) resize?.observe(title);
     portrait.addEventListener?.("change", measure);
+    phone.addEventListener?.("change", measure);
     window.addEventListener("resize", measure);
     void document.fonts?.ready.then(() => { if (!disposed) measure(); });
     measure();
@@ -41,8 +55,10 @@ export default function SustainabilitySurround({ viewport }: { viewport: RefObje
       disposed = true;
       resize?.disconnect();
       portrait.removeEventListener?.("change", measure);
+      phone.removeEventListener?.("change", measure);
       window.removeEventListener("resize", measure);
       stage.style.removeProperty("--sustainability-fitted-zoom");
+      stage.style.removeProperty("--sustainability-header-height");
     };
   }, [viewport]);
   return <div className={styles.colorSurround} aria-hidden="true" data-color-surround />;

@@ -2,12 +2,17 @@
 
 import { pageImageLoader } from "@/lib/pageImageLoader";
 import Header from "@/components/Header/Header";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
 import styles from "./Sustainability.module.css";
 import SustainabilitySurround from "./SustainabilitySurround";
+import MobileJourneyFilm, { type MobileJourneyHandle } from "./MobileJourneyFilm";
 import { sustainabilitySurround } from "./surroundPalette";
 import { useSiteContentMap } from "@/lib/useSiteContent";
+import {
+  mobileMedia, phoneMediaQuery, phoneMediaSnapshot,
+  serverMediaSnapshot, subscribeToPhoneMedia,
+} from "./mobileMedia";
 
 type SceneId = "hero" | "site" | "canopy" | "production" | "longevity" | "fog";
 
@@ -84,16 +89,23 @@ export default function SustainabilityJourney() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const idleVideoRef = useRef<HTMLVideoElement>(null);
   const journeyVideoRef = useRef<HTMLVideoElement>(null);
+  const mobileJourneyRef = useRef<MobileJourneyHandle>(null);
+  const mobilePresentationRef = useRef<(time: number) => void>(() => {});
+  const mobilePresented = useCallback((time: number) => mobilePresentationRef.current(time), []);
   const fogVideoRef = useRef<HTMLVideoElement>(null);
   const fogStartedRef = useRef(false);
   const idleWasPausedRef = useRef(false);
   const [scene, setScene] = useState<SceneId>("hero");
   const prefersReducedMotion = useReducedMotion();
+  // SSR leaves movies unbound. The responsive poster is already correct before
+  // hydration, and a phone never starts downloading the desktop movies.
+  const phoneMedia = useSyncExternalStore<boolean | null>(subscribeToPhoneMedia, phoneMediaSnapshot, serverMediaSnapshot);
+  const moviesEnabled = phoneMedia !== null && !prefersReducedMotion;
 
   useEffect(() => {
     const track = trackRef.current;
     const viewport = viewportRef.current;
-    if (!track || !viewport) return;
+    if (!track || !viewport || phoneMedia === null) return;
 
     let frame = 0;
     let scrubFrame = 0;
@@ -104,11 +116,39 @@ export default function SustainabilityJourney() {
     let targetJourneyProgress = 0;
     let smoothedJourneyProgress = 0;
     let previousScrubTime = performance.now();
+    let mobileFrameInitialized = false;
+    let mobileEndpointReady = false;
+    let mobilePresentedTime: number | null = null;
+    let mobileEndpointSince: number | null = null;
+    let mobileFogWarmed = false;
+    let mobileFogWanted = false;
+    let mobileFogPlaying = false;
+    let fogPlayPending: Promise<void> | null = null;
+    let fogPlayGeneration = 0;
+    let fogPendingGeneration = 0;
+    let fogPlayBlocked = false;
+    let stageVisible = true;
+    let disposed = false;
     const compactViewport = window.matchMedia("(max-width: 820px)");
+    const idleVideo = idleVideoRef.current;
     const journeyVideo = journeyVideoRef.current;
-    const journeyEnabled = Boolean(journeyVideo && !prefersReducedMotion);
-    const sourceFrameRate = 24;
+    const fogVideo = fogVideoRef.current;
+    const journeyEnabled = Boolean((phoneMedia ? mobileJourneyRef.current : journeyVideo) && !prefersReducedMotion);
+    const sourceFrameRate = phoneMedia ? mobileMedia.frameRate : 24;
     const sourceFrameDuration = 1 / sourceFrameRate;
+    const fogDebug = phoneMedia && new URLSearchParams(window.location.search).has("media-debug")
+      ? { warmAt: null as number | null, readyAt: null as number | null, playAt: null as number | null,
+        playingAt: null as number | null, endpointAt: null as number | null, endpointPresentedAt: null as number | null,
+        loads: 0, plays: 0, resets: 0 } : null;
+    const publishFogDebug = () => {
+      if (fogDebug && fogVideo) fogVideo.dataset.fogDebug = JSON.stringify({ ...fogDebug,
+        pending: fogPlayPending !== null, wanted: mobileFogWanted, playing: mobileFogPlaying,
+        readyState: fogVideo.readyState, seeking: fogVideo.seeking });
+    };
+    fogStartedRef.current = false;
+    idleWasPausedRef.current = false;
+
+    const canAnimate = () => !prefersReducedMotion && !document.hidden && stageVisible;
 
     // Desktop exchanges complete after crossing the boundary even if scrolling
     // stops. Phones keep their accepted continuously scrubbed text timeline.
@@ -138,52 +178,48 @@ export default function SustainabilityJourney() {
     };
 
     const syncJourneyFrame = (now: number) => {
-      if (!journeyVideo || !journeyEnabled) {
-        scrubFrame = 0;
-        return;
-      }
-
+      scrubFrame = 0;
+      if (!journeyEnabled || (phoneMedia && !canAnimate())) return;
       const elapsed = Math.min((now - previousScrubTime) / 1000, 0.05);
       previousScrubTime = now;
       const damping = 1 - Math.exp(-elapsed * (compactViewport.matches ? 10 : 5.2));
-      smoothedJourneyProgress +=
-        (targetJourneyProgress - smoothedJourneyProgress) * damping;
-
+      smoothedJourneyProgress += (targetJourneyProgress - smoothedJourneyProgress) * damping;
+      // Quantization plus asymptotic damping must not hold the phone's last
+      // few frames after the real scroll endpoint has already been reached.
+      if (phoneMedia && targetJourneyProgress === 1 && mobileEndpointSince !== null &&
+        now - mobileEndpointSince >= 120) smoothedJourneyProgress = 1;
       let frameCaughtUp = true;
-      if (Number.isFinite(journeyVideo.duration) && journeyVideo.duration > 0) {
-        const usableDuration = Math.max(journeyVideo.duration - sourceFrameDuration, 0);
-        const rawTime = smoothedJourneyProgress * usableDuration;
-        const nextTime =
-          Math.round(rawTime * sourceFrameRate) / sourceFrameRate;
-
-        if (
-          !journeyVideo.seeking &&
-          Math.abs(journeyVideo.currentTime - nextTime) >= sourceFrameDuration * 0.5
-        ) {
+      if (phoneMedia) {
+        const time = Math.round(smoothedJourneyProgress * (mobileMedia.journeyFrames - 1)) / sourceFrameRate;
+        mobileJourneyRef.current?.setTime(time);
+      } else if (journeyVideo && Number.isFinite(journeyVideo.duration) && journeyVideo.duration > 0) {
+        const rawTime = smoothedJourneyProgress * Math.max(journeyVideo.duration - sourceFrameDuration, 0);
+        const nextTime = Math.round(rawTime * sourceFrameRate) / sourceFrameRate;
+        if (!journeyVideo.seeking && Math.abs(journeyVideo.currentTime - nextTime) >= sourceFrameDuration * 0.5) {
           journeyVideo.currentTime = nextTime;
           frameCaughtUp = false;
-        } else if (journeyVideo.seeking) {
-          frameCaughtUp = false;
-        }
+        } else if (journeyVideo.seeking) frameCaughtUp = false;
       }
-
-      const settled =
-        Math.abs(targetJourneyProgress - smoothedJourneyProgress) < 0.0004 &&
-        frameCaughtUp;
-
-      if (settled) {
+      if (Math.abs(targetJourneyProgress - smoothedJourneyProgress) < 0.0004 && frameCaughtUp) {
         smoothedJourneyProgress = targetJourneyProgress;
-        scrubFrame = 0;
         return;
       }
-
       scrubFrame = window.requestAnimationFrame(syncJourneyFrame);
     };
-
     const requestJourneySync = () => {
-      if (!journeyEnabled || scrubFrame) return;
+      if (disposed || !journeyEnabled || scrubFrame || (phoneMedia && !canAnimate())) return;
       previousScrubTime = performance.now();
       scrubFrame = window.requestAnimationFrame(syncJourneyFrame);
+    };
+    mobilePresentationRef.current = (time) => {
+      if (disposed) return;
+      mobilePresentedTime = time;
+      const endpoint = Math.abs(time - (mobileMedia.journeyFrames - 1) / sourceFrameRate) < sourceFrameDuration * 0.5;
+      if (fogDebug && endpoint && fogDebug.endpointPresentedAt === null) fogDebug.endpointPresentedAt = performance.now();
+      if (endpoint !== mobileEndpointReady) {
+        mobileEndpointReady = endpoint;
+        requestUpdate();
+      }
     };
 
     const handleJourneyMetadata = () => {
@@ -191,16 +227,110 @@ export default function SustainabilityJourney() {
       journeyVideo.pause();
       requestJourneySync();
     };
+    const handleLoopData = () => { if (!disposed) requestUpdate(); };
+    const fogHasFrame = () => Boolean(fogVideo && fogVideo.readyState >= 2 && !fogVideo.seeking);
+    const confirmFogPlaying = (generation: number) => {
+      if (disposed || generation !== fogPlayGeneration || !mobileFogWanted || !canAnimate() ||
+        !fogHasFrame() || fogVideo?.paused) return;
+      mobileFogPlaying = true;
+      if (fogDebug && fogDebug.playingAt === null) fogDebug.playingAt = performance.now();
+      publishFogDebug();
+      requestUpdate();
+    };
+    const handleFogData = () => {
+      if (disposed) return;
+      fogPlayBlocked = false;
+      if (fogDebug && fogHasFrame() && fogDebug.readyAt === null) fogDebug.readyAt = performance.now();
+      publishFogDebug();
+      requestUpdate();
+    };
+    const handleFogPlaying = () => {
+      if (!mobileFogWanted || !canAnimate()) { fogVideo?.pause(); return; }
+      confirmFogPlaying(fogPlayPending ? fogPendingGeneration : fogPlayGeneration);
+    };
+    const handleFogWaiting = () => { mobileFogPlaying = false; requestUpdate(); };
+    const syncMobileFog = (progress: number) => {
+      if (!fogVideo || !phoneMedia || prefersReducedMotion) return;
+      if (!mobileFogWarmed && progress >= 0.35 && canAnimate()) {
+        mobileFogWarmed = true;
+        fogVideo.preload = "auto";
+        if (fogDebug) { fogDebug.warmAt = performance.now(); fogDebug.loads++; }
+        fogVideo.load();
+        publishFogDebug();
+      }
+      const wanted = canAnimate() && progress >= 0.785 && mobileEndpointReady;
+      if (!wanted) {
+        if (mobileFogWanted) fogPlayGeneration++;
+        mobileFogWanted = false;
+        mobileFogPlaying = false;
+        fogVideo.pause();
+        // Nearby reversal pauses in place. A real return to the preceding
+        // scene resets once, after any outstanding native seek completes.
+        if (progress < 0.72 && fogStartedRef.current && !fogVideo.seeking) {
+          if (fogVideo.currentTime > 0.001) {
+            fogVideo.currentTime = 0;
+            if (fogDebug) fogDebug.resets++;
+          }
+          fogStartedRef.current = false;
+        }
+        publishFogDebug();
+        return;
+      }
+      mobileFogWanted = true;
+      if (!fogHasFrame() || fogPlayPending || fogPlayBlocked || (mobileFogPlaying && !fogVideo.paused)) return;
+      const generation = fogPlayGeneration;
+      fogPendingGeneration = generation;
+      fogStartedRef.current = true;
+      if (fogDebug) { fogDebug.playAt = performance.now(); fogDebug.plays++; }
+      const attempt = fogVideo.play();
+      fogPlayPending = attempt;
+      publishFogDebug();
+      void attempt.then(() => {
+        if (disposed) return;
+        if (generation === fogPlayGeneration) confirmFogPlaying(generation);
+        else if (!mobileFogWanted) fogVideo.pause();
+      }).catch(() => {
+        if (!disposed && generation === fogPlayGeneration) fogPlayBlocked = true;
+      }).finally(() => {
+        if (disposed || fogPlayPending !== attempt) return;
+        fogPlayPending = null;
+        publishFogDebug();
+        if (generation !== fogPlayGeneration && mobileFogWanted) requestUpdate();
+      });
+    };
 
     if (journeyVideo) {
       journeyVideo.pause();
       journeyVideo.addEventListener("loadedmetadata", handleJourneyMetadata);
+    }
+    // A muted play request can reject while a source is still opening. Retry
+    // only when its active loop gains data, retaining its matching poster.
+    if (phoneMedia) {
+      idleVideo?.addEventListener("loadeddata", handleLoopData);
+      idleVideo?.addEventListener("canplay", handleLoopData);
+      for (const event of ["loadeddata", "canplay", "seeked"]) fogVideo?.addEventListener(event, handleFogData);
+      fogVideo?.addEventListener("playing", handleFogPlaying);
+      fogVideo?.addEventListener("waiting", handleFogWaiting);
     }
 
     const update = () => {
       const rect = track.getBoundingClientRect();
       const distance = Math.max(track.offsetHeight - viewport.offsetHeight, 1);
       const progress = clamp(-rect.top / distance);
+      if (phoneMedia && !mobileFrameInitialized) {
+        // Reloads and breakpoint changes start at the current scroll position.
+        smoothedJourneyProgress = range(progress, 0.12, 0.785);
+        mobileFrameInitialized = true;
+      }
+      if (phoneMedia) {
+        if (progress >= 0.785) mobileEndpointSince ??= performance.now();
+        else mobileEndpointSince = null;
+        if (fogDebug && mobileEndpointSince !== null && fogDebug.endpointAt === null) fogDebug.endpointAt = mobileEndpointSince;
+        mobileEndpointReady = mobilePresentedTime !== null &&
+          Math.abs(mobilePresentedTime - (mobileMedia.journeyFrames - 1) / sourceFrameRate) < sourceFrameDuration * 0.5;
+        mobileJourneyRef.current?.setActive(canAnimate());
+        syncMobileFog(progress);
+      }
       const nextScene = sceneFromProgress(progress);
       const surround = sustainabilitySurround(progress);
       viewport.style.setProperty("--surround-top", surround.top);
@@ -237,8 +367,14 @@ export default function SustainabilityJourney() {
       } else {
         const idleOpacity = 1 - range(progress, 0.055, 0.145);
         const journeyIn = range(progress, 0.07, 0.145);
-        const journeyOut = 1 - range(progress, 0.755, 0.845);
-        const fogOpacity = range(progress, 0.765, 0.85);
+        // Phone fog begins at the actual scroll endpoint, never while the
+        // portrait camera is still moving toward its final composition.
+        const journeyOut = phoneMedia
+          ? mobileEndpointReady && mobileFogPlaying && fogHasFrame() ? 1 - range(progress, 0.785, 0.85) : 1
+          : 1 - range(progress, 0.755, 0.845);
+        const fogOpacity = phoneMedia
+          ? mobileEndpointReady && mobileFogPlaying && fogHasFrame() ? range(progress, 0.785, 0.85) : 0
+          : range(progress, 0.765, 0.85);
 
         viewport.style.setProperty("--idle-opacity", idleOpacity.toFixed(4));
         viewport.style.setProperty("--journey-opacity", (journeyIn * journeyOut).toFixed(4));
@@ -247,8 +383,25 @@ export default function SustainabilityJourney() {
         requestJourneySync();
       }
 
-      const idleVideo = idleVideoRef.current;
-      if (idleVideo) {
+      if (phoneMedia || prefersReducedMotion) {
+        const play = (video: HTMLVideoElement | null) => {
+          if (video?.paused) void video.play().catch(() => undefined);
+        };
+        if (canAnimate() && progress < 0.16) play(idleVideo);
+        else idleVideo?.pause();
+        if (phoneMedia && !prefersReducedMotion) {
+          // Phone fog playback and readiness are coordinated before opacity.
+        } else if (canAnimate() && progress >= 0.785 && mobileEndpointReady) {
+          play(fogVideo);
+          fogStartedRef.current = true;
+        } else {
+          fogVideo?.pause();
+          if (progress < 0.785 && fogStartedRef.current) {
+            if (fogVideo) fogVideo.currentTime = 0;
+            fogStartedRef.current = false;
+          }
+        }
+      } else if (idleVideo) {
         if (progress > 0.16 && !idleVideo.paused) {
           idleVideo.pause();
           idleWasPausedRef.current = true;
@@ -258,8 +411,7 @@ export default function SustainabilityJourney() {
         }
       }
 
-      const fogVideo = fogVideoRef.current;
-      if (fogVideo) {
+      if (fogVideo && !phoneMedia && !prefersReducedMotion) {
         if (progress >= 0.745 && !fogStartedRef.current) {
           fogVideo.currentTime = 0;
           void fogVideo.play().catch(() => undefined);
@@ -275,21 +427,40 @@ export default function SustainabilityJourney() {
     };
 
     const requestUpdate = () => {
-      if (!frame) frame = window.requestAnimationFrame(update);
+      if (!disposed && !frame) frame = window.requestAnimationFrame(update);
     };
 
+    const visibility = typeof IntersectionObserver === "undefined" || !phoneMedia ? null : new IntersectionObserver(([entry]) => {
+      stageVisible = entry.isIntersecting;
+      requestUpdate();
+    });
+    visibility?.observe(track);
     update();
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);
+    document.addEventListener("visibilitychange", requestUpdate);
     return () => {
+      disposed = true;
+      fogPlayGeneration++;
+      visibility?.disconnect();
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
+      document.removeEventListener("visibilitychange", requestUpdate);
       journeyVideo?.removeEventListener("loadedmetadata", handleJourneyMetadata);
+      idleVideo?.removeEventListener("loadeddata", handleLoopData);
+      idleVideo?.removeEventListener("canplay", handleLoopData);
+      for (const event of ["loadeddata", "canplay", "seeked"]) fogVideo?.removeEventListener(event, handleFogData);
+      fogVideo?.removeEventListener("playing", handleFogPlaying);
+      fogVideo?.removeEventListener("waiting", handleFogWaiting);
+      idleVideo?.pause();
+      journeyVideo?.pause();
+      fogVideo?.pause();
       if (frame) window.cancelAnimationFrame(frame);
       if (scrubFrame) window.cancelAnimationFrame(scrubFrame);
       if (revealFrame) window.cancelAnimationFrame(revealFrame);
+      mobilePresentationRef.current = () => {};
     };
-  }, [prefersReducedMotion]);
+  }, [phoneMedia, prefersReducedMotion]);
 
   // Measure layout anchors only on layout changes, never during a scroll paint.
   useEffect(() => {
@@ -330,32 +501,43 @@ export default function SustainabilityJourney() {
         <div ref={viewportRef} className={styles.stickyViewport} data-scene={scene}>
           <SustainabilitySurround viewport={viewportRef} />
           <div className={styles.mediaStage} aria-hidden="true" data-sustainability-film>
-            <div className={styles.sharedPoster} style={{ backgroundImage: `url("${pageImageLoader({ src: get("shared-poster", "/sustainability/shared-poster.png"), width: 1200 })}")` }} />
+            <picture className={styles.sharedPoster}>
+              <source media={phoneMediaQuery} srcSet={mobileMedia.heroPoster} />
+              {/* Native picture selection supplies the correct pre-hydration frame. */}
+              <img className={styles.posterImage} src={pageImageLoader({ src: get("shared-poster", "/sustainability/shared-poster.png"), width: 1200 })} alt="" />
+            </picture>
+            <div className={styles.mobileFogPoster} />
             <video
+              key={`idle-${phoneMedia}-${Boolean(prefersReducedMotion)}`}
               ref={idleVideoRef}
               className={`${styles.mediaVideo} ${styles.idleVideo}`}
-              src={get("idle-video", "/sustainability/hero-idle.mp4")}
-              poster={pageImageLoader({ src: get("shared-poster", "/sustainability/shared-poster.png"), width: 1200 })}
-              autoPlay
+              src={moviesEnabled ? phoneMedia ? mobileMedia.idle : get("idle-video", "/sustainability/hero-idle.mp4") : undefined}
+              poster={phoneMedia === null ? undefined : phoneMedia ? mobileMedia.heroPoster : pageImageLoader({ src: get("shared-poster", "/sustainability/shared-poster.png"), width: 1200 })}
+              autoPlay={moviesEnabled && !phoneMedia}
               loop
               muted
               playsInline
-              preload="metadata"
+              preload={moviesEnabled ? "metadata" : "none"}
             />
+            {phoneMedia && moviesEnabled ? <MobileJourneyFilm ref={mobileJourneyRef}
+              className={`${styles.mediaVideo} ${styles.journeyVideo}`} onPresent={mobilePresented} /> : (
             <video
+              key={`journey-${phoneMedia}-${Boolean(prefersReducedMotion)}`}
               ref={journeyVideoRef}
               className={`${styles.mediaVideo} ${styles.journeyVideo}`}
-              src={get("scroll-video", "/sustainability/scroll-journey.mp4")}
-              poster={pageImageLoader({ src: get("shared-poster", "/sustainability/shared-poster.png"), width: 1200 })}
+              src={moviesEnabled ? phoneMedia ? mobileMedia.journey : get("scroll-video", "/sustainability/scroll-journey.mp4") : undefined}
+              poster={phoneMedia === null ? undefined : phoneMedia ? mobileMedia.journeyPoster : pageImageLoader({ src: get("shared-poster", "/sustainability/shared-poster.png"), width: 1200 })}
               muted
               playsInline
-              preload="auto"
+              preload={moviesEnabled ? "auto" : "none"}
             />
+            )}
             <video
+              key={`fog-${phoneMedia}-${Boolean(prefersReducedMotion)}`}
               ref={fogVideoRef}
               className={`${styles.mediaVideo} ${styles.fogVideo}`}
-              src={get("fog-video", "/sustainability/fog-loop.mp4")}
-              poster={pageImageLoader({ src: get("fog-poster", "/sustainability/fog-poster.png"), width: 1200 })}
+              src={moviesEnabled ? phoneMedia ? mobileMedia.fog : get("fog-video", "/sustainability/fog-loop.mp4") : undefined}
+              poster={phoneMedia === null ? undefined : phoneMedia ? mobileMedia.fogPoster : pageImageLoader({ src: get("fog-poster", "/sustainability/fog-poster.png"), width: 1200 })}
               loop
               muted
               playsInline

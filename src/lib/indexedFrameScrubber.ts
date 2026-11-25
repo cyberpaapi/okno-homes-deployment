@@ -4,12 +4,15 @@ export type IndexedFilm = {
   codec: string; description: string; packets: number[][];
 };
 const CACHE_LIMIT = typeof navigator !== 'undefined' && ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 0) >= 8 ? 96 : 48;
-const LOOK_AHEAD = Math.floor(CACHE_LIMIT / 2) - 3;
+type ScrubberOptions = { cacheLimit?: number; boundedPresentation?: boolean; preserveFrame?: boolean; reverseKeyframesFirst?: boolean };
 
 /** Decode original AVC packets, avoiding the native player's seek pipeline.
  * The compressed source is streamed once; at most 48/96 native frames live.
  */
-export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, onPresent: (time: number) => void, fullData?: Uint8Array) {
+export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTMLCanvasElement, signal: AbortSignal, ready: () => void, fail: () => void, onPresent: (time: number) => void, fullData?: Uint8Array, options: ScrubberOptions = {}) {
+  const cacheLimit = Number.isFinite(options.cacheLimit) ? Math.min(96, Math.max(8, Math.floor(options.cacheLimit!))) : CACHE_LIMIT;
+  const lookAhead = Math.floor(cacheLimit / 2) - 3;
+  const independentReverse = options.reverseKeyframesFirst && film.packets.every(packet => Boolean(packet[3]));
   const last = film.packets.length - 1;
   if (typeof VideoDecoder === 'undefined') return null;
   const description = Uint8Array.from(atob(film.description), character => character.charCodeAt(0));
@@ -17,8 +20,8 @@ export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTML
   if (!(await VideoDecoder.isConfigSupported(config)).supported || signal.aborted) return null;
   const context = canvas.getContext('2d', { alpha: false, desynchronized: true });
   if (!context) return null;
-  canvas.width = film.width;
-  canvas.height = film.height;
+  if (!options.preserveFrame || canvas.width !== film.width) canvas.width = film.width;
+  if (!options.preserveFrame || canvas.height !== film.height) canvas.height = film.height;
   if (fullData && fullData.length !== film.bytes) return null;
   const source = fullData ?? new Uint8Array(film.bytes);
   const frames = new Map<number, VideoFrame>();
@@ -42,7 +45,10 @@ export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTML
     if (disposed || document.hidden || drawn === target || !frames.size) return;
     // During a continuous gesture, do not hold the old picture while waiting
     // for a target that moves every RAF. Present the closest original frame.
-    const present = frames.has(target) ? target : [...frames.keys()].reduce((a,b) => Math.abs(a-target) < Math.abs(b-target) ? a : b);
+    const candidates = [...frames.keys()].filter(index => !options.boundedPresentation ||
+      (drawn < 0 ? index === target : index >= Math.min(drawn,target) && index <= Math.max(drawn,target)));
+    if (!candidates.length) return;
+    const present = frames.has(target) ? target : candidates.reduce((a,b) => Math.abs(a-target) < Math.abs(b-target) ? a : b);
     if (present === drawn) return;
     const frame = frames.get(present);
     if (!frame) return;
@@ -70,7 +76,7 @@ export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTML
       const index = Math.round(frame.timestamp / 1e6 * film.fps);
       frames.get(index)?.close();
       frames.set(index, frame);
-      while (frames.size > CACHE_LIMIT) {
+      while (frames.size > cacheLimit) {
         const farthest = [...frames.keys()].reduce((a,b) => Math.abs(a-target) > Math.abs(b-target) ? a : b);
         frames.get(farthest)?.close(); frames.delete(farthest);
       }
@@ -85,15 +91,16 @@ export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTML
     // Cached frames remain usable while a speculative hardware decode waits.
     queueDraw();
     if (busy) return;
-    const ahead = Math.min(last,Math.max(0,target + direction*LOOK_AHEAD));
+    const window = independentReverse && direction < 0 ? 2 : lookAhead;
+    const ahead = Math.min(last,Math.max(0,target + direction*window));
     if (frames.has(target) && frames.has(ahead)) return;
     const needsTarget = !frames.has(target);
     // Decode the requested frame before filling the directional buffer. In
     // reverse, decoding the predecessor buffer first would add visible latency.
     if (!needsTarget && film.packets[ahead][0] + film.packets[ahead][1] > available) return;
-    let start = needsTarget ? target : direction < 0 ? Math.max(0,target-LOOK_AHEAD) : Math.min(last,target+1);
+    let start = needsTarget ? target : direction < 0 ? Math.max(0,target-window) : Math.min(last,target+1);
     while (start > 0 && !film.packets[start][3]) start--;
-    let end = needsTarget ? Math.min(last,target+2) : direction < 0 ? target : Math.min(last,target+LOOK_AHEAD);
+    let end = needsTarget ? independentReverse && direction < 0 ? target : Math.min(last,target+2) : direction < 0 ? target : Math.min(last,target+window);
     while (end >= start && film.packets[end][0] + film.packets[end][1] > available) end--;
     if (end < start || (needsTarget && end < target)) return;
     busy = true;
@@ -101,7 +108,11 @@ export async function createIndexedFrameScrubber(film: IndexedFilm, canvas: HTML
     const jobGeneration = generation;
     let deadline: ReturnType<typeof setTimeout> | undefined;
     try {
-      for (let index = start; index <= end; index++) {
+      // Independent keyframes can fill the reverse buffer nearest-first.
+      // Inter-frame GOPs retain their required chronological decode order.
+      const reverse = options.reverseKeyframesFirst && direction < 0 && !needsTarget &&
+        film.packets.slice(start,end+1).every(packet => Boolean(packet[3]));
+      for (let index = reverse ? end : start; reverse ? index >= start : index <= end; index += reverse ? -1 : 1) {
         const [offset,size,timestamp,key] = film.packets[index];
         decoder.decode(new EncodedVideoChunk({ type: key ? 'key' : 'delta', timestamp, data: source.subarray(offset,offset+size) }));
       }

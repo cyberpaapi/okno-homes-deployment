@@ -41,7 +41,8 @@
   width: min(900px, 80vw);
   margin-inline: auto;
   text-align: center;
-  transform: translateY(-50%);
+  translate: 0 -50%;
+  transform: none;
   will-change: transform, opacity;
 }
 

@@ -190,7 +190,7 @@ export default function SustainabilityProof() {
   const openingY = useTransform(
     scrollYProgress,
     [0, openingExit],
-    reducedMotion ? [0, 0] : [22, -28],
+    [0, 0],
   );
   const proofOpacity = useTransform(scrollYProgress, [openingExit, 0.1], [0, 1]);
   const pressOpacity = useTransform(
