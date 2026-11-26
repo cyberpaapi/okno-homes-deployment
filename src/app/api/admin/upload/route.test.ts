@@ -1,3 +1,4 @@
+import { triangleGlb } from '@/test/glbFixture';
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
@@ -17,6 +18,26 @@ afterEach(async () => {
 });
 
 describe("admin video upload route", () => {
+  it('rejects a GLB upload without reachable drawable geometry and accepts actual vertex bytes', async () => {
+    temporary = await mkdtemp(path.join(tmpdir(), 'okno-glb-route-'));
+    vi.spyOn(process, 'cwd').mockReturnValue(temporary);
+    vi.resetModules();
+    const { POST } = await import('./route');
+    const upload = async (bytes: Buffer) => {
+      const data = new FormData();
+      data.set('file', new File([new Uint8Array(bytes)], 'house.glb', { type: 'model/gltf-binary' }));
+      return POST({ headers: new Headers(), formData: async () => data } as Request);
+    };
+    const empty = await upload(triangleGlb({ meshes: [{ primitives: [] }] }));
+    expect(empty.status).toBe(400);
+    expect(await empty.json()).toMatchObject({ error: expect.stringContaining('drawable geometry') });
+    const bytes = triangleGlb();
+    const valid = await upload(bytes);
+    expect(valid.status).toBe(200);
+    const name = createHash('sha256').update(bytes).digest('hex') + '.glb';
+    expect(await valid.json()).toMatchObject({ url: '/api/site-media/' + name });
+    expect(existsSync(path.join(temporary, '.okno-content', 'media', name))).toBe(true);
+  });
   it("stores the original before acknowledging a queued job", async () => {
     temporary = await mkdtemp(path.join(tmpdir(), "okno-upload-route-"));
     vi.spyOn(process, "cwd").mockReturnValue(temporary);

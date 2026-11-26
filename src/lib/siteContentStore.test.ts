@@ -1,3 +1,4 @@
+import { triangleGlb } from '@/test/glbFixture';
 import { initialProjectItems } from "@/data/projectCollections";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
@@ -55,7 +56,7 @@ describe("collection content store", () => {
   it("keeps new GLB model settings private until publication and rejects missing geometry", async () => {
     const store = await import("./siteContentStore");
     const { signatureModelDefaults } = await import("./signatureCollections");
-    await writeFile(path.join(testRoot,"public","house.glb"),"test geometry");
+    await writeFile(path.join(testRoot,"public","house.glb"),triangleGlb());
     const models = signatureModelDefaults.map(model => model.id === "forza" ? {...model,fields:{...model.fields,configuratorModel:"/house.glb",finish_ext_roof:"02",configuratorScale:"1"}} : model);
     const draft = await store.saveCollectionDraft("signature.models",models,0,0);
     expect(draft.publishedCollections["signature.models"]).toBeUndefined();
@@ -102,7 +103,7 @@ describe("collection content store", () => {
     const store = await import('./siteContentStore');
     const { signatureModelDefaults, signaturePlanDefaults } = await import('./signatureCollections');
     const { resolveConfigurator } = await import('./configuratorSettings');
-    await writeFile(path.join(testRoot, 'public', 'house.glb'), 'isolated geometry fixture');
+    await writeFile(path.join(testRoot, 'public', 'house.glb'), triangleGlb());
     await writeFile(path.join(testRoot, 'public', 'orbit.mp4'), 'isolated video fixture');
     const custom = { id: 'retreat', fields: { name: 'Retreat', configuratorModel: '/house.glb', orbitFilm: '/orbit.mp4', detailFilm: '/orbit.mp4', poster: '/photo.webp', posterAlt: 'Retreat exterior', exploreAction: 'Explore Retreat', features: JSON.stringify([{ title: 'Living', copy: 'Open living.' }, { title: 'Rest', copy: 'Quiet rooms.' }, { title: 'Build', copy: 'Prepared structure.' }]), gallery: JSON.stringify([{ id: 'outside', label: 'Exterior', image: '/photo.webp', alt: 'Retreat exterior' }]) } };
     const draft = await store.saveCollectionDraft('signature.models', [...signatureModelDefaults, custom], 0, 0);
@@ -110,6 +111,27 @@ describe("collection content store", () => {
     await store.publishDraft(0, plans.draftRevision);
     const published = (await store.readContent()).publishedCollections['signature.models'];
     expect(resolveConfigurator(published.find(model => model.id === 'retreat')!, published)?.url).toBe('/house.glb');
+  });
+  it('rejects a local model path whose existing .glb file is text or an empty mesh', async () => {
+    const store = await import('./siteContentStore');
+    for (const bytes of [Buffer.from('not a model'), triangleGlb({ meshes: [{ primitives: [] }] })]) {
+      await writeFile(path.join(testRoot, 'public', 'bad.glb'), bytes);
+      await expect(store.saveCollectionDraft('signature.models', [{ id: 'forza', fields: { name: 'Forza', configuratorModel: '/bad.glb' } }], 0, 0)).rejects.toThrow(/valid glTF 2|drawable geometry/);
+    }
+    expect((await store.readContent()).draftRevision).toBe(0);
+  });
+  it.each(['corrupted', 'deleted'])('rechecks a local model that was %s after a valid draft save', async change => {
+    const store = await import('./siteContentStore');
+    const { signatureModelDefaults } = await import('./signatureCollections');
+    const location = path.join(testRoot, 'public', 'house.glb');
+    await writeFile(location, triangleGlb());
+    const models = signatureModelDefaults.map(model => model.id === 'forza' ? { ...model, fields: { ...model.fields, configuratorModel: '/house.glb' } } : model);
+    const draft = await store.saveCollectionDraft('signature.models', models, 0, 0);
+    if (change === 'deleted') await rm(location); else await writeFile(location, 'corrupted model');
+    await expect(store.publishDraft(0, draft.draftRevision)).rejects.toThrow(/valid glTF 2|does not exist/);
+    const current = await store.readContent();
+    expect(current.revision).toBe(0);
+    expect(current.draftRevision).toBe(draft.draftRevision);
   });
   it('keeps per-house material assignments private until published and rejects invalid component choices', async () => {
     const store = await import('./siteContentStore');

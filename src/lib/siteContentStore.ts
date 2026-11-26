@@ -1,3 +1,5 @@
+import { validateGlb } from "./validateGlb";
+import signatureAssets from "@/data/configurator/signatureAssetManifest.json";
 import { configuratorApplications, configuratorSettingsError, resolveConfigurator } from "./configuratorSettings";
 import { materialAllowed, materialsError, pricingCollection, validRupees } from './configuratorPricing';
 import { MATERIAL_FINISHES } from '@/data/configurator/materials';
@@ -130,7 +132,7 @@ export async function readContent(): Promise<ContentSnapshot> {
   return (await readContentWithVersion()).snapshot;
 }
 
-async function updateContent(change: (current: ContentSnapshot) => ContentSnapshot): Promise<ContentSnapshot> {
+async function updateContent(change: (current: ContentSnapshot) => ContentSnapshot | Promise<ContentSnapshot>): Promise<ContentSnapshot> {
   let release: () => void = () => undefined;
   const next = new Promise<void>(resolve => { release = resolve; });
   const previous = queue;
@@ -138,7 +140,7 @@ async function updateContent(change: (current: ContentSnapshot) => ContentSnapsh
   await previous;
   try {
     const { snapshot, etag } = await readContentWithVersion();
-    const updated = change(snapshot);
+    const updated = await change(snapshot);
     if (cloudStorageEnabled()) { await writeCloudContent(updated, etag); return updated; }
     await mkdir(directory, { recursive: true });
     const temporary = path.join(directory, `content.${process.pid}.${Date.now()}.tmp`);
@@ -239,6 +241,20 @@ async function mediaExists(value: string) {
   try { return (await stat(resolved)).isFile(); } catch { return false; }
 }
 
+async function validateModelMedia(value: string) {
+  // Immutable release paths come from the reviewed bundled house manifest.
+  if (Object.values(signatureAssets).some(asset => asset.url === value)) return;
+  if (!validMediaPath(value, 'model') || !(await mediaExists(value))) throw new Error('The 3D model does not exist on the website. Upload or choose a valid GLB.');
+  if (cloudStorageEnabled()) {
+    // Public release models are reviewed assets; private hashed GLBs pass validateGlb on upload.
+    if (!/^\/api\/site-media\/[a-f0-9]{64}\.glb$/.test(value)) throw new Error('Choose an approved house model or upload a GLB through the content studio.');
+    return;
+  }
+  const upload = value.match(/^\/api\/site-media\/([a-f0-9]{64}\.glb)$/);
+  const location = upload ? path.join(directory, 'media', upload[1]) : path.join(process.cwd(), 'public', value.slice(1));
+  validateGlb(await readFile(location));
+}
+
 export async function saveDraft(id: string, value: string, revision: number, draftRevision: number) {
   return saveFieldsDraft({ [id]: value }, revision, draftRevision);
 }
@@ -318,6 +334,7 @@ export async function saveCollectionDraft(collectionId: string, rawItems: unknow
         throw new Error(`${field.label} in ${item.id} does not exist on the local website.`);
       }
     }
+    if (collectionId === 'signature.models' && item.fields.configuratorModel) await validateModelMedia(item.fields.configuratorModel);
     for (const [pathValue, kind] of nestedMediaPaths(collectionId, item)) {
       if (!validMediaPath(pathValue, kind) || !(await mediaExists(pathValue))) throw new Error(`${item.id}: a nested ${kind} path is invalid or missing.`);
     }
@@ -533,11 +550,17 @@ function validatePublishCollections(collections: ContentCollections, previousCol
 }
 
 export async function publishDraft(revision: number, draftRevision: number) {
-  return updateContent(current => {
+  return updateContent(async current => {
     if (current.revision !== revision) throw new Error("The published content changed. Reload before publishing.");
     if (current.draftRevision !== draftRevision) throw new Error("The draft content changed. Reload before publishing.");
     const publishedCollections = { ...current.publishedCollections, ...current.draftCollections };
     validatePublishCollections(publishedCollections, current.publishedCollections);
+    const models = publishedCollections['signature.models'] ?? signatureModelDefaults;
+    const checked = new Set<string>();
+    for (const model of models) {
+      const settings = resolveConfigurator(model, models);
+      if (settings && !checked.has(settings.url)) { await validateModelMedia(settings.url); checked.add(settings.url); }
+    }
     validateProcessPublish({ ...current.published, ...current.draft });
     const featuredPressId = current.draft["journal.hero.featured-id"] ?? current.published["journal.hero.featured-id"] ?? pressEntries[0].id;
     const shownPress = (publishedCollections["journal.press"] ?? journalDefaultCollections()["journal.press"])
