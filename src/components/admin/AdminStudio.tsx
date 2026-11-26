@@ -492,7 +492,7 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
     };
     return <>
       <div className={styles.signatureToolbar}><div><strong>Signature model library</strong><p>{roster.length} models · Open a model for its media, story, Explore detail, preview images and plans.</p></div><ActionButton type="button" disabled={busy || !snapshot || roster.length >= 24} onClick={addModel}>Add model</ActionButton></div>
-      <details className={styles.modelTray}><summary><span className={styles.sectionName}>Configurator pricing</span><ChevronDown size={20} /></summary>
+      <details className={styles.modelTray}><summary><span className={styles.sectionName}>Configurator materials and pricing</span><ChevronDown size={20} /></summary>
         {collectionPanel(collectionDefinitionsForPage("signature").find(d => d.id === pricingCollection)!)}
       </details>
       {visibleSections.filter(section => !/^(forza|kray|gaze|tengo|trib|octapod)-/.test(section.id)).map((section,index) => sectionPanel(section,index))}

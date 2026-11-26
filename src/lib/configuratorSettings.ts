@@ -1,3 +1,4 @@
+import type { MaterialApplicationId } from '@/data/configurator/types';
 import type { ContentItem } from './contentCollections';
 import finishes from '@/data/configurator/antigravity/finishes.json';
 import assets from '@/data/configurator/signatureAssetManifest.json';
@@ -6,6 +7,10 @@ export const configuratorZones = [
   ['ext_roof', 'External roof'], ['ext_wall', 'External wall'], ['flooring', 'Flooring'],
   ['int_ceiling', 'Internal ceiling'], ['int_wall', 'Internal wall'],
 ] as const;
+export const configuratorApplications: Record<(typeof configuratorZones)[number][0], MaterialApplicationId> = {
+  ext_roof: 'external-roof', ext_wall: 'external-wall', flooring: 'flooring',
+  int_ceiling: 'internal-ceiling', int_wall: 'internal-wall',
+};
 export const configuratorFinishes = finishes;
 export type ConfiguratorSettings = {
   slug: string; name: string; profile: string; url: string; scale: number;

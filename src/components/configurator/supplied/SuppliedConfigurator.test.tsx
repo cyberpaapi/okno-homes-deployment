@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { signatureAsset } from "@/data/configurator/signatureAssets";
 import SuppliedConfigurator from "./SuppliedConfigurator";
 
-const scene = vi.hoisted(() => ({ finish: vi.fn(), dispose: vi.fn(), turn: vi.fn(), view: vi.fn(), light: vi.fn(), background: vi.fn(), moveCamera: vi.fn(), glb: vi.fn().mockResolvedValue({}), surface: vi.fn().mockReturnValue(1), mapSurfaces: vi.fn().mockReturnValue({ counts: { 'external-roof': 1, 'external-wall': 1, flooring: 1, 'internal-ceiling': 1, 'internal-wall': 1 }, meshes: [] }) }));
+const scene = vi.hoisted(() => ({ finish: vi.fn(), dispose: vi.fn(), turn: vi.fn(), view: vi.fn(), light: vi.fn(), background: vi.fn(), resetSurfaces: vi.fn(), moveCamera: vi.fn(), glb: vi.fn().mockResolvedValue({}), surface: vi.fn().mockReturnValue(1), mapSurfaces: vi.fn().mockReturnValue({ counts: { 'external-roof': 1, 'external-wall': 1, flooring: 1, 'internal-ceiling': 1, 'internal-wall': 1 }, meshes: [] }) }));
 vi.mock("./cabinScene", () => ({ createScene: (_mount: HTMLElement, ready: () => void) => { ready(); return scene; } }));
 vi.mock("next/navigation", () => ({ usePathname: () => "/models/signature/forza/configure" }));
 
@@ -35,14 +35,14 @@ describe("supplied cabin customer controls", () => {
     expect(within(screen.getByRole("region", { name: "Flooring finishes" })).getByRole("button", { name: /Tuscan Elegance/ })).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByRole("status")).toHaveTextContent("Current interior preview — Internal wall: Alpine White");
   });
-  it("wires camera, lighting and background and disposes the scene", () => {
+  it("wires camera and lighting, removes landscape choices and disposes the scene", () => {
     const { unmount } = render(<SuppliedConfigurator />);
     fireEvent.click(within(screen.getByRole("group", { name: "Camera views" })).getByRole("button", { name: "inside" }));
     fireEvent.click(screen.getByRole("button", { name: "Golden hour" }));
-    fireEvent.click(screen.getByRole("button", { name: "Forest" }));
     expect(scene.view).toHaveBeenCalledWith("inside");
     expect(scene.light).toHaveBeenCalledWith("golden");
-    expect(scene.background).toHaveBeenCalledWith("forest");
+    for (const name of ['Forest', 'Meadow', 'Hill', 'Island', 'Full island']) expect(screen.queryByRole('button', { name, exact: true })).not.toBeInTheDocument();
+    expect(scene.background).not.toHaveBeenCalled();
     expect(screen.queryByRole("button", { name: "Import model" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Back to models" })).toHaveAttribute("href", "/models/signature");
     unmount();
@@ -103,6 +103,28 @@ describe("supplied cabin customer controls", () => {
     expect(screen.getByRole("alert")).toHaveTextContent("taking too long");
     expect(screen.getByRole("button",{name:"Try again"})).toBeEnabled();
     expect(screen.getByRole("button",{name:/Golden Oak/})).toBeDisabled();
+  });
+
+  it('updates totals and availability from published schedules without reloading geometry', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, blob: async () => new Blob(['house']) }));
+    const asset = signatureAsset('forza');
+    const rates = { 'materials.external-wall': '["golden-oak","titanium-veil"]', 'external-wall.golden-oak': '12000', 'external-wall.titanium-veil': '3000' };
+    const { rerender } = render(<SuppliedConfigurator asset={asset} pricing={{ base: 1850000, rates }} />);
+    await waitFor(() => expect(screen.getByRole('button', { name: /Golden Oak/ })).toBeEnabled());
+    expect(screen.queryByRole('button', { name: /Alpine White/ })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /Golden Oak/ }));
+    expect(screen.getByText('₹18,62,000')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /Titanium Veil/ }));
+    expect(screen.getByText('₹18,53,000')).toBeInTheDocument();
+    rerender(<SuppliedConfigurator asset={asset} pricing={{ base: 1850000, rates: { ...rates, 'external-wall.titanium-veil': '5000' } }} />);
+    expect(screen.getByText('₹18,55,000')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Titanium Veil/ })).toHaveAttribute('aria-pressed', 'true');
+    expect(scene.glb).toHaveBeenCalledOnce();
+    rerender(<SuppliedConfigurator asset={asset} pricing={{ base: 1850000, rates: { ...rates, 'materials.external-wall': '[]' } }} />);
+    await waitFor(() => expect(scene.resetSurfaces).toHaveBeenCalledOnce());
+    expect(screen.queryByRole('button', { name: /Titanium Veil/ })).not.toBeInTheDocument();
+    expect(screen.getByText('₹18,50,000')).toBeInTheDocument();
+    expect(scene.glb).toHaveBeenCalledOnce();
   });
 
 });

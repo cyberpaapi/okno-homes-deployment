@@ -1,5 +1,11 @@
 # Admin system — active implementation record
 
+## Configurator materials, prices and mandatory house links — 26 November 2026
+
+The owner released these configurator changes from the former freeze and requested GitHub/Render delivery. **Models → Signature models → Configurator materials and pricing** now assigns approved finishes to each house/component with add/remove controls and per-finish INR adjustments. It retains the existing `signature.pricing` storage and publish workflow, adds optional validated material-ID lists, and preserves legacy catalogues when lists are absent. Price changes retain current customer selections; removed selections reset to the original model surface. Customer totals and downloaded PDFs share the same calculation. No owner prices are fabricated.
+
+Every added house now requires a resolvable linked model or uploaded GLB before publication. The model panel labels the step required, excludes circular source choices, and hides the published configurator action until geometry resolves. Existing Models actions retain the correct house/plan route. Built-in availability is preserved; invalid or excluded starting finishes fail publication with a recovery instruction. No shared CMS content, credentials or storage configuration changed. The free Render review still needs an owner-controlled durable store and owner credential for live save/publish. [Workflow and validation details](configurator-studio-2026-11-26.md).
+
 ## Password-free local admin — 9 November 2026
 
 The owner explicitly said there is no key and requested removing it. This Windows checkout now opts into the existing password-free mode through ignored `.env.local` (`OKNO_ADMIN_PASSWORDLESS=true`). Open `http://127.0.0.1:3140/admin`; it connects automatically. The website and admin gateway remain bound to loopback on 3134/3140. No production environment was changed.

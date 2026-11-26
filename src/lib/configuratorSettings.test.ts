@@ -34,6 +34,8 @@ describe('model-specific walkthrough configuration', () => {
     const b = { id: 'b', fields: { configuratorSource: 'a' } };
     expect(resolveConfigurator(a, [a, b])).toBeNull();
     expect(resolveConfigurator(a, [a])).toBeNull();
+    expect(resolveConfigurator({ id: 'retreat', fields: { configuratorSource: 'tengo' } }, [{ id: 'tengo', fields: { configuratorMode: 'legacy' } }])).toBeNull();
+    expect(resolveConfigurator({ id: 'retreat', fields: { configuratorSource: 'retreat' } })).toBeNull();
     expect(configuratorSettingsError({ configuratorSource: 'forza', configuratorModel: '/house.glb' })).not.toBeNull();
   });
 });

@@ -1,3 +1,7 @@
+# Configurator authority —26November2026
+
+The owner explicitly lifted the configurator freeze for black backgrounds/floors, grounded houses, removal of landscape controls, per-house material assignments and INR prices with live totals, and mandatory 3D model linkage for added houses. See `docs/configurator-studio-2026-11-26.md`. Preserve accepted page changes and CMS data. The owner authorized pushing this work to the GitHub finishing branch linked to the existing Render review. This does not authorize paid resources, passwordless live admin or reuse of another owner's private storage. Live admin persistence still needs an owner-controlled durable store and configured credentials.
+
 # Review5 authority —24November2026
 
 OwnerReview5 (`docs/review-5-2026-11-24.md`, externalissues036–041) supersedespriorlocal-onlydeploymentandfontdemoonlyrules. Applyreportedphonecontent/desktopModelsfixes andpublicKento/Govandiglyphheight108% withhorizontalmetricsunchanged; originalfonts/configurator/adminpreserved. Ownerauthorizesverifiedrelease toexistingCodeAccRenderfree service viaapprovedcodex/finishing-2026-11-24 remotebranch, authenticateGitwritesCodeAcc2007-dev. Currentlocalbranchcodex/review-5-2026-11-24. Nootherproviders/defaultbranches/resources/CMSwrites. MobileSustbackgrounddeferred.

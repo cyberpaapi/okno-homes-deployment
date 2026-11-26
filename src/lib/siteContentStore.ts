@@ -1,5 +1,6 @@
-import { configuratorSettingsError, resolveConfigurator } from "./configuratorSettings";
-import { pricingCollection, validRupees } from './configuratorPricing';
+import { configuratorApplications, configuratorSettingsError, resolveConfigurator } from "./configuratorSettings";
+import { materialAllowed, materialsError, pricingCollection, validRupees } from './configuratorPricing';
+import { MATERIAL_FINISHES } from '@/data/configurator/materials';
 import { typographyValueError, validateTypographySizes } from "@/lib/typography";
 import "server-only";
 
@@ -279,7 +280,7 @@ function validateDraftItems(collectionId: string, value: unknown): ContentItem[]
     for (const [key, rawField] of Object.entries(fields)) {
       const field = allowed.get(key);
       if (!field || typeof rawField !== "string" || rawField.length > (field.kind === "json" ? 200000 : 8000)) throw new Error(`Invalid ${key} field in ${id}.`);
-      if (collectionId === pricingCollection && rawField !== '' && !validRupees(rawField)) throw new Error(`${id} / ${field.label}: enter a whole INR amount between 0 and 9999999999.`);
+      if (collectionId === pricingCollection && field.kind !== 'json' && rawField !== '' && !validRupees(rawField)) throw new Error(`${id} / ${field.label}: enter a whole INR amount between 0 and 9999999999.`);
       if (field.kind === "choice" && rawField && !field.options?.some(option => option.value === rawField)) throw new Error(`Choose a listed ${field.label.toLowerCase()} in ${id}.`);
       if (field.kind === "url" && rawField && !validDestination(rawField)) throw new Error(`Use a local path or HTTPS link for ${field.label.toLowerCase()} in ${id}.`);
       if (collectionId.startsWith("footer.links.") && key === "href" && rawField && (!rawField.startsWith("/") || localDestination(rawField, "") !== rawField || rawField.includes(".."))) throw new Error(`Use a same-site path for the Footer link in ${id}.`);
@@ -290,6 +291,7 @@ function validateDraftItems(collectionId: string, value: unknown): ContentItem[]
       validated[key] = rawField;
     }
     if (collectionId === "signature.models") { const error = configuratorSettingsError(validated); if (error) throw new Error(`${id}: ${error}`); }
+    if (collectionId === pricingCollection) { const error = materialsError(validated); if (error) throw new Error(`${id}: ${error}`); }
     ids.add(id);
     items.push({ id, fields: validated });
   }
@@ -433,7 +435,18 @@ function validatePublishCollections(collections: ContentCollections, previousCol
   if (collections["signature.plans"]) for (const plan of signaturePlans) if (!signatureIds.has(plan.fields.modelId)) throw new Error(`Signature plans / ${plan.id}: owning model is missing.`);
   const baseSignatureIds = new Set(signatureModelDefaults.map(item => item.id));
   for (const model of signatureModels) {
-    if (model.fields.configuratorSource && !resolveConfigurator(model, signatureModels)) throw new Error(`Signature models / ${model.id}: linked 3D model is missing, disabled or links back to this house. Choose a valid model before publishing.`);
+    const settings = resolveConfigurator(model, signatureModels);
+    if (model.fields.configuratorSource && !settings) throw new Error(`Signature models / ${model.id}: linked 3D model is missing, disabled or links back to this house. Choose a valid model before publishing.`);
+    if (!baseSignatureIds.has(model.id)) {
+      if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(model.id)) throw new Error(`Signature models / ${model.id}: use a lowercase model ID with hyphens for its Models page and configurator links.`);
+      if (!settings) throw new Error(`Signature models / ${model.id}: a working 3D model is required. Link a model from the house library or upload a GLB before publishing.`);
+    }
+    const rates = collections[pricingCollection]?.find(item => item.id === model.id)?.fields ?? {};
+    for (const [zone, application] of Object.entries(configuratorApplications)) {
+      const defaultId = settings?.defaults[zone];
+      const finish = MATERIAL_FINISHES.find(item => item.registerNumber === defaultId);
+      if (finish && !materialAllowed(rates, application, finish.id)) throw new Error(`Signature models / ${model.id}: ${finish.name} is the starting ${application.replaceAll('-', ' ')} finish. Add it to this house’s materials or choose another starting finish before publishing.`);
+    }
     if (!signaturePlans.some(plan => plan.fields.modelId === model.id)) throw new Error(`Signature models / ${model.id}: add at least one plan.`);
     if (baseSignatureIds.has(model.id)) continue;
     for (const key of ["orbitFilm", "detailFilm", "poster", "posterAlt", "exploreAction"]) if (!model.fields[key]?.trim()) throw new Error(`Signature models / ${model.id}: ${key} is required.`);

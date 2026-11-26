@@ -7,9 +7,8 @@ import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.j
 import { houseBounds, housePlacement, houseViews, houseOrbitLimits } from "./modelFraming";
 import { meshApplications, zoneApplications } from "./surfaceMapping";
 import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
-import { createCoast } from "./coastalScene";
 import { createContactPass } from "./contactPass";
-import { createHouseDaylight, setWindowReflections } from "./houseDaylight";
+import { setWindowReflections } from "./houseDaylight";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { projectGeometryInModelSpace } from "./materialProjection.mjs";
 const W = 5.2, D = 6.4, F = .46, E = 3.06, R = 4.61, A = Math.atan2(R - E, W / 2), S = Math.hypot(W / 2, R - E);
@@ -24,7 +23,6 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     const gl = renderer.getContext(), debug = gl.getExtension("WEBGL_debug_renderer_info");
     const softwareRendering = debug && /swiftshader|llvmpipe|software/i.test(String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)));
     const displayPixelRatio = Math.min(devicePixelRatio, softwareRendering ? .85 : innerWidth < 700 ? 1.35 : 1.7);
-    const animateWater = !matchMedia("(prefers-reduced-motion: reduce)").matches;
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     renderer.setPixelRatio(displayPixelRatio);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -38,7 +36,8 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     renderer.domElement.ariaLabel = "Interactive 3D Studio Cabin";
     mount.append(renderer.domElement);
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog("#cbd1c2", 18, 52);
+    scene.background = new THREE.Color("#000000");
+    scene.fog = new THREE.Fog("#000000", 32, 95);
     const camera = new THREE.PerspectiveCamera(innerWidth < 700 ? 48 : 40, mount.clientWidth / mount.clientHeight, .08, 100);
     const contactPass = customerModel ? createContactPass(renderer,scene,camera) : null;
     const drawScene = () => { if (contactPass) return contactPass.draw(); renderer.render(scene,camera);return renderer.info.render; };
@@ -74,8 +73,8 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     controls.zoomToCursor = true;
     const pmrem = new THREE.PMREMGenerator(renderer), room = new RoomEnvironment(), envTarget = pmrem.fromScene(room, .04), env = envTarget.texture;
     scene.environment = env;
-    scene.environmentIntensity = .64;
-    const daylight = customerModel ? createHouseDaylight(scene,renderer,()=>invalidate(),assets) : null;
+    // Studio reflections illuminate the house without loading an outdoor backdrop or garden.
+    scene.environmentIntensity = customerModel ? .84 : .64;
     const loader = new THREE.TextureLoader(assets), cache = new Map();
     const tex = (path, x = 2, y = 2, data = false) => { const k = [path,x,y,data].join("|"); if (cache.has(k))
         return cache.get(k); const t = loader.load(path, texture => { if (disposed) texture.dispose(); else invalidate(); }); t.colorSpace = data ? THREE.NoColorSpace : THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(x, y); t.anisotropy = renderer.capabilities.getMaxAnisotropy(); cache.set(k, t); return t; };
@@ -146,32 +145,15 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     chair(-1.25, D / 2 + 1.05, -.18);
     chair(.05, D / 2 + 1.25, .24);
     scene.add(cabin);
-    const groundTex = tex("/textures/meadow-grass.jpg", 18, 18), groundMaterial = new THREE.MeshStandardMaterial({ map: groundTex, bumpMap: groundTex, bumpScale: .085, color: "#82936d", roughness: 1 }), ground = new THREE.Mesh(new THREE.CircleGeometry(32, 96), groundMaterial);
-    // Blend the distant terrain into the photographic environment instead of
-    // exposing the hard edge of a circular mesh. Nearby contact shadows stay solid.
-    groundMaterial.transparent = true;
-    groundMaterial.onBeforeCompile = shader => {
-        shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nvarying vec2 vTerrainPosition;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvTerrainPosition = position.xy;');
-        shader.fragmentShader = shader.fragmentShader.replace('#include <common>', '#include <common>\nvarying vec2 vTerrainPosition;').replace('#include <opaque_fragment>', 'diffuseColor.a *= 1.0 - smoothstep(20.0, 32.0, length(vTerrainPosition));\n#include <opaque_fragment>');
-    };
+    // A continuous black studio floor gives the support geometry a real contact plane.
+    // Grounding uses the precise house vertices below, never an arbitrary visual offset.
+    const groundMaterial = new THREE.MeshStandardMaterial({ color: "#030303", roughness: .92, metalness: 0 });
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), groundMaterial);
+    ground.name = "Black studio floor";
     ground.rotation.x = -Math.PI / 2;
     ground.receiveShadow = true;
     scene.add(ground);
-    const landscapeProps = new THREE.Group(), stoneMat = mat("/textures/stone.jpg", "#8b8c82", .98, 0, 1.4, 1.4), rand = (i) => { const v = Math.sin(i * 91.13) * 43758.54; return v - Math.floor(v); };
-    for (let i = 0; i < 24; i++) {
-        const a = rand(i) * Math.PI * 2, r = 7 + rand(i + 5) * 18, o = new THREE.Mesh(new THREE.DodecahedronGeometry(.3 + rand(i + 9) * .65, 1), stoneMat);
-        o.position.set(Math.cos(a) * r, .12, Math.sin(a) * r);
-        o.scale.set(1.3, .6, .9);
-        o.castShadow = true;
-        landscapeProps.add(o);
-    }
-    scene.add(landscapeProps);
-    if (customerModel) landscapeProps.visible=false;
-    const islandWorld = new THREE.Group();
-    islandWorld.visible = false;
-    scene.add(islandWorld);
-    let coast=null, coastKey="", goldenCoast=false;
-    const isCoastal = setting => setting==="island" || setting==="full-island";
+    cabin.position.y = -houseBounds(cabin).min.y;
     const hemi = new THREE.HemisphereLight("#eaf3ff", "#77725e", 1.25), sun = new THREE.DirectionalLight("#fff2d2", 4.4), fill = new THREE.DirectionalLight("#bfd8ff", .82);
     sun.position.set(-8, 13, 7);
     sun.castShadow = true;
@@ -182,15 +164,14 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
     sun.shadow.normalBias = .025;
     fill.position.set(8, 5, -8);
     scene.add(hemi, sun, fill);
-    if (daylight) {
+    if (customerModel) {
         sun.position.set(-8.32,14.90,10.40);
         sun.intensity=2.45; hemi.intensity=.50; fill.intensity=.22;
         sun.shadow.normalBias=.012; sun.shadow.bias=-.00007;
         renderer.toneMappingExposure=.98;
-        groundMaterial.color.set("#a7ad86");
     }
     let presets = { hero: [new THREE.Vector3(9.6, 5.25, 10.8), new THREE.Vector3(0, 1.62, .35)], front: [new THREE.Vector3(.1, 2.55, 12.4), new THREE.Vector3(0, 1.95, 1.1)], side: [new THREE.Vector3(11.8, 3.25, 1.2), new THREE.Vector3(0, 1.62, 0)], rear: [new THREE.Vector3(-8.9, 3.7, -10.2), new THREE.Vector3(0, 1.55, -.4)], plan: [new THREE.Vector3(.01, 15.5, .01), new THREE.Vector3()], inside: [new THREE.Vector3(1.85, 1.72, 4.55), new THREE.Vector3(-.45, 1.35, -.6)] };
-    let cp = null, ct = null, imported = null, framedSize = null, raf = 0, physicalScale = 1, importedPixelRatio = displayPixelRatio, activeBackground = "meadow", activeHouseView = "hero";
+    let cp = null, ct = null, imported = null, framedSize = null, raf = 0, physicalScale = 1, importedPixelRatio = displayPixelRatio, activeHouseView = "hero";
     const stopCameraFlight = () => { cp = ct = null; };
     controls.addEventListener("start", stopCameraFlight);
     const importStage = new THREE.Group();
@@ -294,8 +275,6 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
         selected.forEach(mesh => { const okno = Object.assign(Object.assign(Object.assign({}, (mesh.userData.okno || {})), (category ? { category, editGroupCategory: category } : {})), { editGroupId: group.id, editGroupName: group.name, editGroupCustom: custom }); if (custom)
             delete okno.editGroupCategory; mesh.userData.okno = okno; });
         publishSelection();
-        if (category === "foundation")
-            rebuildIsland();
         return group;
     };
     const ungroupSelection = () => {
@@ -323,8 +302,6 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
         pushHistory();
         selected.forEach(mesh => { mesh.userData.okno = Object.assign(Object.assign(Object.assign({}, (mesh.userData.okno || {})), (group.category ? { category: group.category, editGroupCategory: group.category, editGroupCustom: false } : { editGroupCustom: true })), { editGroupId: group.id, editGroupName: group.name }); });
         publishSelection();
-        if (group.category === "foundation")
-            rebuildIsland();
         return selected.size;
     };
     const deleteEditGroup = (id) => {
@@ -383,41 +360,6 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             core.union(row.bounds); });
         return core.isEmpty() ? new THREE.Box3().setFromObject(imported) : core;
     };
-    const islandFootprint = () => {
-        if (imported && importStage.visible) {
-            imported.updateMatrixWorld(true);
-            const foundation = new THREE.Box3();
-            let found = false;
-            importedMeshes().forEach(mesh => {
-                var _a;
-                if (mesh.visible && ((_a = mesh.userData.okno) === null || _a === void 0 ? void 0 : _a.category) === "foundation") {
-                    const bounds = new THREE.Box3().setFromObject(mesh);
-                    if (!bounds.isEmpty()) {
-                        foundation.union(bounds);
-                        found = true;
-                    }
-                }
-            });
-            const bounds = found ? foundation : robustBounds();
-            if (bounds && !bounds.isEmpty())
-                return { center: bounds.getCenter(new THREE.Vector3()), size: bounds.getSize(new THREE.Vector3()) };
-        }
-        return { center: new THREE.Vector3(), size: new THREE.Vector3(5.62, .32, 6.82) };
-    };
-    const rebuildIsland = () => {
-        if (!isCoastal(activeBackground)) return;
-        const {center,size} = customerModel && framedSize ? {center:new THREE.Vector3(),size:framedSize} : islandFootprint();
-        const key=[size.x,size.z].map(n=>n.toFixed(2)).join("/");
-        if (coastKey !== key) {
-            coast?.dispose();
-            coast=createCoast(size,tex,()=>{if(!disposed){renderer.shadowMap.needsUpdate=true;invalidate();}},assets);
-            coastKey=key;coast.warm.value=goldenCoast?1:0;
-            islandWorld.add(coast.root);
-        }
-        islandWorld.position.set(center.x,0,center.z);
-        controls.maxDistance=Math.max(45,coast.extent*4.3);
-        renderer.shadowMap.needsUpdate=true;
-    };
     const applyViewLimits = () => {
         if (!customerModel) return;
         // Interior eye-level/upward views and nearby walls must not be clamped
@@ -440,10 +382,11 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             return;
         const size = bounds.getSize(new THREE.Vector3()), center = bounds.getCenter(new THREE.Vector3());
         const placement = housePlacement(bounds, physicalScale);
-        framedSize = placement.size; daylight?.place(placement.size, imported.userData.oknoApproach);
+        const groundY = houseBounds(imported).min.y;
+        framedSize = placement.size;
         const scale = customerModel ? placement.scale : 8 / (Math.max(size.x, size.y, size.z) || 1);
         importStage.scale.setScalar(scale);
-        importStage.position.copy(customerModel ? placement.position : new THREE.Vector3(-center.x * scale, -bounds.min.y * scale + .03, -center.z * scale));
+        importStage.position.copy(customerModel ? placement.position : new THREE.Vector3(-center.x * scale, -groundY * scale, -center.z * scale));
         importStage.updateMatrixWorld(true);
         controls.minDistance = 2.2;
         controls.maxDistance = Math.max(35, size.length() * scale * 4);
@@ -459,13 +402,11 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             scene.fog.near = Math.max(32, placement.size.length() * 2);
             scene.fog.far = Math.max(95, placement.size.length() * 6);
             const radius = placement.size.length() * .6 + 1;
-            landscapeProps.children.forEach(o => { if (Math.hypot(o.position.x, o.position.z) < radius) o.visible = false; });
             const shadowExtent = Math.max(12, radius);
             sun.shadow.camera.left = sun.shadow.camera.bottom = -shadowExtent;
             sun.shadow.camera.right = sun.shadow.camera.top = shadowExtent;
             sun.shadow.camera.updateProjectionMatrix();
         }
-        rebuildIsland();
         renderer.shadowMap.needsUpdate = true;
     };
     const modelMatrixFor = (mesh) => {
@@ -495,7 +436,6 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
         });
         publishSelection();
         onHistory(history.length);
-        rebuildIsland();
         renderer.shadowMap.needsUpdate = true;
         return true;
     };
@@ -612,13 +552,12 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
                 camera.position.copy(cp); controls.target.copy(ct); cp = ct = null;
             }
         }
-        if (animateWater && islandWorld.visible) coast.time.value += delta;
         const changed = controls.update(delta);
         const frameStats=drawScene();
         mount.dataset.renderFrames = String(++frames);
         mount.dataset.drawCalls = String(frameStats.calls);
         mount.dataset.triangles = String(frameStats.triangles);
-        if (cp || controls.autoRotate || changed || (animateWater && islandWorld.visible)) invalidate();
+        if (cp || controls.autoRotate || changed) invalidate();
     };
     invalidate = () => { if (!disposed && !document.hidden && !mount.dataset.contextLost && !raf) raf = requestAnimationFrame(render); };
     controls.addEventListener("change", invalidate);
@@ -746,38 +685,14 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             invalidate();
             return meshes.length;
         },
-        light: m => { daylight?.lighting(m); const g = m === "golden"; sun.color.set(g ? "#ffbf78" : "#fff2d2"); sun.intensity = g ? 4.9 : 4.4; sun.position.set(g ? -10 : -8, g ? 6.5 : 13, g ? 12 : 7); hemi.intensity = g ? .92 : 1.25; renderer.toneMappingExposure = g ? .96 : 1.02; if (daylight) {
+        light: m => { const g = m === "golden"; sun.color.set(g ? "#ffbf78" : "#fff2d2"); sun.intensity = g ? 4.9 : 4.4; sun.position.set(g ? -10 : -8, g ? 6.5 : 13, g ? 12 : 7); hemi.intensity = g ? .92 : 1.25; renderer.toneMappingExposure = g ? .96 : 1.02; if (customerModel) {
             sun.position.set(...(g?[-12.35,4.82,15.44]:[-8.32,14.90,10.40]));
             sun.intensity=g?2.05:2.45; hemi.intensity=g?.40:.50; fill.intensity=g?.16:.22;
             renderer.toneMappingExposure=g?.92:.98;
-        } goldenCoast=g; if(coast)coast.warm.value=g?1:0; renderer.shadowMap.needsUpdate = true; },
-        background: v => {
-            daylight?.setting(v);
-            const previous=activeBackground;
-            if(previous==="full-island" && v!==previous) [cp,ct]=presets.hero.map(p=>p.clone());
-            activeBackground=v;
-            const coastal=isCoastal(v);
-            ground.visible=!coastal;
-            landscapeProps.visible=!coastal && !customerModel;
-            islandWorld.visible=coastal;
-            scene.fog?.color.set(coastal ? "#a5bbc5" : "#cbd1c2");
-            if (coastal) {
-                rebuildIsland();
-                if (v==="full-island" && previous!==v) {
-                    const distance=coast.extent*(camera.aspect<1?2.8:2.15);
-                    ct=islandWorld.position.clone().add(new THREE.Vector3(0,.35,0));
-                    cp=ct.clone().add(new THREE.Vector3(.75,.66,1).multiplyScalar(distance));
-                    controls.autoRotate=false;
-                }
-            } else {
-            controls.maxDistance = importStage.visible ? Math.max(35,(framedSize?.length()||0)*4) : 22;
-            const settings = { meadow: { texture: "/textures/meadow-grass.jpg", color: "#82936d", repeat: 18, bump: .085 }, forest: { texture: "/textures/grass.jpg", color: "#667357", repeat: 20, bump: .1 }, hill: { texture: "/textures/meadow-grass.jpg", color: "#8c986d", repeat: 18, bump: .075 }, island: { texture: "/textures/stone.jpg", color: "#aaa99d", repeat: 15, bump: .12 } }, choice = settings[v], map = tex(choice.texture, choice.repeat, choice.repeat);
-            groundMaterial.map = map;
-            groundMaterial.bumpMap = map;
-            groundMaterial.bumpScale = choice.bump;
-            groundMaterial.color.set(daylight && v==="meadow" ? "#a7ad86" : choice.color);
-            groundMaterial.needsUpdate = true;
         } renderer.shadowMap.needsUpdate = true; },
+        // Retain the scene API for existing admin consumers; landscape requests
+        // cannot restore retired scenery or load an outdoor environment.
+        background: () => { scene.background.set("#000000"); },
         moveCamera: (direction, distance = .46) => { cp = ct = null; controls.autoRotate = false; const forward = camera.getWorldDirection(new THREE.Vector3()); forward.y = 0; if (forward.lengthSq() < .0001)
             forward.set(0, 0, -1);
         else
@@ -833,7 +748,7 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             invalidate();
             return { parts, triangles: Math.round(triangles), labeled, categories: categoryCounts() };
         },
-        cabin: () => { renderer.setPixelRatio(displayPixelRatio); importStage.visible = false; cabin.visible = true; clearSelection(); [cp, ct] = presets.hero.map(x => x.clone()); rebuildIsland(); renderer.shadowMap.needsUpdate = true; },
+        cabin: () => { renderer.setPixelRatio(displayPixelRatio); importStage.visible = false; cabin.visible = true; clearSelection(); [cp, ct] = presets.hero.map(x => x.clone()); renderer.shadowMap.needsUpdate = true; },
         showImported: () => { if (imported) {
             renderer.setPixelRatio(importedPixelRatio);
             importStage.visible = true;
@@ -853,8 +768,7 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
         addSelectionToGroup,
         deleteEditGroup,
         labelSelection: g => { if (!selected.size)
-            return; pushHistory(); selected.forEach(mesh => { mesh.userData.okno = Object.assign(Object.assign({}, (mesh.userData.okno || {})), { category: g }); }); publishSelection(); if (g === "foundation")
-            rebuildIsland(); },
+            return; pushHistory(); selected.forEach(mesh => { mesh.userData.okno = Object.assign(Object.assign({}, (mesh.userData.okno || {})), { category: g }); }); publishSelection(); },
         applySelection,
         applyCategory: (g, f, name) => { const meshes = importedMeshes().filter(mesh => { var _a; return mesh.visible && ((_a = mesh.userData.okno) === null || _a === void 0 ? void 0 : _a.category) === g; }); if (!meshes.length)
             return 0; pushHistory(); selected.clear(); meshes.forEach(mesh => selected.add(mesh)); applyMeshes(meshes, f, name); publishSelection(); return meshes.length; },
@@ -864,9 +778,9 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             return 0; pushHistory(); restoreMeshes(meshes); publishSelection(); return meshes.length; },
         categoryCounts,
         deleteSelection: () => { if (!selected.size)
-            return; pushHistory(); selected.forEach(mesh => { mesh.visible = false; mesh.userData.okno = Object.assign(Object.assign({}, (mesh.userData.okno || {})), { deleted: true }); deleted.add(mesh); }); clearSelection(); rebuildIsland(); renderer.shadowMap.needsUpdate = true; },
+            return; pushHistory(); selected.forEach(mesh => { mesh.visible = false; mesh.userData.okno = Object.assign(Object.assign({}, (mesh.userData.okno || {})), { deleted: true }); deleted.add(mesh); }); clearSelection(); renderer.shadowMap.needsUpdate = true; },
         restoreDeleted: () => { if (!deleted.size)
-            return; pushHistory(); deleted.forEach(mesh => { mesh.visible = true; const okno = mesh.userData.okno || {}; delete okno.deleted; mesh.userData.okno = okno; }); deleted.clear(); publishSelection(); rebuildIsland(); renderer.shadowMap.needsUpdate = true; },
+            return; pushHistory(); deleted.forEach(mesh => { mesh.visible = true; const okno = mesh.userData.okno || {}; delete okno.deleted; mesh.userData.okno = okno; }); deleted.clear(); publishSelection(); renderer.shadowMap.needsUpdate = true; },
         undo,
         frameImported,
         exportGlb: async () => {
@@ -889,7 +803,7 @@ export function createScene(mount, onReady, onSelection, onHistory = () => { }, 
             controls.removeEventListener("start", stopCameraFlight);
             renderer.domElement.removeEventListener("pointerdown", onPointerDown);
             renderer.domElement.removeEventListener("pointerup", onPointerUp);
-            coast?.dispose(); contactPass?.dispose(); daylight?.dispose();
+            contactPass?.dispose();
             disposeImported();
             appliedMaterials.forEach(material => material.dispose());
             appliedMaterials.clear();

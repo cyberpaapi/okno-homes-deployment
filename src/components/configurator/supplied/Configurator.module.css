@@ -9,6 +9,7 @@
   height: 100dvh;
   min-height: 620px;
   overflow: hidden;
+  background: #000;
   color: var(--cabin-ink);
   font-family: var(--type-font-body, var(--okno-font-body)), sans-serif;
 }
@@ -66,7 +67,7 @@
 .iconButton { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 9px; color: var(--cabin-muted); background: transparent; cursor: pointer; }
 .lighting { display: flex; align-items: center; padding: 4px; border-radius: 12px; background: #e8e6dd; }
 .lighting .iconButton { width: 40px; height: 44px; }
-.gestureHint { position: absolute; z-index: 5; bottom: 8px; left: 0; right: 0; margin: 0; text-align: center; color: #20352b; font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
+.gestureHint { position: absolute; z-index: 5; bottom: 8px; left: 0; right: 0; margin: 0; text-align: center; color: #d9dccf; font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .loader, .error { position: absolute; z-index: 25; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 16px 20px; border-radius: 12px; background: var(--cabin-paper); color: var(--cabin-ink); font-size: var(--type-size-caption, var(--okno-label));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 .error { max-width: min(440px, 80vw); line-height: 1.5; }
 .skipLink { position: absolute; z-index: 120; top: 6px; left: 16px; padding: 10px 14px; background: var(--cabin-paper); color: var(--cabin-ink); transform: translateY(-150%); }

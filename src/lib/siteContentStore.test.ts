@@ -68,7 +68,7 @@ describe("collection content store", () => {
     const store = await import("./siteContentStore");
     const { signatureModelDefaults, signaturePlanDefaults } = await import("./signatureCollections");
     await writeFile(path.join(testRoot,"public","orbit.mp4"),"video");
-    const custom = { id:"aurora", fields: {name:"Aurora",orbitFilm:"/orbit.mp4",detailFilm:"/orbit.mp4",poster:"/photo.webp",posterAlt:"Aurora outside",exploreAction:"Explore Aurora",features:JSON.stringify([{title:"One",copy:"First"},{title:"Two",copy:"Second"},{title:"Three",copy:"Third"}]),gallery:JSON.stringify([{id:"aurora-view",label:"Exterior",image:"/photo.webp",alt:"Aurora exterior"}])} };
+    const custom = { id:"aurora", fields: {name:"Aurora",configuratorSource:"tengo",orbitFilm:"/orbit.mp4",detailFilm:"/orbit.mp4",poster:"/photo.webp",posterAlt:"Aurora outside",exploreAction:"Explore Aurora",features:JSON.stringify([{title:"One",copy:"First"},{title:"Two",copy:"Second"},{title:"Three",copy:"Third"}]),gallery:JSON.stringify([{id:"aurora-view",label:"Exterior",image:"/photo.webp",alt:"Aurora exterior"}])} };
     const modelDraft = await store.saveCollectionDraft("signature.models",[...signatureModelDefaults,custom],0,0);
     const planDraft = await store.saveCollectionDraft("signature.plans",[...signaturePlanDefaults(),{id:"aurora-plan-1",fields:{modelId:"aurora",name:"Studio",area:"410 sq ft",price:"₹23 lakh",spaces:"1 bed"}}],0,modelDraft.draftRevision);
     const footerDraft = await store.saveCollectionDraft("footer.links.homes",[{id:"new-retreat",fields:{label:"New retreat",href:"/models/signature"}}],0,planDraft.draftRevision);
@@ -78,6 +78,60 @@ describe("collection content store", () => {
     expect(published.publishedCollections["footer.links.homes"]).toHaveLength(1);
     await expect(store.saveCollectionDraft("footer.links.homes",[{id:"bad",fields:{label:"Bad",href:"https://example.com"}}],published.revision,published.draftRevision)).rejects.toThrow(/same-site/);
     await expect(store.saveCollectionDraft("signature.models",[{...custom,fields:{...custom.fields,gallery:JSON.stringify([{id:"x",label:"X",image:"/missing.webp",alt:"Missing"}])}}],published.revision,published.draftRevision)).rejects.toThrow(/nested image/);
+  });
+  it('requires a working 3D model before a new house can publish while allowing an incomplete private draft', async () => {
+    const store = await import('./siteContentStore');
+    const { signatureModelDefaults, signaturePlanDefaults } = await import('./signatureCollections');
+    const custom = { id: 'retreat', fields: { name: 'Retreat' } };
+    const draft = await store.saveCollectionDraft('signature.models', [...signatureModelDefaults, custom], 0, 0);
+    const plans = await store.saveCollectionDraft('signature.plans', [...signaturePlanDefaults(), { id: 'retreat-plan', fields: { modelId: 'retreat', name: 'Studio', area: '410 sq ft', price: '₹23 lakh', spaces: '1 bed' } }], 0, draft.draftRevision);
+    await expect(store.publishDraft(0, plans.draftRevision)).rejects.toThrow(/working 3D model is required/);
+    const read = await store.readContent();
+    expect(read.revision).toBe(0);
+    expect(read.publishedCollections['signature.models']).toBeUndefined();
+    expect(read.draftCollections['signature.models'].at(-1)?.id).toBe('retreat');
+  });
+  it.each(['missing-house', 'tengo'])('rejects an added house linked to a missing or disabled source %s', async source => {
+    const store = await import('./siteContentStore');
+    const { signatureModelDefaults } = await import('./signatureCollections');
+    const models = signatureModelDefaults.map(model => model.id === 'tengo' ? { ...model, fields: { ...model.fields, configuratorMode: 'legacy' } } : model);
+    const draft = await store.saveCollectionDraft('signature.models', [...models, { id: 'retreat', fields: { name: 'Retreat', configuratorSource: source } }], 0, 0);
+    await expect(store.publishDraft(0, draft.draftRevision)).rejects.toThrow(/linked 3D model is missing, disabled/);
+  });
+  it('publishes a new house with its uploaded model and retains the resolved geometry after reading storage', async () => {
+    const store = await import('./siteContentStore');
+    const { signatureModelDefaults, signaturePlanDefaults } = await import('./signatureCollections');
+    const { resolveConfigurator } = await import('./configuratorSettings');
+    await writeFile(path.join(testRoot, 'public', 'house.glb'), 'isolated geometry fixture');
+    await writeFile(path.join(testRoot, 'public', 'orbit.mp4'), 'isolated video fixture');
+    const custom = { id: 'retreat', fields: { name: 'Retreat', configuratorModel: '/house.glb', orbitFilm: '/orbit.mp4', detailFilm: '/orbit.mp4', poster: '/photo.webp', posterAlt: 'Retreat exterior', exploreAction: 'Explore Retreat', features: JSON.stringify([{ title: 'Living', copy: 'Open living.' }, { title: 'Rest', copy: 'Quiet rooms.' }, { title: 'Build', copy: 'Prepared structure.' }]), gallery: JSON.stringify([{ id: 'outside', label: 'Exterior', image: '/photo.webp', alt: 'Retreat exterior' }]) } };
+    const draft = await store.saveCollectionDraft('signature.models', [...signatureModelDefaults, custom], 0, 0);
+    const plans = await store.saveCollectionDraft('signature.plans', [...signaturePlanDefaults(), { id: 'retreat-plan', fields: { modelId: 'retreat', name: 'Studio', area: '410 sq ft', price: '₹23 lakh', spaces: '1 bed' } }], 0, draft.draftRevision);
+    await store.publishDraft(0, plans.draftRevision);
+    const published = (await store.readContent()).publishedCollections['signature.models'];
+    expect(resolveConfigurator(published.find(model => model.id === 'retreat')!, published)?.url).toBe('/house.glb');
+  });
+  it('keeps per-house material assignments private until published and rejects invalid component choices', async () => {
+    const store = await import('./siteContentStore');
+    const fields = { base: '1850000', 'materials.external-wall': JSON.stringify(['golden-oak']), 'external-wall.golden-oak': '12500', 'materials.flooring': '[]' };
+    const draft = await store.saveCollectionDraft('signature.pricing', [{ id: 'forza', fields }], 0, 0);
+    expect((await store.readContent()).publishedCollections['signature.pricing']).toBeUndefined();
+    const published = await store.publishDraft(0, draft.draftRevision);
+    expect((await store.readContent()).publishedCollections['signature.pricing']).toEqual([{ id: 'forza', fields }]);
+    for (const choices of ['["unknown-finish"]', '["castile-crest"]', '["golden-oak","golden-oak"]', '{}']) {
+      await expect(store.saveCollectionDraft('signature.pricing', [{ id: 'forza', fields: { 'materials.external-wall': choices } }], published.revision, published.draftRevision)).rejects.toThrow();
+    }
+  });
+  it('requires inherited starting finishes to be assigned to the configured house before publication', async () => {
+    const store = await import('./siteContentStore');
+    const { signatureModelDefaults } = await import('./signatureCollections');
+    const models = signatureModelDefaults.map(model => model.id === 'tengo' ? { ...model, fields: { ...model.fields, finish_ext_wall: '10' } } : model.id === 'forza' ? { ...model, fields: { ...model.fields, configuratorSource: 'tengo' } } : model);
+    const draft = await store.saveCollectionDraft('signature.models', models, 0, 0);
+    const prices = await store.saveCollectionDraft('signature.pricing', [{ id: 'forza', fields: { 'materials.external-wall': '["titanium-veil"]' } }], 0, draft.draftRevision);
+    await expect(store.publishDraft(0, prices.draftRevision)).rejects.toThrow(/Golden Oak is the starting external wall finish/);
+    const corrected = models.map(model => model.id === 'forza' ? { ...model, fields: { ...model.fields, finish_ext_wall: '02' } } : model);
+    const fixed = await store.saveCollectionDraft('signature.models', corrected, 0, prices.draftRevision);
+    await expect(store.publishDraft(0, fixed.draftRevision)).resolves.toMatchObject({ revision: 1 });
   });
   it("accepts local action destinations and rejects external or script destinations", async () => {
     const store = await import("./siteContentStore");

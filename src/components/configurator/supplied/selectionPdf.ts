@@ -100,11 +100,8 @@ function coverImage(ctx: CanvasRenderingContext2D, img: HTMLImageElement, width:
 async function exterior(input: Sheet) {
   if (!input.preview) return;
   const { surface, ctx } = canvas(1540, 700);
-  ctx.fillStyle = input.light === 'golden' ? '#d3b698' : '#d3dee3'; ctx.fillRect(0, 0, 1540, 700);
-  const setting = input.background ?? 'meadow';
-  const backdrop = setting === 'meadow' ? 'meadow-' + input.light : setting === 'full-island' ? 'sky-' + input.light : 'background-' + setting;
-  const sky = await image('/textures/' + backdrop + '.jpg').catch(() => null);
-  if (sky) coverImage(ctx, sky, 1540, 700);
+  // The scene and its downloaded exterior share the same black studio setting.
+  ctx.fillStyle = '#000000'; ctx.fillRect(0, 0, 1540, 700);
   ctx.drawImage(await image(input.preview), 0, 0, 1540, 700);
   return surface.toDataURL('image/jpeg', .91);
 }
