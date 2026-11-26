@@ -84,6 +84,11 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   useLenisDocumentLock();
   const viewportRef = useRef<HTMLDivElement>(null);
   const [journeyReady, setJourneyReady] = useState(false);
+  const [openingUnlocked, setOpeningUnlocked] = useState(false);
+  const receiveJourneyReady = useCallback((ready: boolean) => {
+    setJourneyReady(ready);
+    if (ready) setOpeningUnlocked(true);
+  }, []);
   const [journeyLoading, setJourneyLoading] = useState<number | null>(0);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const reducedMotion = useReducedMotion();
@@ -92,7 +97,9 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   // frame; once the film is ready a small mouse prompt asks for a scroll, and
   // scroll alone drives the film, forwards and back.
   const loaded = journeyReady;
-  const loadingLocked = animated && !loaded;
+  // Only the initial opening owns a document lock. A later decoder fallback
+  // keeps its recovery UI but must not rewind a visitor in lower content.
+  const loadingLocked = animated && !openingUnlocked;
   useHeroLoadingLock(loadingLocked);
   const presentedFilmProgress = useMotionValue(0);
   const presentFilm = useCallback((value: number) => presentedFilmProgress.set(value), [presentedFilmProgress]);
@@ -193,7 +200,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
                 poster={firstFrame}
                 progress={mediaProgress}
                 className={`${styles.video} ${styles.journeyVideo}`}
-                onReady={setJourneyReady}
+                onReady={receiveJourneyReady}
                 onProgress={presentFilm}
                 onLoadProgress={trackJourneyLoading}
               />

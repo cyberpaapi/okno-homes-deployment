@@ -300,6 +300,13 @@
 .blogImage[data-portrait="true"] .blogImageDrift { inset: 0; }
 .blogImage[data-portrait="true"] img { object-fit: contain; }
 .blogArticle:hover .blogImage[data-portrait="true"] img { transform: none; }
+
+/* Desktop archive cards share one frame even when an editor chooses a portrait.
+   The article itself retains its original image and the phone square is unchanged. */
+@media (min-width: 1101px) {
+  .blogImage[data-portrait="true"] { aspect-ratio: 4 / 3; }
+  .blogImage[data-portrait="true"] img { object-fit: cover; }
+}
 .eyebrow, .pressIntro > p, .marqueeCaption { font-family: var(--type-font-heading, var(--okno-font-heading)) !important; font-size: var(--okno-label); letter-spacing: .01em; }
 
 /* Phones (owner request, 10 November 2026): journal items were 380–540px tall. */

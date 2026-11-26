@@ -11,8 +11,20 @@ describe("admin page hierarchy", () => {
   it("follows the public navigation order with Home first and Enquiry after", () => {
     expect(adminPages.slice(1, 8).map(page => page.href)).toEqual(siteNavigationItems.map(item => item.href));
     expect(adminPages[0].id).toBe("home");
-    expect(adminPages[8].id).toBe("enquiry");
+    expect(adminPages[8].id).toBe('testimonials');
+    expect(adminPages[9].id).toBe("enquiry");
     expect(adminPages.at(-1)?.id).toBe("shared");
+  });
+
+  it('maps Testimonials copy and offers only typography roles with public consumers', () => {
+    const page = adminPages.find(page => page.id === 'testimonials')!;
+    expect(page.href).toBe('/testimonials');
+    expect(page.sections.map(section => section.id)).toEqual(['introduction', 'disclosure', 'reviews', 'closing']);
+    expect(page.sections[1].fields[0]).toMatchObject({ id: 'testimonials.disclosure.visibility', defaultValue: 'shown' });
+    expect(page.sections[2].typography?.map(field => field.id.split('.').at(-1))).toEqual([
+      'body-font', 'heading-font', 'highlight-font', 'heading-size', 'heading-mobile-size', 'body-size', 'body-mobile-size', 'caption-size', 'caption-mobile-size',
+    ]);
+    expect(page.sections.flatMap(section => section.fields).some(field => field.id.endsWith('href'))).toBe(false);
   });
 
   it("uses unique stable field identifiers and local media defaults", () => {

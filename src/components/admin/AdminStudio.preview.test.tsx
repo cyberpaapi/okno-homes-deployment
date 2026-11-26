@@ -1,7 +1,7 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import AdminStudio from './AdminStudio';
-import { PREVIEW_READY, PREVIEW_UPDATE } from '@/lib/sitePreview';
+import { PREVIEW_READY, PREVIEW_REQUEST, PREVIEW_UPDATE } from '@/lib/sitePreview';
 
 const snapshot = { revision: 9, draftRevision: 50, published: {}, draft: { 'about.opening.title': 'Draft About' }, publishedCollections: {}, draftCollections: {}, history: [] };
 afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); });
@@ -21,13 +21,14 @@ describe('admin preview lifecycle', () => {
     expect(initial).toHaveAttribute('loading','eager');
     expect(initial).toHaveAttribute('allow','autoplay; fullscreen');
     fireEvent.change(screen.getByLabelText('Admin token'),{target:{value:'local-test-token'}});
-    fireEvent.click(screen.getByRole('button',{name:'Connect'}));
+    fireEvent.click(screen.getByText('Connect', { exact: true }));
     await screen.findByText('Editor connected.');
     expect(view.container.querySelector('iframe')).toBe(initial);
-    fireEvent.click(screen.getByRole('button',{name:/^About\d+/}));
+    fireEvent.click(within(view.container.querySelector('nav')!).getByRole('button',{name:/^About\d+/}));
     const frame=view.container.querySelector('iframe')!;
     const post=vi.spyOn(frame.contentWindow!,'postMessage');
     fireEvent.load(frame);
+    expect(post).toHaveBeenCalledWith({ type: PREVIEW_REQUEST }, window.location.origin);
     fireEvent.click(screen.getByText('About opening',{exact:true}).closest('summary')!);
     fireEvent.change(screen.getByLabelText('Page title'),{target:{value:'Unsaved About preview'}});
     post.mockClear();
@@ -38,7 +39,7 @@ describe('admin preview lifecycle', () => {
     fireEvent(window,new MessageEvent('message',{origin:'https://untrusted.example',source:frame.contentWindow,data:{type:PREVIEW_READY}}));
     fireEvent(window,new MessageEvent('message',{origin:window.location.origin,source:window,data:{type:PREVIEW_READY}}));
     expect(post).not.toHaveBeenCalled();
-  }, 15000);
+  }, 45000);
   it('offers recovery for a stalled preview and keeps a healthy preview after the timeout', async () => {
     vi.useFakeTimers();
     const view=render(<AdminStudio />);

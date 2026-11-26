@@ -8,9 +8,20 @@ type Manifest = {
 };
 const whole = (value: number, minimum = 0) => Number.isSafeInteger(value) && value >= minimum;
 const geometryError = () => new Error('The GLB must contain drawable geometry in its opening scene, with valid POSITION vertices and buffers.');
+// Count actual validation reads across all primitives, including repeated accessors.
+// Sparse accessors can represent enormous zero-filled arrays in a tiny upload.
+const maxValidationValues = 24_000_000;
+// Sparse replacements allocate a Map entry and a component array per index.
+const maxSparseEntries = 100_000;
 
 /** Accept self-contained glTF 2 GLBs with geometry reachable from the scene the viewer opens. */
 export function validateGlb(bytes: Uint8Array) {
+  let remainingValues = maxValidationValues;
+  let remainingSparseEntries = maxSparseEntries;
+  function reserveValues(count: number, width: number) {
+    if (count > Math.floor(remainingValues / width)) throw new Error('The GLB geometry is too complex to validate. Reduce its vertices, indices or repeated primitives before uploading.');
+    remainingValues -= count * width;
+  }
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   if (bytes.length < 24 || view.getUint32(0, true) !== 0x46546c67 || view.getUint32(4, true) !== 2 || view.getUint32(8, true) !== bytes.length) throw new Error('Choose a valid glTF 2 binary (.glb) model.');
   const jsonLength = view.getUint32(12, true);
@@ -63,11 +74,17 @@ export function validateGlb(bytes: Uint8Array) {
     const item = whole(index) ? data.accessors?.[index] : undefined;
     if (!item || item.type !== type || !allowed.includes(item.componentType) || !whole(item.count, 1) || (item.bufferView === undefined && !item.sparse)) throw geometryError();
     const width = type === 'VEC3' ? 3 : 1;
+    reserveValues(item.count, width);
+    const patch = item.sparse;
+    if (patch) {
+      if (!whole(patch.count, 1) || patch.count > item.count || ![5121, 5123, 5125].includes(patch.indices.componentType)) throw geometryError();
+      if (patch.count > remainingSparseEntries) throw new Error('The GLB geometry is too complex to validate. Reduce sparse vertex or index replacements before uploading.');
+      remainingSparseEntries -= patch.count;
+      reserveValues(patch.count, width + 1);
+    }
     const base = item.bufferView === undefined ? () => 0 : values(item.bufferView, item.byteOffset ?? 0, item.count, width, item.componentType);
     const sparse = new Map<number, number[]>();
-    if (item.sparse) {
-      const patch = item.sparse;
-      if (!whole(patch.count, 1) || patch.count > item.count || ![5121, 5123, 5125].includes(patch.indices.componentType)) throw geometryError();
+    if (patch) {
       const indices = values(patch.indices.bufferView, patch.indices.byteOffset ?? 0, patch.count, 1, patch.indices.componentType, true);
       const replacements = values(patch.values.bufferView, patch.values.byteOffset ?? 0, patch.count, width, item.componentType, true);
       let previous = -1;

@@ -29,6 +29,17 @@ const enquiryOptionGroups = [
 ] as const;
 
 export const collectionDefinitions: readonly CollectionDefinition[] = [
+  {
+    id: 'testimonials.reviews', pageId: 'testimonials', label: 'Testimonials', itemLabel: 'review', maxItems: 100,
+    fields: [
+      { key: 'image', label: 'Review image', kind: 'image', required: true },
+      { key: 'imageAlt', label: 'Image description', kind: 'text', required: true },
+      { key: 'quote', label: 'Quote', kind: 'text', required: true },
+      { key: 'name', label: 'Name', kind: 'text', required: true },
+      { key: 'locationLine1', label: 'Location · first line', kind: 'text', required: true },
+      { key: 'locationLine2', label: 'Location · second line', kind: 'text', required: true },
+    ],
+  },
   { id: pricingCollection, pageId: 'signature', label: 'Configurator prices', itemLabel: 'house price schedule', maxItems: 36, fields: pricingFields },
   {
     id: "signature.models", pageId: "signature", label: "Signature model roster", itemLabel: "model", maxItems: 24,

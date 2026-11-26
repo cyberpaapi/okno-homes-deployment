@@ -86,7 +86,9 @@ export default function BespokeExperience() {
     if (index >= horizontalStages.length) { document.getElementById("original")?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" }); return; }
     const section = horizontalRef.current;
     if (!section) return;
-    if (window.matchMedia("(max-width: 700px)").matches || reduced) {
+    // The phone journey uses the same horizontal track as desktop. Only the
+    // readable vertical fallbacks should navigate to the article itself.
+    if (reduced || window.matchMedia("(max-height: 560px)").matches) {
       document.getElementById(`decision-${index}`)?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
       return;
     }
@@ -132,7 +134,7 @@ export default function BespokeExperience() {
           <div className={styles.horizontalSticky}><motion.div className={styles.horizontalTrack} style={{ x: horizontalX }}>
             {currentStages.map((stage, index) => <article id={`decision-${index}`} key={index} className={styles.horizontalPanel} data-type-section={`bespoke.decision-${index + 1}`} data-tone={stage.tone}>
               <div className={styles.panelHeading}><h2 id={index === 0 ? "decisions-title" : undefined}>{stage.label}</h2></div>
-              <figure className={styles.panelMedia}><Image loader={previewImageLoader} src={stage.image} alt={stage.alt} fill sizes="(max-width: 800px) 100vw, 62vw" className={styles.image} /></figure>
+              <figure className={styles.panelMedia}><Image loader={previewImageLoader} src={stage.image} alt={stage.alt} fill loading="eager" fetchPriority="low" sizes="(max-width: 800px) 100vw, 62vw" className={styles.image} /></figure>
               <div className={styles.panelCaption}><div><p>{stage.detail}</p><strong>{stage.copy}</strong></div><button type="button" onClick={() => moveToDecision(index + 1)} aria-label={`${get("stages.next-action", "Next step")}: ${index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}`}><span data-type-field={"models.bespoke.stages.next-action"}>{get("stages.next-action", "Next step")}</span><b data-type-field={"models.bespoke.result.eyebrow"}>{index < currentStages.length - 1 ? currentStages[index + 1].label : get("result.eyebrow", "The result")}</b><i aria-hidden="true"><ArrowRight size={18} strokeWidth={1.7} /></i></button></div>
             </article>)}
           </motion.div></div>
@@ -153,7 +155,7 @@ export default function BespokeExperience() {
           <p className={styles.kicker}>{get("gallery.label", "Bespoke projects")}</p>
           <h2 id="bespoke-gallery-title">{lakewood.title}</h2>
           <p className={styles.bodyCopy}>{lakewood.description}</p>
-          <MasonryLightbox images={lakewood.gallery} title={lakewood.title} even />
+          <MasonryLightbox images={lakewood.gallery} title={lakewood.title} even thumbnailLoader={previewImageLoader} />
         </section>}
       </main>
     </MotionConfig>

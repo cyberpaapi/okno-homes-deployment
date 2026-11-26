@@ -50,6 +50,7 @@ describe('SiteFooter', () => {
       ['Projects', '/projects'],
       ['Process', '/process'],
       ['About', '/about'],
+      ['Testimonials', '/testimonials'],
       ['Sustainability', '/sustainability'],
       ['Journal', '/journal'],
     ] as const) {

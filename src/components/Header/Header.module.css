@@ -34,6 +34,13 @@
 @media (max-width: 1120px) { .navigation { display: none; } .enquire { display: none; } .menuPosition { display: block; } .shell { height: 82px; } .logo { width: 115px; } }
 .header[data-copy-compact="true"] .navigation,.header[data-copy-compact="true"] .enquire{display:none}
 .header[data-copy-compact="true"] .menuPosition{display:block}
+/* Eight public destinations need more room in the wide company face.
+   The customer configurator keeps its existing seven-link breakpoint. */
+@media (max-width: 1360px) {
+  .header[data-public-site="true"] .navigation,
+  .header[data-public-site="true"] .enquire { display: none; }
+  .header[data-public-site="true"] .menuPosition { display: block; }
+}
 @media (max-width: 700px) { .header { padding: 0 16px; } .shell { height: 74px; } .logo { width: 104px; } .menuLinks { inset: 72px 26px 26px; gap: clamp(14px, 2.4svh, 22px); } }
 @media (prefers-reduced-motion: reduce) { .character > span, .rolling:hover .character > span, .rolling:focus-visible .character > span { transition: none; transform: none; } }
 

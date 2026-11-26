@@ -1,8 +1,7 @@
 "use client";
 
 import { useMemo, useSyncExternalStore } from "react";
-import localPorts from "../../config/local-ports.json";
-import { announcePreviewReady } from "./sitePreview";
+import { announcePreviewReady, isTrustedPreviewMessage, PREVIEW_READY, PREVIEW_REQUEST, PREVIEW_UPDATE } from "./sitePreview";
 import type { ContentCollections, ContentItem } from "@/lib/contentCollections";
 
 type PublicSnapshot = { revision: number; published: Record<string, string>; publishedCollections: ContentCollections };
@@ -59,10 +58,12 @@ function subscribe(listener: () => void) {
 }
 
 function receivePreview(event: MessageEvent) {
-  if (event.source !== window.parent || window.parent === window || event.data?.type !== "OKNO_CMS_PREVIEW") return;
-  const sameOriginAdmin = event.origin === window.location.origin && window.parent.location.pathname.startsWith("/admin");
-  const fixedLocalAdmin = window.location.hostname === "127.0.0.1" && window.location.port === String(localPorts.website) && event.origin === `http://127.0.0.1:${localPorts.admin}`;
-  if (!sameOriginAdmin && !fixedLocalAdmin) return;
+  if (!isTrustedPreviewMessage(event)) return;
+  if (event.data?.type === PREVIEW_REQUEST) {
+    window.parent.postMessage({ type: PREVIEW_READY }, event.origin);
+    return;
+  }
+  if (event.data?.type !== PREVIEW_UPDATE) return;
   const values = event.data.values;
   if (!values || typeof values !== "object" || Array.isArray(values)) return;
   preview = Object.fromEntries(Object.entries(values as Record<string, unknown>).filter((entry): entry is [string, string] => typeof entry[1] === "string"));

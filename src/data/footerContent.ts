@@ -16,6 +16,7 @@ export const footerGroups = [
   {
     id: "okno", heading: "OKNO", links: [
       { id: "about", label: "About", href: "/about" },
+      { id: "testimonials", label: "Testimonials", href: "/testimonials" },
       { id: "sustainability", label: "Sustainability", href: "/sustainability" },
       { id: "enquire", label: "Enquire", href: "/enquiry?intent=home" },
     ],

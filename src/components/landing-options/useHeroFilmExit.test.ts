@@ -22,6 +22,22 @@ function setup() {
   return { ...hook, hero, shown };
 }
 describe('Hero movie handoff', () => {
+  it.each([360, 390, 700])('keeps scrolling beyond a delayed ending native at %ipx', width => {
+    vi.stubGlobal('matchMedia', (query: string) => ({ matches: query === '(max-width: 700px)' && width <= 700, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
+    const view = setup();
+    act(() => { y = 1200; window.dispatchEvent(new Event('scroll')); });
+    expect(y).toBe(1200);
+    expect(view.hero.dataset.filmExitPending).toBeUndefined();
+    for (const event of [new WheelEvent('wheel', { deltaY: 400, cancelable: true }), new Event('touchmove', { cancelable: true }), new KeyboardEvent('keydown', { key: 'PageDown', cancelable: true })]) {
+      act(() => { window.dispatchEvent(event); });
+      expect(event.defaultPrevented).toBe(false);
+    }
+    act(() => { y = 2400; window.dispatchEvent(new Event('scroll')); });
+    expect(y).toBe(2400);
+    act(() => { y = 900; window.dispatchEvent(new Event('scroll')); });
+    expect(y).toBe(900);
+    view.unmount();
+  });
   it('makes Home interrupt wheel inertia while leaving editable controls alone',()=>{
     const scrollTo=vi.fn((next:number)=>{y=next;});
     driver.active={targetScroll:600,scrollTo,on:vi.fn(),off:vi.fn()};

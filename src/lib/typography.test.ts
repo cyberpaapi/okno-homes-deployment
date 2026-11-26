@@ -5,6 +5,15 @@ import { adminPages, allContentFields } from '@/data/adminContent';
 import { typographyBindings, typographyCss, typographyValueError, validateTypographySizes, typeRoles, typographyFonts, isTypographySizeField } from './typography';
 
 const bindings = typographyBindings(adminPages);
+const typographyFields = allContentFields().filter(field => field.id.startsWith('typography.'));
+// Each field still renders against the complete binding set. Bound the work per
+// test so exhaustive coverage fits the default timeout as the registry grows.
+const fieldBatchSize = 64;
+const fieldBatches = Array.from({ length: Math.ceil(typographyFields.length / fieldBatchSize) }, (_, index) => ({
+  start: index * fieldBatchSize + 1,
+  end: Math.min((index + 1) * fieldBatchSize, typographyFields.length),
+  fields: typographyFields.slice(index * fieldBatchSize, (index + 1) * fieldBatchSize),
+}));
 function files(directory: string): string[] { return readdirSync(directory, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? files(path.join(directory, entry.name)) : [path.join(directory, entry.name)]); }
 
 describe('published typography contract', () => {
@@ -20,9 +29,14 @@ describe('published typography contract', () => {
     expect(typographyCss({ 'typography.section.home.timeline.body-font': 'bad-font' }, [{ scope: 'home.timeline', fields: [] }])).toBe(css);
   });
   it('registers optional numeric sizes and font choices for every editable section', () => {
-    const fields = allContentFields().filter(field => field.id.startsWith('typography.'));
+    const fields = typographyFields;
     expect(new Set(fields.map(field => field.id)).size).toBe(fields.length);
     expect(bindings.length).toBeGreaterThan(65);
+    expect(fields.some(field => field.id.includes('typography.preset.') || field.id.endsWith('-preset'))).toBe(false);
+    if (process.env.OKNO_WRITE_TYPE_BINDINGS) writeFileSync('src/data/typographySections.json', JSON.stringify(bindings, null, 2) + '\n');
+    expect(JSON.parse(readFileSync('src/data/typographySections.json', 'utf8'))).toEqual(bindings);
+  });
+  it.each(fieldBatches)('validates every font option and numeric size for fields $start–$end', ({ fields }) => {
     for (const field of fields) {
       for (const option of field.options ?? []) {
         const css = typographyCss({ [field.id]: option.value }, bindings);
@@ -35,9 +49,6 @@ describe('published typography contract', () => {
         expect(typographyCss({ [field.id]: '26.5' }, bindings)).toContain('26.5px');
       }
     }
-    expect(fields.some(field => field.id.includes('typography.preset.') || field.id.endsWith('-preset'))).toBe(false);
-    if (process.env.OKNO_WRITE_TYPE_BINDINGS) writeFileSync('src/data/typographySections.json', JSON.stringify(bindings, null, 2) + '\n');
-    expect(JSON.parse(readFileSync('src/data/typographySections.json', 'utf8'))).toEqual(bindings);
   });
   it('rejects CSS injection and invalid numbers, and accepts blank resets and independent phone sizes', () => {
     for (const bad of ['0', '-1', '401', '20; color:red', 'calc(1px)', 'Infinity', '16.55']) expect(typographyValueError('typography.section.about.hero.body-size', bad)).toBeTruthy();

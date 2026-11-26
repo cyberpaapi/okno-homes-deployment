@@ -4,11 +4,13 @@ import { useEffect, type RefObject } from 'react';
 import { useLenis } from 'lenis/react';
 import type { MotionValue } from 'motion/react';
 import { HERO_FILM_EXIT } from '@/lib/heroFilmScroll';
+import { useMediaQuery } from '@/lib/useMediaQuery';
 
 /** Only the handoff is gated. Keep the full input distance and release it once
  * the actual window frame has painted, rather than running the film offscreen. */
 export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: MotionValue<number>, enabled: boolean) {
   const lenis = useLenis();
+  const phone = useMediaQuery('(max-width: 700px)');
   useEffect(() => {
     const hero = section.current;
     if (!enabled || !hero) return;
@@ -42,7 +44,9 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
       });
     };
     const check = () => {
-      if (document.body.style.overflow === 'hidden') return;
+      // Touch scrolling owns the document. A delayed final frame must not
+      // rewind a phone to the film boundary or hold the following section.
+      if (phone || document.body.style.overflow === 'hidden') return;
       const y = window.scrollY, end = boundary();
       if (pendingY !== null) {
         if (y < end - 3) { pendingY = null; clear(); }
@@ -61,7 +65,7 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
       previousY = Math.min(y, pendingY === null ? y : end);
     };
     const wheel = (event: WheelEvent) => {
-      if (document.body.style.overflow === 'hidden' || pendingY === null || event.ctrlKey) return;
+      if (phone || document.body.style.overflow === 'hidden' || pendingY === null || event.ctrlKey) return;
       if (event.deltaY < 0) { pendingY = null; clear(); return; }
       if (event.deltaY > 0) {
         const unit = event.deltaMode === 2 ? window.innerHeight : event.deltaMode === 1 ? 16 : 1;
@@ -88,5 +92,5 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
       window.removeEventListener('wheel', wheel, true);
       window.removeEventListener('keydown',key);
     };
-  }, [section, shown, enabled, lenis]);
+  }, [section, shown, enabled, lenis, phone]);
 }

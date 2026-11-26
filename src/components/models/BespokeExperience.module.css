@@ -115,10 +115,6 @@
   .portal { height:200svh; }
   .portalMask { width:100%; left:0; }
   .portalMask text { font-size:135px; letter-spacing:-.04em; }
-  .horizontal { height:auto; }
-  .horizontalSticky { position:relative; height:auto; overflow:visible; }
-  .horizontalTrack { width:100%; height:auto; flex-direction:column; transform:none!important; }
-  .horizontalPanel { width:100%; height:100svh; flex-basis:100svh; }
   .panelHeading { top:88px; right:20px; left:20px; }
   .panelHeading h2 { font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .horizontalPanel[data-tone="blue"] .panelHeading h2 { font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
@@ -153,7 +149,7 @@
 .gallery { padding-top:30px; }
 .gallery h2 { margin:0; font-size:var(--okno-section); font-weight:500;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 .gallery .bodyCopy { margin:20px 0 48px; }
-@media (max-width:700px), (prefers-reduced-motion:reduce) {
+@media (prefers-reduced-motion:reduce) {
   .horizontal { height:auto; }
   .horizontalSticky { position:relative; height:auto; overflow:visible; }
   .horizontalTrack { width:100%; height:auto; flex-direction:column; transform:none!important; }
@@ -210,7 +206,7 @@
   .closing { padding: 40px 20px 0; }
   .gallery { padding: 40px 20px 72px; }
 }
-@media (max-width: 700px), (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
   .panelHeading, .panelCaption { right: auto; left: auto; }
   .panelMedia { width: 100%; }
 }
@@ -221,7 +217,7 @@
    frame (only "…D FROM PLACE." showed). */
 .heroWords { padding: clamp(18px, 4.5cqi, 70px); }
 .heroWords h1 { font-size: clamp(22px, 7cqi, var(--okno-hero)); }
-@media (max-width: 700px), (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
   .panelHeading { top: auto; }
 }
 /* Phones: the inset second photo ran across the result heading; the full-bleed photo and
@@ -274,7 +270,7 @@
 /* Full-device audit (13 November 2026): on phones held sideways the sideways-scrolling
    stages had no room (the photograph covered its heading and the caption covered the
    photograph). Short landscape screens stack the stages exactly as phones do. */
-@media (max-height: 560px) and (orientation: landscape) {
+@media (max-height: 560px) and (orientation: landscape), (max-width: 700px) and (max-height: 560px) {
   .horizontal { height: auto; }
   .horizontalSticky { position: relative; height: auto; overflow: visible; }
   .horizontalTrack { width: 100%; height: auto; flex-direction: column; transform: none !important; }
@@ -290,3 +286,31 @@
 .panelCaption button i { flex: none; }
 .panelCaption button i svg,
 .closing a > span svg { display: block; flex: none; }
+
+/* Phones keep the desktop's sideways decision journey. Native vertical scroll
+   drives one shared track; no gesture is intercepted or waiting for a decoder.
+   A compact grid keeps the heading, photo, copy and action inside the viewport. */
+@media (max-width: 700px) and (min-height: 561px) and (prefers-reduced-motion: no-preference) {
+  .horizontal { height: 400svh; }
+  .horizontalSticky { position: sticky; top: 0; height: 100svh; overflow: clip; }
+  .horizontalTrack { width: 400vw; height: 100%; flex-direction: row; }
+  .horizontalPanel {
+    display: grid;
+    grid-template-rows: auto minmax(120px, 1fr) auto;
+    gap: 16px;
+    width: 100vw;
+    height: 100%;
+    min-height: 0;
+    flex: 0 0 100vw;
+    padding: 84px 20px 28px;
+    overflow: hidden;
+  }
+  .panelHeading, .panelMedia, .panelCaption { position: relative; inset: auto; width: 100%; transform: none; }
+  .panelHeading h2 { font-size: var(--okno-section); overflow-wrap: normal; }
+  .panelMedia { min-height: 0; height: 100%; margin: 0; border-radius: 16px; }
+  .panelCaption { display: grid; align-content: start; gap: 14px; translate: none; }
+  .panelCaption > div { max-width: none; padding: 0; border: 0; background: transparent; box-shadow: none; }
+  .panelCaption p { margin-bottom: 5px; font-size: var(--okno-spec); }
+  .panelCaption strong { margin-top: 0; font-size: var(--okno-spec); line-height: 1.5; }
+  .panelCaption button { justify-self: start; min-width: 190px; }
+}

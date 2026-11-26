@@ -5,7 +5,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { createPortal } from 'react-dom';
-import Image from 'next/image';
+import Image, { type ImageLoader } from 'next/image';
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react';
 import type { ProjectImage } from '@/data/projectAtlas';
 import { MagneticButton } from './Magnetic';
@@ -13,18 +13,18 @@ import { CarouselThumbnails } from './PhotoCarousel';
 import styles from './MasonryLightbox.module.css';
 import { useImageOrientation } from '@/lib/useImageOrientation';
 
-function MasonryTile({ item, index, reduced, onOpen }: { item: ProjectImage; index: number; reduced: boolean; onOpen: (button: HTMLButtonElement) => void }) {
+function MasonryTile({ item, index, reduced, onOpen, thumbnailLoader }: { item: ProjectImage; index: number; reduced: boolean; onOpen: (button: HTMLButtonElement) => void; thumbnailLoader?: ImageLoader }) {
   const photograph = useImageOrientation(item.src, item.width && item.height ? item : undefined);
   return <motion.button type="button" layoutId={reduced ? undefined : `photo-${index}`} className={styles.tile} aria-label={`View photograph ${index + 1}`}
     data-portrait={photograph.portrait} style={photograph.frameStyle} onClick={event => onOpen(event.currentTarget)}
     initial={reduced ? false : { opacity: 0, y: 16, filter: 'blur(6px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: '-40px' }}
     transition={{ duration: reduced ? 0 : .6, delay: reduced ? 0 : (index % 12) * .05, ease: [.22, 1, .36, 1] }} whileHover={reduced ? undefined : { y: -3 }}>
-    <Image src={item.src} alt={item.alt} width={item.width ?? 2400} height={item.height ?? 1600} sizes="(max-width:600px) 90vw, 46vw" priority={index < 2} onLoad={photograph.onLoad} />
+    <Image loader={thumbnailLoader} src={item.src} alt={item.alt} width={item.width ?? 2400} height={item.height ?? 1600} sizes="(max-width:600px) 90vw, 46vw" priority={index < 2} onLoad={photograph.onLoad} />
   </motion.button>;
 }
 
 /** `even` lays the photographs out in equal rows instead of staggered columns. */
-export function MasonryLightbox({ images, title, even = false }: { images: ProjectImage[]; title: string; even?: boolean }) {
+export function MasonryLightbox({ images, title, even = false, thumbnailLoader }: { images: ProjectImage[]; title: string; even?: boolean; thumbnailLoader?: ImageLoader }) {
   const [selected, setSelected] = useState<number | null>(null);
   const visibleIndex = selected === null || !images.length ? null : Math.min(selected, images.length - 1);
   const reduced = useReducedMotion();
@@ -54,7 +54,7 @@ export function MasonryLightbox({ images, title, even = false }: { images: Proje
   }, [open, images.length, step]);
   const image = visibleIndex === null ? null : images[visibleIndex];
   return <LayoutGroup id={`masonry-${title}`}><div className={styles.grid} data-single={images.length === 1} data-even={even}>
-    {images.map((item, i) => <MasonryTile key={item.src} item={item} index={i} reduced={Boolean(reduced)} onOpen={button => { opener.current = button;setSelected(i); }} />)}
+    {images.map((item, i) => <MasonryTile key={item.src} item={item} index={i} reduced={Boolean(reduced)} thumbnailLoader={thumbnailLoader} onOpen={button => { opener.current = button;setSelected(i); }} />)}
   </div>
   {typeof document !== 'undefined' && createPortal(<AnimatePresence>{image && visibleIndex !== null && <motion.div className={styles.backdrop} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduced ? 0 : .25 }} onClick={() => setSelected(null)} data-lenis-prevent>
     <div ref={dialog} role="dialog" aria-modal="true" aria-label={`${title} fullscreen photograph`} tabIndex={-1} className={styles.dialog}>

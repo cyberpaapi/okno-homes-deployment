@@ -857,6 +857,32 @@
     ]
   },
   {
+    "scope": "testimonials.introduction",
+    "fields": [
+      "testimonials.heading",
+      "testimonials.introduction"
+    ]
+  },
+  {
+    "scope": "testimonials.disclosure",
+    "fields": [
+      "testimonials.disclosure.copy"
+    ]
+  },
+  {
+    "scope": "testimonials.reviews",
+    "fields": []
+  },
+  {
+    "scope": "testimonials.closing",
+    "fields": [
+      "testimonials.closing.heading",
+      "testimonials.closing.body",
+      "testimonials.closing.enquiry-label",
+      "testimonials.closing.models-label"
+    ]
+  },
+  {
     "scope": "enquiry.intro",
     "fields": [
       "enquiry.intro.heading-line-1",
@@ -942,6 +968,7 @@
     "fields": [
       "footer.okno.heading",
       "footer.okno.about.label",
+      "footer.okno.testimonials.label",
       "footer.okno.sustainability.label",
       "footer.okno.enquire.label"
     ]

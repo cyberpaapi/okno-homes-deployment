@@ -134,7 +134,11 @@
    while a second full-height stage remains pinned underneath it. */
 @media (max-width: 700px) {
   .section { padding: 0 0 32px; }
-  .timeline { margin-top: 0; }
+  .timeline {
+    /* Only trim the final pinned dwell; JS retains the original phase range. */
+    height: var(--process-phone-timeline-height, 462svh);
+    margin-top: 0;
+  }
   .stage {
     display: grid;
     grid-template-columns: minmax(0, 1fr);

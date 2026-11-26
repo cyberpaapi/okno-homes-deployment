@@ -1,5 +1,5 @@
 import { heroV2EndingDefaults as v2Ending } from "./heroV2Ending";
-import { withTypography } from "@/lib/typography";
+import { sectionTypographyFields, withTypography } from "@/lib/typography";
 import { siteNavigationItems } from "@/data/siteNavigation";
 import projectMedia from "@/data/realProjectMedia.json";
 import { projectDescriptions } from "@/data/projectCopy";
@@ -11,6 +11,7 @@ import { customerCopySections } from "@/data/configurator/studio/customerCopy";
 import { footerGroups, footerSocialLinks } from "@/data/footerContent";
 import { PROCESS_DAY_RANGES } from "@/lib/processChapters";
 import { processDetailPhases } from "@/data/processDetailPhases";
+import { testimonialPageDefaults } from '@/lib/testimonialCollections';
 import type { ContentItem } from "@/lib/contentCollections";
 export { homeVariantDefaults } from "@/data/homeVariants";
 
@@ -759,6 +760,23 @@ const baseAdminPages: readonly ContentPage[] = [
       { id: "about.fit.copy", label: "Closing copy", kind: "text", defaultValue: "Walls, ceilings and floors are designed and made to fit one another exactly. The result is clean lines, quiet junctions and nothing left to chance." },
     ] },
   ] },
+  { id: 'testimonials', label: 'Testimonials', href: '/testimonials', sections: [
+    { id: 'introduction', label: 'Page introduction', fields: [
+      { id: 'testimonials.heading', label: 'Page heading', kind: 'text', defaultValue: testimonialPageDefaults.heading },
+      { id: 'testimonials.introduction', label: 'Introduction', kind: 'text', defaultValue: testimonialPageDefaults.introduction },
+    ] },
+    { id: 'disclosure', label: 'Preview disclosure', fields: [
+      { id: 'testimonials.disclosure.visibility', label: 'Show fictional-content disclosure', kind: 'choice', defaultValue: 'shown', options: [{ label: 'Shown', value: 'shown' }, { label: 'Hidden', value: 'hidden' }], help: 'Keep shown while reviews are illustrative. Hide explicitly after replacing them with approved customer content; the notice and its spacing are removed together.' },
+      { id: 'testimonials.disclosure.copy', label: 'Disclosure copy', kind: 'text', defaultValue: testimonialPageDefaults.disclosure },
+    ] },
+    { id: 'reviews', label: 'Review collection', fields: [], typography: [], note: 'Add, edit, remove and reorder reviews below. Quote, name and location typography applies to all reviews; individual review style controls are not offered.' },
+    { id: 'closing', label: 'Closing invitation', fields: [
+      { id: 'testimonials.closing.heading', label: 'Invitation heading', kind: 'text', defaultValue: testimonialPageDefaults.closingHeading },
+      { id: 'testimonials.closing.body', label: 'Invitation body', kind: 'text', defaultValue: testimonialPageDefaults.closingBody },
+      { id: 'testimonials.closing.enquiry-label', label: 'Enquiry button label', kind: 'text', defaultValue: testimonialPageDefaults.enquiryLabel },
+      { id: 'testimonials.closing.models-label', label: 'Models button label', kind: 'text', defaultValue: testimonialPageDefaults.modelsLabel },
+    ], note: 'Buttons retain their existing safe destinations: Enquiry and Models.' },
+  ] },
   { id: "enquiry", label: "Enquiry", href: "/enquiry", sections: [
     enquirySection("intro", "Introduction", [
       ["intro.heading-line-1", "Heading · first line", "Tell us what"],
@@ -843,7 +861,19 @@ const baseAdminPages: readonly ContentPage[] = [
   ] },
 ];
 
-export const adminPages: readonly ContentPage[] = withTypography(baseAdminPages);
+const testimonialTypographyControls: Record<string, readonly string[]> = {
+  introduction: ['heading-font', 'body-font', 'display-size', 'display-mobile-size', 'body-size', 'body-mobile-size'],
+  disclosure: ['body-font', 'caption-size', 'caption-mobile-size'],
+  reviews: ['body-font', 'heading-font', 'highlight-font', 'body-size', 'body-mobile-size', 'heading-size', 'heading-mobile-size', 'caption-size', 'caption-mobile-size'],
+  closing: ['heading-font', 'body-font', 'highlight-font', 'heading-size', 'heading-mobile-size', 'body-size', 'body-mobile-size', 'caption-size', 'caption-mobile-size'],
+};
+export const adminPages: readonly ContentPage[] = withTypography(baseAdminPages).map(page => page.id !== 'testimonials' ? page : {
+  ...page,
+  sections: page.sections.map(section => ({
+    ...section,
+    typography: sectionTypographyFields(`testimonials.${section.id}`).filter(field => testimonialTypographyControls[section.id]?.includes(field.id.split('.').at(-1)!)),
+  })),
+});
 
 export function allContentFields(pages: readonly ContentPage[] = adminPages): ContentField[] {
   const unique = new Map<string, ContentField>();

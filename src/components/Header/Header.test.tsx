@@ -20,6 +20,7 @@ describe("shared Models/Projects header", () => {
     try {
       const { container } = render(<Header currentHref="/models" />);
       expect(container.querySelector("header")).toHaveAttribute("data-public-site", "false");
+      expect(screen.queryByRole("link", { name: "Testimonials" })).not.toBeInTheDocument();
       expect(screen.getByRole("button", { name: "Open navigation" })).toHaveStyle({ width: "100px" });
     } finally { navigation.pathname = "/process"; }
   });
@@ -30,6 +31,17 @@ describe("shared Models/Projects header", () => {
     expect(screen.getByRole("link", { name: "Enquire" })).toHaveAttribute("href", "/enquiry");
     expect(screen.getByRole("link", { name: "Process" })).toHaveAttribute("aria-current", "page");
     expect(screen.queryByRole("navigation", { name: "Mobile navigation" })).toBeNull();
+  });
+
+  it("makes Testimonials reachable and current in public desktop and mobile navigation", () => {
+    navigation.pathname = "/testimonials";
+    try {
+      render(<Header />);
+      expect(screen.getByRole("link", { name: "Testimonials" })).toHaveAttribute("aria-current", "page");
+      const { dialog } = openMenu();
+      expect(within(dialog).getByRole("link", { name: "Testimonials" })).toHaveAttribute("href", "/testimonials");
+      expect(within(dialog).getByRole("link", { name: "Testimonials" })).toHaveAttribute("aria-current", "page");
+    } finally { navigation.pathname = "/process"; }
   });
 
   it("preserves enquiry intent in the desktop and mobile actions", () => {

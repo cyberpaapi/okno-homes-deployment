@@ -38,10 +38,13 @@ describe("BespokeExperience", () => {
     expect(screen.queryByRole("heading", { name: "Begin a bespoke enquiry." })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /begin crafting/i })).toHaveAttribute("href", "/enquiry?intent=home&model=bespoke");
     const portal = screen.getByLabelText("OKNO bespoke architecture transition");
-    expect(portal.querySelector("mask image")).toHaveAttribute("href", "/assets/projects/brand/okno-modhomes-white.svg");
+    expect(portal.querySelector("mask image")).toHaveAttribute("href", "/assets/projects/brand/okno-white.svg");
     expect(portal.querySelector("mask text")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "View photograph 1" }).querySelector("img")).toHaveAttribute("src", expect.stringContaining("/thumbnail-images/"));
     fireEvent.click(screen.getByRole("button", { name: "View photograph 1" }));
-    expect(screen.getByRole("dialog", { name: "Lakewood Villa fullscreen photograph" })).toBeInTheDocument();
+    const photograph = screen.getByRole("dialog", { name: "Lakewood Villa fullscreen photograph" });
+    expect(photograph).toBeInTheDocument();
+    expect(photograph.querySelector("img")).toHaveAttribute("src", "/assets/projects/real-v1/lakewood-01.webp");
     fireEvent.click(screen.getByRole("button", { name: "Next photograph" }));
     expect(screen.getByText("Photograph 2 of 10")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Close fullscreen photograph" }));
@@ -64,5 +67,24 @@ describe("BespokeExperience", () => {
     fireEvent.click(screen.getByRole("button", { name: "Next step: BRIEF" }));
     expect(scrollTo).toHaveBeenCalledWith(expect.objectContaining({ behavior: "smooth" }));
     scrollTo.mockRestore();
+  });
+
+  it("uses the phone track's measured vertical travel for each sideways stage", () => {
+    const previousMedia = window.matchMedia;
+    vi.stubGlobal("matchMedia", (query: string) => ({ matches: query === "(max-width: 700px)", addEventListener: vi.fn(), removeEventListener: vi.fn() }));
+    const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => undefined);
+    const position = vi.spyOn(window, "scrollY", "get").mockReturnValue(200);
+    const height = vi.spyOn(window, "innerHeight", "get").mockReturnValue(800);
+    const view = render(<BespokeExperience />);
+    const decisions = view.container.querySelector<HTMLElement>("#decisions")!;
+    Object.defineProperty(decisions, "offsetHeight", { value: 3200 });
+    vi.spyOn(decisions, "getBoundingClientRect").mockReturnValue({ top: 800 } as DOMRect);
+    fireEvent.click(screen.getByRole("button", { name: "Next step: BRIEF" }));
+    expect(scrollTo).toHaveBeenLastCalledWith({ top: 1800, behavior: "smooth" });
+    fireEvent.click(screen.getByRole("button", { name: "Next step: ATMOSPHERE" }));
+    expect(scrollTo).toHaveBeenLastCalledWith({ top: 3400, behavior: "smooth" });
+    view.unmount();
+    height.mockRestore(); position.mockRestore(); scrollTo.mockRestore();
+    vi.stubGlobal("matchMedia", previousMedia);
   });
 });

@@ -1,0 +1,15 @@
+# Testimonials forward loop — 27 November 2026
+
+The owner requested an uninterrupted forward last-to-first transition, with visible acceleration and deceleration, before releasing the current finishing candidate to the existing Render review service.
+
+The former finite rail advanced to the native scroll limit and reset its position to zero. The new controller keeps one original review cycle between two visual copies. Copies are `aria-hidden` and `inert`, have no extra IDs or controls, and do not replace the original accessible review set. Clones are hidden when the original content fits or has fewer than two reviews.
+
+Grid coordinates are measured from floating-point client rectangles after the duplicate cycles are displayed. Each original stop and the actual adjacent-cycle start are cached; rounded `offsetLeft` values are not multiplied into a cycle width. A half-CSS-pixel boundary tolerance absorbs scroll-coordinate quantization so a near-zero negative error cannot map the rail to the far end of the cycle.
+
+Each automatic or arrow step lasts 720 ms with a cubic ease-in-out: it starts slowly, accelerates through the middle, and decelerates into the next card. After crossing a cycle boundary, an instant offset change of exactly one complete cycle preserves the same visible composition. It is not an animated trip back through the previous reviews. The six-second progress interval, disclosure, CMS subscriptions, original photography, typography and frosted surfaces remain.
+
+Native overflow remains available for touch and wheel input. CSS scroll snapping is disabled in loop mode so it cannot fight the controller or its equivalent-position rebase. No input event is prevented by the motion controller. Direct pointer, wheel and keyboard input cancels an in-flight step; settling a native swipe recentres its equivalent cycle, without recentering while a pointer remains held. Previous/Next wrap, Home/End target the first/last logical review. Keyboard focus pauses autoplay but does not cancel the keyboard step it requested.
+
+Reduced motion disables autoplay and makes manual moves instant. Hidden/offscreen/explicitly paused states cancel animation. Resizing and real review edits cancel pending work and remeasure; unchanged polling identities preserve the countdown. Empty, one-review and all-fit collections cannot rotate. Observers, animation frames, timers and listeners are removed on unmount. There is no new package, CMS write, storage change or Blob upload.
+
+Verification is recorded outside the repository under `testimonials-forward-release-2026-11-27`: controller tests exercise easing positions, two complete forward cycles, previous wrap, native interruption/release, reduced motion, suspension, resize/shrink and cleanup. Component tests retain controls, focus, progress, disclosure, CMS isolation and content/style coverage, and check hidden/inert clones plus the first keyboard step. Root integration owns the final build, responsive browser evidence, independent review and Render release. These source/unit checks alone do not establish physical-phone smoothness.

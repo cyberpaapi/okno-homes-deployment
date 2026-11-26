@@ -120,7 +120,7 @@ export default function CollectionEditor({ definition, items, onChange, onUpload
               {field.help && <p className={styles.help}>{field.help}</p>}
               {field.kind === "choice" ? <select id={controlId} value={value} disabled={locked} onChange={event => updateField(index, field.key, event.target.value)}>{field.options?.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}</select>
                 : field.kind === "json" ? <textarea id={controlId} value={value} disabled={locked} rows={3} spellCheck={false} onChange={event => updateField(index, field.key, event.target.value)} />
-                : field.kind === "text" && (field.key === "description" || field.key === "excerpt" || field.key === "summary") ? <textarea id={controlId} value={value} disabled={locked} rows={3} onChange={event => updateField(index, field.key, event.target.value)} />
+                : field.kind === "text" && (field.key === "description" || field.key === "excerpt" || field.key === "summary" || field.key === "quote") ? <textarea id={controlId} value={value} disabled={locked} rows={3} onChange={event => updateField(index, field.key, event.target.value)} />
                 : <input id={controlId} type={field.kind === "url" ? "url" : "text"} value={value} disabled={locked} onChange={event => updateField(index, field.key, event.target.value)} />}
               {(field.kind === "image" || field.kind === "video") && <div className={styles.mediaTools}>
                 {value && (field.kind === "image" ? <Image src={value} alt={`${field.label} preview`} width={180} height={112} unoptimized /> : <video src={value} controls muted preload="none" aria-label={`${field.label} preview`} />)}

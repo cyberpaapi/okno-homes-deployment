@@ -1,3 +1,7 @@
+# Release authority — 27 November 2026
+
+The latest owner instruction selects the authenticated `CodeAcc2007-dev` GitHub CLI account for this release, superseding the earlier request to use the `cyberpaapi` connector. The canonical repository remains `cyberpaapi/okno-homes-deployment`; the old CodeAcc2007-dev URL redirects there, and the selected CLI account has push access. Deploy the verified finishing candidate to the existing CodeAcc2007 Render Free review service. Do not add paid resources, enable passwordless admin, connect private storage or publish CMS data. Durable admin storage remains deferred; do not promise zero-cost durable editing or unlimited hosting. Preserve the accepted site and configurator.
+
 # Configurator authority —26November2026
 
 The owner explicitly lifted the configurator freeze for black backgrounds/floors, grounded houses, removal of landscape controls, per-house material assignments and INR prices with live totals, and mandatory 3D model linkage for added houses. See `docs/configurator-studio-2026-11-26.md`. Preserve accepted page changes and CMS data. The owner authorized pushing this work to the GitHub finishing branch linked to the existing Render review. This does not authorize paid resources, passwordless live admin or reuse of another owner's private storage. Live admin persistence still needs an owner-controlled durable store and configured credentials.

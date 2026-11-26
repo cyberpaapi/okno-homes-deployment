@@ -117,6 +117,27 @@ describe('ForestEntryOption', () => {
     expect(viewport(container).style.getPropertyValue('--end-opacity')).toBe('1.0000');
   });
 
+  it('keeps lower-page scrolling unlocked when the film recovers or fails after initial readiness', () => {
+    viewportWidth = 390;
+    const scroll = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    const view = render(<ForestEntryOption />);
+    act(() => motionState.onReady?.(true));
+    vi.spyOn(window, 'scrollY', 'get').mockReturnValue(8000);
+    scroll.mockClear();
+    act(() => { motionState.onReady?.(false); motionState.onLoadProgress?.(null); });
+    expect(document.documentElement.dataset.heroLoading).toBeUndefined();
+    for (const event of [new WheelEvent('wheel', { deltaY: 400, cancelable: true }), new Event('touchmove', { cancelable: true }), new KeyboardEvent('keydown', { key: 'PageDown', cancelable: true })]) {
+      fireEvent(window, event);
+      expect(event.defaultPrevented).toBe(false);
+    }
+    fireEvent.scroll(window);
+    expect(scroll).not.toHaveBeenCalled();
+    act(() => motionState.onReady?.(true));
+    act(() => motionState.onReady?.(false));
+    expect(document.documentElement.dataset.heroLoading).toBeUndefined();
+    view.unmount();
+  });
+
   it('keeps the current landing after the forest-entry sequence', () => {
     render(<ForestEntryOption />);
     const hero = screen.getByRole('region', { name: 'A journey from the forest into an OKNO home' });

@@ -28,8 +28,9 @@ import { parseProcessDayRange } from "@/lib/processDayRange";
 import SignatureModelPanel from "./SignatureModelPanel";
 import ConfiguratorPrices from './ConfiguratorPrices';
 import { pricingCollection } from '@/lib/configuratorPricing';
-import { PREVIEW_READY, PREVIEW_UPDATE } from "@/lib/sitePreview";
+import { PREVIEW_READY, PREVIEW_REQUEST, PREVIEW_UPDATE } from "@/lib/sitePreview";
 import { isTypographySizeField } from "@/lib/typography";
+import { initialTestimonialItems, testimonialCollectionId } from '@/lib/testimonialCollections';
 
 type Snapshot = { revision: number; draftRevision: number; published: Record<string, string>; draft: Record<string, string>; publishedCollections: ContentCollections; draftCollections: ContentCollections; history: { revision: number; publishedCollections: ContentCollections; publishedAt: string }[]; demoExpiresAt?: string };
 type View = "content" | "site";
@@ -53,6 +54,7 @@ function enquiryOptions(values: Record<string, string> = {}): ContentCollections
   ]));
 }
 const fallbackCollections: ContentCollections = {
+  [testimonialCollectionId]: initialTestimonialItems,
   "home.variants": homeVariantDefaults,
   "projects.globePins": initialGlobePinItems,
   "projects.records": initialProjectItems,
@@ -69,7 +71,13 @@ const legacyJournalItemIds = new Set([
   ...journalDefaultCollections()["journal.notes"].map(item => item.id),
 ]);
 function editableSections(page: ContentPage) {
-  const sections = page.sections.filter(section => page.id === "journal" ? !legacyJournalItemIds.has(section.id) && !section.id.startsWith("post-") : page.id === "projects" ? section.id === "project-library" || !section.id.startsWith("project-") : page.id === "signature" ? !section.id.includes("-plan-") : true);
+  const sections = page.sections.filter(section => page.id === "journal" ? !legacyJournalItemIds.has(section.id) && !section.id.startsWith("post-") : page.id === "projects" ? section.id === "project-library" || !section.id.startsWith("project-") : true)
+    .map(section => page.id === 'signature' && section.id.includes('-plan-') ? {
+      ...section, fields: [],
+      // The plan specification consumes these roles; no display/body-size or
+      // highlight control is offered without a matching public consumer.
+      typography: section.typography?.filter(field => ['body-font', 'heading-font', 'heading-size', 'heading-mobile-size', 'subheading-size', 'subheading-mobile-size', 'caption-size', 'caption-mobile-size'].includes(field.id.split('.').at(-1)!)),
+    } : section);
   // V1 has one editing source, shared with the published-home opening selector.
   // Historical scalar fields remain readable when the collection has not been saved.
   if (page.id === "hero-v1") return sections.filter(section => section.id !== 'opening');
@@ -283,6 +291,10 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
   const sendPreview = useCallback(() => {
     if (siteOrigin) previewRef.current?.contentWindow?.postMessage({ type: PREVIEW_UPDATE, values: previewValues, collections: previewCollections }, siteOrigin);
   }, [previewValues, previewCollections, siteOrigin]);
+  const requestPreview = useCallback(() => {
+    if (siteOrigin) previewRef.current?.contentWindow?.postMessage({ type: PREVIEW_REQUEST }, siteOrigin);
+    sendPreview();
+  }, [sendPreview, siteOrigin]);
   useEffect(() => { sendPreview(); }, [sendPreview, view, selectedId]);
   useEffect(() => {
     const ready = (event: MessageEvent) => {
@@ -435,6 +447,7 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
 
   function collectionsAfter(sectionId: string) {
     const definitions = collectionDefinitionsForPage(page.id);
+    if (page.id === 'testimonials') return sectionId === 'reviews' ? definitions : [];
     if (page.id === "projects") return definitions.filter(definition => sectionId === "globe-pins" ? definition.id === "projects.globePins" : sectionId === "project-library" ? definition.id === "projects.records" : false);
     if (page.id === "hospitality" && sectionId === "projects") return definitions;
     if (page.id === "journal") {
@@ -596,8 +609,8 @@ export default function AdminStudio({ passwordless = false }: { passwordless?: b
           {page.id === "signature" ? signaturePanels() : visibleSections.map((section,index) => sectionPanel(section,index))}
           {!visibleSections.length && !collectionDefinitionsForPage(page.id).length && <p className={styles.unmapped}>Choose one of the Home variants in the left panel.</p>}
         </div>
-        <aside className={styles.previewColumn} aria-label="Page position preview"><div className={styles.previewTop}><div><strong>On the website</strong><span>Draft preview · {selectedCustomVariant ? `${page.href} opening` : page.href}</span></div><a href={pageUrl} target="_blank" rel="noopener noreferrer"><ExternalLink size={16} aria-hidden="true" /><span className={styles.srOnly}>Open full page</span></a></div><iframe ref={previewRef} key={`${page.id}:${previewAttempt}`} title={`${page.label} draft preview`} src={siteOrigin ? previewPageUrl : undefined} loading="eager" allow="autoplay; fullscreen" onLoad={sendPreview} onError={() => setPreviewState({ id: previewIdentity, status: "slow" })} /></aside>
-      </div> : <div id="admin-site-panel" aria-labelledby="admin-site-tab" className={styles.fullPreview} role="tabpanel"><iframe ref={previewRef} key={`${page.id}:${previewAttempt}`} title={`${page.label} draft site preview`} src={siteOrigin ? previewPageUrl : undefined} loading="eager" allow="autoplay; fullscreen" onLoad={sendPreview} onError={() => setPreviewState({ id: previewIdentity, status: "slow" })} /></div>}
+        <aside className={styles.previewColumn} aria-label="Page position preview"><div className={styles.previewTop}><div><strong>On the website</strong><span>Draft preview · {selectedCustomVariant ? `${page.href} opening` : page.href}</span></div><a href={pageUrl} target="_blank" rel="noopener noreferrer"><ExternalLink size={16} aria-hidden="true" /><span className={styles.srOnly}>Open full page</span></a></div><iframe ref={previewRef} key={`${page.id}:${previewAttempt}`} title={`${page.label} draft preview`} src={siteOrigin ? previewPageUrl : undefined} loading="eager" allow="autoplay; fullscreen" onLoad={requestPreview} onError={() => setPreviewState({ id: previewIdentity, status: "slow" })} /></aside>
+      </div> : <div id="admin-site-panel" aria-labelledby="admin-site-tab" className={styles.fullPreview} role="tabpanel"><iframe ref={previewRef} key={`${page.id}:${previewAttempt}`} title={`${page.label} draft site preview`} src={siteOrigin ? previewPageUrl : undefined} loading="eager" allow="autoplay; fullscreen" onLoad={requestPreview} onError={() => setPreviewState({ id: previewIdentity, status: "slow" })} /></div>}
     </main>
   </div>;
 }

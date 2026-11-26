@@ -53,8 +53,8 @@ describe('V2 lossless scroll-only delivery', () => {
       return local + size <= parts[part].length ? parts[part].subarray(local, local + size) : Buffer.concat([parts[part].subarray(local), parts[part + 1].subarray(0, size - (parts[part].length - local))]);
     };
     film.frames.forEach((entry, i) => { expect(entry[2]).toBe(i); expect(frame(i).subarray(8, 12).toString()).toBe('WEBP'); });
-    expect(frame(0)).toEqual(readFileSync('public' + film.first));
-    expect(frame(790)).toEqual(readFileSync('public' + film.last));
+    expect(frame(0).equals(readFileSync('public' + film.first))).toBe(true);
+    expect(frame(790).equals(readFileSync('public' + film.last))).toBe(true);
   });
   it('coalesces rapid input, reverses, holds at idle, and releases bounded caches', async () => {
     const mocks = setup(), canvas = document.createElement('canvas'), abort = new AbortController();

@@ -29,6 +29,37 @@ afterEach(async () => {
 });
 
 describe("collection content store", () => {
+  it('keeps review and disclosure drafts private, publishes them together and preserves an explicit empty collection', async () => {
+    const store = await import('./siteContentStore');
+    const rows = [{ id: 'approved-review', fields: { quote: 'Our approved fixture quote.', name: 'Fixture owner', locationLine1: 'Town', locationLine2: 'District', image: '/photo.webp', imageAlt: 'Fixture home' } }];
+    const draft = await store.saveCollectionDraft('testimonials.reviews', rows, 0, 0);
+    const choice = await store.saveDraft('testimonials.disclosure.visibility', 'hidden', 0, draft.draftRevision);
+    const copy = await store.saveDraft('testimonials.heading', 'Customer stories', 0, choice.draftRevision);
+    expect(copy.publishedCollections['testimonials.reviews']).toBeUndefined();
+    expect(copy.published['testimonials.disclosure.visibility']).toBeUndefined();
+    const published = await store.publishDraft(0, copy.draftRevision);
+    expect(published.publishedCollections['testimonials.reviews']).toEqual(rows);
+    expect(published.published).toMatchObject({ 'testimonials.heading': 'Customer stories', 'testimonials.disclosure.visibility': 'hidden' });
+    const empty = await store.saveCollectionDraft('testimonials.reviews', [], published.revision, published.draftRevision);
+    expect(empty.publishedCollections['testimonials.reviews']).toEqual(rows);
+    const removed = await store.publishDraft(empty.revision, empty.draftRevision);
+    expect(Object.hasOwn(removed.publishedCollections, 'testimonials.reviews')).toBe(true);
+    expect(removed.publishedCollections['testimonials.reviews']).toEqual([]);
+  });
+  it.each(['quote', 'name', 'locationLine1', 'locationLine2', 'image', 'imageAlt'])('allows an incomplete %s draft but rejects its publication', async key => {
+    const store = await import('./siteContentStore');
+    const fields = { quote: 'Fixture quote', name: 'Fixture owner', locationLine1: 'Town', locationLine2: 'District', image: '/photo.webp', imageAlt: 'Fixture home', [key]: '' };
+    const draft = await store.saveCollectionDraft('testimonials.reviews', [{ id: 'review', fields }], 0, 0);
+    await expect(store.publishDraft(0, draft.draftRevision)).rejects.toThrow(/required to publish/);
+    expect((await store.readContent()).publishedCollections['testimonials.reviews']).toBeUndefined();
+  });
+  it('rejects duplicate review IDs, missing or unsafe media and invalid disclosure choices', async () => {
+    const store = await import('./siteContentStore');
+    const row = { id: 'review', fields: { image: '/photo.webp' } };
+    await expect(store.saveCollectionDraft('testimonials.reviews', [row, row], 0, 0)).rejects.toThrow(/unique stable ID/);
+    for (const image of ['/missing.webp', 'https://example.com/photo.webp', '/assets/../private.webp']) await expect(store.saveCollectionDraft('testimonials.reviews', [{ ...row, fields: { image } }], 0, 0)).rejects.toThrow();
+    await expect(store.saveDraft('testimonials.disclosure.visibility', 'sometimes', 0, 0)).rejects.toThrow(/listed options/);
+  });
   it('publishes house-specific INR rates and rejects invalid amounts or finish assignments', async () => {
     const store = await import('./siteContentStore');
     const rows = [{ id: 'forza', fields: { base: '1850000', 'external-wall.golden-oak': '12500', 'external-wall.titanium-veil': '0' } }];

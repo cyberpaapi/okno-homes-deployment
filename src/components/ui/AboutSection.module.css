@@ -242,7 +242,7 @@
   .heroTitle { font-size: var(--type-size-display, var(--okno-hero)); text-shadow: none;  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
   .heroMedia { width: 100%; }
   .manifesto { padding: 4rem 1.25rem 2rem; }
-  .manifesto p { font-size: var(--type-size-display, var(--okno-intro)); text-align: left;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
+  .manifesto p { font-size: var(--type-size-display, var(--okno-intro)); text-align: center;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
   .chapter { padding: 3.25rem 1.25rem; }
   .fit { padding-bottom: 2rem; }
   .heading { font-size: var(--type-size-display, var(--okno-section));  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}

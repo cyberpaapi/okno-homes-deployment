@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import { previewImageLoader } from '@/lib/thumbnailImageLoader';
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
-import { useRef } from 'react';
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
+import { useEffect, useRef, type CSSProperties } from 'react';
 import styles from './ProcessDetailTimeline.module.css';
 import { useSiteContent, useSiteContentMap } from '@/lib/useSiteContent';
 import { processDetailPhases } from '@/data/processDetailPhases';
@@ -11,6 +11,16 @@ import { resolveProcessDayRange } from '@/lib/processDayRange';
 import useProcessScrollGuard from './useProcessScrollGuard';
 import ProcessPhaseProgress from './ProcessPhaseProgress';
 import { useMediaQuery } from '@/lib/useMediaQuery';
+
+// The original 500svh range selects the final phase after 350svh of travel.
+// Retain those phase positions, then allow 12svh before releasing the stage.
+const PHONE_TIMELINE_SVH = 100 + 350 + 12;
+
+export function phoneTimelineTravelRatio(height: number, viewport: number) {
+  const travel = height - viewport;
+  const originalTravel = height * 500 / PHONE_TIMELINE_SVH - viewport;
+  return travel > 0 && originalTravel > 0 ? travel / originalTravel : 1;
+}
 
 // Keep editable titles intact while giving every phone phase the same two-line
 // rhythm. Split at the word boundary nearest the middle, never shrink one title.
@@ -71,13 +81,35 @@ export default function ProcessDetailTimeline() {
   const phone = useMediaQuery('(max-width: 700px)');
   const timelineRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
+  const shortViewport = useMediaQuery('(max-height: 620px)');
+  const travelRatio = useMotionValue(1);
+  useEffect(() => {
+    const timeline = timelineRef.current;
+    if (!phone || reducedMotion || shortViewport || !timeline) {
+      travelRatio.set(1);
+      return;
+    }
+    // svh can differ from the current viewport when browser chrome collapses.
+    // Measure only on layout/viewport changes, never during a scroll update.
+    const measure = () => travelRatio.set(phoneTimelineTravelRatio(
+      timeline.offsetHeight, document.documentElement.clientHeight,
+    ));
+    measure();
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(measure);
+    observer?.observe(timeline);
+    window.addEventListener('resize', measure);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [phone, reducedMotion, shortViewport, travelRatio]);
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ['start start', 'end end'],
   });
   // Settle on a complete phase instead of leaving one phase's photo beside
   // the next phase's text. Day/copy/image continue to travel as one article.
-  const phaseProgress = useTransform(scrollYProgress, value => Math.round(value * 4) / 4);
+  const phaseProgress = useTransform(() => Math.round(scrollYProgress.get() * travelRatio.get() * 4) / 4);
   const smoothProgress = useSpring(phaseProgress, { stiffness: phone ? 85 : 120, damping: phone ? 24 : 26, mass: .8 });
   const trackX = useTransform(smoothProgress, [0, 1], ['0%', '-80%']);
   useProcessScrollGuard(timelineRef, smoothProgress, 'timeline', !reducedMotion);
@@ -90,7 +122,8 @@ export default function ProcessDetailTimeline() {
   return (
     <section className={styles.section} aria-labelledby={phone ? "process-detail-mobile-title" : "process-detail-title"}>
       {introduction(false)}
-      <div className={styles.timeline} ref={timelineRef} data-process-detail-timeline>
+      <div className={styles.timeline} ref={timelineRef} data-process-detail-timeline
+        style={{ '--process-phone-timeline-height': `${PHONE_TIMELINE_SVH}svh` } as CSSProperties}>
         <div className={styles.stage}>
           {introduction(true)}
           <div className={styles.trackViewport}><motion.div className={styles.track} style={{ x: reducedMotion ? '0%' : trackX }}>

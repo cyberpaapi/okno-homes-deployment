@@ -41,7 +41,7 @@ describe("supplied cabin customer controls", () => {
     fireEvent.click(screen.getByRole("button", { name: "Golden hour" }));
     expect(scene.view).toHaveBeenCalledWith("inside");
     expect(scene.light).toHaveBeenCalledWith("golden");
-    for (const name of ['Forest', 'Meadow', 'Hill', 'Island', 'Full island']) expect(screen.queryByRole('button', { name, exact: true })).not.toBeInTheDocument();
+    for (const name of ['Forest', 'Meadow', 'Hill', 'Island', 'Full island']) expect(screen.queryByRole('button', { name })).not.toBeInTheDocument();
     expect(scene.background).not.toHaveBeenCalled();
     expect(screen.queryByRole("button", { name: "Import model" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Back to models" })).toHaveAttribute("href", "/models/signature");

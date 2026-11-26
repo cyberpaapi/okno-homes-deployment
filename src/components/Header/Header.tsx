@@ -44,12 +44,12 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
   useEffect(() => {
     const measure = () => {
       setViewport({ width: window.innerWidth, height: window.innerHeight });
-      if (window.innerWidth > 1120 && !compactForCopy) setOpen(false);
+      if (window.innerWidth > (publicSite ? 1360 : 1120) && !compactForCopy) setOpen(false);
     };
     measure();
     window.addEventListener("resize", measure, { passive: true });
     return () => window.removeEventListener("resize", measure);
-  }, [compactForCopy]);
+  }, [compactForCopy, publicSite]);
 
   useEffect(() => {
     if (!open) return;
@@ -162,7 +162,12 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", enquir
   const publicSite = !/^\/models\/signature\/[^/]+\/configure(?:\/|$)/.test(pathname ?? "");
   const activePath = currentHref ?? pathname ?? "/";
   const resolvedTone = tone ?? (variant === "glass" ? "light" : "dark");
-  const navigation = siteNavigationItems.map(item => ({ ...item, label: get(`nav.${item.href.slice(1)}`, item.label) }));
+  // Testimonials is a public page; keep the existing customer configurator's
+  // navigation contract unchanged.
+  const navigationItems = publicSite
+    ? [...siteNavigationItems, { href: "/testimonials", label: "Testimonials" }]
+    : siteNavigationItems;
+  const navigation = navigationItems.map(item => ({ ...item, label: get(`nav.${item.href.slice(1)}`, item.label) }));
   const enquireLabel = enquiryLabel ?? get("action.enquire", "Enquire");
   // The phone menu keeps one-word destinations; a page-specific label such as
   // "Enquire about Forza" stays on the desktop button, and both link to the same enquiry.
