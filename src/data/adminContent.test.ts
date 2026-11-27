@@ -1,4 +1,7 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
 import { adminPages, allContentFields } from "./adminContent";
 import { siteNavigationItems } from "./siteNavigation";
 import projectMedia from "./realProjectMedia.json";
@@ -6,6 +9,12 @@ import { pressEntries } from "@/components/journal/journalData";
 import { gazePrototype, oknoModels } from "./models";
 import { PROCESS_DAY_RANGES } from "@/lib/processChapters";
 import { processDetailPhases } from "./processDetailPhases";
+
+// This compatibility fixture must never use a configured hosted store.
+vi.mock('@/lib/cloudStorage', async importOriginal => ({
+  ...await importOriginal<typeof import('@/lib/cloudStorage')>(),
+  cloudStorageEnabled: () => false,
+}));
 
 describe("admin page hierarchy", () => {
   it("follows the public navigation order with Home first and Enquiry after", () => {
@@ -105,14 +114,34 @@ describe("admin page hierarchy", () => {
     expect(journal.sections.find(section => section.id === "article-reader")?.fields.map(field => field.id)).toContain("journal.article.on-page-label");
   });
 
-  it("exposes the current-page image descriptions, credit and approved About icon choices", () => {
+  it("exposes the current-page image descriptions and approved About icon choices", () => {
     const fields = new Map(allContentFields().map(field => [field.id, field]));
     expect(fields.get("models.bespoke.portal.image-alt")?.kind).toBe("text");
-    expect(fields.get("sustainability.proof.final-credit")?.defaultValue).toBe("Photography · Inclined Studio");
     expect(fields.get("projects.detail.return")?.defaultValue).toBe("All places");
     for (const id of ["sustainability", "move-in", "warranty", "energy", "resilience"]) {
       expect(fields.get(`about.assurances.${id}-icon`)?.options?.map(option => option.value))
         .toEqual(["badge", "calendar", "shield", "bulb", "home"]);
+    }
+  });
+
+  it('retains a legacy Sustainability credit in validated draft, published and history reads', async () => {
+    const fixtureRoot = await mkdtemp(path.join(tmpdir(), 'okno-retired-credit-'));
+    const id = 'sustainability.proof.final-credit';
+    const legacy = { [id]: 'Approved legacy photographer' };
+    const fixture = { revision: 3, draftRevision: 4, published: legacy, draft: { [id]: 'Private legacy credit' }, publishedCollections: {}, draftCollections: {}, history: [{ revision: 2, published: legacy, publishedCollections: {}, publishedAt: '2026-11-26T00:00:00.000Z' }] };
+    const cwd = vi.spyOn(process, 'cwd').mockReturnValue(fixtureRoot);
+    try {
+      await mkdir(path.join(fixtureRoot, '.okno-content'));
+      await writeFile(path.join(fixtureRoot, '.okno-content', 'content.json'), JSON.stringify(fixture));
+      const store = await import('@/lib/siteContentStore');
+      expect(store.validateContentValue(id, legacy[id])).toBeNull();
+      for (const scope of ['opening', 'enquiry']) for (const size of ['caption-size', 'caption-mobile-size']) {
+        expect(store.validateContentValue(`typography.section.hospitality.${scope}.${size}`, '18')).toBeNull();
+      }
+      expect(await store.readContent()).toEqual(fixture);
+    } finally {
+      cwd.mockRestore();
+      await rm(fixtureRoot, { recursive: true, force: true });
     }
   });
 

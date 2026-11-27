@@ -123,6 +123,7 @@ export default function SustainabilityJourney() {
     let mobileFogWarmed = false;
     let mobileFogWanted = false;
     let mobileFogPlaying = false;
+    let mobileFogPresented = false;
     let fogPlayPending: Promise<void> | null = null;
     let fogPlayGeneration = 0;
     let fogPendingGeneration = 0;
@@ -233,6 +234,7 @@ export default function SustainabilityJourney() {
       if (disposed || generation !== fogPlayGeneration || !mobileFogWanted || !canAnimate() ||
         !fogHasFrame() || fogVideo?.paused) return;
       mobileFogPlaying = true;
+      mobileFogPresented = true;
       if (fogDebug && fogDebug.playingAt === null) fogDebug.playingAt = performance.now();
       publishFogDebug();
       requestUpdate();
@@ -272,6 +274,7 @@ export default function SustainabilityJourney() {
             if (fogDebug) fogDebug.resets++;
           }
           fogStartedRef.current = false;
+          mobileFogPresented = false;
         }
         publishFogDebug();
         return;
@@ -370,10 +373,13 @@ export default function SustainabilityJourney() {
         // Phone fog begins at the actual scroll endpoint, never while the
         // portrait camera is still moving toward its final composition.
         const journeyOut = phoneMedia
-          ? mobileEndpointReady && mobileFogPlaying && fogHasFrame() ? 1 - range(progress, 0.785, 0.85) : 1
+          // Keep the actual endpoint opaque beneath the incoming fog. Fading
+          // both layers exposes the unrelated opening poster between them.
+          ? 1
           : 1 - range(progress, 0.755, 0.845);
         const fogOpacity = phoneMedia
-          ? mobileEndpointReady && mobileFogPlaying && fogHasFrame() ? range(progress, 0.785, 0.85) : 0
+          // A buffering loop retains its last decoded frame and composition.
+          ? mobileEndpointReady && mobileFogPresented ? range(progress, 0.785, 0.85) : 0
           : range(progress, 0.765, 0.85);
 
         viewport.style.setProperty("--idle-opacity", idleOpacity.toFixed(4));

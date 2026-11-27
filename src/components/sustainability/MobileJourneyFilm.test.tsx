@@ -37,7 +37,7 @@ describe("phone original-frame renderer", () => {
     act(() => { ref.current!.setTime(4); });
     await waitFor(() => expect(indexed.create).toHaveBeenCalledOnce());
     expect(local.setTime).toHaveBeenLastCalledWith(4);
-    expect(indexed.create.mock.calls[0][7]).toEqual({ cacheLimit: 24, boundedPresentation: true, preserveFrame: true, reverseKeyframesFirst: true });
+    expect(indexed.create.mock.calls[0][7]).toEqual({ cacheLimit: 24, boundedPresentation: true, preserveFrame: true, reverseKeyframesFirst: true, independentRanges: true });
     expect(view.container.querySelector("video")).toBeNull();
     expect(presented).not.toHaveBeenCalled();
     act(() => { draw(3.9667); });
@@ -73,13 +73,44 @@ describe("phone original-frame renderer", () => {
     act(() => { native.dispatchEvent(new Event("loadeddata")); });
     act(() => { const pending = [...callbacks.values()]; callbacks.clear(); pending.forEach(callback => callback(performance.now())); });
     act(() => { native.dispatchEvent(new Event("seeked")); });
-    expect(native.style.visibility).toBe("visible");
-    expect(canvas.style.visibility).toBe("hidden");
+    expect(native.style.visibility).toBe("hidden");
+    expect(canvas.style.visibility).toBe("visible");
+    // While another native seek is incomplete, the preceding canvas remains
+    // the presented image rather than exposing the video's transient state.
+    Object.defineProperty(native, "seeking", { configurable: true, value: true });
+    act(() => { ref.current!.setTime(2); native.dispatchEvent(new Event("seeked")); });
+    expect(canvas.style.visibility).toBe("visible");
+    expect(presented).toHaveBeenLastCalledWith(4 + 0.25 / mobileMedia.frameRate);
     act(() => { ref.current!.setActive(false); });
     expect(canvas.style.visibility).toBe("visible");
     act(() => { ref.current!.setActive(true); });
     expect(view.container.querySelector("video")!.style.visibility).toBe("hidden");
     expect(canvas.style.visibility).toBe("visible");
+  });
+
+  it("retains the preceding composition when native copying fails and coalesces to the newest target", async () => {
+    const ref = createRef<MobileJourneyHandle>();
+    const presented = vi.fn();
+    const copy = vi.fn();
+    vi.mocked(HTMLCanvasElement.prototype.getContext).mockImplementation((() => ({ drawImage: copy })) as unknown as typeof HTMLCanvasElement.prototype.getContext);
+    const view = render(<MobileJourneyFilm ref={ref} className="film" onPresent={presented} />);
+    await waitFor(() => expect(indexed.create).toHaveBeenCalledOnce());
+    act(() => { ref.current!.setTime(4); draw(4); fail(); });
+    const canvas = view.container.querySelector("canvas")!;
+    const native = view.container.querySelector("video")!;
+    Object.defineProperty(native, "readyState", { configurable: true, value: 2 });
+    act(() => { native.dispatchEvent(new Event("loadeddata")); });
+    act(() => { const pending = [...callbacks.values()]; callbacks.clear(); pending.forEach(callback => callback(performance.now())); });
+    act(() => { ref.current!.setTime(3); ref.current!.setTime(2); native.dispatchEvent(new Event("seeked")); });
+    expect(presented).toHaveBeenLastCalledWith(4);
+    act(() => { const pending = [...callbacks.values()]; callbacks.clear(); pending.forEach(callback => callback(performance.now())); });
+    copy.mockImplementationOnce(() => { throw new Error("frame unavailable"); });
+    act(() => { native.dispatchEvent(new Event("seeked")); });
+    expect(presented).toHaveBeenLastCalledWith(4);
+    expect(canvas.style.visibility).toBe("visible");
+    expect(native.style.visibility).toBe("hidden");
+    act(() => { native.dispatchEvent(new Event("loadeddata")); });
+    expect(presented).toHaveBeenLastCalledWith(2 + 0.25 / mobileMedia.frameRate);
   });
 
   it("uses native fallback without starting an indexed decoder when WebCodecs is absent", () => {

@@ -27,6 +27,7 @@ import useProcessScrollGuard from "./useProcessScrollGuard";
 import { PROCESS_DAY_RANGES } from "@/lib/processChapters";
 import { useHeroLoadingLock } from "@/lib/useHeroLoadingLock";
 import FilmLoadingStatus from "@/components/landing-options/FilmLoadingStatus";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 type Stage = ProcessTimelineItem & {
   days: string;
@@ -177,6 +178,7 @@ function ReducedProcess() {
 }
 
 function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean) => void }) {
+  const phone = useMediaQuery('(max-width: 700px)');
   const currentStages = useProcessStages();
   const timelineItems = currentStages.map(({ id, days, label, title, poster }) => ({ id, days, label, title, poster }));
   const opening = useProcessOpening();
@@ -228,7 +230,9 @@ function AnimatedProcess({ onFilmCovering }: { onFilmCovering: (covered: boolean
           <p className={styles.heroLabel}>{opening.eyebrow}</p>
           <div id="process-title"><ProcessTextReveal text={opening.title} /></div>
           <p className={styles.heroSummary}>{opening.summary}</p>
-          <div className={styles.scrollCue}>{masterFilmReady ? <><span aria-hidden="true" />{opening.cue}</> : <FilmLoadingStatus ready={false} progress={loading} retry={() => { setLoading(0); setAttempt(value => value + 1); }} />}</div>
+          {/* Shorten only the original phone cue; custom CMS copy and the
+              desktop/editor default remain verbatim. */}
+          <div className={styles.scrollCue}>{masterFilmReady ? <><span aria-hidden="true" />{phone && opening.cue === "Scroll to enter the build" ? "Scroll to enter" : opening.cue}</> : <FilmLoadingStatus ready={false} progress={loading} retry={() => { setLoading(0); setAttempt(value => value + 1); }} />}</div>
         </div>
 
         <div className={styles.mediaFrame}>

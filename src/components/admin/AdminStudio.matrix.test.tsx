@@ -34,6 +34,8 @@ function excludedReason(page: ContentPage, section: ContentSection, field: Conte
   if (page.id === 'hero-v1' && section.id === 'opening') return 'V1 opening has one editing source in the home.variants collection.';
   if (page.id === 'journal' && (legacyJournalIds.has(section.id) || section.id.startsWith('post-'))) return 'Legacy story scalars are replaced by the ordered Journal collections.';
   if (page.id === 'projects' && section.id.startsWith('project-') && section.id !== 'project-library') return 'Legacy Project scalars are replaced by projects.records.';
+  if (page.id === 'sustainability' && field.id === 'sustainability.proof.final-credit') return 'Removed public photography credit; legacy scalar remains readable but has no editable public consumer.';
+  if (page.id === 'hospitality' && ['opening', 'enquiry'].includes(section.id) && typography && ['caption-size', 'caption-mobile-size'].includes(field.id.split('.').at(-1)!)) return 'Consultation buttons use the owner-fixed 14px size; other text in these sections does not consume caption sizes.';
   if (page.id === 'footer' && footerLinkSections.has(section.id) && !typography && !field.id.endsWith('.heading')) return 'Footer link scalars are replaced by ordered footer.links collections.';
   if (page.id === 'signature' && section.id.includes('-plan-')) {
     if (!typography) return 'Plan content is edited once through model-owned signature.plans controls.';
@@ -89,6 +91,31 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks(); });
 
 describe('admin matrix registry boundaries', () => {
+  it.each([
+    { pageId: 'hospitality', prefix: 'hospitality.opening', label: 'Consultation', href: '/enquiry?intent=hospitality' },
+    { pageId: 'hospitality', prefix: 'hospitality.closing', label: 'Consultation', href: '/enquiry?intent=hospitality' },
+    { pageId: 'sustainability', prefix: 'sustainability.ending', label: 'Enquire', href: '/enquiry' },
+  ])('previews unsaved $prefix action and destination through the accessible controls without CMS requests', ({ pageId, prefix, label, href }) => {
+    const { container } = render(<AdminStudio />);
+    selectPage(container, registeredPages.find(page => page.id === pageId)!);
+    const action = container.querySelector<HTMLTextAreaElement>(`[id="${prefix}.action"]`)!;
+    const destination = container.querySelector<HTMLTextAreaElement>(`[id="${prefix}.action-href"]`)!;
+    expect(action).toHaveAccessibleName(/button/i);
+    expect(destination).toHaveAccessibleName(/destination/i);
+    expect(action.value).toBe(label);
+    expect(destination.value).toBe(href);
+    const frame = container.querySelector('iframe')!;
+    const preview = vi.spyOn(frame.contentWindow!, 'postMessage');
+    const draftHref = `${href}${href.includes('?') ? '&' : '?'}source=draft`;
+    fireEvent.change(action, { target: { value: 'Draft enquiry' } });
+    fireEvent.change(destination, { target: { value: draftHref } });
+    expect(preview).toHaveBeenLastCalledWith(expect.objectContaining({
+      type: PREVIEW_UPDATE,
+      values: expect.objectContaining({ [`${prefix}.action`]: 'Draft enquiry', [`${prefix}.action-href`]: draftHref }),
+    }), new URL(frame.src).origin);
+    expect(globalThis.fetch).not.toHaveBeenCalled();
+  });
+
   it('sends the unsaved Hospitality palette through the existing draft preview without a CMS request', () => {
     const { container } = render(<AdminStudio />);
     selectPage(container, registeredPages.find(page => page.id === 'hospitality')!);

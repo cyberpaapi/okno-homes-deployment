@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useCallback, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
@@ -221,7 +220,7 @@ export default function TestimonialsExperience({ initialItems = initialTestimoni
             <p data-type-field={"testimonials.closing.body"}>{get('closing.body', testimonialPageDefaults.closingBody)}</p>
             <div className={styles.closeLinks}>
               <SubtleLink className={styles.enquire} href="/enquiry" distance={0} data-type-field={"testimonials.closing.enquiry-label"}>{get('closing.enquiry-label', testimonialPageDefaults.enquiryLabel)}</SubtleLink>
-              <Link className={styles.models} href="/models" data-type-field={"testimonials.closing.models-label"}>{get('closing.models-label', testimonialPageDefaults.modelsLabel)}</Link>
+              <SubtleLink className={styles.models} href="/models" distance={0} data-type-field={"testimonials.closing.models-label"}>{get('closing.models-label', testimonialPageDefaults.modelsLabel)}</SubtleLink>
             </div>
           </div>
         </section>

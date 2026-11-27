@@ -12,14 +12,19 @@ import useProcessScrollGuard from './useProcessScrollGuard';
 import ProcessPhaseProgress from './ProcessPhaseProgress';
 import { useMediaQuery } from '@/lib/useMediaQuery';
 
-// The original 500svh range selects the final phase after 350svh of travel.
-// Retain those phase positions, then allow 12svh before releasing the stage.
+// The phone story completes after 350svh, with a short 12svh reading pause
+// before the complete panel and rail leave together for the footer.
 const PHONE_TIMELINE_SVH = 100 + 350 + 12;
 
-export function phoneTimelineTravelRatio(height: number, viewport: number) {
+export function phoneTimelineTravelRatio(height: number, viewport: number, stageHeight = viewport) {
   const travel = height - viewport;
-  const originalTravel = height * 500 / PHONE_TIMELINE_SVH - viewport;
-  return travel > 0 && originalTravel > 0 ? travel / originalTravel : 1;
+  const finalDwell = height * 12 / PHONE_TIMELINE_SVH;
+  const activeTravel = height - stageHeight - finalDwell;
+  return travel > 0 && activeTravel > 0 ? travel / activeTravel : 1;
+}
+
+export function phoneTimelineProgress(progress: number, travelRatio: number) {
+  return Math.min(1, Math.max(0, progress * travelRatio));
 }
 
 // Keep editable titles intact while giving every phone phase the same two-line
@@ -93,10 +98,12 @@ export default function ProcessDetailTimeline() {
     // Measure only on layout/viewport changes, never during a scroll update.
     const measure = () => travelRatio.set(phoneTimelineTravelRatio(
       timeline.offsetHeight, document.documentElement.clientHeight,
+      timeline.firstElementChild instanceof HTMLElement ? timeline.firstElementChild.offsetHeight : undefined,
     ));
     measure();
     const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(measure);
     observer?.observe(timeline);
+    if (timeline.firstElementChild) observer?.observe(timeline.firstElementChild);
     window.addEventListener('resize', measure);
     return () => {
       observer?.disconnect();
@@ -107,12 +114,15 @@ export default function ProcessDetailTimeline() {
     target: timelineRef,
     offset: ['start start', 'end end'],
   });
-  // Settle on a complete phase instead of leaving one phase's photo beside
-  // the next phase's text. Day/copy/image continue to travel as one article.
-  const phaseProgress = useTransform(() => Math.round(scrollYProgress.get() * travelRatio.get() * 4) / 4);
-  const smoothProgress = useSpring(phaseProgress, { stiffness: phone ? 85 : 120, damping: phone ? 24 : 26, mass: .8 });
-  const trackX = useTransform(smoothProgress, [0, 1], ['0%', '-80%']);
-  useProcessScrollGuard(timelineRef, smoothProgress, 'timeline', !reducedMotion);
+  // Phone photo, copy and rail follow the current document position together.
+  // Do not wait for a rounded phase threshold, then play a second spring tail.
+  // Desktop keeps its accepted complete-phase composition and spring response.
+  const phaseProgress = useTransform(scrollYProgress, value => Math.round(value * 4) / 4);
+  const smoothProgress = useSpring(phaseProgress, { stiffness: 120, damping: 26, mass: .8 });
+  const phoneProgress = useTransform(() => phoneTimelineProgress(scrollYProgress.get(), travelRatio.get()));
+  const presentedProgress = phone ? phoneProgress : smoothProgress;
+  const trackX = useTransform(presentedProgress, [0, 1], ['0%', '-80%']);
+  useProcessScrollGuard(timelineRef, presentedProgress, 'timeline', !reducedMotion);
 
   const introduction = (mobile: boolean) => <header className={`${styles.intro} ${mobile ? styles.mobileIntro : styles.desktopIntro}`} aria-hidden={mobile ? !phone : phone} data-type-section="process.details">
     <p data-type-field="process.details.eyebrow">{eyebrow}</p>
@@ -130,7 +140,7 @@ export default function ProcessDetailTimeline() {
             {currentPhases.map((phase, index) => <Phase key={index} phase={phase} index={index}
               phone={phone} reducedMotion={Boolean(reducedMotion)} />)}
           </motion.div></div>
-          <ProcessPhaseProgress phases={currentPhases} progress={smoothProgress} />
+          <ProcessPhaseProgress phases={currentPhases} progress={presentedProgress} />
         </div>
       </div>
     </section>

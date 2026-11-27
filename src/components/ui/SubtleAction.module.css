@@ -48,6 +48,14 @@
   justify-content: center;
   line-height: 1;
 }
+/* Public actions share the Models reading face. Keep each section's genuine
+   numeric size controls and the protected configurator's typography intact. */
+.action:not(:global([data-configurator] *)),
+.action:not(:global([data-configurator] *)) .label {
+  font-family: "Manrope OKNO", Arial, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+}
 .dot {
   position: relative;
   z-index: 1;

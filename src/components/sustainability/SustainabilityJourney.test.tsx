@@ -311,6 +311,28 @@ describe("Sustainability scroll movie", () => {
     expect(viewport.style.getPropertyValue("--fog-opacity")).toBe("1.0000");
   });
 
+  it("keeps opaque endpoint coverage under the whole fog crossfade and retains it while buffering", async () => {
+    const { container, viewport, scrollTo } = setupJourney();
+    const fog = container.querySelectorAll("video")[1];
+    for (const progress of [0.785, 0.8, 0.8175, 0.835, 0.85, 0.9, 0.835, 0.8]) {
+      scrollTo(progress);
+      await settlePlayback();
+      const journey = Number(viewport.style.getPropertyValue("--journey-opacity"));
+      const incoming = Number(viewport.style.getPropertyValue("--fog-opacity"));
+      // Source-over compositing must leave zero contribution from the hero
+      // poster beneath the two decoded layers, including halfway through.
+      expect((1 - journey) * (1 - incoming)).toBe(0);
+    }
+    scrollTo(0.9);
+    await settlePlayback();
+    const opacity = viewport.style.getPropertyValue("--fog-opacity");
+    Object.defineProperty(fog, "readyState", { configurable: true, value: 1 });
+    act(() => { fog.dispatchEvent(new Event("waiting")); });
+    advanceFrames();
+    expect(viewport.style.getPropertyValue("--fog-opacity")).toBe(opacity);
+    expect(viewport.style.getPropertyValue("--journey-opacity")).toBe("1.0000");
+  });
+
   it("coalesces pending fog play and ignores stale starts after reverse, hidden state, and unmount", async () => {
     const { container, viewport, scrollTo, unmount } = setupJourney();
     const fog = container.querySelectorAll("video")[1];

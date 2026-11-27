@@ -22,7 +22,6 @@ export default function MobileJourneyFilm({ ref, className, onPresent }: Props) 
   const [active, setActive] = useState(true);
   const [nativeSource, setNativeSource] = useState(false);
   const [canvasReady, setCanvasReady] = useState(false);
-  const [nativeReady, setNativeReady] = useState(false);
   useEffect(() => { present.current = onPresent; }, [onPresent]);
 
   useImperativeHandle(ref, () => ({
@@ -31,13 +30,6 @@ export default function MobileJourneyFilm({ ref, className, onPresent }: Props) 
       controller.current?.setTime(requestedTime.current);
     },
     setActive(next) {
-      if (!next && video.current && video.current.readyState >= 2) {
-        try {
-          const context = canvas.current?.getContext("2d", { alpha: false });
-          if (context) { context.drawImage(video.current, 0, 0, 1080, 1920); setCanvasReady(true); }
-        } catch { /* Retain the preceding valid canvas if a native frame is unavailable. */ }
-      }
-      if (!next) setNativeReady(false);
       setActive(next);
     },
   }), []);
@@ -89,7 +81,7 @@ export default function MobileJourneyFilm({ ref, className, onPresent }: Props) 
       ]);
       if (disposed || !node) return;
       local = await createIndexedFrameScrubber(film as IndexedFilm, node, abort.signal, () => {}, fallback, presented,
-        undefined, { cacheLimit: 24, boundedPresentation: true, preserveFrame: true, reverseKeyframesFirst: true });
+        undefined, { cacheLimit: 24, boundedPresentation: true, preserveFrame: true, reverseKeyframesFirst: true, independentRanges: true });
       if (disposed || fallingBack) { local?.dispose(); return; }
       if (!local) { fallback(); return; }
       controller.current = local;
@@ -110,11 +102,22 @@ export default function MobileJourneyFilm({ ref, className, onPresent }: Props) 
     let raf = 0;
     let videoFrame = 0;
     let pending: number | null = null;
+    let lastPresentedFrame = -1;
     const queue = () => { if (!disposed && !raf && !document.hidden && pending === null) raf = requestAnimationFrame(seek); };
     const announce = (time: number) => {
       if (disposed || pending !== null || element.readyState < 2 || element.seeking ||
-        Math.abs(element.currentTime - requestedTime.current) >= 0.5 / mobileMedia.frameRate) return;
-      setNativeReady(true);
+        Math.abs(time - requestedTime.current) >= 0.5 / mobileMedia.frameRate) return;
+      const frame = Math.floor(time * mobileMedia.frameRate);
+      if (frame === lastPresentedFrame) return;
+      // Native video is a decoder only. Publish a complete matching frame to
+      // the same opaque canvas; another seek can never clear the visible film.
+      const context = canvas.current?.getContext("2d", { alpha: false });
+      if (!context) return;
+      try { context.drawImage(element, 0, 0, 1080, 1920); }
+      catch { return; }
+      lastPresentedFrame = frame;
+      setCanvasReady(true);
+      if (canvas.current) canvas.current.dataset.scrubPresentedTime = time.toFixed(4);
       present.current(time);
     };
     const seek = () => {
@@ -133,8 +136,9 @@ export default function MobileJourneyFilm({ ref, className, onPresent }: Props) 
     };
     const observe = (_now: number, metadata: VideoFrameCallbackMetadata) => {
       if (disposed) return;
-      complete();
+      if (!element.seeking && element.readyState >= 2) pending = null;
       announce(metadata.mediaTime);
+      queue();
       videoFrame = element.requestVideoFrameCallback(observe);
     };
     const native: Scrubber = { setTime: queue, dispose() {
@@ -157,9 +161,9 @@ export default function MobileJourneyFilm({ ref, className, onPresent }: Props) 
 
   return <>
     <canvas ref={canvas} className={className} width={1080} height={1920} aria-hidden="true"
-      data-mobile-journey-film data-film-renderer="frames"
-      style={{ visibility: canvasReady && !nativeReady ? "visible" : "hidden" }} />
+      data-mobile-journey-film data-film-renderer={nativeSource ? "native-canvas" : "frames"}
+      style={{ visibility: canvasReady ? "visible" : "hidden" }} />
     {nativeSource && active && <video ref={video} className={className} src={mobileMedia.journey} muted playsInline preload="auto"
-      data-mobile-journey-film data-film-renderer="native" style={{ visibility: nativeReady ? "visible" : "hidden" }} />}
+      data-mobile-journey-film data-film-renderer="native" style={{ visibility: "hidden" }} />}
   </>;
 }

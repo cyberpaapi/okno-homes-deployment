@@ -6,14 +6,14 @@
 // Aurora Background (18263), and Preloader (13967). The page uses the single
 // site-wide 21st.dev fluid cursor rather than mounting a second local cursor.
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import {
   AnimatePresence, MotionConfig, motion,
   useReducedMotion, useScroll, useTransform,
 } from "motion/react";
 import ModelsHeader from "./ModelsHeader";
-import { MagneticLink } from "@/components/projects/21st/Magnetic";
+import { SubtleLink } from "@/components/ui/SubtleAction";
 import { MasonryLightbox } from "@/components/projects/21st/MasonryLightbox";
 import { useProjectsContent } from "@/lib/useProjectContent";
 import { localDestination } from "@/lib/localDestination";
@@ -149,7 +149,7 @@ export default function BespokeExperience() {
           </div>
         </section>
         <section className={styles.closing} aria-label="Begin your Bespoke home" data-type-section="bespoke.result">
-          <MagneticLink href={localDestination(get("closing.href", "/enquiry?intent=home&model=bespoke"), "/enquiry?intent=home&model=bespoke")}>{get("closing.action", "Begin crafting")} <span aria-hidden="true"><ArrowUpRight size={18} strokeWidth={1.7} /></span></MagneticLink>
+          <SubtleLink tone="paper" className={styles.closingAction} href={localDestination(get("closing.href", "/enquiry?intent=home&model=bespoke"), "/enquiry?intent=home&model=bespoke")}>{get("closing.action", "Begin crafting")}</SubtleLink>
         </section>
         {lakewood && lakewood.gallery.length > 0 && <section className={styles.gallery} aria-labelledby="bespoke-gallery-title">
           <p className={styles.kicker}>{get("gallery.label", "Bespoke projects")}</p>

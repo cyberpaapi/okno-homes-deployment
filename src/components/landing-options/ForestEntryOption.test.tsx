@@ -5,6 +5,7 @@ import ForestEntryOption from './ForestEntryOption';
 const motionState = vi.hoisted(() => ({
   reduced: false,
   progress: 0,
+  targets: [] as number[],
   onChange: null as ((progress: number) => void) | null,
   shown: 0,
   onShown: null as ((progress: number) => void) | null,
@@ -25,7 +26,7 @@ vi.mock('@/components/landing/LandingExperience', () => ({ default: () => <div d
 vi.mock('lenis/react', () => ({ useLenis: () => lenisState.enabled ? lenisState : undefined, ReactLenis: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
 vi.mock('motion/react', () => ({
   motion: new Proxy({}, { get: (_, tag) => tag }),
-  useScroll: () => ({ scrollYProgress: { get: () => motionState.progress } }),
+  useScroll: () => ({ scrollYProgress: { get: () => motionState.progress, jump: (value: number) => { motionState.targets.push(value); motionState.progress = value; motionState.onChange?.(value); } } }),
   useSpring: (value: unknown) => value,
   useMotionValue:()=>shownValue,
   useTransform: () => ({ get: () => 0 }),
@@ -49,7 +50,7 @@ describe('ForestEntryOption', () => {
   afterEach(() => {
     motionState.reduced = false;
     document.body.style.overflow = '';
-    motionState.progress = 0;
+    motionState.progress = 0; motionState.targets = [];
     motionState.onChange = null;
     motionState.onReady = null; motionState.onLoadProgress = null;
     motionState.shown=0;motionState.onShown=null;motionState.onProgress=null;
@@ -148,29 +149,27 @@ describe('ForestEntryOption', () => {
     expect(screen.getByTestId('option-one')).toBeInTheDocument();
   });
 
-  it.each([390, 430, 700, 768, 1440])('gates Skip on readiness and sweeps to the actual end at %ipx', width => {
+  it.each([360, 390, 430, 700, 768, 1440])('jumps past the film with one endpoint target at %ipx', width => {
     viewportWidth = width;
     lenisState.enabled = true;
     const { container } = render(<ForestEntryOption />);
     const hero = screen.getByRole('region', { name: 'A journey from the forest into an OKNO home' });
-    vi.spyOn(hero, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, -200, 390, 6000));
+    vi.spyOn(hero, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, -200, width, 6000));
     Object.defineProperty(hero, 'offsetHeight', { configurable: true, value: 6000 });
     const skip = screen.getByRole('button', { name: 'Skip to end of film' });
     expect(skip).toBeDisabled();
     fireEvent.click(skip);
     expect(lenisState.scrollTo).not.toHaveBeenCalled();
     act(() => motionState.onReady?.(true));
-    expect(skip).toBeEnabled();
     fireEvent.click(skip);
-    expect(lenisState.scrollTo).toHaveBeenLastCalledWith(-200 + window.scrollY + 6000 - window.innerHeight, expect.objectContaining({ duration: width <= 700 ? 4.4 : 2.2, lock: false }));
-    const options = lenisState.scrollTo.mock.calls.at(-1)![1];
-    expect(options.easing(.5)).toBeCloseTo(.5);
-    expect(options.easing(.1)).toBeLessThan(.1);
-    expect(options.easing(.9)).toBeGreaterThan(.9);
-    expect(options.easing(0)).toBe(0);
-    expect(options.easing(1)).toBe(1);
-    expect(options.force).toBeUndefined();
+    expect(lenisState.scrollTo).toHaveBeenLastCalledWith(-200 + window.scrollY + 6000, { immediate: true, force: true });
+    expect(motionState.targets).toEqual([1]);
+    // Navigation never invents a decoded endpoint or restarts the movie.
     expect(motionState.shown).toBe(0);
+    expect(viewport(container).style.getPropertyValue('--end-opacity')).toBe('0.0000');
+    act(() => motionState.onProgress?.(1));
+    expect(viewport(container).style.getPropertyValue('--end-opacity')).toBe('1.0000');
+    act(() => { motionState.progress = .5; motionState.onChange?.(.5); });
     expect(viewport(container).style.getPropertyValue('--end-opacity')).toBe('0.0000');
   });
 
@@ -187,7 +186,7 @@ describe('ForestEntryOption', () => {
     expect(scroll).not.toHaveBeenCalled();
     document.body.style.overflow = '';
     fireEvent.click(screen.getByRole('button', { name: 'Skip to end of film' }));
-    expect(scroll).toHaveBeenLastCalledWith({ top: 6000 - window.innerHeight, behavior: 'smooth' });
+    expect(scroll).toHaveBeenLastCalledWith({ top: 6000, behavior: 'instant' });
     const wheel = new WheelEvent('wheel', { deltaY: -120, cancelable: true });
     fireEvent(window, wheel);
     expect(wheel.defaultPrevented).toBe(false);

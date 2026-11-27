@@ -47,3 +47,12 @@
 .filmChoices button{font-family:var(--type-font-body, var(--okno-font-body));font-size:var(--type-size-caption, clamp(14px, 1.1vw, 16px));line-height:1.5}
 .controls button, .dialogHeader button { display: grid; place-items: center; }
 .play svg, .controls button svg, .dialogHeader button svg { display: block; }
+
+/* Review5: smaller phone project names without moving the film or controls. */
+@media (max-width: 700px), (max-width: 1000px) and (max-height: 500px) {
+  .content .title h2 {
+    font-size: min(var(--type-size-heading, 24px), clamp(20px, 5.6vw, 22px));
+    line-height: 1.12;
+  }
+  .title { gap: 12px; }
+}

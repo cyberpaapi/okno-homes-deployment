@@ -42,6 +42,24 @@ describe('complete native video preparation',()=>{
     expect(ready).not.toHaveBeenCalledWith(true);
     view.unmount();
   });
+  it('replaces pending movie positions with the direct endpoint before the next paint', async () => {
+    vi.useFakeTimers();
+    const progress = motionValue(0), shown = vi.fn();
+    const view = render(<ScrollJourneyFilm src="/custom.mp4" poster="/cover.jpg" className="film" progress={progress} onReady={vi.fn()} onProgress={shown} />);
+    await act(async () => {});
+    const video = view.container.querySelector('video')!;
+    Object.defineProperties(video, { readyState: { value: 4 }, duration: { value: 24.042 } });
+    fireEvent.loadedData(video);
+    // A click can supersede an ordinary gesture before its scheduled seek.
+    await act(async () => { progress.set(.2); progress.set(.4); progress.jump(1); await vi.advanceTimersByTimeAsync(40); });
+    expect(video.dataset.scrubTarget).toBe('24.0000');
+    expect(video.currentTime).toBeCloseTo(24, 2);
+    fireEvent.seeked(video);
+    expect(shown).toHaveBeenLastCalledWith(1);
+    await act(async () => { await vi.advanceTimersByTimeAsync(200); });
+    expect(video.dataset.scrubPresentedFrames).toBe('1');
+    view.unmount();
+  });
   it('seeks forward, reverses and reaches the true ending using only the downloaded blob',async()=>{
     vi.useFakeTimers();
     const progress=motionValue(.8),shown=vi.fn();

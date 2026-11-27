@@ -5,7 +5,10 @@ import film from '../../config/process-video-hq.json';
 import { createIndexedFrameScrubber } from './indexedFrameScrubber';
 import mobileFilm from '../../config/process-video-scrub.json';
 
-const bytes = readFileSync(`public${film.source}`);
+// Isolated source-only verification can read the owner's unchanged media from
+// the canonical checkout without copying or linking public assets into it.
+const publicAssets = process.env.OKNO_TEST_PUBLIC ?? 'public';
+const bytes = readFileSync(`${publicAssets}${film.source}`);
 describe('original-packet Process frame rendering', () => {
   afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); vi.useRealTimers(); });
   it('indexes every original frame without modifying the native MP4', () => {
@@ -15,7 +18,7 @@ describe('original-packet Process frame rendering', () => {
     expect(film.packets.every(([position,size],index)=>position+size<=bytes.length && (index===0 || film.packets[index-1][2]<film.packets[index][2]))).toBe(true);
   });
   it('keeps the mobile manifest aligned and its original source unchanged', () => {
-    const mobileBytes = readFileSync(`public${mobileFilm.source}`);
+    const mobileBytes = readFileSync(`${publicAssets}${mobileFilm.source}`);
     expect(createHash('sha256').update(mobileBytes).digest('hex')).toBe(mobileFilm.sha256);
     expect([mobileFilm.width,mobileFilm.height,mobileFilm.fps,mobileFilm.packets.length]).toEqual([1280,720,30,769]);
     expect(mobileFilm.packets.map(p=>p[2])).toEqual(film.packets.map(p=>p[2]));
@@ -186,6 +189,171 @@ describe('original-packet Process frame rendering', () => {
       expect(batches[0]).toEqual([1]);
       expect(batches[1]).toEqual([1,0]);
     }
+    abort.abort();
+  });
+});
+
+describe('opt-in independent packet delivery', () => {
+  const chunkBytes = 512 * 1024;
+  const packets = Array.from({ length: 80 }, (_, index) => [index * chunkBytes, 128, Math.round(index / 30 * 1e6), 1]);
+  const independent = { ...film, bytes: chunkBytes * 80, packets };
+  afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); vi.useRealTimers(); });
+
+  function decoder() {
+    vi.useFakeTimers();
+    const decoded = vi.fn();
+    const closeFrame = vi.fn();
+    const close = vi.fn();
+    class Chunk { constructor(public value: { data: Uint8Array; timestamp: number }) {} }
+    class Decoder {
+      state = 'configured';
+      static async isConfigSupported() { return { supported: true }; }
+      constructor(private init: { output(frame: unknown): void }) {}
+      configure() {}
+      decode(chunk: Chunk) { decoded(chunk.value); this.init.output({ timestamp: chunk.value.timestamp, close: closeFrame }); }
+      async flush() {}
+      close() { this.state = 'closed'; close(); }
+    }
+    vi.stubGlobal('VideoDecoder', Decoder);
+    vi.stubGlobal('EncodedVideoChunk', Chunk);
+    vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockImplementation((() => ({ drawImage: vi.fn() })) as unknown as typeof HTMLCanvasElement.prototype.getContext);
+    return { decoded, closeFrame, close };
+  }
+
+  function rangeResponse(start: number, end: number, total = independent.bytes) {
+    const data = new Uint8Array(end - start + 1).fill(Math.floor(start / chunkBytes));
+    return { status: 206, headers: new Headers({ 'Content-Range': `bytes ${start}-${end}/${total}` }),
+      body: new ReadableStream({ start(controller) { controller.enqueue(data); controller.close(); } }) };
+  }
+
+  function respond(_url: string, request: RequestInit) {
+    const match = (request.headers as Record<string, string>).Range.match(/bytes=(\d+)-(\d+)/)!;
+    return Promise.resolve(rangeResponse(Number(match[1]), Number(match[2])));
+  }
+
+  it('fetches the newest late target without downloading preceding bytes, cancels stale demand and never replays it', async () => {
+    const { decoded } = decoder();
+    let firstSignal: AbortSignal | undefined;
+    const fetcher = vi.fn((url: string, request: RequestInit) => {
+      if (!firstSignal) {
+        firstSignal = request.signal as AbortSignal;
+        return new Promise<ReturnType<typeof rangeResponse>>((_resolve, reject) => firstSignal!.addEventListener('abort', () => reject(new DOMException('obsolete', 'AbortError'))));
+      }
+      return respond(url, request);
+    });
+    vi.stubGlobal('fetch', fetcher);
+    const canvas = document.createElement('canvas'), abort = new AbortController(), fail = vi.fn();
+    const scrubber = await createIndexedFrameScrubber(independent, canvas, abort.signal, vi.fn(), fail, vi.fn(), undefined,
+      { cacheLimit: 24, boundedPresentation: true, independentRanges: true });
+    scrubber!.setTime(40 / 30);
+    await vi.advanceTimersByTimeAsync(40);
+    expect(firstSignal!.aborted).toBe(true);
+    expect((fetcher.mock.calls[1][1].headers as Record<string, string>).Range).toBe(`bytes=${40 * chunkBytes}-${41 * chunkBytes - 1}`);
+    expect(decoded.mock.calls[0][0].timestamp).toBe(packets[40][2]);
+    expect(decoded.mock.calls[0][0].data).toEqual(new Uint8Array(128).fill(40));
+    expect(canvas.dataset.scrubPresentedTime).toBe('1.3333');
+    expect(Number(canvas.dataset.scrubTransferBytes)).toBeLessThan(11 * chunkBytes);
+    expect(canvas.dataset.scrubRangeAborts).toBe('1');
+    expect(fail).not.toHaveBeenCalled();
+    decoded.mockClear();
+    scrubber!.setTime(12 / 30); scrubber!.setTime(5 / 30);
+    await vi.advanceTimersByTimeAsync(40);
+    expect(decoded.mock.calls[0][0].timestamp).toBe(packets[5][2]);
+    expect(decoded.mock.calls.some(([packet]) => packet.timestamp === packets[12][2])).toBe(false);
+    expect(canvas.dataset.scrubPresentedTime).toBe('0.1667');
+    abort.abort();
+  });
+
+  it('bounds compressed and decoded caches while preserving a complete frame on destroy', async () => {
+    const { closeFrame, close } = decoder();
+    vi.stubGlobal('fetch', vi.fn(respond));
+    const canvas = document.createElement('canvas'), abort = new AbortController();
+    const scrubber = await createIndexedFrameScrubber(independent, canvas, abort.signal, vi.fn(), vi.fn(), vi.fn(), undefined,
+      { cacheLimit: 24, boundedPresentation: true, independentRanges: true });
+    for (const index of [0, 10, 20, 30, 40, 50, 60, 70]) {
+      scrubber!.setTime(index / 30);
+      await vi.advanceTimersByTimeAsync(40);
+      expect(Number(canvas.dataset.scrubCompressedBytes)).toBeLessThanOrEqual(16 * 1024 * 1024);
+      expect(Number(canvas.dataset.scrubCacheFrames)).toBeLessThanOrEqual(24);
+    }
+    const presented = canvas.dataset.scrubPresentedTime;
+    abort.abort();
+    expect(canvas.dataset.scrubPresentedTime).toBe(presented);
+    expect(canvas.dataset.scrubCompressedBytes).toBe('0');
+    expect(close).toHaveBeenCalledOnce(); expect(closeFrame).toHaveBeenCalled();
+    const calls = vi.mocked(fetch).mock.calls.length;
+    await vi.advanceTimersByTimeAsync(40);
+    expect(vi.mocked(fetch).mock.calls).toHaveLength(calls);
+  });
+
+  it('protects every chunk of a dense requested frame when cancelling an obsolete packet', async () => {
+    const { decoded } = decoder();
+    const dense = { ...independent, bytes: chunkBytes + 1024, packets: [
+      [0, 100, 0, 1], [100, 100, 33333, 1], [200, 100, 66667, 1], [300, 100, 100000, 1],
+      [chunkBytes - 100, 200, 133333, 1], [chunkBytes + 100, 100, 166667, 1],
+    ] };
+    let release!: () => void;
+    let firstSignal!: AbortSignal;
+    const fetcher = vi.fn((_url: string, request: RequestInit) => {
+      const match = (request.headers as Record<string, string>).Range.match(/bytes=(\d+)-(\d+)/)!;
+      const start = Number(match[1]), end = Number(match[2]);
+      if (start === 0) {
+        firstSignal = request.signal as AbortSignal;
+        return new Promise<ReturnType<typeof rangeResponse>>(resolve => { release = () => resolve(rangeResponse(start, end, dense.bytes)); });
+      }
+      return Promise.resolve(rangeResponse(start, end, dense.bytes));
+    });
+    vi.stubGlobal('fetch', fetcher);
+    const abort = new AbortController();
+    const scrubber = await createIndexedFrameScrubber(dense, document.createElement('canvas'), abort.signal, vi.fn(), vi.fn(), vi.fn(), undefined,
+      { cacheLimit: 24, independentRanges: true });
+    scrubber!.setTime(4 / 30);
+    expect(firstSignal.aborted).toBe(false);
+    release(); await vi.advanceTimersByTimeAsync(40);
+    expect(decoded.mock.calls[0][0].data).toEqual(Uint8Array.from([...new Uint8Array(100), ...new Uint8Array(100).fill(1)]));
+    expect(fetcher.mock.calls.filter(([, request]) => (request.headers as Record<string, string>).Range.startsWith('bytes=0-'))).toHaveLength(1);
+    abort.abort();
+  });
+
+  it('cancels a server ignoring Range and falls back once instead of downloading a full movie per seek', async () => {
+    decoder();
+    const cancel = vi.fn();
+    const fetcher = vi.fn(async () => ({ status: 200, body: { cancel } }));
+    vi.stubGlobal('fetch', fetcher);
+    const fail = vi.fn(), abort = new AbortController();
+    const scrubber = await createIndexedFrameScrubber(independent, document.createElement('canvas'), abort.signal, vi.fn(), fail, vi.fn(), undefined,
+      { independentRanges: true });
+    await vi.advanceTimersByTimeAsync(30);
+    for (const index of [40, 10, 60]) scrubber!.setTime(index / 30);
+    await vi.advanceTimersByTimeAsync(30);
+    expect(fetcher).toHaveBeenCalledOnce(); expect(cancel).toHaveBeenCalledOnce(); expect(fail).toHaveBeenCalledOnce();
+    abort.abort();
+  });
+
+  it('aborts pending range reads on destroy without reporting an expected abort as failure', async () => {
+    const { close } = decoder();
+    let rangeSignal!: AbortSignal;
+    vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => new Promise((_resolve, reject) => {
+      rangeSignal = request.signal as AbortSignal;
+      rangeSignal.addEventListener('abort', () => reject(new DOMException('disposed', 'AbortError')));
+    })));
+    const fail = vi.fn(), abort = new AbortController();
+    await createIndexedFrameScrubber(independent, document.createElement('canvas'), abort.signal, vi.fn(), fail, vi.fn(), undefined,
+      { independentRanges: true });
+    abort.abort(); await vi.advanceTimersByTimeAsync(30);
+    expect(rangeSignal.aborted).toBe(true); expect(close).toHaveBeenCalledOnce(); expect(fail).not.toHaveBeenCalled();
+  });
+
+  it('keeps inter-frame sources on their existing streaming path even if the option is supplied', async () => {
+    decoder();
+    const inter = { ...film, bytes: 2, packets: [[0, 1, 0, 1], [1, 1, 33333, 0]] };
+    const fetcher = vi.fn(async () => ({ ok: true, body: new ReadableStream({ start(controller) { controller.enqueue(new Uint8Array(2)); controller.close(); } }) }));
+    vi.stubGlobal('fetch', fetcher);
+    const abort = new AbortController();
+    await createIndexedFrameScrubber(inter, document.createElement('canvas'), abort.signal, vi.fn(), vi.fn(), vi.fn(), undefined,
+      { independentRanges: true });
+    await vi.advanceTimersByTimeAsync(30);
+    expect(vi.mocked(fetch).mock.calls[0][1]).not.toHaveProperty('headers');
     abort.abort();
   });
 });

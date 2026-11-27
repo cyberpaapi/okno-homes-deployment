@@ -266,7 +266,6 @@ export default function SustainabilityProof() {
                   quality={60}
                 />
               </motion.div>
-              <span className={styles.photoCredit} data-type-field={"sustainability.proof.final-credit"}>{get("final-credit", "Photography · Inclined Studio")}</span>
             </div>
           </figure>
 

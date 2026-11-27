@@ -667,7 +667,7 @@ const baseAdminPages: readonly ContentPage[] = [
       { id: "sustainability.ending.heading-line-1", label: "Heading · first line", kind: "text", defaultValue: "Build with what" },
       { id: "sustainability.ending.heading-line-2", label: "Heading · second line", kind: "text", defaultValue: "the land " },
       { id: "sustainability.ending.heading-emphasis", label: "Heading · emphasis", kind: "text", defaultValue: "gives." },
-      { id: "sustainability.ending.action", label: "Enquiry button", kind: "text", defaultValue: "Begin a conversation" },
+      { id: "sustainability.ending.action", label: "Enquiry button", kind: "text", defaultValue: "Enquire" },
       { id: "sustainability.ending.action-href", label: "Enquiry destination", kind: "text", defaultValue: "/enquiry", help: "Same-site path beginning with /." },
     ] },
   ] },
@@ -795,7 +795,7 @@ const baseAdminPages: readonly ContentPage[] = [
       ["home.home-type.label", "Home type · label", "Home type"],
       ["home.home-type.option-1", "Home type · option 1", "Retreat or second home"], ["home.home-type.option-2", "Home type · option 2", "Primary residence"], ["home.home-type.option-3", "Home type · option 3", "Hospitality estate"], ["home.home-type.option-4", "Home type · option 4", "Development"],
       ["home.timeline.label", "Timeline · label", "Timeline"], ["home.timeline.option-1", "Timeline · option 1", "This year"], ["home.timeline.option-2", "Timeline · option 2", "Next year"], ["home.timeline.option-3", "Timeline · option 3", "Exploring"],
-      ["home.submit", "Submit button", "Begin the conversation"],
+      ["home.submit", "Submit button", "Send enquiry"],
       ["reassurance", "Enquiry reassurance", "Every enquiry is read by our team and answered personally."],
     ]),
     enquirySection("hospitality-tab", "Arrange a private consultation tab", [

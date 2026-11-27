@@ -502,7 +502,9 @@
   .sharedPoster, .mediaVideo { transform: none; }
   .sharedPoster { background-size: cover; }
   .posterImage, .mediaVideo { object-fit: cover; object-position: center; }
-  .journeyVideo, .fogVideo { transition: opacity 180ms linear; }
+  /* Scroll owns the opacity timeline; independent transitions can expose an
+     earlier layer when a gesture reverses or a decoded frame arrives late. */
+  .journeyVideo, .fogVideo { transition: none; }
   .fogVideo {
     transform: none;
     filter: saturate(.82) contrast(1.04) brightness(.82) blur(5.5px);

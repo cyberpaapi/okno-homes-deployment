@@ -97,17 +97,6 @@
 
 .finalImage { z-index: 2; }
 
-.photoCredit {
-  position: absolute;
-  right: 14px;
-  bottom: 13px;
-  z-index: 5;
-  color: rgba(255, 255, 255, .82);
-  font-size: var(--type-size-caption, var(--okno-spec));
-  letter-spacing: .04em;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, .65);
- font-family: "Geist OKNO", Arial, sans-serif !important; font-weight: 400 !important;}
-
 .proofSidebar {
   position: relative;
   min-width: 0;

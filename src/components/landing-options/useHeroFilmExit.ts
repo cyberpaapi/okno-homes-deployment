@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, type RefObject } from 'react';
+import { useCallback, useEffect, useRef, type RefObject } from 'react';
 import { useLenis } from 'lenis/react';
 import type { MotionValue } from 'motion/react';
 import { HERO_FILM_EXIT } from '@/lib/heroFilmScroll';
@@ -11,6 +11,7 @@ import { useMediaQuery } from '@/lib/useMediaQuery';
 export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: MotionValue<number>, enabled: boolean) {
   const lenis = useLenis();
   const phone = useMediaQuery('(max-width: 700px)');
+  const directSkip = useRef<(destination: number) => void>(() => {});
   useEffect(() => {
     const hero = section.current;
     if (!enabled || !hero) return;
@@ -26,6 +27,13 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
       window.clearTimeout(release); cancelAnimationFrame(paint);
       release = 0; paint = 0;
       hero.removeAttribute('data-film-exit-pending');
+    };
+    directSkip.current = destination => {
+      pendingY = null;
+      clear();
+      // Explicit navigation supersedes an unfinished endpoint handoff. The
+      // next scroll event must not pull the visitor back into the film.
+      previousY = destination;
     };
     const finish = () => {
       if (document.body.style.overflow === 'hidden' || pendingY === null || (shown.get() < 1) || release || paint) return;
@@ -87,10 +95,12 @@ export function useHeroFilmExit(section: RefObject<HTMLElement | null>, shown: M
     window.addEventListener('keydown',key);
     lenis?.on('scroll', check);
     return () => {
+      directSkip.current = () => {};
       lockObserver.disconnect(); clear(); unsubscribe(); lenis?.off('scroll', check);
       window.removeEventListener('scroll', check);
       window.removeEventListener('wheel', wheel, true);
       window.removeEventListener('keydown',key);
     };
   }, [section, shown, enabled, lenis, phone]);
+  return useCallback((destination: number) => directSkip.current(destination), []);
 }

@@ -38,15 +38,18 @@ const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const range = (value: number, start: number, end: number) =>
   clamp((value - start) / (end - start));
 
-function HeroSkip({ section, ready }: { section: RefObject<HTMLElement | null>; ready: boolean }) {
+function HeroSkip({ section, ready, onSkip }: { section: RefObject<HTMLElement | null>; ready: boolean; onSkip(destination: number): void }) {
   // This child lives inside ReactLenis; the film still follows document position.
   const lenis = useLenis();
   const skip = () => {
     const hero = section.current;
     if (!ready || !hero || document.hidden || document.body.style.overflow === 'hidden' || document.documentElement.dataset.heroLoading === 'true') return;
-    const end = hero.getBoundingClientRect().top + window.scrollY + Math.max(0, hero.offsetHeight - window.innerHeight);
-    if (lenis) lenis.scrollTo(end, { duration: window.matchMedia('(max-width: 700px)').matches ? 4.4 : 2.2, easing: time => (1 - Math.cos(Math.PI * time)) / 2, lock: false });
-    else window.scrollTo({ top: end, behavior: 'smooth' });
+    const end = hero.getBoundingClientRect().top + window.scrollY + hero.offsetHeight;
+    onSkip(end);
+    // Skip is navigation: cancel Lenis inertia and land at the following
+    // content without scrolling through any intermediate movie positions.
+    if (lenis) { lenis.resize(); lenis.scrollTo(end, { immediate: true, force: true }); }
+    else window.scrollTo({ top: end, behavior: 'instant' });
   };
   return <button type="button" className={styles.skip} data-hero-skip disabled={!ready} onClick={skip} aria-label="Skip to end of film">Skip</button>;
 }
@@ -110,7 +113,13 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
   // Lenis smooths the document once. A second spring and a chronological
   // playback queue make the camera continue after the visitor stops scrolling.
   const mediaProgress = scrollYProgress;
-  useHeroFilmExit(sectionRef, presentedFilmProgress, animated);
+  const prepareDirectSkip = useHeroFilmExit(sectionRef, presentedFilmProgress, animated);
+  const skipFilm = useCallback((destination: number) => {
+    prepareDirectSkip(destination);
+    // Replace the renderer's pending target; presented progress still comes
+    // from a decoded frame, and ordinary reversal follows document position.
+    mediaProgress.jump(1);
+  }, [prepareDirectSkip, mediaProgress]);
   // The bar only ever moves forward, even when a stream reports a fresh phase.
   const trackJourneyLoading = useCallback((value: number | null) => setJourneyLoading(previous => value === null || previous === null ? value : value < 0 ? (previous > 0 ? previous : value) : Math.max(previous, value)), []);
 
@@ -194,7 +203,7 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
               <p data-type-field={"hero-v1.opening.scroll-cue"}>{savedScrollCue}</p>
             </div>
           )}
-          {animated && <HeroSkip section={sectionRef} ready={loaded} />}
+          {animated && <HeroSkip section={sectionRef} ready={loaded} onSkip={skipFilm} />}
 
           {animated && (
             <>

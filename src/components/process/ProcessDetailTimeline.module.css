@@ -135,7 +135,7 @@
 @media (max-width: 700px) {
   .section { padding: 0 0 32px; }
   .timeline {
-    /* Only trim the final pinned dwell; JS retains the original phase range. */
+    /* Keep the short final reading pause before the footer handoff. */
     height: var(--process-phone-timeline-height, 462svh);
     margin-top: 0;
   }
@@ -144,7 +144,10 @@
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto minmax(0, 1fr);
     gap: clamp(16px, 2.4svh, 22px);
+    /* Follow the visible viewport when phone browser chrome opens/closes.
+       A small-viewport stage otherwise leaves the rail floating above it. */
     height: 100svh;
+    height: 100dvh;
     padding: clamp(78px, 10svh, 92px) 20px 94px;
     box-sizing: border-box;
   }

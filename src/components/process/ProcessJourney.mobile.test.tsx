@@ -1,7 +1,7 @@
 import { act, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import ProcessJourney from './ProcessJourney';
-import { phoneTimelineTravelRatio } from './ProcessDetailTimeline';
+import { phoneTimelineProgress, phoneTimelineTravelRatio } from './ProcessDetailTimeline';
 
 const film = vi.hoisted(() => ({ props: null as null | { onReady(ready: boolean): void; onLoadProgress(progress: number | null): void } }));
 vi.mock('@/components/projects/21st/SilkBackground', () => ({ SilkBackground: () => null }));
@@ -23,37 +23,49 @@ describe('phone build playback', () => {
     expect(document.documentElement.dataset.heroLoading).toBe('true');
     act(() => film.props?.onReady(true));
     expect(document.documentElement.dataset.heroLoading).toBeUndefined();
+    expect(screen.getByText('Scroll to enter')).toBeInTheDocument();
+    expect(screen.queryByText('Scroll to enter the build')).not.toBeInTheDocument();
     view.unmount();
   });
 });
 
 describe('phone chronology ending geometry', () => {
   it.each([
-    { width: 360, smallHeight: 800, viewport: 800 },
-    { width: 390, smallHeight: 844, viewport: 844 },
-    { width: 390, smallHeight: 800, viewport: 844 },
-  ])('preserves earlier phase positions at $width with viewport $viewport', ({ smallHeight, viewport }) => {
+    { width: 360, smallHeight: 800, viewport: 800, stageHeight: 800 },
+    { width: 390, smallHeight: 844, viewport: 844, stageHeight: 844 },
+    { width: 390, smallHeight: 800, viewport: 844, stageHeight: 844 },
+    { width: 390, smallHeight: 800, viewport: 844, stageHeight: 800 },
+  ])('follows intermediate positions and reverses at $width with viewport $viewport', ({ smallHeight, viewport, stageHeight }) => {
     const height = 4.62 * smallHeight;
     const travel = height - viewport;
-    const originalTravel = 5 * smallHeight - viewport;
-    const ratio = phoneTimelineTravelRatio(height, viewport);
-    const phaseAt = (position: number) => Math.round(position / travel * ratio * 4) / 4;
+    const ratio = phoneTimelineTravelRatio(height, viewport, stageHeight);
+    const phaseAt = (position: number) => phoneTimelineProgress(position / travel, ratio);
+    const releaseAt = height - stageHeight;
+    const completeAt = releaseAt - .12 * smallHeight;
 
-    for (const boundary of [.125, .375, .625, .875]) {
-      const position = originalTravel * boundary;
-      expect(phaseAt(position - 1)).toBe((Math.round(boundary * 4) - 1) / 4);
-      expect(phaseAt(position + 1)).toBe(Math.round(boundary * 4) / 4);
+    // Small forward input must move the article without waiting for a phase
+    // threshold; reversing has no spring queue or stale forward target.
+    const positions = [0, 10, 20, completeAt * .25, completeAt * .5, completeAt * .75, completeAt];
+    const forward = positions.map(phaseAt);
+    expect(forward[1]).toBeGreaterThan(0);
+    expect(forward[2]).toBeGreaterThan(forward[1]);
+    for (let index = 1; index < forward.length; index++) {
+      expect(forward[index]).toBeGreaterThan(forward[index - 1]);
     }
-    expect(phaseAt(travel)).toBe(1);
-    expect(phaseAt(travel + 32)).toBe(1);
-    // Reversing across the last boundary restores the preceding whole phase.
-    expect(phaseAt(originalTravel * .875 - 1)).toBe(.75);
-    expect(travel).toBeCloseTo(originalTravel - .38 * smallHeight);
+    expect([...positions].reverse().map(phaseAt)).toEqual([...forward].reverse());
+    expect(phaseAt(completeAt * .25)).toBeCloseTo(.25);
+    expect(phaseAt(completeAt * .5)).toBeCloseTo(.5);
+    expect(phaseAt(completeAt * .75)).toBeCloseTo(.75);
+    expect(phaseAt(-40)).toBe(0);
+    expect(phaseAt(releaseAt)).toBe(1);
+    expect(phaseAt(releaseAt + 32)).toBe(1);
+    expect(phaseAt(completeAt - 1)).toBeLessThan(1);
   });
 
   it.each([800, 844])('releases after a 12svh final dwell in a %ipx viewport', viewport => {
     const travel = 4.62 * viewport - viewport;
-    const finalStart = (5 * viewport - viewport) * .875;
+    const ratio = phoneTimelineTravelRatio(4.62 * viewport, viewport);
+    const finalStart = travel / ratio;
     expect(travel - finalStart).toBeCloseTo(.12 * viewport);
   });
 

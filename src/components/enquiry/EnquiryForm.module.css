@@ -214,3 +214,17 @@
 
 /* Full sentence: Govandi body, per the supplied typography rule. */
 .helper { margin:12px 0 0; max-width:48ch; font-size:var(--type-size-body, var(--okno-spec)); line-height:1.6; color:inherit; opacity:.78;  font-family: var(--type-font-body, var(--okno-font-body)) !important; letter-spacing: 0;}
+
+/* Retained21st SubtleButton3373 public action; the form handler stays separate. */
+.submitAction {
+  --action-ink: #f4f5ed;
+  --action-field: #254b37;
+  --action-border: #315c42;
+  --action-dot: #b9cdb7;
+  max-width: 100%;
+  min-height: 44px;
+  gap: 12px;
+  padding: 11px 16px;
+  border-radius: 18px;
+}
+.submitAction > span:last-child { width: 8px; height: 8px; flex: 0 0 8px; }

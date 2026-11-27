@@ -77,10 +77,18 @@ function editableSections(page: ContentPage) {
       // The plan specification consumes these roles; no display/body-size or
       // highlight control is offered without a matching public consumer.
       typography: section.typography?.filter(field => ['body-font', 'heading-font', 'heading-size', 'heading-mobile-size', 'subheading-size', 'subheading-mobile-size', 'caption-size', 'caption-mobile-size'].includes(field.id.split('.').at(-1)!)),
+    } : page.id === 'hospitality' && ['opening', 'enquiry'].includes(section.id) ? {
+      ...section,
+      // Consultation buttons have an owner-fixed 14px size. The opening
+      // photograph caption uses body-size, so neither section uses this role.
+      typography: section.typography?.filter(field => !['caption-size', 'caption-mobile-size'].includes(field.id.split('.').at(-1)!)),
     } : section);
   // V1 has one editing source, shared with the published-home opening selector.
   // Historical scalar fields remain readable when the collection has not been saved.
   if (page.id === "hero-v1") return sections.filter(section => section.id !== 'opening');
+  // The public photography credit was retired; retain its registered ID so
+  // existing drafts, publications and history remain readable.
+  if (page.id === "sustainability") return sections.map(section => ({ ...section, fields: section.fields.filter(field => field.id !== "sustainability.proof.final-credit") }));
   return page.id === "footer" ? sections.map(section => ["footer-homes", "footer-explore", "footer-okno"].includes(section.id) ? { ...section, fields: section.fields.filter(field => field.id.endsWith(".heading")) } : section) : sections;
 }
 

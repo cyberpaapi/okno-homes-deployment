@@ -192,8 +192,22 @@
 
 .parallaxCopy { left: var(--gutter); }
 .closing { padding: clamp(40px, 6vw, 72px) var(--gutter) 8px; }
-.closing a { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 14px 26px; border: 1px solid #23382c33; border-radius: 999px; background: #fffffff0; color: var(--ink); font-size: var(--okno-button); text-decoration: none; text-transform: uppercase; font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: .01em; }
-.closing a:hover, .closing a:focus-visible { background: #36543d; color: #fff; }
+.closing .closingAction {
+  --action-ink: #203c2b;
+  --action-field: rgb(255 255 255 / 86%);
+  --action-border: #42604a66;
+  --action-dot: #42604a;
+  display: inline-flex;
+  min-height: 44px;
+  gap: 12px;
+  margin: 0;
+  padding: 11px 16px;
+  border-radius: 18px;
+  color: var(--action-ink);
+  text-decoration: none;
+  text-transform: none;
+}
+.closing .closingAction > span:last-child { width: 8px; height: 8px; flex: 0 0 8px; }
 .gallery { padding: clamp(40px, 6vw, 72px) var(--gutter) clamp(64px, 8vw, 110px); }
 
 @media (max-width: 1000px) {

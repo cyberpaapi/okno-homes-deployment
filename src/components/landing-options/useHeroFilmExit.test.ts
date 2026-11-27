@@ -22,6 +22,27 @@ function setup() {
   return { ...hook, hero, shown };
 }
 describe('Hero movie handoff', () => {
+  it('lets direct Skip cancel a pending desktop handoff without consuming input or returning later', async () => {
+    const view = setup();
+    act(() => { y = 1300; window.dispatchEvent(new Event('scroll')); });
+    expect(y).toBe(1000);
+    expect(view.hero.dataset.filmExitPending).toBe('true');
+    act(() => { view.result.current(2000); y = 2000; window.dispatchEvent(new Event('scroll')); });
+    expect(y).toBe(2000);
+    expect(view.hero.dataset.filmExitPending).toBeUndefined();
+    const wheel = new WheelEvent('wheel', { deltaY: 300, cancelable: true });
+    act(() => window.dispatchEvent(wheel));
+    expect(wheel.defaultPrevented).toBe(false);
+    await act(async () => { view.shown.set(1); await vi.advanceTimersByTimeAsync(2500); });
+    expect(y).toBe(2000);
+    // Reversing into the film resumes the existing ordinary handoff behavior.
+    act(() => { view.shown.set(.5); y = 900; window.dispatchEvent(new Event('scroll')); });
+    act(() => { y = 1200; window.dispatchEvent(new Event('scroll')); });
+    expect(y).toBe(1000);
+    expect(view.hero.dataset.filmExitPending).toBe('true');
+    view.unmount();
+  });
+
   it.each([360, 390, 700])('keeps scrolling beyond a delayed ending native at %ipx', width => {
     vi.stubGlobal('matchMedia', (query: string) => ({ matches: query === '(max-width: 700px)' && width <= 700, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
     const view = setup();

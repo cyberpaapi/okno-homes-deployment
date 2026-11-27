@@ -26,3 +26,9 @@
 .image[data-portrait="true"] { aspect-ratio: var(--photo-aspect) !important; }
 .image[data-portrait="true"] img { object-fit: contain; }
 .card:hover .image[data-portrait="true"] img { transform: none; }
+
+/* Review5: compact phone names; retain the accepted photograph geometry. */
+@media (max-width: 700px), (max-width: 1000px) and (max-height: 500px) {
+  .overlay h2 { font-size: min(var(--type-size-subheading, var(--okno-card)), 16px); line-height: 1.2; }
+  .overlay { padding: 18px 20px; gap: 12px; }
+}

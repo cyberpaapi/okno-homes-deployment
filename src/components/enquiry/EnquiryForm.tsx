@@ -6,7 +6,7 @@ import FluidField from "@/components/landing/FluidField";
 import TextBlock from "@/components/landing/TextBlock";
 import EnquiryTabs from "./21st/EnquiryTabs";
 import { Field, FieldGroup, FieldInput, FieldLabel, FieldSelect } from "./21st/EnquiryFields";
-import InteractiveHoverButton from "./21st/InteractiveHoverButton";
+import { SubtleButton } from "@/components/ui/SubtleAction";
 import styles from "./EnquiryForm.module.css";
 import { useSiteCollection, useSiteContentMap } from "@/lib/useSiteContent";
 import type { ContentItem } from "@/lib/contentCollections";
@@ -182,7 +182,7 @@ export default function EnquiryForm({ isOpen }: EnquiryFormProps) {
     );
   };
 
-  const submitLabel = activeValue === "hospitality" ? t("hospitality.submit", "Request the deck") : activeValue === "press" ? t("press.submit", "Send enquiry") : t("home.submit", "Begin the conversation");
+  const submitLabel = activeValue === "hospitality" ? t("hospitality.submit", "Request the deck") : activeValue === "press" ? t("press.submit", "Send enquiry") : t("home.submit", "Send enquiry");
 
   return (
     <section
@@ -233,7 +233,7 @@ export default function EnquiryForm({ isOpen }: EnquiryFormProps) {
                     {activeValue === "hospitality" ? <input type="hidden" name="intent" value="hospitality" /> : null}
                     {requestedModel && <input type="hidden" name="model" value={requestedModel} />}
                     {formFields()}
-                    <InteractiveHoverButton type="submit" label={submitLabel} />
+                    <SubtleButton type="submit" className={styles.submitAction}>{submitLabel}</SubtleButton>
                     <p className={styles.helper}>{t("reassurance", "Every enquiry is read by our team and answered personally.")}</p>
                   </form>
                 </motion.div>

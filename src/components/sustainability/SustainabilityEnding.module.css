@@ -49,31 +49,8 @@
 
 .statement h2 span { color: var(--route-accent); }
 
-.statement > a {
-  min-width: min(330px, calc(100vw - 48px));
-  min-height: 52px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 48px;
+.action {
   margin-top: clamp(48px, 7vh, 72px);
-  padding: 0 18px;
-  border: 1px solid rgba(215, 243, 151, .42);
-  border-radius: 999px;
-  background: rgba(215, 243, 151, .07);
-  color: inherit;
-  text-decoration: none;
-  font-size: var(--type-size-caption, var(--okno-label));
-  font-weight: 600;
-  transition: background-color 220ms ease, color 220ms ease, transform 220ms ease;
- font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
-
-.statement > a:hover,
-.statement > a:focus-visible {
-  background: var(--route-accent);
-  color: #071008;
-  outline: none;
-  transform: translateY(-2px);
 }
 
 @media (max-width: 760px) {
@@ -89,15 +66,7 @@
     font-size: var(--type-size-display, var(--okno-section));
    font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em; line-height: 1.15; font-style: normal;}
 
-  .statement > a {
-    width: 100%;
-    min-width: 0;
-    margin-top: 42px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .statement > a { transition: none; }
+  .action { margin-top: 42px; }
 }
 
 /* Phone ending follows the compact facts block without reserving a screen. */
@@ -106,21 +75,8 @@
   .statement { align-items: center; text-align: center; }
   .statement > p { margin: 0; font-family: "Manrope OKNO", Arial, sans-serif !important; font-weight: 700; }
   .statement h2 { max-width: 100%; margin: 18px 0 0; font-size: min(var(--type-size-display, var(--okno-section)), clamp(28px, 6.8vw, 38px)); line-height: 1.18; }
-  .statement > a {
-    position: relative;
-    width: auto;
+  .action {
     max-width: 100%;
-    min-height: 48px;
-    justify-content: center;
-    gap: 0;
     margin: 28px auto 0;
-    padding: 12px 44px;
-    font-family: "Manrope OKNO", Arial, sans-serif !important;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.25;
-    text-align: center;
   }
-  .actionLabel { min-width: 0; }
-  .actionIcon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
 }
