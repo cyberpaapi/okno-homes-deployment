@@ -45,10 +45,13 @@ function HeroSkip({ section, ready, onSkip }: { section: RefObject<HTMLElement |
     const hero = section.current;
     if (!ready || !hero || document.hidden || document.body.style.overflow === 'hidden' || document.documentElement.dataset.heroLoading === 'true') return;
     const end = hero.getBoundingClientRect().top + window.scrollY + hero.offsetHeight;
+    // Resize emits a Lenis scroll event at the old position. Finish that
+    // notification before preparing the direct-navigation handoff bypass.
+    lenis?.resize();
     onSkip(end);
     // Skip is navigation: cancel Lenis inertia and land at the following
     // content without scrolling through any intermediate movie positions.
-    if (lenis) { lenis.resize(); lenis.scrollTo(end, { immediate: true, force: true }); }
+    if (lenis) lenis.scrollTo(end, { immediate: true, force: true });
     else window.scrollTo({ top: end, behavior: 'instant' });
   };
   return <button type="button" className={styles.skip} data-hero-skip disabled={!ready} onClick={skip} aria-label="Skip to end of film">Skip</button>;

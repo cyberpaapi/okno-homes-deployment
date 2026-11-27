@@ -303,6 +303,9 @@
     height: 480svh;
   }
   .stickyViewport { min-height: 0; }
+  /* Avoid the transformed parent clip that leaks its background above the
+     phone preview; retain the clip geometry and film surface treatment. */
+  .mediaFrame { transform: none; }
   .heroCopy { top: 106px; right: 20px; left: 20px; width: auto; text-align: center; }
   .heroLabel { margin-bottom: 14px; font-size: 12px; }
   .heroCopy h1, .staticHeroCopy h1 {

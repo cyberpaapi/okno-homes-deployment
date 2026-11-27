@@ -42,7 +42,10 @@ describe('ForestEntryOption', () => {
   beforeEach(()=>{
     viewportWidth = 1440;
     lenisState.enabled = false;
-    lenisState.scrollTo.mockClear();
+    lenisState.scrollTo.mockReset();
+    lenisState.resize.mockReset();
+    lenisState.on.mockReset();
+    lenisState.off.mockReset();
     vi.stubGlobal('matchMedia', vi.fn((query: string) => ({ matches: query === '(max-width: 700px)' && viewportWidth <= 700, addEventListener: vi.fn(), removeEventListener: vi.fn() })));
     vi.spyOn(HTMLMediaElement.prototype,'load').mockImplementation(()=>{});
     vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue(undefined);
@@ -171,6 +174,34 @@ describe('ForestEntryOption', () => {
     expect(viewport(container).style.getPropertyValue('--end-opacity')).toBe('1.0000');
     act(() => { motionState.progress = .5; motionState.onChange?.(.5); });
     expect(viewport(container).style.getPropertyValue('--end-opacity')).toBe('0.0000');
+  });
+
+  it.each([768, 844, 1440])('keeps direct Skip past the desktop handoff when Lenis resize emits synchronously at %ipx', width => {
+    viewportWidth = width;
+    lenisState.enabled = true;
+    let y = 0;
+    const listeners = new Set<() => void>();
+    const emitScroll = () => { for (const listener of [...listeners]) listener(); };
+    vi.spyOn(window, 'scrollY', 'get').mockImplementation(() => y);
+    vi.stubGlobal('innerHeight', 1000);
+    lenisState.on.mockImplementation((_event: string, listener: () => void) => { listeners.add(listener); });
+    lenisState.off.mockImplementation((_event: string, listener: () => void) => { listeners.delete(listener); });
+    // Real Lenis resize emits before it returns, at the old document position.
+    lenisState.resize.mockImplementation(emitScroll);
+    lenisState.scrollTo.mockImplementation((destination: number) => { y = destination; emitScroll(); });
+    render(<ForestEntryOption />);
+    const hero = screen.getByRole('region', { name: 'A journey from the forest into an OKNO home' });
+    vi.spyOn(hero, 'getBoundingClientRect').mockImplementation(() => new DOMRect(0, -y, width, 6000));
+    Object.defineProperty(hero, 'offsetHeight', { configurable: true, value: 6000 });
+    act(() => motionState.onReady?.(true));
+    expect(listeners.size).toBeGreaterThan(0); // Exercise the actual exit hook.
+    lenisState.scrollTo.mockClear();
+    fireEvent.click(screen.getByRole('button', { name: 'Skip to end of film' }));
+    expect(y).toBe(6000);
+    expect(lenisState.scrollTo).toHaveBeenCalledExactlyOnceWith(6000, { immediate: true, force: true });
+    expect(hero).not.toHaveAttribute('data-film-exit-pending');
+    expect(motionState.targets).toEqual([1]);
+    expect(motionState.shown).toBe(0);
   });
 
   it('keeps modal locks authoritative and supports native phone scrolling before a Lenis instance is available', () => {
