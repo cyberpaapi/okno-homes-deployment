@@ -29,6 +29,32 @@ afterEach(async () => {
 });
 
 describe("collection content store", () => {
+  it('keeps Hospitality palette drafts private and publishes only the selected validated palette', async () => {
+    const store = await import('./siteContentStore');
+    const { readPublicContent } = await import('./publicContent');
+    const original = await readPublicContent();
+    expect(original.published['hospitality.background']).toBeUndefined();
+    const draft = await store.saveDraft('hospitality.background', 'pearl', 0, 0);
+    expect(draft.draft['hospitality.background']).toBe('pearl');
+    expect((await readPublicContent()).published).toEqual(original.published);
+    const published = await store.publishDraft(draft.revision, draft.draftRevision);
+    expect((await readPublicContent()).published).toEqual({ ...original.published, 'hospitality.background': 'pearl' });
+    expect(published.draft).toEqual({});
+    const green = await store.saveDraft('hospitality.background', 'forest', published.revision, published.draftRevision);
+    expect((await readPublicContent()).published['hospitality.background']).toBe('pearl');
+    await store.publishDraft(green.revision, green.draftRevision);
+    expect((await readPublicContent()).published).toEqual({ ...original.published, 'hospitality.background': 'forest' });
+  });
+
+  it('rejects unsupported Hospitality palettes without changing the publication or draft revision', async () => {
+    const store = await import('./siteContentStore');
+    const before = await store.readContent();
+    for (const palette of ['', 'white', 'sage-soft-waves', 'PEARL', 'https://example.com/pearl.mp4']) {
+      await expect(store.saveDraft('hospitality.background', palette, before.revision, before.draftRevision)).rejects.toThrow(/listed options/);
+    }
+    expect(await store.readContent()).toEqual(before);
+  });
+
   it('keeps review and disclosure drafts private, publishes them together and preserves an explicit empty collection', async () => {
     const store = await import('./siteContentStore');
     const rows = [{ id: 'approved-review', fields: { quote: 'Our approved fixture quote.', name: 'Fixture owner', locationLine1: 'Town', locationLine2: 'District', image: '/photo.webp', imageAlt: 'Fixture home' } }];

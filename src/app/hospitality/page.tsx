@@ -12,12 +12,12 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function HospitalityPage() {
-  const { publishedCollections } = await readPublicContent();
+  const { published, publishedCollections } = await readPublicContent();
   const projects = Object.prototype.hasOwnProperty.call(publishedCollections, 'projects.records')
     ? projectsFromCollection(publishedCollections['projects.records'])
     : atlasProjects;
   const selectedWork = Object.prototype.hasOwnProperty.call(publishedCollections, 'hospitality.selectedWork')
     ? publishedCollections['hospitality.selectedWork']
     : initialHospitalitySelections;
-  return <HospitalityExperience initialProjects={projects} initialSelections={selectedWork} />;
+  return <HospitalityExperience initialProjects={projects} initialSelections={selectedWork} initialBackground={published['hospitality.background'] === 'pearl' ? 'pearl' : 'forest'} />;
 }

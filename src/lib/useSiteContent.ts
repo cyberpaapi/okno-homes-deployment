@@ -5,10 +5,12 @@ import { announcePreviewReady, isTrustedPreviewMessage, PREVIEW_READY, PREVIEW_R
 import type { ContentCollections, ContentItem } from "@/lib/contentCollections";
 
 type PublicSnapshot = { revision: number; published: Record<string, string>; publishedCollections: ContentCollections };
-const initial: PublicSnapshot = { revision: -1, published: {}, publishedCollections: {} };
+type ClientSnapshot = PublicSnapshot & { preview: Record<string, string>; previewCollections: ContentCollections };
+// Drafts must belong to the external-store snapshot too. Reading mutable draft
+// globals during getServerSnapshot can mismatch a later hydration boundary and
+// leave server-rendered attributes (such as a page theme) permanently stale.
+const initial: ClientSnapshot = { revision: -1, published: {}, publishedCollections: {}, preview: {}, previewCollections: {} };
 let snapshot = initial;
-let preview: Record<string, string> = {};
-let previewCollections: ContentCollections = {};
 let interval: ReturnType<typeof setInterval> | null = null;
 let pending: AbortController | null = null;
 const listeners = new Set<() => void>();
@@ -25,7 +27,7 @@ async function refresh() {
     const next = await response.json() as PublicSnapshot;
     if (request.signal.aborted) return;
     if (next.revision === snapshot.revision) return;
-    snapshot = next;
+    snapshot = { ...next, preview: snapshot.preview, previewCollections: snapshot.previewCollections };
     listeners.forEach(listener => listener());
   } catch {
     // Existing source values remain visible when the local CMS is unavailable.
@@ -66,26 +68,26 @@ function receivePreview(event: MessageEvent) {
   if (event.data?.type !== PREVIEW_UPDATE) return;
   const values = event.data.values;
   if (!values || typeof values !== "object" || Array.isArray(values)) return;
-  preview = Object.fromEntries(Object.entries(values as Record<string, unknown>).filter((entry): entry is [string, string] => typeof entry[1] === "string"));
+  const preview = Object.fromEntries(Object.entries(values as Record<string, unknown>).filter((entry): entry is [string, string] => typeof entry[1] === "string"));
   const collections = event.data.collections;
-  previewCollections = collections && typeof collections === "object" && !Array.isArray(collections) ? collections as ContentCollections : {};
-  snapshot = { ...snapshot };
+  const previewCollections = collections && typeof collections === "object" && !Array.isArray(collections) ? collections as ContentCollections : {};
+  snapshot = { ...snapshot, preview, previewCollections };
   listeners.forEach(listener => listener());
 }
 
 export function useSiteContent(id: string, fallback: string) {
   const state = useSyncExternalStore(subscribe, () => snapshot, () => initial);
-  return preview[id] ?? state.published[id] ?? fallback;
+  return state.preview[id] ?? state.published[id] ?? fallback;
 }
 
 export function useSiteContentMap() {
   const state = useSyncExternalStore(subscribe, () => snapshot, () => initial);
-  return useMemo(() => ({ ...state.published, ...preview }), [state]);
+  return useMemo(() => ({ ...state.published, ...state.preview }), [state]);
 }
 
 export function useSiteCollectionsMap(): ContentCollections {
   const state = useSyncExternalStore(subscribe, () => snapshot, () => initial);
-  return useMemo(() => ({ ...state.publishedCollections, ...previewCollections }), [state]);
+  return useMemo(() => ({ ...state.publishedCollections, ...state.previewCollections }), [state]);
 }
 
 export function useSiteCollection(collectionId: string, fallbackItems: ContentItem[]): ContentItem[] {

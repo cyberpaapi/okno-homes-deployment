@@ -502,11 +502,12 @@ const baseAdminPages: readonly ContentPage[] = [
   ] },
   { id: "hospitality", label: siteNavigationItems[2].label, href: "/hospitality", sections: [
     { id: "opening", label: "Opening", fields: [
+      { id: "hospitality.background", label: "Page background", kind: "choice", defaultValue: "forest", options: [{ value: "forest", label: "Forest green" }, { value: "pearl", label: "Pearl white · gold and sage" }], help: "Changes the Hospitality website background. Forest green stays until you select and publish another option." },
       { id: "hospitality.opening.heading", label: "Opening heading", kind: "text", defaultValue: "Built to welcome. Designed to perform." },
       { id: "hospitality.opening.image", label: "Opening photograph", kind: "image", defaultValue: "/assets/projects/real-v1/lakewood-08.webp" },
       { id: "hospitality.opening.alt", label: "Photograph description", kind: "text", defaultValue: "Lakewood hospitality buildings reflected in water at dusk" },
       { id: "hospitality.opening.caption", label: "Opening caption", kind: "text", defaultValue: "One architectural language, coordinated across every residence and shared space." },
-      { id: "hospitality.opening.action", label: "Begin project button", kind: "text", defaultValue: "Arrange a consultation" },
+      { id: "hospitality.opening.action", label: "Begin project button", kind: "text", defaultValue: "Consultation" },
       { id: "hospitality.opening.action-href", label: "Begin project destination", kind: "text", defaultValue: "/enquiry?intent=hospitality", help: "Same-site path beginning with /." },
     ] },
     { id: "proof", label: "Estate capabilities", fields: [
@@ -560,7 +561,7 @@ const baseAdminPages: readonly ContentPage[] = [
     { id: "enquiry", label: "Enquiry close", fields: [
       { id: "hospitality.closing.copy", label: "Consultation description", kind: "text", defaultValue: "Investment is shaped in private consultation." },
       { id: "hospitality.closing.heading", label: "Closing heading", kind: "text", defaultValue: "Begin a hospitality conversation." },
-      { id: "hospitality.closing.action", label: "Enquiry button", kind: "text", defaultValue: "Arrange a private consultation" },
+      { id: "hospitality.closing.action", label: "Enquiry button", kind: "text", defaultValue: "Consultation" },
       { id: "hospitality.closing.action-href", label: "Enquiry destination", kind: "text", defaultValue: "/enquiry?intent=hospitality", help: "Same-site path beginning with /." },
     ] },
   ] },

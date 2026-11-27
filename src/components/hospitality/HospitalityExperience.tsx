@@ -1,9 +1,8 @@
 "use client";
 
 import { useMemo } from 'react';
-import { ArrowUpRight } from "lucide-react";
 import Header from "../Header/Header";
-import { MagneticLink } from "../projects/21st/Magnetic";
+import { SubtleLink } from "../ui/SubtleAction";
 import { SilkBackground } from "../projects/21st/SilkBackground";
 import { HospitalityBento } from "./21st/HospitalityBento";
 import { HospitalityGallery } from "./21st/HospitalityGallery";
@@ -32,21 +31,23 @@ const journey: readonly TimelineStep[] = [
   ["07", "Opening", "Handover into guest operations and continuing care."],
 ];
 
-export default function HospitalityExperience({ initialProjects = atlasProjects, initialSelections = initialHospitalitySelections }: { initialProjects?: AtlasProject[]; initialSelections?: ContentItem[] }) {
+export default function HospitalityExperience({ initialProjects = atlasProjects, initialSelections = initialHospitalitySelections, initialBackground = 'forest' }: { initialProjects?: AtlasProject[]; initialSelections?: ContentItem[]; initialBackground?: string }) {
   const projects = useProjectsContent(initialProjects);
   const selections = useSiteCollection('hospitality.selectedWork', initialSelections);
   const selectedWork = useMemo(() => resolveHospitalitySelections(selections, projects), [selections, projects]);
   const selectedHeading = useSiteContent('hospitality.selected.heading', 'Selected work.');
   const closingHeading = useSiteContent('hospitality.closing.heading', 'Begin a hospitality conversation.');
   const closingCopy = useSiteContent('hospitality.closing.copy', 'Investment is shaped in private consultation.');
-  const closingAction = useSiteContent('hospitality.closing.action', 'Arrange a private consultation');
+  const closingAction = useSiteContent('hospitality.closing.action', 'Consultation');
   const closingHref = useSiteContent('hospitality.closing.action-href', enquiryHref);
+  const backgroundChoice = useSiteContent('hospitality.background', initialBackground);
+  const background = backgroundChoice === 'pearl' ? 'pearl' : 'forest';
   return (
-    <main className={styles.page} data-route="hospitality">
-      <Header variant="immersive" enquiryHref={enquiryHref} />
+    <main className={styles.page} data-route="hospitality" data-background={background}>
+      <Header variant="immersive" tone={background === 'pearl' ? 'light' : 'dark'} enquiryHref={enquiryHref} />
 
       <div className={styles.opening}>
-        <SilkBackground className={styles.openingCanvas} maxPixels={620_000} fps={24} interactive={false} />
+        <SilkBackground palette={background} className={styles.openingCanvas} maxPixels={620_000} fps={24} interactive={false} />
         <HospitalityIntro enquiryHref={enquiryHref} />
 
         <section className={styles.proof} data-type-section="hospitality.proof" aria-label="Hospitality estate capabilities" data-header-tone="dark">
@@ -55,11 +56,11 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
       </div>
 
       <div className={styles.atmosphere}>
-        <SilkBackground className={styles.atmosphereCanvas} maxPixels={520_000} fps={18} interactive={false} />
+        <SilkBackground palette={background} className={styles.atmosphereCanvas} maxPixels={520_000} fps={18} interactive={false} />
 
         {selectedWork.length > 0 && <section id="projects" data-type-section="hospitality.projects" className={styles.projects} aria-labelledby="projects-title" data-header-tone="dark">
           <h2 id="projects-title" className={styles.srOnly} data-type-field={"hospitality.selected.heading"}>{selectedHeading}</h2>
-          <TextBlockAnimation blockColor="#b9cbb8" className={styles.blockHeading}>
+          <TextBlockAnimation blockColor={background === 'pearl' ? '#637c5f' : '#b9cbb8'} className={styles.blockHeading}>
             <h2 aria-hidden="true" data-type-field={"hospitality.selected.heading"}><HospitalityTextLens text={selectedHeading} /></h2>
           </TextBlockAnimation>
           <HospitalityGallery projects={selectedWork} />
@@ -71,11 +72,11 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
 
         <section className={styles.enquire} data-type-section="hospitality.enquiry" aria-labelledby="enquire-title" data-header-tone="dark">
           <h2 id="enquire-title" className={styles.srOnly} data-type-field={"hospitality.closing.heading"}>{closingHeading}</h2>
-          <TextBlockAnimation blockColor="#b9cbb8" duration={0.42} className={styles.enquireTitle}>
+          <TextBlockAnimation blockColor={background === 'pearl' ? '#637c5f' : '#b9cbb8'} duration={0.42} className={styles.enquireTitle}>
             <h2 aria-hidden="true" data-type-field={"hospitality.closing.heading"}><HospitalityTextLens text={closingHeading} /></h2>
           </TextBlockAnimation>
           <p className={styles.closingCopy}>{closingCopy}</p>
-          <MagneticLink
+          <SubtleLink
             href={localDestination(closingHref, enquiryHref)}
             data-magnetic
             onClick={(event) => {
@@ -85,8 +86,8 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
               window.location.assign(event.currentTarget.href);
             }}
           >
-            {closingAction} <span aria-hidden="true"><ArrowUpRight size={18} strokeWidth={1.7} /></span>
-          </MagneticLink>
+            {closingAction}
+          </SubtleLink>
         </section>
       </div>
     </main>

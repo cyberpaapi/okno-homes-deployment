@@ -4,6 +4,7 @@ import { adminPages, allContentFields, type ContentField, type ContentPage, type
 import { journalDefaultCollections } from '@/lib/journalCollections';
 import { homeVariantDefaults } from '@/data/homeVariants';
 import { isTypographySizeField } from '@/lib/typography';
+import { PREVIEW_UPDATE } from '@/lib/sitePreview';
 import AdminStudio from './AdminStudio';
 
 // This contract exercises the real disconnected editor and source-default
@@ -88,6 +89,24 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks(); });
 
 describe('admin matrix registry boundaries', () => {
+  it('sends the unsaved Hospitality palette through the existing draft preview without a CMS request', () => {
+    const { container } = render(<AdminStudio />);
+    selectPage(container, registeredPages.find(page => page.id === 'hospitality')!);
+    const group = container.querySelector('[id="hospitality.background"]')!;
+    const radios = Array.from(group.querySelectorAll<HTMLButtonElement>('button[role="radio"]'));
+    const frame = container.querySelector('iframe')!;
+    const preview = vi.spyOn(frame.contentWindow!, 'postMessage');
+    expect(radios[0]).toHaveAttribute('aria-checked', 'true');
+    fireEvent.click(radios[1]);
+    expect(radios[1]).toHaveAttribute('aria-checked', 'true');
+    expect(preview).toHaveBeenLastCalledWith(expect.objectContaining({ type: PREVIEW_UPDATE, values: expect.objectContaining({ 'hospitality.background': 'pearl' }) }), new URL(frame.src).origin);
+    fireEvent.keyDown(radios[1], { key: 'Home' });
+    expect(radios[0]).toHaveFocus();
+    expect(radios[0]).toHaveAttribute('aria-checked', 'true');
+    expect(preview).toHaveBeenLastCalledWith(expect.objectContaining({ type: PREVIEW_UPDATE, values: expect.objectContaining({ 'hospitality.background': 'forest' }) }), new URL(frame.src).origin);
+    expect(globalThis.fetch).not.toHaveBeenCalled();
+  });
+
   it('accounts explicitly for every registered scalar and excluded navigation page', () => {
     const located = new Set(registeredPages.flatMap(page => fieldContract(page).map(row => row.field.id)));
     for (const field of allContentFields()) {

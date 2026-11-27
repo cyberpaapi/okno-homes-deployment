@@ -36,12 +36,29 @@ afterAll(() => {
 });
 
 describe("HospitalityExperience", () => {
+  it.each(['forest', 'pearl'])('seeds the %s background and retains the photograph caption contrast', background => {
+    const { container } = render(<HospitalityExperience initialBackground={background} />);
+    expect(container.querySelector('main')).toHaveAttribute('data-background', background);
+    expect([...container.querySelectorAll('canvas[data-palette]')].map(canvas => canvas.getAttribute('data-palette'))).toEqual([background, background]);
+    expect(document.querySelector('[data-site-header]')).toHaveAttribute('data-tone', background === 'pearl' ? 'light' : 'dark');
+    expect(screen.getByRole('heading', { name: 'Built to welcome. Designed to perform.' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /Lakewood hospitality buildings/i })).toBeInTheDocument();
+    expect(container.querySelector('[data-type-section="hospitality.result"]')).toHaveAttribute('data-header-tone', 'dark');
+  });
+
+  it('retains the original forest background when a stale choice is unknown', () => {
+    const { container } = render(<HospitalityExperience initialBackground="unrecognised" />);
+    expect(container.querySelector('main')).toHaveAttribute('data-background', 'forest');
+  });
+
   it("speaks directly to multi-residence hospitality buyers", () => {
     render(<HospitalityExperience />);
 
     expect(screen.getByRole("heading", { name: "Built to welcome. Designed to perform." })).toBeInTheDocument();
     expect(screen.getByText(/coordinated across every residence and shared space/i)).toBeInTheDocument();
-    for (const link of screen.getAllByRole("link", { name: /arrange a consultation|arrange a private consultation/i })) {
+    const consultationLinks = screen.getAllByRole("link", { name: 'Consultation', exact: true });
+    expect(consultationLinks).toHaveLength(2);
+    for (const link of consultationLinks) {
       expect(link).toHaveAttribute("href", "/enquiry?intent=hospitality");
     }
   });

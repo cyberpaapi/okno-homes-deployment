@@ -216,7 +216,7 @@
 }
 
 .editorialGallery { display: grid; gap: clamp(48px, 7vw, 108px); }
-.editorialProject { display: block; width: 76%; padding: 0; border: 0; background: none; color: #eef3ed; text-align: left; cursor: pointer; }
+.editorialProject { display: block; width: 76%; padding: 0; border: 0; background: none; color: var(--hospitality-foreground, #eef3ed); text-align: left; cursor: pointer; }
 .editorialProject:first-child { width: 100%; }
 .editorialProject:nth-child(2n) { justify-self: end; width: 65%; }
 .editorialImage { position: relative; display: block; width: 100%; aspect-ratio: 16/10; overflow: hidden; }

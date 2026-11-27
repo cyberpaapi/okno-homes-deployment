@@ -41,6 +41,14 @@ describe("admin page hierarchy", () => {
     }
   });
 
+  it('keeps the optional Hospitality palette in its opening editor with the existing green default', () => {
+    const hospitality = adminPages.find(page => page.id === 'hospitality')!;
+    const field = hospitality.sections.find(section => section.id === 'opening')!.fields.find(field => field.id === 'hospitality.background');
+    expect(field).toMatchObject({ kind: 'choice', defaultValue: 'forest' });
+    expect(field?.options?.map(option => option.value)).toEqual(['forest', 'pearl']);
+    expect(adminPages.filter(page => page.id !== 'hospitality').flatMap(page => page.sections.flatMap(section => section.fields)).some(field => field.id === 'hospitality.background')).toBe(false);
+  });
+
   it("maps the current Process timeline in visual order with the live photographs", () => {
     const process = adminPages.find(page => page.id === "process")!;
     expect(process.sections.map(section => section.id)).toEqual([

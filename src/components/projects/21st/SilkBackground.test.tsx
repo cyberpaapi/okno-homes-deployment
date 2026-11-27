@@ -37,6 +37,7 @@ beforeEach(() => {
   gl = {};
   for (const name of ["shaderSource", "compileShader", "deleteShader", "attachShader", "linkProgram", "deleteProgram", "useProgram", "bindBuffer", "bufferData", "enableVertexAttribArray", "vertexAttribPointer", "uniform3fv", "uniform4f", "drawArrays", "viewport", "deleteBuffer"]) gl[name] = vi.fn();
   for (const name of ["createShader", "createProgram", "createBuffer", "getUniformLocation"]) gl[name] = vi.fn(() => ({}));
+  gl.getUniformLocation.mockImplementation((_program, name: string) => name);
   gl.getAttribLocation = vi.fn(() => 0);
   loseContext = vi.fn();
   gl.getExtension = vi.fn(() => ({ loseContext }));
@@ -61,6 +62,80 @@ function draw(now = 1000) {
 }
 
 describe("Silk framebuffer and scheduling", () => {
+  const sceneTimes = () => gl.uniform4f.mock.calls.filter(call => call[0] === "u_scene").map(call => call[3] as number);
+
+  it("keeps the original forest recipe by default and changes colours without rebuilding or restarting motion", () => {
+    const view = render(<SilkBackground interactive={false} />);
+    draw(1000);
+    draw(1100);
+    const initialColors = Array.from(gl.uniform3fv.mock.calls[0][1] as Float32Array);
+    expect(initialColors.slice(0, 3)).toEqual([expect.closeTo(.025), expect.closeTo(.035), expect.closeTo(.030)]);
+    expect(gl.uniform4f.mock.calls.find(call => call[0] === "u_finish")).toEqual(["u_finish", 0, .12, 0, .016]);
+    const timeBeforePalette = sceneTimes().at(-1)!;
+    expect(timeBeforePalette).toBeGreaterThan(0);
+
+    view.rerender(<SilkBackground interactive={false} palette="pearl" />);
+    expect(view.container.querySelector("canvas")).toHaveAttribute("data-palette", "pearl");
+    const pearlColors = Array.from(gl.uniform3fv.mock.calls.at(-1)![1] as Float32Array);
+    expect(pearlColors.length).toBe(initialColors.length);
+    expect(Math.min(...pearlColors)).toBeGreaterThan(.7);
+    draw(1200);
+    expect(sceneTimes().at(-1)).toBeGreaterThan(timeBeforePalette);
+    expect(gl.createProgram).toHaveBeenCalledOnce();
+    expect(gl.deleteProgram).not.toHaveBeenCalled();
+
+    view.rerender(<SilkBackground interactive={false} palette="forest" />);
+    expect(Array.from(gl.uniform3fv.mock.calls.at(-1)![1] as Float32Array)).toEqual(initialColors);
+    expect(gl.uniform4f.mock.calls.filter(call => call[0] === "u_finish").at(-1)).toEqual(["u_finish", 0, .12, 0, .016]);
+    draw(1300);
+    expect(sceneTimes().at(-1)).toBeGreaterThan(timeBeforePalette);
+    expect(gl.createProgram).toHaveBeenCalledOnce();
+  });
+
+  it("holds elapsed phase through caller, menu and offscreen pauses rather than replaying the first frame", () => {
+    const view = render(<SilkBackground interactive={false} palette="pearl" />);
+    draw(1000);
+    draw(1100);
+    const firstTime = sceneTimes().at(-1)!;
+    expect(firstTime).toBeGreaterThan(0);
+    view.rerender(<SilkBackground interactive={false} palette="pearl" paused />);
+    view.rerender(<SilkBackground interactive={false} palette="pearl" />);
+    draw(10_000);
+    expect(sceneTimes().at(-1)).toBe(firstTime);
+    draw(10_100);
+    const secondTime = sceneTimes().at(-1)!;
+    expect(secondTime).toBeGreaterThan(firstTime);
+
+    act(() => window.dispatchEvent(new CustomEvent("okno-public-menu-activity", { detail: { active: true } })));
+    act(() => window.dispatchEvent(new CustomEvent("okno-public-menu-activity", { detail: { active: false } })));
+    draw(20_000);
+    expect(sceneTimes().at(-1)).toBe(secondTime);
+    draw(20_100);
+    const thirdTime = sceneTimes().at(-1)!;
+    expect(thirdTime).toBeGreaterThan(secondTime);
+
+    act(() => intersect([{ isIntersecting: false } as IntersectionObserverEntry]));
+    act(() => intersect([{ isIntersecting: true } as IntersectionObserverEntry]));
+    draw(30_000);
+    expect(sceneTimes().at(-1)).toBe(thirdTime);
+    draw(30_100);
+    expect(sceneTimes().at(-1)).toBeGreaterThan(thirdTime);
+    expect(gl.createProgram).toHaveBeenCalledOnce();
+  });
+
+  it("redraws the selected palette once under reduced motion without starting continuous animation", () => {
+    environment.reduced = true;
+    const view = render(<SilkBackground interactive={false} />);
+    draw(1000);
+    expect(rafs.size).toBe(0);
+    view.rerender(<SilkBackground interactive={false} palette="pearl" />);
+    draw(1100);
+    expect(gl.drawArrays).toHaveBeenCalledTimes(2);
+    expect(rafs.size).toBe(0);
+    expect(sceneTimes()).toEqual([0, 0]);
+    expect(gl.createProgram).toHaveBeenCalledOnce();
+  });
+
   it("uses the requested phone budget and retains the aspect ratio instead of applying a hidden cap", () => {
     const { container } = render(<SilkBackground maxPixels={520_000} interactive={false} />);
     draw();
