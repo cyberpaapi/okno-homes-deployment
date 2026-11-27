@@ -4,7 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { pageImageLoader } from "@/lib/pageImageLoader";
 import { motion, useReducedMotion } from "motion/react";
-import { SubtleLink } from "../ui/SubtleAction";
+import { ArrowUpRight } from "lucide-react";
+import { MagneticLink } from "../projects/21st/Magnetic";
 import { useSiteContentMap } from "@/lib/useSiteContent";
 import { localDestination } from "@/lib/localDestination";
 import styles from "./HospitalityIntro.module.css";
@@ -69,9 +70,10 @@ export function HospitalityIntro({ enquiryHref }: { enquiryHref: string }) {
           transition={{ duration: reducedMotion ? 0.2 : 0.55, delay: reducedMotion ? 0 : 0.42, ease: [0.16, 1, 0.3, 1] }}
         >
           <p data-type-field={"hospitality.opening.caption"}>{get("caption", "One architectural language, coordinated across every residence and shared space.")}</p>
-          <SubtleLink href={localDestination(get("action-href", enquiryHref), enquiryHref)} className={styles.cta} data-hospitality-action="opening" data-magnetic>
+          <MagneticLink href={localDestination(get("action-href", enquiryHref), enquiryHref)} className={styles.cta} data-hospitality-action="opening" data-magnetic>
             {get("action", "Consultation")}
-          </SubtleLink>
+            <span aria-hidden="true"><ArrowUpRight size={18} strokeWidth={1.7} /></span>
+          </MagneticLink>
         </motion.figcaption>
       </figure>
     </section>

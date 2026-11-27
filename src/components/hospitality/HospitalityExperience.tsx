@@ -2,7 +2,8 @@
 
 import { useMemo } from 'react';
 import Header from "../Header/Header";
-import { SubtleLink } from "../ui/SubtleAction";
+import { ArrowUpRight } from "lucide-react";
+import { MagneticLink } from "../projects/21st/Magnetic";
 import { SilkBackground } from "../projects/21st/SilkBackground";
 import { HospitalityBento } from "./21st/HospitalityBento";
 import { HospitalityGallery } from "./21st/HospitalityGallery";
@@ -76,7 +77,7 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
             <h2 aria-hidden="true" data-type-field={"hospitality.closing.heading"}><HospitalityTextLens text={closingHeading} /></h2>
           </TextBlockAnimation>
           <p className={styles.closingCopy}>{closingCopy}</p>
-          <SubtleLink
+          <MagneticLink
             href={localDestination(closingHref, enquiryHref)}
             data-magnetic
             onClick={(event) => {
@@ -86,8 +87,8 @@ export default function HospitalityExperience({ initialProjects = atlasProjects,
               window.location.assign(event.currentTarget.href);
             }}
           >
-            {closingAction}
-          </SubtleLink>
+            {closingAction} <span aria-hidden="true"><ArrowUpRight size={18} strokeWidth={1.7} /></span>
+          </MagneticLink>
         </section>
       </div>
     </main>

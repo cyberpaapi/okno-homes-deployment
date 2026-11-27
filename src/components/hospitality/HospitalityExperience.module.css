@@ -106,23 +106,36 @@
  font-family: var(--type-font-heading, var(--okno-font-heading)) !important; letter-spacing: 0.01em;}
 
 .enquire > a {
-  --action-field: var(--hospitality-button-bg, var(--accent-silk));
-  --action-ink: var(--hospitality-button-ink, #102219);
-  --action-border: var(--hospitality-button-border, var(--accent-silk));
-  --action-dot: var(--hospitality-button-mark-bg, #17372a);
+  display: inline-flex;
+  align-items: center;
   max-width: 100%;
-  min-height: 44px;
-  gap: 12px;
+  min-height: 56px;
+  gap: 18px;
   margin-top: clamp(28px, 4vw, 48px);
-  padding: 11px 16px;
-  border-radius: 18px;
-  color: var(--action-ink);
+  padding: 7px 8px 7px 24px;
+  border: 1px solid var(--hospitality-button-border, var(--accent-silk));
+  border-radius: 999px;
+  background: var(--hospitality-button-bg, var(--accent-silk));
+  color: var(--hospitality-button-ink, #102219);
   font: 700 14px/1.2 "Manrope OKNO", Arial, sans-serif !important;
   letter-spacing: 0 !important;
   white-space: nowrap;
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
 }
-.enquire > a > span:first-child { font-family: "Manrope OKNO", Arial, sans-serif !important; }
-.enquire > a > span:last-child { width: 8px; height: 8px; flex: 0 0 8px; }
+.enquire > a > span {
+  display: grid;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--hospitality-button-mark-bg, #17372a);
+  color: var(--hospitality-button-mark-ink, #f4f1e9);
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+.enquire > a:is(:hover, :focus-visible) { border-color: #dfe8dc; background: #dfe8dc; color: #102219; }
+.enquire > a:is(:hover, :focus-visible) > span { transform: rotate(45deg); }
+.enquire > a:active > span { transform: rotate(45deg) scale(.94); }
 
 .srOnly {
   position: absolute;
@@ -154,6 +167,7 @@
 @media (prefers-reduced-motion: reduce) {
   .enquire > a,
   .enquire > a span { transition: none; }
+  .enquire > a:is(:hover, :focus-visible, :active) > span { transform: none; }
 }
 
 .closingCopy { max-width:40ch; margin:24px auto 32px; font-size:var(--okno-intro); line-height:1.6;  font-family: var(--type-font-body, var(--okno-font-body)) !important; font-weight: 400 !important;}
@@ -183,6 +197,7 @@
   --hospitality-button-border: #315c42;
   --hospitality-button-ink: #f4f5ed;
   --hospitality-button-mark-bg: #dfd4b2;
+  --hospitality-button-mark-ink: #254b37;
   --hospitality-photo-button-focus: #dfd4b2;
   --accent-silk: #bac9b6;
   background: #f3f4ed;
