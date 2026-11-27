@@ -91,6 +91,25 @@ beforeEach(() => {
 afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe("Testimonials page", () => {
+  it("rests its countdown while public navigation is open and resumes without an unsolicited step", () => {
+    render(<TestimonialsExperience />);
+    running();
+    const left = region().scrollLeft;
+    act(() => {
+      document.documentElement.dataset.oknoPublicMenuActive = "true";
+      window.dispatchEvent(new CustomEvent("okno-public-menu-activity", { detail: { active: true } }));
+    });
+    stopped();
+    advance();
+    expect(region().scrollLeft).toBe(left);
+    act(() => {
+      document.documentElement.dataset.oknoPublicMenuActive = "false";
+      window.dispatchEvent(new CustomEvent("okno-public-menu-activity", { detail: { active: false } }));
+    });
+    running();
+    expect(region().scrollLeft).toBe(left);
+  });
+
   it("uses one fictional-preview disclosure, illustrative project photos and two location lines without review SEO claims", () => {
     render(<TestimonialsExperience />);
     expect(screen.getByRole("heading", { level: 1, name: "Testimonials" })).toBeVisible();

@@ -22,4 +22,11 @@ describe('testimonial publication mapping', () => {
     });
     expect(testimonialSectionStyle({ 'typography.section.testimonials.reviews.body-font': 'red;display:none' }, 'reviews')).toEqual(testimonialSectionStyle({}, 'reviews'));
   });
+  it('uses handwriting only for default quotes and honours saved review and master font choices', () => {
+    expect(testimonialSectionStyle({}, 'reviews')).toHaveProperty('--testimonial-quote-font', '"OKNO Handwriting", "Manrope OKNO", Arial, sans-serif');
+    expect(testimonialSectionStyle({}, 'introduction')).toHaveProperty('--testimonial-quote-font', '"Manrope OKNO", Arial, sans-serif');
+    expect(testimonialSectionStyle({ 'typography.master-font': 'govandi' }, 'reviews')).toHaveProperty('--testimonial-quote-font', 'var(--okno-font-govandi)');
+    expect(testimonialSectionStyle({ 'typography.master-font': 'govandi', 'typography.section.testimonials.reviews.body-font': 'system' }, 'reviews')).toHaveProperty('--testimonial-quote-font', 'Arial, Helvetica, sans-serif');
+    expect(testimonialSectionStyle({ 'typography.master-font': 'govandi', 'typography.section.testimonials.reviews.body-font': 'inherit' }, 'reviews')).toHaveProperty('--testimonial-quote-font', 'var(--okno-font-govandi)');
+  });
 });

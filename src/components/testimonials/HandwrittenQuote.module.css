@@ -1,0 +1,19 @@
+/* The default and every fallback are readable. Only an observed, font-ready
+   quote acquires the writing state; no text node is added during the effect. */
+.quote { overflow-wrap: anywhere; }
+.word { display: inline-block; max-width: 100%; }
+.quote[data-quote-ink="writing"] .word {
+  animation: quoteInk var(--ink-duration) linear both;
+  animation-delay: calc(var(--ink-delay) - var(--ink-elapsed, 0ms));
+}
+
+/* Source31227's right-edge clip is deliberately generous around ascenders and
+   cursive overhangs. It uncovers the beginning of each whole word first. */
+@keyframes quoteInk {
+  from { clip-path: inset(-0.45em calc(100% + 0.3em) -0.45em -0.3em); }
+  to { clip-path: inset(-0.45em -0.3em -0.45em -0.3em); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quote .word { animation: none !important; clip-path: none !important; }
+}

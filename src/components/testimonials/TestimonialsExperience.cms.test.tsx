@@ -78,7 +78,7 @@ describe('Testimonials CMS consumers', () => {
     preview(parent, { 'testimonials.heading': 'Your stories', 'testimonials.introduction': 'Edited introduction', 'testimonials.closing.heading': 'Start a brief', 'testimonials.closing.body': 'Edited invitation', 'testimonials.closing.enquiry-label': 'Enquire now', 'testimonials.closing.models-label': 'View models', [testimonialDisclosureId]: 'hidden' }, updated);
     expect(screen.getByRole('heading', { level: 1, name: 'Your stories' })).toBeInTheDocument();
     expect(screen.getByText('Edited introduction')).toBeInTheDocument();
-    expect(screen.getByText('“A real fixture quote”')).toBeInTheDocument();
+    expect(region().querySelector('blockquote')).toHaveTextContent('“A real fixture quote”');
     expect(screen.getByText('Approved fixture name')).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Fixture house' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Enquire now' })).toHaveAttribute('href', '/enquiry');

@@ -40,8 +40,8 @@ export function testimonialsFromItems(items: ContentItem[]): Testimonial[] {
   }));
 }
 
-/** Use the existing registered font choices while retaining this page's approved
- * Manrope reading face when no administrator has selected an override. */
+/** Keep existing registered font overrides. Only review quotes use the authored
+ * handwriting default; supporting copy retains the approved reading face. */
 export function testimonialSectionStyle(values: Record<string, string>, section: 'introduction' | 'reviews' | 'disclosure' | 'closing'): CSSProperties {
   const selectedFont = (role: 'body' | 'heading' | 'highlight', fallback: string) => {
     const sectionChoice = values[`typography.section.testimonials.${section}.${role}-font`];
@@ -52,6 +52,7 @@ export function testimonialSectionStyle(values: Record<string, string>, section:
   const heading = selectedFont('heading', section === 'reviews' ? '"Manrope OKNO", Arial, sans-serif' : 'var(--okno-font-kento)');
   return {
     '--testimonial-body-font': body,
+    '--testimonial-quote-font': selectedFont('body', section === 'reviews' ? '"OKNO Handwriting", "Manrope OKNO", Arial, sans-serif' : body),
     '--testimonial-heading-font': heading,
     '--testimonial-highlight-font': selectedFont('highlight', body),
   } as CSSProperties;

@@ -13,6 +13,7 @@ import { initialTestimonialItems, testimonialCollectionId, testimonialDisclosure
 import { FrostedReviewSurface } from "./FrostedReviewSurface";
 import styles from "./TestimonialsExperience.module.css";
 import { useLoopingTestimonialRail } from "./useLoopingTestimonialRail";
+import { HandwrittenQuote, type QuoteInkRegistry } from "./HandwrittenQuote";
 
 const emptyValues: Record<string, string> = {};
 
@@ -27,11 +28,14 @@ export default function TestimonialsExperience({ initialItems = initialTestimoni
   const get = (key: string, fallback: string) => values[`testimonials.${key}`] ?? fallback;
   const showDisclosure = values[testimonialDisclosureId] !== 'hidden';
   const rail = useRef<HTMLDivElement>(null);
+  const [inkRegistry] = useState<QuoteInkRegistry>(() => new Map());
   const railId = useId();
   const helpId = useId();
   const [userPaused, setUserPaused] = useState(false);
   const [keyboardFocused, setKeyboardFocused] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const [inkInterrupted, setInkInterrupted] = useState(false);
+  const [menuActive, setMenuActive] = useState(false);
   const [phone, setPhone] = useState(true);
   const [clock, setClock] = useState(0);
   const completedClock = useRef(-1);
@@ -49,9 +53,14 @@ export default function TestimonialsExperience({ initialItems = initialTestimoni
       if (pointerHeld.current) return;
       busy.current = false;
       setScrolling(false);
+      setInkInterrupted(false);
     }, 180);
   }, []);
-  const beginScrolling = useCallback(() => {
+  const beginScrolling = useCallback((event?: Event) => {
+    // Controller steps and their equivalent-cycle rebases emit native rail
+    // scroll events too. User gestures are identified at the input handlers;
+    // only external document scrolling interrupts ink here.
+    if (event && event.target !== rail.current) setInkInterrupted(true);
     if (!busy.current) {
       busy.current = true;
       setScrolling(true);
@@ -66,12 +75,15 @@ export default function TestimonialsExperience({ initialItems = initialTestimoni
     const updateMotion = () => setReducedMotion(query.matches);
     const updatePhone = () => setPhone(phoneQuery.matches);
     const updateVisibility = () => setHidden(document.hidden);
+    const updateMenu = () => setMenuActive(document.documentElement.dataset.oknoPublicMenuActive === "true");
     updateMotion();
     updatePhone();
     updateVisibility();
+    updateMenu();
     query.addEventListener("change", updateMotion);
     phoneQuery.addEventListener("change", updatePhone);
     document.addEventListener("visibilitychange", updateVisibility);
+    window.addEventListener("okno-public-menu-activity", updateMenu);
     const observer = typeof IntersectionObserver === "undefined" ? undefined : new IntersectionObserver(([entry]) => {
       setInView(entry.isIntersecting && entry.intersectionRatio >= 0.15);
     }, { threshold: [0, 0.15] });
@@ -81,6 +93,7 @@ export default function TestimonialsExperience({ initialItems = initialTestimoni
       query.removeEventListener("change", updateMotion);
       phoneQuery.removeEventListener("change", updatePhone);
       document.removeEventListener("visibilitychange", updateVisibility);
+      window.removeEventListener("okno-public-menu-activity", updateMenu);
       observer?.disconnect();
     };
   }, []);
@@ -108,11 +121,11 @@ export default function TestimonialsExperience({ initialItems = initialTestimoni
 
   const { canRotate, move } = useLoopingTestimonialRail({
     rail, identity: reviewIdentity, count: testimonials.length, reducedMotion,
-    suspended: hidden || !inView || userPaused,
+    suspended: hidden || !inView || userPaused || menuActive,
     onStart: beginScrolling, onEnd: finishScrolling, onChange: resetClock,
     isHeld: () => pointerHeld.current,
   });
-  const autoplayRunning = canRotate && !userPaused && !keyboardFocused && !scrolling && !hidden && inView && !reducedMotion;
+  const autoplayRunning = canRotate && !userPaused && !keyboardFocused && !scrolling && !hidden && !menuActive && inView && !reducedMotion;
 
   const moveManually = (direction: "previous" | "next") => {
     resetClock();
@@ -174,7 +187,7 @@ export default function TestimonialsExperience({ initialItems = initialTestimoni
           {showDisclosure && <p className={styles.disclosure} data-type-section="testimonials.disclosure" data-type-field={"testimonials.disclosure.copy"} style={testimonialSectionStyle(values, 'disclosure')}>{get('disclosure.copy', testimonialPageDefaults.disclosure)}</p>}
           <p id={helpId} className={styles.screenReaderOnly}>Testimonials advance every six seconds. Activate Automatic testimonial rotation to stop or restart. Rotation rests during scrolling and keyboard focus, then starts a fresh countdown. Scroll horizontally or use the previous and next buttons. With the testimonials focused, use Left and Right arrow keys, Home for the beginning, or End for the last testimonial. The reviews loop in either direction. Reduced motion turns automatic rotation off.</p>
           <div id={railId} ref={rail} className={styles.rail} role="region" aria-label="Testimonial stories" aria-roledescription="carousel" aria-describedby={helpId} tabIndex={0} onKeyDown={onRailKeyDown}
-            onPointerDown={() => { pointerHeld.current = true; beginScrolling(); }} onWheel={beginScrolling}>
+            onPointerDown={() => { pointerHeld.current = true; setInkInterrupted(true); beginScrolling(); }} onWheel={() => { setInkInterrupted(true); beginScrolling(); }}>
             <ul className={styles.track} data-type-section="testimonials.reviews" style={testimonialSectionStyle(values, 'reviews')}>
               {(testimonials.length > 1 ? ["before", "original", "after"] : ["original"]).flatMap((cycle) => testimonials.map((testimonial, index) => (
                 <li key={`${cycle}-${testimonial.id}`} className={`${styles.card}${cycle === "original" ? "" : ` ${styles.clone}`}`}
@@ -187,7 +200,10 @@ export default function TestimonialsExperience({ initialItems = initialTestimoni
                           loading={index < 3 ? "eager" : "lazy"} />}
                       </div>
                       <FrostedReviewSurface className={styles.story}>
-                        <blockquote><p>“{testimonial.quote}”</p></blockquote>
+                        <blockquote><HandwrittenQuote text={testimonial.quote} reviewId={testimonial.id}
+                          registry={inkRegistry} reducedMotion={reducedMotion}
+                          suspended={hidden || !inView || inkInterrupted || menuActive}
+                          interrupted={inkInterrupted} /></blockquote>
                         <figcaption>
                           <p className={styles.name}>{testimonial.name}</p>
                           <p className={styles.location}><span>{testimonial.location[0]}</span><span>{testimonial.location[1]}</span></p>

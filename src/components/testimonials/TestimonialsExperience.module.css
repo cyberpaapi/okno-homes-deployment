@@ -1,3 +1,14 @@
+/* Unmodified Google Fonts Latin subset; licence and source in
+   docs/testimonials-handwriting-font-2026-11-27.md. No runtime font service. */
+@font-face {
+  font-family: "OKNO Handwriting";
+  src: url("/fonts/allura-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 .page {
   --testimonials-paper: #edf2e8;
   --testimonials-ink: #14281c;
@@ -177,7 +188,16 @@
 
 .story { display: flex; flex: 1; flex-direction: column; padding: clamp(24px, 2.1vw, 36px); }
 .card blockquote { margin: 0 0 32px; }
-.card blockquote p { margin: 0; font-size: var(--type-size-body, clamp(18px, 1.42vw, 23px)); font-weight: 400; line-height: 1.55; letter-spacing: -.02em; text-wrap: pretty; overflow-wrap: break-word; }
+.card blockquote p {
+  margin: 0;
+  font-family: var(--testimonial-quote-font, "OKNO Handwriting", "Manrope OKNO", Arial, sans-serif) !important;
+  font-size: var(--type-size-body, clamp(32px, 2.4vw, 34px));
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
 .card figcaption { margin-top: auto; }
 .name { margin: 0 0 8px; color: var(--testimonials-copper); font-family: var(--testimonial-heading-font, "Manrope OKNO", Arial, sans-serif) !important; font-size: var(--type-size-heading, 15px); font-weight: 650; line-height: 1.5; overflow-wrap: anywhere; }
 .location { margin: 0; color: var(--testimonials-muted); font-family: var(--testimonial-highlight-font, "Manrope OKNO", Arial, sans-serif) !important; font-size: var(--type-size-caption, 13px); line-height: 1.65; overflow-wrap: anywhere; }
@@ -215,7 +235,7 @@
 
 @media (max-width: 1100px) {
   .track { grid-auto-columns: calc((100% - var(--testimonials-gap) * 2) / 2.15); }
-  .card blockquote p { font-size: var(--type-size-body, 20px); }
+  .card blockquote p { font-size: var(--type-size-body, 32px); }
 }
 
 @media (min-width: 701px) and (max-width: 900px) {
@@ -238,7 +258,7 @@
   .track { grid-auto-columns: calc(100% - 26px); }
   .story { padding: 24px 22px 28px; }
   .card blockquote { margin: 0 0 28px; }
-  .card blockquote p { font-size: var(--type-size-body, clamp(18px, 4.9vw, 21px)); line-height: 1.55; }
+  .card blockquote p { font-size: var(--type-size-body, clamp(30px, 8vw, 32px)); }
   .close { grid-template-columns: 1fr; gap: 26px; margin-top: 62px; padding-top: 40px; padding-bottom: 64px; }
   .close h2 { max-width: 18ch; font-size: var(--type-size-heading, 36px); }
   .closeDetails > p { font-size: var(--type-size-body, 15px); margin-bottom: 24px; }
