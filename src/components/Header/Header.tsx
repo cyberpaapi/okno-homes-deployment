@@ -4,9 +4,10 @@
 // Centered Nav Header (21220), Liquid Morph Floating Menu (16369),
 // and Magnetic Button (1507). Original bundles are archived in docs/21st-source/.
 import Link from "next/link";
+import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { isSiteNavigationActive, siteNavigationItems } from "@/data/siteNavigation";
 import { MagneticLink } from "@/components/projects/21st/Magnetic";
 import { SubtleLink } from "@/components/ui/SubtleAction";
@@ -15,6 +16,17 @@ import { useSiteContentMap } from "@/lib/useSiteContent";
 import styles from "./Header.module.css";
 
 type Item = { href: string; label: string };
+
+// Hydration has no changing external data to subscribe to. React reads the
+// server snapshot first, then the browser snapshot before rendering the portal.
+const subscribeToClient = () => () => {};
+const clientSnapshot = () => true;
+const serverSnapshot = () => false;
+
+function publishPublicMenuActivity(active: boolean) {
+  document.documentElement.dataset.oknoPublicMenuActive = String(active);
+  window.dispatchEvent(new CustomEvent("okno-public-menu-activity", { detail: { active } }));
+}
 
 function RollingLink({ href, label, current, onClick }: Item & { current?: boolean; onClick?: () => void }) {
   return (
@@ -40,6 +52,36 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
   const root = useRef<HTMLDivElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
   const reduced = useReducedMotion();
+  const activityActive = useRef(false);
+  const releaseActivity = useRef<number | null>(null);
+
+  // Suspend decorative shaders before the first menu animation frame. Keep the
+  // last canvas frame throughout closing, including a small settling allowance.
+  useLayoutEffect(() => {
+    if (!publicSite) return;
+    if (releaseActivity.current !== null) window.clearTimeout(releaseActivity.current);
+    releaseActivity.current = null;
+    if (open) {
+      activityActive.current = true;
+      publishPublicMenuActivity(true);
+    } else if (activityActive.current) {
+      releaseActivity.current = window.setTimeout(() => {
+        releaseActivity.current = null;
+        activityActive.current = false;
+        publishPublicMenuActivity(false);
+      }, reduced ? 0 : 250);
+    }
+    return () => {
+      if (releaseActivity.current !== null) window.clearTimeout(releaseActivity.current);
+    };
+  }, [open, publicSite, reduced]);
+
+  useEffect(() => () => {
+    if (publicSite && activityActive.current) {
+      activityActive.current = false;
+      publishPublicMenuActivity(false);
+    }
+  }, [publicSite]);
 
   useEffect(() => {
     const measure = () => {
@@ -84,7 +126,10 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
     };
   }, [open]);
 
-  const duration = reduced ? 0 : 0.68;
+  // Public navigation should respond within a tap, without waiting for a long
+  // shell morph followed by a staggered link entrance. Viewer motion is retained.
+  const duration = reduced ? 0 : publicSite ? (open ? 0.28 : 0.2) : 0.68;
+  const iconDuration = reduced ? 0 : publicSite ? 0.18 : 0.3;
   // Phones (client feedback, 11 November 2026): the open menu covered the whole screen. It is
   // now a compact panel sized to its links (44px rows, 4px apart) under the button.
   const phone = viewport.width <= 520;
@@ -125,14 +170,14 @@ function SiteMorphMenu({ items, currentHref, menuLabel, closeLabel, navigationLa
         >
           <span data-type-field={"header.menu.close"}>{open ? closeLabel : menuLabel}</span>
           <span className={styles.menuIcon} aria-hidden="true">
-            <motion.i animate={{ rotate: open ? 45 : 0, y: open ? 0 : -5 }} transition={{ duration: reduced ? 0 : 0.3 }} />
-            <motion.i animate={{ opacity: open ? 0 : 1, scaleX: open ? 0.3 : 1 }} transition={{ duration: reduced ? 0 : 0.2 }} />
-            <motion.i animate={{ rotate: open ? -45 : 0, y: open ? 0 : 5 }} transition={{ duration: reduced ? 0 : 0.3 }} />
+            <motion.i animate={{ rotate: open ? 45 : 0, y: open ? 0 : -5 }} transition={{ duration: iconDuration }} />
+            <motion.i animate={{ opacity: open ? 0 : 1, scaleX: open ? 0.3 : 1 }} transition={{ duration: reduced ? 0 : publicSite ? 0.14 : 0.2 }} />
+            <motion.i animate={{ rotate: open ? -45 : 0, y: open ? 0 : 5 }} transition={{ duration: iconDuration }} />
           </span>
         </button>
         <nav id={menuId} className={styles.menuLinks} aria-label={mobileNavigationLabel} inert={!open} aria-hidden={!open}>
           {items.map((item, index) => (
-            <motion.div key={item.href} initial={false} animate={{ opacity: open ? 1 : 0, y: open ? 0 : 8 }} transition={{ duration: reduced ? 0 : 0.4, delay: open && !reduced ? 0.16 + 0.035 * index : 0 }}>
+            <motion.div key={item.href} initial={false} animate={{ opacity: open ? 1 : 0, y: open ? 0 : publicSite ? 4 : 8 }} transition={{ duration: reduced ? 0 : publicSite ? (open ? 0.16 : 0.1) : 0.4, delay: open && !reduced && !publicSite ? 0.16 + 0.035 * index : 0 }}>
               <RollingLink {...item} current={isSiteNavigationActive(currentHref, item.href)} onClick={() => setOpen(false)} />
             </motion.div>
           ))}
@@ -184,8 +229,12 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", enquir
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
+  // Page canvases deliberately isolate their backgrounds. Move the public fixed
+  // header out of those stacking contexts so its menu also covers the shared footer.
+  // Keep server markup and the protected customer configurator inline.
+  const portalReady = useSyncExternalStore(subscribeToClient, clientSnapshot, serverSnapshot);
   const compactForCopy = navigation.some(item => item.label.length > 20) || navigation.reduce((length, item) => length + item.label.length, 0) > 90;
-  return (
+  const header = (
     <header className={styles.header} data-type-section="shared.header" data-tone={resolvedTone} data-copy-compact={compactForCopy} data-scrolled={scrolled} data-site-header data-public-site={publicSite}>
       <div className={styles.shell}>
         <MagneticLink href="/" className={styles.logo} aria-label={`${brandName} home`} data-models-magnetic>
@@ -205,4 +254,5 @@ export default function Header({ tone, variant, enquiryHref = "/enquiry", enquir
       </div>
     </header>
   );
+  return publicSite && portalReady ? createPortal(header, document.body) : header;
 }

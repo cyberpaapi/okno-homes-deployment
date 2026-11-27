@@ -21,3 +21,22 @@
   .tabs.tabs button, .tabs .tabOverlay > span { min-height: 44px; }
   .thumbnailTrack button { min-width: 44px; }
 }
+
+.tabIcon { display: none; }
+/* Opt-in project media control: selected label + the other medium's icon.
+   Equal footprint in both states prevents the control jumping as it switches. */
+@media (max-width: 700px) {
+  .compactMobile.tabs { width: min(224px, 100%); margin-bottom: 0; }
+  .compactMobile .tabOverlay { display: none; }
+  .compactMobile.tabs button {
+    flex: 0 0 44px; min-width: 44px; min-height: 44px; max-width: none;
+    padding: 10px; font-size: 12px; line-height: 1.2; gap: 0;
+    white-space: nowrap; overflow-wrap: normal;
+  }
+  .compactMobile.tabs button[aria-pressed="true"] { flex: 1 1 0; min-width: 0; background: #d1ceb9; color: #151d18; }
+  .compactMobile .tabLabel { display: none; }
+  .compactMobile button[aria-pressed="true"] .tabLabel { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: inherit; }
+  .compactMobile .tabIcon { display: inline-flex; align-items: center; justify-content: center; }
+  .compactMobile .tabIcon svg { display: block; flex: none; }
+  .compactMobile button[aria-pressed="true"] .tabIcon { display: none; }
+}

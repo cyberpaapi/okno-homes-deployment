@@ -316,9 +316,32 @@ export function SilkBackground({ className, paused = false, maxPixels = 900_000,
   const reduced = useReducedMotion()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pauseRef = useRef(paused)
+  const propPauseRef = useRef(paused)
+  const menuPauseRef = useRef(false)
   const [contextEpoch, setContextEpoch] = useState(0)
   const syncPauseRef = useRef<() => void>(() => {})
-  useEffect(() => { pauseRef.current = paused;syncPauseRef.current() }, [paused])
+  useEffect(() => {
+    propPauseRef.current = paused
+    pauseRef.current = paused || menuPauseRef.current
+    if (canvasRef.current) canvasRef.current.dataset.renderPaused = String(pauseRef.current)
+    syncPauseRef.current()
+  }, [paused])
+
+  useEffect(() => {
+    const applyMenuPause = (active: boolean) => {
+      menuPauseRef.current = active
+      pauseRef.current = propPauseRef.current || active
+      if (canvasRef.current) canvasRef.current.dataset.renderPaused = String(pauseRef.current)
+      syncPauseRef.current()
+    }
+    const onMenuActivity = (event: Event) => {
+      const detail = (event as CustomEvent<{ active: boolean }>).detail
+      if (typeof detail?.active === "boolean") applyMenuPause(detail.active)
+    }
+    applyMenuPause(document.documentElement.dataset.oknoPublicMenuActive === "true")
+    window.addEventListener("okno-public-menu-activity", onMenuActivity)
+    return () => window.removeEventListener("okno-public-menu-activity", onMenuActivity)
+  }, [])
 
   useEffect(() => {
     const element = canvasRef.current
@@ -330,6 +353,22 @@ export function SilkBackground({ className, paused = false, maxPixels = 900_000,
     const context = canvas.getContext("webgl", { antialias: false })
     if (!context) return
     const gl: WebGLRenderingContext = context
+    // Software rasterizers compete with input handling on the CPU. Keep the
+    // same recipe, with a lower decorative framebuffer/cadence budget only when
+    // WebGL positively identifies that fallback; unknown/hardware stays intact.
+    let softwareRenderer = false
+    try {
+      const debug = gl.getExtension("WEBGL_debug_renderer_info")
+      const renderer = debug && typeof gl.getParameter === "function"
+        ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL) : null
+      softwareRenderer = typeof renderer === "string"
+        && /swiftshader|llvmpipe|softpipe|software[\s_-]*rasterizer|microsoft\s*basic\s*render/i.test(renderer)
+    } catch { /* Optional renderer metadata may be blocked by browser privacy. */ }
+    const effectiveMaxPixels = softwareRenderer ? Math.min(maxPixels, 120_000) : maxPixels
+    const effectiveFps = softwareRenderer ? Math.min(fps, 12) : fps
+    canvas.dataset.softwareRenderer = String(softwareRenderer)
+    canvas.dataset.pixelBudget = String(effectiveMaxPixels)
+    canvas.dataset.fpsBudget = String(effectiveFps)
     const cursorEnabled = UNIFORMS.cursorEnabled && !reduced && interactive
 
     const compile = (type: number, src: string) => {
@@ -432,7 +471,7 @@ export function SilkBackground({ className, paused = false, maxPixels = 900_000,
       const rawHeight = Math.max(1, Math.round(bounds.height * dpr))
       const pixelScale = Math.min(
         1,
-        Math.sqrt(maxPixels / Math.max(1, rawWidth * rawHeight)),
+        Math.sqrt(effectiveMaxPixels / Math.max(1, rawWidth * rawHeight)),
       )
       const width = Math.max(1, Math.floor(rawWidth * pixelScale))
       const height = Math.max(1, Math.floor(rawHeight * pixelScale))
@@ -550,7 +589,7 @@ export function SilkBackground({ className, paused = false, maxPixels = 900_000,
     function render(now: number) {
       raf = 0
       if (disposed || pauseRef.current || !visible || !inView) return
-      const nextFrameIn = 1000 / (window.innerWidth <= 700 ? Math.min(fps, 18) : fps) - (now - lastDraw)
+      const nextFrameIn = 1000 / (window.innerWidth <= 700 ? Math.min(effectiveFps, 18) : effectiveFps) - (now - lastDraw)
       if (timeAnimated && nextFrameIn > 0) { requestRender(nextFrameIn);return }
       lastDraw = now
       const dt = lastNow === null ? 0 : Math.min((now - lastNow) / 1000, 0.1)

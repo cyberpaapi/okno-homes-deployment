@@ -3,6 +3,7 @@
 // 1962 Animated Tabs, 19082 Framer Carousel Thumbnails and 12200 film stage.
 import { useMemo, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { Image as ImageIcon, Film } from 'lucide-react';
 import { MagneticLink } from './21st/Magnetic';
 import { CarouselThumbnails } from './21st/PhotoCarousel';
 import { MasonryLightbox } from './21st/MasonryLightbox';
@@ -48,7 +49,7 @@ function ProjectGalleryContent({ project, returnLabel, returnHref, photosLabel, 
         <h1 id="project-title">{project.title}</h1>
         {project.description && <p className={styles.projectDescription}>{project.description}</p>}
         {(project.category || (project.location && project.location !== 'Project collection')) && <p className={styles.projectMeta}>{[project.category, project.location === 'Project collection' ? '' : project.location].filter(Boolean).join(' · ')}</p>}
-        {project.films.length > 0 && <AnimatedTabs value={activeMode} onChange={id => setMode(id as 'photos' | 'films')} tabs={[{ id: 'photos', label: photosLabel }, { id: 'films', label: filmsLabel }]} />}
+        {project.films.length > 0 && <AnimatedTabs compactOnMobile value={activeMode} onChange={id => setMode(id as 'photos' | 'films')} tabs={[{ id: 'photos', label: photosLabel, icon: <ImageIcon size={18} strokeWidth={1.5} /> }, { id: 'films', label: filmsLabel, icon: <Film size={18} strokeWidth={1.5} /> }]} />}
       </motion.div>
       {activeMode === 'photos' ? <section aria-label={`${project.title} ${photosLabel}`}><MasonryLightbox images={images} title={project.title} even /></section> : film && <section className={styles.cinema} aria-label={`${project.title} ${filmsLabel}`}>
         <motion.div key={film.src} className={styles.filmStage} initial={reduced ? false : { opacity: 0, scale: .98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: reduced ? 0 : .5, ease: [.22, 1, .36, 1] }}>

@@ -187,6 +187,10 @@ export default function ForestEntryOption({ variant }: { variant?: ContentItem }
           {animated && (
             <div className={styles.scrollCue} aria-hidden={!loaded} data-hero-scroll-cue>
               <span className={styles.mouse} aria-hidden="true"><span /></span>
+              <svg className={styles.phoneCue} aria-hidden="true" viewBox="0 0 24 32" fill="none">
+                <rect x="4.75" y="1.75" width="14.5" height="28.5" rx="3" />
+                <path d="M12 22V10m-3.5 3.5L12 10l3.5 3.5M10 26.5h4" />
+              </svg>
               <p data-type-field={"hero-v1.opening.scroll-cue"}>{savedScrollCue}</p>
             </div>
           )}

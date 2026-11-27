@@ -210,3 +210,32 @@ canvas.journeyVideo:not([data-scrub-presented-frames]) { opacity: 0; }
 @media (min-width: 701px) {
   .skip { right: clamp(28px, 4vw, 64px); bottom: 36px; }
 }
+
+/* Phone cue: centre the complete prompt, including long editable labels. The
+   desktop mouse and film timing stay unchanged. Leave room for the Skip target. */
+.phoneCue { display: none; }
+@media (max-width: 700px) {
+  .scrollCue {
+    width: min(180px, calc(100% - 184px));
+    gap: 6px;
+    text-align: center;
+  }
+  .scrollCue p {
+    width: 100%;
+    font-size: min(var(--type-size-caption, var(--okno-label)), 11px);
+    line-height: 1.4;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+  .scrollCue .mouse { display: none; }
+  .phoneCue {
+    display: block;
+    width: 18px;
+    height: 26px;
+    stroke: rgb(244 240 233 / .9);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 2px 6px rgb(0 0 0 / .45));
+  }
+}

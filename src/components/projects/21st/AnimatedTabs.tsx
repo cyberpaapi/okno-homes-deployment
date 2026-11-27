@@ -1,10 +1,10 @@
 'use client';
 // preetsuthar17 / Animated Tabs, 21st.dev demo 1962. Controlled, accessible adaptation.
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import styles from './Elements.module.css';
 
-type Tab = { id: string; label: string; count?: number };
-export function AnimatedTabs({ tabs, value, onChange }: { tabs: Tab[]; value: string; onChange: (id: string) => void }) {
+type Tab = { id: string; label: string; count?: number; icon?: ReactNode };
+export function AnimatedTabs({ tabs, value, onChange, compactOnMobile = false }: { tabs: Tab[]; value: string; onChange: (id: string) => void; compactOnMobile?: boolean }) {
   const root = useRef<HTMLDivElement>(null);
   const overlay = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -21,7 +21,7 @@ export function AnimatedTabs({ tabs, value, onChange }: { tabs: Tab[]; value: st
     observer.observe(container);
     return () => observer.disconnect();
   }, [value]);
-  return <div ref={root} className={styles.tabs} role="group" aria-label="Gallery media" onKeyDown={(event) => {
+  return <div ref={root} className={`${styles.tabs}${compactOnMobile ? ` ${styles.compactMobile}` : ''}`} role="group" aria-label="Gallery media" onKeyDown={(event) => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();event.stopPropagation();
     const index = tabs.findIndex(tab => tab.id === value);
@@ -29,6 +29,6 @@ export function AnimatedTabs({ tabs, value, onChange }: { tabs: Tab[]; value: st
     onChange(tabs[next].id);root.current?.querySelectorAll('button')[next]?.focus();
   }}>
     <div ref={overlay} className={styles.tabOverlay} aria-hidden="true">{tabs.map(tab => <span key={tab.id}>{tab.label} {tab.count !== undefined && <small>{tab.count}</small>}</span>)}</div>
-    {tabs.map(tab => <button key={tab.id} type="button" aria-pressed={value === tab.id} onClick={() => onChange(tab.id)}>{tab.label} {tab.count !== undefined && <small>{tab.count}</small>}</button>)}
+    {tabs.map(tab => <button key={tab.id} type="button" aria-label={compactOnMobile ? tab.label : undefined} aria-pressed={value === tab.id} onClick={() => onChange(tab.id)}>{compactOnMobile && tab.icon && <span className={styles.tabIcon} aria-hidden="true">{tab.icon}</span>}<span className={styles.tabLabel}>{tab.label} {tab.count !== undefined && <small>{tab.count}</small>}</span></button>)}
   </div>;
 }

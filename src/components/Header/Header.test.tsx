@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import Header from "./Header";
 import ModelsHeader from "../models/ModelsHeader";
@@ -23,6 +23,62 @@ describe("shared Models/Projects header", () => {
       expect(screen.queryByRole("link", { name: "Testimonials" })).not.toBeInTheDocument();
       expect(screen.getByRole("button", { name: "Open navigation" })).toHaveStyle({ width: "100px" });
     } finally { navigation.pathname = "/process"; }
+  });
+
+  it("lifts the public header out of an isolated page so its menu can cover the sibling footer", () => {
+    const { container } = render(<div style={{ isolation: "isolate" }}><Header /></div>);
+    const header = screen.getByRole("banner");
+    expect(header.parentElement).toBe(document.body);
+    expect(container).not.toContainElement(header);
+    const { dialog } = openMenu();
+    expect(header).toContainElement(dialog);
+    expect(within(dialog).getByRole("link", { name: "Testimonials" })).toBeInTheDocument();
+  });
+
+  it("keeps decorative rendering paused through closing, cancels release on reopen and restores it on unmount", () => {
+    vi.useFakeTimers();
+    const activity: boolean[] = [];
+    const readActivity = (event: Event) => activity.push((event as CustomEvent<{ active: boolean }>).detail.active);
+    window.addEventListener("okno-public-menu-activity", readActivity);
+    const view = render(<Header />);
+    try {
+      const { trigger } = openMenu();
+      expect(activity.at(-1)).toBe(true);
+      fireEvent.click(trigger);
+      act(() => vi.advanceTimersByTime(249));
+      expect(activity.at(-1)).toBe(true);
+      fireEvent.click(trigger);
+      act(() => vi.advanceTimersByTime(20));
+      expect(activity).not.toContain(false);
+      fireEvent.click(trigger);
+      act(() => vi.advanceTimersByTime(250));
+      expect(activity.at(-1)).toBe(false);
+      fireEvent.click(trigger);
+      view.unmount();
+      expect(activity.at(-1)).toBe(false);
+      expect(document.documentElement.dataset.oknoPublicMenuActive).toBe("false");
+    } finally {
+      view.unmount();
+      window.removeEventListener("okno-public-menu-activity", readActivity);
+      vi.useRealTimers();
+    }
+  });
+
+  it("does not broadcast public menu activity from the protected configurator", () => {
+    navigation.pathname = "/models/signature/forza/configure";
+    const listener = vi.fn();
+    window.addEventListener("okno-public-menu-activity", listener);
+    const view = render(<Header />);
+    try {
+      const { trigger } = openMenu();
+      fireEvent.click(trigger);
+      view.unmount();
+      expect(listener).not.toHaveBeenCalled();
+    } finally {
+      view.unmount();
+      navigation.pathname = "/process";
+      window.removeEventListener("okno-public-menu-activity", listener);
+    }
   });
 
   it("uses the same navigation and source magnetic enquiry action", () => {

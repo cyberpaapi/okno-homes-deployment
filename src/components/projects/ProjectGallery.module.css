@@ -15,3 +15,27 @@
 @media (pointer: coarse) {
   .return { padding-block: 12px; margin-block: -12px -4px; }
 }
+
+/* Owner phone refinement: one shared vertical rhythm, smaller reading sizes.
+   Keep the existing desktop typography and source-led gallery untouched. */
+@media (max-width: 700px) {
+  .heading { gap: 16px; padding: 10px 0 24px; }
+  .heading h1 {
+    max-width: 100%;
+    margin: 0;
+    font-size: min(var(--type-size-display, var(--okno-hero)), clamp(28px, 8vw, 36px));
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+  .heading .return { min-height: 44px; margin: 0; padding-block: 8px; font-size: 13px; }
+  .projectDescription { margin: 0; font-size: min(var(--type-size-body, var(--okno-intro)), 16px); line-height: 1.5; }
+  .projectMeta { margin: 0; font-size: min(var(--type-size-caption, var(--okno-label)), 12px); }
+  .heading > div { margin: 0; }
+}
+
+/* Mobile video + the WebGL silk backdrop need distinct compositor surfaces.
+   An identity filter keeps native video out of the opaque overlay path that
+   paints a solid rectangle behind the heading; it leaves video pixels intact. */
+@media (max-width: 700px) {
+  .filmStage video { filter: opacity(1); }
+}
